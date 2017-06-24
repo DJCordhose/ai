@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>AI</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        pre code {
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+            font-size: larger !important;
+        }
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            /*height: 500px;*/
+        }
+        .left-img {
+            margin-left: 10px !important;
+            float: left;
+            /*height: 500px;*/
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+        .reveal {
+            -ms-touch-action: auto !important;
+            touch-action: auto !important;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section data-markdown class="preparation">
+            <textarea data-template>
+# Preparation
+
+- Connect Pixel with Vysor
+- start Deep Dream Notebook for experiments, use google IO version:
+  - `cd /mnt/c/Users/olive/Development/ml/tensorflow-workshop/extras`
+  - `jupyter notebook --no-browser`
+  - `http://localhost:8888/notebooks/deep_dream.ipynb`
+- open https://www.dhl.de/anmelden in incognito tab to show generated captchas
+- Deep Dream Zoom animation in Preview
+
+            </textarea>
+        </section>
+
+        <section>
+            <h1>Can Machines think?</h1>
+            <h2>And can they be conscious?</h2>
+                <p><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </p>
+            <p><a href=http://bit.ly/haw-ai>
+                http://bit.ly/haw-ai</a></p>
+
+        </section>
+
+<!--
+Ablauf:
+- I - Intro: Einsiteg: Wie definiert man Intelligenz?
+  - Einsteigsübung: Eigene Definition finden (Übung 1)
+- II Weak AI: Sind Maschinen Intelligent?
+  - Demo: Captchas erkennen - Maschinen eroberrn domänen, die vorher Menschen vorbehalten waren
+- III Strong AI 1: Können Maschinen kreativ sein?
+  - Demo: Deep Dream
+- III Strong AI 2: Können Maschinen Empathisch sein?
+  - Übung: Kurze Text dazu lesen (Übung 2)
+
+- IV Abschluss
+- Optional: Was ist der Unterschied zwischen Mensch und Tier?
+  - Übung: Twitter Kanal nach tierischen Eigenschaften durchforsten
+- Fishbowl: Gibt es einen grundsätzlichen Unterschied zwischen Maschinen, Tieren und Menschen? (Übung 3)
+
+- https://www.technologyreview.com/s/607970/experts-predict-when-artificial-intelligence-will-exceed-human-performance/
+
+Fun Stuff from Google IO Talks:
+- Animated Dreams: https://github.com/random-forests/tensorflow-workshop/blob/master/extras/deep_dream.ipynb
+- Music and Art using Machine Learning: https://magenta.tensorflow.org/
+- https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html
+- https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2
+- https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/android
+  - https://ci.tensorflow.org/view/Nightly/job/nightly-android/
+  - Show TF Stylize etc using Vysor
+
+Pix2Pix
+- https://affinelayer.com/pixsrv/
+- http://fotogenerator.npocloud.nl/
+
+Optional:
+- Deep Dream auf Azure bringen
+- Captchas nachtrainieren
+-->
+
+
+        <!--<section class="todo">-->
+<!--<pre>-->
+<!--</pre>-->
+        <!--</section>-->
+
+<!--
+        <section>
+            <h2>Olli</h2>
+<pre>
+- Studied Computer Science (with an emphasis on AI) and Philosophy in the 90s
+- Failed to become a (high school) teacher in the 2000s
+- now reiterates on AI and ML
+</pre>
+        </section>
+-->
+
+<!--
+        <section>
+            <h2>Schedule</h2>
+<pre>
+Teil 1: Schwache KI
+- Digit Recognition zeigen
+- Captcha
+- Alles andere
+
+Teil 2: Starke KI
+-DeepDream
+
+</pre>
+        </section>
+-->
+
+        <section>
+            <h1>Part I: What is Intelligence?</h1>
+        </section>
+
+        <section>
+            <h2>Initial Exercise</h2>
+            <p>Specify criteria whether a machine can think</p>
+            <p><small>
+                Example Definition:
+                A machine leading a court trial and coming to a fair judgement
+            </small></p>
+            <p><strong>Discuss in groups and come up with a definition of your own</strong></p>
+        </section>
+
+        <section>
+            <h3>Results</h3>
+            <pre>
+- Meyer: machines can not think! (AND EVERYBODY KNOWS IT!)
+- Team 1:
+  - nicht nur Einzelaufgaben, nicht nur Details
+  - Probleme selbstständig lösen
+  - Kein Bewusstsein notwendig
+  - Wenn man eins sieht, dann weiß man es
+
+- Team 2:
+  - selbstständig lernen und fehler verbessern
+    - feste Regeln reichen nicht
+  - allgemeine Leistung, nicht nur speziellen Domäne
+
+- Team 3:
+  - denken ist erst Stufe 1
+  - Transfervermögen
+  - Übung und Lernen
+  - graduelle Ergebnisse (Wahrscheinlichkeiten?)
+  - Kreativität, Emotionen
+  - Introspektion
+
+- Team 4:
+  - Machine kann einen Menschen zu einem gesellschaftsfähigen Menschen erziehen
+
+            </pre>
+        </section>
+
+        <section>
+            <h2>Possible Definition</h2>
+            <p><em>An artificial intelligence is a system that can learn how to learn, or in other words a series of instructions (an algorithm) that allows computers to write their own algorithms without being explicitly programmed for.</em></p>
+            <p><small><a target="_blank" href="https://medium.com/cyber-tales/artificial-intelligence-what-it-is-and-why-now-4e4431942623">https://medium.com/cyber-tales/artificial-intelligence-what-it-is-and-why-now-4e4431942623</a></small></p>
+        </section>
+
+        <section>
+            <h2>Shared Reading</h2>
+            <p>Very brief history of Artificial Intelligence (AI)</p>
+            <a href="http://www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html" target="_blank">http://www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html</a>
+        </section>
+
+        <section>
+            <h3>Can Machines really think?</h3>
+            <ul>
+                <li class="fragment"data-fragment-index="1"><strong>Weak AI</strong> hypothesis: it is sufficient to simulate thinking
+                    <ul>
+                        <li class="fragment">like in: birds do real <em>flying</em>, planes only simulate flying
+                        <li class="fragment">if something can not be differentiated from real thinking is the only objective for AI anyway (<strong>Turing test</strong>)
+                    </ul>
+                </li>
+                <li class="fragment" data-fragment-index="2"><strong>Strong AI</strong> hypothesis: machines are only intelligent if they do the real thing
+                    <ul>
+                        <li class="fragment">is the machine really <em>conscious</em> like a human?
+                        <li class="fragment">poses the philosophically much more interesting questions
+                    </ul>
+                </li>
+            </ul>
+            <p class="fragment"><strong>Turing said: if you ever experience an intelligent machine,
+                such a distinction would not make more sense than asking if the other people do real thinking either</strong></p>
+        </section>
+
+<!--
+        <section>
+            <h2>What does Yann LeCun - one of the fathers of modern AI - think about this?</h2>
+
+            <p>Prediction is the essence of intelligence.</p>
+            <p>Differentiation is the essence of learning.</p>
+
+            <a href="https://www.facebook.com/yann.lecun/posts/10154442711667143" target="_blank">
+                https://www.facebook.com/yann.lecun/posts/10154442711667143
+            </a>
+        </section>
+-->
+
+        <section>
+            <h1>Part II: Weak AI</h1>
+            <h2>Where do machines enter domains thought of as genuine to humans a few years ago?</h2>
+        </section>
+
+        <section>
+            <h4>Machine Understands and Reacts Like a Human</h4>
+            <img src="ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
+        </section>
+
+        <section>
+            <h3>Recognizing Scribbles</h3>
+            <a href="https://quickdraw.withgoogle.com/" target="_blank">https://quickdraw.withgoogle.com/</a>
+        </section>
+
+        <section>
+            <h3>Can an image Captcha tell a machine from a human?</h3>
+            <img src="ai/iamnotarobot.png" height="500px">
+        </section>
+
+        <section>
+            <h3>Can a machine tell the dog from the muffin?</h3>
+            <img src="dog-vs-muffin.jpg">
+        </section>
+
+        <section>
+            <h3>Using Googles Pre-Trained Inception Model</h3>
+            <img src="inception_v3_architecture.png" height="480px">
+            <p><small><a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a></small></p>
+        </section>
+
+        <section>
+            <h3>Dog 1</h3>
+            <img src="captchas/dog-vs-muffin/dog1.jpg" height="300px">
+            <div class="fragment">
+                <pre><code data-trim>
+Chihuahua (score = 0.70387)
+Pomeranian (score = 0.02321)
+toy terrier (score = 0.00686)
+Pekinese, Pekingese, Peke (score = 0.00679)
+beagle (score = 0.00598)
+                </code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>Dog 2</h3>
+            <img src="captchas/dog-vs-muffin/dog2.jpg" height="300px">
+            <div class="fragment">
+                <pre><code data-trim>
+Chihuahua (score = 0.94613)
+fig (score = 0.00149)
+Mexican hairless (score = 0.00118)
+toy terrier (score = 0.00088)
+ski mask (score = 0.00084)
+                </code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>Muffin 1</h3>
+            <img src="captchas/dog-vs-muffin/muffin1.jpg" height="300px">
+            <div class="fragment">
+                <pre><code data-trim>
+vase (score = 0.05576)
+water jug (score = 0.03472)
+soap dispenser (score = 0.03104)
+hog, pig, grunter, squealer, Sus scrofa (score = 0.02650)
+Sealyham terrier, Sealyham (score = 0.02031)
+                </code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>Muffin 2</h3>
+            <img src="captchas/dog-vs-muffin/muffin2.jpg" height="300px">
+            <div class="fragment">
+                <pre><code data-trim>
+teddy, teddy bear (score = 0.25262)
+custard apple (score = 0.13425)
+spaghetti squash (score = 0.02526)
+earthstar (score = 0.02003)
+toyshop (score = 0.01996)
+                </code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>More Examples</h2>
+        </section>
+
+        <section>
+            <img src="dog-vs-bread.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-bread-term.png">
+        </section>
+
+        <section>
+            <img src="dog-vs-chicken-wing.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-wing-term.png">
+        </section>
+
+        <section>
+            <img src="dog-vs-bagle.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-bagel-term.png">
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-ice-cream/dog-vs-ice-cream.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-ice-cream-term.png">
+        </section>
+
+        <section>
+            <img src="captchas/sheepdog-vs-mop/sheepdog-vs-mop.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="captchas/sheepdog-vs-mop-term.png">
+        </section>
+
+        <section>
+            <h1>So?</h1>
+            <h2>No!</h2>
+            <h3>At least for our examples the Computer knows as well as the human what is a dog and what is not</h3>
+        </section>
+
+        <section>
+            <h3>Playing Go</h3>
+            <p>Until recently Go was believed to be completely in the human domain</p>
+
+            <p><a href="https://techcrunch.com/2017/05/27/googles-alphago-ai-is-retiring/" target="_blank">
+                https://techcrunch.com/2017/05/27/googles-alphago-ai-is-retiring/
+            </a></p>
+            <p><a href="https://www.tastehit.com/blog/google-deepmind-alphago-how-it-works/" target="_blank">
+                https://www.tastehit.com/blog/google-deepmind-alphago-how-it-works/
+            </a></p>
+            <p>Now, within a year, AlphaGo has reliably beaten any human being (including no. 1 and 2 in the world) and has retired already</p>
+        </section>
+
+        <section>
+            <h3>What does this mean for AI</h3>
+            <p><em>Zooming out, it is also still the case that AlphaGo is a narrow AI system that can play Go and that’s it. The ATARI-playing agents from DeepMind do not use the approach taken with AlphaGo. The Neural Turing Machine has little to do with AlphaGo. The Google datacenter improvements definitely do not use AlphaGo. The Google Search engine is not going to use AlphaGo. Therefore, AlphaGo does not generalize to any problem outside of Go, but the people and the underlying neural network components do, and do so much more effectively than in the days of old AI where each demonstration needed repositories of specialized, explicit code.</em></p>
+            <p><small><a href="https://medium.com/@karpathy/alphago-in-context-c47718cb95a5" target="_blank">https://medium.com/@karpathy/alphago-in-context-c47718cb95a5</a></small></p>
+        </section>
+
+        <section>
+            <h1>Part III: Strong AI</h1>
+            <h3>Can machines be creative and sentient?</h3>
+        </section>
+
+<!--
+        <section>
+            <h3>What do experts think where we are - 2015</h3>
+            <img src="ai/Intelligence2-1024x836.png" height="500px">
+            <p><small><a href="http://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html" target="_blank">
+                http://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html
+            </a><br><a href="http://waitbutwhy.com/2015/01/artificial-intelligence-revolution-2.html" target="_blank">
+                http://waitbutwhy.com/2015/01/artificial-intelligence-revolution-2.html
+            </a>
+            </small></p>
+
+        </section>
+
+        <section>
+            <h3>What do experts think where we are - 2016</h3>
+            <img src="ai/three-stages-of-ai-2016.jpg" height="500px">
+            <p><small><a href="https://twitter.com/amitpaka/status/783025757291356164" target="_blank">https://twitter.com/amitpaka/status/783025757291356164</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h2>But will there ever be truly intelligent machines at all?</h2>
+        </section>
+-->
+
+        <section>
+            <h3>Do we still understand the machines we build?</h3>
+            <p><a target="_blank" href="https://backchannel.com/our-machines-now-have-knowledge-well-never-understand-857a479dcc0e">
+                https://backchannel.com/our-machines-now-have-knowledge-well-never-understand-857a479dcc0e
+            </a></p>
+            <p><a target="_blank" href="https://futurism.com/googles-new-ai-is-better-at-creating-ai-than-the-companys-engineers/">
+                https://futurism.com/googles-new-ai-is-better-at-creating-ai-than-the-companys-engineers/
+            </a></p>
+        </section>
+
+        <section>
+            <h3>Even stronger: Do we really still build those machines?</h3>
+            <p>Or rather are they build by the data (e.g. pictures) of the world we feed them?</p>
+            <p>Would we say, we have built our kids?</p>
+
+            <p><a href="https://twitter.com/fchollet/status/849076312853663744" target="_blank">https://twitter.com/fchollet/status/849076312853663744</a></p>
+            <p><em>The most remarkable thing about the brain is that it wasn't designed. As a result, how the brain works is largely an irrelevant question.</em></p>
+            <p><em>Essentially: it doesn't matter what the answer is, because one can mechanically derive it once the question has been asked. What matters is the Question.</em></p>
+        </section>
+
+        <section>
+            <h3>Can machines be creative?</h3>
+            <p>Can they create something genuinely new?</p>
+            <p><em>One of the strangest things about thinking is our ability to create new thoughts, beyond what we can experience, by combining known concepts. This is where cognition departs from mere pattern recognition and become an abstraction machine.</em></p>
+            <p><small><a href="https://twitter.com/fchollet/status/863494785734029312" target="_blank">
+                https://twitter.com/fchollet/status/863494785734029312
+            </a></small></p>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+### What machines can come up with
+
+- Color Names: https://twitter.com/tsullivanphoto/status/865753799729786881
+- Metal Band Names: https://twitter.com/JanelleCShane/status/861243170084007937
+- Movies: https://twitter.com/dh7net/status/861334725750816768
+- worlds: https://www.youtube.com/watch?v=SwRV5422uKI
+	        </script>
+        </section>
+
+        <section>
+            <h2>Can machines create Art?</h2>
+        </section>
+
+        <section>
+            <h3>Klimt or machine?</h3>
+            <img src="ai/ai-klimt.jpg" height="400px">
+            <p><small><a href="https://twitter.com/mtyka/status/866192961960202244" target="_blank">https://twitter.com/mtyka/status/866192961960202244</a>,
+                <a href="https://twitter.com/mtyka/status/866199274119241732" target="_blank">https://twitter.com/mtyka/status/866199274119241732</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h3>Other paintings by climt</h3>
+            <img src="ai/klimt.png">
+        </section>
+
+        <section>
+            <h3>Is a creative process just applying a certain style to reality?</h3>
+            <img src="ai/sigurd-original.jpg" height="400px" class="fragment">
+            <span class="fragment" style="position: relative; top: -205px; font-size: 60px"><strong>=></strong></span>
+            <img src="ai/sigurd-stylized.png" height="400px" class="fragment">
+        </section>
+
+        <section>
+            <h3>Demo Style Transfer</h3>
+            <img src="ai/tf-stylize.png" height="550px">
+        </section>
+
+        <section>
+            <h3>Simulating the brain with many layers of neurons</h3>
+            <p>Each layer getting a deeper abstraction from the raw visual input</p>
+            <img src="ai/feature-channels-io17.png" height="400px">
+            <p><small>
+                <a target="_blank" href="https://www.youtube.com/watch?v=9ziVGkt8Gg4">Open Source TensorFlow Models (Google I/O '17)</a><br>
+                <a target="_blank" href="https://github.com/random-forests/tensorflow-workshop/blob/master/extras/deep_dream.ipynb">https://github.com/random-forests/tensorflow-workshop/blob/master/extras/deep_dream.ipynb</a>
+            </small></p>
+
+        </section>
+
+        <section>
+            <h3>Exercise: Playing around with layered neurons</h3>
+            <a target="_blank" href="http://playground.tensorflow.org">
+            <div>
+            <img src="tensorflow-overview.png">
+            <p><small>http://playground.tensorflow.org</small></p>
+            </div>
+            </a>
+        </section>
+
+        <section>
+            <h2>Might dreaming or hallucinating just be partial brain shut down?</h2>
+            <p>
+                <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/tutorials/deepdream/deepdream.ipynb" target="_blank">
+                    https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/tutorials/deepdream/deepdream.ipynb
+                </a>
+            </p>
+            <p>Sequences:
+                <a href="https://www.youtube.com/watch?v=lkpe5njSiJk" target="_blank">https://www.youtube.com/watch?v=lkpe5njSiJk</a></p>
+        </section>
+
+        <section>
+            <h3>Partially activating layers leeds to dream like impressions</h3>
+            <img src="ai/dream-town.jpg" height="500px">
+        </section>
+
+        <section>
+            <h3>Partial application of layers applied to real images</h3>
+            <img src="ai/hallucination-original.jpg" height="250px" class="fragment">
+            <span class="fragment" style="position: relative; top: -105px; font-size: 60px"><strong>=></strong></span>
+            <img src="ai/hallucination-dogslugs.jpg" height="250px" class="fragment">
+            <p class="fragment">Is the machine hallucinating?</p>
+        </section>
+
+        <section>
+            <h3>Bad Horror Trip?</h3>
+            <img src="ai/moster-squirrel.jpg" height="600px">
+        </section>
+
+        <section>
+            <h1>Consciousness</h1>
+            <p><em>the state of being aware of and responsive to one's surroundings</em></p>
+            <a href="https://en.wikipedia.org/wiki/Consciousness" target="_blank">https://en.wikipedia.org/wiki/Consciousness</a>
+            <p><em>Consciousness is the state or quality of awareness, or, of being aware of an external object or something within oneself. It has been defined variously in terms of sentience, awareness, subjectivity, the ability to experience or to feel, wakefulness, having a sense of selfhood or soul, the fact that there is something "that it is like" to "have" or "be" it, and the executive control system of the mind, or the state or quality of awareness, or, of being aware of an external object or something within oneself. In contemporary philosophy its definition is often hinted at via the logical possibility of its absence, the philosophical zombie, which is defined as a being whose behavior and function are identical to one's own yet there is "no-one in there" experiencing it.</em></p>
+        </section>
+
+        <section>
+            <h3>Famous Philosopher <em>Dr. phil. Dipl.-Math. Sebastian Meyer. M.A.</em></h3>
+            <img src="ai/body-vs-soul-meyer.jpg" height="500px">
+        </section>
+
+        <section>
+            <h3>Strong position</h3>
+            <p><a target="_blank" href="https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)">https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)</a></p>
+            <p>From <em>Ascribing Mental Qualities to Machines</em></p>
+            <p class="fragment"><em>Machines as simple as thermostats can be said to have beliefs, and having beliefs seems to be a characteristic of most machines capable of problem solving performance.</em></p>
+            <p class="fragment"><strong>The appropriately programmed computer with the right inputs and outputs would thereby have a mind in exactly the same sense human beings have minds.</strong></em></p>
+        </section>
+
+        <section>
+            <h3>Counter Argument</h3>
+            <p>By Philosopher <a href="https://en.wikipedia.org/wiki/John_Searle" target="_blank">https://en.wikipedia.org/wiki/John_Searle</a></p>
+            <p class="fragment"><em>The Chinese room argument holds that a program cannot give a computer a "mind", "understanding" or "consciousness", regardless of how intelligently or human-like the program may make the computer behave. </em></p>
+            <p class="fragment"><em>In this thought experiment, a person in the "Chinese room" is passed questions from outside the room, and consults a library of books to formulate an answer.</em></p>
+            <p><small><a target="_blank" href="https://en.wikipedia.org/wiki/Chinese_room">https://en.wikipedia.org/wiki/Chinese_room</a></small></p>
+        </section>
+
+        <section>
+            <h3>But, remember Turing</h3>
+            <p class="fragment"><strong>if you ever experience an intelligent machine,
+                such a distinction (if the machine has mental qualities or a consciousness)
+                would not make more sense than asking if the other people do real thinking either</strong></p>
+        </section>
+
+        <section>
+            <h2>More elaborated approach</h2>
+            <p>What makes us conscious? <a target="_blank" href="https://theconversation.com/what-makes-us-conscious-50011">
+                https://theconversation.com/what-makes-us-conscious-50011
+            </a></p>
+            <p>Integrated Information Theory postulates physical system can give rise to consciousness if it is</p>
+            <ol>
+                <li>very rich in information (like brain and SSD)
+                <li>highly integrated (data is highly connected in complex ways)
+            </ol>
+            <p>Should be able to distinguish awake and anaesthetised brains
+                (<a target="_blank" href="http://journals.sagepub.com/doi/abs/10.1177/1550059413513723">http://journals.sagepub.com/doi/abs/10.1177/1550059413513723</a>)
+            </p>
+            <p>Might consciousness be something not restricted to living things? <a target="_blank " href="https://www.scientificamerican.com/article/is-consciousness-universal/">
+                https://www.scientificamerican.com/article/is-consciousness-universal/
+            </a> </p>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+### Is our consciousness linked to / identical to brain functions?
+
+- Facial recognition reduced to a few brain cells: http://www.cell.com/cell/fulltext/S0092-8674(17)30538-X
+  - Facial images can be linearly reconstructed using responses of ∼200 face cells
+  - early brain regions pre process images before that
+- Seeing Consciousness as a process of inference: https://aeon.co/essays/consciousness-is-not-a-thing-but-a-process-of-inference
+  - *The special trick of consciousness is being able to project action and time into a range of possible futures*
+            </script>
+        </section>
+
+<!--
+        <section>
+            <h2>Exercise</h2>
+            <h3><em>Sentient</em> intelligence vs <em>non-sentient</em> intelligence</h3>
+            <p>Discuss this claim<p>
+            <p><strong>Our main conclusion is that it is <em>not</em> sentient intelligence we should fear but <em>non-sentient</em> intelligence.</strong></p>
+            <p>Sources</p>
+            <ul>
+                <li>Abstract of source of above quote <a target="_blank" href=https://arxiv.org/abs/1705.07996>
+                    Living Together: Mind and Machine Intelligence
+                </a>
+                <li>Abstract of <a target="_blank" href=https://link.springer.com/article/10.1007/s12369-014-0262-y>
+                    A Recipe for Empathy:
+                    Integrating the Mirror System, Insula, Somatosensory Cortex and Motherese
+                </a>
+                <li><a target="_blank" href=https://twitter.com/petitegeek/status/868406476074823680">https://twitter.com/petitegeek/status/868406476074823680</a>
+                <li><a href="https://twitter.com/MattFenech83/status/867698105285791746" target="_blank">https://twitter.com/MattFenech83/status/867698105285791746</a>
+                </ul>
+        </section>
+
+        <section>
+            <h1>Part IV: Wrapping Up</h1>
+        </section>
+-->
+
+        <section>
+            <h3>Does this have a conscience?</h3>
+            <img src="ai/does-a-squirrel-have-a-conscience.jpg" height="600px">
+        </section>
+
+        <section>
+            <h3>What is the difference between human and animal cognition?</h3>
+            <p>A survey of what animals are capable of: <a target="_blank" href="https://twitter.com/animalcog">https://twitter.com/animalcog</a></p>
+        </section>
+
+        <section>
+            <h2>Wrap Up Fishbowl Discussion</h2>
+            <h3>What does consciousness mean in the first place?</h3>
+            <h3>Are animals conscious?</h3>
+            <h3>Does it take a living thing to have consciousness?</h3>
+            <h3>Are machines conscious?</h3>
+            <p><strong>Olli's position here: There is no fundamental difference between machine, animal, and human</strong></p>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
+    //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
+    //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+//        $('.fragment').removeClass('fragment');
+        $('a').attr('target', '_blank');
+
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

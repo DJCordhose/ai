@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Are Captchas Dead?</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        pre code {
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+            font-size: larger !important;
+        }
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            /*height: 500px;*/
+        }
+        .left-img {
+            margin-left: 10px !important;
+            float: left;
+            /*height: 500px;*/
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section>
+            <h1>Are Captchas Dead?</h1>
+                <h3><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </h3>
+            <p><small><a href="http://djcordhose.github.io/machine-learning-in-the-browser/2017_pydata_london_captchas_lightning.html">http://djcordhose.github.io/machine-learning-in-the-browser/2017_pydata_london_captchas_lightning.html</a></small></p>
+        </section>
+
+ <section class="todo">
+ <pre>
+ - Show example captchas, generated in incognito mode by: https://www.dhl.de/anmelden
+ - Retrain inception model to be even better
+ </pre>
+ </section>
+
+        <section>
+            <h3>Can a machine tell the dog from the muffin?</h3>
+            <img src="dog-vs-muffin.jpg">
+        </section>
+
+        <section>
+            <h1>Question</h1>
+            <h2>If Google Creates those Captchas, can Google also Recognize them?</h2>
+            <h3>And it they can, are they sill reasonable?</h3>
+        </section>
+
+        <section>
+            <h3>Using Googles Pre-Trained Inception Model</h3>
+            <img src="inception_v3_architecture.png" height="480px">
+            <p><small><a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a></small></p>
+        </section>
+
+        <section>
+            <h3>Dog 1</h3>
+            <img src="captchas/dog-vs-muffin/dog1.jpg" height="300px">
+            <div class="fragment">
+                <pre><code data-trim>
+Chihuahua (score = 0.70387)
+Pomeranian (score = 0.02321)
+toy terrier (score = 0.00686)
+Pekinese, Pekingese, Peke (score = 0.00679)
+beagle (score = 0.00598)
+                </code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>Dog 2</h3>
+            <img src="captchas/dog-vs-muffin/dog2.jpg" height="300px">
+            <div class="fragment">
+                <pre><code data-trim>
+Chihuahua (score = 0.94613)
+fig (score = 0.00149)
+Mexican hairless (score = 0.00118)
+toy terrier (score = 0.00088)
+ski mask (score = 0.00084)
+                </code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>Muffin 1</h3>
+            <img src="captchas/dog-vs-muffin/muffin1.jpg" height="300px">
+            <div class="fragment">
+                <pre><code data-trim>
+vase (score = 0.05576)
+water jug (score = 0.03472)
+soap dispenser (score = 0.03104)
+hog, pig, grunter, squealer, Sus scrofa (score = 0.02650)
+Sealyham terrier, Sealyham (score = 0.02031)
+                </code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>Muffin 2</h3>
+            <img src="captchas/dog-vs-muffin/muffin2.jpg" height="300px">
+            <div class="fragment">
+                <pre><code data-trim>
+teddy, teddy bear (score = 0.25262)
+custard apple (score = 0.13425)
+spaghetti squash (score = 0.02526)
+earthstar (score = 0.02003)
+toyshop (score = 0.01996)
+                </code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>More Examples</h2>
+        </section>
+
+        <section>
+            <img src="dog-vs-bread.jpg" height="500px">
+        </section>
+
+        <section>
+            <h2>Example Invocation</h2>
+            <pre><code>python classify_image.py --image_file dog-vs-chicken-wing/dog1.jpg 2>/dev/null</code></pre>
+            <a href="https://github.com/tensorflow/models/tree/master/tutorials/image/imagenet" target="_blank">
+                    https://github.com/tensorflow/models/tree/master/tutorials/image/imagenet
+                </a>
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-bread-term.png">
+        </section>
+
+        <section>
+            <img src="dog-vs-chicken-wing.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-wing-term.png">
+        </section>
+
+        <section>
+            <img src="dog-vs-bagle.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-bagel-term.png">
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-ice-cream/dog-vs-ice-cream.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="captchas/dog-vs-ice-cream-term.png">
+        </section>
+
+        <section>
+            <img src="captchas/sheepdog-vs-mop/sheepdog-vs-mop.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="captchas/sheepdog-vs-mop-term.png">
+        </section>
+
+        <section>
+            <h1>So?</h1>
+            <h2>Yes!</h2>
+            <h3>At least for our examples Google Inception Model knows what is a dog and what is not</h3>
+        </section>
+
+        <section>
+            <h2>Links</h2>
+            <ul>
+                <li><a href="https://www.tensorflow.org/tutorials/image_recognition" target="_blank">
+                    https://www.tensorflow.org/tutorials/image_recognition
+                </a>
+                <li><a href="https://github.com/tensorflow/models/tree/master/inception" target="_blank">
+                    https://github.com/tensorflow/models/tree/master/inception
+                </a>
+                <li><a href="https://github.com/tensorflow/models/tree/master/tutorials/image/imagenet" target="_blank">
+                    https://github.com/tensorflow/models/tree/master/tutorials/image/imagenet
+                </a>
+            </ul>
+            <p><small>Sources: https://twitter.com/teenybiscuit/status/705232709220769792, https://twitter.com/kevcodez/status/864905647678246912</small></p>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
+    //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+//        $('.fragment').removeClass('fragment');
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
