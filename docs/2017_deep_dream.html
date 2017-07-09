@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Do Machines Have Souls</title>
+    <title>Deep Dream</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -76,70 +76,68 @@
     <div class="slides">
 
         <section>
-            <h1>Do machines have souls?</h1>
+            <h2>Deep Dream</h2>
+            <h3>Looking under the covers of Convolutional Neural Networks</h3>
                 <h3><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </h3>
-            <p><small><a href="http://djcordhose.github.io/ai/2017_do_machines_have_souls.html">
-                http://djcordhose.github.io/ai/2017_do_machines_have_souls.html
+            <p><small><a href="http://djcordhose.github.io/ai/2017_deep_dream.html">
+                http://djcordhose.github.io/ai/2017_deep_dream.html
             </a></small></p>
         </section>
 
         <section>
-            <h2>The clear answer: Of course not!</h2>
+            <h3>The Inception Model</h3>
+            <img src="img/deep-dream/inception-model.png" height="400px">
+            <p>Consists of many convolutional layers, each having a hundred or more feature channels</p>
         </section>
 
         <section>
-            <h2>... but ...</h2>
+            <h4>Trained on the ImageNet dataset to classify images</h4>
+            <img src="img/deep-dream/imagenet.png" height="500px">
+            <p><small><a href="http://image-net.org/" target="_blank">http://image-net.org/</a></small></p>
         </section>
 
         <section>
-            <h2>... is this really so clear?</h2>
+            <h4>Deep Dream Notebook</h4>
+            <a href="http://localhost:8888/notebooks/deepdream.ipynb" target="_blank">
+            <img src="img/deep-dream/deep_dream_notebook.png" height="450px">
+                </a>
+            <pre>
+- git clone git@github.com:tensorflow/tensorflow.git
+- cd tensorflow/tensorflow/examples/tutorials/deepdream
+- jupyter notebook
+            </pre>
         </section>
 
         <section>
-            <h3>Are you also in a relationship with your car?</h3>
-            <img src="img/lola.jpg" height="400px">
-            <p>Our car actually is a <em>she</em></p>
+            <h3>Lets you take a look inside</h3>
+            <ul>
+                <li>you choose a layer, e.g. <em>mixed4d_3x3_bottleneck_pre_relu</em>
+                <li>you pick a feature channel, e.g. <em>139</em>
+                <li>deep dream generates an image
+                <li>by maximizing overall activation</li>
+                <li>uses gradient ascent</li>
+            </ul>
+            <p>Gives you an impression what each channel <em>"sees"</em></p>
         </section>
 
         <section>
-            <h3>He is really good at listening</h3>
-            <img src="img/sigurd.jpg" height="500px">
+            <h4>Early layers show patterns with low abstraction</h4>
+            <img src="img/deep-dream/mixed3b_1x1_pre_relu-101.jpg">
+            <p><small>mixed3b_1x1_pre_relu, 101</small></p>
         </section>
 
-<!--
-        <section class="todo">
-     <pre>
+        <section>
+            <h4>Deeper Layers show more abstraction</h4>
+            <img src="img/deep-dream/mixed4d_3x3_bottleneck_pre_relu-139.jpg">
+            <p><small>mixed4d_3x3_bottleneck_pre_relu, 139</small></p>
+        </section>
 
-Mit Turings Definition anfangen
-Dann Kunst (docs/img/art/style-transfer)
-Traum
-Halluzination
-
-Lightning Talk SciPy 1 (2 is Captcha Talk)
-
-Sigurd
-- img/sigurd.jpg
-
-Lola, a relationship that has lasted for more than 100.000 Kilometers
-- img/lola.jpg
-
-If we attribute soul to these things, why not to machines?
-
-Go Commentary: attributing human features to the AlphaGo machine
-
-Auch das Horn dazu nehmen
-- Horn benimmt sich so als ob
-- img/squirrel
-
-Dann Bild von mir. Woher weiß man von meiner Seele. Auch nur Annahme.
-
-Deep Dream, machine having dreams, hallucinating?
-
-
-     </pre>
- </section>
--->
+        <section>
+            <h4>Deep Dream can also Dream / Hallucinate</h4>
+            <img src="img/deep-dream/moster-squirrel.jpg" height="500px">
+            <p><small>By optimizing a specific channel on a random image</small></p>
+        </section>
     </div>
 
 </div>
