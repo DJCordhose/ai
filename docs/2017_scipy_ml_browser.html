@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Deep Dream</title>
+    <title>Machine Learning in the Browser</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -76,95 +76,58 @@
     <div class="slides">
 
         <section>
-            <h2>Deep Dream</h2>
-            <h3>Looking under the covers of Convolutional Neural Networks</h3>
-                <h3><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                </h3>
-            <p><small><a href="http://djcordhose.github.io/ai/2017_deep_dream.html">
-                http://djcordhose.github.io/ai/2017_deep_dream.html
+            <h2>Machine Learning in the Browser</h2>
+                <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </h4>
+            <p><small><a href="http://djcordhose.github.io/ai/2017_scipy_ml_browser.html">
+                http://djcordhose.github.io/ai/2017_scipy_ml_browser.html
             </a></small></p>
         </section>
 
         <section>
-            <h3>The Inception Model</h3>
-            <img src="img/deep-dream/inception-model.png" height="400px">
-            <p>Consists of many convolutional layers, each having a hundred or more feature channels</p>
+            <h2>Wait, but why?</h2>
         </section>
 
         <section>
-            <h4>Trained on the ImageNet dataset to classify images</h4>
-            <img src="img/deep-dream/imagenet.png" height="500px">
-            <p><small><a href="http://image-net.org/" target="_blank">http://image-net.org/</a></small></p>
+            <h2>Education: Reach</h2>
         </section>
 
         <section>
-            <h4>Deep Dream Notebook</h4>
-            <a href="http://localhost:8888/notebooks/deepdream.ipynb" target="_blank">
-            <img src="img/deep-dream/deep_dream_notebook.png" height="450px">
-                </a>
-            <pre>
-- git clone git@github.com:tensorflow/tensorflow.git
-- cd tensorflow/tensorflow/examples/tutorials/deepdream
-- jupyter notebook
-            </pre>
-        </section>
-
-        <section>
-            <h3>Lets you take a look inside</h3>
-            <ul>
-                <li>you choose a layer, e.g. <em>mixed4d_3x3_bottleneck_pre_relu</em>
-                <li>you pick a feature channel, e.g. <em>139</em>
-                <li>deep dream generates an image
-                <li>by maximizing overall activation</li>
-                <li>uses gradient ascent to create pixels on input image</li>
-            </ul>
-            <p>Gives you an impression what each channel <em>"sees"</em></p>
-        </section>
-
-        <section>
-            <h4>Early layers show patterns with low abstraction</h4>
-            <img src="img/deep-dream/mixed3b_1x1_pre_relu-101.jpg">
-            <p><small>mixed3b_1x1_pre_relu, 101</small></p>
-        </section>
-
-        <section>
-            <h4>Deeper Layers show more abstraction</h4>
-            <img src="img/deep-dream/mixed4d_3x3_bottleneck_pre_relu-139.jpg">
-            <p><small>mixed4d_3x3_bottleneck_pre_relu, 139</small></p>
-        </section>
-
-        <section>
-            <h4>Deep Dream can also Dream / Hallucinate</h4>
-            <img src="img/deep-dream/moster-squirrel.jpg" height="500px">
-            <p><small>By <em>"over-interpreting"</em> a specific channel on a random image</small></p>
-        </section>
-
-        <section>
-            <h3>More Details and Examples</h3>
-            <img src="img/deep-dream/deep_dream_blog.png">
-            <a href="https://research.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html" target="_blank">
-                https://research.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html
+            <h3>Tensorflow Playground</h3>
+            <p>Playing with Neural Networks without any installation</p>
+            <a href="http://playground.tensorflow.org" target="_blank">
+                <img src="img/browser/playground.png">
             </a>
+            <p><a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a></p>
         </section>
 
         <section>
-            <h3>Other techniques</h3>
-            <ul>
-                <li>Visualize Activations (which parts of an image triggered which feature channel)
-                <li>Visualizing Heatmaps for class Activation (which part of the image triggered the activation)
-            </ul>
+            <h2>Snappy / Offline / Privacy</h2>
         </section>
 
         <section>
-            <h3>Which Feature Channels are Activated?</h3>
-            <img src="img/fchollet/fchollet-activations.png" height="400px">
-            <p><small>Deep Learning with Python, François Chollet, Manning</small></p>
+            <h3>Keras.js</h3>
+            <p>Running Keras Models in the Browser</p>
+            <a href="https://transcranial.github.io/keras-js" target="_blank">
+                <img src="img/browser/keras-browser.png" height="350px">
+            </a>
+            <p><a href="https://transcranial.github.io/keras-js" target="_blank">https://transcranial.github.io/keras-js</a></p>
+            <p><small>Alternative: <a href="https://mil-tokyo.github.io/webdnn/" target="_blank">https://mil-tokyo.github.io/webdnn/</a></small></p>
         </section>
 
         <section>
-            <h3>Heatmaps for class Activation</h3>
-            <img src="img/fchollet/fchollet-elephantness.png" height="450px">
-            <p><small>Deep Learning with Python, François Chollet, Manning</small></p>
+            <h2>Education: Interactivity</h2>
+        </section>
+
+        <section>
+            <h3>PCA Explained Visually</h3>
+            <p>Explorable Explanation of PCA</p>
+            <a href="http://setosa.io/ev/principal-component-analysis/" target="_blank">
+                <img src="img/browser/pca-iris.png">
+            </a>
+            <p><a href="http://setosa.io/ev/principal-component-analysis/" target="_blank">http://setosa.io/ev/principal-component-analysis/</a></p>
+            <p><small>There are many more interactive explanations here:
+            <a href="http://setosa.io/ev" target="_blank">http://setosa.io/ev</a></small></p>
         </section>
 
     </div>
