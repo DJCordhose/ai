@@ -17,10 +17,11 @@
 
     <link rel="stylesheet" href="reveal.js/css/reveal.css">
     <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
-    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
-    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">-->
 
 
     <!-- Code syntax highlighting -->
@@ -76,8 +77,9 @@
     <div class="slides">
 
         <section>
-            <h2>CNN Introspection</h2>
-            <h3>Looking under the covers of Convolutional Neural Networks</h3>
+            <h2><strong>How do Convolutional Neural Networks "see"?</strong></h2>
+            <!--<h2>CNN Introspection</h2>-->
+            <!--<h3>Looking under the covers of Convolutional Neural Networks</h3>-->
                 <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </h4>
             <p><small><a href="http://djcordhose.github.io/ai/2017_scipy_cnn_introspection.html">
@@ -85,23 +87,58 @@
             </a></small></p>
         </section>
 
-        <section>
-            <h2>How do our CNNs "see"?</h2>
+        <section data-background-image="img/deep-dream/inception-model.png">
+            <h2 class="fragment"><strong>CNNs consist of many layers containing many feature channels</strong></h2>
         </section>
 
         <section>
-            <h3>Three Techniques</h3>
-<!--
-            <ul>
-                <li>Deep Dream: Generate Images that fully activate a feature channel
-                <li>Visualize Activations (which parts of an image trigger which feature channel)
-                <li>Visualizing Heatmaps for class Activation (which part of the image triggered the activation)
-            </ul>
--->
+            <h2><strong>What goes on inside such a CNN?</strong></h2>
         </section>
+
+
+        <section>
+            <h2><strong>Three Techniques to visualize this</strong></h2>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Three Techniques</h3>-->
+            <!--<ul>-->
+                <!--<li>Deep Dream: Generate Images that fully activate a feature channel-->
+                <!--<li>Visualize Activations (which parts of an image trigger which feature channel)-->
+                <!--<li>Visualizing Heatmaps for class Activation (which part of the image triggered the activation)-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <section>
             <h1>I</h1>
+        </section>
+
+        <section data-background-image="img/fchollet/fchollet-elephantness.png">
+            <div class="fragment">
+            <h2><strong>Which parts of the image trigger the elephant activation</strong></h2>
+                <br>
+                <br>
+                <br>
+            <h4><strong>Deep Learning with Python, François Chollet, Manning</strong></h4>
+            </div>
+        </section>
+
+        <section>
+            <h1>II</h1>
+        </section>
+
+        <section data-background-image="img/fchollet/fchollet-activations.png">
+            <div class="fragment">
+            <h2><strong>Which<br> Feature Channels<br> are Activated<br> by which images?</strong></h2>
+                <br>
+                <br>
+                <br>
+            <h4><strong>Deep Learning with Python,<br> François Chollet, Manning</strong></h4>
+            </div>
+        </section>
+
+        <section>
+            <h1>III</h1>
         </section>
 
         <section>
@@ -115,49 +152,52 @@
             <p>Gives you an impression what each channel <em>"sees"</em></p>
         </section>
 
-                <section>
-            <h4>Deep Dream Notebook</h4>
+        <section>
+            <h3>Deep Dream Notebook</h3>
+            <p>Working on Google's Inception Model trained with ImageNet</p>
             <a href="http://localhost:8888/notebooks/deepdream.ipynb" target="_blank">
-            <img src="img/deep-dream/deep_dream_notebook.png" height="450px">
+            <img src="img/deep-dream/deep_dream_notebook.png" height="250px">
                 </a>
             <pre>
 - git clone git@github.com:tensorflow/tensorflow.git
 - cd tensorflow/tensorflow/examples/tutorials/deepdream
-- jupyter notebook
-            </pre>
+- jupyter notebook</pre>
+        </section>
+
+        <section data-background-image="img/deep-dream/mixed3b_1x1_pre_relu-101.jpg">
+            <div class="fragment">
+            <h1>Early layers show patterns</h1>
+            <p>mixed3b_1x1_pre_relu, 101</p>
+                </div>
+        </section>
+
+        <section data-background-image="img/deep-dream/mixed4d_3x3_bottleneck_pre_relu-139.jpg">
+            <div class="fragment">
+            <h1>Deeper Layers show more abstraction</h1>
+            <p>mixed4d_3x3_bottleneck_pre_relu, 139</p>
+                </div>
+        </section>
+
+        <section data-background-image="img/deep-dream/mixed5b_5x5_pre_relu_0068.jpg">
+            <div class="fragment">
+            <h1>Final Layers can be quite scary</h1>
+            <p>mixed5b_5x5_pre_relu, 0068</p>
+                </div>
         </section>
 
         <section>
-            <h4>Early layers show patterns with low abstraction</h4>
-            <img src="img/deep-dream/mixed3b_1x1_pre_relu-101.jpg">
-            <p><small>mixed3b_1x1_pre_relu, 101</small></p>
+            <h4>Deep Dream can also Dream / Hallucinate</h4>
+            <img src="img/squirrels/monster/london.jpg" height="500px">
+            <p><small>By <em>"over-interpreting"</em> a specific channel on a random image</small></p>
         </section>
 
         <section>
-            <h4>Deeper Layers show more abstraction</h4>
-            <img src="img/deep-dream/mixed4d_3x3_bottleneck_pre_relu-139.jpg">
-            <p><small>mixed4d_3x3_bottleneck_pre_relu, 139</small></p>
+            <h2><strong>Austin Squirrels seems to be very sensitive to these Hallucinations</strong></h2>
         </section>
 
-        <section>
-            <h1>II</h1>
-        </section>
-
-        <section>
-            <h4>Which Feature Channels are Activated by which images?</h4>
-            <img src="img/fchollet/fchollet-activations.png" height="450px">
-            <p><small>Deep Learning with Python, François Chollet, Manning</small></p>
-        </section>
-
-        <section>
-            <h1>III</h1>
-        </section>
-
-        <section>
-            <h4>Heatmaps for class Activation (which part of the image triggered the activation)</h4>
-            <img src="img/fchollet/fchollet-elephantness.png" height="450px">
-            <p><small>Deep Learning with Python, François Chollet, Manning</small></p>
-        </section>
+        <section data-background-image="img/squirrels/monster/austin1.jpg"></section>
+        <section data-background-image="img/squirrels/monster/austin2.jpg"></section>
+        <section data-background-image="img/squirrels/monster/austin3.jpg"></section>
 
     </div>
 
@@ -170,7 +210,7 @@
 <script>
     //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
 //    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
-    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
     //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
     //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
     //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
