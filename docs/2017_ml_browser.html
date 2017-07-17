@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Machine Learning in the Browser</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        pre code {
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+            font-size: larger !important;
+        }
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            /*height: 500px;*/
+        }
+        .left-img {
+            margin-left: 10px !important;
+            float: left;
+            /*height: 500px;*/
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+Todo:
+- https://hackernoon.com/machine-learning-with-javascript-part-1-9b97f3ed4fe5
+
+GPU:
+* https://twitter.com/hardmaru/status/884467795022331905?s=03
+
+### Education
+* TensorFlow Playground
+* ConvNet
+  * https://youtu.be/nAHcrz5hxc4
+  * http://cs.stanford.edu/people/karpathy/convnetjs/intro.html
+* http://setosa.io/ev/image-kernels/
+* http://setosa.io/ev/principal-component-analysis/
+
+### Using ML as part of an application
+* https://github.com/transcranial/keras-js
+* http://cs.stanford.edu/people/karpathy/tsnejs/
+
+### Browser Based Applications
+* http://djcordhose.github.io/machine-learning-in-the-browser/2016_js_kongress.html#/4
+* http://ml4a.github.io/demos/
+* https://twitter.com/fchollet/status/871480588175196160
+  * https://github.com/mil-tokyo/webdnn
+
+### Technical, building a browser based app
+* https://medium.com/@plotlygraphs/introducing-dash-5ecf7191b503
+  * http://opensourceforu.com/2017/06/dash-build-reactive-web-apps-using-python/amp/
+  * Using Flask and React
+* https://www.html5rocks.com/en/tutorials/canvas/imagefilters
+-->
+
+        <section>
+            <h2>Machine Learning in the Browser</h2>
+                <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </h4>
+            <p><small><a href="http://djcordhose.github.io/ai/2017_ml_browser.html">
+                http://djcordhose.github.io/ai/2017_ml_browser.html
+            </a></small></p>
+        </section>
+
+<!--
+        <section class="todo">
+            <pre>
+            </pre>
+        </section>
+-->
+
+        <section>
+            <h2>Wait, but why?</h2>
+        </section>
+
+        <section>
+            <h2>Education: Reach</h2>
+        </section>
+
+        <section>
+            <h3>Tensorflow Playground</h3>
+            <p>Playing with Neural Networks without any installation</p>
+            <a href="http://playground.tensorflow.org" target="_blank">
+                <img src="img/browser/playground.png">
+            </a>
+            <p><a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a></p>
+        </section>
+
+        <section>
+            <h2>Education: Interactivity</h2>
+        </section>
+
+        <section>
+            <h3>PCA Explained Visually</h3>
+            <p>Explorable Explanation of PCA</p>
+            <a href="http://setosa.io/ev/principal-component-analysis/" target="_blank">
+                <img src="img/browser/pca-iris.png">
+            </a>
+            <p><a href="http://setosa.io/ev/principal-component-analysis/" target="_blank">http://setosa.io/ev/principal-component-analysis/</a></p>
+            <p><small>There are many more interactive explanations here:
+            <a href="http://setosa.io/ev" target="_blank">http://setosa.io/ev</a></small></p>
+        </section>
+
+        <section>
+            <h2>Exploration: Interactivity</h2>
+        </section>
+
+        <section>
+            <h3>tsne.js</h3>
+            <p>Running Keras Models in the Browser</p>
+            <a href="http://cs.stanford.edu/people/karpathy/tsnejs/" target="_blank">
+                <img src="img/browser/tsnejs.png" height="350px">
+            </a>
+            <p><a href="http://cs.stanford.edu/people/karpathy/tsnejs/" target="_blank">http://cs.stanford.edu/people/karpathy/tsnejs/</a></p>
+        </section>
+
+        <section>
+            <h2>Snappy / Offline / Privacy</h2>
+        </section>
+
+        <section>
+            <h3>Keras.js</h3>
+            <p>Running Keras Models in the Browser</p>
+            <a href="https://transcranial.github.io/keras-js" target="_blank">
+                <img src="img/browser/keras-browser.png" height="350px">
+            </a>
+            <p><a href="https://transcranial.github.io/keras-js" target="_blank">https://transcranial.github.io/keras-js</a></p>
+            <p><small>Alternative: <a href="https://mil-tokyo.github.io/webdnn/" target="_blank">https://mil-tokyo.github.io/webdnn/</a></small></p>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
+    //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+//        $('.fragment').removeClass('fragment');
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
