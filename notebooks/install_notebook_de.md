@@ -1,3 +1,7 @@
+### Deep Learning: Bilderkennung mit Keras und TensorFlow
+
+https://www.data2day.de/veranstaltung-5842-deep-learning%3A-bilderkennung-mit-keras-und-tensorflow.html?id=5842
+
 Da die Installation aller notwendigen Pakete komplex sein kann, nutzen
 wir für diesen Workshop die Azure Notebooks, die keinerlei lokale
 Installation erfordern und nur einen Browser zur Steuerung benötigen.
