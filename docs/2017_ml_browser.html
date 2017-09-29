@@ -127,6 +127,21 @@ GPU:
   * Using Flask and React
 * https://www.html5rocks.com/en/tutorials/canvas/imagefilters
 -->
+        <section data-markdown class="preparation">
+            <script type="text/template">
+### Preparation
+
+- Open Deep Learn js sample in VSC
+  - start ```http-server``` in terminal
+  - Color Scheme: High Contrast
+  - Zoom In
+
+- Open all demos way ahead of time when there still is internet
+  -
+  -
+  -
+            </script>
+        </section>
 
         <section>
             <h2>Machine Learning in the Browser</h2>
@@ -141,12 +156,16 @@ GPU:
             </a></small></p>
         </section>
 
-<!--
+
+
         <section class="todo">
             <pre>
+- rehearse demoing deeplearn.js example
+- distribute all 3 demos evenly
+- have a very clear idea what to show in each demo
+- 'More Machine Learning with JavaScript': clean up, either make a slide per tool are given more complete overview
             </pre>
         </section>
--->
 
         <section>
             <h2>Wait, but why?</h2>
@@ -160,34 +179,6 @@ GPU:
                 </div>
         </section>
 
-        <section>
-            <h3>Most obvious reason: JavaScript is the language you are most comfortable with</h3>
-        </section>
-
-        <section>
-            <h4>Machine Learning with JavaScript</h4>
-            <ul>
-                <li>
-                    <a href="http://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank">
-                        ConvNetJS</a>: Visual NN exploration for learning
-                    (<a href="http://cs.stanford.edu/people/karpathy/tsnejs/" target="_blank">t-SNE</a>
-                    cluster exploration from same auhtor)
-
-                <li><a target="_blank" href="https://github.com/harthur-org/brain.js">
-                    Brain.js
-                </a>:
-                    simple and straing forward NN implementation</li>
-                <li><a href="http://caza.la/synaptic/#/">synaptic.js</a>: similar scope as Brain.js, a bit more active</li>
-                <li><a href="https://github.com/mljs/ml">ml.js</a>: generic low level libs for machine learning</li>
-
-                <li><a href="https://scienceai.github.io/neocortex/" target="_blank">
-                    neocortex.js
-                </a>runs pre-trained deep neural networks (<a href="http://keras.io/" target="_blank">Keras</a> models)
-                <li><a href="https://www.npmjs.com/package/scikit-node" target="_blank">
-                    scikit-node
-            </a>: Wrapper for Python's <a target="_blank" href="http://scikit-learn.org/">scikit-learn</a> (mainstream lib)
-            </ul>
-        </section>
         <section>
             <h3>JavaScript might be the only language around</h3>
             <h4  class="fragment">because all you have is a browser</h4>
@@ -277,6 +268,17 @@ We also believe in the importance of clear and understandable explanations of th
         </section>
 
         <section>
+            <h3>Demo: Understanding Neural Networks</h3>
+            <ul>
+                <li>zero installation available from all devices
+            </ul>
+            <p><a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a></p>
+            <ul class="todo">
+                <li>What are we going to show here?
+            </ul>
+        </section>
+
+        <section>
             <h3>PCA Explained Visually</h3>
             <p>Explorable Explanation of PCA</p>
             <a href="http://setosa.io/ev/principal-component-analysis/" target="_blank">
@@ -325,15 +327,81 @@ We also believe in the importance of clear and understandable explanations of th
         </section>
 
         <section>
+            <h3>Demo: Keras.js</h3>
+            <h4>Understanding Convolutional Neural Networks (CNNs)</h4>
+            <ul class="fragment">
+                <li>zero installation available from all devices
+                <li>GPU support
+            </ul>
+            <p class="fragment"><a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
+                https://transcranial.github.io/keras-js/#/mnist-cnn</a></p>
+            <ul class="fragment">
+                <li>What layers does a CNN typically have?
+                <li>What are feature channels? And what are bottleneck features?
+                <li>What does each feature channel "see"?
+            </ul>
+        </section>
+
+        <section>
+            <h3>Most obvious reason: JavaScript is the language you are most comfortable with</h3>
+        </section>
+
+        <section>
             <h3>deeplearn.js</h3>
             <p>Full ML library using browser GPU</p>
+            <p>Written in TypeScript</p>
+
             <a href="https://pair-code.github.io/deeplearnjs/demos/imagenet/imagenet-demo.html" target="_blank">
                 <img src="img/browser/deeplearn-sigurd.png" height="300px">
             </a>
             <p><a href="https://pair-code.github.io/deeplearnjs" target="_blank">https://pair-code.github.io/deeplearnjs</a></p>
-            <p><small>Includes full training mimicing TensorFlow and NumPy API
+            <p><small>Includes full training mimicking TensorFlow and NumPy API
                 <a href="https://research.googleblog.com/2017/08/harness-power-of-machine-learning-in.html" target="_blank">
                     https://research.googleblog.com/2017/08/harness-power-of-machine-learning-in.html</a></small></p>
+        </section>
+
+        <section>
+            <h3>Demo: deeplearn.js</h3>
+            <h4>Use all Browser features in combination with Machine Learning</h4>
+            <ul class="fragment">
+                <li>GPU support
+                <li>camera
+                <li>high interaction
+            </ul>
+            <a href="https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html" target="_blank">
+                <img src="img/browser/NDArrayMathGPU.png" height="300px">
+            </a>
+            <p class="fragment"><a href="https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html" target="_blank">
+                https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html</a></p>
+            <ul class="fragment todo">
+                <li>What to demo?
+            </ul>
+        </section>
+
+
+        <section>
+            <h4>More Machine Learning with JavaScript</h4>
+            <ul>
+                <li>
+                    <a href="http://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank">
+                        ConvNetJS</a>: Visual NN exploration for learning
+                    (<a href="http://cs.stanford.edu/people/karpathy/tsnejs/" target="_blank">t-SNE</a>
+                    cluster exploration from same auhtor)
+
+                <li><a target="_blank" href="https://github.com/harthur-org/brain.js">
+                    Brain.js
+                </a>:
+                    simple and straing forward NN implementation</li>
+                <li><a href="http://caza.la/synaptic/#/">synaptic.js</a>: similar scope as Brain.js, a bit more active</li>
+                <li><a href="https://github.com/mljs/ml">ml.js</a>: generic low level libs for machine learning</li>
+
+                <li><a href="https://scienceai.github.io/neocortex/" target="_blank">
+                    neocortex.js
+                </a>runs pre-trained deep neural networks (<a href="http://keras.io/" target="_blank">Keras</a> models)
+                <li><a href="https://www.npmjs.com/package/scikit-node" target="_blank">
+                    scikit-node
+            </a>: Wrapper for Python's <a target="_blank" href="http://scikit-learn.org/">scikit-learn</a> (mainstream lib)
+            </ul>
         </section>
 
         <section>
@@ -366,14 +434,16 @@ We also believe in the importance of clear and understandable explanations of th
 <script src="lib/jquery-2.2.4.js"></script>
 
 <script>
-    //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
-//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
     $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
-    //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
-    //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
-    //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+//    $('section').attr('data-background-image', "backgrounds/tiles-raw.jpg")
+//    $('section').attr('data-background-image', "backgrounds/white-transparent.jpg")
 </script>
 <script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
     Reveal.addEventListener( 'ready', function( event ) {
         if (window.location.hostname.indexOf('localhost') !== -1) {
             // only applies to presentation version
@@ -383,7 +453,7 @@ We also believe in the importance of clear and understandable explanations of th
             $('.fragment').removeClass('fragment');
         }
         // applies to all versions
-//        $('.fragment').removeClass('fragment');
+        $('code').addClass('line-numbers');
     } );
 </script>
 
