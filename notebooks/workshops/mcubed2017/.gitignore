@@ -8,3 +8,4 @@ tmp
 tf_log
 tf
 *.hdf5
+nohup.out
