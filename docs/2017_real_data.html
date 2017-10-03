@@ -144,22 +144,34 @@ Consider
 
 -->
 
+                <section data-markdown class="preparation">
+            <script type="text/template">
+## Preparation
+- Start ES and Kibana on AWS GPU
+- Run incremntell import as shown in last step of ```import.ipynb```
+
+            </script>
+        </section>
+
         <section>
             <h2>Turning Messy Data into Insights</h2>
             <h3>A case study on American Domestic Flight Data</h3>
                 <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </h4>
-            <p><small><a href="http://djcordhose.github.io/ai/2017_real_data.html">
-                http://djcordhose.github.io/ai/2017_real_data.html
+            <p><small><a href="http://bit.ly/data-insights-ml-101">
+                http://bit.ly/data-insights-ml-101
             </a></small></p>
         </section>
 
-<!--
         <section class="todo">
             <pre>
+- Talk as PDF until Fri 13th
+- add screenshots from Kibana Dashboard
+- add unsupervised learning results from notebook
+- add locations as lat lon in import?
+  - resolve using airports_geo_data.csv over Origin and Destination
             </pre>
         </section>
--->
 
         <section data-transition="zoom">
             <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
@@ -260,7 +272,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h2>I: Statistical pre-analysis to learn about data</h2>
+            <h2>Step I: Statistical pre-analysis to learn about data</h2>
             <p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>
             <ul>
                 <li>What is the nature of the data (e.g. time series data)?</li>
@@ -278,7 +290,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h2>Pearson's r: Linear Correlation</h2>
+            <h2><small>Pearson's r: Linear Correlation</small></h2>
             <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
             <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">-->
                 <!--<img src="Correlation_examples2.svg" height="400px">-->
@@ -287,7 +299,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
                 <!--https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient-->
             <!--</a></small></p>-->
             <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
-            <img src="Correlation_coefficient.png">
+            <img src="img/Correlation_coefficient.png">
             </a>
             <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>
         </section>
@@ -316,7 +328,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <h3>Origin to Unique Carrier</h3>
 
             <div>
-                <img src="analysis_talk/Origin__UniqueCarrier_ATL.png" height="500px">
+                <img src="img/flight-analysis/Origin__UniqueCarrier_ATL.png" height="500px">
                 <p><small>
                     <!--0 = AA(American Airlines),-->
                     <em>4 = (DL) Delta</em>
@@ -330,7 +342,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <h3>Distance to Unique Carrier</h3>
             <div class="fragment">
 
-            <img src="analysis_talk/Distance_UniqueCarrier_.png" height="500px">
+            <img src="img/flight-analysis/Distance_UniqueCarrier_.png" height="500px">
                 </div>
         </section>
 
@@ -338,7 +350,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <h3>Distance to Unique Carrier</h3>
             <div>
 
-                <img src="analysis_talk/Distance_UniqueCarrier_AQ.png" height="500px">
+                <img src="img/flight-analysis/Distance_UniqueCarrier_AQ.png" height="500px">
                 <p><small>
                     <em>1 = AQ (Aloha Airlines)</em>
                     <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
@@ -348,7 +360,14 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h3>Results of Analysis</h3>
+            <h2><small>Unsupervised Machine Learning can also help</small></h2>
+            <img src="img/mc-learning.jpg" height="450px">
+            <p><small>What do you mean by Machine Learning? <a href="http://www.techjini.com/blog/machine-learning/" target="_blank">http://www.techjini.com/blog/machine-learning/</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h2><small>Results of Analysis</small></h2>
             <ul>
                 <li>A really large set of data
                 <li>Data looks plausible
@@ -360,18 +379,12 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </ul>
             <br>
             <br>
-            <h3 class="fragment">Bottom line: not an easy, but interesting data set</h3>
-            <h3 class="fragment">Big Data in the sense of: too big for Excel, hard to process</h3>
+            <h2 class="fragment"><small>Bottom line: not an easy, but interesting data set</small></h2>
         </section>
 
         <section>
-            <h2>Isn't this good enough already?</h2>
-            <h3 class="fragment">So far</h3>
-            <p class="fragment">working on random samples only</p>
-            <p class="fragment">time series data not exploited (would be possible with Pandas)</p>
-            <p class="fragment">not interactive</p>
-            <h3 class="fragment">Next Step: store data in db to make it flexibly accessible</h3>
-
+            <h2>Step II: Interactively Exploration</h2>
+            <p>Loading all the data into a database and query it interactively</p>
         </section>
 
         <section>
@@ -396,28 +409,6 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h2>II: Elasticsearch</h2>
-            <h3>Storing and Querying data</h3>
-        </section>
-
-        <section>
-        <h2>Introducing Elasticsearch</h2>
-            <p><a href="https://www.elastic.co/products/elasticsearch" target="_blank">
-                https://www.elastic.co/products/elasticsearch
-            </a></p>
-            <ul>
-                <li>Search and Analytics Engine
-                <li>Indexes and stores structured or unstructured data
-                <li>Offers query language to search or aggregate data
-            </ul>
-        </section>
-
-        <section>
-            <h2>Importing our data into Elasticsearch</h2>
-            <h3>using <a href="https://pyelasticsearch.readthedocs.io" target="_blank">pyelasticsearch</a></h3>
-        </section>
-
-        <section>
             <h3>Checking time series data for the first time</h3>
             <div class="fragment">
                 <p>using Kibana adhoc queries</p>
@@ -439,23 +430,23 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </ul>
         </section>
 
-
         <section>
-            <h3>Demo</h3>
-            <p class="fragment">Flights from LA or Newyark to Denver or Clinton between September 10th 2001, 11:12 and 15:38?</p>
-            <a class="fragment" href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-09-10T09:12:45.957Z',mode:absolute,to:'2001-09-10T13:38:17.872Z'))&_a=(columns:!(_type,_index,Dest,Origin),filters:!(),index:expo2009_airline,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'Dest%3DLAX,EWR%20AND%20Origin%3DDEN,CLT')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:_type,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
-                <img src="screenshot_kibana_discover2.png" height="300">
-            </a>
+            <h2>Step III: Data Exploration Examples</h2>
+            <h3>Coming back to questions from analysis in first and second part</h3>
+            <p>This requires domain knowledge and interpretation</p>
         </section>
 
         <section>
-            <h2>IV: Data Exploration Examples</h2>
-            <h3>Coming back to questions from low level analysis in first part</h3>
+            <h2><small>What is the recurring dent in the histogram?</small></h2>
         </section>
 
         <section>
-            <h3>Why only short flight distances for Carrier Aloha Airlines (AQ)?</h3>
-            <img src="analysis_talk/Distance_UniqueCarrier_AQ.png" height="500px">
+            <h2><small>What are the origins of Delta flights to STL (St Louis)? Why?</small></h2>
+        </section>
+
+        <section>
+            <h2><small>Why only short flight distances for Carrier Aloha Airlines (AQ)?</small></h2>
+            <img src="img/flight-analysis/Distance_UniqueCarrier_AQ.png" height="500px">
             <!--<p><small><em>1 = AQ (Aloha Airlines)</em>, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)</small></p>-->
             <!--Answer AQ in D3 part: mainly between Hawaii and California -->
         </section>
@@ -472,8 +463,8 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 
 
         <section>
-            <h3>What is the prominent Origin for Carrier Delta (DL)?</h3>
-            <img src="analysis_talk/Origin__UniqueCarrier_ATL.png" height="500px">
+            <h2><small>What is the prominent Origin for Carrier Delta (DL)?</small></h2>
+            <img src="img/flight-analysis/Origin__UniqueCarrier_ATL.png" height="500px">
             <!--<p><small>0 = AA(American Airlines), <em>4 = (DL) Delta</em>, 7 = NW (Northwest), 11 = WN (Southwest)</small></p>-->
             <!--Answer DL in D3 part: that is ATL (Atlanta) -->
         </section>
@@ -489,7 +480,6 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-        <section>
             <h2>Tools Used</h2>
             <p>There are many tools for these task, you can choose others</p>
             <ul>
@@ -501,17 +491,17 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h3>Wrapup</h3>
+            <h2>Wrapup</h2>
             <ul>
-                <li class="fragment">Python based tools are most advanced to prepare data and give an analytical overview
-                <li class="fragment">Pyelasticsearch allows to push that data into Elasticsearch
-                <li class="fragment">Elasticsearch allows for very flexible and fast queries on large amounts of data
-                <li class="fragment">The Browser is the ideal platform to explore data (no installation, available everywhere)
-                <li class="fragment">D3, crossfilter, and DC help you to interactively explore your data visually
-                <li class="fragment">Elasticsearch can deliver data in chunks the Browser can digest
+                <li class="fragment">Statistic Analysis on Samle Code can give first insights
+                <li class="fragment">Exploring Data Interactively lets you find most interesting relationships
+                <li class="fragment">Unsupervised Machine Learning can find more interesting details
+                <li class="fragment">Answering the "why" involves domain knowledge and interpretation
+                <li class="fragment">Interactive, visual experiments also help with interpretation of data
+                <li class="fragment">Interpretation and understanding is the prerequisite to action
             </ul>
-            <p>Slides: <a href="http://bit.ly/data-exploration-odsc">
-                http://bit.ly/data-exploration-odsc</a></p>
+            <p>Slides: <a href="http://bit.ly/data-insights-ml-101">
+                http://bit.ly/data-insights-ml-101</a></p>
             <p>Ping me for questions / help / comments: <a href="http://zeigermann.eu">http://zeigermann.eu</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>
         </section>
     </div>
