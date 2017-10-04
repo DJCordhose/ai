@@ -257,22 +257,24 @@ Unsupervised with Sklearn
             </div>
         </section>
 
+<!--
         <section>
             <h2><small>Pearson's r: Linear Correlation</small></h2>
             <div style="margin-top: -40px">
             <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
-            <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">-->
-                <!--<img src="Correlation_examples2.svg" height="400px">-->
-            <!--</a>-->
-            <!--<p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">-->
-                <!--https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient-->
-            <!--</a></small></p>-->
+            &lt;!&ndash;<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">&ndash;&gt;
+                &lt;!&ndash;<img src="Correlation_examples2.svg" height="400px">&ndash;&gt;
+            &lt;!&ndash;</a>&ndash;&gt;
+            &lt;!&ndash;<p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">&ndash;&gt;
+                &lt;!&ndash;https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient&ndash;&gt;
+            &lt;!&ndash;</a></small></p>&ndash;&gt;
             <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
             <img src="img/Correlation_coefficient.png">
             </a>
             <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966</a></small></p>
                 </div>
         </section>
+-->
 
         <section>
             <h3>Arrival Time to Departure Time</h3>
@@ -427,6 +429,42 @@ Unsupervised with Sklearn
         </section>
 
         <section>
+            <h2 style="margin-top: -10px"><small>Why not just load it into Excel and wing it?</small></h2>
+            <ul style="margin-top: -60px">
+                <li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loads data relatively fast
+                        <li>truncates after 1M lines
+                    </ul>
+                </li>
+                <li class="fragment">Google Sheets: <em style="color: red">nope</em>
+                    <ul>
+                        <li>limited to 2.000.000 cells (not lines)
+                        <li>does not load data at all
+                    </ul>
+                </li>
+                <li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loading takes long
+                        <li>truncates after 64k lines
+                    </ul>
+                </li>
+                <li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>
+                    <ul>
+                        <li>very fast and almost no memory overhead
+                        <li>just a text editor
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Data Size too big</h2>
+            <h3>
+But we can at least work on samples</h3>
+        </section>
+
+        <section>
             <h2><small>Exploring Data using Google Sheets</small></h2>
             <div style="margin-top: -30px">
             <img src="img/google_sheets/screenshot_explore.png">
@@ -481,7 +519,7 @@ Unsupervised with Sklearn
             <h2>Wrapup</h2>
             <ul>
                 <li class="fragment">Statistic Analysis gives first insights
-                <li class="fragment">Interactive Exporation lets find most interesting relationships
+                <li class="fragment">Interactive Exporation lets us find most interesting relationships
                 <li class="fragment">Unsupervised ML reveals hidden structures
                 <li class="fragment">interpretation requires domain knowledge
                 <li class="fragment">experiments also help with interpretation of data
