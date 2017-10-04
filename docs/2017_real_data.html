@@ -142,15 +142,39 @@ Consider
 - https://github.com/bloomberg/bqplot
 - https://plot.ly/products/dash/
 
+Unsupervised with Sklearn
+- http://scikit-learn.org/stable/unsupervised_learning.html
+- https://unsupervisedlearning.wordpress.com/tag/pandas/
+- https://bugra.github.io/work/notes/2014-11-16/an-introduction-to-unsupervised-learning-scikit-learn/
+- http://scikit-learn.org/stable/modules/outlier_detection.html
+
+- Talk as PDF until Fri 13th
+- add locations as lat lon in import?
+  - resolve using airports_geo_data.csv over Origin and Destination
+
 -->
 
-                <section data-markdown class="preparation">
-            <script type="text/template">
-## Preparation
+                <section class="preparation">
+<pre>
 - Start ES and Kibana on AWS GPU
-- Run incremntell import as shown in last step of ```import.ipynb```
+  - ssh -i "/mnt/c/Users/olive/Google Drive/ML-Buch/aws-gpu-ubuntu.pem" ubuntu@ec2-52-43-168-34.us-west-2.compute.amazonaws.com
+  - sudo sysctl -w vm.max_map_count=262144
+  - tmux
+    - cd elasticsearch-5.5.2/
+      - ./bin/elasticsearch
+    - cd kibana-5.5.2-linux-x86_64/
+      - ./bin/kibana
+      - http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601
+        - Discover
+          - Load Not Cancelled
+          - Set interval from (2000-2003(
+      - go to dashboard
 
-            </script>
+- Unsupervised in ELK: https://www.elastic.co/downloads/x-pack#preview-release
+
+- Notebooks: ai/notebooks/es
+  - Run incremntell import as shown in last step of ```import.ipynb```
+</pre>
         </section>
 
         <section>
@@ -163,14 +187,143 @@ Consider
             </a></small></p>
         </section>
 
+<!--
         <section class="todo">
             <pre>
-- Talk as PDF until Fri 13th
-- add screenshots from Kibana Dashboard
-- add unsupervised learning results from notebook
-- add locations as lat lon in import?
-  - resolve using airports_geo_data.csv over Origin and Destination
             </pre>
+        </section>
+-->
+
+        <section>
+            <h2><small>Domestic US flights from 2000 to 2002</small></h2>
+            <div style="margin-top: -30px">
+                <a href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200)))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)" target="_blank">
+                    <img src="img/dataviz/kibana-dashboard.png">
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h2>No specific task or question</h2>
+            <h3>Exploring what just might be interesting</h3>
+            <h3>Finding the unknown unknowns</h3>
+            <div>
+                <img src="img/icons/question-mark.jpg">
+            </div>
+        </section>
+
+        <section>
+            <h2><small>Your #data from another perspective with #dataviz</small></h2>
+            <div>
+                <a href="https://twitter.com/Creatuluw/status/749151998415634432" target="_blank">
+                <img src="img/dataviz/cat-upside-down.jpg" height="450px"
+                     style="float: left; padding-right: 50px; padding-left: 150px">
+                    </a>
+                    <a href="https://twitter.com/planetepics/status/914792139309150208" target="_blank">
+                <img src="img/dataviz/dataviz-cat.jpg" height="450px" style="float: left">
+                </a>
+
+            </div>
+            <p style="clear: both"><small><a target="_blank" href="https://twitter.com/Creatuluw/status/749151998415634432">
+                https://twitter.com/Creatuluw/status/749151998415634432</a>
+                <br>
+                <a href="https://twitter.com/planetepics/status/914792139309150208" target="_blank">
+                    https://twitter.com/planetepics/status/914792139309150208
+                </a>
+                </small></p>
+        </section>
+
+        <section>
+            <h2>Our first investigation</h2>
+        </section>
+
+        <section>
+            <h2>Explore Data</h2>
+            <h3>Visual Statistical analysis using Correlation and Joint Plot</h3>
+            <p>Tools Used</p>
+            <ul>
+                <li>Basic Processing: UNIX tools
+                <li>Cleaning and Import: Dask (Python)
+                <li>Statistical analysis: Pandas (Python)
+                <li>Display and Interactive Filtering: Elasticsearch and Kibana
+            </ul>
+        </section>
+
+        <section>
+                <h2><small>Getting an overview using a correlation plot</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="500px">
+                <p><small>Darker Colours indicate more correlation</small></p>
+            </div>
+        </section>
+
+        <section>
+            <h2><small>Pearson's r: Linear Correlation</small></h2>
+            <div style="margin-top: -40px">
+            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
+            <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">-->
+                <!--<img src="Correlation_examples2.svg" height="400px">-->
+            <!--</a>-->
+            <!--<p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">-->
+                <!--https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient-->
+            <!--</a></small></p>-->
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+            <img src="img/Correlation_coefficient.png">
+            </a>
+            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966</a></small></p>
+                </div>
+        </section>
+
+        <section>
+            <h3>Arrival Time to Departure Time</h3>
+            <div class="fragment">
+                <img src="img/flight-analysis/ArrTime_DepTime.png" height="500px">
+            </div>
+        </section>
+
+        <section>
+                <h2><small>Pearson's r 0.77: high Correlation</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="550px">
+            </div>
+        </section>
+
+        <section>
+            <h2>Of Course Arrival Time and Departure Time Are Correlated</h2>
+            <h2 class="fragment">Verdict: plausible but trivial</h2>
+        </section>
+
+        <section>
+        <h2><small>Second highest correlation: Distance to Unique Carrier</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="550px">
+            </div>
+        </section>
+
+        <section>
+            <h3>Distance to Unique Carrier</h3>
+            <div class="fragment">
+
+            <img src="img/flight-analysis/Distance_UniqueCarrier_.png" height="500px">
+                </div>
+        </section>
+
+        <section data-transition="none">
+            <h3>Distance to Unique Carrier</h3>
+            <div>
+
+                <img src="img/flight-analysis/Distance_UniqueCarrier_AQ.png" height="500px">
+                <p><small>
+                    <em>1 = AQ (Aloha Airlines)</em>
+                    <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
+                </small></p>
+                <!--Answer AQ in D3 part: mainly between Hawaii and California -->
+            </div>
+        </section>
+
+        <section>
+            <h2>Question: Why only short flight distances for Carrier Aloha Airlines (AQ)?</h2>
+            <h3 class="fragment">Does anyone know already?</h3>
         </section>
 
         <section data-transition="zoom">
@@ -185,12 +338,175 @@ Consider
         </section>
 
         <section>
+            <h3>Answer</h3>
+            <div class="fragment">
+                <a target="_blank" href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:UniqueCarrier,negate:!f,type:phrase,value:AQ),query:(match:(UniqueCarrier:(query:AQ,type:phrase)))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:Origin,negate:!f,type:phrase,value:HNL),query:(match:(Origin:(query:HNL,type:phrase))))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
+                    <img src="img/flight-analysis/screenshot_aq.png" height="300px" style="float: left">
+                </a>
+                <small>
+                    <br><br>
+                <ul style="float: right">
+                    <li>HNL: Honolulu International Airport
+<li>KOA: Kona International Airport
+<li>OGG: Kahului Airport
+<li>LIH: Lihue Airport
+<li>ITO: Hilo International Airport
+                </ul>
+                </small>
+                <p style="clear: both"><small><a href="video/AQ-kibana.mp4" target="_blank">Video of incremental search</a></small></p>
+            </div>
+            <div class="fragment">
+            <p><a href="https://en.wikipedia.org/wiki/Aloha_Airlines" target="_blank">
+                Aloha Airlines (AQ) mainly operated on Hawaii</a></p>
+            <p><small>Only data for about 1 year, but AQ existed from from 1946 - 2008</small></p>
+            </div>
+        </section>
+
+        <section>
+                <h2><small>Another (weaker) correlation: Origin to Unique Carrier</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="550px">
+            </div>
+        </section>
+
+        <section>
+            <h3>Origin to Unique Carrier</h3>
+
+            <div class="fragment">
+                <img src="img/flight-analysis/Origin__UniqueCarrier_.png" height="500px">
+            </div>
+        </section>
+
+        <section  data-transition="none">
+            <h3>Origin to Unique Carrier</h3>
+
+            <div>
+                <img src="img/flight-analysis/Origin__UniqueCarrier_ATL.png" height="500px">
+                <p><small>
+                    <!--0 = AA(American Airlines),-->
+                    <em>4 = (DL) Delta</em>
+                    <!--, 7 = NW (Northwest), 11 = WN (Southwest)-->
+                </small></p>
+                <!--Answer DL in D3 part: that is ATL (Atlanta) -->
+            </div>
+        </section>
+
+        <section>
+            <h2>Question: What is the prominent Origin for Carrier Delta (DL) and why is there one?</h2>
+            <h3 class="fragment">Again: Does anyone know already?</h3>
+        </section>
+
+        <section>
+            <h3>Answer</h3>
+            <div class="fragment">
+                <a target="_blank" href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:UniqueCarrier,negate:!f,type:phrase,value:DL),query:(match:(UniqueCarrier:(query:DL,type:phrase))))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
+                    <img src="img/flight-analysis/screenshot_dl.png" height="400px">
+                </a>
+            </div>
+            <p class="fragment"><a href="https://en.wikipedia.org/wiki/Delta_Air_Lines" target="_blank">
+                Delta (DL) mainly flies from Atlanta (ATL) its headquarter and largest hub
+            </a></p>
+        </section>
+
+        <section>
+            <h2>One More Interesting Observation as an exercise to the audience</h2>
+        </section>
+
+        <section>
+            <h2><small>When zooming into time series data: What is the recurring dent in the histogram?</small></h2>
+            <div class="fragment">
+                <a target="_blank" href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2002-01-12T08:20:00.000Z',mode:absolute,to:'2002-03-14T13:40:00.000Z'))&_a=(description:'',filters:!(),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
+                    <img src="img/flight-analysis/screenshot_dent.png" height="400px">
+                </a>
+            </div>
+            <p class="fragment"><small>Hint: When filtering for JFK and other mainly international airports, this dent disappears</small></p>
+        </section>
+
+        <section>
+            <h2>You can only do this using fancy tools, right?</h2>
+        </section>
+
+        <section>
+            <h2><small>Exploring Data using Google Sheets</small></h2>
+            <div style="margin-top: -30px">
+            <img src="img/google_sheets/screenshot_explore.png">
+            <br>
+            <img height="300px" src="img/google_sheets/screenshot_explore2.png">
+                </div>
+        </section>
+
+        <section>
+            <h2><small>Uses Unsupervised Machine Learning</small></h2>
+            <div style="margin-top: -30px">
+            <img src="img/mc-learning.jpg" height="500px">
+            <p><small>What do you mean by Machine Learning? <a href="http://www.techjini.com/blog/machine-learning/" target="_blank">http://www.techjini.com/blog/machine-learning/</a>
+            </small></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Correlations, Outliers, etc.</h2>
+            <p>Sheets can automatically find this</p>
+            <div style="transform: scale(1.5); margin-left: 200px">
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_depArrDelay.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_distance_airtime.png">
+                </div>
+                <div style="height: 250px; float: left">
+                    <img src="img/google_sheets/screenshot_depDelay_outliers.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="google_sheets/screenshot_histogram_distance.png">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>What I have learned</h2>
+            <p>Without asking</p>
+            <ul>
+                <li>long arrival delays are caused by departure delays
+                <li>per 100 minutes you can fly around 857 miles
+                <li>some flights where delayed more than 1000 minutes (more than 16 hours)
+                <li>there seems to be a flight distance of 4962 miles in the US (around 10 hours of flight)
+                <li>ATL is DL's home base
+                <li>there is an interesting gap at weekends
+                <li>there is plenty more insights hidden inside that data
+            </ul>
+        </section>
+
+        <section>
+            <h2>Wrapup</h2>
+            <ul>
+                <li class="fragment">Statistic Analysis gives first insights
+                <li class="fragment">Interactive Exporation lets find most interesting relationships
+                <li class="fragment">Unsupervised ML reveals hidden structures
+                <li class="fragment">interpretation requires domain knowledge
+                <li class="fragment">experiments also help with interpretation of data
+                <li class="fragment">interpretation and understanding is the prerequisite to action
+            </ul>
+
+            <small>
+            <p><a href="http://bit.ly/data-insights-ml-101">
+                http://bit.ly/data-insights-ml-101</a>
+                                <br>
+
+                Ping me for questions / help / comments: <a href="http://zeigermann.eu">http://zeigermann.eu</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>
+                </small>
+        </section>
+
+<!--
+        <section>
             <h2>A journey through exploring <em>all</em> domestic US flights</h2>
             <h2>from 2000 to 2002</h2>
             <img src="img/airline-pictures/a26.jpg" height="200px">
             <p><a target="_blank" href="http://stat-computing.org/dataexpo/2009/">http://stat-computing.org/dataexpo/2009/</a></p>
         </section>
 
+-->
+<!--
         <section>
             <h2>The raw data (per year)</h2>
             <p>approx. 6 million data sets</p>
@@ -212,16 +528,9 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
 2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
         </section>
+-->
 
-        <section>
-            <h2>No specific task or question</h2>
-            <h3>Exploring what just might be interesting</h3>
-            <h3>Finding the unknown unknowns</h3>
-            <div>
-                <img src="img/icons/question-mark.jpg">
-            </div>
-        </section>
-
+<!--
         <section>
             <h2 style="margin-top: -10px"><small>Why not just load it into Excel and wing it?</small></h2>
             <ul style="margin-top: -60px">
@@ -251,13 +560,17 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
                 </li>
             </ul>
         </section>
+-->
 
+<!--
         <section>
             <h2>Challenge</h2>
             <p class="fragment">Handling large amounts of data while maintaining the interactivity and the intuitive UI</p>
             <p class="fragment">Like: benefits of Excel and Access at the same time</p>
         </section>
 
+-->
+<!--
         <section>
             <a href="https://twitter.com/DJCordhose/status/784683545457467392" target="_blank">
                 <img src="img/dataviz/twitter-bottleneck.png" height="600px">
@@ -265,12 +578,16 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <p><small><a href="https://twitter.com/DJCordhose/status/784683545457467392" target="_blank">
                 https://twitter.com/DJCordhose/status/784683545457467392</a></small></p>
         </section>
+-->
+<!--
         <section>
             <h2>The Journey</h2>
             <h3 class="fragment">Making sense of the data step by step</h3>
             <h3 class="fragment">All software shown here is Open Source and Free of Charge</h3>
         </section>
+-->
 
+<!--
         <section>
             <h2>Step I: Statistical pre-analysis to learn about data</h2>
             <p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>
@@ -281,229 +598,8 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </ul>
         </section>
 
-        <section>
-            <h3>Correlations (r)</h3>
-            <div class="fragment">
-                <img src="img/flight-analysis/corr.png" height="500px">
-                <p><small>Interesting: Distance / Origin to Unique Carrier</small></p>
-            </div>
-        </section>
+-->
 
-        <section>
-            <h2><small>Pearson's r: Linear Correlation</small></h2>
-            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
-            <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">-->
-                <!--<img src="Correlation_examples2.svg" height="400px">-->
-            <!--</a>-->
-            <!--<p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">-->
-                <!--https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient-->
-            <!--</a></small></p>-->
-            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
-            <img src="img/Correlation_coefficient.png">
-            </a>
-            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>
-        </section>
-
-        <section>
-            <h2>Need to look at the individual figures</h2>
-        </section>
-
-        <section>
-            <h3>Arrival Time to Departure Time</h3>
-            <div class="fragment">
-                <img src="img/flight-analysis/ArrTime_DepTime.png" height="500px">
-                <p><small>Pearson's r: 0.77, plausible but trivial</small></p>
-            </div>
-        </section>
-
-        <section>
-            <h3>Origin to Unique Carrier</h3>
-
-            <div class="fragment">
-                <img src="img/flight-analysis/Origin__UniqueCarrier_.png" height="500px">
-            </div>
-        </section>
-
-        <section  data-transition="none">
-            <h3>Origin to Unique Carrier</h3>
-
-            <div>
-                <img src="img/flight-analysis/Origin__UniqueCarrier_ATL.png" height="500px">
-                <p><small>
-                    <!--0 = AA(American Airlines),-->
-                    <em>4 = (DL) Delta</em>
-                    <!--, 7 = NW (Northwest), 11 = WN (Southwest)-->
-                </small></p>
-                <!--Answer DL in D3 part: that is ATL (Atlanta) -->
-            </div>
-        </section>
-
-        <section>
-            <h3>Distance to Unique Carrier</h3>
-            <div class="fragment">
-
-            <img src="img/flight-analysis/Distance_UniqueCarrier_.png" height="500px">
-                </div>
-        </section>
-
-        <section data-transition="none">
-            <h3>Distance to Unique Carrier</h3>
-            <div>
-
-                <img src="img/flight-analysis/Distance_UniqueCarrier_AQ.png" height="500px">
-                <p><small>
-                    <em>1 = AQ (Aloha Airlines)</em>
-                    <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
-                </small></p>
-                <!--Answer AQ in D3 part: mainly between Hawaii and California -->
-            </div>
-        </section>
-
-        <section>
-            <h2><small>Unsupervised Machine Learning can also help</small></h2>
-            <img src="img/mc-learning.jpg" height="450px">
-            <p><small>What do you mean by Machine Learning? <a href="http://www.techjini.com/blog/machine-learning/" target="_blank">http://www.techjini.com/blog/machine-learning/</a>
-            </small></p>
-        </section>
-
-        <section>
-            <h2><small>Results of Analysis</small></h2>
-            <ul>
-                <li>A really large set of data
-                <li>Data looks plausible
-                <li>Many missing values
-                <li>Contains obvious correlations
-                <li>But also contains non-trivial correlations
-                <li>Has timestamps
-                <li>Storing and analysing as time series data sounds promising
-            </ul>
-            <br>
-            <br>
-            <h2 class="fragment"><small>Bottom line: not an easy, but interesting data set</small></h2>
-        </section>
-
-        <section>
-            <h2>Step II: Interactively Exploration</h2>
-            <p>Loading all the data into a database and query it interactively</p>
-        </section>
-
-        <section>
-            <h2><small>Your #data from another perspective with #dataviz</small></h2>
-            <div>
-                <a href="https://twitter.com/Creatuluw/status/749151998415634432" target="_blank">
-                <img src="img/dataviz/cat-upside-down.jpg" height="450px"
-                     style="float: left; padding-right: 50px; padding-left: 150px">
-                    </a>
-                    <a href="https://twitter.com/planetepics/status/914792139309150208" target="_blank">
-                <img src="img/dataviz/dataviz-cat.jpg" height="450px" style="float: left">
-                </a>
-
-            </div>
-            <p style="clear: both"><small><a target="_blank" href="https://twitter.com/Creatuluw/status/749151998415634432">
-                https://twitter.com/Creatuluw/status/749151998415634432</a>
-                <br>
-                <a href="https://twitter.com/planetepics/status/914792139309150208" target="_blank">
-                    https://twitter.com/planetepics/status/914792139309150208
-                </a>
-                </small></p>
-        </section>
-
-        <section>
-            <h3>Checking time series data for the first time</h3>
-            <div class="fragment">
-                <p>using Kibana adhoc queries</p>
-                <a href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(columns:!(Cancelled,Origin,Dest,UniqueCarrier),filters:!(),index:expo2009_airline,interval:h,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:ArrDelay,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
-                    <img src="screenshot_kibana_discover.png">
-                </a>
-                <p>Demo: filter for <em>'Cancelled:false'</em></p>
-                <p><small>Interactive Dashboards also possible</small></p>
-            </div>
-        </section>
-
-        <section>
-            <h2>Kibana</h2>
-            <ul>
-                <li>generic frontend for Elasticsearch
-                <li>browser based
-                <li>allows for dashboards
-                <li>also allows to make arbitrary adhoc queries
-            </ul>
-        </section>
-
-        <section>
-            <h2>Step III: Data Exploration Examples</h2>
-            <h3>Coming back to questions from analysis in first and second part</h3>
-            <p>This requires domain knowledge and interpretation</p>
-        </section>
-
-        <section>
-            <h2><small>What is the recurring dent in the histogram?</small></h2>
-        </section>
-
-        <section>
-            <h2><small>What are the origins of Delta flights to STL (St Louis)? Why?</small></h2>
-        </section>
-
-        <section>
-            <h2><small>Why only short flight distances for Carrier Aloha Airlines (AQ)?</small></h2>
-            <img src="img/flight-analysis/Distance_UniqueCarrier_AQ.png" height="500px">
-            <!--<p><small><em>1 = AQ (Aloha Airlines)</em>, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)</small></p>-->
-            <!--Answer AQ in D3 part: mainly between Hawaii and California -->
-        </section>
-
-        <section>
-            <h3>Answer</h3>
-            <div>
-                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_aq.png" height="400px"></a>
-            </div>
-            <p class="fragment"><a href="https://en.wikipedia.org/wiki/Aloha_Airlines" target="_blank">
-                Aloha Airlines (AQ) mainly flies between Hawaii and West Coast (California/Nevada)
-            </a></p>
-        </section>
-
-
-        <section>
-            <h2><small>What is the prominent Origin for Carrier Delta (DL)?</small></h2>
-            <img src="img/flight-analysis/Origin__UniqueCarrier_ATL.png" height="500px">
-            <!--<p><small>0 = AA(American Airlines), <em>4 = (DL) Delta</em>, 7 = NW (Northwest), 11 = WN (Southwest)</small></p>-->
-            <!--Answer DL in D3 part: that is ATL (Atlanta) -->
-        </section>
-
-        <section>
-            <h3>Answer</h3>
-            <div>
-                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_ATL.png" height="400px"></a>
-            </div>
-            <p class="fragment"><a href="https://en.wikipedia.org/wiki/Delta_Air_Lines" target="_blank">
-                Delta (DL) mainly flies from Atlanta (ATL) its headquarter and largest hub
-            </a></p>
-        </section>
-
-        <section>
-            <h2>Tools Used</h2>
-            <p>There are many tools for these task, you can choose others</p>
-            <ul>
-                <li>Basic Processing: UNIX tools
-                <li>Cleaning and Import: Dask (Python)
-                <li>Statistical pre-analysis: Pandas (Python)
-                <li>Display and Interactive Filtering: Elasticsearch and Kibana
-            </ul>
-        </section>
-
-        <section>
-            <h2>Wrapup</h2>
-            <ul>
-                <li class="fragment">Statistic Analysis on Samle Code can give first insights
-                <li class="fragment">Exploring Data Interactively lets you find most interesting relationships
-                <li class="fragment">Unsupervised Machine Learning can find more interesting details
-                <li class="fragment">Answering the "why" involves domain knowledge and interpretation
-                <li class="fragment">Interactive, visual experiments also help with interpretation of data
-                <li class="fragment">Interpretation and understanding is the prerequisite to action
-            </ul>
-            <p>Slides: <a href="http://bit.ly/data-insights-ml-101">
-                http://bit.ly/data-insights-ml-101</a></p>
-            <p>Ping me for questions / help / comments: <a href="http://zeigermann.eu">http://zeigermann.eu</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>
-        </section>
     </div>
 
 </div>
