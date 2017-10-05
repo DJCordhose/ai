@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>ML for your project</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        pre code {
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+            font-size: larger !important;
+        }
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            /*height: 500px;*/
+        }
+        .left-img {
+            margin-left: 10px !important;
+            float: left;
+            /*height: 500px;*/
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section>
+            <h2>Machine Learning for Your Project</h2>
+            <h3>Everyday Applications of AI</h3>
+                <h3><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </h3>
+            <p><small><a href="http://djcordhose.github.io/ai/2017_applications.html">
+                http://djcordhose.github.io/ai/2017_applications.html
+            </a></small></p>
+        </section>
+
+        <section>
+            <h3>AI/ML is Opportunity</h3>
+            <img src="opportunity.png" height="450">
+            <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
+        </section>
+
+
+<section>
+    <h2>What is Machine Learning?</h2>
+</section>
+        <section>
+            <h4>Different Types of Machine Learning</h4>
+            <div >
+            <img src="img/mc-learning.jpg" height="500px">
+            <p><small>What do you mean by Machine Learning? <a href="http://www.techjini.com/blog/machine-learning/" target="_blank">http://www.techjini.com/blog/machine-learning/</a>
+            </small></p>
+            </div>
+        </section>
+
+        <section>
+            <h3>AlphaGo #1 @Go using Reinforcement Learning</h3>
+            <p><small><em>(...) we had it play against different versions of itself thousands of times, each time learning from its mistakes and incrementally improving until it became immensely strong, through a process known as reinforcement learning.</em></small></p>
+            <a href="https://deepmind.com/research/alphago/" target="_blank">
+                <img src="img/applications/alphago-logo.png">
+            </a>
+            <p><small><a href="https://deepmind.com/research/alphago/" target="_blank">https://deepmind.com/research/alphago/</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h3>Unsupervised Machine Learning in Google Sheets</h3>
+            <p>Correlations, Outliers, etc.</p>
+            <div style="transform: scale(1.2); margin-left: 25px">
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_depArrDelay.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_distance_airtime.png">
+                </div>
+                <div style="height: 250px; float: left">
+                    <img src="img/google_sheets/screenshot_depDelay_outliers.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_histogram_distance.png">
+                </div>
+            </div>
+        </section>
+
+         <section>
+            <h3>Supervised Machine Learning by fun example</h3>
+            <div>
+            <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                <img src="img/browser/teachable-machine.png" height="350px">
+            </a>
+            <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+            </small></p>
+                </div>
+        </section>
+
+        <section>
+            <h3>Real World AI is booming</h3>
+            <img src="chollet-twitter-applications.png">
+            <p><small><a href="https://twitter.com/fchollet/status/906582914829246464?s=03" target="_blank">
+                https://twitter.com/fchollet/status/906582914829246464?s=03</a></small></p>
+        </section>
+
+
+
+
+
+
+                <section class="todo">
+<pre>
+- real life AI
+  - making it run on AWS GPU
+  - How hard is it to get started? E.g. Notebook with Pre-trained models trying to identify Squirrels (exists on Azure already)
+  - Demo: what tools, how to make it work? Notebook, live Training
+
+- Applications
+  - find 5 good examples from 2017_applicataions and work them out
+
+</pre>
+        </section>
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
+    //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+//        $('.fragment').removeClass('fragment');
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
