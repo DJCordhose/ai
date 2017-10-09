@@ -21,7 +21,6 @@ math.scope(() => {
         </script>
 
 <!-- <script>
-{
 // https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html#training
 
 const {Graph, Array2D} = deeplearn
@@ -39,7 +38,10 @@ const labelTensor = g.placeholder('label', labelShape);
 // Variables are containers that hold a value that can be updated from
 // training.
 // Here we initialize the multiplier variable randomly.
-const multiplier = g.variable('multiplier', Array2D.randNormal([1, 3]));
+const multArray = Array2D.randNormal([1, 3])
+console.log(`Initial values for multiplier: ${multArray.getValues()}`)
+const multiplier = g.variable('multiplier', multArray);
+console.log(multiplier.shape)
 
 // Top level graph methods take Tensors and return Tensors.
 const outputTensor = g.matmul(multiplier, inputTensor);
@@ -96,13 +98,15 @@ for (let i = 0; i < NUM_BATCHES; i++) {
   });
 }
 
+console.log(`Values for multiplier after training: ${session.eval(multiplier).getValues()}`)
+
 console.log('Prediction')
 
 // Wrap session.eval in a scope so the intermediate values get cleaned up
 // automatically.
 math.scope((keep, track) => {
-//   const testInput = track(Array1D.new([0.1, 0.2, 0.3]));
-  const testInput = track(Array1D.new([1, 2, 3]));
+  const testInput = track(Array1D.new([0.1, 0.2, 0.3]));
+  // const testInput = track(Array1D.new([1, 2, 3]));
 
   // session.eval can take NDArrays as input data.
   const testFeedEntries = [
@@ -119,6 +123,5 @@ math.scope((keep, track) => {
 // Cleanup training data.
 inputs.forEach(input => input.dispose());
 labels.forEach(label => label.dispose());
-}
 </script> -->
 </html>
