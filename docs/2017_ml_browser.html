@@ -138,8 +138,16 @@ GPU:
 
 - Open all demos way ahead of time when there still is internet
 
-- Rehease deeplearn.js code demo
+- Open Bonkers in one tab to have URL ready as input to Resnet on keras.js
+  - https://djcordhose.github.io/ai/img/cat-bonkers.png
+
+- Copy data/flights.csv to download for facets overview
+
+- Rehearse deeplearn.js code demo
+  - explain code on the left side
   - open http://localhost:8080/
+  - show console displaying result
+  - open VSC
   - show index.html
   - show result in the browser console
   - explain first numpy style part
@@ -150,7 +158,7 @@ GPU:
         </section>
 
         <section>
-            <h2>Visualize, Develop, Deploy, Educate</h2>
+            <h2>Educate, Develop, Visualize, Deploy</h2>
             <h3>Why the Browser and Machine Learning are a perfect match</h3>
             <p><a target="_blank" href="http://www.mcubed.london/sessions/machine-learning-with-javascript-in-the-browser-an-overview/">
                 Minds Mastering Machines [M³], London 2017
@@ -197,6 +205,15 @@ GPU:
         </section>
 
         <section>
+            <h3>Neural Networks Simulator</h3>
+            <p>Understanting Neural Networks at a more in depth level</p>
+            <a href="https://www.mladdict.com/neural-network-simulator" target="_blank">
+                <img src="img/browser/screenshot-neural-networks-simulator.png" height="300px">
+            </a>
+            <p><a href="https://www.mladdict.com/neural-network-simulator" target="_blank">https://www.mladdict.com/neural-network-simulator</a></p>
+        </section>
+
+        <section>
             <h3>Demo: Understanding Neural Networks</h3>
             <p>zero installation available from all devices</p>
             <p><a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a></p>
@@ -213,7 +230,9 @@ GPU:
 
         <section>
             <h3>PCA Explained Visually</h3>
-            <p>Explorable Explanation of PCA</p>
+            <p><a href="https://en.wikipedia.org/wiki/Principal_component_analysis" target="_blank">
+                PCA: exploratory data analysis tool to reduce dimensions to most significant features
+            </a></p>
             <a href="http://setosa.io/ev/principal-component-analysis/" target="_blank">
                 <img src="img/browser/pca-iris.png">
             </a>
@@ -222,12 +241,26 @@ GPU:
 
         <section>
             <h3>How to properly use TSNE</h3>
+            <p><a href="https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding" target="_blank">
+                t-SNE: Visualize data into 2-dim scatter plots
+            </a></p>
             <a href="http://distill.pub/2016/misread-tsne/" target="_blank">
                 <img src="img/browser/misread-tsne.png" height="350px">
             </a>
-            <p><a href="http://distill.pub/2016/misread-tsne/" target="_blank">http://distill.pub/2016/misread-tsne/</a></p>
-            <p><small>Distill's All Star Team makes academic advances accessible:
+            <p><small>
+                <a href="http://distill.pub/2016/misread-tsne/" target="_blank">http://distill.pub/2016/misread-tsne/</a>
+                <br>
+                Distill's All Star Team makes academic advances accessible:
             <a href="https://distill.pub" target="_blank">https://distill.pub</a></small></p>
+        </section>
+
+        <section>
+            <h3>Interactive Tutorial on Numerical Optimization</h3>
+            <p>Play around with Gradient Descent and other Optimization Algorithms</p>
+            <a href="http://www.benfrederickson.com/numerical-optimization/" target="_blank">
+                <img src="img/browser/screenshot-numerical-optimizaion.png" height="250px">
+            </a>
+            <p><small><a href="http://www.benfrederickson.com/numerical-optimization/" target="_blank">http://www.benfrederickson.com/numerical-optimization/</a></small></p>
         </section>
 
         <section>
@@ -275,80 +308,10 @@ GPU:
             <a href="https://experiments.withgoogle.com/ai" target="_blank">Google AI Experiments</a></small></p>
                 </div>
         </section>
-        <section>
-            <h1>(II) Visualize</h1>
-            <p class="fragment">Interactively explore your data</p>
-        </section>
+
 
         <section>
-            <h3>Demo: Data Insight</h3>
-            <p>Interactively explore even large amounts of data to understand what goes inside your model</p>
-            <a href="https://pair-code.github.io/facets/index.html#facets-overview" target="_blank">
-                <img src="img/browser/screenshot-flights-facets.png" height="350px">
-            </a>
-            <p><small><a href="https://pair-code.github.io/facets/" target="_blank">https://pair-code.github.io/facets/</a></small></p>
-            <!--<p><small>Also by PAIR like deeplearn.js</small></p>-->
-        </section>
-
-        <section>
-            <h3>Demo 2: Looking at the Quickdraw Dataset</h3>
-            <p>Pivoting on random data</p>
-            <a href="https://pair-code.github.io/facets/quickdraw.html" target="_blank">
-                <img src="img/browser/screenshot-quick-draw-facets.png" height="350px">
-            </a>
-            <p><small><a href="https://pair-code.github.io/facets/quickdraw.html" target="_blank">https://pair-code.github.io/facets/quickdraw.html</a></small></p>
-        </section>
-
-        <section>
-            <h1>(III) Deploy</h1>
-            <p>JavaScript might be the only language around</p>
-            <p class="fragment">because all you have is a browser</p>
-
-            <ul class="fragment">
-                <li>you on your mobile phone
-                <li>AI in browser based game
-                <li>combination with interactive visualizations and other browser features (like audio and video)
-            </ul>
-
-        </section>
-
-        <section>
-            <h3>Keras.js</h3>
-            <p>Running Keras Models in the Browser</p>
-            <a href="https://transcranial.github.io/keras-js" target="_blank">
-                <img src="img/browser/keras-browser.png" height="350px">
-            </a>
-            <p><a href="https://transcranial.github.io/keras-js" target="_blank">https://transcranial.github.io/keras-js</a></p>
-            <p><small>Alternative: <a href="https://mil-tokyo.github.io/webdnn/" target="_blank">https://mil-tokyo.github.io/webdnn/</a></small></p>
-        </section>
-
-        <section>
-            <h3>TensorFire</h3>
-            <p>GPU based inference (no training) in the browser, runs Keras and TensorFlow models</p>
-            <a href="https://tenso.rs/demos/fast-neural-style/" target="_blank">
-                <img src="img/browser/merp.png" height="350px">
-            </a>
-            <p><a href="https://tenso.rs/" target="_blank">https://tenso.rs/</a></p>
-        </section>
-
-        <section>
-            <h3>Demo: Keras.js</h3>
-            <h4>Understanding Convolutional Neural Networks (CNNs)</h4>
-            <ul class="fragment">
-                <li>zero installation available from all devices
-                <li>GPU support
-            </ul>
-            <p class="fragment"><a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
-                https://transcranial.github.io/keras-js/#/mnist-cnn</a></p>
-            <ul class="fragment">
-                <li>What layers does a CNN typically have?
-                <li>What are feature channels? And what are bottleneck features?
-                <li>What does each feature channel "see"?
-            </ul>
-        </section>
-
-        <section>
-            <h1>(IV) Develop</h1>
+            <h1>(II) Develop</h1>
             <p class="fragment">Most obvious reason: JavaScript is the language you are most comfortable with</p>
             <p class="fragment">You just happen to develop for the browser</p>
         </section>
@@ -398,7 +361,7 @@ GPU:
                 <!--<li>camera-->
                 <!--<li>high interaction-->
             <!--</ul>-->
-            <a href="https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html" target="_blank">
+            <a href="http://localhost:8080" target="_blank">
                 <img src="img/browser/NDArrayMathGPU.png" height="350px">
             </a>
             <p><small><a href="https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html" target="_blank">
@@ -444,6 +407,75 @@ GPU:
                 <!--</li>-->
             <!--</ul>-->
         <!--</section>-->
+
+
+        <section>
+            <h1>(III) Visualize</h1>
+            <p class="fragment">Interactively explore your data</p>
+        </section>
+
+        <section>
+            <h3>Demo: Data Insight</h3>
+            <p>Interactively explore even large amounts of data to understand what goes inside your model</p>
+            <a href="https://pair-code.github.io/facets/index.html#facets-overview" target="_blank">
+                <img src="img/browser/screenshot-flights-facets.png" height="350px">
+            </a>
+            <p><small><a href="https://pair-code.github.io/facets/" target="_blank">https://pair-code.github.io/facets/</a></small></p>
+            <!--<p><small>Also by PAIR like deeplearn.js</small></p>-->
+        </section>
+
+        <section>
+            <h3>Demo 2: Looking at the Quickdraw Dataset</h3>
+            <p>Pivoting on random data</p>
+            <a href="https://pair-code.github.io/facets/quickdraw.html" target="_blank">
+                <img src="img/browser/screenshot-quick-draw-facets.png" height="350px">
+            </a>
+            <p><small><a href="https://pair-code.github.io/facets/quickdraw.html" target="_blank">https://pair-code.github.io/facets/quickdraw.html</a></small></p>
+        </section>
+
+        <section>
+            <h1>(IV) Deploy</h1>
+            <p>JavaScript might be the only language around</p>
+            <p class="fragment">because all you have is a browser</p>
+
+            <ul class="fragment">
+                <li>you on your mobile phone
+                <li>AI in browser based game
+                <li>combination with interactive visualizations and other browser features (like audio and video)
+            </ul>
+
+        </section>
+
+        <section>
+            <h3>Keras.js</h3>
+            <p>Running Keras Models in the Browser using GPU</p>
+            <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
+                <img src="img/browser/keras-browser.png" height="350px">
+            </a>
+            <p><a href="https://transcranial.github.io/keras-js" target="_blank">https://transcranial.github.io/keras-js</a></p>
+            <p><small>Alternative: <a href="https://mil-tokyo.github.io/webdnn/" target="_blank">https://mil-tokyo.github.io/webdnn/</a></small></p>
+        </section>
+
+        <section>
+            <h3>TensorFire</h3>
+            <p>GPU based inference (no training) in the browser, runs Keras and TensorFlow models</p>
+            <a href="https://tenso.rs/demos/fast-neural-style/" target="_blank">
+                <img src="img/browser/merp.png" height="350px">
+            </a>
+            <p><a href="https://tenso.rs/" target="_blank">https://tenso.rs/</a></p>
+        </section>
+
+        <section>
+            <h3>Demo: Keras.js</h3>
+            <h4>Deploying production grade Keras Models</h4>
+            <a href="https://transcranial.github.io/keras-js" target="_blank">
+                <img src="img/browser/screenshot-sentiment-analysis.png" height="350px">
+            </a>
+            <ul class="fragment">
+                <li>Sentiment Analysis trained on IMDB
+                <li>ResNet / Inception V3 on ImageNet
+            </ul>
+        </section>
 
         <section>
             <h3>Wrapping Up</h3>
