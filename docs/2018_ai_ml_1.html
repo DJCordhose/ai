@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Do machines have souls?</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        pre code {
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+            font-size: larger !important;
+        }
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            /*height: 500px;*/
+        }
+        .left-img {
+            margin-left: 10px !important;
+            float: left;
+            /*height: 500px;*/
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+        .reveal {
+            -ms-touch-action: auto !important;
+            touch-action: auto !important;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section>
+            <h2>Machine Learning and Artificial Intelligence</h2>
+                <p><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </p>
+            <p><a href=http://bit.ly/haw-ai>
+                http://bit.ly/haw-ai</a></p>
+
+        </section>
+
+<!--
+Ablauf:
+- I - Intro: Einsiteg: Wie definiert man Intelligenz?
+  - Einsteigsübung: Eigene Definition finden (Übung 1)
+- II Weak AI: Sind Maschinen Intelligent?
+  - Demo: Captchas erkennen - Maschinen eroberrn domänen, die vorher Menschen vorbehalten waren
+- III Strong AI 1: Können Maschinen kreativ sein?
+  - Demo: Deep Dream
+- III Strong AI 2: Können Maschinen Empathisch sein?
+  - Übung: Kurze Text dazu lesen (Übung 2)
+
+- IV Abschluss
+- Optional: Was ist der Unterschied zwischen Mensch und Tier?
+  - Übung: Twitter Kanal nach tierischen Eigenschaften durchforsten
+- Fishbowl: Gibt es einen grundsätzlichen Unterschied zwischen Maschinen, Tieren und Menschen? (Übung 3)
+
+- https://www.technologyreview.com/s/607970/experts-predict-when-artificial-intelligence-will-exceed-human-performance/
+
+Fun Stuff from Google IO Talks:
+- Animated Dreams: https://github.com/random-forests/tensorflow-workshop/blob/master/extras/deep_dream.ipynb
+- Music and Art using Machine Learning: https://magenta.tensorflow.org/
+- https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html
+- https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2
+- https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/android
+  - https://ci.tensorflow.org/view/Nightly/job/nightly-android/
+  - Show TF Stylize etc using Vysor
+
+Pix2Pix
+- https://affinelayer.com/pixsrv/
+- http://fotogenerator.npocloud.nl/
+
+Optional:
+- Deep Dream auf Azure bringen
+- Captchas nachtrainieren
+-->
+
+
+        <!--<section class="todo">-->
+<!--<pre>-->
+<!--</pre>-->
+        <!--</section>-->
+
+<!--
+        <section>
+            <h2>Olli</h2>
+<pre>
+- Studied Computer Science (with an emphasis on AI) and Philosophy in the 90s
+- Failed to become a (high school) teacher in the 2000s
+- now reiterates on AI and ML
+</pre>
+        </section>
+-->
+
+<!--
+        <section>
+            <h2>Schedule</h2>
+<pre>
+Teil 1: Schwache KI
+- Digit Recognition zeigen
+- Captcha
+- Alles andere
+
+Teil 2: Starke KI
+-DeepDream
+
+</pre>
+        </section>
+-->
+
+        <section>
+            <h2>Part I: What is Intelligence?</h2>
+        </section>
+
+        <section>
+            <h2>Initial Exercise</h2>
+            <p>Specify criteria whether a machine can think</p>
+            <p><small>
+                Example Definition:
+                A machine leading a court trial and coming to a fair judgement
+            </small></p>
+            <p><strong>Discuss in groups and come up with a definition of your own</strong></p>
+            <p><small>10 Minutes Time</small></p>
+        </section>
+
+        <section>
+            <h3>Collecting Results</h3>
+            <pre contenteditable="true">
+- Team 1:
+
+- Team 2:
+
+- Team 3:
+
+- Team 4:
+
+            </pre>
+            <p><small>5 Minutes</small></p>
+
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Sample Results</h3>-->
+            <!--<pre contenteditable="true">-->
+<!-- - Meyer: machines can not think! (AND EVERYBODY KNOWS IT!)-->
+<!-- - Team 1:-->
+  <!-- - nicht nur Einzelaufgaben, nicht nur Details-->
+  <!-- - Probleme selbstständig lösen-->
+  <!-- - Kein Bewusstsein notwendig-->
+  <!-- - Wenn man eins sieht, dann weiß man es-->
+
+<!-- - Team 2:-->
+  <!-- - selbstständig lernen und fehler verbessern-->
+    <!-- - feste Regeln reichen nicht-->
+  <!-- - allgemeine Leistung, nicht nur speziellen Domäne-->
+
+<!-- - Team 3:-->
+  <!-- - denken ist erst Stufe 1-->
+  <!-- - Transfervermögen-->
+  <!-- - Übung und Lernen-->
+  <!-- - graduelle Ergebnisse (Wahrscheinlichkeiten?)-->
+  <!-- - Kreativität, Emotionen-->
+  <!-- - Introspektion-->
+
+<!-- - Team 4:-->
+  <!-- - Machine kann einen Menschen zu einem gesellschaftsfähigen Menschen erziehen-->
+
+            <!--</pre>-->
+        <!--</section>-->
+        <section>
+            <h2>Possible Definition</h2>
+            <p><em>An artificial intelligence is a system that can learn how to learn, or in other words a series of instructions (an algorithm) that allows computers to write their own algorithms without being explicitly programmed for.</em></p>
+            <p><small><a target="_blank" href="https://medium.com/cyber-tales/artificial-intelligence-what-it-is-and-why-now-4e4431942623">https://medium.com/cyber-tales/artificial-intelligence-what-it-is-and-why-now-4e4431942623</a></small></p>
+        </section>
+
+        <!--<section>-->
+            <!--<h2>Shared Reading</h2>-->
+            <!--<p>Very brief history of Artificial Intelligence (AI)</p>-->
+            <!--<a href="http://www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html" target="_blank">http://www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html</a>-->
+        <!--</section>-->
+
+        <section>
+            <h4>Can Machines really think?</h4>
+            <ul>
+                <li class="fragment"data-fragment-index="1"><strong>Weak AI</strong> hypothesis: it is sufficient to simulate thinking
+                    <ul>
+                        <li class="fragment">like in: birds do real <em>flying</em>, planes only simulate flying
+                        <li class="fragment">if something can not be differentiated from real thinking is the only objective for AI anyway (<strong>Turing test</strong>)
+                    </ul>
+                </li>
+                <li class="fragment" data-fragment-index="2"><strong>Strong AI</strong> hypothesis: machines are only intelligent if they do the real thing
+                    <ul>
+                        <li class="fragment">is the machine really <em>conscious</em> like a human?
+                        <li class="fragment">poses the philosophically much more interesting questions
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Turing</h2>
+            <h3 class="fragment">Farther of modern computing</h3>
+            <p class="fragment"><em>if you ever experience an intelligent machine,
+                such a distinction would not make more sense than asking if the other people do real thinking either</em></p>
+        </section>
+
+        <section>
+            <h1>How far are we, really?</h1>
+        </section>
+
+        <section>
+            <h2>Strong AI and Beyond: Singularity</h2>
+        </section>
+
+        <section>
+            <p><em>The <strong>singularity</strong> is the hypothesis that the invention of <strong>artificial superintelligence</strong>
+                will abruptly trigger runaway technological growth, resulting in unfathomable changes to human civilization.
+                According to this hypothesis, an upgradable intelligent agent
+                (such as a computer running software-based artificial general intelligence)
+                would enter a "runaway reaction" of <strong>self-improvement</strong> cycles, with each new and more intelligent generation
+                appearing more and more rapidly, causing an intelligence explosion and resulting in a powerful
+                superintelligence that would, qualitatively, <strong>far surpass all human intelligence</strong>.</em></p>
+        </section>
+
+        <section>
+            <h2>Claimed Cause: exponential growth</h2>
+            <p><em>Many notable personalities, including Stephen Hawking and Elon Musk consider the uncontrolled rise of artificial intelligence as a matter of alarm and concern for humanity's future. The consequences of the singularity and its potential benefit or harm to the human race has been hotly debated by various intellectual circles.</em></p>
+            <p><small><a href="https://en.wikipedia.org/wiki/Technological_singularity" target="_blank">https://en.wikipedia.org/wiki/Technological_singularity</a></small></p>
+        </section>
+
+        <section>
+            <h2>Verdict</h2>
+            <h3 class="fragment">Factually, there just is no exponential growth</h3>
+            <h3 class="fragment">We are currently nowhere near such a singularity and there is no <em>existing</em> technology to make it happen</h3>
+            <p><small><a href="https://blog.keras.io/the-future-of-deep-learning.html" target="_blank">https://blog.keras.io/the-future-of-deep-learning.html</a></small></p>
+        </section>
+
+<!--
+        <section>
+            <h2>What does Yann LeCun - one of the fathers of modern AI - think about this?</h2>
+
+            <p>Prediction is the essence of intelligence.</p>
+            <p>Differentiation is the essence of learning.</p>
+
+            <a href="https://www.facebook.com/yann.lecun/posts/10154442711667143" target="_blank">
+                https://www.facebook.com/yann.lecun/posts/10154442711667143
+            </a>
+        </section>
+-->
+
+        <section>
+            <h2>The reality: Weak AI</h2>
+            <h3 class="fragment">Machine Learning works today and will impact our society</h3>
+            <h3 class="fragment">Claim: Ten Years from now AI and ML will be major topics in politics</h3>
+        </section>
+
+
+         <section>
+            <h3>But first: How does Machine Learning work in the first place?</h3>
+            <div>
+            <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                <img src="img/browser/teachable-machine.png" height="350px">
+            </a>
+            <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+            </small></p>
+                </div>
+        </section>
+
+        <section>
+            <h2>Experiment: I need two additional 2 volunteers (plus me)</h2>
+            <p class="fragment">Assignment: Train the system and make it react to each of us individually</p>
+            <!--<p><small>10 Minutes Time</small></p>-->
+        </section>
+
+        <section>
+            <h1>End of Lesson #1</h1>
+        </section>
+
+        <section>
+            <h2>Where do machines enter domains thought of as genuine to humans a few years ago?</h2>
+            <h3 class="fragment">This is not the future, this is today</h3>
+        </section>
+
+        <section>
+            <h4>Machine Understands and Reacts Like a Human</h4>
+            <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
+        </section>
+
+        <section>
+            <h3>Recognizing Scribbles</h3>
+            <a href="https://quickdraw.withgoogle.com" target="_blank">
+                <img src="img/browser/quick-draw.png" height="350px">
+            </a>
+            <p><small><a href="https://quickdraw.withgoogle.com" target="_blank">https://quickdraw.withgoogle.com</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h4>Can an image Captcha tell a machine from a human?</h4>
+            <img src="img/ai/iamnotarobot.png" height="500px">
+        </section>
+
+        <section>
+            <img src="img/ai/dog-vs-muffin.jpg">
+        </section>
+        <section>
+            <img src="img/ai/dog-vs-bread.jpg" height="500px">
+        </section>
+
+        <section>
+            <img src="img/ai/dog-vs-chicken-wing.jpg" height="500px">
+        </section>
+        <section>
+            <h2>All these Captchas can reliably be solved be AI</h2>
+            <h3 class="fragment">Not sure I would be able to</h3>
+        </section>
+
+        <section>
+            <h3>Playing Go</h3>
+            <p>Until recently Go was believed to be completely in the human domain</p>
+
+            <div class="fragment">
+            <p>Now, within a year, AlphaGo has reliably beaten every human being (including no. 1 and 2 in the world) and has retired already</p>
+            <p><small><a href="https://techcrunch.com/2017/05/27/googles-alphago-ai-is-retiring/" target="_blank">
+                https://techcrunch.com/2017/05/27/googles-alphago-ai-is-retiring/
+            </a><br><a href="https://www.tastehit.com/blog/google-deepmind-alphago-how-it-works/" target="_blank">
+                https://www.tastehit.com/blog/google-deepmind-alphago-how-it-works/
+            </a></small></p>
+                </div>
+        </section>
+
+        <section>
+            <h3>Face Detection</h3>
+            <img src="img/facial-recognition.png">
+            <p><small><a href="https://aws.amazon.com/rekognition/" target="_blank">
+                https://aws.amazon.com/rekognition/</a></small></p>
+<!--https://us-west-2.console.aws.amazon.com/rekognition/home?region=us-west-2#/face-comparison-->
+        </section>
+
+        <section>
+            <h3>More applications include</h3>
+            <ul>
+                <li class="fragment"><strong>Medicine</strong>: Many AI System are at the same level as human doctors (e.g. skin cancer screening)
+                <li class="fragment"><strong>Recommendation Systems</strong>: Spotify and Netflix know me better than I do
+                <li class="fragment"><strong>Making decisions</strong>: Should you be granted private health insurance or a loan
+                <li class="fragment"><strong>Fraud Detection</strong>: AI can detect Credit Card Scams and other suspicious activities (tax declarations)
+                <li class="fragment"><strong>Predictive Maintenance</strong>: AI systems tell you when to repair something before it is breaks
+            </ul>
+        </section>
+
+        <section>
+            <h4>Wrap Up Fishbowl Discussion</h4>
+            <h3>What role do we want to play AI in our society?</h3>
+            <p class="fragment">How will we face being defeated by machines?
+                <small>
+                <a href="https://www.theverge.com/2017/10/11/16460118/alphago-deepmind-ai-documentary-go-lee-sedol-film-review">
+                    https://www.theverge.com/2017/10/11/16460118/alphago-deepmind-ai-documentary-go-lee-sedol-film-review
+                </a></small></p>
+            <p class="fragment">Machine Learning and Artificial will destroy jobs</p>
+            <p class="fragment">Are the jobs destroyed worth being kept in the first place?</p>
+            <p class="fragment">Self driving cars might save 4000 lives per year, but may cost 1 million jobs</p>
+            <!--<p><small>All remaining time, 25 Minutes Time would be great</small></p>-->
+        </section>
+
+        <section>
+            <h2>Possible Second part: Do machines have souls?</h2>
+            <h3>Is strong AI plausible?</h3>
+            <ul>
+                <li>Can machines be creative and sentient?
+                <li>Are machines conscious?
+                <li>Is there a difference between humans and machines?
+            </ul>
+        </section>
+
+        <section class="todo">
+<pre>
+- copy from http://bit.ly/haw-ai
+- We are self-aware, and we are left wondering what that means, but we are not self-aware enough to understand what we are and how we work: (https://twitter.com/fchollet/status/917493399992786944?s=03)
+</pre>        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
+    //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
+    //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+//        $('.fragment').removeClass('fragment');
+        $('a').attr('target', '_blank');
+
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
