@@ -80,9 +80,13 @@ Dauer: 1 Stunde
 
 Talk: Machine Learning auch für dein Projekt
 
-Abstract: Na klar, die Internetgrößen wie Amazon, Google, Apple, Microsoft und Facebook wären ohne Machine Learning nicht denkbar. Aber wo kannst du Machine Learning jenseits des Hypes im eigenen Betrieb, in der eigenen Anwendung oder im Projekt nutzbringend und sinnvoll einsetzen?
+Abstract: Na klar, die Internetgrößen wie Amazon, Google, Apple, Microsoft und Facebook wären ohne
+Machine Learning nicht denkbar.
+Aber wo kannst du Machine Learning jenseits des Hypes im eigenen Betrieb,
+in der eigenen Anwendung oder im Projekt nutzbringend und sinnvoll einsetzen?
 
-Wir beginnen mit einem kurzen Überblick, was Machine Learning ausmacht und wie es funktioniert. Dann untersuchen wir mögliche Anwendungsgebiete in unterschiedlichen Branchen und Projektarten.
+Wir beginnen mit einem kurzen Überblick, was Machine Learning ausmacht und wie es funktioniert.
+Dann untersuchen wir mögliche Anwendungsgebiete in unterschiedlichen Branchen und Projektarten.
 
 Bio:
 Oliver Zeigermann ist Entwickler, Architekt, Berater und Coach.
@@ -94,7 +98,7 @@ eingestiegen. Er knüpft damit an sein Studium der Künstlichen Intelligenz in d
 
         <section>
             <h2>Machine Learning for Your Project</h2>
-            <h3>Everyday Applications of AI</h3>
+            <h3>Everyday Applications of Artificial Intelligence</h3>
                 <h3><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </h3>
             <p><small><a href="http://bit.ly/ml-sipgate">
@@ -103,21 +107,30 @@ eingestiegen. Er knüpft damit an sein Studium der Künstlichen Intelligenz in d
         </section>
 
         <section>
-            <h3>AI/ML is Opportunity</h3>
+            <h4>AI (Artificial Intelligence)/ ML (Machine Learning) is Opportunity</h4>
             <img src="opportunity.png" height="450">
             <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
         </section>
 
+        <section>
+            <h2>Gretchenfrage</h2>
+            <h3 class="fragment">What kind of data do you have or what kind of data would you be able to collect?</h3>
+            <h4 class="fragment">Your answer determines how can you benefit from machine learning</h4>
+        </section>
 
-<section>
-    <h2>What is Machine Learning?</h2>
-</section>
+        <section>
+            <h2>Data is the fuel and machine learning is the engine</h2>
+            <h3 class="fragment">You need both</h3>
+        </section>
+
+        <section>
+            <h2>First a look at the different types of engines</h2>
+        </section>
+
         <section>
             <h4>Different Types of Machine Learning</h4>
             <div >
-            <img src="img/mc-learning.jpg" height="500px">
-            <p><small>What do you mean by Machine Learning? <a href="http://www.techjini.com/blog/machine-learning/" target="_blank">http://www.techjini.com/blog/machine-learning/</a>
-            </small></p>
+            <img src="img/sketch/types-of-ml.png" height="500px">
             </div>
         </section>
 
@@ -162,30 +175,86 @@ eingestiegen. Er knüpft damit an sein Studium der Künstlichen Intelligenz in d
         </section>
 
         <section>
+            <h2>Now let's have a look at the different types of data</h2>
+            <h3 class="fragment">Some data is more valuable than other</h3>
+        </section>
+
+        <section>
+            <h2>In General: The more, the better</h2>
+            <h3 class="fragment">You can often compensate quantity with quality, though</h3>
+            <h3 class="fragment">And sometimes also the other way round</h3>
+        </section>
+
+        <section>
+            <h2>What kind of data</h2>
+            <ul>
+                <li>Log data
+                <li>Transaction data
+                <li>Structured, tabular data (like from an Excel Sheet)
+                <li>Speech
+                <li>Text
+                <li>Image data
+            </ul>
+        </section>
+
+        <section>
+            <h2>Is it labelled?</h2>
+            <h3 class="fragment">Only if it is labelled, it qualifies for supervised learning</h3>
+            <h3 class="fragment">If it is not labelled, would it be realistic to label it now?</h3>
+        </section>
+
+        <section>
+            <h2>What quality</h2>
+            <ul>
+                <li>unstructured (heterogeneous) / structured
+                <li>complete / incomplete
+                <li>without errors?
+            </ul>
+        </section>
+
+        <section>
+            <h2>Examples</h2>
+            <h3 class="fragment">We will mainly see Supervised and Unsupervised Learning, rarely Reinforcement Learning</h3>
+        </section>
+
+        <section>
+            <h2>A small amount (1000 - 5.000) of labelled images</h2>
+            <h3 class="fragment">Is that good data? <span class="fragment" style="color: yellow">MAYBE</span></h3>
+            <p class="fragment">It depends on how many categories (or is it continuous?) to predict and
+                on the variation and content (common / special) of the images</p>
+            <p class="fragment"><strong>Might qualify for supervised learning with Convolutional Neutral Networks</strong></p>
+        </section>
+
+        <section>
+            <h2>Huge amounts (TB) of unstructured (heterogeneous) log data</h2>
+            <h3 class="fragment">Is that good data? <span class="fragment" style="color: red">NO</span></h3>
+            <p class="fragment">If data is not even of the same category, how do you even tackle it. Hardest challenge, even with lots amounts of data</p>
+        </section>
+
+        <section>
+            <h2>A decent amount (> 10.000) of complete and labelled structured data</h2>
+            <h3 class="fragment">Is that good data? <span class="fragment" style="color: green">YES</span></h3>
+            <p class="fragment">The best you can possibly have. This is a real asset</p>
+            <p class="fragment"><strong>Qualifies for supervised learning with a variety of learning strategies</strong></p>
+        </section>
+
+        <section>
+            <h2>Medium size (GB) of structured time series data</h2>
+            <h3 class="fragment">Is that good data? <span class="fragment" style="color: greenyellow">Probably YES</span></h3>
+            <p class="fragment"><strong>Qualifies for Unsupervised Learning. Possibly there are a lot of insights hidden in the data</strong></p>
+        </section>
+
+        <section>
+            <h3>Actual Applications</h3>
+            <h2 class="fragment">For some more inspiration</h2>
+        </section>
+
+        <section>
             <h3>Real World AI is booming</h3>
             <img src="chollet-twitter-applications.png">
             <p><small><a href="https://twitter.com/fchollet/status/906582914829246464?s=03" target="_blank">
                 https://twitter.com/fchollet/status/906582914829246464?s=03</a></small></p>
         </section>
-
-
-                <section class="todo">
-<pre>
-- real life AI
-  - making it run on AWS GPU
-  - How hard is it to get started? E.g. Notebook with Pre-trained models trying to identify Squirrels (exists on Azure already)
-  - Demo: what tools, how to make it work? Notebook, live Training
-
-- Applications
-  - find 5 good examples from 2017_applicataions and work them out
-    - one example per category
-</pre>
-        </section>
-
-        <section>
-            <h1>Applications</h1>
-        </section>
-
 
         <section>
             <img src="img/applications/2016-gartner-hypecycle.jpg">
@@ -194,7 +263,7 @@ eingestiegen. Er knüpft damit an sein Studium der Künstlichen Intelligenz in d
         <section>
             <h4>First of all</h4>
             <h2>What does not work, (yet)?</h2>
-            <h3>Might be surprising</h3>
+            <h3 class="fragment">Might be surprising</h3>
         </section>
 
         <section>
@@ -211,8 +280,31 @@ eingestiegen. Er knüpft damit an sein Studium der Künstlichen Intelligenz in d
             <p><small><a href="https://twitter.com/fchollet/status/912413863168974848" target="_blank">https://twitter.com/fchollet/status/912413863168974848</a></small></p>
         </section>
 
-        <section class="todo">
+        <section>
             <h2>(II) Singularity</h2>
+        </section>
+
+        <section>
+            <p><em>The <strong>singularity</strong> is the hypothesis that the invention of <strong>artificial superintelligence</strong>
+                will abruptly trigger runaway technological growth, resulting in unfathomable changes to human civilization.
+                According to this hypothesis, an upgradable intelligent agent
+                (such as a computer running software-based artificial general intelligence)
+                would enter a "runaway reaction" of <strong>self-improvement</strong> cycles, with each new and more intelligent generation
+                appearing more and more rapidly, causing an intelligence explosion and resulting in a powerful
+                superintelligence that would, qualitatively, <strong>far surpass all human intelligence</strong>.</em></p>
+        </section>
+
+        <section>
+            <h2>Claimed Cause: exponential growth</h2>
+            <p><em>Many notable personalities, including Stephen Hawking and Elon Musk consider the uncontrolled rise of artificial intelligence as a matter of alarm and concern for humanity's future. The consequences of the singularity and its potential benefit or harm to the human race has been hotly debated by various intellectual circles.</em></p>
+            <p><small><a href="https://en.wikipedia.org/wiki/Technological_singularity" target="_blank">https://en.wikipedia.org/wiki/Technological_singularity</a></small></p>
+        </section>
+
+        <section>
+            <h2>Verdict</h2>
+            <h3 class="fragment">Factually, there just is no exponential growth</h3>
+            <h3 class="fragment">We are currently nowhere near such a singularity and there is no <em>existing</em> technology to make it happen</h3>
+            <p><small><a href="https://blog.keras.io/the-future-of-deep-learning.html" target="_blank">https://blog.keras.io/the-future-of-deep-learning.html</a></small></p>
         </section>
 
         <section>
@@ -249,6 +341,7 @@ eingestiegen. Er knüpft damit an sein Studium der Künstlichen Intelligenz in d
 - https://www.microsoft.com/en-us/research/video/research-focus-project-innereye-assistive-ai-cancer-treatment/?utm_source=t.co&utm_medium=referral
 - https://twitter.com/fchollet/status/907650078759829504?s=03
 - https://medium.com/inside-machine-learning/top-10-machine-learning-use-cases-part-2-7708ec514c2
+- https://twitter.com/Reza_Zadeh/status/913965097608818689
         </section>
 
         <section class="todo">
@@ -284,6 +377,27 @@ eingestiegen. Er knüpft damit an sein Studium der Künstlichen Intelligenz in d
 </pre>
         </section>
 
+        <section class="todo">
+            <h2>Finding hidden structures and insights in flight data</h2>
+<pre>
+- My flight data example using Google Sheets
+</pre>
+        </section>
+
+        <section>
+            <h2>Wrap-Up</h2>
+            <ul>
+                <li class="fragment">If you have data lying around, possibly you have a great treasure
+                <li class="fragment">Data can be of different quality, though
+                <li class="fragment">Larger amounts of high quality data probably are valuable
+                <li class="fragment">You can not just throw your data at AI and hope to get something out
+                <li class="fragment">You also need to have knowledge of Machine Learning and how it works
+            </ul>
+                <p><small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>Slides: <a href="http://bit.ly/ml-sipgate">
+                http://bit.ly/ml-sipgate
+            </a></small></p>
+        </section>
 
     </div>
 
