@@ -21,7 +21,7 @@ x = Convolution2D(256, 3, activation='relu', padding='same')(x)
 x = MaxPooling2D(pool_size=(2, 2))(x)
 
 x = Flatten()(x)
-x = Dense(256, activation='relu')(x)
+x = Dense(256, activation='sigmoid')(x)
 
 # softmax activation, 6 categories
 predictions = Dense(6, activation='softmax')(x)
