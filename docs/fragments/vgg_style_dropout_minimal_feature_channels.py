@@ -24,7 +24,7 @@ x = Dropout(0.5)(x)
 x = MaxPooling2D(pool_size=(2, 2))(x)
 
 x = Flatten()(x)
-x = Dense(32, activation='sigmoid')(x)
+x = Dense(32, activation='relu')(x)
 
 # softmax activation, 6 categories
 predictions = Dense(6, activation='softmax')(x)

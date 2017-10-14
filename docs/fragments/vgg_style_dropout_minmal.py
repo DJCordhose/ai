@@ -22,7 +22,7 @@ x = MaxPooling2D(pool_size=(2, 2))(x)
 x = MaxPooling2D(pool_size=(2, 2))(x)
 
 x = Flatten()(x)
-x = Dense(256, activation='sigmoid')(x)
+x = Dense(256, activation='relu')(x)
 x = Dropout(0.5)(x)
 
 # softmax activation, 6 categories
