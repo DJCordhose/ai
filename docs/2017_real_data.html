@@ -204,6 +204,28 @@ Unsupervised with Sklearn
         </section>
 
         <section>
+            <h2>The raw data (per year)</h2>
+            <p>approx. 6 million data sets</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> wc -l 2001.csv
+5967781 2001.csv
+            </code></pre>
+            <p>approx. 600 MB of data</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> ls -hl 2001.csv
+573M Jan 10  2016 2001.csv
+            </code></pre>
+            <p>29 colums, data has gaps, but looks consistent</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> head 2001.csv
+Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
+2001,1,17,3,1806,1810,1931,1934,US,375,N700��,85,84,60,-3,-4,BWI,CLT,361,5,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,18,4,1805,1810,1938,1934,US,375,N713��,93,84,64,4,-5,BWI,CLT,361,9,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
+2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
+        </section>
+
+        <section>
             <h2>No specific task or question</h2>
             <h3>Exploring what just might be interesting</h3>
             <h3>Finding the unknown unknowns</h3>
@@ -551,30 +573,6 @@ But we can at least work on samples</h3>
         </section>
 
 -->
-<!--
-        <section>
-            <h2>The raw data (per year)</h2>
-            <p>approx. 6 million data sets</p>
-            <pre><code contenteditable data-trim class="nohighlight">
-> wc -l 2001.csv
-5967781 2001.csv
-            </code></pre>
-            <p>approx. 600 MB of data</p>
-            <pre><code contenteditable data-trim class="nohighlight">
-> ls -hl 2001.csv
-573M Jan 10  2016 2001.csv
-            </code></pre>
-            <p>29 colums, data has gaps, but looks consistent</p>
-            <pre><code contenteditable data-trim class="nohighlight">
-> head 2001.csv
-Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
-2001,1,17,3,1806,1810,1931,1934,US,375,N700��,85,84,60,-3,-4,BWI,CLT,361,5,20,0,NA,0,NA,NA,NA,NA,NA
-2001,1,18,4,1805,1810,1938,1934,US,375,N713��,93,84,64,4,-5,BWI,CLT,361,9,20,0,NA,0,NA,NA,NA,NA,NA
-2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
-2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
-        </section>
--->
-
 <!--
         <section>
             <h2 style="margin-top: -10px"><small>Why not just load it into Excel and wing it?</small></h2>
