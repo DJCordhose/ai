@@ -1,9 +1,11 @@
 <html>
         <!-- <script src="https://storage.googleapis.com/learnjs-data/deeplearn-latest.js"></script> -->
-        <script src="lib/deeplearn-latest.js"></script>
+        <script src="lib/deeplearn.js"></script>
+        <!-- <script src="lib/deeplearn.min.js"></script> -->
         <!-- <script src="sandbox.js"  type="module"></script> -->
-
-        <script>
+        <script src="regression.js"></script>
+        
+        <!-- <script>
 {
 // import {Array1D, NDArrayMathGPU, Scalar} from 'deeplearn';
 const {Array1D, NDArrayMathGPU, Scalar} = deeplearn
@@ -12,13 +14,15 @@ const math = new NDArrayMathGPU()
 const a = Array1D.new([1, 2, 3])
 const b = Scalar.new(2)
 
+math.enableDebugMode()
+
 // cleans up GPU resources after use
 math.scope(() => {
   const result = math.add(a, b)
   console.log(result.getValues())  // Float32Array([3, 4, 5])
 })
 }
-        </script>
+        </script> -->
 
 <!-- <script>
 // https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html#training

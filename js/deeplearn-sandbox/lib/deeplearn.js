@@ -1,4 +1,956 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.deeplearn = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+
+},{}],2:[function(require,module,exports){
+// A library of seedable RNGs implemented in Javascript.
+//
+// Usage:
+//
+// var seedrandom = require('seedrandom');
+// var random = seedrandom(1); // or any seed.
+// var x = random();       // 0 <= x < 1.  Every bit is random.
+// var x = random.quick(); // 0 <= x < 1.  32 bits of randomness.
+
+// alea, a 53-bit multiply-with-carry generator by Johannes Baagøe.
+// Period: ~2^116
+// Reported to pass all BigCrush tests.
+var alea = require('./lib/alea');
+
+// xor128, a pure xor-shift generator by George Marsaglia.
+// Period: 2^128-1.
+// Reported to fail: MatrixRank and LinearComp.
+var xor128 = require('./lib/xor128');
+
+// xorwow, George Marsaglia's 160-bit xor-shift combined plus weyl.
+// Period: 2^192-2^32
+// Reported to fail: CollisionOver, SimpPoker, and LinearComp.
+var xorwow = require('./lib/xorwow');
+
+// xorshift7, by François Panneton and Pierre L'ecuyer, takes
+// a different approach: it adds robustness by allowing more shifts
+// than Marsaglia's original three.  It is a 7-shift generator
+// with 256 bits, that passes BigCrush with no systmatic failures.
+// Period 2^256-1.
+// No systematic BigCrush failures reported.
+var xorshift7 = require('./lib/xorshift7');
+
+// xor4096, by Richard Brent, is a 4096-bit xor-shift with a
+// very long period that also adds a Weyl generator. It also passes
+// BigCrush with no systematic failures.  Its long period may
+// be useful if you have many generators and need to avoid
+// collisions.
+// Period: 2^4128-2^32.
+// No systematic BigCrush failures reported.
+var xor4096 = require('./lib/xor4096');
+
+// Tyche-i, by Samuel Neves and Filipe Araujo, is a bit-shifting random
+// number generator derived from ChaCha, a modern stream cipher.
+// https://eden.dei.uc.pt/~sneves/pubs/2011-snfa2.pdf
+// Period: ~2^127
+// No systematic BigCrush failures reported.
+var tychei = require('./lib/tychei');
+
+// The original ARC4-based prng included in this library.
+// Period: ~2^1600
+var sr = require('./seedrandom');
+
+sr.alea = alea;
+sr.xor128 = xor128;
+sr.xorwow = xorwow;
+sr.xorshift7 = xorshift7;
+sr.xor4096 = xor4096;
+sr.tychei = tychei;
+
+module.exports = sr;
+
+},{"./lib/alea":3,"./lib/tychei":4,"./lib/xor128":5,"./lib/xor4096":6,"./lib/xorshift7":7,"./lib/xorwow":8,"./seedrandom":9}],3:[function(require,module,exports){
+// A port of an algorithm by Johannes Baagøe <baagoe@baagoe.com>, 2010
+// http://baagoe.com/en/RandomMusings/javascript/
+// https://github.com/nquinlan/better-random-numbers-for-javascript-mirror
+// Original work is under MIT license -
+
+// Copyright (C) 2010 by Johannes Baagøe <baagoe@baagoe.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+
+
+(function(global, module, define) {
+
+function Alea(seed) {
+  var me = this, mash = Mash();
+
+  me.next = function() {
+    var t = 2091639 * me.s0 + me.c * 2.3283064365386963e-10; // 2^-32
+    me.s0 = me.s1;
+    me.s1 = me.s2;
+    return me.s2 = t - (me.c = t | 0);
+  };
+
+  // Apply the seeding algorithm from Baagoe.
+  me.c = 1;
+  me.s0 = mash(' ');
+  me.s1 = mash(' ');
+  me.s2 = mash(' ');
+  me.s0 -= mash(seed);
+  if (me.s0 < 0) { me.s0 += 1; }
+  me.s1 -= mash(seed);
+  if (me.s1 < 0) { me.s1 += 1; }
+  me.s2 -= mash(seed);
+  if (me.s2 < 0) { me.s2 += 1; }
+  mash = null;
+}
+
+function copy(f, t) {
+  t.c = f.c;
+  t.s0 = f.s0;
+  t.s1 = f.s1;
+  t.s2 = f.s2;
+  return t;
+}
+
+function impl(seed, opts) {
+  var xg = new Alea(seed),
+      state = opts && opts.state,
+      prng = xg.next;
+  prng.int32 = function() { return (xg.next() * 0x100000000) | 0; }
+  prng.double = function() {
+    return prng() + (prng() * 0x200000 | 0) * 1.1102230246251565e-16; // 2^-53
+  };
+  prng.quick = prng;
+  if (state) {
+    if (typeof(state) == 'object') copy(state, xg);
+    prng.state = function() { return copy(xg, {}); }
+  }
+  return prng;
+}
+
+function Mash() {
+  var n = 0xefc8249d;
+
+  var mash = function(data) {
+    data = data.toString();
+    for (var i = 0; i < data.length; i++) {
+      n += data.charCodeAt(i);
+      var h = 0.02519603282416938 * n;
+      n = h >>> 0;
+      h -= n;
+      h *= n;
+      n = h >>> 0;
+      h -= n;
+      n += h * 0x100000000; // 2^32
+    }
+    return (n >>> 0) * 2.3283064365386963e-10; // 2^-32
+  };
+
+  return mash;
+}
+
+
+if (module && module.exports) {
+  module.exports = impl;
+} else if (define && define.amd) {
+  define(function() { return impl; });
+} else {
+  this.alea = impl;
+}
+
+})(
+  this,
+  (typeof module) == 'object' && module,    // present in node.js
+  (typeof define) == 'function' && define   // present with an AMD loader
+);
+
+
+
+},{}],4:[function(require,module,exports){
+// A Javascript implementaion of the "Tyche-i" prng algorithm by
+// Samuel Neves and Filipe Araujo.
+// See https://eden.dei.uc.pt/~sneves/pubs/2011-snfa2.pdf
+
+(function(global, module, define) {
+
+function XorGen(seed) {
+  var me = this, strseed = '';
+
+  // Set up generator function.
+  me.next = function() {
+    var b = me.b, c = me.c, d = me.d, a = me.a;
+    b = (b << 25) ^ (b >>> 7) ^ c;
+    c = (c - d) | 0;
+    d = (d << 24) ^ (d >>> 8) ^ a;
+    a = (a - b) | 0;
+    me.b = b = (b << 20) ^ (b >>> 12) ^ c;
+    me.c = c = (c - d) | 0;
+    me.d = (d << 16) ^ (c >>> 16) ^ a;
+    return me.a = (a - b) | 0;
+  };
+
+  /* The following is non-inverted tyche, which has better internal
+   * bit diffusion, but which is about 25% slower than tyche-i in JS.
+  me.next = function() {
+    var a = me.a, b = me.b, c = me.c, d = me.d;
+    a = (me.a + me.b | 0) >>> 0;
+    d = me.d ^ a; d = d << 16 ^ d >>> 16;
+    c = me.c + d | 0;
+    b = me.b ^ c; b = b << 12 ^ d >>> 20;
+    me.a = a = a + b | 0;
+    d = d ^ a; me.d = d = d << 8 ^ d >>> 24;
+    me.c = c = c + d | 0;
+    b = b ^ c;
+    return me.b = (b << 7 ^ b >>> 25);
+  }
+  */
+
+  me.a = 0;
+  me.b = 0;
+  me.c = 2654435769 | 0;
+  me.d = 1367130551;
+
+  if (seed === Math.floor(seed)) {
+    // Integer seed.
+    me.a = (seed / 0x100000000) | 0;
+    me.b = seed | 0;
+  } else {
+    // String seed.
+    strseed += seed;
+  }
+
+  // Mix in string seed, then discard an initial batch of 64 values.
+  for (var k = 0; k < strseed.length + 20; k++) {
+    me.b ^= strseed.charCodeAt(k) | 0;
+    me.next();
+  }
+}
+
+function copy(f, t) {
+  t.a = f.a;
+  t.b = f.b;
+  t.c = f.c;
+  t.d = f.d;
+  return t;
+};
+
+function impl(seed, opts) {
+  var xg = new XorGen(seed),
+      state = opts && opts.state,
+      prng = function() { return (xg.next() >>> 0) / 0x100000000; };
+  prng.double = function() {
+    do {
+      var top = xg.next() >>> 11,
+          bot = (xg.next() >>> 0) / 0x100000000,
+          result = (top + bot) / (1 << 21);
+    } while (result === 0);
+    return result;
+  };
+  prng.int32 = xg.next;
+  prng.quick = prng;
+  if (state) {
+    if (typeof(state) == 'object') copy(state, xg);
+    prng.state = function() { return copy(xg, {}); }
+  }
+  return prng;
+}
+
+if (module && module.exports) {
+  module.exports = impl;
+} else if (define && define.amd) {
+  define(function() { return impl; });
+} else {
+  this.tychei = impl;
+}
+
+})(
+  this,
+  (typeof module) == 'object' && module,    // present in node.js
+  (typeof define) == 'function' && define   // present with an AMD loader
+);
+
+
+
+},{}],5:[function(require,module,exports){
+// A Javascript implementaion of the "xor128" prng algorithm by
+// George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
+
+(function(global, module, define) {
+
+function XorGen(seed) {
+  var me = this, strseed = '';
+
+  me.x = 0;
+  me.y = 0;
+  me.z = 0;
+  me.w = 0;
+
+  // Set up generator function.
+  me.next = function() {
+    var t = me.x ^ (me.x << 11);
+    me.x = me.y;
+    me.y = me.z;
+    me.z = me.w;
+    return me.w ^= (me.w >>> 19) ^ t ^ (t >>> 8);
+  };
+
+  if (seed === (seed | 0)) {
+    // Integer seed.
+    me.x = seed;
+  } else {
+    // String seed.
+    strseed += seed;
+  }
+
+  // Mix in string seed, then discard an initial batch of 64 values.
+  for (var k = 0; k < strseed.length + 64; k++) {
+    me.x ^= strseed.charCodeAt(k) | 0;
+    me.next();
+  }
+}
+
+function copy(f, t) {
+  t.x = f.x;
+  t.y = f.y;
+  t.z = f.z;
+  t.w = f.w;
+  return t;
+}
+
+function impl(seed, opts) {
+  var xg = new XorGen(seed),
+      state = opts && opts.state,
+      prng = function() { return (xg.next() >>> 0) / 0x100000000; };
+  prng.double = function() {
+    do {
+      var top = xg.next() >>> 11,
+          bot = (xg.next() >>> 0) / 0x100000000,
+          result = (top + bot) / (1 << 21);
+    } while (result === 0);
+    return result;
+  };
+  prng.int32 = xg.next;
+  prng.quick = prng;
+  if (state) {
+    if (typeof(state) == 'object') copy(state, xg);
+    prng.state = function() { return copy(xg, {}); }
+  }
+  return prng;
+}
+
+if (module && module.exports) {
+  module.exports = impl;
+} else if (define && define.amd) {
+  define(function() { return impl; });
+} else {
+  this.xor128 = impl;
+}
+
+})(
+  this,
+  (typeof module) == 'object' && module,    // present in node.js
+  (typeof define) == 'function' && define   // present with an AMD loader
+);
+
+
+
+},{}],6:[function(require,module,exports){
+// A Javascript implementaion of Richard Brent's Xorgens xor4096 algorithm.
+//
+// This fast non-cryptographic random number generator is designed for
+// use in Monte-Carlo algorithms. It combines a long-period xorshift
+// generator with a Weyl generator, and it passes all common batteries
+// of stasticial tests for randomness while consuming only a few nanoseconds
+// for each prng generated.  For background on the generator, see Brent's
+// paper: "Some long-period random number generators using shifts and xors."
+// http://arxiv.org/pdf/1004.3115v1.pdf
+//
+// Usage:
+//
+// var xor4096 = require('xor4096');
+// random = xor4096(1);                        // Seed with int32 or string.
+// assert.equal(random(), 0.1520436450538547); // (0, 1) range, 53 bits.
+// assert.equal(random.int32(), 1806534897);   // signed int32, 32 bits.
+//
+// For nonzero numeric keys, this impelementation provides a sequence
+// identical to that by Brent's xorgens 3 implementaion in C.  This
+// implementation also provides for initalizing the generator with
+// string seeds, or for saving and restoring the state of the generator.
+//
+// On Chrome, this prng benchmarks about 2.1 times slower than
+// Javascript's built-in Math.random().
+
+(function(global, module, define) {
+
+function XorGen(seed) {
+  var me = this;
+
+  // Set up generator function.
+  me.next = function() {
+    var w = me.w,
+        X = me.X, i = me.i, t, v;
+    // Update Weyl generator.
+    me.w = w = (w + 0x61c88647) | 0;
+    // Update xor generator.
+    v = X[(i + 34) & 127];
+    t = X[i = ((i + 1) & 127)];
+    v ^= v << 13;
+    t ^= t << 17;
+    v ^= v >>> 15;
+    t ^= t >>> 12;
+    // Update Xor generator array state.
+    v = X[i] = v ^ t;
+    me.i = i;
+    // Result is the combination.
+    return (v + (w ^ (w >>> 16))) | 0;
+  };
+
+  function init(me, seed) {
+    var t, v, i, j, w, X = [], limit = 128;
+    if (seed === (seed | 0)) {
+      // Numeric seeds initialize v, which is used to generates X.
+      v = seed;
+      seed = null;
+    } else {
+      // String seeds are mixed into v and X one character at a time.
+      seed = seed + '\0';
+      v = 0;
+      limit = Math.max(limit, seed.length);
+    }
+    // Initialize circular array and weyl value.
+    for (i = 0, j = -32; j < limit; ++j) {
+      // Put the unicode characters into the array, and shuffle them.
+      if (seed) v ^= seed.charCodeAt((j + 32) % seed.length);
+      // After 32 shuffles, take v as the starting w value.
+      if (j === 0) w = v;
+      v ^= v << 10;
+      v ^= v >>> 15;
+      v ^= v << 4;
+      v ^= v >>> 13;
+      if (j >= 0) {
+        w = (w + 0x61c88647) | 0;     // Weyl.
+        t = (X[j & 127] ^= (v + w));  // Combine xor and weyl to init array.
+        i = (0 == t) ? i + 1 : 0;     // Count zeroes.
+      }
+    }
+    // We have detected all zeroes; make the key nonzero.
+    if (i >= 128) {
+      X[(seed && seed.length || 0) & 127] = -1;
+    }
+    // Run the generator 512 times to further mix the state before using it.
+    // Factoring this as a function slows the main generator, so it is just
+    // unrolled here.  The weyl generator is not advanced while warming up.
+    i = 127;
+    for (j = 4 * 128; j > 0; --j) {
+      v = X[(i + 34) & 127];
+      t = X[i = ((i + 1) & 127)];
+      v ^= v << 13;
+      t ^= t << 17;
+      v ^= v >>> 15;
+      t ^= t >>> 12;
+      X[i] = v ^ t;
+    }
+    // Storing state as object members is faster than using closure variables.
+    me.w = w;
+    me.X = X;
+    me.i = i;
+  }
+
+  init(me, seed);
+}
+
+function copy(f, t) {
+  t.i = f.i;
+  t.w = f.w;
+  t.X = f.X.slice();
+  return t;
+};
+
+function impl(seed, opts) {
+  if (seed == null) seed = +(new Date);
+  var xg = new XorGen(seed),
+      state = opts && opts.state,
+      prng = function() { return (xg.next() >>> 0) / 0x100000000; };
+  prng.double = function() {
+    do {
+      var top = xg.next() >>> 11,
+          bot = (xg.next() >>> 0) / 0x100000000,
+          result = (top + bot) / (1 << 21);
+    } while (result === 0);
+    return result;
+  };
+  prng.int32 = xg.next;
+  prng.quick = prng;
+  if (state) {
+    if (state.X) copy(state, xg);
+    prng.state = function() { return copy(xg, {}); }
+  }
+  return prng;
+}
+
+if (module && module.exports) {
+  module.exports = impl;
+} else if (define && define.amd) {
+  define(function() { return impl; });
+} else {
+  this.xor4096 = impl;
+}
+
+})(
+  this,                                     // window object or global
+  (typeof module) == 'object' && module,    // present in node.js
+  (typeof define) == 'function' && define   // present with an AMD loader
+);
+
+},{}],7:[function(require,module,exports){
+// A Javascript implementaion of the "xorshift7" algorithm by
+// François Panneton and Pierre L'ecuyer:
+// "On the Xorgshift Random Number Generators"
+// http://saluc.engr.uconn.edu/refs/crypto/rng/panneton05onthexorshift.pdf
+
+(function(global, module, define) {
+
+function XorGen(seed) {
+  var me = this;
+
+  // Set up generator function.
+  me.next = function() {
+    // Update xor generator.
+    var X = me.x, i = me.i, t, v, w;
+    t = X[i]; t ^= (t >>> 7); v = t ^ (t << 24);
+    t = X[(i + 1) & 7]; v ^= t ^ (t >>> 10);
+    t = X[(i + 3) & 7]; v ^= t ^ (t >>> 3);
+    t = X[(i + 4) & 7]; v ^= t ^ (t << 7);
+    t = X[(i + 7) & 7]; t = t ^ (t << 13); v ^= t ^ (t << 9);
+    X[i] = v;
+    me.i = (i + 1) & 7;
+    return v;
+  };
+
+  function init(me, seed) {
+    var j, w, X = [];
+
+    if (seed === (seed | 0)) {
+      // Seed state array using a 32-bit integer.
+      w = X[0] = seed;
+    } else {
+      // Seed state using a string.
+      seed = '' + seed;
+      for (j = 0; j < seed.length; ++j) {
+        X[j & 7] = (X[j & 7] << 15) ^
+            (seed.charCodeAt(j) + X[(j + 1) & 7] << 13);
+      }
+    }
+    // Enforce an array length of 8, not all zeroes.
+    while (X.length < 8) X.push(0);
+    for (j = 0; j < 8 && X[j] === 0; ++j);
+    if (j == 8) w = X[7] = -1; else w = X[j];
+
+    me.x = X;
+    me.i = 0;
+
+    // Discard an initial 256 values.
+    for (j = 256; j > 0; --j) {
+      me.next();
+    }
+  }
+
+  init(me, seed);
+}
+
+function copy(f, t) {
+  t.x = f.x.slice();
+  t.i = f.i;
+  return t;
+}
+
+function impl(seed, opts) {
+  if (seed == null) seed = +(new Date);
+  var xg = new XorGen(seed),
+      state = opts && opts.state,
+      prng = function() { return (xg.next() >>> 0) / 0x100000000; };
+  prng.double = function() {
+    do {
+      var top = xg.next() >>> 11,
+          bot = (xg.next() >>> 0) / 0x100000000,
+          result = (top + bot) / (1 << 21);
+    } while (result === 0);
+    return result;
+  };
+  prng.int32 = xg.next;
+  prng.quick = prng;
+  if (state) {
+    if (state.x) copy(state, xg);
+    prng.state = function() { return copy(xg, {}); }
+  }
+  return prng;
+}
+
+if (module && module.exports) {
+  module.exports = impl;
+} else if (define && define.amd) {
+  define(function() { return impl; });
+} else {
+  this.xorshift7 = impl;
+}
+
+})(
+  this,
+  (typeof module) == 'object' && module,    // present in node.js
+  (typeof define) == 'function' && define   // present with an AMD loader
+);
+
+
+},{}],8:[function(require,module,exports){
+// A Javascript implementaion of the "xorwow" prng algorithm by
+// George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
+
+(function(global, module, define) {
+
+function XorGen(seed) {
+  var me = this, strseed = '';
+
+  // Set up generator function.
+  me.next = function() {
+    var t = (me.x ^ (me.x >>> 2));
+    me.x = me.y; me.y = me.z; me.z = me.w; me.w = me.v;
+    return (me.d = (me.d + 362437 | 0)) +
+       (me.v = (me.v ^ (me.v << 4)) ^ (t ^ (t << 1))) | 0;
+  };
+
+  me.x = 0;
+  me.y = 0;
+  me.z = 0;
+  me.w = 0;
+  me.v = 0;
+
+  if (seed === (seed | 0)) {
+    // Integer seed.
+    me.x = seed;
+  } else {
+    // String seed.
+    strseed += seed;
+  }
+
+  // Mix in string seed, then discard an initial batch of 64 values.
+  for (var k = 0; k < strseed.length + 64; k++) {
+    me.x ^= strseed.charCodeAt(k) | 0;
+    if (k == strseed.length) {
+      me.d = me.x << 10 ^ me.x >>> 4;
+    }
+    me.next();
+  }
+}
+
+function copy(f, t) {
+  t.x = f.x;
+  t.y = f.y;
+  t.z = f.z;
+  t.w = f.w;
+  t.v = f.v;
+  t.d = f.d;
+  return t;
+}
+
+function impl(seed, opts) {
+  var xg = new XorGen(seed),
+      state = opts && opts.state,
+      prng = function() { return (xg.next() >>> 0) / 0x100000000; };
+  prng.double = function() {
+    do {
+      var top = xg.next() >>> 11,
+          bot = (xg.next() >>> 0) / 0x100000000,
+          result = (top + bot) / (1 << 21);
+    } while (result === 0);
+    return result;
+  };
+  prng.int32 = xg.next;
+  prng.quick = prng;
+  if (state) {
+    if (typeof(state) == 'object') copy(state, xg);
+    prng.state = function() { return copy(xg, {}); }
+  }
+  return prng;
+}
+
+if (module && module.exports) {
+  module.exports = impl;
+} else if (define && define.amd) {
+  define(function() { return impl; });
+} else {
+  this.xorwow = impl;
+}
+
+})(
+  this,
+  (typeof module) == 'object' && module,    // present in node.js
+  (typeof define) == 'function' && define   // present with an AMD loader
+);
+
+
+
+},{}],9:[function(require,module,exports){
+/*
+Copyright 2014 David Bau.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*/
+
+(function (pool, math) {
+//
+// The following constants are related to IEEE 754 limits.
+//
+var global = this,
+    width = 256,        // each RC4 output is 0 <= x < 256
+    chunks = 6,         // at least six RC4 outputs for each double
+    digits = 52,        // there are 52 significant digits in a double
+    rngname = 'random', // rngname: name for Math.random and Math.seedrandom
+    startdenom = math.pow(width, chunks),
+    significance = math.pow(2, digits),
+    overflow = significance * 2,
+    mask = width - 1,
+    nodecrypto;         // node.js crypto module, initialized at the bottom.
+
+//
+// seedrandom()
+// This is the seedrandom function described above.
+//
+function seedrandom(seed, options, callback) {
+  var key = [];
+  options = (options == true) ? { entropy: true } : (options || {});
+
+  // Flatten the seed string or build one from local entropy if needed.
+  var shortseed = mixkey(flatten(
+    options.entropy ? [seed, tostring(pool)] :
+    (seed == null) ? autoseed() : seed, 3), key);
+
+  // Use the seed to initialize an ARC4 generator.
+  var arc4 = new ARC4(key);
+
+  // This function returns a random double in [0, 1) that contains
+  // randomness in every bit of the mantissa of the IEEE 754 value.
+  var prng = function() {
+    var n = arc4.g(chunks),             // Start with a numerator n < 2 ^ 48
+        d = startdenom,                 //   and denominator d = 2 ^ 48.
+        x = 0;                          //   and no 'extra last byte'.
+    while (n < significance) {          // Fill up all significant digits by
+      n = (n + x) * width;              //   shifting numerator and
+      d *= width;                       //   denominator and generating a
+      x = arc4.g(1);                    //   new least-significant-byte.
+    }
+    while (n >= overflow) {             // To avoid rounding up, before adding
+      n /= 2;                           //   last byte, shift everything
+      d /= 2;                           //   right using integer math until
+      x >>>= 1;                         //   we have exactly the desired bits.
+    }
+    return (n + x) / d;                 // Form the number within [0, 1).
+  };
+
+  prng.int32 = function() { return arc4.g(4) | 0; }
+  prng.quick = function() { return arc4.g(4) / 0x100000000; }
+  prng.double = prng;
+
+  // Mix the randomness into accumulated entropy.
+  mixkey(tostring(arc4.S), pool);
+
+  // Calling convention: what to return as a function of prng, seed, is_math.
+  return (options.pass || callback ||
+      function(prng, seed, is_math_call, state) {
+        if (state) {
+          // Load the arc4 state from the given state if it has an S array.
+          if (state.S) { copy(state, arc4); }
+          // Only provide the .state method if requested via options.state.
+          prng.state = function() { return copy(arc4, {}); }
+        }
+
+        // If called as a method of Math (Math.seedrandom()), mutate
+        // Math.random because that is how seedrandom.js has worked since v1.0.
+        if (is_math_call) { math[rngname] = prng; return seed; }
+
+        // Otherwise, it is a newer calling convention, so return the
+        // prng directly.
+        else return prng;
+      })(
+  prng,
+  shortseed,
+  'global' in options ? options.global : (this == math),
+  options.state);
+}
+math['seed' + rngname] = seedrandom;
+
+//
+// ARC4
+//
+// An ARC4 implementation.  The constructor takes a key in the form of
+// an array of at most (width) integers that should be 0 <= x < (width).
+//
+// The g(count) method returns a pseudorandom integer that concatenates
+// the next (count) outputs from ARC4.  Its return value is a number x
+// that is in the range 0 <= x < (width ^ count).
+//
+function ARC4(key) {
+  var t, keylen = key.length,
+      me = this, i = 0, j = me.i = me.j = 0, s = me.S = [];
+
+  // The empty key [] is treated as [0].
+  if (!keylen) { key = [keylen++]; }
+
+  // Set up S using the standard key scheduling algorithm.
+  while (i < width) {
+    s[i] = i++;
+  }
+  for (i = 0; i < width; i++) {
+    s[i] = s[j = mask & (j + key[i % keylen] + (t = s[i]))];
+    s[j] = t;
+  }
+
+  // The "g" method returns the next (count) outputs as one number.
+  (me.g = function(count) {
+    // Using instance members instead of closure state nearly doubles speed.
+    var t, r = 0,
+        i = me.i, j = me.j, s = me.S;
+    while (count--) {
+      t = s[i = mask & (i + 1)];
+      r = r * width + s[mask & ((s[i] = s[j = mask & (j + t)]) + (s[j] = t))];
+    }
+    me.i = i; me.j = j;
+    return r;
+    // For robust unpredictability, the function call below automatically
+    // discards an initial batch of values.  This is called RC4-drop[256].
+    // See http://google.com/search?q=rsa+fluhrer+response&btnI
+  })(width);
+}
+
+//
+// copy()
+// Copies internal state of ARC4 to or from a plain object.
+//
+function copy(f, t) {
+  t.i = f.i;
+  t.j = f.j;
+  t.S = f.S.slice();
+  return t;
+};
+
+//
+// flatten()
+// Converts an object tree to nested arrays of strings.
+//
+function flatten(obj, depth) {
+  var result = [], typ = (typeof obj), prop;
+  if (depth && typ == 'object') {
+    for (prop in obj) {
+      try { result.push(flatten(obj[prop], depth - 1)); } catch (e) {}
+    }
+  }
+  return (result.length ? result : typ == 'string' ? obj : obj + '\0');
+}
+
+//
+// mixkey()
+// Mixes a string seed into a key that is an array of integers, and
+// returns a shortened string seed that is equivalent to the result key.
+//
+function mixkey(seed, key) {
+  var stringseed = seed + '', smear, j = 0;
+  while (j < stringseed.length) {
+    key[mask & j] =
+      mask & ((smear ^= key[mask & j] * 19) + stringseed.charCodeAt(j++));
+  }
+  return tostring(key);
+}
+
+//
+// autoseed()
+// Returns an object for autoseeding, using window.crypto and Node crypto
+// module if available.
+//
+function autoseed() {
+  try {
+    var out;
+    if (nodecrypto && (out = nodecrypto.randomBytes)) {
+      // The use of 'out' to remember randomBytes makes tight minified code.
+      out = out(width);
+    } else {
+      out = new Uint8Array(width);
+      (global.crypto || global.msCrypto).getRandomValues(out);
+    }
+    return tostring(out);
+  } catch (e) {
+    var browser = global.navigator,
+        plugins = browser && browser.plugins;
+    return [+new Date, global, plugins, global.screen, tostring(pool)];
+  }
+}
+
+//
+// tostring()
+// Converts an array of charcodes to a string
+//
+function tostring(a) {
+  return String.fromCharCode.apply(0, a);
+}
+
+//
+// When seedrandom.js is loaded, we immediately mix a few bits
+// from the built-in RNG into the entropy pool.  Because we do
+// not want to interfere with deterministic PRNG state later,
+// seedrandom will not call math.random on its own again after
+// initialization.
+//
+mixkey(math.random(), pool);
+
+//
+// Nodejs and AMD support: export the implementation as a module using
+// either convention.
+//
+if ((typeof module) == 'object' && module.exports) {
+  module.exports = seedrandom;
+  // When in node.js, try using crypto package for autoseeding.
+  try {
+    nodecrypto = require('crypto');
+  } catch (ex) {}
+} else if ((typeof define) == 'function' && define.amd) {
+  define(function() { return seedrandom; });
+}
+
+// End anonymous scope, and pass initial values.
+})(
+  [],     // pool: entropy pool starts empty
+  Math    // math: package containing random, pow, and seedrandom
+);
+
+},{"crypto":1}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("../math/ndarray");
@@ -95,7 +1047,7 @@ var CheckpointLoader = (function () {
 }());
 exports.CheckpointLoader = CheckpointLoader;
 
-},{"../math/ndarray":49}],2:[function(require,module,exports){
+},{"../math/ndarray":60}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("../math/ndarray");
@@ -260,7 +1212,7 @@ var InMemoryDataset = (function () {
 }());
 exports.InMemoryDataset = InMemoryDataset;
 
-},{"../math/ndarray":49,"../util":75}],3:[function(require,module,exports){
+},{"../math/ndarray":60,"../util":91}],12:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -363,7 +1315,7 @@ var InGPUMemoryShuffledInputProviderBuilder = (function (_super) {
 }(InMemoryShuffledInputProviderBuilder));
 exports.InGPUMemoryShuffledInputProviderBuilder = InGPUMemoryShuffledInputProviderBuilder;
 
-},{"../math/ndarray":49,"../util":75}],4:[function(require,module,exports){
+},{"../math/ndarray":60,"../util":91}],13:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -510,7 +1462,7 @@ function parseTypedArrayFromPng(info, shape) {
     });
 }
 
-},{"../math/ndarray":49,"../util":75,"./dataset":2}],5:[function(require,module,exports){
+},{"../math/ndarray":60,"../util":91,"./dataset":11}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function isMobile() {
@@ -522,7 +1474,7 @@ function isMobile() {
 }
 exports.isMobile = isMobile;
 
-},{}],6:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var device_util = require("./device_util");
@@ -535,7 +1487,8 @@ var Type;
 exports.URL_PROPERTIES = [
     { name: 'WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_ENABLED', type: Type.BOOLEAN },
     { name: 'WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_RELIABLE', type: Type.BOOLEAN },
-    { name: 'WEBGL_VERSION', type: Type.NUMBER }
+    { name: 'WEBGL_VERSION', type: Type.NUMBER },
+    { name: 'WEBGL_FLOAT_TEXTURE_ENABLED', type: Type.BOOLEAN }
 ];
 function getWebGLRenderingContext(webGLVersion) {
     if (webGLVersion === 0) {
@@ -576,6 +1529,37 @@ function isWebGLDisjointQueryTimerEnabled(webGLVersion) {
     }
     return isExtEnabled;
 }
+function isFloatTextureReadPixelsEnabled(webGLVersion) {
+    if (webGLVersion === 0) {
+        return false;
+    }
+    var gl = getWebGLRenderingContext(webGLVersion);
+    var floatExtension;
+    var colorBufferFloatExtension;
+    if (webGLVersion === 1) {
+        floatExtension = gl.getExtension('OES_texture_float');
+        colorBufferFloatExtension = gl.getExtension('WEBGL_color_buffer_float');
+        if (floatExtension == null || colorBufferFloatExtension == null) {
+            return false;
+        }
+    }
+    else {
+        colorBufferFloatExtension = gl.getExtension('EXT_color_buffer_float');
+        if (colorBufferFloatExtension == null) {
+            return false;
+        }
+    }
+    var frameBuffer = gl.createFramebuffer();
+    var texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    var internalFormat = webGLVersion === 2 ? gl.RGBA32F : gl.RGBA;
+    gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, 1, 1, 0, gl.RGBA, gl.FLOAT, null);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, frameBuffer);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+    var frameBufferComplete = (gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE);
+    loseContext(gl);
+    return frameBufferComplete;
+}
 var Environment = (function () {
     function Environment(features) {
         this.features = {};
@@ -611,6 +1595,9 @@ var Environment = (function () {
             }
             return 0;
         }
+        else if (feature === 'WEBGL_FLOAT_TEXTURE_ENABLED') {
+            return isFloatTextureReadPixelsEnabled(this.get('WEBGL_VERSION'));
+        }
         throw new Error("Unknown feature " + feature + ".");
     };
     return Environment;
@@ -619,6 +1606,9 @@ exports.Environment = Environment;
 var DEEPLEARNJS_FLAGS_PREFIX = 'dljsflags';
 function getFeaturesFromURL() {
     var features = {};
+    if (typeof window === 'undefined') {
+        return features;
+    }
     var urlParams = util.getQueryParams(window.location.search);
     if (DEEPLEARNJS_FLAGS_PREFIX in urlParams) {
         var urlFlags_1 = {};
@@ -651,7 +1641,7 @@ function setEnvironment(environment) {
 }
 exports.setEnvironment = setEnvironment;
 
-},{"./device_util":5,"./util":75}],7:[function(require,module,exports){
+},{"./device_util":14,"./util":91}],16:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -665,7 +1655,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var initializers_1 = require("../initializers");
-var concat3d_util = require("../math/concat3d_util");
+var concat_util = require("../math/concat_util");
 var conv_util = require("../math/conv_util");
 var ndarray_1 = require("../math/ndarray");
 var util = require("../util");
@@ -999,14 +1989,14 @@ exports.ReduceSumNode = ReduceSumNode;
 var Concat3DNode = (function (_super) {
     __extends(Concat3DNode, _super);
     function Concat3DNode(graph, x1, x2, axis) {
-        var _this = _super.call(this, graph, 'Concat3D', { x1: x1, x2: x2 }, new Tensor(concat3d_util.computeConcat3DOutputShape(x1.shape, x2.shape, axis))) || this;
+        var _this = _super.call(this, graph, 'Concat3D', { x1: x1, x2: x2 }, new Tensor(concat_util.computeOutShape(x1.shape, x2.shape, axis))) || this;
         _this.x1 = x1;
         _this.x2 = x2;
         _this.axis = axis;
         return _this;
     }
     Concat3DNode.prototype.validate = function () {
-        concat3d_util.assertConcat3DShapesMatch(this.x1.shape, this.x2.shape, this.axis);
+        concat_util.assertParams(this.x1.shape, this.x2.shape, this.axis);
     };
     Concat3DNode.X1 = 'x1';
     Concat3DNode.X2 = 'x2';
@@ -1248,7 +2238,7 @@ var ArgMaxEqualsNode = (function (_super) {
 }(Node));
 exports.ArgMaxEqualsNode = ArgMaxEqualsNode;
 
-},{"../initializers":40,"../math/concat3d_util":42,"../math/conv_util":43,"../math/ndarray":49,"../util":75}],8:[function(require,module,exports){
+},{"../initializers":51,"../math/concat_util":53,"../math/conv_util":54,"../math/ndarray":60,"../util":91}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var graph_1 = require("./graph");
@@ -1325,7 +2315,7 @@ function isPassthroughNode(node, map) {
 }
 exports.isPassthroughNode = isPassthroughNode;
 
-},{"./graph":7,"./priority_queue":34}],9:[function(require,module,exports){
+},{"./graph":16,"./priority_queue":45}],18:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var graph_1 = require("./graph");
@@ -1439,7 +2429,7 @@ function emitOpFromNode(node) {
     }
 }
 
-},{"./graph":7,"./graph_util":8,"./ops/add":10,"./ops/argmax":11,"./ops/argmaxequals":12,"./ops/concat3d":13,"./ops/convolution":14,"./ops/divide":15,"./ops/element_wise_activation":16,"./ops/element_wise_cost":17,"./ops/exp":18,"./ops/linear_combination":19,"./ops/log":20,"./ops/matmul":21,"./ops/max_pool":22,"./ops/multiply":23,"./ops/reduce_sum":25,"./ops/reshape":26,"./ops/softmax":27,"./ops/subtract":28}],10:[function(require,module,exports){
+},{"./graph":16,"./graph_util":17,"./ops/add":19,"./ops/argmax":20,"./ops/argmaxequals":21,"./ops/concat3d":22,"./ops/convolution":23,"./ops/divide":24,"./ops/element_wise_activation":25,"./ops/element_wise_cost":26,"./ops/exp":27,"./ops/linear_combination":28,"./ops/log":29,"./ops/matmul":30,"./ops/max_pool":31,"./ops/multiply":32,"./ops/reduce_sum":34,"./ops/reshape":35,"./ops/softmax":36,"./ops/subtract":37}],19:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1526,7 +2516,7 @@ var Add = (function (_super) {
 }(op_1.Operation));
 exports.Add = Add;
 
-},{"../../math/ndarray":49,"../../util":75,"../graph_util":8,"./op":24}],11:[function(require,module,exports){
+},{"../../math/ndarray":60,"../../util":91,"../graph_util":17,"./op":33}],20:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1562,7 +2552,7 @@ var ArgMax = (function (_super) {
 }(op_1.Operation));
 exports.ArgMax = ArgMax;
 
-},{"./op":24}],12:[function(require,module,exports){
+},{"./op":33}],21:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1600,7 +2590,7 @@ var ArgMaxEquals = (function (_super) {
 }(op_1.Operation));
 exports.ArgMaxEquals = ArgMaxEquals;
 
-},{"./op":24}],13:[function(require,module,exports){
+},{"./op":33}],22:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1613,7 +2603,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var concat3d_util = require("../../math/concat3d_util");
+var concat_util = require("../../math/concat_util");
 var op_1 = require("./op");
 var Concat3D = (function (_super) {
     __extends(Concat3D, _super);
@@ -1623,7 +2613,7 @@ var Concat3D = (function (_super) {
         _this.x2Tensor = x2Tensor;
         _this.axis = axis;
         _this.yTensor = yTensor;
-        concat3d_util.assertConcat3DShapesMatch(x1Tensor.shape, x2Tensor.shape, axis);
+        concat_util.assertParams(x1Tensor.shape, x2Tensor.shape, axis);
         return _this;
     }
     Concat3D.prototype.feedForward = function (math, inferenceArrays) {
@@ -1642,7 +2632,7 @@ var Concat3D = (function (_super) {
 }(op_1.Operation));
 exports.Concat3D = Concat3D;
 
-},{"../../math/concat3d_util":42,"./op":24}],14:[function(require,module,exports){
+},{"../../math/concat_util":53,"./op":33}],23:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1711,7 +2701,7 @@ var Convolution2D = (function (_super) {
 }(op_1.Operation));
 exports.Convolution2D = Convolution2D;
 
-},{"../../math/conv_util":43,"../../util":75,"./op":24}],15:[function(require,module,exports){
+},{"../../math/conv_util":54,"../../util":91,"./op":33}],24:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1806,7 +2796,7 @@ var Divide = (function (_super) {
 }(op_1.Operation));
 exports.Divide = Divide;
 
-},{"../../util":75,"../graph_util":8,"./op":24}],16:[function(require,module,exports){
+},{"../../util":91,"../graph_util":17,"./op":33}],25:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1884,7 +2874,7 @@ var Square = (function (_super) {
 }(ElementWiseActivation));
 exports.Square = Square;
 
-},{"../../math/activation_functions":41,"./op":24}],17:[function(require,module,exports){
+},{"../../math/activation_functions":52,"./op":33}],26:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1953,7 +2943,7 @@ var MeanSquaredCost = (function (_super) {
 }(ElementWiseCost));
 exports.MeanSquaredCost = MeanSquaredCost;
 
-},{"../../math/cost_functions":45,"../../math/ndarray":49,"../../util":75,"../graph_util":8,"./op":24}],18:[function(require,module,exports){
+},{"../../math/cost_functions":56,"../../math/ndarray":60,"../../util":91,"../graph_util":17,"./op":33}],27:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1997,7 +2987,7 @@ var Exp = (function (_super) {
 }(op_1.Operation));
 exports.Exp = Exp;
 
-},{"../graph_util":8,"./op":24}],19:[function(require,module,exports){
+},{"../graph_util":17,"./op":33}],28:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2061,7 +3051,7 @@ var LinearCombination = (function (_super) {
 }(op_1.Operation));
 exports.LinearCombination = LinearCombination;
 
-},{"../graph_util":8,"./op":24}],20:[function(require,module,exports){
+},{"../graph_util":17,"./op":33}],29:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2105,7 +3095,7 @@ var Log = (function (_super) {
 }(op_1.Operation));
 exports.Log = Log;
 
-},{"../graph_util":8,"./op":24}],21:[function(require,module,exports){
+},{"../graph_util":17,"./op":33}],30:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2174,7 +3164,7 @@ var MatMul = (function (_super) {
 }(op_1.Operation));
 exports.MatMul = MatMul;
 
-},{"../../math/math":46,"../graph_util":8,"./op":24}],22:[function(require,module,exports){
+},{"../../math/math":57,"../graph_util":17,"./op":33}],31:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2228,7 +3218,7 @@ var MaxPool = (function (_super) {
 }(op_1.Operation));
 exports.MaxPool = MaxPool;
 
-},{"../../math/conv_util":43,"../../util":75,"./op":24}],23:[function(require,module,exports){
+},{"../../math/conv_util":54,"../../util":91,"./op":33}],32:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2311,7 +3301,7 @@ var Multiply = (function (_super) {
 }(op_1.Operation));
 exports.Multiply = Multiply;
 
-},{"../../util":75,"../graph_util":8,"./op":24}],24:[function(require,module,exports){
+},{"../../util":91,"../graph_util":17,"./op":33}],33:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Operation = (function () {
@@ -2323,7 +3313,7 @@ var Operation = (function () {
 }());
 exports.Operation = Operation;
 
-},{}],25:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2375,7 +3365,7 @@ var ReduceSum = (function (_super) {
 }(op_1.Operation));
 exports.ReduceSum = ReduceSum;
 
-},{"../../math/ndarray":49,"../../util":75,"../graph_util":8,"./op":24}],26:[function(require,module,exports){
+},{"../../math/ndarray":60,"../../util":91,"../graph_util":17,"./op":33}],35:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2419,7 +3409,7 @@ var Reshape = (function (_super) {
 }(op_1.Operation));
 exports.Reshape = Reshape;
 
-},{"../../util":75,"./op":24}],27:[function(require,module,exports){
+},{"../../util":91,"./op":33}],36:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2507,7 +3497,7 @@ function crossEntropyCost(math, y, target, epsilon) {
 }
 exports.crossEntropyCost = crossEntropyCost;
 
-},{"../../math/ndarray":49,"../../util":75,"../graph":7,"./op":24}],28:[function(require,module,exports){
+},{"../../math/ndarray":60,"../../util":91,"../graph":16,"./op":33}],37:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2595,7 +3585,82 @@ var Subtract = (function (_super) {
 }(op_1.Operation));
 exports.Subtract = Subtract;
 
-},{"../../math/ndarray":49,"../../util":75,"../graph_util":8,"./op":24}],29:[function(require,module,exports){
+},{"../../math/ndarray":60,"../../util":91,"../graph_util":17,"./op":33}],38:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var ndarray_1 = require("../../math/ndarray");
+var tensor_array_map_1 = require("../tensor_array_map");
+var optimizer_1 = require("./optimizer");
+var AdadeltaOptimizer = (function (_super) {
+    __extends(AdadeltaOptimizer, _super);
+    function AdadeltaOptimizer(learningRate, gamma, specifiedVariableList) {
+        var _this = _super.call(this, learningRate, specifiedVariableList) || this;
+        _this.learningRate = learningRate;
+        _this.gamma = gamma;
+        _this.accumulatedSquaredGradients = new tensor_array_map_1.TensorArrayMap();
+        _this.accumulatedUpdates = new tensor_array_map_1.TensorArrayMap();
+        _this.eps = ndarray_1.Scalar.new(1e-6);
+        _this.g = ndarray_1.Scalar.new(_this.gamma);
+        return _this;
+    }
+    AdadeltaOptimizer.prototype.beforeBatch = function (math, batchSize, runtime, activationArrayMap, gradientArrayMap) {
+        var _this = this;
+        _super.prototype.beforeBatch.call(this, math, batchSize, runtime, activationArrayMap, gradientArrayMap);
+        if (this.accumulatedSquaredGradients.size() === 0) {
+            this.variableNodes.forEach(function (node) {
+                _this.accumulatedSquaredGradients.set(node.output, ndarray_1.NDArray.zeros(node.output.shape));
+                _this.accumulatedUpdates.set(node.output, ndarray_1.NDArray.zeros(node.output.shape));
+            });
+        }
+    };
+    AdadeltaOptimizer.prototype.afterBatch = function (math, batchSize, runtime, activationArrayMap, gradientArrayMap) {
+        var _this = this;
+        math.scope(function (keep) {
+            _this.variableNodes.forEach(function (node) {
+                var oldVariable = activationArrayMap.get(node.output);
+                var gradient = _this.variableGradients.get(node.output);
+                var oldCache = _this.accumulatedSquaredGradients.get(node.output);
+                var oldUpdates = _this.accumulatedUpdates.get(node.output);
+                var gradientSquare = math.multiply(gradient, gradient);
+                var cache = math.scaledArrayAdd(_this.g, oldCache, math.sub(_this.one, _this.g), gradientSquare);
+                var updates = math.multiply(math.divide(math.sqrt(math.add(oldUpdates, _this.eps)), math.sqrt(math.add(oldCache, _this.eps))), gradient);
+                var variable = math.scaledArrayAdd(_this.c, updates, _this.one, oldVariable);
+                var updateSquare = math.multiply(updates, updates);
+                var newUpdates = math.scaledArrayAdd(_this.g, oldUpdates, math.sub(_this.one, _this.g), updateSquare);
+                _this.accumulatedSquaredGradients.set(node.output, keep(cache));
+                _this.accumulatedUpdates.set(node.output, keep(newUpdates));
+                activationArrayMap.set(node.output, keep(variable));
+                node.data = variable;
+                oldVariable.dispose();
+                oldCache.dispose();
+                oldUpdates.dispose();
+            });
+        });
+        this.variableGradients.dispose();
+        this.variableGradients = new tensor_array_map_1.TensorArrayMap();
+    };
+    AdadeltaOptimizer.prototype.dispose = function () {
+        _super.prototype.dispose.call(this);
+        this.eps.dispose();
+        this.g.dispose();
+        this.accumulatedSquaredGradients.dispose();
+        this.accumulatedUpdates.dispose();
+    };
+    return AdadeltaOptimizer;
+}(optimizer_1.Optimizer));
+exports.AdadeltaOptimizer = AdadeltaOptimizer;
+
+},{"../../math/ndarray":60,"../tensor_array_map":48,"./optimizer":42}],39:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2613,12 +3678,10 @@ var tensor_array_map_1 = require("../tensor_array_map");
 var optimizer_1 = require("./optimizer");
 var AdagradOptimizer = (function (_super) {
     __extends(AdagradOptimizer, _super);
-    function AdagradOptimizer(learningRate, momentum, specifiedVariableList) {
+    function AdagradOptimizer(learningRate, specifiedVariableList) {
         var _this = _super.call(this, learningRate, specifiedVariableList) || this;
         _this.learningRate = learningRate;
-        _this.momentum = momentum;
         _this.accumulatedSquaredGradients = new tensor_array_map_1.TensorArrayMap();
-        _this.m = ndarray_1.Scalar.new(momentum);
         _this.eps = ndarray_1.Scalar.new(1e-6);
         return _this;
     }
@@ -2653,7 +3716,6 @@ var AdagradOptimizer = (function (_super) {
     };
     AdagradOptimizer.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
-        this.m.dispose();
         this.eps.dispose();
         this.accumulatedSquaredGradients.dispose();
     };
@@ -2661,7 +3723,96 @@ var AdagradOptimizer = (function (_super) {
 }(optimizer_1.Optimizer));
 exports.AdagradOptimizer = AdagradOptimizer;
 
-},{"../../math/ndarray":49,"../tensor_array_map":37,"./optimizer":31}],30:[function(require,module,exports){
+},{"../../math/ndarray":60,"../tensor_array_map":48,"./optimizer":42}],40:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var ndarray_1 = require("../../math/ndarray");
+var tensor_array_map_1 = require("../tensor_array_map");
+var optimizer_1 = require("./optimizer");
+var AdamOptimizer = (function (_super) {
+    __extends(AdamOptimizer, _super);
+    function AdamOptimizer(learningRate, beta1, beta2, specifiedVariableList) {
+        var _this = _super.call(this, learningRate, specifiedVariableList) || this;
+        _this.learningRate = learningRate;
+        _this.beta1 = beta1;
+        _this.beta2 = beta2;
+        _this.firstMoment = new tensor_array_map_1.TensorArrayMap();
+        _this.secondMoment = new tensor_array_map_1.TensorArrayMap();
+        _this.eps = ndarray_1.Scalar.new(1e-8);
+        _this.b1 = ndarray_1.Scalar.new(_this.beta1);
+        _this.b2 = ndarray_1.Scalar.new(_this.beta2);
+        _this.accB1 = ndarray_1.Scalar.new(_this.beta1);
+        _this.accB2 = ndarray_1.Scalar.new(_this.beta2);
+        return _this;
+    }
+    AdamOptimizer.prototype.beforeBatch = function (math, batchSize, runtime, activationArrayMap, gradientArrayMap) {
+        var _this = this;
+        _super.prototype.beforeBatch.call(this, math, batchSize, runtime, activationArrayMap, gradientArrayMap);
+        if (this.firstMoment.size() === 0) {
+            this.variableNodes.forEach(function (node) {
+                _this.firstMoment.set(node.output, ndarray_1.NDArray.zeros(node.output.shape));
+            });
+        }
+        if (this.secondMoment.size() === 0) {
+            this.variableNodes.forEach(function (node) {
+                _this.secondMoment.set(node.output, ndarray_1.NDArray.zeros(node.output.shape));
+            });
+        }
+    };
+    AdamOptimizer.prototype.afterBatch = function (math, batchSize, runtime, activationArrayMap, gradientArrayMap) {
+        var _this = this;
+        math.scope(function (keep) {
+            _this.variableNodes.forEach(function (node) {
+                var oldVariable = activationArrayMap.get(node.output);
+                var gradient = _this.variableGradients.get(node.output);
+                var oldFirstMoment = _this.firstMoment.get(node.output);
+                var oldSecondMoment = _this.secondMoment.get(node.output);
+                var newFirstMoment = math.scaledArrayAdd(_this.b1, oldFirstMoment, math.sub(_this.one, _this.b1), gradient);
+                var gradientSquare = math.multiply(gradient, gradient);
+                var newSecondMoment = math.scaledArrayAdd(_this.b2, oldSecondMoment, math.sub(_this.one, _this.b2), gradientSquare);
+                var biasCorrectedFirstMoment = math.divide(newFirstMoment, math.sub(_this.one, _this.accB1));
+                var biasCorrectedSecondMoment = math.divide(newSecondMoment, math.sub(_this.one, _this.accB2));
+                var variable = math.scaledArrayAdd(_this.c, math.divide(biasCorrectedFirstMoment, math.add(math.sqrt(biasCorrectedSecondMoment), _this.eps)), _this.one, oldVariable);
+                activationArrayMap.set(node.output, keep(variable));
+                node.data = variable;
+                _this.firstMoment.set(node.output, keep(newFirstMoment));
+                _this.secondMoment.set(node.output, keep(newSecondMoment));
+                oldVariable.dispose();
+                gradient.dispose();
+                oldFirstMoment.dispose();
+                oldSecondMoment.dispose();
+            });
+            _this.accB1 = keep(math.multiply(_this.accB1, _this.b1));
+            _this.accB2 = keep(math.multiply(_this.accB2, _this.b2));
+        });
+        this.variableGradients.dispose();
+        this.variableGradients = new tensor_array_map_1.TensorArrayMap();
+    };
+    AdamOptimizer.prototype.dispose = function () {
+        _super.prototype.dispose.call(this);
+        this.firstMoment.dispose();
+        this.secondMoment.dispose();
+        this.eps.dispose();
+        this.b1.dispose();
+        this.b2.dispose();
+        this.accB1.dispose();
+        this.accB2.dispose();
+    };
+    return AdamOptimizer;
+}(optimizer_1.Optimizer));
+exports.AdamOptimizer = AdamOptimizer;
+
+},{"../../math/ndarray":60,"../tensor_array_map":48,"./optimizer":42}],41:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2727,7 +3878,7 @@ var MomentumOptimizer = (function (_super) {
 }(sgd_optimizer_1.SGDOptimizer));
 exports.MomentumOptimizer = MomentumOptimizer;
 
-},{"../../math/ndarray":49,"../tensor_array_map":37,"./sgd_optimizer":33}],31:[function(require,module,exports){
+},{"../../math/ndarray":60,"../tensor_array_map":48,"./sgd_optimizer":44}],42:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("../../math/ndarray");
@@ -2777,7 +3928,7 @@ var Optimizer = (function () {
 }());
 exports.Optimizer = Optimizer;
 
-},{"../../math/ndarray":49,"../session_util":36,"../tensor_array_map":37}],32:[function(require,module,exports){
+},{"../../math/ndarray":60,"../session_util":47,"../tensor_array_map":48}],43:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2843,7 +3994,7 @@ var RMSPropOptimizer = (function (_super) {
 }(optimizer_1.Optimizer));
 exports.RMSPropOptimizer = RMSPropOptimizer;
 
-},{"../../math/ndarray":49,"../tensor_array_map":37,"./optimizer":31}],33:[function(require,module,exports){
+},{"../../math/ndarray":60,"../tensor_array_map":48,"./optimizer":42}],44:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2890,7 +4041,7 @@ var SGDOptimizer = (function (_super) {
 }(optimizer_1.Optimizer));
 exports.SGDOptimizer = SGDOptimizer;
 
-},{"../tensor_array_map":37,"./optimizer":31}],34:[function(require,module,exports){
+},{"../tensor_array_map":48,"./optimizer":42}],45:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function defaultCompare(a, b) {
@@ -3021,7 +4172,7 @@ var PriorityQueue = (function () {
 }());
 exports.PriorityQueue = PriorityQueue;
 
-},{}],35:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("../math/ndarray");
@@ -3159,7 +4310,7 @@ var Session = (function () {
 }());
 exports.Session = Session;
 
-},{"../math/ndarray":49,"../util":75,"./operation_emitter":9,"./session_util":36,"./tensor_array_map":37}],36:[function(require,module,exports){
+},{"../math/ndarray":60,"../util":91,"./operation_emitter":18,"./session_util":47,"./tensor_array_map":48}],47:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("../math/ndarray");
@@ -3287,7 +4438,7 @@ function throwErrorIfEvaluationSetContainsPlaceholderNodes(evaluationSet) {
 }
 exports.throwErrorIfEvaluationSetContainsPlaceholderNodes = throwErrorIfEvaluationSetContainsPlaceholderNodes;
 
-},{"../math/ndarray":49,"../util":75,"./graph":7,"./graph_util":8}],37:[function(require,module,exports){
+},{"../math/ndarray":60,"../util":91,"./graph":16,"./graph_util":17}],48:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3387,7 +4538,7 @@ var SummedTensorArrayMap = (function (_super) {
 }(TensorArrayMapBase));
 exports.SummedTensorArrayMap = SummedTensorArrayMap;
 
-},{}],38:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var session_1 = require("./graph/session");
@@ -3610,11 +4761,13 @@ var GraphRunner = (function () {
 }());
 exports.GraphRunner = GraphRunner;
 
-},{"./graph/session":35,"./math/ndarray":49}],39:[function(require,module,exports){
+},{"./graph/session":46,"./math/ndarray":60}],50:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var xhr_dataset = require("./data/xhr-dataset");
 exports.xhr_dataset = xhr_dataset;
+var environment = require("./environment");
+exports.environment = environment;
 var conv_util = require("./math/conv_util");
 exports.conv_util = conv_util;
 var gpgpu_util = require("./math/webgl/gpgpu_util");
@@ -3623,6 +4776,8 @@ var render_ndarray_gpu_util = require("./math/webgl/render_ndarray_gpu_util");
 exports.render_ndarray_gpu_util = render_ndarray_gpu_util;
 var webgl_util = require("./math/webgl/webgl_util");
 exports.webgl_util = webgl_util;
+var test_util = require("./test_util");
+exports.test_util = test_util;
 var util = require("./util");
 exports.util = util;
 var checkpoint_loader_1 = require("./data/checkpoint_loader");
@@ -3636,9 +4791,12 @@ var xhr_dataset_1 = require("./data/xhr-dataset");
 exports.XhrDataset = xhr_dataset_1.XhrDataset;
 var environment_1 = require("./environment");
 exports.ENV = environment_1.ENV;
+exports.Environment = environment_1.Environment;
 var graph_1 = require("./graph/graph");
 exports.Graph = graph_1.Graph;
 exports.Tensor = graph_1.Tensor;
+var adadelta_optimizer_1 = require("./graph/optimizers/adadelta_optimizer");
+exports.AdadeltaOptimizer = adadelta_optimizer_1.AdadeltaOptimizer;
 var adagrad_optimizer_1 = require("./graph/optimizers/adagrad_optimizer");
 exports.AdagradOptimizer = adagrad_optimizer_1.AdagradOptimizer;
 var momentum_optimizer_1 = require("./graph/optimizers/momentum_optimizer");
@@ -3649,6 +4807,8 @@ var rmsprop_optimizer_1 = require("./graph/optimizers/rmsprop_optimizer");
 exports.RMSPropOptimizer = rmsprop_optimizer_1.RMSPropOptimizer;
 var sgd_optimizer_1 = require("./graph/optimizers/sgd_optimizer");
 exports.SGDOptimizer = sgd_optimizer_1.SGDOptimizer;
+var adam_optimizer_1 = require("./graph/optimizers/adam_optimizer");
+exports.AdamOptimizer = adam_optimizer_1.AdamOptimizer;
 var session_1 = require("./graph/session");
 exports.CostReduction = session_1.CostReduction;
 exports.Session = session_1.Session;
@@ -3681,7 +4841,7 @@ exports.Scalar = ndarray_1.Scalar;
 var gpgpu_context_1 = require("./math/webgl/gpgpu_context");
 exports.GPGPUContext = gpgpu_context_1.GPGPUContext;
 
-},{"./data/checkpoint_loader":1,"./data/dataset":2,"./data/input_provider":3,"./data/xhr-dataset":4,"./environment":6,"./graph/graph":7,"./graph/optimizers/adagrad_optimizer":29,"./graph/optimizers/momentum_optimizer":30,"./graph/optimizers/optimizer":31,"./graph/optimizers/rmsprop_optimizer":32,"./graph/optimizers/sgd_optimizer":33,"./graph/session":35,"./graph_runner":38,"./initializers":40,"./math/conv_util":43,"./math/math":46,"./math/math_cpu":47,"./math/math_gpu":48,"./math/ndarray":49,"./math/webgl/gpgpu_context":59,"./math/webgl/gpgpu_util":61,"./math/webgl/render_ndarray_gpu_util":68,"./math/webgl/webgl_util":74,"./util":75}],40:[function(require,module,exports){
+},{"./data/checkpoint_loader":10,"./data/dataset":11,"./data/input_provider":12,"./data/xhr-dataset":13,"./environment":15,"./graph/graph":16,"./graph/optimizers/adadelta_optimizer":38,"./graph/optimizers/adagrad_optimizer":39,"./graph/optimizers/adam_optimizer":40,"./graph/optimizers/momentum_optimizer":41,"./graph/optimizers/optimizer":42,"./graph/optimizers/rmsprop_optimizer":43,"./graph/optimizers/sgd_optimizer":44,"./graph/session":46,"./graph_runner":49,"./initializers":51,"./math/conv_util":54,"./math/math":57,"./math/math_cpu":58,"./math/math_gpu":59,"./math/ndarray":60,"./math/webgl/gpgpu_context":71,"./math/webgl/gpgpu_util":73,"./math/webgl/render_ndarray_gpu_util":82,"./math/webgl/webgl_util":89,"./test_util":90,"./util":91}],51:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("./math/ndarray");
@@ -3805,7 +4965,7 @@ var RandomUniformInitializer = (function () {
 }());
 exports.RandomUniformInitializer = RandomUniformInitializer;
 
-},{"./math/ndarray":49}],41:[function(require,module,exports){
+},{"./math/ndarray":60}],52:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("./ndarray");
@@ -3876,32 +5036,32 @@ var SquareFunc = (function () {
 }());
 exports.SquareFunc = SquareFunc;
 
-},{"./ndarray":49}],42:[function(require,module,exports){
+},{"./ndarray":60}],53:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../util");
-function assertConcat3DShapesMatch(x1Shape, x2Shape, axis, errorMessagePrefix) {
-    if (errorMessagePrefix === void 0) { errorMessagePrefix = ''; }
-    util.assert(x1Shape.length === 3, errorMessagePrefix + 'Concat3D x1 shape should be of rank 3.');
-    util.assert(x2Shape.length === 3, errorMessagePrefix + 'Concat3D x2 shape should be of rank 3.');
-    util.assert(axis >= 0 && axis < 3, 'Axis for concat3D must be between 0 and 2.');
-    for (var i = 0; i < 3; i++) {
-        util.assert((i === axis) || (x1Shape[i] === x2Shape[i]), errorMessagePrefix +
-            ("Shape (" + x1Shape + ") does not match (" + x2Shape + ") along ") +
-            "non-concatenated axis.");
+function assertParams(aShape, bShape, axis) {
+    var aRank = aShape.length;
+    var bRank = bShape.length;
+    util.assert(aShape.length === bShape.length, "Error in concat" + aRank + "D: rank of x1 (" + aRank + ") and x2 (" + bRank + ") " +
+        "must be the same.");
+    util.assert(axis >= 0 && axis < aRank, "Error in concat" + aRank + "D: axis must be " +
+        ("between 0 and " + (aRank - 1) + "."));
+    for (var i = 0; i < aRank; i++) {
+        util.assert((i === axis) || (aShape[i] === bShape[i]), "Error in concat" + aRank + "D: Shape (" + aShape + ") does not match " +
+            ("(" + bShape + ") along the non-concatenated axis " + i + "."));
     }
 }
-exports.assertConcat3DShapesMatch = assertConcat3DShapesMatch;
-function computeConcat3DOutputShape(x1Shape, x2Shape, axis) {
-    util.assert(x1Shape.length === 3, 'Concat3D x1 shape should be of rank 3.');
-    util.assert(x2Shape.length === 3, 'Concat3D x2shape should be of rank 3.');
+exports.assertParams = assertParams;
+function computeOutShape(x1Shape, x2Shape, axis) {
+    util.assert(x1Shape.length === x2Shape.length, 'x1 and x2 should have the same rank.');
     var outputShape = x1Shape.slice();
     outputShape[axis] += x2Shape[axis];
     return outputShape;
 }
-exports.computeConcat3DOutputShape = computeConcat3DOutputShape;
+exports.computeOutShape = computeOutShape;
 
-},{"../util":75}],43:[function(require,module,exports){
+},{"../util":91}],54:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../util");
@@ -3988,7 +5148,7 @@ function computeDilatedRC(rc, origStride) {
 }
 exports.computeDilatedRC = computeDilatedRC;
 
-},{"../util":75}],44:[function(require,module,exports){
+},{"../util":91}],55:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function validateShapes(sourceSize, destSize) {
@@ -4003,7 +5163,7 @@ function validateShapes(sourceSize, destSize) {
 }
 exports.validateShapes = validateShapes;
 
-},{}],45:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("./ndarray");
@@ -4029,14 +5189,15 @@ var SquareCostFunc = (function () {
 }());
 exports.SquareCostFunc = SquareCostFunc;
 
-},{"./ndarray":49}],46:[function(require,module,exports){
+},{"./ndarray":60}],57:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../util");
-var concat3d_util = require("./concat3d_util");
+var concat_util = require("./concat_util");
 var conv_util = require("./conv_util");
 var copy2d_util = require("./copy2d_util");
 var ndarray_1 = require("./ndarray");
+var slice_util = require("./slice_util");
 var NDArrayMath = (function () {
     function NDArrayMath(safeMode) {
         this.safeMode = safeMode;
@@ -4104,7 +5265,7 @@ var NDArrayMath = (function () {
     };
     NDArrayMath.prototype.isNDArrayDataInList = function (ndarray, ndarrayList) {
         for (var i = 0; i < ndarrayList.length; i++) {
-            if (ndarrayList[i].getData() === ndarray.getData()) {
+            if (ndarrayList && ndarrayList[i] && ndarrayList[i].getData && (ndarrayList[i].getData() === ndarray.getData())) {
                 return true;
             }
         }
@@ -4143,6 +5304,7 @@ var NDArrayMath = (function () {
         this.activeScope.push(result);
         return result;
     };
+    NDArrayMath.prototype.dispose = function () { };
     NDArrayMath.prototype.matMul = function (a, b, aOrientation, bOrientation) {
         var _this = this;
         if (aOrientation === void 0) { aOrientation = MatrixOrientation.REGULAR; }
@@ -4180,10 +5342,9 @@ var NDArrayMath = (function () {
             ("rank " + v.rank + "."));
         util.assert(matrix.rank === 2, "Error in vectorTimesMatrix: second input must be rank 2, but got " +
             ("rank " + matrix.rank + "."));
-        util.assert(v.size === matrix.shape[0], "Error in vectorTimesMatrix: size of first rank 1 input (" + v.size + ") " +
-            "must match inner dimension of second rank 2 input, but got " +
-            ("rank " + matrix.rank + "."));
-        return this.matMul(v.as2D(1, v.size), matrix).as1D();
+        util.assert(v.size === matrix.shape[0], "Error in vectorTimesMatrix: size of vector (" + v.size + ") " +
+            ("must match first dimension of matrix (" + matrix.shape[0] + ")"));
+        return this.matMul(v.as2D(1, -1), matrix).as1D();
     };
     NDArrayMath.prototype.matrixTimesVector = function (matrix, v) {
         util.assert(v.rank === 1, "Error in vectorTimesMatrix: second input must rank 1, but got " +
@@ -4193,19 +5354,19 @@ var NDArrayMath = (function () {
         util.assert(v.size === matrix.shape[1], "Error in vectorTimesMatrix: size of first rank 1 input " + v.size + " " +
             "must match inner dimension of second rank 2 input, but got " +
             ("shape " + matrix.shape + "."));
-        return this.matMul(matrix, v.as2D(v.size, 1)).as1D();
+        return this.matMul(matrix, v.as2D(-1, 1)).as1D();
     };
     NDArrayMath.prototype.dotProduct = function (v1, v2) {
         util.assert(v1.rank === 1 && v2.rank === 1, "Error in dotProduct: inputs must be rank 1, but got ranks " +
             (v1.rank + " and " + v2.rank + "."));
         util.assert(v1.size === v2.size, "Error in dotProduct: size of inputs (" + v1.size + ") and (" +
             (v2.size + ") must match."));
-        return this.matMul(v1.as2D(1, v1.size), v2.as2D(v2.size, 1)).asScalar();
+        return this.matMul(v1.as2D(1, -1), v2.as2D(-1, 1)).asScalar();
     };
     NDArrayMath.prototype.outerProduct = function (v1, v2) {
         util.assert(v1.rank === 1 && v2.rank === 1, "Error in outerProduct: inputs must be rank 1, but got ranks " +
             (v1.rank + " and " + v2.rank + "."));
-        return this.matMul(v1.as2D(v1.size, 1), v2.as2D(1, v2.size));
+        return this.matMul(v1.as2D(-1, 1), v2.as2D(1, -1));
     };
     NDArrayMath.prototype.clone = function (ndarray) {
         var _this = this;
@@ -4216,12 +5377,25 @@ var NDArrayMath = (function () {
             'directly on the ndarray object');
         return ndarray.reshape(newShape);
     };
+    NDArrayMath.prototype.slice1D = function (input, begin, size) {
+        var _this = this;
+        slice_util.assertParamsValid(input, [begin], [size]);
+        return this.executeOp('slice1D', function () { return _this.slice1DInternal(input, begin, size); });
+    };
     NDArrayMath.prototype.slice2D = function (input, begin, size) {
         var _this = this;
-        util.assert(begin[0] + size[0] <= input.shape[0] &&
-            begin[1] + size[1] <= input.shape[1], "Error in slice2D: requested start position " + begin + " and size " +
-            (size + " would overflow input of shape " + input.shape + "."));
+        slice_util.assertParamsValid(input, begin, size);
         return this.executeOp('slice2D', function () { return _this.slice2DInternal(input, begin, size); });
+    };
+    NDArrayMath.prototype.slice3D = function (input, begin, size) {
+        var _this = this;
+        slice_util.assertParamsValid(input, begin, size);
+        return this.executeOp('slice3D', function () { return _this.slice3DInternal(input, begin, size); });
+    };
+    NDArrayMath.prototype.slice4D = function (input, begin, size) {
+        var _this = this;
+        slice_util.assertParamsValid(input, begin, size);
+        return this.executeOp('slice4D', function () { return _this.slice4DInternal(input, begin, size); });
     };
     NDArrayMath.prototype.copy2D = function (source, sourceBegin, sourceSize, dest, destBegin, destSize) {
         var _this = this;
@@ -4239,10 +5413,25 @@ var NDArrayMath = (function () {
             return dest;
         });
     };
+    NDArrayMath.prototype.concat1D = function (a, b) {
+        var _this = this;
+        concat_util.assertParams(a.shape, b.shape, 0);
+        return this.executeOp('concat1D', function () { return _this.concat1DInternal(a, b); });
+    };
+    NDArrayMath.prototype.concat2D = function (a, b, axis) {
+        var _this = this;
+        concat_util.assertParams(a.shape, b.shape, axis);
+        return this.executeOp('concat2D', function () { return _this.concat2DInternal(a, b, axis); });
+    };
     NDArrayMath.prototype.concat3D = function (ndarray1, ndarray2, axis) {
         var _this = this;
-        concat3d_util.assertConcat3DShapesMatch(ndarray1.shape, ndarray2.shape, axis, 'Error in concat3d: ');
+        concat_util.assertParams(ndarray1.shape, ndarray2.shape, axis);
         return this.executeOp('concat3D', function () { return _this.concat3DInternal(ndarray1, ndarray2, axis); });
+    };
+    NDArrayMath.prototype.concat4D = function (ndarray1, ndarray2, axis) {
+        var _this = this;
+        concat_util.assertParams(ndarray1.shape, ndarray2.shape, axis);
+        return this.executeOp('concat4D', function () { return _this.concat4DInternal(ndarray1, ndarray2, axis); });
     };
     NDArrayMath.prototype.logSumExp = function (ndarray) {
         var _this = this;
@@ -4615,21 +5804,38 @@ var NDArrayMath = (function () {
         var res = this.scope(function () {
             util.assert(data.shape[0] === 1, "Error in multiRNNCell: first dimension of data is " +
                 (data.shape[0] + ", but batch sizes > 1 are not yet supported."));
-            var data3D = data.as3D(1, 1, data.shape[1]);
-            var h3D = h.as3D(1, 1, h.shape[1]);
-            var combined3D = _this.concat3D(data3D, h3D, 2);
-            var combined2D = combined3D.as2D(1, data.shape[1] + h.shape[1]);
-            var weighted = _this.matMul(combined2D, lstmKernel);
-            var res = _this.add(weighted, lstmBias);
-            var i = _this.slice2D(res, [0, 0], [res.shape[0], res.shape[1] / 4]);
-            var j = _this.slice2D(res, [0, res.shape[1] / 4 * 1], [res.shape[0], res.shape[1] / 4]);
-            var f = _this.slice2D(res, [0, res.shape[1] / 4 * 2], [res.shape[0], res.shape[1] / 4]);
-            var o = _this.slice2D(res, [0, res.shape[1] / 4 * 3], [res.shape[0], res.shape[1] / 4]);
-            var newC = _this.add(_this.multiplyStrict(c, _this.sigmoid(_this.scalarPlusArray(forgetBias, f))), _this.multiplyStrict(_this.sigmoid(i), _this.tanh(j)));
+            var combined = _this.concat1D(data.as1D(), h.as1D());
+            var weighted = _this.vectorTimesMatrix(combined, lstmKernel);
+            var res = _this.addStrict(weighted, lstmBias);
+            var sliceSize = res.size / 4;
+            var i = _this.slice1D(res, 0, sliceSize);
+            var j = _this.slice1D(res, sliceSize, sliceSize);
+            var f = _this.slice1D(res, sliceSize * 2, sliceSize);
+            var o = _this.slice1D(res, sliceSize * 3, sliceSize);
+            var newC = _this.addStrict(_this.multiplyStrict(c.as1D(), _this.sigmoid(_this.scalarPlusArray(forgetBias, f))), _this.multiplyStrict(_this.sigmoid(i), _this.tanh(j)));
             var newH = _this.multiplyStrict(_this.tanh(newC), _this.sigmoid(o));
             return [newC, newH];
         });
-        return [res[0], res[1]];
+        return [res[0].as2D(1, -1), res[1].as2D(1, -1)];
+    };
+    NDArrayMath.prototype.multinomial = function (probabilities, numSamples, seed) {
+        var _this = this;
+        var numOutcomes = probabilities.size;
+        if (numOutcomes < 2) {
+            throw new Error("Error in multinomial: you need at least 2 outcomes, but got " +
+                (numOutcomes + "."));
+        }
+        seed = seed || Math.random();
+        return this.executeOp('multinomial', function () { return _this.multinomialInternal(probabilities, numSamples, seed); });
+    };
+    NDArrayMath.prototype.oneHot = function (indices, depth, onValue, offValue) {
+        var _this = this;
+        if (onValue === void 0) { onValue = 1; }
+        if (offValue === void 0) { offValue = 0; }
+        if (depth < 2) {
+            throw new Error("Error in oneHot: depth must be >=2, but it is " + depth);
+        }
+        return this.executeOp('oneHot', function () { return _this.oneHotInternal(indices, depth, onValue, offValue); });
     };
     return NDArrayMath;
 }());
@@ -4643,7 +5849,7 @@ function parseTupleParam(param) {
     return typeof param === 'number' ? [param, param] : param;
 }
 
-},{"../util":75,"./concat3d_util":42,"./conv_util":43,"./copy2d_util":44,"./ndarray":49}],47:[function(require,module,exports){
+},{"../util":91,"./concat_util":53,"./conv_util":54,"./copy2d_util":55,"./ndarray":60,"./slice_util":61}],58:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -4656,8 +5862,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var seedrandom = require("seedrandom");
 var util = require("../util");
-var concat3d_util = require("./concat3d_util");
+var concat_util = require("./concat_util");
 var conv_util = require("./conv_util");
 var copy2D_util = require("./copy2d_util");
 var math_1 = require("./math");
@@ -4671,9 +5878,47 @@ var NDArrayMathCPU = (function (_super) {
     NDArrayMathCPU.prototype.cloneInternal = function (ndarray) {
         return ndarray_1.NDArray.make(ndarray.shape, { values: new Float32Array(ndarray.getValues()) });
     };
-    NDArrayMathCPU.prototype.slice2DInternal = function (input, beginRowCol, sizeRowCol) {
-        var result = ndarray_1.Array2D.zeros(sizeRowCol);
-        this.copy2DInternal(input, beginRowCol, sizeRowCol, result, [0, 0], sizeRowCol);
+    NDArrayMathCPU.prototype.slice1DInternal = function (input, begin, size) {
+        var newVals = input.getValues().slice(begin, begin + size);
+        return ndarray_1.Array1D.new(newVals);
+    };
+    NDArrayMathCPU.prototype.slice2DInternal = function (input, begin, size) {
+        var result = ndarray_1.Array2D.zeros(size);
+        var startI = begin[0], startJ = begin[1];
+        for (var i = 0; i < size[0]; ++i) {
+            for (var j = 0; j < size[1]; ++j) {
+                var val = input.get(i + startI, j + startJ);
+                result.set(val, i, j);
+            }
+        }
+        return result;
+    };
+    NDArrayMathCPU.prototype.slice3DInternal = function (input, begin, size) {
+        var result = ndarray_1.Array3D.zeros(size);
+        var startI = begin[0], startJ = begin[1], startK = begin[2];
+        for (var i = 0; i < size[0]; ++i) {
+            for (var j = 0; j < size[1]; ++j) {
+                for (var k = 0; k < size[2]; ++k) {
+                    var val = input.get(i + startI, j + startJ, k + startK);
+                    result.set(val, i, j, k);
+                }
+            }
+        }
+        return result;
+    };
+    NDArrayMathCPU.prototype.slice4DInternal = function (input, begin, size) {
+        var result = ndarray_1.Array4D.zeros(size);
+        var startI = begin[0], startJ = begin[1], startK = begin[2], startL = begin[3];
+        for (var i = 0; i < size[0]; ++i) {
+            for (var j = 0; j < size[1]; ++j) {
+                for (var k = 0; k < size[2]; ++k) {
+                    for (var l = 0; l < size[3]; ++l) {
+                        var val = input.get(i + startI, j + startJ, k + startK, l + startL);
+                        result.set(val, i, j, k, l);
+                    }
+                }
+            }
+        }
         return result;
     };
     NDArrayMathCPU.prototype.copy2DInternal = function (source, sourceBeginRowCol, sourceSizeRowCol, dest, destBeginRowCol, destSizeRowCol) {
@@ -4691,27 +5936,105 @@ var NDArrayMathCPU = (function (_super) {
             dstValues[dstOff] = srcValues[srcOff];
         }
     };
-    NDArrayMathCPU.prototype.concat3DInternal = function (x1, x2, axis) {
-        var outputShape = concat3d_util.computeConcat3DOutputShape(x1.shape, x2.shape, axis);
-        var values = ndarray_1.Array3D.zeros(outputShape);
-        for (var i = 0; i < outputShape[0]; i++) {
-            for (var j = 0; j < outputShape[1]; j++) {
-                for (var k = 0; k < outputShape[2]; k++) {
+    NDArrayMathCPU.prototype.concat1DInternal = function (a, b) {
+        var outShape = concat_util.computeOutShape(a.shape, b.shape, 0);
+        var result = ndarray_1.Array1D.zeros(outShape);
+        var aVals = a.getValues();
+        var bVals = b.getValues();
+        var vals = result.getValues();
+        vals.set(aVals, 0);
+        vals.set(bVals, a.size);
+        return result;
+    };
+    NDArrayMathCPU.prototype.concat2DInternal = function (a, b, axis) {
+        var outShape = concat_util.computeOutShape(a.shape, b.shape, axis);
+        var result = ndarray_1.Array2D.zeros(outShape);
+        if (axis === 0) {
+            var aVals = a.getValues();
+            var bVals = b.getValues();
+            var vals = result.getValues();
+            vals.set(aVals, 0);
+            vals.set(bVals, a.size);
+            return result;
+        }
+        for (var i = 0; i < outShape[0]; ++i) {
+            for (var j = 0; j < outShape[1]; ++j) {
+                var index = [i, j];
+                var value = void 0;
+                if (index[axis] < a.shape[axis]) {
+                    value = a.get(i, j);
+                }
+                else {
+                    index[axis] -= a.shape[axis];
+                    var i2 = index[0], j2 = index[1];
+                    value = b.get(i2, j2);
+                }
+                result.set(value, i, j);
+            }
+        }
+        return result;
+    };
+    NDArrayMathCPU.prototype.concat3DInternal = function (a, b, axis) {
+        var outShape = concat_util.computeOutShape(a.shape, b.shape, axis);
+        var result = ndarray_1.Array3D.zeros(outShape);
+        if (axis === 0) {
+            var aVals = a.getValues();
+            var bVals = b.getValues();
+            var vals = result.getValues();
+            vals.set(aVals, 0);
+            vals.set(bVals, a.size);
+            return result;
+        }
+        for (var i = 0; i < outShape[0]; ++i) {
+            for (var j = 0; j < outShape[1]; ++j) {
+                for (var k = 0; k < outShape[2]; ++k) {
                     var index = [i, j, k];
                     var value = void 0;
-                    if (index[axis] < x1.shape[axis]) {
-                        value = x1.get(i, j, k);
+                    if (index[axis] < a.shape[axis]) {
+                        value = a.get(i, j, k);
                     }
                     else {
-                        index[axis] -= x1.shape[axis];
+                        index[axis] -= a.shape[axis];
                         var i2 = index[0], j2 = index[1], k2 = index[2];
-                        value = x2.get(i2, j2, k2);
+                        value = b.get(i2, j2, k2);
                     }
-                    values.set(value, i, j, k);
+                    result.set(value, i, j, k);
                 }
             }
         }
-        return values;
+        return result;
+    };
+    NDArrayMathCPU.prototype.concat4DInternal = function (a, b, axis) {
+        var outShape = concat_util.computeOutShape(a.shape, b.shape, axis);
+        var result = ndarray_1.Array4D.zeros(outShape);
+        if (axis === 0) {
+            var aVals = a.getValues();
+            var bVals = b.getValues();
+            var vals = result.getValues();
+            vals.set(aVals, 0);
+            vals.set(bVals, a.size);
+            return result;
+        }
+        for (var i = 0; i < outShape[0]; ++i) {
+            for (var j = 0; j < outShape[1]; ++j) {
+                for (var k = 0; k < outShape[2]; ++k) {
+                    for (var l = 0; l < outShape[3]; ++l) {
+                        var index = [i, j, k, l];
+                        var value = void 0;
+                        if (index[axis] < a.shape[axis]) {
+                            value = a.get(i, j, k, l);
+                        }
+                        else {
+                            index[axis] -= a.shape[axis];
+                            var i2 = index[0], j2 = index[1], k2 = index[2], l2 = index[3];
+                            value = b.get(i2, j2, k2, l2);
+                        }
+                        result.set(value, i, j, k, l);
+                    }
+                }
+            }
+        }
+        return result;
     };
     NDArrayMathCPU.prototype.scaledArrayAddInternal = function (c1, a, c2, b) {
         var newShape = util.assertAndGetBroadcastedShape(a.shape, b.shape);
@@ -5352,13 +6675,42 @@ var NDArrayMathCPU = (function (_super) {
                     scaleValues[i % scaleValues.length] /
                     Math.sqrt(varianceValues[i % varianceValues.length] + varianceEpsilon);
         }
-        return ndarray_1.NDArray.make(x.shape, { values: outValues });
+        return ndarray_1.Array3D.make(x.shape, { values: outValues });
+    };
+    NDArrayMathCPU.prototype.multinomialInternal = function (probabilities, numSamples, seed) {
+        var probVals = probabilities.getValues();
+        var cdf = new Float32Array(probabilities.size - 1);
+        cdf[0] = probVals[0];
+        for (var event_1 = 1; event_1 < cdf.length; ++event_1) {
+            cdf[event_1] = cdf[event_1 - 1] + probVals[event_1];
+        }
+        var random = seedrandom.alea(seed.toString());
+        var res = new Float32Array(numSamples);
+        for (var i = 0; i < numSamples; ++i) {
+            var r = random();
+            res[i] = cdf.length;
+            for (var event_2 = 0; event_2 < cdf.length; event_2++) {
+                if (r < cdf[event_2]) {
+                    res[i] = event_2;
+                    break;
+                }
+            }
+        }
+        return ndarray_1.Array1D.new(res);
+    };
+    NDArrayMathCPU.prototype.oneHotInternal = function (indices, depth, onValue, offValue) {
+        var res = new Float32Array(indices.size * depth);
+        res.fill(offValue);
+        for (var event_3 = 0; event_3 < indices.size; ++event_3) {
+            res[event_3 * depth + indices.get(event_3)] = onValue;
+        }
+        return ndarray_1.Array2D.new([indices.size, depth], res);
     };
     return NDArrayMathCPU;
 }(math_1.NDArrayMath));
 exports.NDArrayMathCPU = NDArrayMathCPU;
 
-},{"../util":75,"./concat3d_util":42,"./conv_util":43,"./copy2d_util":44,"./math":46,"./ndarray":49}],48:[function(require,module,exports){
+},{"../util":91,"./concat_util":53,"./conv_util":54,"./copy2d_util":55,"./math":57,"./ndarray":60,"seedrandom":2}],59:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -5380,7 +6732,7 @@ var argminmax_gpu_1 = require("./webgl/argminmax_gpu");
 var batchnorm_gpu_1 = require("./webgl/batchnorm_gpu");
 var binaryop_gpu = require("./webgl/binaryop_gpu");
 var binaryop_gpu_1 = require("./webgl/binaryop_gpu");
-var concat3d_gpu_1 = require("./webgl/concat3d_gpu");
+var concat_gpu_1 = require("./webgl/concat_gpu");
 var conv_backprop_gpu_1 = require("./webgl/conv_backprop_gpu");
 var conv_gpu_1 = require("./webgl/conv_gpu");
 var copy_gpu_1 = require("./webgl/copy_gpu");
@@ -5391,9 +6743,12 @@ var logsumexp_gpu_1 = require("./webgl/logsumexp_gpu");
 var max_pool_backprop_gpu_1 = require("./webgl/max_pool_backprop_gpu");
 var minmax_gpu_1 = require("./webgl/minmax_gpu");
 var mulmat_gpu_1 = require("./webgl/mulmat_gpu");
+var multinomial_gpu_1 = require("./webgl/multinomial_gpu");
+var onehot_gpu_1 = require("./webgl/onehot_gpu");
 var pool_gpu_1 = require("./webgl/pool_gpu");
 var reducesum_gpu_1 = require("./webgl/reducesum_gpu");
 var resize_bilinear_gpu_1 = require("./webgl/resize_bilinear_gpu");
+var slice_gpu_1 = require("./webgl/slice_gpu");
 var texture_manager_1 = require("./webgl/texture_manager");
 var unary_op = require("./webgl/unaryop_gpu");
 var unaryop_gpu_1 = require("./webgl/unaryop_gpu");
@@ -5420,25 +6775,52 @@ var NDArrayMathGPU = (function (_super) {
     NDArrayMathGPU.prototype.getGPGPUContext = function () {
         return this.gpgpu;
     };
-    NDArrayMathGPU.prototype.cloneInternal = function (ndarray) {
-        var texShape = ndarray.getTextureShapeRC();
-        var source = ndarray.as2D(texShape[0], texShape[1]);
+    NDArrayMathGPU.prototype.cloneInternal = function (a) {
+        var texShape = a.getTextureShapeRC();
+        var source = a.as2D(texShape[0], texShape[1]);
         var output = this.makeOutputArray(texShape);
         this.copy2D(source, [0, 0], texShape, output, [0, 0], texShape);
-        return output.reshape(ndarray.shape);
+        return output.reshape(a.shape);
     };
-    NDArrayMathGPU.prototype.slice2DInternal = function (input, beginRowCol, sizeRowCol) {
-        var result = this.makeOutputArray(sizeRowCol);
-        this.copy2DInternal(input, beginRowCol, sizeRowCol, result, [0, 0], sizeRowCol);
-        return result;
+    NDArrayMathGPU.prototype.slice1DInternal = function (input, begin, size) {
+        var program = new slice_gpu_1.SliceProgram([size]);
+        var customSetup = program.getCustomSetupFunc([begin]);
+        return this.compileAndRun(program, [input], null, customSetup);
+    };
+    NDArrayMathGPU.prototype.slice2DInternal = function (input, begin, size) {
+        var program = new slice_gpu_1.SliceProgram(size);
+        var customSetup = program.getCustomSetupFunc(begin);
+        return this.compileAndRun(program, [input], null, customSetup);
+    };
+    NDArrayMathGPU.prototype.slice3DInternal = function (input, begin, size) {
+        var program = new slice_gpu_1.SliceProgram(size);
+        var customSetup = program.getCustomSetupFunc(begin);
+        return this.compileAndRun(program, [input], null, customSetup);
+    };
+    NDArrayMathGPU.prototype.slice4DInternal = function (input, begin, size) {
+        var program = new slice_gpu_1.SliceProgram(size);
+        var customSetup = program.getCustomSetupFunc(begin);
+        return this.compileAndRun(program, [input], null, customSetup);
     };
     NDArrayMathGPU.prototype.copy2DInternal = function (source, sourceBeginRowCol, sourceSizeRowCol, dest, destBeginRowCol, destSizeRowCol) {
         var program = new copy_gpu_1.Copy2DProgram(sourceSizeRowCol[1], destSizeRowCol[1]);
         var customSetup = program.getCustomSetupFunc(sourceBeginRowCol, destBeginRowCol, destSizeRowCol);
         this.compileAndRun(program, [source], dest, customSetup);
     };
+    NDArrayMathGPU.prototype.concat1DInternal = function (a, b) {
+        var program = new concat_gpu_1.ConcatProgram(a.shape, b.shape, 0);
+        return this.compileAndRun(program, [a, b]);
+    };
+    NDArrayMathGPU.prototype.concat2DInternal = function (a, b, axis) {
+        var program = new concat_gpu_1.ConcatProgram(a.shape, b.shape, axis);
+        return this.compileAndRun(program, [a, b]);
+    };
     NDArrayMathGPU.prototype.concat3DInternal = function (x1, x2, axis) {
-        var program = new concat3d_gpu_1.Concat3DProgram(x1.shape, x2.shape, axis);
+        var program = new concat_gpu_1.ConcatProgram(x1.shape, x2.shape, axis);
+        return this.compileAndRun(program, [x1, x2]);
+    };
+    NDArrayMathGPU.prototype.concat4DInternal = function (x1, x2, axis) {
+        var program = new concat_gpu_1.ConcatProgram(x1.shape, x2.shape, axis);
         return this.compileAndRun(program, [x1, x2]);
     };
     NDArrayMathGPU.prototype.scaledArrayAddInternal = function (c1, a, c2, b) {
@@ -5644,6 +7026,15 @@ var NDArrayMathGPU = (function (_super) {
         var program = new resize_bilinear_gpu_1.ResizeBilinear3DProgram(x.shape, newShape2D, alignCorners);
         return this.compileAndRun(program, [x]);
     };
+    NDArrayMathGPU.prototype.multinomialInternal = function (probs, numSamples, seed) {
+        var program = new multinomial_gpu_1.MultinomialProgram(probs.size, numSamples);
+        var customSetup = program.getCustomSetupFunc(seed);
+        return this.compileAndRun(program, [probs], null, customSetup);
+    };
+    NDArrayMathGPU.prototype.oneHotInternal = function (indices, depth, onValue, offValue) {
+        var program = new onehot_gpu_1.OneHotProgram(indices.size, depth, onValue, offValue);
+        return this.compileAndRun(program, [indices]);
+    };
     NDArrayMathGPU.prototype.getAndSaveBinary = function (key, getBinary) {
         if (!(key in this.binaryCache)) {
             this.binaryCache[key] = getBinary();
@@ -5666,7 +7057,7 @@ var NDArrayMathGPU = (function (_super) {
 }(math_1.NDArrayMath));
 exports.NDArrayMathGPU = NDArrayMathGPU;
 
-},{"./math":46,"./ndarray":49,"./webgl/addscaledmat_gpu":50,"./webgl/argmaxequals_gpu":51,"./webgl/argminmax_gpu":52,"./webgl/batchnorm_gpu":53,"./webgl/binaryop_gpu":54,"./webgl/concat3d_gpu":55,"./webgl/conv_backprop_gpu":56,"./webgl/conv_gpu":57,"./webgl/copy_gpu":58,"./webgl/gpgpu_context":59,"./webgl/gpgpu_math":60,"./webgl/gpgpu_util":61,"./webgl/logsumexp_gpu":62,"./webgl/max_pool_backprop_gpu":63,"./webgl/minmax_gpu":64,"./webgl/mulmat_gpu":65,"./webgl/pool_gpu":66,"./webgl/reducesum_gpu":67,"./webgl/resize_bilinear_gpu":69,"./webgl/texture_manager":72,"./webgl/unaryop_gpu":73,"./webgl/webgl_util":74}],49:[function(require,module,exports){
+},{"./math":57,"./ndarray":60,"./webgl/addscaledmat_gpu":62,"./webgl/argmaxequals_gpu":63,"./webgl/argminmax_gpu":64,"./webgl/batchnorm_gpu":65,"./webgl/binaryop_gpu":66,"./webgl/concat_gpu":67,"./webgl/conv_backprop_gpu":68,"./webgl/conv_gpu":69,"./webgl/copy_gpu":70,"./webgl/gpgpu_context":71,"./webgl/gpgpu_math":72,"./webgl/gpgpu_util":73,"./webgl/logsumexp_gpu":74,"./webgl/max_pool_backprop_gpu":75,"./webgl/minmax_gpu":76,"./webgl/mulmat_gpu":77,"./webgl/multinomial_gpu":78,"./webgl/onehot_gpu":79,"./webgl/pool_gpu":80,"./webgl/reducesum_gpu":81,"./webgl/resize_bilinear_gpu":83,"./webgl/slice_gpu":85,"./webgl/texture_manager":87,"./webgl/unaryop_gpu":88,"./webgl/webgl_util":89}],60:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -5745,6 +7136,7 @@ var NDArray = (function () {
         }
     };
     NDArray.prototype.reshape = function (newShape) {
+        newShape = util.inferFromImplicitShape(newShape, this.size);
         if (util.arraysEqual(this.shape, newShape)) {
             return this;
         }
@@ -5979,6 +7371,22 @@ var Array1D = (function (_super) {
     Array1D.zeros = function (shape) {
         return NDArray.zeros(shape);
     };
+    Array1D.randNormal = function (shape, mean, stdDev) {
+        if (mean === void 0) { mean = 0; }
+        if (stdDev === void 0) { stdDev = 1; }
+        return NDArray.rand(shape, function () { return util.randGauss(mean, stdDev); });
+    };
+    Array1D.randTruncatedNormal = function (shape, mean, stdDev) {
+        if (mean === void 0) { mean = 0; }
+        if (stdDev === void 0) { stdDev = 1; }
+        return NDArray.rand(shape, function () { return util.randGauss(mean, stdDev, true); });
+    };
+    Array1D.randUniform = function (shape, a, b) {
+        return NDArray.rand(shape, function () { return util.randUniform(a, b); });
+    };
+    Array1D.make = function (shape, data) {
+        return new Array1D(data);
+    };
     return Array1D;
 }(NDArray));
 exports.Array1D = Array1D;
@@ -6019,6 +7427,22 @@ var Array2D = (function (_super) {
     };
     Array2D.zeros = function (shape) {
         return NDArray.zeros(shape);
+    };
+    Array2D.randNormal = function (shape, mean, stdDev) {
+        if (mean === void 0) { mean = 0; }
+        if (stdDev === void 0) { stdDev = 1; }
+        return NDArray.rand(shape, function () { return util.randGauss(mean, stdDev); });
+    };
+    Array2D.randTruncatedNormal = function (shape, mean, stdDev) {
+        if (mean === void 0) { mean = 0; }
+        if (stdDev === void 0) { stdDev = 1; }
+        return NDArray.rand(shape, function () { return util.randGauss(mean, stdDev, true); });
+    };
+    Array2D.randUniform = function (shape, a, b) {
+        return NDArray.rand(shape, function () { return util.randUniform(a, b); });
+    };
+    Array2D.make = function (shape, data) {
+        return new Array2D(shape, data);
     };
     return Array2D;
 }(NDArray));
@@ -6063,6 +7487,22 @@ var Array3D = (function (_super) {
     };
     Array3D.zeros = function (shape) {
         return NDArray.zeros(shape);
+    };
+    Array3D.randNormal = function (shape, mean, stdDev) {
+        if (mean === void 0) { mean = 0; }
+        if (stdDev === void 0) { stdDev = 1; }
+        return NDArray.rand(shape, function () { return util.randGauss(mean, stdDev); });
+    };
+    Array3D.randTruncatedNormal = function (shape, mean, stdDev) {
+        if (mean === void 0) { mean = 0; }
+        if (stdDev === void 0) { stdDev = 1; }
+        return NDArray.rand(shape, function () { return util.randGauss(mean, stdDev, true); });
+    };
+    Array3D.randUniform = function (shape, a, b) {
+        return NDArray.rand(shape, function () { return util.randUniform(a, b); });
+    };
+    Array3D.make = function (shape, data) {
+        return new Array3D(shape, data);
     };
     return Array3D;
 }(NDArray));
@@ -6112,14 +7552,47 @@ var Array4D = (function (_super) {
     Array4D.zeros = function (shape) {
         return NDArray.zeros(shape);
     };
+    Array4D.randNormal = function (shape, mean, stdDev) {
+        if (mean === void 0) { mean = 0; }
+        if (stdDev === void 0) { stdDev = 1; }
+        return NDArray.rand(shape, function () { return util.randGauss(mean, stdDev); });
+    };
+    Array4D.randTruncatedNormal = function (shape, mean, stdDev) {
+        if (mean === void 0) { mean = 0; }
+        if (stdDev === void 0) { stdDev = 1; }
+        return NDArray.rand(shape, function () { return util.randGauss(mean, stdDev, true); });
+    };
+    Array4D.randUniform = function (shape, a, b) {
+        return NDArray.rand(shape, function () { return util.randUniform(a, b); });
+    };
+    Array4D.make = function (shape, data) {
+        return new Array4D(shape, data);
+    };
     return Array4D;
 }(NDArray));
 exports.Array4D = Array4D;
 function toTypedArray(a) {
-    return (a instanceof Float32Array) ? a : new Float32Array(util.flatten(a));
+    return (a instanceof Float32Array) ?
+        a : new Float32Array(util.flatten(a));
 }
 
-},{"../environment":6,"../util":75,"./webgl/webgl_util":74}],50:[function(require,module,exports){
+},{"../environment":15,"../util":91,"./webgl/webgl_util":89}],61:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var util = require("../util");
+function assertParamsValid(input, begin, size) {
+    util.assert(input.rank === begin.length, "Error in slice" + input.rank + "D: Length of begin " + begin + " must " +
+        ("match the rank of the array (" + input.rank + ")."));
+    util.assert(input.rank === size.length, "Error in slice" + input.rank + "D: Length of size " + size + " must " +
+        ("match the rank of the array (" + input.rank + ")."));
+    for (var i = 0; i < input.rank; ++i) {
+        util.assert(begin[i] + size[i] <= input.shape[i], "Error in slice" + input.rank + "D: begin[" + i + "] + size[" + i + "] " +
+            ("(" + (begin[i] + size[i]) + ") would overflow input.shape[" + i + "] (" + input.shape[i] + ")"));
+    }
+}
+exports.assertParamsValid = assertParamsValid;
+
+},{"../util":91}],62:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../../util");
@@ -6135,7 +7608,7 @@ var AddScaledMatProgram = (function () {
 }());
 exports.AddScaledMatProgram = AddScaledMatProgram;
 
-},{"../../util":75}],51:[function(require,module,exports){
+},{"../../util":91}],63:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var argminmax_gpu = require("./argminmax_gpu");
@@ -6152,7 +7625,7 @@ var ArgMaxEqualsProgram = (function () {
 }());
 exports.ArgMaxEqualsProgram = ArgMaxEqualsProgram;
 
-},{"./argminmax_gpu":52}],52:[function(require,module,exports){
+},{"./argminmax_gpu":64}],64:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function getArgMinMaxSnippet(op, texName, size) {
@@ -6172,7 +7645,7 @@ var ArgMinMaxProgram = (function () {
 }());
 exports.ArgMinMaxProgram = ArgMinMaxProgram;
 
-},{}],53:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../../util");
@@ -6204,7 +7677,7 @@ var BatchNormProgram = (function () {
 }());
 exports.BatchNormProgram = BatchNormProgram;
 
-},{"../../util":75}],54:[function(require,module,exports){
+},{"../../util":91}],66:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../../util");
@@ -6224,27 +7697,79 @@ var BinaryOpProgram = (function () {
 }());
 exports.BinaryOpProgram = BinaryOpProgram;
 
-},{"../../util":75}],55:[function(require,module,exports){
+},{"../../util":91}],67:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var concat3d_util = require("../concat3d_util");
-var Concat3DProgram = (function () {
-    function Concat3DProgram(x1Shape, x2Shape, axis) {
+var concat_util = require("../concat_util");
+var ConcatProgram = (function () {
+    function ConcatProgram(aShape, bShape, axis) {
         this.variableNames = ['A', 'B'];
         this.params = [];
         this.outputShape = [];
-        var yAxes = ['yR', 'yC', 'yD'];
+        var yAxes = ['yR', 'yC', 'yD', 'yW'];
         var concatAxis = yAxes[axis];
         this.params = [axis];
-        this.outputShape =
-            concat3d_util.computeConcat3DOutputShape(x1Shape, x2Shape, axis);
-        this.userCode = "\n      void main() {\n        ivec3 coords = getOutputCoords();\n        int yR = coords.x;\n        int yC = coords.y;\n        int yD = coords.z;\n\n        float value = 0.0;\n        if (" + concatAxis + " < " + x1Shape[axis] + ") {\n          value = getA(yR, yC, yD);\n        } else {\n          " + concatAxis + " -= " + x1Shape[axis] + ";\n          value = getB(yR, yC, yD);\n        }\n\n        setOutput(value);\n      }\n    ";
+        this.outputShape = concat_util.computeOutShape(aShape, bShape, axis);
+        var dType = getDataType(aShape.length);
+        var unpackSnippet = getUnpack(aShape.length);
+        var sampleCoords = getSampleCoords(aShape.length);
+        this.userCode = "\n      void main() {\n        " + dType + " coords = getOutputCoords();\n        " + unpackSnippet + "\n\n        float value = 0.0;\n        if (" + concatAxis + " < " + aShape[axis] + ") {\n          value = getA(" + sampleCoords + ");\n        } else {\n          " + concatAxis + " -= " + aShape[axis] + ";\n          value = getB(" + sampleCoords + ");\n        }\n\n        setOutput(value);\n      }\n    ";
     }
-    return Concat3DProgram;
+    return ConcatProgram;
 }());
-exports.Concat3DProgram = Concat3DProgram;
+exports.ConcatProgram = ConcatProgram;
+function getSampleCoords(rank) {
+    if (rank === 1) {
+        return 'yR';
+    }
+    else if (rank === 2) {
+        return 'yR, yC';
+    }
+    else if (rank === 3) {
+        return 'yR, yC, yD';
+    }
+    else if (rank === 4) {
+        return 'yR, yC, yD, yW';
+    }
+    else {
+        throw Error("Concat for rank " + rank + " is not yet supported");
+    }
+}
+function getUnpack(rank) {
+    var res = rank === 1 ? 'int yR = coords;' : 'int yR = coords.x;';
+    if (rank > 1) {
+        res += '\nint yC = coords.y;';
+    }
+    if (rank > 2) {
+        res += '\nint yD = coords.z;';
+    }
+    if (rank > 3) {
+        res += '\nint yW = coords.w;';
+    }
+    if (rank > 4) {
+        throw Error("Concat for rank " + rank + " is not yet supported");
+    }
+    return res;
+}
+function getDataType(rank) {
+    if (rank === 1) {
+        return 'int';
+    }
+    else if (rank === 2) {
+        return 'ivec2';
+    }
+    else if (rank === 3) {
+        return 'ivec3';
+    }
+    else if (rank === 4) {
+        return 'ivec4';
+    }
+    else {
+        throw Error("Concat for rank " + rank + " is not yet supported");
+    }
+}
 
-},{"../concat3d_util":42}],56:[function(require,module,exports){
+},{"../concat_util":53}],68:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var conv_util = require("../conv_util");
@@ -6293,7 +7818,7 @@ var Conv2DDerBiasProgram = (function () {
 }());
 exports.Conv2DDerBiasProgram = Conv2DDerBiasProgram;
 
-},{"../conv_util":43}],57:[function(require,module,exports){
+},{"../conv_util":54}],69:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Conv2DProgram = (function () {
@@ -6320,7 +7845,7 @@ var Conv2DProgram = (function () {
 }());
 exports.Conv2DProgram = Conv2DProgram;
 
-},{}],58:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Copy2DProgram = (function () {
@@ -6343,7 +7868,7 @@ var Copy2DProgram = (function () {
 }());
 exports.Copy2DProgram = Copy2DProgram;
 
-},{}],59:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var environment_1 = require("../../environment");
@@ -6485,6 +8010,15 @@ var GPGPUContext = (function () {
         this.throwIfDisposed();
         return webgl_util.getProgramUniformLocationOrThrow(this.gl, program, uniformName);
     };
+    GPGPUContext.prototype.getAttributeLocation = function (program, attribute) {
+        var _this = this;
+        this.throwIfDisposed();
+        return webgl_util.callAndCheck(this.gl, function () { return _this.gl.getAttribLocation(program, attribute); });
+    };
+    GPGPUContext.prototype.getUniformLocationNoThrow = function (program, uniformName) {
+        this.throwIfDisposed();
+        return this.gl.getUniformLocation(program, uniformName);
+    };
     GPGPUContext.prototype.setInputMatrixTexture = function (inputMatrixTexture, uniformLocation, textureUnit) {
         this.throwIfDisposed();
         this.throwIfNoProgram();
@@ -6510,11 +8044,11 @@ var GPGPUContext = (function () {
         }
         webgl_util.validateFramebuffer(this.gl);
     };
-    GPGPUContext.prototype.executeProgram = function () {
+    GPGPUContext.prototype.executeProgram = function (attribLocations) {
         this.throwIfDisposed();
         this.throwIfNoProgram();
         var gl = this.gl;
-        gpgpu_util.bindVertexProgramAttributeStreams(gl, this.program, this.vertexBuffer);
+        gpgpu_util.bindVertexProgramAttributeStreams(gl, this.program, this.vertexBuffer, attribLocations);
         if (this.autoDebugValidate) {
             this.debugValidate();
         }
@@ -6629,11 +8163,17 @@ var GPGPUContext = (function () {
 }());
 exports.GPGPUContext = GPGPUContext;
 
-},{"../../environment":6,"../../util":75,"./gpgpu_util":61,"./tex_util":71,"./webgl_util":74}],60:[function(require,module,exports){
+},{"../../environment":15,"../../util":91,"./gpgpu_util":73,"./tex_util":86,"./webgl_util":89}],72:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var environment_1 = require("../../environment");
 var util = require("../../util");
 var shader_compiler = require("./shader_compiler");
+var ATTRIBUTE_NAMES = ['uv', 'clipSpacePos'];
+var NAN_UNIFORM_NAME = 'NaN';
+function shouldUploadNaNUniform() {
+    return !environment_1.ENV.get('WEBGL_FLOAT_TEXTURE_ENABLED');
+}
 function compileProgram(gpgpu, program, inputs, output) {
     var userCode = program.userCode;
     var inputInfos = inputs.map(function (input, i) {
@@ -6656,11 +8196,21 @@ function compileProgram(gpgpu, program, inputs, output) {
         uniformLocations[uniformName] =
             gpgpu.getUniformLocation(webGLProgram, uniformName);
     }
+    var attributeLocations = {};
+    ATTRIBUTE_NAMES.forEach(function (attribute) {
+        attributeLocations[attribute] =
+            gpgpu.getAttributeLocation(webGLProgram, attribute);
+    });
+    if (shouldUploadNaNUniform()) {
+        uniformLocations[NAN_UNIFORM_NAME] =
+            gpgpu.getUniformLocation(webGLProgram, NAN_UNIFORM_NAME);
+    }
     return {
         program: program,
         source: source,
         webGLProgram: webGLProgram,
         uniformLocations: uniformLocations,
+        attributeLocations: attributeLocations,
         gpgpu: gpgpu,
         inShapeInfos: inShapeInfos,
         outShapeInfo: outShapeInfo
@@ -6701,10 +8251,13 @@ function runProgram(binary, inputs, output, customSetup) {
         var variableUniformLocation = binary.uniformLocations[variableName];
         gpgpu.setInputMatrixTexture(tex, variableUniformLocation, i);
     });
+    if (shouldUploadNaNUniform()) {
+        gpgpu.gl.uniform1f(binary.uniformLocations[NAN_UNIFORM_NAME], NaN);
+    }
     if (customSetup != null) {
         customSetup(gpgpu, binary.webGLProgram);
     }
-    gpgpu.executeProgram();
+    gpgpu.executeProgram(binary.attributeLocations);
 }
 exports.runProgram = runProgram;
 function makeShaderKey(program, inputs, output) {
@@ -6718,7 +8271,7 @@ function makeShaderKey(program, inputs, output) {
 }
 exports.makeShaderKey = makeShaderKey;
 
-},{"../../util":75,"./shader_compiler":70}],61:[function(require,module,exports){
+},{"../../environment":15,"../../util":91,"./shader_compiler":84}],73:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var environment_1 = require("../../environment");
@@ -6773,6 +8326,9 @@ function createIndexBuffer(gl) {
 }
 exports.createIndexBuffer = createIndexBuffer;
 function getTextureInternalFormat(gl, numChannels) {
+    if (!environment_1.ENV.get('WEBGL_FLOAT_TEXTURE_ENABLED')) {
+        return gl.RGBA;
+    }
     if (environment_1.ENV.get('WEBGL_VERSION') === 2) {
         if (numChannels === 4) {
             return gl.RGBA32F;
@@ -6782,6 +8338,9 @@ function getTextureInternalFormat(gl, numChannels) {
     return gl.RGBA;
 }
 function getTextureFormat(gl, numChannels) {
+    if (!environment_1.ENV.get('WEBGL_FLOAT_TEXTURE_ENABLED')) {
+        return gl.RGBA;
+    }
     if (environment_1.ENV.get('WEBGL_VERSION') === 2) {
         if (numChannels === 4) {
             return gl.RGBA;
@@ -6789,6 +8348,12 @@ function getTextureFormat(gl, numChannels) {
         return gl.RED;
     }
     return gl.RGBA;
+}
+function getTextureType(gl) {
+    if (!environment_1.ENV.get('WEBGL_FLOAT_TEXTURE_ENABLED')) {
+        return gl.UNSIGNED_BYTE;
+    }
+    return gl.FLOAT;
 }
 function createAndConfigureTexture(gl, width, height, numChannels) {
     webgl_util.validateTextureSize(gl, width, height);
@@ -6801,7 +8366,7 @@ function createAndConfigureTexture(gl, width, height, numChannels) {
     webgl_util.callAndCheck(gl, function () { return gl.texParameteri(tex2d, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE); });
     webgl_util.callAndCheck(gl, function () { return gl.texParameteri(tex2d, gl.TEXTURE_MIN_FILTER, gl.NEAREST); });
     webgl_util.callAndCheck(gl, function () { return gl.texParameteri(tex2d, gl.TEXTURE_MAG_FILTER, gl.NEAREST); });
-    webgl_util.callAndCheck(gl, function () { return gl.texImage2D(tex2d, 0, internalFormat, width, height, 0, format, gl.FLOAT, null); });
+    webgl_util.callAndCheck(gl, function () { return gl.texImage2D(tex2d, 0, internalFormat, width, height, 0, format, getTextureType(gl), null); });
     webgl_util.callAndCheck(gl, function () { return gl.bindTexture(gl.TEXTURE_2D, null); });
     return texture;
 }
@@ -6823,27 +8388,20 @@ function createPackedMatrixTexture(gl, rows, columns) {
     return createAndConfigureTexture(gl, width, height, numChannels);
 }
 exports.createPackedMatrixTexture = createPackedMatrixTexture;
-function bindVertexProgramAttributeStreams(gl, program, vertexBuffer) {
+function bindVertexProgramAttributeStreams(gl, program, vertexBuffer, attribLocations) {
     var posOffset = 0;
     var uvOffset = 3 * 4;
     var stride = (3 * 4) + (2 * 4);
     webgl_util.callAndCheck(gl, function () { return gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer); });
-    webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'clipSpacePos', vertexBuffer, 3, stride, posOffset);
-    try {
-        webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'uv', vertexBuffer, 2, stride, uvOffset);
-    }
-    catch (e) {
-        if (!e.hasOwnProperty('namedVertexAttributeNotFound')) {
-            throw e;
-        }
-    }
+    webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'clipSpacePos', vertexBuffer, 3, stride, posOffset, attribLocations);
+    webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'uv', vertexBuffer, 2, stride, uvOffset, attribLocations);
 }
 exports.bindVertexProgramAttributeStreams = bindVertexProgramAttributeStreams;
 function uploadPixelDataToTexture(gl, texture, pixels) {
     var numChannels = 4;
     var internalFormat = getTextureInternalFormat(gl, numChannels);
     webgl_util.callAndCheck(gl, function () { return gl.bindTexture(gl.TEXTURE_2D, texture); });
-    webgl_util.callAndCheck(gl, function () { return gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, gl.RGBA, gl.FLOAT, pixels); });
+    webgl_util.callAndCheck(gl, function () { return gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, gl.RGBA, getTextureType(gl), pixels); });
     webgl_util.callAndCheck(gl, function () { return gl.bindTexture(gl.TEXTURE_2D, null); });
 }
 exports.uploadPixelDataToTexture = uploadPixelDataToTexture;
@@ -6851,20 +8409,25 @@ function uploadDataToTexture(gl, texture, width, height, data, numChannels) {
     var textureFormat = getTextureFormat(gl, numChannels);
     webgl_util.validateTextureSize(gl, width, height);
     webgl_util.callAndCheck(gl, function () { return gl.bindTexture(gl.TEXTURE_2D, texture); });
-    webgl_util.callAndCheck(gl, function () { return gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, width, height, textureFormat, gl.FLOAT, data); });
+    webgl_util.callAndCheck(gl, function () { return gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, width, height, textureFormat, getTextureType(gl), data); });
     webgl_util.callAndCheck(gl, function () { return gl.bindTexture(gl.TEXTURE_2D, null); });
 }
 function uploadMatrixToTexture(gl, texture, rows, columns, matrix, numChannels) {
     var _a = tex_util.getUnpackedMatrixTextureShapeWidthHeight(rows, columns), w = _a[0], h = _a[1];
-    var channelsPerTexture = numChannels === 1 ? webgl_util.getChannelsPerTexture() : numChannels;
     var unpackedArray;
-    if (channelsPerTexture === 1) {
-        unpackedArray = matrix;
+    if (environment_1.ENV.get('WEBGL_FLOAT_TEXTURE_ENABLED')) {
+        var channelsPerTexture = numChannels === 1 ? webgl_util.getChannelsPerTexture() : numChannels;
+        if (channelsPerTexture === 1) {
+            unpackedArray = matrix;
+        }
+        else {
+            unpackedArray =
+                new Float32Array(tex_util.getUnpackedArraySizeFromMatrixSize(matrix.length, channelsPerTexture));
+            tex_util.encodeMatrixToUnpackedArray(matrix, unpackedArray, channelsPerTexture);
+        }
     }
     else {
-        unpackedArray =
-            new Float32Array(tex_util.getUnpackedArraySizeFromMatrixSize(matrix.length, channelsPerTexture));
-        tex_util.encodeMatrixToUnpackedArray(matrix, unpackedArray, channelsPerTexture);
+        unpackedArray = tex_util.encodeFloatArray(matrix);
     }
     uploadDataToTexture(gl, texture, w, h, unpackedArray, numChannels);
 }
@@ -6880,23 +8443,36 @@ exports.uploadMatrixToPackedTexture = uploadMatrixToPackedTexture;
 function downloadMatrixFromOutputTexture(gl, rows, columns) {
     var _a = tex_util.getUnpackedMatrixTextureShapeWidthHeight(rows, columns), w = _a[0], h = _a[1];
     var channelsPerTexture = 4;
-    var unpackedArray = new Float32Array(tex_util.getUnpackedArraySizeFromMatrixSize(rows * columns, channelsPerTexture));
-    webgl_util.callAndCheck(gl, function () { return gl.readPixels(0, 0, w, h, gl.RGBA, gl.FLOAT, unpackedArray); });
-    var matrix = new Float32Array(rows * columns);
-    tex_util.decodeMatrixFromUnpackedArray(unpackedArray, matrix, channelsPerTexture);
-    return matrix;
+    var isFloatTexture = environment_1.ENV.get('WEBGL_FLOAT_TEXTURE_ENABLED');
+    var downloadTarget;
+    if (isFloatTexture) {
+        downloadTarget =
+            new Float32Array(tex_util.getUnpackedArraySizeFromMatrixSize(rows * columns, channelsPerTexture));
+    }
+    else {
+        downloadTarget = new Uint8Array(rows * columns * channelsPerTexture);
+    }
+    webgl_util.callAndCheck(gl, function () { return gl.readPixels(0, 0, w, h, gl.RGBA, getTextureType(gl), downloadTarget); });
+    if (isFloatTexture) {
+        var matrix = new Float32Array(rows * columns);
+        tex_util.decodeMatrixFromUnpackedArray(downloadTarget, matrix, channelsPerTexture);
+        return matrix;
+    }
+    else {
+        return tex_util.decodeToFloatArray(downloadTarget);
+    }
 }
 exports.downloadMatrixFromOutputTexture = downloadMatrixFromOutputTexture;
 function downloadMatrixFromPackedOutputTexture(gl, rows, columns) {
     var _a = tex_util.getPackedMatrixTextureShapeWidthHeight(rows, columns), w = _a[0], h = _a[1];
     var packedRGBA = new Float32Array(tex_util.getPackedRGBAArraySizeFromMatrixShape(rows, columns));
-    webgl_util.callAndCheck(gl, function () { return gl.readPixels(0, 0, w, h, gl.RGBA, gl.FLOAT, packedRGBA); });
+    webgl_util.callAndCheck(gl, function () { return gl.readPixels(0, 0, w, h, gl.RGBA, getTextureType(gl), packedRGBA); });
     var matrix = new Float32Array(rows * columns);
     return tex_util.decodeMatrixFromPackedRGBA(packedRGBA, rows, columns, matrix);
 }
 exports.downloadMatrixFromPackedOutputTexture = downloadMatrixFromPackedOutputTexture;
 
-},{"../../environment":6,"./tex_util":71,"./webgl_util":74}],62:[function(require,module,exports){
+},{"../../environment":15,"./tex_util":86,"./webgl_util":89}],74:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var LogSumExpProgram = (function () {
@@ -6915,7 +8491,7 @@ var LogSumExpProgram = (function () {
 }());
 exports.LogSumExpProgram = LogSumExpProgram;
 
-},{}],63:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var MaxPool2DBackpropProgram = (function () {
@@ -6939,7 +8515,7 @@ var MaxPool2DBackpropProgram = (function () {
 }());
 exports.MaxPool2DBackpropProgram = MaxPool2DBackpropProgram;
 
-},{}],64:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var MinMaxProgram = (function () {
@@ -6958,7 +8534,7 @@ var MinMaxProgram = (function () {
 }());
 exports.MinMaxProgram = MinMaxProgram;
 
-},{}],65:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var math_1 = require("../math");
@@ -6990,7 +8566,53 @@ var MatMulProgram = (function () {
 }());
 exports.MatMulProgram = MatMulProgram;
 
-},{"../math":46}],66:[function(require,module,exports){
+},{"../math":57}],78:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var MultinomialProgram = (function () {
+    function MultinomialProgram(numOutcomes, numSamples) {
+        this.variableNames = ['probs'];
+        this.outputShape = [numSamples];
+        this.params = [];
+        this.userCode = "\n      uniform float seed;\n\n      void main() {\n        float r = random(seed);\n        float cdf = 0.0;\n\n        for (int i = 0; i < " + (numOutcomes - 1) + "; i++) {\n          cdf += getProbs(i);\n\n          if (r < cdf) {\n            setOutput(float(i));\n            return;\n          }\n        }\n\n        // If no other event happened, last event happened.\n        setOutput(float(" + (numOutcomes - 1) + "));\n      }\n    ";
+    }
+    MultinomialProgram.prototype.getCustomSetupFunc = function (seed) {
+        var _this = this;
+        return function (gpgpu, webGLProgram) {
+            if (_this.seedLoc == null) {
+                _this.seedLoc = gpgpu.getUniformLocation(webGLProgram, 'seed');
+            }
+            gpgpu.gl.uniform1f(_this.seedLoc, seed);
+        };
+    };
+    return MultinomialProgram;
+}());
+exports.MultinomialProgram = MultinomialProgram;
+
+},{}],79:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var OneHotProgram = (function () {
+    function OneHotProgram(numIndices, depth, onValue, offValue) {
+        this.variableNames = ['indices'];
+        this.outputShape = [numIndices, depth];
+        this.params = [onValue, offValue];
+        this.userCode = "\n      void main() {\n        ivec2 coords = getOutputCoords();\n        int index = round(getIndices(coords.x));\n        setOutput(mix(float(" + offValue + "), float(" + onValue + "),\n                      float(index == coords.y)));\n      }\n    ";
+    }
+    OneHotProgram.prototype.getCustomSetupFunc = function (seed) {
+        var _this = this;
+        return function (gpgpu, webGLProgram) {
+            if (_this.seedLoc == null) {
+                _this.seedLoc = gpgpu.getUniformLocation(webGLProgram, 'seed');
+            }
+            gpgpu.gl.uniform1f(_this.seedLoc, seed);
+        };
+    };
+    return OneHotProgram;
+}());
+exports.OneHotProgram = OneHotProgram;
+
+},{}],80:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Pool2DProgram = (function () {
@@ -7041,7 +8663,7 @@ var Pool2DProgram = (function () {
 }());
 exports.Pool2DProgram = Pool2DProgram;
 
-},{}],67:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ReduceSumProgram = (function () {
@@ -7061,7 +8683,7 @@ var ReduceSumProgram = (function () {
 }());
 exports.ReduceSumProgram = ReduceSumProgram;
 
-},{}],68:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var webgl_util = require("./webgl_util");
@@ -7083,7 +8705,7 @@ function renderToFramebuffer(gpgpu, renderShader, sourceTex) {
 }
 exports.renderToFramebuffer = renderToFramebuffer;
 
-},{"./webgl_util":74}],69:[function(require,module,exports){
+},{"./webgl_util":89}],83:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ResizeBilinear3DProgram = (function () {
@@ -7109,23 +8731,37 @@ var ResizeBilinear3DProgram = (function () {
 }());
 exports.ResizeBilinear3DProgram = ResizeBilinear3DProgram;
 
-},{}],70:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var environment_1 = require("../../environment");
 var util = require("../../util");
+var tex_util = require("./tex_util");
 function makeShader(inputsInfo, outputShape, userCode, broadcast) {
+    var sampleSnippet = getSampleSnippet();
+    var setOutputSnippet = getSetOutputSnippet();
     var inputPrefixSnippet = inputsInfo.map(function (x) { return "uniform sampler2D " + x.name + ";"; }).join('\n');
     var inputSamplingSnippet = inputsInfo.map(function (x) { return getInputSamplingSnippet(x, outputShape, broadcast); })
         .join('\n');
     var outTexShape = outputShape.texShape;
     var outputSamplingSnippet = getOutputSamplingSnippet(outputShape.logicalShape, outTexShape);
     var source = [
-        SHADER_PREFIX, inputPrefixSnippet, inputSamplingSnippet,
-        outputSamplingSnippet, userCode
+        SHADER_PREFIX, sampleSnippet, setOutputSnippet, inputPrefixSnippet,
+        inputSamplingSnippet, outputSamplingSnippet, userCode
     ].join('\n');
     return source;
 }
 exports.makeShader = makeShader;
+function getSampleSnippet() {
+    return environment_1.ENV.get('WEBGL_FLOAT_TEXTURE_ENABLED') ?
+        FLOAT_TEXTURE_SAMPLE_SNIPPET :
+        UNSIGNED_BYTE_TEXTURE_SAMPLE_SNIPPET;
+}
+function getSetOutputSnippet() {
+    return environment_1.ENV.get('WEBGL_FLOAT_TEXTURE_ENABLED') ?
+        FLOAT_TEXTURE_SETOUTPUT_SNIPPET :
+        UNSIGNED_BYTE_TEXTURE_SETOUTPUT_SNIPPET;
+}
 function getInputSamplingSnippet(inInfo, outShapeInfo, broadcast) {
     var shape = inInfo.shapeInfo.logicalShape;
     var texShape = inInfo.shapeInfo.texShape;
@@ -7179,38 +8815,42 @@ var SAMPLE_1D_SNIPPET = "\nvec2 UVfrom1D(int texNumR, int texNumC, int index) {\
 var SAMPLE_2D_SNIPPET = "\nvec2 UVfrom2D(int texNumR, int texNumC, int numC, int row, int col) {\n  int index = row * numC + col;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n";
 var SAMPLE_3D_SNIPPET = "\nvec2 UVfrom3D(int texNumR, int texNumC, int stride0,\n    int stride1, int row, int col, int depth) {\n  int index = row * stride0 + col * stride1 + depth;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n";
 var SAMPLE_4D_SNIPPET = "\nvec2 UVfrom4D(int texNumR, int texNumC, int stride0,\n    int stride1, int stride2, int row, int col, int depth,\n    int depth2) {\n  int index = row * stride0 + col * stride1 + depth * stride2 + depth2;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n";
-var SHADER_PREFIX = "\n  precision highp float;\n  varying vec2 resultUV;\n  const vec2 halfCR = vec2(0.5, 0.5);\n\n  float sample(sampler2D texture, vec2 uv) {\n    return texture2D(texture, uv).r;\n  }\n\n  void setOutput(float val) {\n    gl_FragColor = vec4(val, 0, 0, 0);\n  }\n\n  bool isNaN(float val) {\n    return val == val ? false : true;\n  }\n\n  bool hasNaN(vec4 values) {\n    return any(notEqual(values, values));\n  }\n\n  float getNaN(vec4 values) {\n    return dot(vec4(1), values);\n  }\n\n  " + SAMPLE_1D_SNIPPET + "\n  " + SAMPLE_2D_SNIPPET + "\n  " + SAMPLE_3D_SNIPPET + "\n  " + SAMPLE_4D_SNIPPET + "\n";
+var UNSIGNED_BYTE_TEXTURE_SAMPLE_SNIPPET = "\n  uniform float NaN;\n\n  const vec4 floatDeltas = vec4(\n      1.0,\n      1.0 / 255.0,\n      1.0 / (255.0 * 255.0),\n      1.0 / (255.0 * 255.0 * 255.0)\n  );\n  const float minValue = " + tex_util.FLOAT_MIN + ".0;\n  const float maxValue = " + tex_util.FLOAT_MAX + ".0;\n  const float range = (maxValue - minValue) / 255.0;\n  const vec2 dotRange = vec2(1.0, range);\n\n  float sample(sampler2D texture, vec2 uv) {\n    vec4 sampleValue = texture2D(texture, uv);\n    if (all(equal(sampleValue, vec4(" + tex_util.BYTE_NAN_VALUE + ")))) {\n      return NaN;\n    }\n\n    vec4 encValue = floor(sampleValue * 255.0 + 0.5);\n    float decodedValue = dot(encValue, floatDeltas);\n    return dot(vec2(minValue, decodedValue), dotRange);\n  }\n";
+var UNSIGNED_BYTE_TEXTURE_SETOUTPUT_SNIPPET = "\n  const vec4 floatPowers = vec4(\n    1.0,\n    255.0,\n    255.0 * 255.0,\n    255.0 * 255.0 * 255.0\n  );\n  const vec2 recipRange = vec2(1.0/range);\n  const vec2 recipRange255 = vec2(1.0/(maxValue - minValue));\n\n  void setOutput(float decodedValue) {\n    if (isNaN(decodedValue)) {\n      gl_FragColor = vec4(" + tex_util.BYTE_NAN_VALUE + ");\n      return;\n    }\n\n    float a = dot(vec2(decodedValue, -minValue), recipRange);\n    float b = fract(a) * 255.0;\n    float c = fract(b) * 255.0;\n    float d = fract(c) * 255.0;\n    gl_FragColor = floor(vec4(a, b, c, d)) / 255.0;\n\n    // TODO(dsmilkov): Version above gets better accuracy but probably slower\n    // than the version below. Benchmark to determine if the accuracy is worth\n    // the cost.\n\n    // float normValue = dot(vec2(decodedValue, -minValue), recipRange255);\n    // vec4 f = normValue * floatPowers;\n    // gl_FragColor = floor(fract(f) * 255.0) / 255.0;\n  }\n";
+var FLOAT_TEXTURE_SAMPLE_SNIPPET = "\n  float sample(sampler2D texture, vec2 uv) {\n    return texture2D(texture, uv).r;\n  }\n";
+var FLOAT_TEXTURE_SETOUTPUT_SNIPPET = "\n  void setOutput(float val) {\n    gl_FragColor = vec4(val, 0, 0, 0);\n  }\n";
+var SHADER_PREFIX = "\n  precision highp float;\n  precision highp int;\n  varying vec2 resultUV;\n  const vec2 halfCR = vec2(0.5, 0.5);\n\n  bool isNaN(float val) {\n    return val == val ? false : true;\n  }\n\n  bool hasNaN(vec4 values) {\n    return any(notEqual(values, values));\n  }\n\n  float getNaN(vec4 values) {\n    return dot(vec4(1), values);\n  }\n\n  int round(float value) {\n    return int(floor(value + 0.5));\n  }\n\n  const vec2 randomConst = vec2(\n    23.14069263277926, // e^pi (Gelfond's constant)\n     2.665144142690225 // 2^sqrt(2) (Gelfond\u2013Schneider constant)\n  );\n\n  float random(float seed) {\n      return fract(cos(dot(resultUV * seed, randomConst)) * 12345.6789);\n  }\n\n  " + SAMPLE_1D_SNIPPET + "\n  " + SAMPLE_2D_SNIPPET + "\n  " + SAMPLE_3D_SNIPPET + "\n  " + SAMPLE_4D_SNIPPET + "\n";
 function getOutput1DCoords(shape, texShape) {
     if (texShape[0] === 1) {
-        return "\n      int getOutputCoords() {\n        return int(gl_FragCoord.x);\n      }\n    ";
+        return "\n      int getOutputCoords() {\n        return int(resultUV.x * " + texShape[1] + ".0);\n      }\n    ";
     }
     if (texShape[1] === 1) {
-        return "\n      int getOutputCoords() {\n        return int(gl_FragCoord.y);\n      }\n    ";
+        return "\n      int getOutputCoords() {\n        return int(resultUV.y * " + texShape[0] + ".0);\n      }\n    ";
     }
-    return "\n    int getOutputCoords() {\n      ivec2 resTexRC = ivec2(gl_FragCoord.yx);\n      return resTexRC.x * " + texShape[1] + " + resTexRC.y;\n    }\n  ";
+    return "\n    int getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + texShape[0] + ", " + texShape[1] + "));\n      return resTexRC.x * " + texShape[1] + " + resTexRC.y;\n    }\n  ";
 }
 function getOutput3DCoords(shape, texShape) {
     var stride0 = shape[1] * shape[2];
     var stride1 = shape[2];
-    return "\n    ivec3 getOutputCoords() {\n      ivec2 resTexRC = ivec2(gl_FragCoord.yx);\n      int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n      int r = index / " + stride0 + ";\n      index -= r * " + stride0 + ";\n      int c = index / " + stride1 + ";\n      int d = index - c * " + stride1 + ";\n      return ivec3(r, c, d);\n    }\n  ";
+    return "\n    ivec3 getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + texShape[0] + ", " + texShape[1] + "));\n      int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n      int r = index / " + stride0 + ";\n      index -= r * " + stride0 + ";\n      int c = index / " + stride1 + ";\n      int d = index - c * " + stride1 + ";\n      return ivec3(r, c, d);\n    }\n  ";
 }
 function getOutput4DCoords(shape, texShape) {
     var stride2 = shape[3];
     var stride1 = shape[2] * stride2;
     var stride0 = shape[1] * stride1;
-    return "\n    ivec4 getOutputCoords() {\n      ivec2 resTexRC = ivec2(gl_FragCoord.yx);\n      int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n\n      int r = index / " + stride0 + ";\n      index -= r * " + stride0 + ";\n\n      int c = index / " + stride1 + ";\n      index -= c * " + stride1 + ";\n\n      int d = index / " + stride2 + ";\n      int d2 = index - d * " + stride2 + ";\n\n      return ivec4(r, c, d, d2);\n    }\n  ";
+    return "\n    ivec4 getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n        vec2(" + texShape[0] + ", " + texShape[1] + "));\n      int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n\n      int r = index / " + stride0 + ";\n      index -= r * " + stride0 + ";\n\n      int c = index / " + stride1 + ";\n      index -= c * " + stride1 + ";\n\n      int d = index / " + stride2 + ";\n      int d2 = index - d * " + stride2 + ";\n\n      return ivec4(r, c, d, d2);\n    }\n  ";
 }
 function getOutput2DCoords(shape, texShape) {
     if (util.arraysEqual(shape, texShape)) {
-        return "\n      ivec2 getOutputCoords() {\n        return ivec2(gl_FragCoord.yx);\n      }\n    ";
+        return "\n      ivec2 getOutputCoords() {\n        return ivec2(resultUV.yx * vec2(" + texShape[0] + ", " + texShape[1] + "));\n      }\n    ";
     }
     if (shape[1] === 1) {
-        return "\n      ivec2 getOutputCoords() {\n        ivec2 resTexRC = ivec2(gl_FragCoord.yx);\n        int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n        return ivec2(index, 0);\n      }\n    ";
+        return "\n      ivec2 getOutputCoords() {\n        ivec2 resTexRC = ivec2(resultUV.yx *\n                               vec2(" + texShape[0] + ", " + texShape[1] + "));\n        int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n        return ivec2(index, 0);\n      }\n    ";
     }
     if (shape[0] === 1) {
-        return "\n      ivec2 getOutputCoords() {\n        ivec2 resTexRC = ivec2(gl_FragCoord.yx);\n        int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n        return ivec2(0, index);\n      }\n    ";
+        return "\n      ivec2 getOutputCoords() {\n        ivec2 resTexRC = ivec2(resultUV.yx *\n                               vec2(" + texShape[0] + ", " + texShape[1] + "));\n        int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n        return ivec2(0, index);\n      }\n    ";
     }
-    return "\n    ivec2 getOutputCoords() {\n      ivec2 resTexRC = ivec2(gl_FragCoord.yx);\n      int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n      int r = index / " + shape[1] + ";\n      int c = index - r * " + shape[1] + ";\n      return ivec2(r, c);\n    }\n  ";
+    return "\n    ivec2 getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + texShape[0] + ", " + texShape[1] + "));\n      int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n      int r = index / " + shape[1] + ";\n      int c = index - r * " + shape[1] + ";\n      return ivec2(r, c);\n    }\n  ";
 }
 function getSamplerScalar(texName) {
     var funcName = 'get' + texName.charAt(0).toUpperCase() + texName.slice(1);
@@ -7301,10 +8941,91 @@ function getSamplerAtOutputCoords(texName, inTexShape, outTexShape, broadcast) {
     if (broadcast) {
         broadcastSnippet = "\n      int mainPart = index / " + inSize + ";\n      index -= mainPart * " + inSize + ";\n    ";
     }
-    return "\n    float " + funcName + "() {\n      ivec2 resTexRC = ivec2(gl_FragCoord.yx);\n      int index = resTexRC.x * " + outTexShape[1] + " + resTexRC.y;\n      " + broadcastSnippet + "\n      int texR = index / " + inTexShape[1] + ";\n      int texC = index - texR * " + inTexShape[1] + ";\n      vec2 uv = (vec2(texC, texR) + halfCR) /\n                 vec2(" + inTexShape[1] + ".0, " + inTexShape[0] + ".0);\n      return sample(" + texName + ", uv);\n    }\n  ";
+    return "\n    float " + funcName + "() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + outTexShape[0] + ", " + outTexShape[1] + "));\n      int index = resTexRC.x * " + outTexShape[1] + " + resTexRC.y;\n      " + broadcastSnippet + "\n      int texR = index / " + inTexShape[1] + ";\n      int texC = index - texR * " + inTexShape[1] + ";\n      vec2 uv = (vec2(texC, texR) + halfCR) /\n                 vec2(" + inTexShape[1] + ".0, " + inTexShape[0] + ".0);\n      return sample(" + texName + ", uv);\n    }\n  ";
 }
 
-},{"../../util":75}],71:[function(require,module,exports){
+},{"../../environment":15,"../../util":91,"./tex_util":86}],85:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var SliceProgram = (function () {
+    function SliceProgram(destSize) {
+        this.variableNames = ['source'];
+        this.outputShape = destSize;
+        this.rank = destSize.length;
+        this.params = [];
+        var dtype = getDataType(this.rank);
+        var sourceCoords = getCoords(this.rank);
+        this.userCode = "\n      uniform " + dtype + " start;\n\n      void main() {\n        " + dtype + " sourceLoc = start + getOutputCoords();\n        setOutput(getSource(" + sourceCoords + "));\n      }\n    ";
+    }
+    SliceProgram.prototype.getCustomSetupFunc = function (start) {
+        var _this = this;
+        if (start.length !== this.rank) {
+            throw Error("The rank (" + this.rank + ") of the program must match the " +
+                ("length of start (" + start.length + ")"));
+        }
+        return function (gpgpu, webGLProgram) {
+            if (_this.startLoc == null) {
+                _this.startLoc = gpgpu.getUniformLocationNoThrow(webGLProgram, 'start');
+                if (_this.startLoc == null) {
+                    return;
+                }
+            }
+            if (_this.rank === 1) {
+                gpgpu.gl.uniform1i(_this.startLoc, start[0]);
+            }
+            else if (_this.rank === 2) {
+                gpgpu.gl.uniform2i(_this.startLoc, start[0], start[1]);
+            }
+            else if (_this.rank === 3) {
+                gpgpu.gl.uniform3i(_this.startLoc, start[0], start[1], start[2]);
+            }
+            else if (_this.rank === 4) {
+                gpgpu.gl.uniform4i(_this.startLoc, start[0], start[1], start[2], start[3]);
+            }
+            else {
+                throw Error("Slicing for rank " + _this.rank + " is not yet supported");
+            }
+        };
+    };
+    return SliceProgram;
+}());
+exports.SliceProgram = SliceProgram;
+function getCoords(rank) {
+    if (rank === 1) {
+        return 'sourceLoc';
+    }
+    else if (rank === 2) {
+        return 'sourceLoc.x, sourceLoc.y';
+    }
+    else if (rank === 3) {
+        return 'sourceLoc.x, sourceLoc.y, sourceLoc.z';
+    }
+    else if (rank === 4) {
+        return 'sourceLoc.x, sourceLoc.y, sourceLoc.z, sourceLoc.w';
+    }
+    else {
+        throw Error("Slicing for rank " + rank + " is not yet supported");
+    }
+}
+function getDataType(rank) {
+    if (rank === 1) {
+        return 'int';
+    }
+    else if (rank === 2) {
+        return 'ivec2';
+    }
+    else if (rank === 3) {
+        return 'ivec3';
+    }
+    else if (rank === 4) {
+        return 'ivec4';
+    }
+    else {
+        throw Error("Slicing for rank " + rank + " is not yet supported");
+    }
+}
+
+},{}],86:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function getUnpackedMatrixTextureShapeWidthHeight(rows, columns) {
@@ -7340,6 +9061,60 @@ function encodeMatrixToUnpackedArray(matrix, unpackedArray, channelsPerTexture) 
     }
 }
 exports.encodeMatrixToUnpackedArray = encodeMatrixToUnpackedArray;
+exports.FLOAT_MAX = 20000;
+exports.FLOAT_MIN = -exports.FLOAT_MAX;
+var FLOAT_RANGE = (exports.FLOAT_MAX - exports.FLOAT_MIN) / 255;
+var FLOAT_DELTAS = [1, 1 / 255, 1 / (255 * 255), 1 / (255 * 255 * 255)];
+var FLOAT_POWERS = [1, 255, 255 * 255];
+exports.BYTE_NAN_VALUE = 0;
+function encodeFloatArray(floatArray) {
+    var uintArray = new Uint8Array(floatArray.length * 4);
+    var _loop_1 = function (i) {
+        var value = floatArray[i / 4];
+        if (isNaN(value)) {
+            uintArray[i] = exports.BYTE_NAN_VALUE;
+            uintArray[i + 1] = exports.BYTE_NAN_VALUE;
+            uintArray[i + 2] = exports.BYTE_NAN_VALUE;
+            uintArray[i + 3] = exports.BYTE_NAN_VALUE;
+            return "continue";
+        }
+        var normalizedValue = (value - exports.FLOAT_MIN) / FLOAT_RANGE;
+        var enc = FLOAT_POWERS.map(function (pow) { return pow * normalizedValue; });
+        var buckets = enc.map(function (value) { return Math.floor((value % 1) * 255); });
+        uintArray[i] = Math.floor(normalizedValue);
+        uintArray[i + 1] = buckets[0];
+        uintArray[i + 2] = buckets[1];
+        uintArray[i + 3] = buckets[2];
+    };
+    for (var i = 0; i < uintArray.length; i += 4) {
+        _loop_1(i);
+    }
+    return uintArray;
+}
+exports.encodeFloatArray = encodeFloatArray;
+function decodeToFloatArray(uintArray) {
+    var floatArray = new Float32Array(uintArray.length / 4);
+    var _loop_2 = function (i) {
+        if (uintArray[i] === exports.BYTE_NAN_VALUE &&
+            uintArray[i + 1] === exports.BYTE_NAN_VALUE &&
+            uintArray[i + 2] === exports.BYTE_NAN_VALUE &&
+            uintArray[i + 3] === exports.BYTE_NAN_VALUE) {
+            floatArray[i / 4] = NaN;
+            return "continue";
+        }
+        var dot = 0;
+        FLOAT_DELTAS.forEach(function (delta, j) {
+            dot += delta * uintArray[i + j];
+        });
+        var value = dot * FLOAT_RANGE + exports.FLOAT_MIN;
+        floatArray[i / 4] = value;
+    };
+    for (var i = 0; i < uintArray.length; i += 4) {
+        _loop_2(i);
+    }
+    return floatArray;
+}
+exports.decodeToFloatArray = decodeToFloatArray;
 function decodeMatrixFromUnpackedArray(unpackedArray, matrix, channelsPerTexture) {
     var requiredSize = getMatrixSizeFromUnpackedArraySize(unpackedArray.length, channelsPerTexture);
     if (matrix.length < requiredSize) {
@@ -7472,7 +9247,7 @@ function decodeMatrixFromPackedRGBA(packedRGBA, rows, columns, matrix) {
 }
 exports.decodeMatrixFromPackedRGBA = decodeMatrixFromPackedRGBA;
 
-},{}],72:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var TextureManager = (function () {
@@ -7543,7 +9318,7 @@ function getKeyFromTextureShape(shapeRowsCol) {
     return shapeRowsCol[0] + '_' + shapeRowsCol[1];
 }
 
-},{}],73:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var UnaryOpProgram = (function () {
@@ -7575,7 +9350,7 @@ exports.SINH = "\n  float e2x = exp(x);\n  return (e2x - 1.0 / e2x) / 2.0;\n";
 exports.COSH = "\n  float e2x = exp(-x);\n  return (e2x + 1.0 / e2x) / 2.0;\n";
 exports.TANH = "\n  float e2x = exp(-2.0 * abs(x));\n  return sign(x) * (1.0 - e2x) / (1.0 + e2x);\n";
 
-},{}],74:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var MAX_TEXTURE_SIZE = null;
@@ -7739,6 +9514,9 @@ function queryMaxTextureSize(gl) {
 }
 exports.queryMaxTextureSize = queryMaxTextureSize;
 function getChannelsPerTexture() {
+    if (!environment_1.ENV.get('WEBGL_FLOAT_TEXTURE_ENABLED')) {
+        return 4;
+    }
     if (environment_1.ENV.get('WEBGL_VERSION') === 2) {
         return 1;
     }
@@ -7767,12 +9545,16 @@ function createFramebuffer(gl) {
     return throwIfNull(gl, function () { return gl.createFramebuffer(); }, 'Unable to create WebGLFramebuffer.');
 }
 exports.createFramebuffer = createFramebuffer;
-function bindVertexBufferToProgramAttribute(gl, program, attribute, buffer, arrayEntriesPerItem, itemStrideInBytes, itemOffsetInBytes) {
-    var loc = gl.getAttribLocation(program, attribute);
+function bindVertexBufferToProgramAttribute(gl, program, attribute, buffer, arrayEntriesPerItem, itemStrideInBytes, itemOffsetInBytes, attribLocations) {
+    var loc = -1;
+    if ((attribLocations != null) && (attribute in attribLocations)) {
+        loc = attribLocations[attribute];
+    }
+    else {
+        loc = gl.getAttribLocation(program, attribute);
+    }
     if (loc === -1) {
-        var error = new Error('Unable to get attribute "' + attribute + '" on WebGLProgram.');
-        error.namedVertexAttributeNotFound = attribute;
-        throw error;
+        return;
     }
     callAndCheck(gl, function () { return gl.bindBuffer(gl.ARRAY_BUFFER, buffer); });
     callAndCheck(gl, function () { return gl.vertexAttribPointer(loc, arrayEntriesPerItem, gl.FLOAT, false, itemStrideInBytes, itemOffsetInBytes); });
@@ -7886,7 +9668,167 @@ function getTextureShapeFromLogicalShape(gl, logShape, preferredTexShape) {
 }
 exports.getTextureShapeFromLogicalShape = getTextureShapeFromLogicalShape;
 
-},{"../../environment":6,"../../util":75}],75:[function(require,module,exports){
+},{"../../environment":15,"../../util":91}],90:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var environment = require("./environment");
+var environment_1 = require("./environment");
+var math_cpu_1 = require("./math/math_cpu");
+var math_gpu_1 = require("./math/math_gpu");
+exports.TEST_EPSILON = 1e-2;
+function expectArraysClose(actual, expected, epsilon) {
+    if (epsilon === void 0) { epsilon = exports.TEST_EPSILON; }
+    if (actual.length !== expected.length) {
+        throw new Error('Matrices have different lengths (' + actual.length + ' vs ' +
+            expected.length + ').');
+    }
+    for (var i = 0; i < expected.length; ++i) {
+        var a = actual[i];
+        var e = expected[i];
+        if (!areClose(a, e, epsilon)) {
+            var actualStr = 'actual[' + i + '] === ' + a;
+            var expectedStr = 'expected[' + i + '] === ' + e;
+            throw new Error('Arrays differ: ' + actualStr + ', ' + expectedStr);
+        }
+    }
+}
+exports.expectArraysClose = expectArraysClose;
+function expectNumbersClose(a, e, epsilon) {
+    if (epsilon === void 0) { epsilon = exports.TEST_EPSILON; }
+    if (!areClose(a, e, epsilon)) {
+        throw new Error('Numbers differ: actual === ' + a + ', expected === ' + e);
+    }
+}
+exports.expectNumbersClose = expectNumbersClose;
+function areClose(a, e, epsilon) {
+    if (isNaN(a) && isNaN(e)) {
+        return true;
+    }
+    if (isNaN(a) || isNaN(e) || Math.abs(a - e) > epsilon) {
+        return false;
+    }
+    return true;
+}
+function randomArrayInRange(n, minValue, maxValue) {
+    var v = new Float32Array(n);
+    var range = maxValue - minValue;
+    for (var i = 0; i < n; ++i) {
+        v[i] = (Math.random() * range) + minValue;
+    }
+    return v;
+}
+exports.randomArrayInRange = randomArrayInRange;
+function makeIdentity(n) {
+    var i = new Float32Array(n * n);
+    for (var j = 0; j < n; ++j) {
+        i[(j * n) + j] = 1;
+    }
+    return i;
+}
+exports.makeIdentity = makeIdentity;
+function setValue(m, mNumRows, mNumCols, v, row, column) {
+    if (row >= mNumRows) {
+        throw new Error('row (' + row + ') must be in [0 ' + mNumRows + '].');
+    }
+    if (column >= mNumCols) {
+        throw new Error('column (' + column + ') must be in [0 ' + mNumCols + '].');
+    }
+    m[(row * mNumCols) + column] = v;
+}
+exports.setValue = setValue;
+function cpuMultiplyMatrix(a, aRow, aCol, b, bRow, bCol) {
+    var result = new Float32Array(aRow * bCol);
+    for (var r = 0; r < aRow; ++r) {
+        var aOffset = (r * aCol);
+        var cOffset = (r * bCol);
+        for (var c = 0; c < bCol; ++c) {
+            var d = 0;
+            for (var k = 0; k < aCol; ++k) {
+                d += a[aOffset + k] * b[(k * bCol) + c];
+            }
+            result[cOffset + c] = d;
+        }
+    }
+    return result;
+}
+exports.cpuMultiplyMatrix = cpuMultiplyMatrix;
+function cpuDotProduct(a, b) {
+    if (a.length !== b.length) {
+        throw new Error('cpuDotProduct: incompatible vectors.');
+    }
+    var d = 0;
+    for (var i = 0; i < a.length; ++i) {
+        d += a[i] * b[i];
+    }
+    return d;
+}
+exports.cpuDotProduct = cpuDotProduct;
+function describeMathCPU(name, tests, featuresList) {
+    var testNameBase = 'math_cpu.' + name;
+    describeWithFeaturesAndExecutor(testNameBase, tests, function (testName, tests, features) { return executeMathTests(testName, tests, function () { return new math_cpu_1.NDArrayMathCPU(); }, features); }, featuresList);
+}
+exports.describeMathCPU = describeMathCPU;
+function describeMathGPU(name, tests, featuresList) {
+    var testNameBase = 'math_gpu.' + name;
+    describeWithFeaturesAndExecutor(testNameBase, tests, function (testName, tests, features) { return executeMathTests(testName, tests, function () { return new math_gpu_1.NDArrayMathGPU(); }, features); }, featuresList);
+}
+exports.describeMathGPU = describeMathGPU;
+function describeCustom(name, tests, featuresList, customBeforeEach, customAfterEach) {
+    describeWithFeaturesAndExecutor(name, tests, function (testName, tests, features) { return executeTests(testName, tests, features, customBeforeEach, customAfterEach); }, featuresList);
+}
+exports.describeCustom = describeCustom;
+function describeWithFeaturesAndExecutor(testNameBase, tests, executor, featuresList) {
+    if (featuresList != null) {
+        featuresList.forEach(function (features) {
+            var testName = testNameBase + ' ' + JSON.stringify(features);
+            executor(testName, tests, features);
+        });
+    }
+    else {
+        executor(testNameBase, tests);
+    }
+}
+function executeMathTests(testName, tests, mathFactory, features) {
+    var math;
+    var customBeforeEach = function () {
+        math = mathFactory();
+        math.startScope();
+    };
+    var customAfterEach = function () {
+        math.endScope(null);
+        math.dispose();
+    };
+    var customIt = function (name, testFunc) {
+        it(name, function () { return testFunc(math); });
+    };
+    executeTests(testName, tests, features, customBeforeEach, customAfterEach, customIt);
+}
+exports.executeMathTests = executeMathTests;
+function executeTests(testName, tests, features, customBeforeEach, customAfterEach, customIt) {
+    if (customIt === void 0) { customIt = it; }
+    describe(testName, function () {
+        beforeEach(function () {
+            if (features != null) {
+                environment.setEnvironment(new environment_1.Environment(features));
+            }
+            if (customBeforeEach != null) {
+                customBeforeEach();
+            }
+        });
+        afterEach(function () {
+            if (customAfterEach != null) {
+                customAfterEach();
+            }
+            if (features != null) {
+                environment.setEnvironment(new environment_1.Environment());
+            }
+        });
+        tests.forEach(function (test) { return test(customIt); });
+    });
+}
+exports.executeTests = executeTests;
+
+},{"./environment":15,"./math/math_cpu":58,"./math/math_gpu":59}],91:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function shuffle(array) {
@@ -7921,7 +9863,7 @@ function randGauss(mean, stdDev, truncated) {
         s = v1 * v1 + v2 * v2;
     } while (s > 1);
     var result = Math.sqrt(-2 * Math.log(s) / s) * v1;
-    if (truncated && result > 2) {
+    if (truncated && Math.abs(result) > 2) {
         return randGauss(mean, stdDev, true);
     }
     return mean + stdDev * result;
@@ -8108,6 +10050,39 @@ exports.getQueryParams = getQueryParams;
 function decodeParam(params, name, value) {
     params[decodeURIComponent(name)] = decodeURIComponent(value || '');
 }
+function inferFromImplicitShape(shape, size) {
+    var shapeProd = 1;
+    var implicitIdx = -1;
+    for (var i = 0; i < shape.length; ++i) {
+        if (shape[i] > 0) {
+            shapeProd *= shape[i];
+        }
+        else if (shape[i] === -1) {
+            if (implicitIdx !== -1) {
+                throw Error("Shapes can only have 1 implicit size. " +
+                    ("Found -1 at dim " + implicitIdx + " and dim " + i));
+            }
+            implicitIdx = i;
+        }
+        else if (shape[i] <= 0) {
+            throw Error("Shapes can not be <= 0. Found " + shape[i] + " at dim " + i);
+        }
+    }
+    if (implicitIdx === -1) {
+        if (size > 0 && size !== shapeProd) {
+            throw Error("Size (" + size + ") must match the product of shape " + shape);
+        }
+        return shape;
+    }
+    if (size % shapeProd !== 0) {
+        throw Error("The implicit shape can't be a fractional number. " +
+            ("Got " + size + " / " + shapeProd));
+    }
+    var newShape = shape.slice();
+    newShape[implicitIdx] = size / shapeProd;
+    return newShape;
+}
+exports.inferFromImplicitShape = inferFromImplicitShape;
 
-},{}]},{},[39])(39)
+},{}]},{},[50])(50)
 });
