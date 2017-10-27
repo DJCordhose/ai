@@ -1,10 +1,94 @@
 <html>
         <!-- <script src="https://storage.googleapis.com/learnjs-data/deeplearn-latest.js"></script> -->
+        <!-- <script src="https://unpkg.com/deeplearn@0.3.3/dist/deeplearn.js"></script> -->
         <script src="lib/deeplearn.js"></script>
         <!-- <script src="lib/deeplearn.min.js"></script> -->
         <!-- <script src="sandbox.js"  type="module"></script> -->
         <script src="regression.js"></script>
+
+      </style>
+      
+        <body>
+          <p>Fitting a quadratic equation like <code>y = a * x^2 + b * x + c</code> through a set of points</p>
+          <p>Press any key to begin computation</p>
+          <canvas id="regression-canvas" height="600" width="800"></canvas>
+          <p id='decription'></p>
+        </body>
         
+        <script src="Plot.js"></script>
+        <script>
+    (async () => {
+const regressionCanvas = document.querySelector('#regression-canvas');
+const description = document.querySelector('#decription');
+const myGraph = new Plot({
+    canvas: regressionCanvas,
+    minX: -10,
+    minY: -50,
+    maxX: 10,
+    maxY: 50,
+    unitsPerTickX: 1,
+    unitsPerTickY: 10
+});
+const sampleX = myGraph.samplePositions();
+
+const drawPrediction = async () => {
+  const predictions = await predict(sampleX);
+  const zipped = sampleX.map((x, index) => [x, predictions[index]]);
+  myGraph.drawPoints(zipped, 'green', 1);
+};
+await drawPrediction();
+
+// myGraph.drawEquation(x => {
+//   // y = b * x + c
+//   const b = 5;
+//   const c = 20;
+//   const y = b * x + c;
+//   return y;
+// }, 'blue', 1);
+
+const points = [
+  [0, 1.1],
+  [1, 5.9],
+  [2, 16.8],
+  [3, 33.9],
+  [-1, 2],
+  [-4, 45]
+];
+
+// const points = [
+//   [0, -41.1],
+//   [1, -5.9],
+//   [2, -16.8],
+//   [3, -33.9],
+//   [-1, -30],
+//   [-2, -10],
+//   [-4, -45]
+
+// ];
+const drawScatter = () => myGraph.scatterPlot(points, 'red', 2);
+
+drawScatter();
+
+const timeout = millis => new Promise(resolve => setTimeout(() => resolve(), millis));
+
+const keypress = () => new Promise(resolve => window.onkeypress = () => resolve());
+await keypress();
+
+const draw = async ({a, b, c, loss}) => {
+  console.log(`a=${a}, b=${b}, c=${c}, loss=${loss}`);
+  myGraph.clear();
+  description.innerHTML = `a=${a}, b=${b}, c=${c}, loss=${loss}`;
+  drawScatter();
+  // drawPrediction();
+  myGraph.drawEquation(x => a * x ** 2 + b * x + c, 'green', 1);
+  return timeout(100);
+};
+
+const {a, b, c, loss} = await fitCurveThroughPoints(points, draw);
+
+})();
+        </script>
+
         <!-- <script>
 {
 // import {Array1D, NDArrayMathGPU, Scalar} from 'deeplearn';

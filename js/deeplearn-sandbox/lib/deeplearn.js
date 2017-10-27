@@ -1030,7 +1030,7 @@ var CheckpointLoader = (function () {
                 resolve(ndarray);
             };
             xhr.onerror = function (error) {
-                throw new Error('Could not fetch variable ' + varName + ': ' + error);
+                throw new Error("Could not fetch variable " + varName + ": " + error);
             };
             xhr.send();
         };
@@ -1047,7 +1047,7 @@ var CheckpointLoader = (function () {
 }());
 exports.CheckpointLoader = CheckpointLoader;
 
-},{"../math/ndarray":60}],11:[function(require,module,exports){
+},{"../math/ndarray":63}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("../math/ndarray");
@@ -1212,7 +1212,7 @@ var InMemoryDataset = (function () {
 }());
 exports.InMemoryDataset = InMemoryDataset;
 
-},{"../math/ndarray":60,"../util":91}],12:[function(require,module,exports){
+},{"../math/ndarray":63,"../util":95}],12:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1315,7 +1315,7 @@ var InGPUMemoryShuffledInputProviderBuilder = (function (_super) {
 }(InMemoryShuffledInputProviderBuilder));
 exports.InGPUMemoryShuffledInputProviderBuilder = InGPUMemoryShuffledInputProviderBuilder;
 
-},{"../math/ndarray":60,"../util":91}],13:[function(require,module,exports){
+},{"../math/ndarray":63,"../util":95}],13:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1462,7 +1462,7 @@ function parseTypedArrayFromPng(info, shape) {
     });
 }
 
-},{"../math/ndarray":60,"../util":91,"./dataset":11}],14:[function(require,module,exports){
+},{"../math/ndarray":63,"../util":95,"./dataset":11}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function isMobile() {
@@ -1641,7 +1641,7 @@ function setEnvironment(environment) {
 }
 exports.setEnvironment = setEnvironment;
 
-},{"./device_util":14,"./util":91}],16:[function(require,module,exports){
+},{"./device_util":14,"./util":95}],16:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1702,7 +1702,8 @@ var Graph = (function () {
             finalValue = value;
         }
         else if (value instanceof Array) {
-            var vals = new Float32Array(util.flatten(value));
+            var flatValues = util.flatten(value);
+            var vals = new Float32Array(flatValues);
             finalValue = ndarray_1.NDArray.make(util.inferShape(value), { values: vals });
         }
         else {
@@ -1860,9 +1861,9 @@ var ReshapeNode = (function (_super) {
     ReshapeNode.prototype.validate = function () {
         var xSize = util.sizeFromShape(this.x.shape);
         var shapeSize = util.sizeFromShape(this.shape);
-        util.assert(xSize === shapeSize, 'Error making reshape operation: input Tensor to reshape \'' +
-            this.name + '\' of shape (' + this.x.shape +
-            ') does not match size of requested shape ' + this.shape + '.');
+        util.assert(xSize === shapeSize, "Error making reshape operation: input to reshape '" + this.name + "'" +
+            (" of shape (" + this.x.shape + ") does not match size of ") +
+            ("requested shape " + this.shape + "."));
     };
     ReshapeNode.X = 'x';
     return ReshapeNode;
@@ -1882,11 +1883,11 @@ var FusedLinearCombinationNode = (function (_super) {
         util.assertShapesMatch(this.t1.shape, this.t2.shape);
         if (!util.isScalarShape(this.c1.shape)) {
             throw new Error('Error adding fusedLinearCombination: c1 is not a scalar, got ' +
-                'shape: ' + this.c1.shape);
+                ("shape: " + this.c1.shape));
         }
         if (!util.isScalarShape(this.c2.shape)) {
             throw new Error('Error adding fusedLinearCombination: c2 is not a scalar, got ' +
-                'shape: ' + this.c2.shape);
+                ("shape: " + this.c2.shape));
         }
     };
     FusedLinearCombinationNode.T1 = 't1';
@@ -1908,8 +1909,7 @@ var AddNode = (function (_super) {
         util.assert(util.sizeFromShape(this.t1.shape) === 1 ||
             util.sizeFromShape(this.t2.shape) === 1 ||
             util.arraysEqual(this.t1.shape, this.t2.shape), 'Error adding add operation op: one of inputs must be scalar or the ' +
-            'shapes ' + this.t1.shape + ' and ' + this.t2.shape +
-            ' must match.');
+            ("shapes " + this.t1.shape + " and " + this.t2.shape + " must match."));
     };
     AddNode.T1 = 't1';
     AddNode.T2 = 't2';
@@ -1928,8 +1928,7 @@ var SubtractNode = (function (_super) {
         util.assert(util.sizeFromShape(this.t1.shape) === 1 ||
             util.sizeFromShape(this.t2.shape) === 1 ||
             util.arraysEqual(this.t1.shape, this.t2.shape), 'Error adding subtract op: one of inputs must be scalar or the ' +
-            'shapes ' + this.t1.shape + ' and ' + this.t2.shape +
-            ' must match.');
+            ("shapes " + this.t1.shape + " and " + this.t2.shape + " must match."));
     };
     SubtractNode.T1 = 't1';
     SubtractNode.T2 = 't2';
@@ -1948,8 +1947,7 @@ var MultiplyNode = (function (_super) {
         util.assert(util.sizeFromShape(this.t1.shape) === 1 ||
             util.sizeFromShape(this.t2.shape) === 1 ||
             util.arraysEqual(this.t1.shape, this.t2.shape), 'Error adding multiply op: one of inputs must be scalar or the ' +
-            'shapes ' + this.t1.shape + ' and ' + this.t2.shape +
-            ' must match.');
+            ("shapes " + this.t1.shape + " and " + this.t2.shape + " must match."));
     };
     MultiplyNode.T1 = 't1';
     MultiplyNode.T2 = 't2';
@@ -1968,8 +1966,7 @@ var DivideNode = (function (_super) {
         util.assert(util.sizeFromShape(this.t1.shape) === 1 ||
             util.sizeFromShape(this.t2.shape) === 1 ||
             util.arraysEqual(this.t1.shape, this.t2.shape), 'Error adding divide op: one of inputs must be scalar or the ' +
-            'shapes ' + this.t1.shape + ' and ' + this.t2.shape +
-            ' must match.');
+            ("shapes " + this.t1.shape + " and " + this.t2.shape + " must match."));
     };
     DivideNode.T1 = 't1';
     DivideNode.T2 = 't2';
@@ -2027,17 +2024,17 @@ var MatMulNode = (function (_super) {
     MatMulNode.prototype.validate = function () {
         if (this.x1.shape.length === 2 && this.x2.shape.length === 2) {
             util.assert(this.x1.shape[1] === this.x2.shape[0], 'Error adding matmul op: inner shapes of matrices with shapes ' +
-                this.x1.shape + ' and ' + this.x2.shape + ' must match.');
+                (this.x1.shape + " and " + this.x2.shape + " must match."));
         }
         else if (this.x1.shape.length === 2 && this.x2.shape.length === 1) {
             util.assert(this.x1.shape[1] === this.x2.shape[0], 'Error adding matmul op: second dimension of matrix with shape ' +
-                this.x1.shape + ' must match size of vector with shape ' +
-                this.x2.shape + '.');
+                this.x1.shape.toString() +
+                (" must match size of vector with shape " + this.x2.shape + "."));
         }
         else if (this.x1.shape.length === 1 && this.x2.shape.length === 2) {
-            util.assert(this.x1.shape[0] === this.x2.shape[0], 'Error adding matmul op: size of vector with shape ' + this.x1.shape +
-                ' must match first dimension of matrix with ' +
-                'shape ' + this.x2.shape + '.');
+            util.assert(this.x1.shape[0] === this.x2.shape[0], "Error adding matmul op: size of vector with shape " + this.x1.shape +
+                " must match first dimension of matrix with " +
+                ("shape " + this.x2.shape + "."));
         }
         else {
             throw new Error('Error adding matmul op: inputs must be vectors or matrices.');
@@ -2064,13 +2061,13 @@ var Convolution2DNode = (function (_super) {
     }
     Convolution2DNode.prototype.validate = function () {
         util.assert(this.x.shape.length === 3, 'Error adding conv2d op: input must be of rank 3, but got shape: ' +
-            this.x.shape + '.');
+            (this.x.shape + "."));
         util.assert(this.w.shape.length === 4, 'Error adding conv2d op: weights must be of rank 4, but got shape: ' +
-            this.w.shape + '.');
+            (this.w.shape + "."));
         util.assert(this.b.shape.length === 1, 'Error adding conv2d op: biases must be of rank 1, but got shape: ' +
-            this.b.shape + '.');
-        util.assert(this.x.shape[2] === this.w.shape[2], 'Error adding conv2d op: depth of input (' + this.x.shape[2] +
-            ') must match input depth for weights (' + this.w.shape[2] + ').');
+            (this.b.shape + "."));
+        util.assert(this.x.shape[2] === this.w.shape[2], "Error adding conv2d op: depth of input (" + this.x.shape[2] + ") " +
+            ("must match input depth for weights (" + this.w.shape[2] + ")."));
     };
     Convolution2DNode.X = 'x';
     Convolution2DNode.W = 'w';
@@ -2091,7 +2088,7 @@ var MaxPoolNode = (function (_super) {
     }
     MaxPoolNode.prototype.validate = function () {
         util.assert(this.x.shape.length === 3, 'Error adding maxPool op: input must be of rank 3, but got shape: ' +
-            this.x.shape + '.');
+            (this.x.shape + "."));
     };
     MaxPoolNode.X = 'x';
     return MaxPoolNode;
@@ -2166,8 +2163,8 @@ var SoftmaxCrossEntropyCostNode = (function (_super) {
         return _this;
     }
     SoftmaxCrossEntropyCostNode.prototype.validate = function () {
-        util.assert(util.arraysEqual(this.x.shape, this.target.shape), 'Error adding softmaxCrossEntropyCost op: x shape (' + this.x.shape +
-            ') must match target shape (' + this.target.shape + ').');
+        util.assert(util.arraysEqual(this.x.shape, this.target.shape), "Error adding softmaxCrossEntropyCost op: x shape (" + this.x.shape + ") " +
+            ("must match target shape (" + this.target.shape + ")."));
     };
     SoftmaxCrossEntropyCostNode.X = 'x';
     SoftmaxCrossEntropyCostNode.TARGET = 'target';
@@ -2198,8 +2195,8 @@ var MeanSquaredCostNode = (function (_super) {
         return _this;
     }
     MeanSquaredCostNode.prototype.validate = function () {
-        util.assert(util.arraysEqual(this.label.shape, this.prediction.shape), 'Error adding meanSquaredCost op: label shape (' + this.label.shape +
-            ') must match prediction shape (' + this.prediction.shape + ').');
+        util.assert(util.arraysEqual(this.label.shape, this.prediction.shape), "Error adding meanSquaredCost op: label shape (" + this.label.shape + ") " +
+            ("must match prediction shape (" + this.prediction.shape + ")."));
     };
     MeanSquaredCostNode.LABEL = 'label';
     MeanSquaredCostNode.PREDICTION = 'prediction';
@@ -2229,8 +2226,8 @@ var ArgMaxEqualsNode = (function (_super) {
         return _this;
     }
     ArgMaxEqualsNode.prototype.validate = function () {
-        util.assert(util.arraysEqual(this.x1.shape, this.x2.shape), 'Error adding ArgMaxEquals op: x1 shape (' + this.x1.shape +
-            ') must match x2 shape (' + this.x2.shape + ').');
+        util.assert(util.arraysEqual(this.x1.shape, this.x2.shape), "Error adding ArgMaxEquals op: x1 shape (" + this.x1.shape + ") " +
+            ("must match x2 shape (" + this.x2.shape + ")."));
     };
     ArgMaxEqualsNode.X1 = 'x1';
     ArgMaxEqualsNode.X2 = 'x2';
@@ -2238,7 +2235,7 @@ var ArgMaxEqualsNode = (function (_super) {
 }(Node));
 exports.ArgMaxEqualsNode = ArgMaxEqualsNode;
 
-},{"../initializers":51,"../math/concat_util":53,"../math/conv_util":54,"../math/ndarray":60,"../util":91}],17:[function(require,module,exports){
+},{"../initializers":52,"../math/concat_util":56,"../math/conv_util":57,"../math/ndarray":63,"../util":95}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var graph_1 = require("./graph");
@@ -2315,7 +2312,7 @@ function isPassthroughNode(node, map) {
 }
 exports.isPassthroughNode = isPassthroughNode;
 
-},{"./graph":16,"./priority_queue":45}],18:[function(require,module,exports){
+},{"./graph":16,"./priority_queue":46}],18:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var graph_1 = require("./graph");
@@ -2425,7 +2422,7 @@ function emitOpFromNode(node) {
         return [];
     }
     else {
-        throw Error('Unsupported node type: ' + node.constructor.name);
+        throw Error("Unsupported node type: " + node.constructor.name);
     }
 }
 
@@ -2516,7 +2513,7 @@ var Add = (function (_super) {
 }(op_1.Operation));
 exports.Add = Add;
 
-},{"../../math/ndarray":60,"../../util":91,"../graph_util":17,"./op":33}],20:[function(require,module,exports){
+},{"../../math/ndarray":63,"../../util":95,"../graph_util":17,"./op":33}],20:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2632,7 +2629,7 @@ var Concat3D = (function (_super) {
 }(op_1.Operation));
 exports.Concat3D = Concat3D;
 
-},{"../../math/concat_util":53,"./op":33}],23:[function(require,module,exports){
+},{"../../math/concat_util":56,"./op":33}],23:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2701,7 +2698,7 @@ var Convolution2D = (function (_super) {
 }(op_1.Operation));
 exports.Convolution2D = Convolution2D;
 
-},{"../../math/conv_util":54,"../../util":91,"./op":33}],24:[function(require,module,exports){
+},{"../../math/conv_util":57,"../../util":95,"./op":33}],24:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2796,7 +2793,7 @@ var Divide = (function (_super) {
 }(op_1.Operation));
 exports.Divide = Divide;
 
-},{"../../util":91,"../graph_util":17,"./op":33}],25:[function(require,module,exports){
+},{"../../util":95,"../graph_util":17,"./op":33}],25:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2874,7 +2871,7 @@ var Square = (function (_super) {
 }(ElementWiseActivation));
 exports.Square = Square;
 
-},{"../../math/activation_functions":52,"./op":33}],26:[function(require,module,exports){
+},{"../../math/activation_functions":53,"./op":33}],26:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2943,7 +2940,7 @@ var MeanSquaredCost = (function (_super) {
 }(ElementWiseCost));
 exports.MeanSquaredCost = MeanSquaredCost;
 
-},{"../../math/cost_functions":56,"../../math/ndarray":60,"../../util":91,"../graph_util":17,"./op":33}],27:[function(require,module,exports){
+},{"../../math/cost_functions":59,"../../math/ndarray":63,"../../util":95,"../graph_util":17,"./op":33}],27:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3164,7 +3161,7 @@ var MatMul = (function (_super) {
 }(op_1.Operation));
 exports.MatMul = MatMul;
 
-},{"../../math/math":57,"../graph_util":17,"./op":33}],31:[function(require,module,exports){
+},{"../../math/math":60,"../graph_util":17,"./op":33}],31:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3218,7 +3215,7 @@ var MaxPool = (function (_super) {
 }(op_1.Operation));
 exports.MaxPool = MaxPool;
 
-},{"../../math/conv_util":54,"../../util":91,"./op":33}],32:[function(require,module,exports){
+},{"../../math/conv_util":57,"../../util":95,"./op":33}],32:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3301,7 +3298,7 @@ var Multiply = (function (_super) {
 }(op_1.Operation));
 exports.Multiply = Multiply;
 
-},{"../../util":91,"../graph_util":17,"./op":33}],33:[function(require,module,exports){
+},{"../../util":95,"../graph_util":17,"./op":33}],33:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Operation = (function () {
@@ -3365,7 +3362,7 @@ var ReduceSum = (function (_super) {
 }(op_1.Operation));
 exports.ReduceSum = ReduceSum;
 
-},{"../../math/ndarray":60,"../../util":91,"../graph_util":17,"./op":33}],35:[function(require,module,exports){
+},{"../../math/ndarray":63,"../../util":95,"../graph_util":17,"./op":33}],35:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3409,7 +3406,7 @@ var Reshape = (function (_super) {
 }(op_1.Operation));
 exports.Reshape = Reshape;
 
-},{"../../util":91,"./op":33}],36:[function(require,module,exports){
+},{"../../util":95,"./op":33}],36:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3473,7 +3470,7 @@ var SoftmaxCrossEntropyCost = (function (_super) {
         var softmax = inferenceArrays.get(this.softmaxTensor);
         var label = inferenceArrays.get(this.labelTensor);
         math.scope(function () {
-            gradientArrays.add(_this.logitsTensor, math.sub(softmax, label));
+            gradientArrays.add(_this.logitsTensor, math.subtract(softmax, label));
         });
     };
     SoftmaxCrossEntropyCost.prototype.disposeTransientArrays = function (inferenceArrays, gradientArrays) {
@@ -3497,7 +3494,7 @@ function crossEntropyCost(math, y, target, epsilon) {
 }
 exports.crossEntropyCost = crossEntropyCost;
 
-},{"../../math/ndarray":60,"../../util":91,"../graph":16,"./op":33}],37:[function(require,module,exports){
+},{"../../math/ndarray":63,"../../util":95,"../graph":16,"./op":33}],37:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3540,7 +3537,7 @@ var Subtract = (function (_super) {
                 result = math.arrayMinusScalar(t1, t2);
             }
             else {
-                result = math.sub(t1, t2);
+                result = math.subtract(t1, t2);
             }
             inferenceArrays.set(_this.outTensor, keep(result));
         });
@@ -3585,7 +3582,7 @@ var Subtract = (function (_super) {
 }(op_1.Operation));
 exports.Subtract = Subtract;
 
-},{"../../math/ndarray":60,"../../util":91,"../graph_util":17,"./op":33}],38:[function(require,module,exports){
+},{"../../math/ndarray":63,"../../util":95,"../graph_util":17,"./op":33}],38:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3632,11 +3629,11 @@ var AdadeltaOptimizer = (function (_super) {
                 var oldCache = _this.accumulatedSquaredGradients.get(node.output);
                 var oldUpdates = _this.accumulatedUpdates.get(node.output);
                 var gradientSquare = math.multiply(gradient, gradient);
-                var cache = math.scaledArrayAdd(_this.g, oldCache, math.sub(_this.one, _this.g), gradientSquare);
+                var cache = math.scaledArrayAdd(_this.g, oldCache, math.subtract(_this.one, _this.g), gradientSquare);
                 var updates = math.multiply(math.divide(math.sqrt(math.add(oldUpdates, _this.eps)), math.sqrt(math.add(oldCache, _this.eps))), gradient);
                 var variable = math.scaledArrayAdd(_this.c, updates, _this.one, oldVariable);
                 var updateSquare = math.multiply(updates, updates);
-                var newUpdates = math.scaledArrayAdd(_this.g, oldUpdates, math.sub(_this.one, _this.g), updateSquare);
+                var newUpdates = math.scaledArrayAdd(_this.g, oldUpdates, math.subtract(_this.one, _this.g), updateSquare);
                 _this.accumulatedSquaredGradients.set(node.output, keep(cache));
                 _this.accumulatedUpdates.set(node.output, keep(newUpdates));
                 activationArrayMap.set(node.output, keep(variable));
@@ -3660,7 +3657,7 @@ var AdadeltaOptimizer = (function (_super) {
 }(optimizer_1.Optimizer));
 exports.AdadeltaOptimizer = AdadeltaOptimizer;
 
-},{"../../math/ndarray":60,"../tensor_array_map":48,"./optimizer":42}],39:[function(require,module,exports){
+},{"../../math/ndarray":63,"../tensor_array_map":49,"./optimizer":43}],39:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3723,7 +3720,7 @@ var AdagradOptimizer = (function (_super) {
 }(optimizer_1.Optimizer));
 exports.AdagradOptimizer = AdagradOptimizer;
 
-},{"../../math/ndarray":60,"../tensor_array_map":48,"./optimizer":42}],40:[function(require,module,exports){
+},{"../../math/ndarray":63,"../tensor_array_map":49,"./optimizer":43}],40:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3777,11 +3774,11 @@ var AdamOptimizer = (function (_super) {
                 var gradient = _this.variableGradients.get(node.output);
                 var oldFirstMoment = _this.firstMoment.get(node.output);
                 var oldSecondMoment = _this.secondMoment.get(node.output);
-                var newFirstMoment = math.scaledArrayAdd(_this.b1, oldFirstMoment, math.sub(_this.one, _this.b1), gradient);
+                var newFirstMoment = math.scaledArrayAdd(_this.b1, oldFirstMoment, math.subtract(_this.one, _this.b1), gradient);
                 var gradientSquare = math.multiply(gradient, gradient);
-                var newSecondMoment = math.scaledArrayAdd(_this.b2, oldSecondMoment, math.sub(_this.one, _this.b2), gradientSquare);
-                var biasCorrectedFirstMoment = math.divide(newFirstMoment, math.sub(_this.one, _this.accB1));
-                var biasCorrectedSecondMoment = math.divide(newSecondMoment, math.sub(_this.one, _this.accB2));
+                var newSecondMoment = math.scaledArrayAdd(_this.b2, oldSecondMoment, math.subtract(_this.one, _this.b2), gradientSquare);
+                var biasCorrectedFirstMoment = math.divide(newFirstMoment, math.subtract(_this.one, _this.accB1));
+                var biasCorrectedSecondMoment = math.divide(newSecondMoment, math.subtract(_this.one, _this.accB2));
                 var variable = math.scaledArrayAdd(_this.c, math.divide(biasCorrectedFirstMoment, math.add(math.sqrt(biasCorrectedSecondMoment), _this.eps)), _this.one, oldVariable);
                 activationArrayMap.set(node.output, keep(variable));
                 node.data = variable;
@@ -3812,7 +3809,88 @@ var AdamOptimizer = (function (_super) {
 }(optimizer_1.Optimizer));
 exports.AdamOptimizer = AdamOptimizer;
 
-},{"../../math/ndarray":60,"../tensor_array_map":48,"./optimizer":42}],41:[function(require,module,exports){
+},{"../../math/ndarray":63,"../tensor_array_map":49,"./optimizer":43}],41:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var ndarray_1 = require("../../math/ndarray");
+var tensor_array_map_1 = require("../tensor_array_map");
+var optimizer_1 = require("./optimizer");
+var AdamaxOptimizer = (function (_super) {
+    __extends(AdamaxOptimizer, _super);
+    function AdamaxOptimizer(learningRate, beta1, beta2, specifiedVariableList) {
+        var _this = _super.call(this, learningRate, specifiedVariableList) || this;
+        _this.learningRate = learningRate;
+        _this.beta1 = beta1;
+        _this.beta2 = beta2;
+        _this.firstMoment = new tensor_array_map_1.TensorArrayMap();
+        _this.weightedInfNorm = new tensor_array_map_1.TensorArrayMap();
+        _this.b1 = ndarray_1.Scalar.new(_this.beta1);
+        _this.b2 = ndarray_1.Scalar.new(_this.beta2);
+        return _this;
+    }
+    AdamaxOptimizer.prototype.beforeBatch = function (math, batchSize, runtime, activationArrayMap, gradientArrayMap) {
+        var _this = this;
+        _super.prototype.beforeBatch.call(this, math, batchSize, runtime, activationArrayMap, gradientArrayMap);
+        if (this.firstMoment.size() === 0) {
+            this.variableNodes.forEach(function (node) {
+                _this.firstMoment.set(node.output, ndarray_1.NDArray.zeros(node.output.shape));
+            });
+        }
+        if (this.weightedInfNorm.size() === 0) {
+            this.variableNodes.forEach(function (node) {
+                _this.weightedInfNorm.set(node.output, ndarray_1.NDArray.zeros(node.output.shape));
+            });
+        }
+    };
+    AdamaxOptimizer.prototype.afterBatch = function (math, batchSize, runtime, activationArrayMap, gradientArrayMap) {
+        var _this = this;
+        math.scope(function (keep) {
+            _this.variableNodes.forEach(function (node) {
+                var oldVariable = activationArrayMap.get(node.output);
+                var gradient = _this.variableGradients.get(node.output);
+                var oldFirstMoment = _this.firstMoment.get(node.output);
+                var oldWeightedInfNorm = _this.weightedInfNorm.get(node.output);
+                var newFirstMoment = math.scaledArrayAdd(_this.b1, oldFirstMoment, math.subtract(_this.one, _this.b1), gradient);
+                var ut0 = math.multiply(_this.b2, oldWeightedInfNorm);
+                var ut1 = math.abs(gradient);
+                var newWeightedInfNorm = math.add(math.relu(math.subtract(ut0, ut1)), ut1);
+                var variable = math.scaledArrayAdd(_this.one, oldVariable, math.divide(_this.c, math.subtract(_this.one, _this.b1)), math.divide(newFirstMoment, newWeightedInfNorm));
+                activationArrayMap.set(node.output, keep(variable));
+                node.data = variable;
+                _this.firstMoment.set(node.output, keep(newFirstMoment));
+                _this.weightedInfNorm.set(node.output, keep(newWeightedInfNorm));
+                oldVariable.dispose();
+                gradient.dispose();
+                oldFirstMoment.dispose();
+                oldWeightedInfNorm.dispose();
+            });
+        });
+        this.variableGradients.dispose();
+        this.variableGradients = new tensor_array_map_1.TensorArrayMap();
+    };
+    AdamaxOptimizer.prototype.dispose = function () {
+        _super.prototype.dispose.call(this);
+        this.firstMoment.dispose();
+        this.weightedInfNorm.dispose();
+        this.eps.dispose();
+        this.b1.dispose();
+        this.b2.dispose();
+    };
+    return AdamaxOptimizer;
+}(optimizer_1.Optimizer));
+exports.AdamaxOptimizer = AdamaxOptimizer;
+
+},{"../../math/ndarray":63,"../tensor_array_map":49,"./optimizer":43}],42:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3878,7 +3956,7 @@ var MomentumOptimizer = (function (_super) {
 }(sgd_optimizer_1.SGDOptimizer));
 exports.MomentumOptimizer = MomentumOptimizer;
 
-},{"../../math/ndarray":60,"../tensor_array_map":48,"./sgd_optimizer":44}],42:[function(require,module,exports){
+},{"../../math/ndarray":63,"../tensor_array_map":49,"./sgd_optimizer":45}],43:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("../../math/ndarray");
@@ -3928,7 +4006,7 @@ var Optimizer = (function () {
 }());
 exports.Optimizer = Optimizer;
 
-},{"../../math/ndarray":60,"../session_util":47,"../tensor_array_map":48}],43:[function(require,module,exports){
+},{"../../math/ndarray":63,"../session_util":48,"../tensor_array_map":49}],44:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3972,7 +4050,7 @@ var RMSPropOptimizer = (function (_super) {
                 var gradient = _this.variableGradients.get(node.output);
                 var oldCache = _this.accumulatedSquaredGradients.get(node.output);
                 var gradientSquare = math.multiply(gradient, gradient);
-                var cache = math.scaledArrayAdd(_this.g, oldCache, math.sub(_this.one, _this.g), gradientSquare);
+                var cache = math.scaledArrayAdd(_this.g, oldCache, math.subtract(_this.one, _this.g), gradientSquare);
                 var variable = math.scaledArrayAdd(_this.c, math.divide(gradient, math.add(math.sqrt(cache), _this.eps)), _this.one, oldVariable);
                 _this.accumulatedSquaredGradients.set(node.output, keep(cache));
                 activationArrayMap.set(node.output, keep(variable));
@@ -3994,7 +4072,7 @@ var RMSPropOptimizer = (function (_super) {
 }(optimizer_1.Optimizer));
 exports.RMSPropOptimizer = RMSPropOptimizer;
 
-},{"../../math/ndarray":60,"../tensor_array_map":48,"./optimizer":42}],44:[function(require,module,exports){
+},{"../../math/ndarray":63,"../tensor_array_map":49,"./optimizer":43}],45:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -4041,7 +4119,7 @@ var SGDOptimizer = (function (_super) {
 }(optimizer_1.Optimizer));
 exports.SGDOptimizer = SGDOptimizer;
 
-},{"../tensor_array_map":48,"./optimizer":42}],45:[function(require,module,exports){
+},{"../tensor_array_map":49,"./optimizer":43}],46:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function defaultCompare(a, b) {
@@ -4172,7 +4250,7 @@ var PriorityQueue = (function () {
 }());
 exports.PriorityQueue = PriorityQueue;
 
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("../math/ndarray");
@@ -4310,7 +4388,7 @@ var Session = (function () {
 }());
 exports.Session = Session;
 
-},{"../math/ndarray":60,"../util":91,"./operation_emitter":18,"./session_util":47,"./tensor_array_map":48}],47:[function(require,module,exports){
+},{"../math/ndarray":63,"../util":95,"./operation_emitter":18,"./session_util":48,"./tensor_array_map":49}],48:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("../math/ndarray");
@@ -4438,7 +4516,7 @@ function throwErrorIfEvaluationSetContainsPlaceholderNodes(evaluationSet) {
 }
 exports.throwErrorIfEvaluationSetContainsPlaceholderNodes = throwErrorIfEvaluationSetContainsPlaceholderNodes;
 
-},{"../math/ndarray":60,"../util":91,"./graph":16,"./graph_util":17}],48:[function(require,module,exports){
+},{"../math/ndarray":63,"../util":95,"./graph":16,"./graph_util":17}],49:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -4458,11 +4536,11 @@ var TensorArrayMapBase = (function () {
     TensorArrayMapBase.prototype.get = function (tensor, skipChecks) {
         if (skipChecks === void 0) { skipChecks = false; }
         if (!skipChecks && this.dict[tensor.id] === undefined) {
-            throw new Error('tensor ' + tensor.id + ' not in array map.');
+            throw new Error("tensor " + tensor.id + " not in array map.");
         }
         var nda = this.dict[tensor.id];
         if (!skipChecks && nda === null) {
-            throw new Error('tensor ' + tensor.id + ' has null array.');
+            throw new Error("tensor " + tensor.id + " has null array.");
         }
         return nda;
     };
@@ -4498,7 +4576,7 @@ var TensorArrayMapBase = (function () {
     };
     TensorArrayMapBase.prototype.hasNullArray = function (tensor) {
         if (this.dict[tensor.id] === undefined) {
-            throw new Error('tensor ' + tensor.id + ' not in array map.');
+            throw new Error("tensor " + tensor.id + " not in array map.");
         }
         return this.dict[tensor.id] === null;
     };
@@ -4538,7 +4616,7 @@ var SummedTensorArrayMap = (function (_super) {
 }(TensorArrayMapBase));
 exports.SummedTensorArrayMap = SummedTensorArrayMap;
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var session_1 = require("./graph/session");
@@ -4761,7 +4839,7 @@ var GraphRunner = (function () {
 }());
 exports.GraphRunner = GraphRunner;
 
-},{"./graph/session":46,"./math/ndarray":60}],50:[function(require,module,exports){
+},{"./graph/session":47,"./math/ndarray":63}],51:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var xhr_dataset = require("./data/xhr-dataset");
@@ -4780,6 +4858,8 @@ var test_util = require("./test_util");
 exports.test_util = test_util;
 var util = require("./util");
 exports.util = util;
+var version_1 = require("./version");
+exports.version = version_1.version;
 var checkpoint_loader_1 = require("./data/checkpoint_loader");
 exports.CheckpointLoader = checkpoint_loader_1.CheckpointLoader;
 var dataset_1 = require("./data/dataset");
@@ -4799,6 +4879,10 @@ var adadelta_optimizer_1 = require("./graph/optimizers/adadelta_optimizer");
 exports.AdadeltaOptimizer = adadelta_optimizer_1.AdadeltaOptimizer;
 var adagrad_optimizer_1 = require("./graph/optimizers/adagrad_optimizer");
 exports.AdagradOptimizer = adagrad_optimizer_1.AdagradOptimizer;
+var adam_optimizer_1 = require("./graph/optimizers/adam_optimizer");
+exports.AdamOptimizer = adam_optimizer_1.AdamOptimizer;
+var adamax_optimizer_1 = require("./graph/optimizers/adamax_optimizer");
+exports.AdamaxOptimizer = adamax_optimizer_1.AdamaxOptimizer;
 var momentum_optimizer_1 = require("./graph/optimizers/momentum_optimizer");
 exports.MomentumOptimizer = momentum_optimizer_1.MomentumOptimizer;
 var optimizer_1 = require("./graph/optimizers/optimizer");
@@ -4807,8 +4891,6 @@ var rmsprop_optimizer_1 = require("./graph/optimizers/rmsprop_optimizer");
 exports.RMSPropOptimizer = rmsprop_optimizer_1.RMSPropOptimizer;
 var sgd_optimizer_1 = require("./graph/optimizers/sgd_optimizer");
 exports.SGDOptimizer = sgd_optimizer_1.SGDOptimizer;
-var adam_optimizer_1 = require("./graph/optimizers/adam_optimizer");
-exports.AdamOptimizer = adam_optimizer_1.AdamOptimizer;
 var session_1 = require("./graph/session");
 exports.CostReduction = session_1.CostReduction;
 exports.Session = session_1.Session;
@@ -4841,7 +4923,7 @@ exports.Scalar = ndarray_1.Scalar;
 var gpgpu_context_1 = require("./math/webgl/gpgpu_context");
 exports.GPGPUContext = gpgpu_context_1.GPGPUContext;
 
-},{"./data/checkpoint_loader":10,"./data/dataset":11,"./data/input_provider":12,"./data/xhr-dataset":13,"./environment":15,"./graph/graph":16,"./graph/optimizers/adadelta_optimizer":38,"./graph/optimizers/adagrad_optimizer":39,"./graph/optimizers/adam_optimizer":40,"./graph/optimizers/momentum_optimizer":41,"./graph/optimizers/optimizer":42,"./graph/optimizers/rmsprop_optimizer":43,"./graph/optimizers/sgd_optimizer":44,"./graph/session":46,"./graph_runner":49,"./initializers":51,"./math/conv_util":54,"./math/math":57,"./math/math_cpu":58,"./math/math_gpu":59,"./math/ndarray":60,"./math/webgl/gpgpu_context":71,"./math/webgl/gpgpu_util":73,"./math/webgl/render_ndarray_gpu_util":82,"./math/webgl/webgl_util":89,"./test_util":90,"./util":91}],51:[function(require,module,exports){
+},{"./data/checkpoint_loader":10,"./data/dataset":11,"./data/input_provider":12,"./data/xhr-dataset":13,"./environment":15,"./graph/graph":16,"./graph/optimizers/adadelta_optimizer":38,"./graph/optimizers/adagrad_optimizer":39,"./graph/optimizers/adam_optimizer":40,"./graph/optimizers/adamax_optimizer":41,"./graph/optimizers/momentum_optimizer":42,"./graph/optimizers/optimizer":43,"./graph/optimizers/rmsprop_optimizer":44,"./graph/optimizers/sgd_optimizer":45,"./graph/session":47,"./graph_runner":50,"./initializers":52,"./math/conv_util":57,"./math/math":60,"./math/math_cpu":61,"./math/math_gpu":62,"./math/ndarray":63,"./math/webgl/gpgpu_context":74,"./math/webgl/gpgpu_util":76,"./math/webgl/render_ndarray_gpu_util":85,"./math/webgl/webgl_util":93,"./test_util":94,"./util":95,"./version":96}],52:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("./math/ndarray");
@@ -4866,7 +4948,7 @@ var VarianceScalingInitializer = (function () {
             n = (inputUnits + outputUnits) / 2;
         }
         else {
-            throw new Error('Unexpected mode for variance scaling initializer: ' + this.mode);
+            throw new Error("Unexpected mode for variance scaling initializer: " + this.mode);
         }
         if (this.distribution === 'normal') {
             return ndarray_1.NDArray.randTruncatedNormal(weightsShape, 0.0, Math.sqrt(this.scale / n));
@@ -4875,8 +4957,8 @@ var VarianceScalingInitializer = (function () {
             return ndarray_1.NDArray.randUniform(weightsShape, 0.0, Math.sqrt(3 * this.scale / n));
         }
         else {
-            throw new Error('Unexpected distribution for variance scaling initializer: ' +
-                this.distribution);
+            throw new Error("Unexpected distribution for variance scaling initializer: " +
+                ("" + this.distribution));
         }
     };
     return VarianceScalingInitializer;
@@ -4965,7 +5047,7 @@ var RandomUniformInitializer = (function () {
 }());
 exports.RandomUniformInitializer = RandomUniformInitializer;
 
-},{"./math/ndarray":60}],52:[function(require,module,exports){
+},{"./math/ndarray":63}],53:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("./ndarray");
@@ -5036,7 +5118,113 @@ var SquareFunc = (function () {
 }());
 exports.SquareFunc = SquareFunc;
 
-},{"./ndarray":60}],53:[function(require,module,exports){
+},{"./ndarray":63}],54:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function axesAreInnerMostDims(axes, rank) {
+    for (var i = 0; i < axes.length; ++i) {
+        if (axes[axes.length - i - 1] !== rank - 1 - i) {
+            return false;
+        }
+    }
+    return true;
+}
+exports.axesAreInnerMostDims = axesAreInnerMostDims;
+function combineLocations(outputLoc, reduceLoc, axes) {
+    var rank = outputLoc.length + reduceLoc.length;
+    var loc = [];
+    var outIdx = 0;
+    var reduceIdx = 0;
+    for (var dim = 0; dim < rank; dim++) {
+        if (axes.indexOf(dim) === -1) {
+            loc.push(outputLoc[outIdx++]);
+        }
+        else {
+            loc.push(reduceLoc[reduceIdx++]);
+        }
+    }
+    return loc;
+}
+exports.combineLocations = combineLocations;
+function computeOutAndReduceShapes(aShape, axes) {
+    var outShape = [];
+    var rank = aShape.length;
+    for (var dim = 0; dim < rank; dim++) {
+        if (axes.indexOf(dim) === -1) {
+            outShape.push(aShape[dim]);
+        }
+    }
+    var reduceShape = axes.map(function (dim) { return aShape[dim]; });
+    return [outShape, reduceShape];
+}
+exports.computeOutAndReduceShapes = computeOutAndReduceShapes;
+function expandShapeToKeepDim(shape, axes) {
+    var reduceSubShape = axes.map(function (x) { return 1; });
+    return combineLocations(shape, reduceSubShape, axes);
+}
+exports.expandShapeToKeepDim = expandShapeToKeepDim;
+function parseAxisParam(axis, shape) {
+    if (axis == null) {
+        axis = shape.map(function (s, i) { return i; });
+    }
+    else if (typeof (axis) === 'number') {
+        axis = [axis];
+    }
+    return axis;
+}
+exports.parseAxisParam = parseAxisParam;
+function assertAxesAreInnerMostDims(msg, axes, rank) {
+    if (!axesAreInnerMostDims(axes, rank)) {
+        throw new Error(msg + " supports only inner-most axes for now. " +
+            ("Got axes " + axes + " and rank-" + rank + " input."));
+    }
+}
+exports.assertAxesAreInnerMostDims = assertAxesAreInnerMostDims;
+
+},{}],55:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function getBroadcastDims(inShape, outShape) {
+    var inRank = inShape.length;
+    var dims = [];
+    for (var i = 0; i < inRank; i++) {
+        var dim = inRank - 1 - i;
+        var a = inShape[dim] || 1;
+        var b = outShape[outShape.length - 1 - i] || 1;
+        if (b > 1 && a === 1) {
+            dims.unshift(dim);
+        }
+    }
+    return dims;
+}
+exports.getBroadcastDims = getBroadcastDims;
+function broadcastDimsAreOuter(dims) {
+    for (var i = 0; i < dims.length; i++) {
+        if (dims[i] !== i) {
+            return false;
+        }
+    }
+    return true;
+}
+exports.broadcastDimsAreOuter = broadcastDimsAreOuter;
+function assertAndGetBroadcastShape(shapeA, shapeB) {
+    var result = [];
+    var errMsg = "Operands could not be broadcast together with shapes " +
+        (shapeA + " and " + shapeB + ".");
+    var l = Math.max(shapeA.length, shapeB.length);
+    for (var i = 0; i < l; i++) {
+        var a = shapeA[shapeA.length - i - 1] || 1;
+        var b = shapeB[shapeB.length - i - 1] || 1;
+        if (a > 1 && b > 1 && a !== b) {
+            throw Error(errMsg);
+        }
+        result.unshift(Math.max(a, b));
+    }
+    return result;
+}
+exports.assertAndGetBroadcastShape = assertAndGetBroadcastShape;
+
+},{}],56:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../util");
@@ -5061,7 +5249,7 @@ function computeOutShape(x1Shape, x2Shape, axis) {
 }
 exports.computeOutShape = computeOutShape;
 
-},{"../util":91}],54:[function(require,module,exports){
+},{"../util":95}],57:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../util");
@@ -5148,22 +5336,22 @@ function computeDilatedRC(rc, origStride) {
 }
 exports.computeDilatedRC = computeDilatedRC;
 
-},{"../util":91}],55:[function(require,module,exports){
+},{"../util":95}],58:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function validateShapes(sourceSize, destSize) {
     var srcArea = sourceSize[0] * sourceSize[1];
     var dstArea = destSize[0] * destSize[1];
     if (srcArea !== dstArea) {
-        var srcStr = '[' + sourceSize[0] + ', ' + sourceSize[1] + ']';
-        var dstStr = '[' + destSize[0] + ', ' + destSize[1] + ']';
-        throw new Error('copy2D shapes have different areas:\n  sourceSize ' + srcStr +
-            ', area ' + srcArea + '\n  destSize ' + dstStr + ', area ' + dstArea);
+        var srcStr = "[" + sourceSize[0] + ", " + sourceSize[1] + "]";
+        var dstStr = "[" + destSize[0] + ", " + destSize[1] + "]";
+        throw new Error("copy2D shapes have different areas:\n  sourceSize " + srcStr +
+            (", area " + srcArea + "\n  destSize " + dstStr + ", area " + dstArea));
     }
 }
 exports.validateShapes = validateShapes;
 
-},{}],56:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ndarray_1 = require("./ndarray");
@@ -5189,15 +5377,23 @@ var SquareCostFunc = (function () {
 }());
 exports.SquareCostFunc = SquareCostFunc;
 
-},{"./ndarray":60}],57:[function(require,module,exports){
+},{"./ndarray":63}],60:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../util");
+var axis_util = require("./axis_util");
+var broadcast_util = require("./broadcast_util");
 var concat_util = require("./concat_util");
 var conv_util = require("./conv_util");
 var copy2d_util = require("./copy2d_util");
 var ndarray_1 = require("./ndarray");
 var slice_util = require("./slice_util");
+var SumTypesMap;
+(function (SumTypesMap) {
+    SumTypesMap["float32"] = "float32";
+    SumTypesMap["int32"] = "int32";
+    SumTypesMap["bool"] = "int32";
+})(SumTypesMap = exports.SumTypesMap || (exports.SumTypesMap = {}));
 var NDArrayMath = (function () {
     function NDArrayMath(safeMode) {
         this.safeMode = safeMode;
@@ -5212,8 +5408,14 @@ var NDArrayMath = (function () {
         var keepFn = function (ndarray) { return _this.keep(ndarray); };
         var trackFn = function (ndarray) { return _this.track(ndarray); };
         var result = scopeFn(keepFn, trackFn);
-        this.endScope(result);
-        return result;
+        if (result instanceof Promise) {
+            result.then(function (r) { return _this.endScope(r); });
+            return result;
+        }
+        else {
+            this.endScope(result);
+            return result;
+        }
     };
     NDArrayMath.prototype.enableDebugMode = function () {
         this.debugMode = true;
@@ -5265,7 +5467,7 @@ var NDArrayMath = (function () {
     };
     NDArrayMath.prototype.isNDArrayDataInList = function (ndarray, ndarrayList) {
         for (var i = 0; i < ndarrayList.length; i++) {
-            if (ndarrayList && ndarrayList[i] && ndarrayList[i].getData && (ndarrayList[i].getData() === ndarray.getData())) {
+            if (ndarrayList[i] && ndarrayList[i].getData && ndarrayList[i].getData() === ndarray.getData()) {
                 return true;
             }
         }
@@ -5284,9 +5486,9 @@ var NDArrayMath = (function () {
         this.activeScopeNDArraysToKeep.push(result);
         return result;
     };
-    NDArrayMath.prototype.checkForNaN = function (vals, name) {
+    NDArrayMath.prototype.checkForNaN = function (vals, dtype, name) {
         for (var i = 0; i < vals.length; i++) {
-            if (isNaN(vals[i])) {
+            if (util.isValNaN(vals[i], dtype)) {
                 throw Error("The result of the last math." + name + " has NaNs.");
             }
         }
@@ -5300,6 +5502,9 @@ var NDArrayMath = (function () {
                     'leaks.');
             }
             return result;
+        }
+        if (!result || !result.getData || !(result instanceof ndarray_1.NDArray)) {
+            throw new Error("Tracking data not of type NDArray " + result);
         }
         this.activeScope.push(result);
         return result;
@@ -5327,13 +5532,13 @@ var NDArrayMath = (function () {
         var result = f();
         if (this.debugMode) {
             var vals = result.getValues();
-            var time = util.rightPad((performance.now() - start) + 'ms', 9);
+            var time = util.rightPad(performance.now() - start + "ms", 9);
             var paddedName = util.rightPad(name, 25);
             var rank = result.rank;
             var size = result.size;
-            var shape = util.rightPad(result.shape + '', 14);
+            var shape = util.rightPad(result.shape.toString(), 14);
             console.log("%c" + paddedName + "\t%c" + time + "\t%c" + rank + "D " + shape + "\t%c" + size, 'font-weight:bold', 'color:red', 'color:blue', 'color: orange');
-            this.checkForNaN(vals, name);
+            this.checkForNaN(vals, result.dtype, name);
         }
         return this.track(result);
     };
@@ -5347,11 +5552,11 @@ var NDArrayMath = (function () {
         return this.matMul(v.as2D(1, -1), matrix).as1D();
     };
     NDArrayMath.prototype.matrixTimesVector = function (matrix, v) {
-        util.assert(v.rank === 1, "Error in vectorTimesMatrix: second input must rank 1, but got " +
+        util.assert(v.rank === 1, "Error in matrixTimesVector: second input must rank 1, but got " +
             ("rank " + v.rank + "."));
-        util.assert(matrix.rank === 2, "Error in vectorTimesMatrix: first input must be a rank 2, but got " +
+        util.assert(matrix.rank === 2, "Error in matrixTimesVector: first input must be a rank 2, but got " +
             ("rank " + matrix.rank + "."));
-        util.assert(v.size === matrix.shape[1], "Error in vectorTimesMatrix: size of first rank 1 input " + v.size + " " +
+        util.assert(v.size === matrix.shape[1], "Error in matrixTimesVector: size of first rank 1 input " + v.size + " " +
             "must match inner dimension of second rank 2 input, but got " +
             ("shape " + matrix.shape + "."));
         return this.matMul(matrix, v.as2D(-1, 1)).as1D();
@@ -5433,26 +5638,64 @@ var NDArrayMath = (function () {
         concat_util.assertParams(ndarray1.shape, ndarray2.shape, axis);
         return this.executeOp('concat4D', function () { return _this.concat4DInternal(ndarray1, ndarray2, axis); });
     };
-    NDArrayMath.prototype.logSumExp = function (ndarray) {
+    NDArrayMath.prototype.logSumExp = function (input, axis, keepDims) {
         var _this = this;
-        return this.executeOp('logSumExp', function () { return _this.logSumExpInternal(ndarray); });
+        if (axis === void 0) { axis = null; }
+        if (keepDims === void 0) { keepDims = false; }
+        var axes = axis_util.parseAxisParam(axis, input.shape);
+        axis_util.assertAxesAreInnerMostDims('logSumExp', axes, input.rank);
+        return this.executeOp('logSumExp', function () {
+            var res = _this.logSumExpInternal(input, axes);
+            if (keepDims) {
+                var newShape = axis_util.expandShapeToKeepDim(res.shape, axes);
+                return res.reshape(newShape);
+            }
+            return res;
+        });
     };
-    NDArrayMath.prototype.sum = function (ndarray) {
+    NDArrayMath.prototype.sum = function (input, axis, keepDims) {
         var _this = this;
-        return this.executeOp('sum', function () { return _this.sumInternal(ndarray); });
+        if (axis === void 0) { axis = null; }
+        if (keepDims === void 0) { keepDims = false; }
+        var axes = axis_util.parseAxisParam(axis, input.shape);
+        axis_util.assertAxesAreInnerMostDims('sum', axes, input.rank);
+        return this.executeOp('sum', function () {
+            var res = _this.sumInternal(input, axes);
+            if (keepDims) {
+                var newShape = axis_util.expandShapeToKeepDim(res.shape, axes);
+                return res.reshape(newShape);
+            }
+            return res;
+        });
     };
-    NDArrayMath.prototype.argMin = function (ndarray) {
+    NDArrayMath.prototype.argMin = function (input, axis) {
         var _this = this;
-        return this.executeOp('argMin', function () { return _this.argMinInternal(ndarray); });
+        if (axis === void 0) { axis = null; }
+        var axes = axis_util.parseAxisParam(axis, input.shape);
+        axis_util.assertAxesAreInnerMostDims('argMin', axes, input.rank);
+        return this.executeOp('argMin', function () { return _this.argMinInternal(input, axes); });
     };
-    NDArrayMath.prototype.argMax = function (ndarray) {
+    NDArrayMath.prototype.argMax = function (input, axis) {
         var _this = this;
-        return this.executeOp('argMax', function () { return _this.argMaxInternal(ndarray); });
+        if (axis === void 0) { axis = null; }
+        var axes = axis_util.parseAxisParam(axis, input.shape);
+        axis_util.assertAxesAreInnerMostDims('argMax', axes, input.rank);
+        return this.executeOp('argMax', function () { return _this.argMaxInternal(input, axes); });
     };
     NDArrayMath.prototype.argMaxEquals = function (x1, x2) {
         var _this = this;
         util.assertShapesMatch(x1.shape, x2.shape, 'Error in argMaxEquals: ');
-        return this.executeOp('argMaxEquals', function () { return _this.argMaxEqualsInternal(x1, x2); });
+        return this.executeOp('argMaxEquals', function () { return _this.scope(function () {
+            return _this.equal(_this.argMax(x1), _this.argMax(x2));
+        }); });
+    };
+    NDArrayMath.prototype.equal = function (x, y) {
+        var _this = this;
+        return this.executeOp('equal', function () { return _this.equalInternal(x, y); });
+    };
+    NDArrayMath.prototype.equalStrict = function (x, y) {
+        util.assertShapesMatch(x.shape, y.shape, 'Error in equalStrict: ');
+        return this.equal(x, y);
     };
     NDArrayMath.prototype.topK = function (ndarray, k) {
         var _this = this;
@@ -5466,29 +5709,65 @@ var NDArrayMath = (function () {
         this.track(result.indices);
         return result;
     };
-    NDArrayMath.prototype.min = function (ndarray) {
+    NDArrayMath.prototype.min = function (input, axis, keepDims) {
         var _this = this;
-        return this.executeOp('min', function () { return _this.minInternal(ndarray); });
+        if (axis === void 0) { axis = null; }
+        if (keepDims === void 0) { keepDims = false; }
+        var axes = axis_util.parseAxisParam(axis, input.shape);
+        axis_util.assertAxesAreInnerMostDims('min', axes, input.rank);
+        return this.executeOp('min', function () {
+            var res = _this.minInternal(input, axes);
+            if (keepDims) {
+                var newShape = axis_util.expandShapeToKeepDim(res.shape, axes);
+                return res.reshape(newShape);
+            }
+            return res;
+        });
     };
-    NDArrayMath.prototype.max = function (ndarray) {
+    NDArrayMath.prototype.max = function (input, axis, keepDims) {
         var _this = this;
-        return this.executeOp('max', function () { return _this.maxInternal(ndarray); });
+        if (axis === void 0) { axis = null; }
+        if (keepDims === void 0) { keepDims = false; }
+        var axes = axis_util.parseAxisParam(axis, input.shape);
+        axis_util.assertAxesAreInnerMostDims('max', axes, input.rank);
+        return this.executeOp('max', function () {
+            var res = _this.maxInternal(input, axes);
+            if (keepDims) {
+                var newShape = axis_util.expandShapeToKeepDim(res.shape, axes);
+                return res.reshape(newShape);
+            }
+            return res;
+        });
     };
-    NDArrayMath.prototype.softmax = function (x) {
+    NDArrayMath.prototype.softmax = function (logits, dim) {
         var _this = this;
+        if (dim === void 0) { dim = -1; }
+        if (dim === -1) {
+            dim = logits.rank - 1;
+        }
+        if (dim !== logits.rank - 1) {
+            throw Error('Softmax along a non-last dimension is not yet supported. ' +
+                ("Logits was rank " + logits.rank + " and dim was " + dim));
+        }
         return this.executeOp('softmax', function () {
             return _this.scope(function () {
-                var lse = _this.logSumExp(x);
-                var logResult = _this.arrayMinusScalar(x, lse);
+                var lse = _this.logSumExp(logits, [dim], true);
+                var logResult = _this.subtract(logits, lse);
                 return _this.exp(logResult);
             });
         });
     };
     NDArrayMath.prototype.switchDim = function (a, newDim) {
+        return this.transpose(a, newDim);
+    };
+    NDArrayMath.prototype.transpose = function (a, perm) {
         var _this = this;
-        util.assert(a.rank === newDim.length, "Error in switchDim: length of input shape " + a.shape + " " +
-            ("must match size of newDim array " + newDim + "."));
-        return this.executeOp('switchDim', function () { return _this.switchDimInternal(a, newDim); });
+        if (perm == null) {
+            perm = a.shape.map(function (s, i) { return i; }).reverse();
+        }
+        util.assert(a.rank === perm.length, "Error in switchDim: length of input shape " + a.shape + " " +
+            ("must match size of newDim array " + perm + "."));
+        return this.executeOp('transpose', function () { return _this.transposeInternal(a, perm); });
     };
     NDArrayMath.prototype.scalarPlusArray = function (c, a) {
         util.assert(c.size === 1, "Error in scalarPlusArray: first argument must be rank 0, but got " +
@@ -5498,12 +5777,12 @@ var NDArrayMath = (function () {
     NDArrayMath.prototype.scalarMinusArray = function (c, a) {
         util.assert(c.size === 1, "Error in scalarMinusArray: first argument must be rank 0, but got " +
             ("rank " + c.rank + "."));
-        return this.sub(c, a);
+        return this.subtract(c, a);
     };
     NDArrayMath.prototype.arrayMinusScalar = function (a, c) {
         util.assert(c.size === 1, "Error in arrayMinusScalar: second argument must be rank 0, but " +
             ("got rank " + c.rank + "."));
-        return this.sub(a, c);
+        return this.subtract(a, c);
     };
     NDArrayMath.prototype.neg = function (a) {
         var _this = this;
@@ -5511,25 +5790,28 @@ var NDArrayMath = (function () {
     };
     NDArrayMath.prototype.add = function (a, b) {
         var _this = this;
-        util.assertAndGetBroadcastedShape(a.shape, b.shape);
+        broadcast_util.assertAndGetBroadcastShape(a.shape, b.shape);
         return this.executeOp('add', function () { return _this.addInternal(a, b); });
     };
     NDArrayMath.prototype.addStrict = function (a, b) {
         util.assertShapesMatch(a.shape, b.shape, 'Error in addStrict: ');
         return this.add(a, b);
     };
-    NDArrayMath.prototype.sub = function (a, b) {
+    NDArrayMath.prototype.subtract = function (a, b) {
         var _this = this;
-        util.assertAndGetBroadcastedShape(a.shape, b.shape);
-        return this.executeOp('sub', function () { return _this.subInternal(a, b); });
+        broadcast_util.assertAndGetBroadcastShape(a.shape, b.shape);
+        return this.executeOp('subtract', function () { return _this.subtractInternal(a, b); });
+    };
+    NDArrayMath.prototype.sub = function (a, b) {
+        return this.subtract(a, b);
     };
     NDArrayMath.prototype.subStrict = function (a, b) {
         util.assertShapesMatch(a.shape, b.shape, 'Error in subStrict: ');
-        return this.sub(a, b);
+        return this.subtract(a, b);
     };
     NDArrayMath.prototype.multiply = function (a, b) {
         var _this = this;
-        util.assertAndGetBroadcastedShape(a.shape, b.shape);
+        broadcast_util.assertAndGetBroadcastShape(a.shape, b.shape);
         return this.executeOp('multiply', function () { return _this.multiplyInternal(a, b); });
     };
     NDArrayMath.prototype.elementWiseMul = function (a, b) {
@@ -5541,7 +5823,7 @@ var NDArrayMath = (function () {
     };
     NDArrayMath.prototype.divide = function (a, b) {
         var _this = this;
-        util.assertAndGetBroadcastedShape(a.shape, b.shape);
+        broadcast_util.assertAndGetBroadcastShape(a.shape, b.shape);
         return this.executeOp('divide', function () { return _this.divideInternal(a, b); });
     };
     NDArrayMath.prototype.divideStrict = function (a, b) {
@@ -5557,6 +5839,14 @@ var NDArrayMath = (function () {
         util.assert(c.size === 1, "Error in arrayDividedByScalar: second argument must be rank 0, " +
             ("but got NDArray of rank " + c.rank + "."));
         return this.divide(a, c);
+    };
+    NDArrayMath.prototype.ceil = function (ndarray) {
+        var _this = this;
+        return this.executeOp('ceil', function () { return _this.ceilInternal(ndarray); });
+    };
+    NDArrayMath.prototype.floor = function (ndarray) {
+        var _this = this;
+        return this.executeOp('floor', function () { return _this.floorInternal(ndarray); });
     };
     NDArrayMath.prototype.exp = function (ndarray) {
         var _this = this;
@@ -5574,9 +5864,26 @@ var NDArrayMath = (function () {
         var _this = this;
         return this.executeOp('abs', function () { return _this.absInternal(ndarray); });
     };
+    NDArrayMath.prototype.clip = function (ndarray, min, max) {
+        var _this = this;
+        util.assert((min <= max), "Error in clip: min (" + min + ") must be" +
+            ("less than or equal to max (" + max + ")."));
+        return this.executeOp('clip', function () { return _this.clipInternal(ndarray, min, max); });
+    };
     NDArrayMath.prototype.relu = function (ndarray) {
         var _this = this;
         return this.executeOp('relu', function () { return _this.reluInternal(ndarray); });
+    };
+    NDArrayMath.prototype.elu = function (ndarray) {
+        var _this = this;
+        return this.executeOp('elu', function () { return _this.eluInternal(ndarray); });
+    };
+    NDArrayMath.prototype.leakyRelu = function (ndarray, alpha) {
+        var _this = this;
+        if (alpha === void 0) { alpha = 0.2; }
+        return this.executeOp('leakyRelu', function () {
+            return _this.leakyReluInternal(ndarray, alpha);
+        });
     };
     NDArrayMath.prototype.sigmoid = function (ndarray) {
         var _this = this;
@@ -5713,7 +6020,7 @@ var NDArrayMath = (function () {
     };
     NDArrayMath.prototype.maxPool = function (x, filterSize, strides, pad) {
         var _this = this;
-        util.assert(x.rank === 3, 'Error in maxPool: x must be rank 3 but got rank ' + x.rank + '.');
+        util.assert(x.rank === 3, "Error in maxPool: x must be rank 3 but got rank " + x.rank + ".");
         var _a = parseTupleParam(filterSize), filterHeight = _a[0], filterWidth = _a[1];
         var outDepth = x.shape[2];
         var _b = parseTupleParam(strides), strideHeight = _b[0], strideWidth = _b[1];
@@ -5778,8 +6085,6 @@ var NDArrayMath = (function () {
         return this.executeOp('batchNorm3D', function () { return _this.batchNormalization3DInternal(x, mean, variance, varianceEpsilon, scale, offset); });
     };
     NDArrayMath.prototype.multiRNNCell = function (lstmCells, data, c, h) {
-        util.assert(data.shape[0] === 1, "Error in multiRNNCell: first dimension of data is " + data.shape[0] + ", " +
-            "but batch sizes > 1 are not yet supported.");
         var res = this.scope(function () {
             var input = data;
             var newStates = [];
@@ -5802,21 +6107,21 @@ var NDArrayMath = (function () {
     NDArrayMath.prototype.basicLSTMCell = function (forgetBias, lstmKernel, lstmBias, data, c, h) {
         var _this = this;
         var res = this.scope(function () {
-            util.assert(data.shape[0] === 1, "Error in multiRNNCell: first dimension of data is " +
-                (data.shape[0] + ", but batch sizes > 1 are not yet supported."));
-            var combined = _this.concat1D(data.as1D(), h.as1D());
-            var weighted = _this.vectorTimesMatrix(combined, lstmKernel);
-            var res = _this.addStrict(weighted, lstmBias);
-            var sliceSize = res.size / 4;
-            var i = _this.slice1D(res, 0, sliceSize);
-            var j = _this.slice1D(res, sliceSize, sliceSize);
-            var f = _this.slice1D(res, sliceSize * 2, sliceSize);
-            var o = _this.slice1D(res, sliceSize * 3, sliceSize);
-            var newC = _this.addStrict(_this.multiplyStrict(c.as1D(), _this.sigmoid(_this.scalarPlusArray(forgetBias, f))), _this.multiplyStrict(_this.sigmoid(i), _this.tanh(j)));
+            var combined = _this.concat2D(data, h, 1);
+            var weighted = _this.matMul(combined, lstmKernel);
+            var res = _this.add(weighted, lstmBias);
+            var batchSize = res.shape[0];
+            var sliceCols = res.shape[1] / 4;
+            var sliceSize = [batchSize, sliceCols];
+            var i = _this.slice2D(res, [0, 0], sliceSize);
+            var j = _this.slice2D(res, [0, sliceCols], sliceSize);
+            var f = _this.slice2D(res, [0, sliceCols * 2], sliceSize);
+            var o = _this.slice2D(res, [0, sliceCols * 3], sliceSize);
+            var newC = _this.addStrict(_this.multiplyStrict(c, _this.sigmoid(_this.scalarPlusArray(forgetBias, f))), _this.multiplyStrict(_this.sigmoid(i), _this.tanh(j)));
             var newH = _this.multiplyStrict(_this.tanh(newC), _this.sigmoid(o));
             return [newC, newH];
         });
-        return [res[0].as2D(1, -1), res[1].as2D(1, -1)];
+        return [res[0], res[1]];
     };
     NDArrayMath.prototype.multinomial = function (probabilities, numSamples, seed) {
         var _this = this;
@@ -5825,8 +6130,21 @@ var NDArrayMath = (function () {
             throw new Error("Error in multinomial: you need at least 2 outcomes, but got " +
                 (numOutcomes + "."));
         }
+        if (probabilities.rank > 2) {
+            throw new Error("Rank of probabilities must be 1 or 2, but is " + probabilities.rank);
+        }
         seed = seed || Math.random();
-        return this.executeOp('multinomial', function () { return _this.multinomialInternal(probabilities, numSamples, seed); });
+        var origRank = probabilities.rank;
+        if (probabilities.rank === 1) {
+            probabilities = probabilities.as2D(1, -1);
+        }
+        return this.executeOp('multinomial', function () {
+            var res = _this.multinomialInternal(probabilities, numSamples, seed);
+            if (origRank === 1) {
+                return res.as1D();
+            }
+            return res;
+        });
     };
     NDArrayMath.prototype.oneHot = function (indices, depth, onValue, offValue) {
         var _this = this;
@@ -5849,7 +6167,7 @@ function parseTupleParam(param) {
     return typeof param === 'number' ? [param, param] : param;
 }
 
-},{"../util":91,"./concat_util":53,"./conv_util":54,"./copy2d_util":55,"./ndarray":60,"./slice_util":61}],58:[function(require,module,exports){
+},{"../util":95,"./axis_util":54,"./broadcast_util":55,"./concat_util":56,"./conv_util":57,"./copy2d_util":58,"./ndarray":63,"./slice_util":64}],61:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -5864,6 +6182,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var seedrandom = require("seedrandom");
 var util = require("../util");
+var axis_util = require("./axis_util");
+var broadcast_util = require("./broadcast_util");
 var concat_util = require("./concat_util");
 var conv_util = require("./conv_util");
 var copy2D_util = require("./copy2d_util");
@@ -6037,16 +6357,11 @@ var NDArrayMathCPU = (function (_super) {
         return result;
     };
     NDArrayMathCPU.prototype.scaledArrayAddInternal = function (c1, a, c2, b) {
-        var newShape = util.assertAndGetBroadcastedShape(a.shape, b.shape);
-        var newValues = new Float32Array(util.sizeFromShape(newShape));
-        var aValues = a.getValues();
-        var bValues = b.getValues();
         var c1Val = c1.get();
         var c2Val = c2.get();
-        for (var i = 0; i < newValues.length; ++i) {
-            newValues[i] = c1Val * aValues[i % a.size] + c2Val * bValues[i % b.size];
-        }
-        return ndarray_1.NDArray.make(newShape, { values: newValues });
+        return this.broadcastedBinaryOp(a, b, 'float32', function (aVal, bVal) {
+            return c1Val * aVal + c2Val * bVal;
+        });
     };
     NDArrayMathCPU.prototype.negInternal = function (a) {
         return this.scalarTimesArray(ndarray_1.Scalar.NEG_ONE, a);
@@ -6054,7 +6369,7 @@ var NDArrayMathCPU = (function (_super) {
     NDArrayMathCPU.prototype.addInternal = function (a, b) {
         return this.scaledArrayAddInternal(ndarray_1.Scalar.ONE, a, ndarray_1.Scalar.ONE, b);
     };
-    NDArrayMathCPU.prototype.subInternal = function (a, b) {
+    NDArrayMathCPU.prototype.subtractInternal = function (a, b) {
         return this.scaledArrayAddInternal(ndarray_1.Scalar.ONE, a, ndarray_1.Scalar.NEG_ONE, b);
     };
     NDArrayMathCPU.prototype.matMulInternal = function (a, b, aOrientation, bOrientation) {
@@ -6089,7 +6404,7 @@ var NDArrayMathCPU = (function (_super) {
         return ndarray_1.Array2D.new([leftDim, rightDim], values);
     };
     NDArrayMathCPU.prototype.multiplyInternal = function (a, b) {
-        var newShape = util.assertAndGetBroadcastedShape(a.shape, b.shape);
+        var newShape = broadcast_util.assertAndGetBroadcastShape(a.shape, b.shape);
         var newValues = new Float32Array(util.sizeFromShape(newShape));
         var aValues = a.getValues();
         var bValues = b.getValues();
@@ -6099,7 +6414,7 @@ var NDArrayMathCPU = (function (_super) {
         return ndarray_1.NDArray.make(newShape, { values: newValues });
     };
     NDArrayMathCPU.prototype.divideInternal = function (a, b) {
-        var newShape = util.assertAndGetBroadcastedShape(a.shape, b.shape);
+        var newShape = broadcast_util.assertAndGetBroadcastShape(a.shape, b.shape);
         var newValues = new Float32Array(util.sizeFromShape(newShape));
         var aValues = a.getValues();
         var bValues = b.getValues();
@@ -6108,53 +6423,85 @@ var NDArrayMathCPU = (function (_super) {
         }
         return ndarray_1.NDArray.make(newShape, { values: newValues });
     };
-    NDArrayMathCPU.prototype.sumInternal = function (ndarray) {
-        var sum = 0;
-        var values = ndarray.getValues();
-        for (var i = 0; i < values.length; ++i) {
-            sum += values[i];
+    NDArrayMathCPU.prototype.sumInternal = function (input, axes) {
+        axis_util.assertAxesAreInnerMostDims('sum', axes, input.rank);
+        var _a = axis_util.computeOutAndReduceShapes(input.shape, axes), outShape = _a[0], reduceShape = _a[1];
+        var resultDtype = math_1.SumTypesMap[input.dtype];
+        var result = ndarray_1.NDArray.zeros(outShape, resultDtype);
+        var reduceSize = util.sizeFromShape(reduceShape);
+        var vals = result.getValues();
+        var aVals = input.getValues();
+        for (var i = 0; i < vals.length; ++i) {
+            var offset = i * reduceSize;
+            var sum = 0;
+            for (var j = 0; j < reduceSize; ++j) {
+                sum += aVals[offset + j];
+            }
+            vals[i] = sum;
         }
-        return ndarray_1.Scalar.new(sum);
+        return result;
     };
-    NDArrayMathCPU.prototype.argMinInternal = function (ndarray) {
-        var min = Number.MAX_VALUE;
-        var minIndex = -1;
-        var values = ndarray.getValues();
-        for (var i = 0; i < values.length; ++i) {
-            var value = values[i];
-            if (isNaN(value)) {
-                return ndarray_1.Scalar.new(NaN);
+    NDArrayMathCPU.prototype.argMinInternal = function (input, axes) {
+        axis_util.assertAxesAreInnerMostDims('argMax', axes, input.rank);
+        var _a = axis_util.computeOutAndReduceShapes(input.shape, axes), outShape = _a[0], reduceShape = _a[1];
+        var result = ndarray_1.NDArray.zeros(outShape, 'int32');
+        var reduceSize = util.sizeFromShape(reduceShape);
+        var vals = result.getValues();
+        var aVals = input.getValues();
+        for (var i = 0; i < vals.length; ++i) {
+            var offset = i * reduceSize;
+            var min = aVals[offset];
+            var minIndex = 0;
+            for (var j = 0; j < reduceSize; ++j) {
+                var value = aVals[offset + j];
+                if (isNaN(value)) {
+                    minIndex = util.NAN_INT32;
+                    break;
+                }
+                if (value < min) {
+                    min = value;
+                    minIndex = j;
+                }
             }
-            if (value < min) {
-                min = value;
-                minIndex = i;
-            }
+            vals[i] = minIndex;
         }
-        return ndarray_1.Scalar.new(minIndex);
+        return result;
     };
-    NDArrayMathCPU.prototype.argMaxInternal = function (ndarray) {
-        var max = Number.NEGATIVE_INFINITY;
-        var maxIndex = -1;
-        var values = ndarray.getValues();
-        for (var i = 0; i < values.length; ++i) {
-            var value = values[i];
-            if (isNaN(value)) {
-                return ndarray_1.Scalar.new(NaN);
+    NDArrayMathCPU.prototype.argMaxInternal = function (input, axes) {
+        axis_util.assertAxesAreInnerMostDims('argMax', axes, input.rank);
+        var _a = axis_util.computeOutAndReduceShapes(input.shape, axes), outShape = _a[0], reduceShape = _a[1];
+        var result = ndarray_1.NDArray.zeros(outShape, 'int32');
+        var reduceSize = util.sizeFromShape(reduceShape);
+        var vals = result.getValues();
+        var aVals = input.getValues();
+        for (var i = 0; i < vals.length; ++i) {
+            var offset = i * reduceSize;
+            var max = aVals[offset];
+            var maxIndex = 0;
+            for (var j = 0; j < reduceSize; ++j) {
+                var value = aVals[offset + j];
+                if (isNaN(value)) {
+                    maxIndex = util.NAN_INT32;
+                    break;
+                }
+                if (value > max) {
+                    max = value;
+                    maxIndex = j;
+                }
             }
-            if (value > max) {
-                max = value;
-                maxIndex = i;
-            }
+            vals[i] = maxIndex;
         }
-        return ndarray_1.Scalar.new(maxIndex);
+        return result;
     };
-    NDArrayMathCPU.prototype.argMaxEqualsInternal = function (x1, x2) {
-        var argMax1 = this.argMaxInternal(x1).get();
-        var argMax2 = this.argMaxInternal(x2).get();
-        if (isNaN(argMax1) || isNaN(argMax2)) {
-            return ndarray_1.Scalar.new(NaN);
-        }
-        return ndarray_1.Scalar.new(+(argMax1 === argMax2));
+    NDArrayMathCPU.prototype.equalInternal = function (a, b) {
+        return this.broadcastedBinaryOp(a, b, 'bool', function (aVal, bVal) {
+            if (util.isValNaN(aVal, a.dtype) || util.isValNaN(bVal, b.dtype)) {
+                return util.getNaN('bool');
+            }
+            else {
+                return (aVal === bVal) ? 1 : 0;
+            }
+        });
     };
     NDArrayMathCPU.prototype.topKInternal = function (ndarray, k) {
         var values = ndarray.getValues();
@@ -6173,33 +6520,69 @@ var NDArrayMathCPU = (function (_super) {
         }
         return { values: ndarray_1.Array1D.new(topkValues), indices: ndarray_1.Array1D.new(topkIndices) };
     };
-    NDArrayMathCPU.prototype.minInternal = function (ndarray) {
-        var values = ndarray.getValues();
-        var min = values[0];
-        for (var i = 1; i < values.length; ++i) {
-            var value = values[i];
-            if (isNaN(value)) {
-                return ndarray_1.Scalar.new(NaN);
+    NDArrayMathCPU.prototype.minInternal = function (input, axes) {
+        axis_util.assertAxesAreInnerMostDims('min', axes, input.rank);
+        var _a = axis_util.computeOutAndReduceShapes(input.shape, axes), outShape = _a[0], reduceShape = _a[1];
+        var result = ndarray_1.NDArray.zeros(outShape, input.dtype);
+        var reduceSize = util.sizeFromShape(reduceShape);
+        var vals = result.getValues();
+        var aVals = input.getValues();
+        for (var i = 0; i < vals.length; ++i) {
+            var offset = i * reduceSize;
+            var min = aVals[0];
+            for (var j = 0; j < reduceSize; ++j) {
+                var value = aVals[offset + j];
+                if (isNaN(value)) {
+                    min = Number.NaN;
+                    break;
+                }
+                if (value < min) {
+                    min = value;
+                }
             }
-            if (value < min) {
-                min = value;
-            }
+            vals[i] = min;
         }
-        return ndarray_1.Scalar.new(min);
+        return result;
     };
-    NDArrayMathCPU.prototype.maxInternal = function (ndarray) {
-        var values = ndarray.getValues();
-        var max = values[0];
-        for (var i = 1; i < values.length; ++i) {
-            var value = values[i];
-            if (isNaN(value)) {
-                return ndarray_1.Scalar.new(NaN);
+    NDArrayMathCPU.prototype.maxInternal = function (input, axes) {
+        axis_util.assertAxesAreInnerMostDims('max', axes, input.rank);
+        var _a = axis_util.computeOutAndReduceShapes(input.shape, axes), outShape = _a[0], reduceShape = _a[1];
+        var result = ndarray_1.NDArray.zeros(outShape, input.dtype);
+        var reduceSize = util.sizeFromShape(reduceShape);
+        var vals = result.getValues();
+        var aVals = input.getValues();
+        for (var i = 0; i < vals.length; ++i) {
+            var offset = i * reduceSize;
+            var max = aVals[0];
+            for (var j = 0; j < reduceSize; ++j) {
+                var value = aVals[offset + j];
+                if (isNaN(value)) {
+                    max = Number.NaN;
+                    break;
+                }
+                if (value > max) {
+                    max = value;
+                }
             }
-            if (value > max) {
-                max = value;
-            }
+            vals[i] = max;
         }
-        return ndarray_1.Scalar.new(max);
+        return result;
+    };
+    NDArrayMathCPU.prototype.ceilInternal = function (ndarray) {
+        var values = ndarray.getValues();
+        var newValues = new Float32Array(values.length);
+        for (var i = 0; i < values.length; ++i) {
+            newValues[i] = Math.ceil(values[i]);
+        }
+        return ndarray_1.NDArray.make(ndarray.shape, { values: newValues });
+    };
+    NDArrayMathCPU.prototype.floorInternal = function (ndarray) {
+        var values = ndarray.getValues();
+        var newValues = new Float32Array(values.length);
+        for (var i = 0; i < values.length; ++i) {
+            newValues[i] = Math.floor(values[i]);
+        }
+        return ndarray_1.NDArray.make(ndarray.shape, { values: newValues });
     };
     NDArrayMathCPU.prototype.expInternal = function (ndarray) {
         var values = ndarray.getValues();
@@ -6227,25 +6610,64 @@ var NDArrayMathCPU = (function (_super) {
         }
         return ndarray_1.NDArray.make(ndarray.shape, { values: newValues });
     };
-    NDArrayMathCPU.prototype.logSumExpInternal = function (ndarray) {
-        var xMax = this.max(ndarray);
-        var a = this.arrayMinusScalar(ndarray, xMax);
+    NDArrayMathCPU.prototype.logSumExpInternal = function (input, axes) {
+        axis_util.assertAxesAreInnerMostDims('logSumExp', axes, input.rank);
+        var xMax = this.max(input, axes, true);
+        var a = this.subtract(input, xMax);
         var b = this.exp(a);
-        var c = this.sum(b);
+        var c = this.sum(b, axes);
         var d = this.log(c);
-        var result = this.add(xMax, d);
-        xMax.dispose();
-        a.dispose();
-        b.dispose();
-        c.dispose();
-        d.dispose();
+        var result = this.add(xMax.reshape(d.shape), d);
         return result;
     };
-    NDArrayMathCPU.prototype.reluInternal = function (ndarray) {
+    NDArrayMathCPU.prototype.reluInternal = function (input) {
+        var res = ndarray_1.NDArray.zeros(input.shape, input.dtype);
+        var resVals = res.getValues();
+        var inVals = input.getValues();
+        for (var i = 0; i < inVals.length; ++i) {
+            var val = inVals[i];
+            if (util.isValNaN(val, input.dtype)) {
+                resVals[i] = util.getNaN(res.dtype);
+            }
+            else {
+                resVals[i] = Math.max(0, inVals[i]);
+            }
+        }
+        return res;
+    };
+    NDArrayMathCPU.prototype.eluInternal = function (ndarray) {
+        var resultValues = new Float32Array(ndarray.size);
+        var values = ndarray.dataSync();
+        for (var i = 0; i < values.length; ++i) {
+            var v = values[i];
+            if (v >= 0) {
+                resultValues[i] = v;
+            }
+            else {
+                resultValues[i] = (Math.exp(v) - 1);
+            }
+        }
+        return ndarray_1.NDArray.make(ndarray.shape, { values: resultValues });
+    };
+    NDArrayMathCPU.prototype.leakyReluInternal = function (ndarray, alpha) {
+        var resultValues = new Float32Array(ndarray.size);
+        var values = ndarray.dataSync();
+        for (var i = 0; i < values.length; i++) {
+            var v = values[i];
+            if (v >= 0) {
+                resultValues[i] = v;
+            }
+            else {
+                resultValues[i] = alpha * v;
+            }
+        }
+        return ndarray_1.NDArray.make(ndarray.shape, { values: resultValues });
+    };
+    NDArrayMathCPU.prototype.clipInternal = function (ndarray, min, max) {
         var resultValues = new Float32Array(ndarray.size);
         var values = ndarray.getValues();
         for (var i = 0; i < values.length; ++i) {
-            resultValues[i] = Math.max(0, values[i]);
+            resultValues[i] = Math.min(max, Math.max(min, values[i]));
         }
         return ndarray_1.NDArray.make(ndarray.shape, { values: resultValues });
     };
@@ -6475,19 +6897,19 @@ var NDArrayMathCPU = (function (_super) {
         }
         return ndarray_1.Array1D.new(values);
     };
-    NDArrayMathCPU.prototype.switchDimInternal = function (t, newDim) {
-        var newShape = new Array(t.rank);
+    NDArrayMathCPU.prototype.transposeInternal = function (a, perm) {
+        var newShape = new Array(a.rank);
         for (var i = 0; i < newShape.length; i++) {
-            newShape[i] = t.shape[newDim[i]];
+            newShape[i] = a.shape[perm[i]];
         }
-        var resultValues = new Float32Array(t.size);
-        var values = t.getValues();
+        var resultValues = new Float32Array(a.size);
+        var values = a.getValues();
         var result = ndarray_1.NDArray.make(newShape, { values: resultValues });
-        for (var i = 0; i < t.size; ++i) {
-            var loc = t.indexToLoc(i);
+        for (var i = 0; i < a.size; ++i) {
+            var loc = a.indexToLoc(i);
             var newLoc = new Array(loc.length);
             for (var i_1 = 0; i_1 < newLoc.length; i_1++) {
-                newLoc[i_1] = loc[newDim[i_1]];
+                newLoc[i_1] = loc[perm[i_1]];
             }
             var newIndex = result.locToIndex(newLoc);
             resultValues[newIndex] = values[i];
@@ -6675,28 +7097,35 @@ var NDArrayMathCPU = (function (_super) {
                     scaleValues[i % scaleValues.length] /
                     Math.sqrt(varianceValues[i % varianceValues.length] + varianceEpsilon);
         }
-        return ndarray_1.Array3D.make(x.shape, { values: outValues });
+        return ndarray_1.Array3D.new(x.shape, outValues);
     };
     NDArrayMathCPU.prototype.multinomialInternal = function (probabilities, numSamples, seed) {
+        var batchSize = probabilities.shape[0];
+        var numEvents = probabilities.shape[1];
+        var res = ndarray_1.Array2D.zeros([batchSize, numSamples], 'int32');
+        var resVals = res.getValues();
         var probVals = probabilities.getValues();
-        var cdf = new Float32Array(probabilities.size - 1);
-        cdf[0] = probVals[0];
-        for (var event_1 = 1; event_1 < cdf.length; ++event_1) {
-            cdf[event_1] = cdf[event_1 - 1] + probVals[event_1];
-        }
-        var random = seedrandom.alea(seed.toString());
-        var res = new Float32Array(numSamples);
-        for (var i = 0; i < numSamples; ++i) {
-            var r = random();
-            res[i] = cdf.length;
-            for (var event_2 = 0; event_2 < cdf.length; event_2++) {
-                if (r < cdf[event_2]) {
-                    res[i] = event_2;
-                    break;
+        for (var b = 0; b < batchSize; ++b) {
+            var offset = b * numEvents;
+            var cdf = new Float32Array(numEvents - 1);
+            cdf[0] = probVals[offset];
+            for (var event_1 = 1; event_1 < cdf.length; ++event_1) {
+                cdf[event_1] = cdf[event_1 - 1] + probVals[offset + event_1];
+            }
+            var random = seedrandom.alea(seed.toString());
+            var outOffset = b * numSamples;
+            for (var sampleId = 0; sampleId < numSamples; ++sampleId) {
+                var r = random();
+                resVals[outOffset + sampleId] = cdf.length;
+                for (var event_2 = 0; event_2 < cdf.length; event_2++) {
+                    if (r < cdf[event_2]) {
+                        resVals[outOffset + sampleId] = event_2;
+                        break;
+                    }
                 }
             }
         }
-        return ndarray_1.Array1D.new(res);
+        return res;
     };
     NDArrayMathCPU.prototype.oneHotInternal = function (indices, depth, onValue, offValue) {
         var res = new Float32Array(indices.size * depth);
@@ -6706,11 +7135,34 @@ var NDArrayMathCPU = (function (_super) {
         }
         return ndarray_1.Array2D.new([indices.size, depth], res);
     };
+    NDArrayMathCPU.prototype.broadcastedBinaryOp = function (a, b, dtype, op) {
+        var newShape = broadcast_util.assertAndGetBroadcastShape(a.shape, b.shape);
+        var result = ndarray_1.NDArray.zeros(newShape, dtype);
+        var newValues = result.getValues();
+        var aValues = a.getValues();
+        var bValues = b.getValues();
+        var aBroadcastDims = broadcast_util.getBroadcastDims(a.shape, newShape);
+        var bBroadcastDims = broadcast_util.getBroadcastDims(b.shape, newShape);
+        var _loop_1 = function (i) {
+            var loc = result.indexToLoc(i);
+            var aLoc = loc.slice(-a.rank);
+            aBroadcastDims.forEach(function (d) { return aLoc[d] = 0; });
+            var aIndex = a.locToIndex(aLoc);
+            var bLoc = loc.slice(-b.rank);
+            bBroadcastDims.forEach(function (d) { return bLoc[d] = 0; });
+            var bIndex = b.locToIndex(bLoc);
+            newValues[i] = op(aValues[aIndex], bValues[bIndex]);
+        };
+        for (var i = 0; i < newValues.length; ++i) {
+            _loop_1(i);
+        }
+        return result;
+    };
     return NDArrayMathCPU;
 }(math_1.NDArrayMath));
 exports.NDArrayMathCPU = NDArrayMathCPU;
 
-},{"../util":91,"./concat_util":53,"./conv_util":54,"./copy2d_util":55,"./math":57,"./ndarray":60,"seedrandom":2}],59:[function(require,module,exports){
+},{"../util":95,"./axis_util":54,"./broadcast_util":55,"./concat_util":56,"./conv_util":57,"./copy2d_util":58,"./math":60,"./ndarray":63,"seedrandom":2}],62:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -6727,11 +7179,11 @@ var math_1 = require("./math");
 var ndarray = require("./ndarray");
 var ndarray_1 = require("./ndarray");
 var addscaledmat_gpu_1 = require("./webgl/addscaledmat_gpu");
-var argmaxequals_gpu_1 = require("./webgl/argmaxequals_gpu");
 var argminmax_gpu_1 = require("./webgl/argminmax_gpu");
 var batchnorm_gpu_1 = require("./webgl/batchnorm_gpu");
 var binaryop_gpu = require("./webgl/binaryop_gpu");
 var binaryop_gpu_1 = require("./webgl/binaryop_gpu");
+var clip_gpu_1 = require("./webgl/clip_gpu");
 var concat_gpu_1 = require("./webgl/concat_gpu");
 var conv_backprop_gpu_1 = require("./webgl/conv_backprop_gpu");
 var conv_gpu_1 = require("./webgl/conv_gpu");
@@ -6750,6 +7202,7 @@ var reducesum_gpu_1 = require("./webgl/reducesum_gpu");
 var resize_bilinear_gpu_1 = require("./webgl/resize_bilinear_gpu");
 var slice_gpu_1 = require("./webgl/slice_gpu");
 var texture_manager_1 = require("./webgl/texture_manager");
+var transpose_gpu_1 = require("./webgl/transpose_gpu");
 var unary_op = require("./webgl/unaryop_gpu");
 var unaryop_gpu_1 = require("./webgl/unaryop_gpu");
 var webgl_util = require("./webgl/webgl_util");
@@ -6778,7 +7231,7 @@ var NDArrayMathGPU = (function (_super) {
     NDArrayMathGPU.prototype.cloneInternal = function (a) {
         var texShape = a.getTextureShapeRC();
         var source = a.as2D(texShape[0], texShape[1]);
-        var output = this.makeOutputArray(texShape);
+        var output = this.makeOutputArray(texShape, a.dtype);
         this.copy2D(source, [0, 0], texShape, output, [0, 0], texShape);
         return output.reshape(a.shape);
     };
@@ -6831,15 +7284,15 @@ var NDArrayMathGPU = (function (_super) {
         var program = new unaryop_gpu_1.UnaryOpProgram(a.shape, unary_op.NEG);
         return this.compileAndRun(program, [a]);
     };
-    NDArrayMathGPU.prototype.makeOutputArray = function (shape) {
+    NDArrayMathGPU.prototype.makeOutputArray = function (shape, dtype) {
         var textureShapeRC = webgl_util.getTextureShapeFromLogicalShape(this.gpgpu.gl, shape);
         var texture = this.textureManager.acquireTexture(textureShapeRC);
-        return ndarray_1.NDArray.make(shape, { texture: texture, textureShapeRC: textureShapeRC });
+        return ndarray_1.NDArray.make(shape, { texture: texture, textureShapeRC: textureShapeRC }, dtype);
     };
     NDArrayMathGPU.prototype.compileAndRun = function (program, inputs, output, customSetup) {
         var _this = this;
         if (output == null) {
-            output = this.makeOutputArray(program.outputShape);
+            output = this.makeOutputArray(program.outputShape, inputs[0].dtype);
         }
         var key = gpgpu_math.makeShaderKey(program, inputs, output);
         var binary = this.getAndSaveBinary(key, function () {
@@ -6874,34 +7327,39 @@ var NDArrayMathGPU = (function (_super) {
         var program = new batchnorm_gpu_1.BatchNormProgram(x.shape, mean.shape, variance.shape, offsetShape, scaleShape, varianceEpsilon);
         return this.compileAndRun(program, inputs);
     };
-    NDArrayMathGPU.prototype.switchDimInternal = function (a, newDim) {
-        throw new Error('Not yet implemented!');
-    };
-    NDArrayMathGPU.prototype.sumInternal = function (a) {
-        var program = new reducesum_gpu_1.ReduceSumProgram(a.size);
+    NDArrayMathGPU.prototype.transposeInternal = function (a, perm) {
+        var program = new transpose_gpu_1.TransposeProgram(a.shape, perm);
         return this.compileAndRun(program, [a]);
     };
-    NDArrayMathGPU.prototype.argMinInternal = function (a) {
-        var program = new argminmax_gpu_1.ArgMinMaxProgram(a.size, 'min');
-        return this.compileAndRun(program, [a]);
+    NDArrayMathGPU.prototype.sumInternal = function (a, axes) {
+        var program = new reducesum_gpu_1.ReduceSumProgram(a.shape, axes);
+        var output = this.makeOutputArray(program.outputShape, math_1.SumTypesMap[a.dtype]);
+        return this.compileAndRun(program, [a], output);
     };
-    NDArrayMathGPU.prototype.argMaxInternal = function (a) {
-        var program = new argminmax_gpu_1.ArgMinMaxProgram(a.size, 'max');
-        return this.compileAndRun(program, [a]);
+    NDArrayMathGPU.prototype.argMinInternal = function (a, axes) {
+        var program = new argminmax_gpu_1.ArgMinMaxProgram(a.shape, axes, 'min');
+        var output = this.makeOutputArray(program.outputShape, 'int32');
+        return this.compileAndRun(program, [a], output);
     };
-    NDArrayMathGPU.prototype.argMaxEqualsInternal = function (x1, x2) {
-        var program = new argmaxequals_gpu_1.ArgMaxEqualsProgram(x1.size, x2.size);
-        return this.compileAndRun(program, [x1, x2]);
+    NDArrayMathGPU.prototype.argMaxInternal = function (a, axes) {
+        var program = new argminmax_gpu_1.ArgMinMaxProgram(a.shape, axes, 'max');
+        var output = this.makeOutputArray(program.outputShape, 'int32');
+        return this.compileAndRun(program, [a], output);
+    };
+    NDArrayMathGPU.prototype.equalInternal = function (x, y) {
+        var program = new binaryop_gpu_1.BinaryOpProgram(binaryop_gpu.EQUAL, x.shape, y.shape);
+        var output = this.makeOutputArray(program.outputShape, 'bool');
+        return this.compileAndRun(program, [x, y], output);
     };
     NDArrayMathGPU.prototype.topKInternal = function (ndarray, k) {
         throw new Error('topK GPU not yet implemented!');
     };
-    NDArrayMathGPU.prototype.minInternal = function (a) {
-        var program = new minmax_gpu_1.MinMaxProgram(a.size, 'min');
+    NDArrayMathGPU.prototype.minInternal = function (a, axes) {
+        var program = new minmax_gpu_1.MinMaxProgram(a.shape, axes, 'min');
         return this.compileAndRun(program, [a]);
     };
-    NDArrayMathGPU.prototype.maxInternal = function (a) {
-        var program = new minmax_gpu_1.MinMaxProgram(a.size, 'max');
+    NDArrayMathGPU.prototype.maxInternal = function (a, axes) {
+        var program = new minmax_gpu_1.MinMaxProgram(a.shape, axes, 'max');
         return this.compileAndRun(program, [a]);
     };
     NDArrayMathGPU.prototype.divideInternal = function (a, b) {
@@ -6912,12 +7370,20 @@ var NDArrayMathGPU = (function (_super) {
         var program = new binaryop_gpu_1.BinaryOpProgram(binaryop_gpu.ADD, a.shape, b.shape);
         return this.compileAndRun(program, [a, b]);
     };
-    NDArrayMathGPU.prototype.subInternal = function (a, b) {
+    NDArrayMathGPU.prototype.subtractInternal = function (a, b) {
         var program = new binaryop_gpu_1.BinaryOpProgram(binaryop_gpu.SUB, a.shape, b.shape);
         return this.compileAndRun(program, [a, b]);
     };
-    NDArrayMathGPU.prototype.logSumExpInternal = function (a) {
-        var program = new logsumexp_gpu_1.LogSumExpProgram(a.size);
+    NDArrayMathGPU.prototype.logSumExpInternal = function (a, axes) {
+        var program = new logsumexp_gpu_1.LogSumExpProgram(a.shape, axes);
+        return this.compileAndRun(program, [a]);
+    };
+    NDArrayMathGPU.prototype.ceilInternal = function (a) {
+        var program = new unaryop_gpu_1.UnaryOpProgram(a.shape, unary_op.CEIL);
+        return this.compileAndRun(program, [a]);
+    };
+    NDArrayMathGPU.prototype.floorInternal = function (a) {
+        var program = new unaryop_gpu_1.UnaryOpProgram(a.shape, unary_op.FLOOR);
         return this.compileAndRun(program, [a]);
     };
     NDArrayMathGPU.prototype.expInternal = function (a) {
@@ -6934,6 +7400,18 @@ var NDArrayMathGPU = (function (_super) {
     };
     NDArrayMathGPU.prototype.reluInternal = function (a) {
         var program = new unaryop_gpu_1.UnaryOpProgram(a.shape, unary_op.RELU);
+        return this.compileAndRun(program, [a]);
+    };
+    NDArrayMathGPU.prototype.eluInternal = function (a) {
+        var program = new unaryop_gpu_1.UnaryOpProgram(a.shape, unary_op.ELU);
+        return this.compileAndRun(program, [a]);
+    };
+    NDArrayMathGPU.prototype.leakyReluInternal = function (a, alpha) {
+        var program = new unaryop_gpu_1.UnaryOpProgram(a.shape, unary_op.LEAKY_RELU(alpha));
+        return this.compileAndRun(program, [a]);
+    };
+    NDArrayMathGPU.prototype.clipInternal = function (a, min, max) {
+        var program = new clip_gpu_1.ClipProgram(a.shape, min, max);
         return this.compileAndRun(program, [a]);
     };
     NDArrayMathGPU.prototype.absInternal = function (a) {
@@ -7027,9 +7505,12 @@ var NDArrayMathGPU = (function (_super) {
         return this.compileAndRun(program, [x]);
     };
     NDArrayMathGPU.prototype.multinomialInternal = function (probs, numSamples, seed) {
-        var program = new multinomial_gpu_1.MultinomialProgram(probs.size, numSamples);
+        var batchSize = probs.shape[0];
+        var numOutcomes = probs.shape[1];
+        var program = new multinomial_gpu_1.MultinomialProgram(batchSize, numOutcomes, numSamples);
+        var output = this.makeOutputArray(program.outputShape, 'int32');
         var customSetup = program.getCustomSetupFunc(seed);
-        return this.compileAndRun(program, [probs], null, customSetup);
+        return this.compileAndRun(program, [probs], output, customSetup);
     };
     NDArrayMathGPU.prototype.oneHotInternal = function (indices, depth, onValue, offValue) {
         var program = new onehot_gpu_1.OneHotProgram(indices.size, depth, onValue, offValue);
@@ -7057,7 +7538,7 @@ var NDArrayMathGPU = (function (_super) {
 }(math_1.NDArrayMath));
 exports.NDArrayMathGPU = NDArrayMathGPU;
 
-},{"./math":57,"./ndarray":60,"./webgl/addscaledmat_gpu":62,"./webgl/argmaxequals_gpu":63,"./webgl/argminmax_gpu":64,"./webgl/batchnorm_gpu":65,"./webgl/binaryop_gpu":66,"./webgl/concat_gpu":67,"./webgl/conv_backprop_gpu":68,"./webgl/conv_gpu":69,"./webgl/copy_gpu":70,"./webgl/gpgpu_context":71,"./webgl/gpgpu_math":72,"./webgl/gpgpu_util":73,"./webgl/logsumexp_gpu":74,"./webgl/max_pool_backprop_gpu":75,"./webgl/minmax_gpu":76,"./webgl/mulmat_gpu":77,"./webgl/multinomial_gpu":78,"./webgl/onehot_gpu":79,"./webgl/pool_gpu":80,"./webgl/reducesum_gpu":81,"./webgl/resize_bilinear_gpu":83,"./webgl/slice_gpu":85,"./webgl/texture_manager":87,"./webgl/unaryop_gpu":88,"./webgl/webgl_util":89}],60:[function(require,module,exports){
+},{"./math":60,"./ndarray":63,"./webgl/addscaledmat_gpu":65,"./webgl/argminmax_gpu":66,"./webgl/batchnorm_gpu":67,"./webgl/binaryop_gpu":68,"./webgl/clip_gpu":69,"./webgl/concat_gpu":70,"./webgl/conv_backprop_gpu":71,"./webgl/conv_gpu":72,"./webgl/copy_gpu":73,"./webgl/gpgpu_context":74,"./webgl/gpgpu_math":75,"./webgl/gpgpu_util":76,"./webgl/logsumexp_gpu":77,"./webgl/max_pool_backprop_gpu":78,"./webgl/minmax_gpu":79,"./webgl/mulmat_gpu":80,"./webgl/multinomial_gpu":81,"./webgl/onehot_gpu":82,"./webgl/pool_gpu":83,"./webgl/reducesum_gpu":84,"./webgl/resize_bilinear_gpu":86,"./webgl/slice_gpu":88,"./webgl/texture_manager":90,"./webgl/transpose_gpu":91,"./webgl/unaryop_gpu":92,"./webgl/webgl_util":93}],63:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -7069,12 +7550,54 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var environment_1 = require("../environment");
 var util = require("../util");
+var tex_util_1 = require("./webgl/tex_util");
 var webgl_util = require("./webgl/webgl_util");
 exports.GPGPU = null;
 exports.TEXTURE_MANAGER = null;
+var DType;
+(function (DType) {
+    DType["float32"] = "float32";
+    DType["int32"] = "int32";
+    DType["bool"] = "bool";
+})(DType = exports.DType || (exports.DType = {}));
 function initializeGPU(gpgpu, textureManager) {
     exports.GPGPU = gpgpu;
     exports.TEXTURE_MANAGER = textureManager;
@@ -7086,16 +7609,20 @@ function throwIfGPUNotInitialized() {
     }
 }
 var NDArray = (function () {
-    function NDArray(shape, data) {
+    function NDArray(shape, data, dtype) {
         util.assert(data.values != null || data.texture != null, 'Either `values` or `texture` must be defined');
         util.assert(data.texture == null || (data.textureShapeRC != null), '`textureShape` must be defined when `texture` is defined');
         this.size = util.sizeFromShape(shape);
         if (data.values != null) {
-            util.assert(this.size === data.values.length, 'Constructing ndarray of shape (' + this.size + ') should match the' +
-                ' length of values (' + data.values.length + ')');
+            util.assert(this.size === data.values.length, "Constructing ndarray of shape (" + this.size + ") should match the " +
+                ("length of values (" + data.values.length + ")"));
         }
         this.shape = shape;
-        this.data = data;
+        if (data.textureType == null) {
+            data.textureType = tex_util_1.TextureType.DEFAULT;
+        }
+        this.ndarrayData = data;
+        this.dtype = dtype || 'float32';
         var dim = this.shape.length;
         if (dim < 2) {
             this.strides = [];
@@ -7108,32 +7635,44 @@ var NDArray = (function () {
             }
         }
     }
-    NDArray.zeros = function (shape) {
-        var values = new Float32Array(util.sizeFromShape(shape));
-        return NDArray.make(shape, { values: values });
+    NDArray.zeros = function (shape, dtype) {
+        var values = makeZerosTypedArray(util.sizeFromShape(shape), dtype);
+        return NDArray.make(shape, { values: values }, dtype);
     };
     NDArray.zerosLike = function (another) {
-        return NDArray.zeros(another.shape);
+        return NDArray.zeros(another.shape, another.dtype);
     };
     NDArray.like = function (another) {
-        var values = another.getValues();
-        return NDArray.make(another.shape, { values: new Float32Array(values) });
+        var newValues = copyTypedArray(another.getValues(), another.dtype);
+        return NDArray.make(another.shape, { values: newValues }, another.dtype);
     };
-    NDArray.make = function (shape, data) {
+    NDArray.make = function (shape, data, dtype) {
         switch (shape.length) {
             case 0:
-                return new Scalar(data);
+                return new Scalar(data, dtype);
             case 1:
-                return new Array1D(data);
+                return new Array1D(data, dtype);
             case 2:
-                return new Array2D(shape, data);
+                return new Array2D(shape, data, dtype);
             case 3:
-                return new Array3D(shape, data);
+                return new Array3D(shape, data, dtype);
             case 4:
-                return new Array4D(shape, data);
+                return new Array4D(shape, data, dtype);
             default:
-                return new NDArray(shape, data);
+                return new NDArray(shape, data, dtype);
         }
+    };
+    NDArray.fromPixels = function (pixels, numChannels) {
+        if (numChannels === void 0) { numChannels = 3; }
+        if (numChannels > 4) {
+            throw new Error('Cannot construct NDArray with more than 4 channels from pixels.');
+        }
+        var shape = [pixels.height, pixels.width, numChannels];
+        var textureShapeRC = [shape[0], shape[1]];
+        var texture = exports.TEXTURE_MANAGER.acquireTexture(textureShapeRC);
+        var textureType = tex_util_1.TextureType.RGBA_COLOR;
+        exports.GPGPU.uploadPixelDataToTexture(texture, pixels);
+        return Array3D.make(shape, { texture: texture, textureShapeRC: textureShapeRC, textureType: textureType });
     };
     NDArray.prototype.reshape = function (newShape) {
         newShape = util.inferFromImplicitShape(newShape, this.size);
@@ -7141,7 +7680,13 @@ var NDArray = (function () {
             return this;
         }
         util.assert(this.size === util.sizeFromShape(newShape), 'new shape and old shape must have the same number of elements.');
-        return NDArray.make(newShape, this.data);
+        return NDArray.make(newShape, this.ndarrayData, this.dtype);
+    };
+    NDArray.prototype.flatten = function () {
+        if (this instanceof Array1D) {
+            return this;
+        }
+        return this.as1D();
     };
     NDArray.prototype.asScalar = function () {
         util.assert(this.size === 1, 'The array must have only 1 element.');
@@ -7158,6 +7703,13 @@ var NDArray = (function () {
     };
     NDArray.prototype.as4D = function (rows, columns, depth, depth2) {
         return this.reshape([rows, columns, depth, depth2]);
+    };
+    NDArray.prototype.asType = function (dtype) {
+        var newData = this.getData();
+        if (newData.values != null) {
+            newData = { values: toTypedArray(newData.values, dtype) };
+        }
+        return NDArray.make(this.shape, newData, dtype);
     };
     Object.defineProperty(NDArray.prototype, "rank", {
         get: function () {
@@ -7195,6 +7747,22 @@ var NDArray = (function () {
         }
         this.getValues()[index] = value;
     };
+    NDArray.prototype.val = function () {
+        var locs = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            locs[_i] = arguments[_i];
+        }
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.data()];
+                    case 1:
+                        _a.sent();
+                        return [2, this.get.apply(this, locs)];
+                }
+            });
+        });
+    };
     NDArray.prototype.locToIndex = function (locs) {
         var index = locs[locs.length - 1];
         for (var i = 0; i < locs.length - 1; ++i) {
@@ -7215,21 +7783,19 @@ var NDArray = (function () {
         this.getValues().fill(value);
     };
     NDArray.prototype.getData = function () {
-        return this.data;
+        return this.ndarrayData;
     };
     NDArray.prototype.getValues = function () {
-        if (this.data.values == null) {
-            throwIfGPUNotInitialized();
-            this.data.values = exports.GPGPU.downloadMatrixFromTexture(this.data.texture, this.data.textureShapeRC[0], this.data.textureShapeRC[1]);
-            this.disposeTexture();
-        }
-        return this.data.values;
+        return this.dataSync();
     };
     NDArray.prototype.getValuesAsync = function () {
+        return this.data();
+    };
+    NDArray.prototype.data = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            if (_this.data.values != null) {
-                resolve(_this.data.values);
+            if (_this.ndarrayData.values != null) {
+                resolve(_this.ndarrayData.values);
                 return;
             }
             if (!environment_1.ENV.get('WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_ENABLED')) {
@@ -7242,44 +7808,62 @@ var NDArray = (function () {
             });
         });
     };
+    NDArray.prototype.dataSync = function () {
+        if (this.ndarrayData.values == null) {
+            throwIfGPUNotInitialized();
+            var values = void 0;
+            if (this.ndarrayData.textureType === tex_util_1.TextureType.DEFAULT) {
+                values = exports.GPGPU.downloadMatrixFromTexture(this.ndarrayData.texture, this.ndarrayData.textureShapeRC[0], this.ndarrayData.textureShapeRC[1]);
+            }
+            else {
+                values = exports.GPGPU.downloadMatrixFromRGBAColorTexture(this.ndarrayData.texture, this.ndarrayData.textureShapeRC[0], this.ndarrayData.textureShapeRC[1], this.shape[2]);
+            }
+            this.ndarrayData.values = float32ToTypedArray(values, this.dtype);
+            this.disposeTexture();
+        }
+        return this.ndarrayData.values;
+    };
     NDArray.prototype.uploadToGPU = function (preferredTexShape) {
         throwIfGPUNotInitialized();
-        this.data.textureShapeRC = webgl_util.getTextureShapeFromLogicalShape(exports.GPGPU.gl, this.shape, preferredTexShape);
-        this.data.texture =
-            exports.TEXTURE_MANAGER.acquireTexture(this.data.textureShapeRC);
-        exports.GPGPU.uploadMatrixToTexture(this.data.texture, this.data.textureShapeRC[0], this.data.textureShapeRC[1], this.data.values);
-        this.data.values = null;
+        this.ndarrayData.textureShapeRC =
+            webgl_util.getTextureShapeFromLogicalShape(exports.GPGPU.gl, this.shape, preferredTexShape);
+        this.ndarrayData.texture =
+            exports.TEXTURE_MANAGER.acquireTexture(this.ndarrayData.textureShapeRC);
+        this.ndarrayData.textureType = tex_util_1.TextureType.DEFAULT;
+        exports.GPGPU.uploadMatrixToTexture(this.ndarrayData.texture, this.ndarrayData.textureShapeRC[0], this.ndarrayData.textureShapeRC[1], typedArrayToFloat32(this.ndarrayData.values, this.dtype));
+        this.ndarrayData.values = null;
     };
     NDArray.prototype.getTexture = function (preferredShapeRC) {
-        if (this.data.texture == null) {
+        if (this.ndarrayData.texture == null) {
             this.uploadToGPU(preferredShapeRC);
         }
-        return this.data.texture;
+        return this.ndarrayData.texture;
     };
     NDArray.prototype.getTextureShapeRC = function (preferredShapeRC) {
-        if (this.data.textureShapeRC == null) {
+        if (this.ndarrayData.textureShapeRC == null) {
             this.uploadToGPU(preferredShapeRC);
         }
-        return this.data.textureShapeRC;
+        return this.ndarrayData.textureShapeRC;
     };
     NDArray.prototype.dispose = function () {
-        this.data.values = null;
+        this.ndarrayData.values = null;
         this.shape = null;
-        if (this.data.texture != null) {
+        if (this.ndarrayData.texture != null) {
             this.disposeTexture();
         }
     };
     NDArray.prototype.disposeTexture = function () {
         throwIfGPUNotInitialized();
-        exports.TEXTURE_MANAGER.releaseTexture(this.data.texture, this.data.textureShapeRC);
-        this.data.texture = null;
-        this.data.textureShapeRC = null;
+        exports.TEXTURE_MANAGER.releaseTexture(this.ndarrayData.texture, this.ndarrayData.textureShapeRC);
+        this.ndarrayData.texture = null;
+        this.ndarrayData.textureShapeRC = null;
+        this.ndarrayData.textureType = null;
     };
     NDArray.prototype.inGPU = function () {
-        return this.data.texture != null;
+        return this.ndarrayData.texture != null;
     };
     NDArray.prototype.equals = function (t) {
-        return util.arraysEqual(this.shape, t.shape) &&
+        return this.dtype === t.dtype && util.arraysEqual(this.shape, t.shape) &&
             util.arraysEqual(this.getValues(), t.getValues());
     };
     NDArray.rand = function (shape, randFunction) {
@@ -7308,25 +7892,47 @@ var NDArray = (function () {
 exports.NDArray = NDArray;
 var Scalar = (function (_super) {
     __extends(Scalar, _super);
-    function Scalar(data) {
+    function Scalar(data, dtype) {
         var _this = this;
         if (data.texture != null) {
             data.textureShapeRC = [1, 1];
         }
-        _this = _super.call(this, [], data) || this;
+        _this = _super.call(this, [], data, dtype) || this;
         return _this;
     }
-    Scalar.new = function (value) {
-        return new Scalar({ values: new Float32Array([value]) });
+    Scalar.new = function (value, dtype) {
+        var values = [value];
+        return new Scalar({ values: toTypedArray(values, dtype) }, dtype);
     };
     Scalar.prototype.get = function () {
         return this.getValues()[0];
+    };
+    Scalar.prototype.val = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.data()];
+                    case 1:
+                        _a.sent();
+                        return [2, this.get()];
+                }
+            });
+        });
     };
     Scalar.prototype.set = function (value) {
         this.getValues()[0] = value;
     };
     Scalar.prototype.add = function (value) {
         this.getValues()[0] += value;
+    };
+    Scalar.prototype.asType = function (dtype) {
+        return _super.prototype.asType.call(this, dtype);
+    };
+    Scalar.prototype.locToIndex = function (loc) {
+        return 0;
+    };
+    Scalar.prototype.indexToLoc = function (index) {
+        return [];
     };
     Scalar.ZERO = Scalar.new(0);
     Scalar.ONE = Scalar.new(1);
@@ -7337,27 +7943,39 @@ var Scalar = (function (_super) {
 exports.Scalar = Scalar;
 var Array1D = (function (_super) {
     __extends(Array1D, _super);
-    function Array1D(data) {
+    function Array1D(data, dtype) {
         var _this = this;
         var shape = (data.values != null) ?
             [data.values.length] :
             [util.sizeFromShape(data.textureShapeRC)];
-        _this = _super.call(this, shape, data) || this;
+        _this = _super.call(this, shape, data, dtype) || this;
         return _this;
     }
-    Array1D.new = function (values) {
-        if (!(values instanceof Float32Array)) {
+    Array1D.new = function (values, dtype) {
+        if (!instanceofTypedArray(values)) {
             var inferredShape = util.inferShape(values);
             util.assert(inferredShape.length === 1, "Error constructing Array1D. Shape of values " + inferredShape + " is " +
                 "not 1 dimensional.");
         }
-        return new Array1D({ values: toTypedArray(values) });
+        return new Array1D({ values: toTypedArray(values, dtype) }, dtype);
     };
     Array1D.prototype.get = function (i) {
         return this.getValues()[i];
     };
     Array1D.prototype.set = function (value, i) {
         this.getValues()[i] = value;
+    };
+    Array1D.prototype.val = function (i) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.data()];
+                    case 1:
+                        _a.sent();
+                        return [2, this.get(i)];
+                }
+            });
+        });
     };
     Array1D.prototype.add = function (value, i) {
         this.getValues()[i] += value;
@@ -7368,8 +7986,11 @@ var Array1D = (function (_super) {
     Array1D.prototype.indexToLoc = function (index) {
         return [index];
     };
-    Array1D.zeros = function (shape) {
-        return NDArray.zeros(shape);
+    Array1D.prototype.asType = function (dtype) {
+        return _super.prototype.asType.call(this, dtype);
+    };
+    Array1D.zeros = function (shape, dtype) {
+        return NDArray.zeros(shape, dtype);
     };
     Array1D.randNormal = function (shape, mean, stdDev) {
         if (mean === void 0) { mean = 0; }
@@ -7384,23 +8005,20 @@ var Array1D = (function (_super) {
     Array1D.randUniform = function (shape, a, b) {
         return NDArray.rand(shape, function () { return util.randUniform(a, b); });
     };
-    Array1D.make = function (shape, data) {
-        return new Array1D(data);
-    };
     return Array1D;
 }(NDArray));
 exports.Array1D = Array1D;
 var Array2D = (function (_super) {
     __extends(Array2D, _super);
-    function Array2D(shape, data) {
+    function Array2D(shape, data, dtype) {
         var _this = this;
         util.assert(shape.length === 2, 'Shape should be of length 2');
-        _this = _super.call(this, shape, data) || this;
+        _this = _super.call(this, shape, data, dtype) || this;
         _this.stride0 = _this.strides[0];
         return _this;
     }
-    Array2D.new = function (shape, values) {
-        if (!(values instanceof Float32Array)) {
+    Array2D.new = function (shape, values, dtype) {
+        if (!instanceofTypedArray(values)) {
             var inferredShape = util.inferShape(values);
             if (inferredShape.length > 1) {
                 util.assertShapesMatch(shape, inferredShape, "Error when constructing Array2D. Shape of values " +
@@ -7408,7 +8026,7 @@ var Array2D = (function (_super) {
                     (shape + ". "));
             }
         }
-        return new Array2D(shape, { values: toTypedArray(values) });
+        return new Array2D(shape, { values: toTypedArray(values, dtype) }, dtype);
     };
     Array2D.prototype.get = function (i, j) {
         return this.getValues()[this.stride0 * i + j];
@@ -7419,14 +8037,29 @@ var Array2D = (function (_super) {
     Array2D.prototype.add = function (value, i, j) {
         this.getValues()[this.stride0 * i + j] += value;
     };
+    Array2D.prototype.val = function (i, j) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.data()];
+                    case 1:
+                        _a.sent();
+                        return [2, this.get(i, j)];
+                }
+            });
+        });
+    };
     Array2D.prototype.locToIndex = function (locs) {
         return this.stride0 * locs[0] + locs[1];
     };
     Array2D.prototype.indexToLoc = function (index) {
         return [Math.floor(index / this.stride0), index % this.stride0];
     };
-    Array2D.zeros = function (shape) {
-        return NDArray.zeros(shape);
+    Array2D.prototype.asType = function (dtype) {
+        return _super.prototype.asType.call(this, dtype);
+    };
+    Array2D.zeros = function (shape, dtype) {
+        return NDArray.zeros(shape, dtype);
     };
     Array2D.randNormal = function (shape, mean, stdDev) {
         if (mean === void 0) { mean = 0; }
@@ -7441,24 +8074,21 @@ var Array2D = (function (_super) {
     Array2D.randUniform = function (shape, a, b) {
         return NDArray.rand(shape, function () { return util.randUniform(a, b); });
     };
-    Array2D.make = function (shape, data) {
-        return new Array2D(shape, data);
-    };
     return Array2D;
 }(NDArray));
 exports.Array2D = Array2D;
 var Array3D = (function (_super) {
     __extends(Array3D, _super);
-    function Array3D(shape, data) {
+    function Array3D(shape, data, dtype) {
         var _this = this;
         util.assert(shape.length === 3, 'Shape should be of length 3');
-        _this = _super.call(this, shape, data) || this;
+        _this = _super.call(this, shape, data, dtype) || this;
         _this.stride0 = _this.strides[0];
         _this.stride1 = _this.strides[1];
         return _this;
     }
-    Array3D.new = function (shape, values) {
-        if (!(values instanceof Float32Array)) {
+    Array3D.new = function (shape, values, dtype) {
+        if (!instanceofTypedArray(values)) {
             var inferredShape = util.inferShape(values);
             if (inferredShape.length > 1) {
                 util.assertShapesMatch(shape, inferredShape, "Error when constructing Array3D. Shape of values " +
@@ -7466,13 +8096,25 @@ var Array3D = (function (_super) {
                     (shape + ". "));
             }
         }
-        return new Array3D(shape, { values: toTypedArray(values) });
+        return new Array3D(shape, { values: toTypedArray(values, dtype) }, dtype);
     };
     Array3D.prototype.get = function (i, j, k) {
         return this.getValues()[this.stride0 * i + this.stride1 * j + k];
     };
     Array3D.prototype.set = function (value, i, j, k) {
         this.getValues()[this.stride0 * i + this.stride1 * j + k] = value;
+    };
+    Array3D.prototype.val = function (i, j, k) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.data()];
+                    case 1:
+                        _a.sent();
+                        return [2, this.get(i, j, k)];
+                }
+            });
+        });
     };
     Array3D.prototype.add = function (value, i, j, k) {
         this.getValues()[this.stride0 * i + this.stride1 * j + k] += value;
@@ -7485,8 +8127,11 @@ var Array3D = (function (_super) {
         index -= i * this.stride0;
         return [i, Math.floor(index / this.stride1), index % this.stride1];
     };
-    Array3D.zeros = function (shape) {
-        return NDArray.zeros(shape);
+    Array3D.prototype.asType = function (dtype) {
+        return _super.prototype.asType.call(this, dtype);
+    };
+    Array3D.zeros = function (shape, dtype) {
+        return NDArray.zeros(shape, dtype);
     };
     Array3D.randNormal = function (shape, mean, stdDev) {
         if (mean === void 0) { mean = 0; }
@@ -7501,25 +8146,22 @@ var Array3D = (function (_super) {
     Array3D.randUniform = function (shape, a, b) {
         return NDArray.rand(shape, function () { return util.randUniform(a, b); });
     };
-    Array3D.make = function (shape, data) {
-        return new Array3D(shape, data);
-    };
     return Array3D;
 }(NDArray));
 exports.Array3D = Array3D;
 var Array4D = (function (_super) {
     __extends(Array4D, _super);
-    function Array4D(shape, data) {
+    function Array4D(shape, data, dtype) {
         var _this = this;
         util.assert(shape.length === 4, 'Shape should be of length 4');
-        _this = _super.call(this, shape, data) || this;
+        _this = _super.call(this, shape, data, dtype) || this;
         _this.stride0 = _this.strides[0];
         _this.stride1 = _this.strides[1];
         _this.stride2 = _this.strides[2];
         return _this;
     }
-    Array4D.new = function (shape, values) {
-        if (!(values instanceof Float32Array)) {
+    Array4D.new = function (shape, values, dtype) {
+        if (!instanceofTypedArray(values)) {
             var inferredShape = util.inferShape(values);
             if (inferredShape.length > 1) {
                 util.assertShapesMatch(shape, inferredShape, "Error when constructing Array4D. Shape of values " +
@@ -7527,13 +8169,25 @@ var Array4D = (function (_super) {
                     (shape + ". "));
             }
         }
-        return new Array4D(shape, { values: toTypedArray(values) });
+        return new Array4D(shape, { values: toTypedArray(values, dtype) }, dtype);
     };
     Array4D.prototype.get = function (i, j, k, l) {
         return this.getValues()[this.stride0 * i + this.stride1 * j + this.stride2 * k + l];
     };
     Array4D.prototype.set = function (value, i, j, k, l) {
         this.getValues()[this.stride0 * i + this.stride1 * j + this.stride2 * k + l] = value;
+    };
+    Array4D.prototype.val = function (i, j, k, l) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.data()];
+                    case 1:
+                        _a.sent();
+                        return [2, this.get(i, j, k, l)];
+                }
+            });
+        });
     };
     Array4D.prototype.add = function (value, i, j, k, l) {
         this.getValues()[this.stride0 * i + this.stride1 * j + this.stride2 * k + l] += value;
@@ -7549,8 +8203,11 @@ var Array4D = (function (_super) {
         index -= j * this.stride1;
         return [i, j, Math.floor(index / this.stride2), index % this.stride2];
     };
-    Array4D.zeros = function (shape) {
-        return NDArray.zeros(shape);
+    Array4D.prototype.asType = function (dtype) {
+        return _super.prototype.asType.call(this, dtype);
+    };
+    Array4D.zeros = function (shape, dtype) {
+        return NDArray.zeros(shape, dtype);
     };
     Array4D.randNormal = function (shape, mean, stdDev) {
         if (mean === void 0) { mean = 0; }
@@ -7565,18 +8222,98 @@ var Array4D = (function (_super) {
     Array4D.randUniform = function (shape, a, b) {
         return NDArray.rand(shape, function () { return util.randUniform(a, b); });
     };
-    Array4D.make = function (shape, data) {
-        return new Array4D(shape, data);
-    };
     return Array4D;
 }(NDArray));
 exports.Array4D = Array4D;
-function toTypedArray(a) {
-    return (a instanceof Float32Array) ?
-        a : new Float32Array(util.flatten(a));
+function copyTypedArray(array, dtype) {
+    if (dtype == null || dtype === 'float32') {
+        return new Float32Array(array);
+    }
+    else if (dtype === 'int32') {
+        return new Int32Array(array);
+    }
+    else if (dtype === 'bool') {
+        var bool = new Uint8Array(array.length);
+        for (var i = 0; i < bool.length; ++i) {
+            var val = array[i];
+            if (util.isValNaN(val, 'bool')) {
+                bool[i] = util.getNaN('bool');
+            }
+            else if (val) {
+                bool[i] = 1;
+            }
+        }
+        return bool;
+    }
+    else {
+        throw new Error("Unknown data type " + dtype);
+    }
+}
+function instanceofTypedArray(a) {
+    return a instanceof Float32Array || a instanceof Int32Array ||
+        a instanceof Uint8Array;
+}
+function noConversionNeeded(a, dtype) {
+    return (a instanceof Float32Array && dtype === 'float32') ||
+        (a instanceof Int32Array && dtype === 'int32') ||
+        (a instanceof Uint8Array && dtype === 'bool');
+}
+function toTypedArray(a, dtype) {
+    if (noConversionNeeded(a, dtype)) {
+        return a;
+    }
+    if (Array.isArray(a)) {
+        a = util.flatten(a);
+    }
+    return copyTypedArray(a, dtype);
+}
+function makeZerosTypedArray(size, dtype) {
+    if (dtype == null || dtype === 'float32') {
+        return new Float32Array(size);
+    }
+    else if (dtype === 'int32') {
+        return new Int32Array(size);
+    }
+    else if (dtype === 'bool') {
+        return new Uint8Array(size);
+    }
+    else {
+        throw new Error("Unknown data type " + dtype);
+    }
+}
+function typedArrayToFloat32(a, dtype) {
+    if (a instanceof Float32Array) {
+        return a;
+    }
+    else {
+        var res = new Float32Array(a.length);
+        for (var i = 0; i < res.length; i++) {
+            var val = a[i];
+            res[i] = util.isValNaN(val, dtype) ? NaN : val;
+        }
+        return res;
+    }
+}
+function float32ToTypedArray(a, dtype) {
+    if (dtype === 'float32') {
+        return a;
+    }
+    else if (dtype === 'int32' || dtype === 'bool') {
+        var result = (dtype === 'int32') ? new Int32Array(a.length) :
+            new Uint8Array(a.length);
+        for (var i = 0; i < result.length; ++i) {
+            var val = a[i];
+            val = isNaN(val) ? util.getNaN(dtype) : Math.round(val);
+            result[i] = val;
+        }
+        return result;
+    }
+    else {
+        throw new Error("Unknown dtype " + dtype);
+    }
 }
 
-},{"../environment":15,"../util":91,"./webgl/webgl_util":89}],61:[function(require,module,exports){
+},{"../environment":15,"../util":95,"./webgl/tex_util":89,"./webgl/webgl_util":93}],64:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var util = require("../util");
@@ -7592,80 +8329,69 @@ function assertParamsValid(input, begin, size) {
 }
 exports.assertParamsValid = assertParamsValid;
 
-},{"../util":91}],62:[function(require,module,exports){
+},{"../util":95}],65:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var util = require("../../util");
+var broadcast_util = require("../broadcast_util");
 var AddScaledMatProgram = (function () {
     function AddScaledMatProgram(aShape, bShape) {
         this.variableNames = ['A', 'B', 'c1', 'c2'];
         this.params = [];
         this.supportsBroadcasting = true;
-        this.outputShape = util.assertAndGetBroadcastedShape(aShape, bShape);
+        this.outputShape =
+            broadcast_util.assertAndGetBroadcastShape(aShape, bShape);
         this.userCode = "\n      void main() {\n        float a = getAAtOutCoords();\n        float b = getBAtOutCoords();\n        float c1 = getC1();\n        float c2 = getC2();\n        setOutput(dot(vec2(c1, c2), vec2(a, b)));\n      }\n    ";
     }
     return AddScaledMatProgram;
 }());
 exports.AddScaledMatProgram = AddScaledMatProgram;
 
-},{"../../util":91}],63:[function(require,module,exports){
+},{"../broadcast_util":55}],66:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var argminmax_gpu = require("./argminmax_gpu");
-var ArgMaxEqualsProgram = (function () {
-    function ArgMaxEqualsProgram(aSize, bSize) {
-        this.variableNames = ['A', 'B'];
-        this.outputShape = [];
-        this.params = [];
-        var aSnippet = argminmax_gpu.getArgMinMaxSnippet('max', 'A', aSize);
-        var bSnippet = argminmax_gpu.getArgMinMaxSnippet('max', 'B', bSize);
-        this.userCode = "\n      " + aSnippet + "\n      " + bSnippet + "\n\n      void main() {\n        float argMaxA = getArgMinMaxA();\n        float argMaxB = getArgMinMaxB();\n\n        float value;\n        if (isNaN(argMaxA)) {\n          value = argMaxA;\n        } else if (isNaN(argMaxB)) {\n          value = argMaxB;\n        } else {\n          value = float(argMaxA == argMaxB);\n        }\n\n        setOutput(value);\n      }\n    ";
-    }
-    return ArgMaxEqualsProgram;
-}());
-exports.ArgMaxEqualsProgram = ArgMaxEqualsProgram;
-
-},{"./argminmax_gpu":64}],64:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+var util = require("../../util");
+var axis_util = require("../axis_util");
 function getArgMinMaxSnippet(op, texName, size) {
     var compOp = (op === 'min') ? '<' : '>';
     return "\n    float getArgMinMax" + texName + "() {\n      int bestIndex = 0;\n      float bestValue = get" + texName + "Flat(0);\n\n      for (int i = 0; i < " + size + "; i++) {\n        float candidate = get" + texName + "Flat(i);\n        if (isNaN(candidate)) {\n          return candidate;\n        }\n        if (candidate " + compOp + " bestValue) {\n          bestValue = candidate;\n          bestIndex = i;\n        }\n      }\n      return float(bestIndex);\n    }\n  ";
 }
 exports.getArgMinMaxSnippet = getArgMinMaxSnippet;
 var ArgMinMaxProgram = (function () {
-    function ArgMinMaxProgram(aSize, opType) {
+    function ArgMinMaxProgram(shape, axes, opType) {
         this.variableNames = ['A'];
-        this.outputShape = [];
         this.params = [opType];
-        var aSnippet = getArgMinMaxSnippet(opType, 'A', aSize);
+        var _a = axis_util.computeOutAndReduceShapes(shape, axes), outShape = _a[0], reduceShape = _a[1];
+        this.outputShape = outShape;
+        this.numBatchDims = outShape.length;
+        var size = util.sizeFromShape(reduceShape);
+        var aSnippet = getArgMinMaxSnippet(opType, 'A', size);
         this.userCode = "\n      " + aSnippet + "\n\n      void main() {\n        setOutput(getArgMinMaxA());\n      }\n    ";
     }
     return ArgMinMaxProgram;
 }());
 exports.ArgMinMaxProgram = ArgMinMaxProgram;
 
-},{}],65:[function(require,module,exports){
+},{"../../util":95,"../axis_util":54}],67:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var util = require("../../util");
+var broadcast_util = require("../broadcast_util");
 var BatchNormProgram = (function () {
     function BatchNormProgram(xShape, meanShape, varianceShape, offsetShape, scaleShape, varianceEpsilon) {
         this.params = [];
         this.outputShape = [];
         this.supportsBroadcasting = true;
         this.variableNames = ['x', 'mean', 'variance'];
-        util.assertAndGetBroadcastedShape(xShape, meanShape);
-        util.assertAndGetBroadcastedShape(xShape, varianceShape);
+        broadcast_util.assertAndGetBroadcastShape(xShape, meanShape);
+        broadcast_util.assertAndGetBroadcastShape(xShape, varianceShape);
         var offsetSnippet = '0.0';
         if (offsetShape != null) {
-            util.assertAndGetBroadcastedShape(xShape, offsetShape);
+            broadcast_util.assertAndGetBroadcastShape(xShape, offsetShape);
             this.variableNames.push('offset');
             offsetSnippet = 'getOffsetAtOutCoords()';
         }
         var scaleSnippet = '1.0';
         if (scaleShape != null) {
-            util.assertAndGetBroadcastedShape(xShape, scaleShape);
+            broadcast_util.assertAndGetBroadcastShape(xShape, scaleShape);
             this.variableNames.push('scale');
             scaleSnippet = 'getScaleAtOutCoords()';
         }
@@ -7677,27 +8403,45 @@ var BatchNormProgram = (function () {
 }());
 exports.BatchNormProgram = BatchNormProgram;
 
-},{"../../util":91}],66:[function(require,module,exports){
+},{"../broadcast_util":55}],68:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var util = require("../../util");
+var broadcast_util = require("../broadcast_util");
 exports.ADD = 'return a + b;';
 exports.SUB = 'return a - b;';
 exports.MUL = 'return a * b;';
 exports.DIV = 'return a / b;';
+exports.EQUAL = "\n  if (isNaN(a)) return a;\n  if (isNaN(b)) return b;\n  return float(a == b);\n";
 var BinaryOpProgram = (function () {
     function BinaryOpProgram(op, aShape, bShape) {
         this.variableNames = ['A', 'B'];
         this.supportsBroadcasting = true;
         this.params = [op];
-        this.outputShape = util.assertAndGetBroadcastedShape(aShape, bShape);
+        this.outputShape =
+            broadcast_util.assertAndGetBroadcastShape(aShape, bShape);
         this.userCode = "\n      float binaryOperation(float a, float b) {\n        " + op + "\n      }\n\n      void main() {\n        float a = getAAtOutCoords();\n        float b = getBAtOutCoords();\n        setOutput(binaryOperation(a, b));\n      }\n    ";
     }
     return BinaryOpProgram;
 }());
 exports.BinaryOpProgram = BinaryOpProgram;
 
-},{"../../util":91}],67:[function(require,module,exports){
+},{"../broadcast_util":55}],69:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var ClipProgram = (function () {
+    function ClipProgram(aShape, min, max) {
+        this.variableNames = ['A'];
+        this.outputShape = aShape;
+        var minFixed = min.toFixed(20);
+        var maxFixed = max.toFixed(20);
+        this.params = [minFixed, maxFixed];
+        this.userCode = "\n      void main() {\n        float value = getAAtOutCoords();\n        if (isNaN(value)) {\n          setOutput(value);\n          return;\n        }\n\n        setOutput(clamp(value, " + minFixed + ", " + maxFixed + "));\n      }\n    ";
+    }
+    return ClipProgram;
+}());
+exports.ClipProgram = ClipProgram;
+
+},{}],70:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var concat_util = require("../concat_util");
@@ -7769,7 +8513,7 @@ function getDataType(rank) {
     }
 }
 
-},{"../concat_util":53}],68:[function(require,module,exports){
+},{"../concat_util":56}],71:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var conv_util = require("../conv_util");
@@ -7818,7 +8562,7 @@ var Conv2DDerBiasProgram = (function () {
 }());
 exports.Conv2DDerBiasProgram = Conv2DDerBiasProgram;
 
-},{"../conv_util":54}],69:[function(require,module,exports){
+},{"../conv_util":57}],72:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Conv2DProgram = (function () {
@@ -7845,7 +8589,7 @@ var Conv2DProgram = (function () {
 }());
 exports.Conv2DProgram = Conv2DProgram;
 
-},{}],70:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Copy2DProgram = (function () {
@@ -7868,7 +8612,7 @@ var Copy2DProgram = (function () {
 }());
 exports.Copy2DProgram = Copy2DProgram;
 
-},{}],71:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var environment_1 = require("../../environment");
@@ -7968,6 +8712,10 @@ var GPGPUContext = (function () {
         return this.downloadMatrixDriver(texture, function () {
             return gpgpu_util.downloadMatrixFromOutputTexture(_this.gl, rows, columns);
         });
+    };
+    GPGPUContext.prototype.downloadMatrixFromRGBAColorTexture = function (texture, rows, columns, channels) {
+        var _this = this;
+        return this.downloadMatrixDriver(texture, function () { return gpgpu_util.downloadMatrixFromRGBAColorTexture(_this.gl, rows, columns, channels); });
     };
     GPGPUContext.prototype.downloadMatrixFromPackedTexture = function (texture, rows, columns) {
         var _this = this;
@@ -8163,7 +8911,7 @@ var GPGPUContext = (function () {
 }());
 exports.GPGPUContext = GPGPUContext;
 
-},{"../../environment":15,"../../util":91,"./gpgpu_util":73,"./tex_util":86,"./webgl_util":89}],72:[function(require,module,exports){
+},{"../../environment":15,"../../util":95,"./gpgpu_util":76,"./tex_util":89,"./webgl_util":93}],75:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var environment_1 = require("../../environment");
@@ -8179,16 +8927,18 @@ function compileProgram(gpgpu, program, inputs, output) {
     var inputInfos = inputs.map(function (input, i) {
         var shapeInfo = {
             logicalShape: input.shape,
-            texShape: input.getTextureShapeRC()
+            texShape: input.getTextureShapeRC(),
+            textureType: input.getData().textureType
         };
         return { name: program.variableNames[i], shapeInfo: shapeInfo };
     });
     var inShapeInfos = inputInfos.map(function (x) { return x.shapeInfo; });
     var outShapeInfo = {
         logicalShape: output.shape,
-        texShape: output.getTextureShapeRC()
+        texShape: output.getTextureShapeRC(),
+        textureType: output.getData().textureType
     };
-    var source = shader_compiler.makeShader(inputInfos, outShapeInfo, userCode, program.supportsBroadcasting === true);
+    var source = shader_compiler.makeShader(inputInfos, outShapeInfo, userCode, program.supportsBroadcasting === true, program.numBatchDims);
     var webGLProgram = gpgpu.createProgram(source);
     var uniformLocations = {};
     for (var i = 0; i < program.variableNames.length; i++) {
@@ -8217,7 +8967,7 @@ function compileProgram(gpgpu, program, inputs, output) {
     };
 }
 exports.compileProgram = compileProgram;
-function validateBinaryAndProgram(shapeInfos, inputs) {
+function validateBinaryAndProgram(shapeInfos, inputs, numBatchDims) {
     if (shapeInfos.length !== inputs.length) {
         throw Error("Binary was compiled with " + shapeInfos.length + " inputs, but " +
             ("was executed with " + inputs.length + " inputs"));
@@ -8227,19 +8977,19 @@ function validateBinaryAndProgram(shapeInfos, inputs) {
         var texShapeA = s.texShape;
         var shapeB = inputs[i].shape;
         var texShapeB = inputs[i].getTextureShapeRC();
-        if (!util.arraysEqual(shapeA, shapeB)) {
+        if (!numBatchDims && !util.arraysEqual(shapeA, shapeB)) {
             throw Error("Binary was compiled with different shapes than " +
                 ("the current args. Shapes " + shapeA + " and " + shapeB + " must match"));
         }
-        if (!util.arraysEqual(texShapeA, texShapeB)) {
+        if (!numBatchDims && !util.arraysEqual(texShapeA, texShapeB)) {
             throw Error("Binary was compiled with different texture shapes than the" +
                 (" current args. Shape " + texShapeA + " and " + texShapeB + " must match"));
         }
     });
 }
 function runProgram(binary, inputs, output, customSetup) {
-    validateBinaryAndProgram(binary.inShapeInfos, inputs);
-    validateBinaryAndProgram([binary.outShapeInfo], [output]);
+    validateBinaryAndProgram(binary.inShapeInfos, inputs, binary.program.numBatchDims);
+    validateBinaryAndProgram([binary.outShapeInfo], [output], binary.program.numBatchDims);
     var outTex = output.getTexture();
     var outTexShape = output.getTextureShapeRC();
     var gpgpu = binary.gpgpu;
@@ -8262,7 +9012,7 @@ function runProgram(binary, inputs, output, customSetup) {
 exports.runProgram = runProgram;
 function makeShaderKey(program, inputs, output) {
     var params = program.params;
-    var keyStart = inputs.concat(output).map(function (x) { return x.shape + '_' + x.getTextureShapeRC(); });
+    var keyStart = inputs.concat(output).map(function (x) { return x.shape + "_" + x.getTextureShapeRC(); });
     var keyEnd = params.map(String);
     var key = [program.constructor.name];
     key.push((program.supportsBroadcasting === true).toString());
@@ -8271,7 +9021,7 @@ function makeShaderKey(program, inputs, output) {
 }
 exports.makeShaderKey = makeShaderKey;
 
-},{"../../environment":15,"../../util":91,"./shader_compiler":84}],73:[function(require,module,exports){
+},{"../../environment":15,"../../util":95,"./shader_compiler":87}],76:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var environment_1 = require("../../environment");
@@ -8398,10 +9148,8 @@ function bindVertexProgramAttributeStreams(gl, program, vertexBuffer, attribLoca
 }
 exports.bindVertexProgramAttributeStreams = bindVertexProgramAttributeStreams;
 function uploadPixelDataToTexture(gl, texture, pixels) {
-    var numChannels = 4;
-    var internalFormat = getTextureInternalFormat(gl, numChannels);
     webgl_util.callAndCheck(gl, function () { return gl.bindTexture(gl.TEXTURE_2D, texture); });
-    webgl_util.callAndCheck(gl, function () { return gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, gl.RGBA, getTextureType(gl), pixels); });
+    webgl_util.callAndCheck(gl, function () { return gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, pixels); });
     webgl_util.callAndCheck(gl, function () { return gl.bindTexture(gl.TEXTURE_2D, null); });
 }
 exports.uploadPixelDataToTexture = uploadPixelDataToTexture;
@@ -8463,6 +9211,19 @@ function downloadMatrixFromOutputTexture(gl, rows, columns) {
     }
 }
 exports.downloadMatrixFromOutputTexture = downloadMatrixFromOutputTexture;
+function downloadMatrixFromRGBAColorTexture(gl, rows, columns, channels) {
+    var size = rows * columns * 4;
+    var downloadTarget = new Uint8Array(size);
+    webgl_util.callAndCheck(gl, function () { return gl.readPixels(0, 0, columns, rows, gl.RGBA, gl.UNSIGNED_BYTE, downloadTarget); });
+    var packedRGBA = new Float32Array(size);
+    for (var i = 0; i < downloadTarget.length; i++) {
+        packedRGBA[i] = downloadTarget[i];
+    }
+    var matrix = new Float32Array(rows * columns * channels);
+    tex_util.decodeMatrixFromUnpackedColorRGBAArray(packedRGBA, matrix, channels);
+    return matrix;
+}
+exports.downloadMatrixFromRGBAColorTexture = downloadMatrixFromRGBAColorTexture;
 function downloadMatrixFromPackedOutputTexture(gl, rows, columns) {
     var _a = tex_util.getPackedMatrixTextureShapeWidthHeight(rows, columns), w = _a[0], h = _a[1];
     var packedRGBA = new Float32Array(tex_util.getPackedRGBAArraySizeFromMatrixShape(rows, columns));
@@ -8472,14 +9233,19 @@ function downloadMatrixFromPackedOutputTexture(gl, rows, columns) {
 }
 exports.downloadMatrixFromPackedOutputTexture = downloadMatrixFromPackedOutputTexture;
 
-},{"../../environment":15,"./tex_util":86,"./webgl_util":89}],74:[function(require,module,exports){
+},{"../../environment":15,"./tex_util":89,"./webgl_util":93}],77:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var util = require("../../util");
+var axis_util = require("../axis_util");
 var LogSumExpProgram = (function () {
-    function LogSumExpProgram(size) {
+    function LogSumExpProgram(shape, axes) {
         this.variableNames = ['A'];
         this.params = [];
-        this.outputShape = [];
+        var _a = axis_util.computeOutAndReduceShapes(shape, axes), outShape = _a[0], reduceShape = _a[1];
+        this.outputShape = outShape;
+        this.numBatchDims = outShape.length;
+        var size = util.sizeFromShape(reduceShape);
         var sizeNearestVec4 = Math.floor(size / 4) * 4;
         var sizeVec4Remainder = size % 4;
         var r1 = sizeNearestVec4;
@@ -8491,7 +9257,7 @@ var LogSumExpProgram = (function () {
 }());
 exports.LogSumExpProgram = LogSumExpProgram;
 
-},{}],75:[function(require,module,exports){
+},{"../../util":95,"../axis_util":54}],78:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var MaxPool2DBackpropProgram = (function () {
@@ -8515,13 +9281,18 @@ var MaxPool2DBackpropProgram = (function () {
 }());
 exports.MaxPool2DBackpropProgram = MaxPool2DBackpropProgram;
 
-},{}],76:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var util = require("../../util");
+var axis_util = require("../axis_util");
 var MinMaxProgram = (function () {
-    function MinMaxProgram(size, op) {
+    function MinMaxProgram(shape, axes, op) {
         this.variableNames = ['A'];
-        this.outputShape = [];
+        var _a = axis_util.computeOutAndReduceShapes(shape, axes), outShape = _a[0], reduceShape = _a[1];
+        this.outputShape = outShape;
+        this.numBatchDims = outShape.length;
+        var size = util.sizeFromShape(reduceShape);
         this.params = [op];
         var sizeNearestVec4 = Math.floor(size / 4) * 4;
         var sizeVec4Remainder = size % 4;
@@ -8534,7 +9305,7 @@ var MinMaxProgram = (function () {
 }());
 exports.MinMaxProgram = MinMaxProgram;
 
-},{}],77:[function(require,module,exports){
+},{"../../util":95,"../axis_util":54}],80:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var math_1 = require("../math");
@@ -8566,13 +9337,14 @@ var MatMulProgram = (function () {
 }());
 exports.MatMulProgram = MatMulProgram;
 
-},{"../math":57}],78:[function(require,module,exports){
+},{"../math":60}],81:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var MultinomialProgram = (function () {
-    function MultinomialProgram(numOutcomes, numSamples) {
+    function MultinomialProgram(batchSize, numOutcomes, numSamples) {
         this.variableNames = ['probs'];
-        this.outputShape = [numSamples];
+        this.outputShape = [batchSize, numSamples];
+        this.numBatchDims = 1;
         this.params = [];
         this.userCode = "\n      uniform float seed;\n\n      void main() {\n        float r = random(seed);\n        float cdf = 0.0;\n\n        for (int i = 0; i < " + (numOutcomes - 1) + "; i++) {\n          cdf += getProbs(i);\n\n          if (r < cdf) {\n            setOutput(float(i));\n            return;\n          }\n        }\n\n        // If no other event happened, last event happened.\n        setOutput(float(" + (numOutcomes - 1) + "));\n      }\n    ";
     }
@@ -8589,7 +9361,7 @@ var MultinomialProgram = (function () {
 }());
 exports.MultinomialProgram = MultinomialProgram;
 
-},{}],79:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var OneHotProgram = (function () {
@@ -8612,7 +9384,7 @@ var OneHotProgram = (function () {
 }());
 exports.OneHotProgram = OneHotProgram;
 
-},{}],80:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Pool2DProgram = (function () {
@@ -8663,15 +9435,19 @@ var Pool2DProgram = (function () {
 }());
 exports.Pool2DProgram = Pool2DProgram;
 
-},{}],81:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var util = require("../../util");
+var axis_util = require("../axis_util");
 var ReduceSumProgram = (function () {
-    function ReduceSumProgram(size) {
-        this.size = size;
+    function ReduceSumProgram(shape, axes) {
         this.variableNames = ['A'];
         this.params = [];
-        this.outputShape = [];
+        var _a = axis_util.computeOutAndReduceShapes(shape, axes), outShape = _a[0], reduceShape = _a[1];
+        this.outputShape = outShape;
+        this.numBatchDims = outShape.length;
+        var size = util.sizeFromShape(reduceShape);
         var sizeNearestVec4 = Math.floor(size / 4) * 4;
         var sizeVec4Remainder = size % 4;
         var r1 = sizeNearestVec4;
@@ -8683,7 +9459,7 @@ var ReduceSumProgram = (function () {
 }());
 exports.ReduceSumProgram = ReduceSumProgram;
 
-},{}],82:[function(require,module,exports){
+},{"../../util":95,"../axis_util":54}],85:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var webgl_util = require("./webgl_util");
@@ -8705,7 +9481,7 @@ function renderToFramebuffer(gpgpu, renderShader, sourceTex) {
 }
 exports.renderToFramebuffer = renderToFramebuffer;
 
-},{"./webgl_util":89}],83:[function(require,module,exports){
+},{"./webgl_util":93}],86:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ResizeBilinear3DProgram = (function () {
@@ -8731,23 +9507,41 @@ var ResizeBilinear3DProgram = (function () {
 }());
 exports.ResizeBilinear3DProgram = ResizeBilinear3DProgram;
 
-},{}],84:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var environment_1 = require("../../environment");
 var util = require("../../util");
+var broadcast_util = require("../broadcast_util");
 var tex_util = require("./tex_util");
-function makeShader(inputsInfo, outputShape, userCode, broadcast) {
+var tex_util_1 = require("./tex_util");
+function updateBatchedShapeInfo(info, numBatchDims) {
+    info.logicalShape = info.logicalShape.slice(numBatchDims);
+}
+function makeShader(inputsInfo, outputShape, userCode, broadcast, numBatchDims) {
+    var batchSnippet = '';
+    if (numBatchDims) {
+        if (inputsInfo.length !== 1) {
+            throw new Error("Batching for 2 or more inputs is not yet supported. " +
+                ("Got " + inputsInfo.length + " inputs."));
+        }
+        updateBatchedShapeInfo(inputsInfo[0].shapeInfo, numBatchDims);
+        updateBatchedShapeInfo(outputShape, numBatchDims);
+        var inputSize = util.sizeFromShape(inputsInfo[0].shapeInfo.logicalShape);
+        var outputSize = util.sizeFromShape(outputShape.logicalShape);
+        batchSnippet = getBatchSnippet(inputSize, outputSize, outputShape.texShape);
+    }
     var sampleSnippet = getSampleSnippet();
     var setOutputSnippet = getSetOutputSnippet();
     var inputPrefixSnippet = inputsInfo.map(function (x) { return "uniform sampler2D " + x.name + ";"; }).join('\n');
-    var inputSamplingSnippet = inputsInfo.map(function (x) { return getInputSamplingSnippet(x, outputShape, broadcast); })
+    var inputSamplingSnippet = inputsInfo
+        .map(function (x) { return getInputSamplingSnippet(x, outputShape, broadcast, numBatchDims); })
         .join('\n');
     var outTexShape = outputShape.texShape;
     var outputSamplingSnippet = getOutputSamplingSnippet(outputShape.logicalShape, outTexShape);
     var source = [
-        SHADER_PREFIX, sampleSnippet, setOutputSnippet, inputPrefixSnippet,
-        inputSamplingSnippet, outputSamplingSnippet, userCode
+        SHADER_PREFIX, batchSnippet, sampleSnippet, setOutputSnippet,
+        inputPrefixSnippet, outputSamplingSnippet, inputSamplingSnippet, userCode
     ].join('\n');
     return source;
 }
@@ -8762,26 +9556,24 @@ function getSetOutputSnippet() {
         FLOAT_TEXTURE_SETOUTPUT_SNIPPET :
         UNSIGNED_BYTE_TEXTURE_SETOUTPUT_SNIPPET;
 }
-function getInputSamplingSnippet(inInfo, outShapeInfo, broadcast) {
+function getInputSamplingSnippet(inInfo, outShapeInfo, broadcast, numBatchDims) {
     var shape = inInfo.shapeInfo.logicalShape;
-    var texShape = inInfo.shapeInfo.texShape;
-    var outTexShape = outShapeInfo.texShape;
-    var res = '';
+    var res = getSamplerFlat(inInfo, numBatchDims);
     switch (shape.length) {
         case 0:
-            res += getSamplerScalar(inInfo.name);
+            res += getSamplerScalar(inInfo);
             break;
         case 1:
-            res += getSampler1D(inInfo.name, texShape);
+            res += getSampler1D(inInfo);
             break;
         case 2:
-            res += getSampler2D(inInfo.name, shape, texShape);
+            res += getSampler2D(inInfo);
             break;
         case 3:
-            res += getSampler3D(inInfo.name, shape, texShape);
+            res += getSampler3D(inInfo);
             break;
         case 4:
-            res += getSampler4D(inInfo.name, shape, texShape);
+            res += getSampler4D(inInfo);
             break;
         default:
             throw new Error(shape.length + "-D input sampling" +
@@ -8789,16 +9581,17 @@ function getInputSamplingSnippet(inInfo, outShapeInfo, broadcast) {
     }
     if (broadcast ||
         util.arraysEqual(inInfo.shapeInfo.logicalShape, outShapeInfo.logicalShape)) {
-        res +=
-            getSamplerAtOutputCoords(inInfo.name, texShape, outTexShape, broadcast);
+        res += getSamplerAtOutputCoords(inInfo, outShapeInfo, broadcast);
     }
-    res += getSamplerFlat(inInfo.name, texShape);
     return res;
+}
+function getBatchSnippet(inputSize, outputSize, texShape) {
+    return "\n    int getBatchOffset() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n          vec2(" + texShape[0] + ", " + texShape[1] + "));\n      int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n      int b = index / " + outputSize + ";\n      return b * " + inputSize + ";\n    }\n  ";
 }
 function getOutputSamplingSnippet(outShape, outTexShape) {
     switch (outShape.length) {
         case 0:
-            return '';
+            return getOutputScalarCoords();
         case 1:
             return getOutput1DCoords(outShape, outTexShape);
         case 2:
@@ -8813,13 +9606,16 @@ function getOutputSamplingSnippet(outShape, outTexShape) {
 }
 var SAMPLE_1D_SNIPPET = "\nvec2 UVfrom1D(int texNumR, int texNumC, int index) {\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n";
 var SAMPLE_2D_SNIPPET = "\nvec2 UVfrom2D(int texNumR, int texNumC, int numC, int row, int col) {\n  int index = row * numC + col;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n";
-var SAMPLE_3D_SNIPPET = "\nvec2 UVfrom3D(int texNumR, int texNumC, int stride0,\n    int stride1, int row, int col, int depth) {\n  int index = row * stride0 + col * stride1 + depth;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n";
-var SAMPLE_4D_SNIPPET = "\nvec2 UVfrom4D(int texNumR, int texNumC, int stride0,\n    int stride1, int stride2, int row, int col, int depth,\n    int depth2) {\n  int index = row * stride0 + col * stride1 + depth * stride2 + depth2;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n";
+var SAMPLE_3D_SNIPPET = "\nvec2 UVfrom3D(int texNumR, int texNumC, int stride0,\n    int stride1, int row, int col, int depth) {\n  // Explicitly use integer operations as dot() only works on floats.\n  int index = row * stride0 + col * stride1 + depth;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n";
+var SAMPLE_4D_SNIPPET = "\nvec2 UVfrom4D(int texNumR, int texNumC, int stride0,\n    int stride1, int stride2, int row, int col, int depth,\n    int depth2) {\n  // Explicitly use integer operations as dot() only works on floats.\n  int index = row * stride0 + col * stride1 + depth * stride2 + depth2;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n";
 var UNSIGNED_BYTE_TEXTURE_SAMPLE_SNIPPET = "\n  uniform float NaN;\n\n  const vec4 floatDeltas = vec4(\n      1.0,\n      1.0 / 255.0,\n      1.0 / (255.0 * 255.0),\n      1.0 / (255.0 * 255.0 * 255.0)\n  );\n  const float minValue = " + tex_util.FLOAT_MIN + ".0;\n  const float maxValue = " + tex_util.FLOAT_MAX + ".0;\n  const float range = (maxValue - minValue) / 255.0;\n  const vec2 dotRange = vec2(1.0, range);\n\n  float sample(sampler2D texture, vec2 uv) {\n    vec4 sampleValue = texture2D(texture, uv);\n    if (all(equal(sampleValue, vec4(" + tex_util.BYTE_NAN_VALUE + ")))) {\n      return NaN;\n    }\n\n    vec4 encValue = floor(sampleValue * 255.0 + 0.5);\n    float decodedValue = dot(encValue, floatDeltas);\n    return dot(vec2(minValue, decodedValue), dotRange);\n  }\n";
 var UNSIGNED_BYTE_TEXTURE_SETOUTPUT_SNIPPET = "\n  const vec4 floatPowers = vec4(\n    1.0,\n    255.0,\n    255.0 * 255.0,\n    255.0 * 255.0 * 255.0\n  );\n  const vec2 recipRange = vec2(1.0/range);\n  const vec2 recipRange255 = vec2(1.0/(maxValue - minValue));\n\n  void setOutput(float decodedValue) {\n    if (isNaN(decodedValue)) {\n      gl_FragColor = vec4(" + tex_util.BYTE_NAN_VALUE + ");\n      return;\n    }\n\n    float a = dot(vec2(decodedValue, -minValue), recipRange);\n    float b = fract(a) * 255.0;\n    float c = fract(b) * 255.0;\n    float d = fract(c) * 255.0;\n    gl_FragColor = floor(vec4(a, b, c, d)) / 255.0;\n\n    // TODO(dsmilkov): Version above gets better accuracy but probably slower\n    // than the version below. Benchmark to determine if the accuracy is worth\n    // the cost.\n\n    // float normValue = dot(vec2(decodedValue, -minValue), recipRange255);\n    // vec4 f = normValue * floatPowers;\n    // gl_FragColor = floor(fract(f) * 255.0) / 255.0;\n  }\n";
 var FLOAT_TEXTURE_SAMPLE_SNIPPET = "\n  float sample(sampler2D texture, vec2 uv) {\n    return texture2D(texture, uv).r;\n  }\n";
 var FLOAT_TEXTURE_SETOUTPUT_SNIPPET = "\n  void setOutput(float val) {\n    gl_FragColor = vec4(val, 0, 0, 0);\n  }\n";
-var SHADER_PREFIX = "\n  precision highp float;\n  precision highp int;\n  varying vec2 resultUV;\n  const vec2 halfCR = vec2(0.5, 0.5);\n\n  bool isNaN(float val) {\n    return val == val ? false : true;\n  }\n\n  bool hasNaN(vec4 values) {\n    return any(notEqual(values, values));\n  }\n\n  float getNaN(vec4 values) {\n    return dot(vec4(1), values);\n  }\n\n  int round(float value) {\n    return int(floor(value + 0.5));\n  }\n\n  const vec2 randomConst = vec2(\n    23.14069263277926, // e^pi (Gelfond's constant)\n     2.665144142690225 // 2^sqrt(2) (Gelfond\u2013Schneider constant)\n  );\n\n  float random(float seed) {\n      return fract(cos(dot(resultUV * seed, randomConst)) * 12345.6789);\n  }\n\n  " + SAMPLE_1D_SNIPPET + "\n  " + SAMPLE_2D_SNIPPET + "\n  " + SAMPLE_3D_SNIPPET + "\n  " + SAMPLE_4D_SNIPPET + "\n";
+var SHADER_PREFIX = "\n  precision highp float;\n  precision highp int;\n  varying vec2 resultUV;\n  const vec2 halfCR = vec2(0.5, 0.5);\n\n  bool isNaN(float val) {\n    return val == val ? false : true;\n  }\n\n  bool hasNaN(vec4 values) {\n    return any(notEqual(values, values));\n  }\n\n  float getNaN(vec4 values) {\n    return dot(vec4(1), values);\n  }\n\n  int round(float value) {\n    return int(floor(value + 0.5));\n  }\n\n  int imod(int x, int y) {\n    return x - y * (x / y);\n  }\n\n  const vec2 randomConst = vec2(\n    23.14069263277926, // e^pi (Gelfond's constant)\n     2.665144142690225 // 2^sqrt(2) (Gelfond\u2013Schneider constant)\n  );\n\n  float random(float seed) {\n      return fract(cos(dot(resultUV * seed, randomConst)) * 12345.6789);\n  }\n\n  float sampleUVAndDepth(sampler2D texture, vec2 uv, int depth) {\n    float value;\n    if (depth == 0) {\n      value = texture2D(texture, uv).r;\n    } else if (depth == 1) {\n      value = texture2D(texture, uv).g;\n    } else if (depth == 2) {\n      value = texture2D(texture, uv).b;\n    } else if (depth == 3) {\n      value = texture2D(texture, uv).a;\n    }\n    return floor(value * 255.0 + 0.5);\n  }\n\n  " + SAMPLE_1D_SNIPPET + "\n  " + SAMPLE_2D_SNIPPET + "\n  " + SAMPLE_3D_SNIPPET + "\n  " + SAMPLE_4D_SNIPPET + "\n";
+function getOutputScalarCoords() {
+    return "\n    int getOutputCoords() {\n      return 0;\n    }\n  ";
+}
 function getOutput1DCoords(shape, texShape) {
     if (texShape[0] === 1) {
         return "\n      int getOutputCoords() {\n        return int(resultUV.x * " + texShape[1] + ".0);\n      }\n    ";
@@ -8852,37 +9648,74 @@ function getOutput2DCoords(shape, texShape) {
     }
     return "\n    ivec2 getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + texShape[0] + ", " + texShape[1] + "));\n      int index = resTexRC.x * " + texShape[1] + " + resTexRC.y;\n      int r = index / " + shape[1] + ";\n      int c = index - r * " + shape[1] + ";\n      return ivec2(r, c);\n    }\n  ";
 }
-function getSamplerScalar(texName) {
+function getSamplerScalar(inputInfo) {
+    var texName = inputInfo.name;
     var funcName = 'get' + texName.charAt(0).toUpperCase() + texName.slice(1);
     return "\n    float " + funcName + "() {\n      return sample(" + texName + ", halfCR);\n    }\n  ";
 }
-function getSampler1D(texName, texShape) {
+function getSampler1D(inputInfo) {
+    var texName = inputInfo.name;
+    var funcName = 'get' + texName.charAt(0).toUpperCase() + texName.slice(1);
+    return "\n    float " + funcName + "(int index) {\n      return " + funcName + "Flat(index);\n    }\n  ";
+}
+function getSampler2D(inputInfo) {
+    var shape = inputInfo.shapeInfo.logicalShape;
+    var texShape = inputInfo.shapeInfo.texShape;
+    var texName = inputInfo.name;
     var funcName = 'get' + texName.charAt(0).toUpperCase() + texName.slice(1);
     var tR = texShape[0];
     var tC = texShape[1];
-    if (texShape[0] === 1 && texShape[1] === 1) {
-        return "\n      float " + funcName + "(int index) {\n        return sample(" + texName + ", halfCR);\n      }\n    ";
+    if (util.arraysEqual(shape, texShape)) {
+        return "\n    float " + funcName + "(int row, int col) {\n      vec2 uv = (vec2(col, row) + halfCR) / vec2(" + tC + ".0, " + tR + ".0);\n      return sample(" + texName + ", uv);\n    }\n  ";
     }
-    if (texShape[1] === 1) {
-        return "\n      float " + funcName + "(int index) {\n        vec2 uv = vec2(0.5, (float(index) + 0.5) / " + tR + ".0);\n        return sample(" + texName + ", uv);\n      }\n    ";
+    if (tC === 1) {
+        if (shape[0] === 1) {
+            return "\n      float " + funcName + "(int row, int col) {\n        vec2 uv = vec2(0.5, (float(col) + 0.5) / " + tR + ".0);\n        return sample(" + texName + ", uv);\n      }\n    ";
+        }
+        if (shape[1] === 1) {
+            return "\n      float " + funcName + "(int row, int col) {\n        vec2 uv = vec2(0.5, (float(row) + 0.5) / " + tR + ".0);\n        return sample(" + texName + ", uv);\n      }\n    ";
+        }
+        return "\n    float " + funcName + "(int row, int col) {\n      int index = row * " + shape[1] + " + col;\n      vec2 uv = vec2(0.5, (float(index) + 0.5) / " + tR + ".0);\n      return sample(" + texName + ", uv);\n    }\n  ";
     }
-    if (texShape[0] === 1) {
-        return "\n      float " + funcName + "(int index) {\n        vec2 uv = vec2((float(index) + 0.5) / " + tC + ".0, 0.5);\n        return sample(" + texName + ", uv);\n      }\n    ";
+    if (tR === 1) {
+        return "\n    float " + funcName + "(int row, int col) {\n      int index = row * " + shape[1] + " + col;\n      vec2 uv = vec2((float(index) + 0.5) / " + tC + ".0, 0.5);\n      return sample(" + texName + ", uv);\n    }\n  ";
     }
-    return "\n    float " + funcName + "(int index) {\n      vec2 uv = UVfrom1D(" + tR + ", " + tC + ", index);\n      return sample(" + texName + ", uv);\n    }\n  ";
+    return "\n  float " + funcName + "(int row, int col) {\n    vec2 uv = UVfrom2D(" + tR + ", " + tC + ", " + shape[1] + ", row, col);\n    return sample(" + texName + ", uv);\n  }\n";
 }
-function getSampler3D(texName, shape, texShape) {
+function getSampler3D(inputInfo) {
+    var texShape = inputInfo.shapeInfo.texShape;
+    var shape = inputInfo.shapeInfo.logicalShape;
+    var texName = inputInfo.name;
     var funcName = 'get' + texName.charAt(0).toUpperCase() + texName.slice(1);
     var tR = texShape[0];
     var tC = texShape[1];
     var stride0 = shape[1] * shape[2];
     var stride1 = shape[2];
     if (tC === stride0) {
-        return "\n      float " + funcName + "(int row, int col, int depth) {\n        int texR = row;\n        int texC = col * " + stride1 + " + depth;\n        vec2 uv = (vec2(texC, texR) + halfCR) / vec2(" + tC + ".0, " + tR + ".0);\n        return sample(" + texName + ", uv);\n      }\n    ";
+        if (inputInfo.shapeInfo.textureType === tex_util_1.TextureType.DEFAULT) {
+            return "\n        float " + funcName + "(int row, int col, int depth) {\n          int texR = row;\n          int texC = col * " + stride1 + " + depth;\n          vec2 uv = (vec2(texC, texR) + halfCR) / vec2(" + tC + ".0, " + tR + ".0);\n          return sample(" + texName + ", uv);\n        }\n      ";
+        }
+        else if (inputInfo.shapeInfo.textureType === tex_util_1.TextureType.RGBA_COLOR) {
+            return "\n        float " + funcName + "(int row, int col, int depth) {\n          vec2 uv = (vec2(col, row) + halfCR) / vec2(" + tC + ".0, " + tR + ".0);\n          return sampleUVAndDepth(" + texName + ", uv, depth);\n        }\n      ";
+        }
+        else {
+            throw new Error("Unknown TextureType " + inputInfo.shapeInfo.textureType + ".");
+        }
     }
-    return "\n    float " + funcName + "(int row, int col, int depth) {\n      vec2 uv = UVfrom3D(" + tR + ", " + tC + ", " + stride0 + ", " + stride1 + ", row, col, depth);\n      return sample(" + texName + ", uv);\n    }\n  ";
+    if (inputInfo.shapeInfo.textureType === tex_util_1.TextureType.DEFAULT) {
+        return "\n      float " + funcName + "(int row, int col, int depth) {\n        vec2 uv = UVfrom3D(\n            " + tR + ", " + tC + ", " + stride0 + ", " + stride1 + ", row, col, depth);\n        return sample(" + texName + ", uv);\n      }\n  ";
+    }
+    else if (inputInfo.shapeInfo.textureType === tex_util_1.TextureType.RGBA_COLOR) {
+        return "\n      float " + funcName + "(int row, int col, int depth) {\n        vec2 uv = UVfrom2D(" + tR + ", " + tC + ", " + shape[1] + ", row, col);\n        return sampleUVAndDepth(" + texName + ", uv, depth);\n      }\n    ";
+    }
+    else {
+        throw new Error("Unknown TextureType " + inputInfo.shapeInfo.textureType + ".");
+    }
 }
-function getSampler4D(texName, shape, texShape) {
+function getSampler4D(inputInfo) {
+    var shape = inputInfo.shapeInfo.logicalShape;
+    var texShape = inputInfo.shapeInfo.texShape;
+    var texName = inputInfo.name;
     var funcName = 'get' + texName.charAt(0).toUpperCase() + texName.slice(1);
     var tR = texShape[0];
     var tC = texShape[1];
@@ -8894,57 +9727,100 @@ function getSampler4D(texName, shape, texShape) {
     }
     return "\n    float " + funcName + "(int row, int col, int depth, int depth2) {\n      vec2 uv = UVfrom4D(" + tR + ", " + tC + ", " + stride0 + ", " + stride1 + ", " + stride2 + ",\n          row, col, depth, depth2);\n      return sample(" + texName + ", uv);\n    }\n  ";
 }
-function getSampler2D(texName, shape, texShape) {
-    var funcName = 'get' + texName.charAt(0).toUpperCase() + texName.slice(1);
-    var tR = texShape[0];
-    var tC = texShape[1];
-    if (util.arraysEqual(shape, texShape)) {
-        return "\n      float " + funcName + "(int row, int col) {\n        vec2 uv = (vec2(col, row) + halfCR) / vec2(" + tC + ".0, " + tR + ".0);\n        return sample(" + texName + ", uv);\n      }\n    ";
-    }
-    if (tC === 1) {
-        if (shape[0] === 1) {
-            return "\n        float " + funcName + "(int row, int col) {\n          vec2 uv = vec2(0.5, (float(col) + 0.5) / " + tR + ".0);\n          return sample(" + texName + ", uv);\n        }\n      ";
-        }
-        if (shape[1] === 1) {
-            return "\n        float " + funcName + "(int row, int col) {\n          vec2 uv = vec2(0.5, (float(row) + 0.5) / " + tR + ".0);\n          return sample(" + texName + ", uv);\n        }\n      ";
-        }
-        return "\n      float " + funcName + "(int row, int col) {\n        int index = row * " + shape[1] + " + col;\n        vec2 uv = vec2(0.5, (float(index) + 0.5) / " + tR + ".0);\n        return sample(" + texName + ", uv);\n      }\n    ";
-    }
-    if (tR === 1) {
-        return "\n      float " + funcName + "(int row, int col) {\n        int index = row * " + shape[1] + " + col;\n        vec2 uv = vec2((float(index) + 0.5) / " + tC + ".0, 0.5);\n        return sample(" + texName + ", uv);\n      }\n    ";
-    }
-    return "\n    float " + funcName + "(int row, int col) {\n      vec2 uv = UVfrom2D(" + tR + ", " + tC + ", " + shape[1] + ", row, col);\n      return sample(" + texName + ", uv);\n    }\n  ";
-}
-function getSamplerFlat(texName, texShape) {
+function getSamplerFlat(inputInfo, numBatchDims) {
+    var texName = inputInfo.name;
+    var texShape = inputInfo.shapeInfo.texShape;
     var funcName = 'get' + texName.charAt(0).toUpperCase() + texName.slice(1) + 'Flat';
     var tNumR = texShape[0];
     var tNumC = texShape[1];
+    var batchSnippet = '';
+    if (numBatchDims) {
+        batchSnippet = 'index += getBatchOffset();';
+    }
     if (tNumC === 1 && tNumR === 1) {
-        return "\n      float " + funcName + "(int index) {\n        return sample(" + texName + ", halfCR);\n      }\n    ";
+        return "\n      float " + funcName + "(int index) {\n        " + batchSnippet + "\n        return sample(" + texName + ", halfCR);\n      }\n    ";
     }
     if (tNumC === 1) {
-        return "\n      float " + funcName + "(int index) {\n        vec2 uv = vec2(0.5, (float(index) + 0.5) / " + tNumR + ".0);\n        return sample(" + texName + ", uv);\n      }\n    ";
+        return "\n      float " + funcName + "(int index) {\n        " + batchSnippet + "\n        vec2 uv = vec2(0.5, (float(index) + 0.5) / " + tNumR + ".0);\n        return sample(" + texName + ", uv);\n      }\n    ";
     }
     if (tNumR === 1) {
-        return "\n      float " + funcName + "(int index) {\n        vec2 uv = vec2((float(index) + 0.5) / " + tNumC + ".0, 0.5);\n        return sample(" + texName + ", uv);\n      }\n    ";
+        return "\n      float " + funcName + "(int index) {\n        " + batchSnippet + "\n        vec2 uv = vec2((float(index) + 0.5) / " + tNumC + ".0, 0.5);\n        return sample(" + texName + ", uv);\n      }\n    ";
     }
-    return "\n    float " + funcName + "(int index) {\n      int texR = index / " + tNumC + ";\n      int texC = index - texR * " + tNumC + ";\n      vec2 uv = (vec2(texC, texR) + halfCR) / vec2(" + tNumC + ".0, " + tNumR + ".0);\n      return sample(" + texName + ", uv);\n    }\n  ";
+    return "\n    float " + funcName + "(int index) {\n      " + batchSnippet + "\n      vec2 uv = UVfrom1D(" + tNumR + ", " + tNumC + ", index);\n      return sample(" + texName + ", uv);\n    }\n  ";
 }
-function getSamplerAtOutputCoords(texName, inTexShape, outTexShape, broadcast) {
-    var funcName = 'get' + texName.charAt(0).toUpperCase() + texName.slice(1) +
-        'AtOutCoords';
-    if (util.arraysEqual(inTexShape, outTexShape)) {
+function getBroadcastOutputCoordsSampler(inputInfo, outShapeInfo, texFuncSnippet, funcName) {
+    var inRank = inputInfo.shapeInfo.logicalShape.length;
+    var outRank = outShapeInfo.logicalShape.length;
+    var type = 'int';
+    if (outRank === 2) {
+        type = 'ivec2';
+    }
+    else if (outRank === 3) {
+        type = 'ivec3';
+    }
+    else if (outRank === 4) {
+        type = 'ivec4';
+    }
+    var broadcastDims = broadcast_util.getBroadcastDims(inputInfo.shapeInfo.logicalShape, outShapeInfo.logicalShape);
+    var rankDiff = outRank - inRank;
+    var coordsSnippet;
+    if (inRank === 0) {
+        coordsSnippet = '';
+    }
+    else if (outRank < 2 && broadcastDims.length >= 1) {
+        coordsSnippet = 'coords = 0;';
+    }
+    else {
+        coordsSnippet =
+            broadcastDims.map(function (d) { return "coords[" + (d + rankDiff) + "] = 0;"; }).join('\n');
+    }
+    var unpackedCoordsSnippet = '';
+    if (outRank < 2 && inRank > 0) {
+        unpackedCoordsSnippet = 'coords';
+    }
+    else {
+        unpackedCoordsSnippet = inputInfo.shapeInfo.logicalShape
+            .map(function (s, i) { return "coords[" + (i + rankDiff) + "]"; })
+            .join(', ');
+    }
+    return "\n    float " + funcName + "() {\n      " + type + " coords = getOutputCoords();\n      " + coordsSnippet + "\n      return get" + texFuncSnippet + "(" + unpackedCoordsSnippet + ");\n    }\n  ";
+}
+function getSamplerAtOutputCoords(inputInfo, outShapeInfo, supportsBroadcasting) {
+    var inTexShape = inputInfo.shapeInfo.texShape;
+    var texName = inputInfo.name;
+    var isRGBAColorTexture = inputInfo.shapeInfo.textureType === tex_util_1.TextureType.RGBA_COLOR;
+    var texFuncSnippet = texName.charAt(0).toUpperCase() + texName.slice(1);
+    var funcName = 'get' + texFuncSnippet + 'AtOutCoords';
+    var broadcastDims = broadcast_util.getBroadcastDims(inputInfo.shapeInfo.logicalShape, outShapeInfo.logicalShape);
+    var inRank = inputInfo.shapeInfo.logicalShape.length;
+    var outRank = outShapeInfo.logicalShape.length;
+    var doBroadcast = supportsBroadcasting && ((outRank > inRank) || broadcastDims.length > 0);
+    var broadcastOverOuter = broadcast_util.broadcastDimsAreOuter(broadcastDims);
+    if (doBroadcast && !broadcastOverOuter) {
+        return getBroadcastOutputCoordsSampler(inputInfo, outShapeInfo, texFuncSnippet, funcName);
+    }
+    var outTexShape = outShapeInfo.texShape;
+    if (util.arraysEqual(inTexShape, outTexShape) && !isRGBAColorTexture) {
         return "\n      float " + funcName + "() {\n        return sample(" + texName + ", resultUV);\n      }\n    ";
     }
-    var inSize = util.sizeFromShape(inTexShape);
-    var broadcastSnippet = '';
-    if (broadcast) {
-        broadcastSnippet = "\n      int mainPart = index / " + inSize + ";\n      index -= mainPart * " + inSize + ";\n    ";
+    var inTexExpandedShape = isRGBAColorTexture ?
+        [inTexShape[0], inTexShape[1] * inputInfo.shapeInfo.logicalShape[2]] :
+        inTexShape;
+    var sampleSnippet = "return sample(" + texName + ", uv);";
+    var rgbaColorSnippet = '';
+    if (isRGBAColorTexture) {
+        rgbaColorSnippet = "\n      int col = texC / " + inputInfo.shapeInfo.logicalShape[2] + ";\n      int texD = texC - col * " + inputInfo.shapeInfo.logicalShape[2] + ";\n      texC = col;\n    ";
+        sampleSnippet = "return sampleUVAndDepth(" + texName + ", uv, texD);";
     }
-    return "\n    float " + funcName + "() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + outTexShape[0] + ", " + outTexShape[1] + "));\n      int index = resTexRC.x * " + outTexShape[1] + " + resTexRC.y;\n      " + broadcastSnippet + "\n      int texR = index / " + inTexShape[1] + ";\n      int texC = index - texR * " + inTexShape[1] + ";\n      vec2 uv = (vec2(texC, texR) + halfCR) /\n                 vec2(" + inTexShape[1] + ".0, " + inTexShape[0] + ".0);\n      return sample(" + texName + ", uv);\n    }\n  ";
+    var inSize = util.sizeFromShape(inTexExpandedShape);
+    var broadcastSnippet = '';
+    if (doBroadcast && broadcastOverOuter) {
+        broadcastSnippet = "\n        int mainPart = index / " + inSize + ";\n        index -= mainPart * " + inSize + ";\n      ";
+    }
+    return "\n    float " + funcName + "() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + outTexShape[0] + ", " + outTexShape[1] + "));\n      int index = resTexRC.x * " + outTexShape[1] + " + resTexRC.y;\n      " + broadcastSnippet + "\n      int texR = index / " + inTexExpandedShape[1] + ";\n      int texC = index - texR * " + inTexExpandedShape[1] + ";\n\n      " + rgbaColorSnippet + "\n\n      vec2 uv = (vec2(texC, texR) + halfCR) /\n                 vec2(" + inTexShape[1] + ".0, " + inTexShape[0] + ".0);\n\n      " + sampleSnippet + "\n    }\n  ";
 }
 
-},{"../../environment":15,"../../util":91,"./tex_util":86}],85:[function(require,module,exports){
+},{"../../environment":15,"../../util":95,"../broadcast_util":55,"./tex_util":89}],88:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var SliceProgram = (function () {
@@ -9025,9 +9901,14 @@ function getDataType(rank) {
     }
 }
 
-},{}],86:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var TextureType;
+(function (TextureType) {
+    TextureType[TextureType["DEFAULT"] = 0] = "DEFAULT";
+    TextureType[TextureType["RGBA_COLOR"] = 1] = "RGBA_COLOR";
+})(TextureType = exports.TextureType || (exports.TextureType = {}));
 function getUnpackedMatrixTextureShapeWidthHeight(rows, columns) {
     return [columns, rows];
 }
@@ -9042,8 +9923,8 @@ function getColorMatrixTextureShapeWidthHeight(rows, columns) {
 exports.getColorMatrixTextureShapeWidthHeight = getColorMatrixTextureShapeWidthHeight;
 function getMatrixSizeFromUnpackedArraySize(unpackedSize, channelsPerTexture) {
     if (unpackedSize % channelsPerTexture !== 0) {
-        throw new Error('unpackedSize (' + unpackedSize + ') must be a multiple of ' +
-            channelsPerTexture);
+        throw new Error("unpackedSize (" + unpackedSize + ") must be a multiple of " +
+            ("" + channelsPerTexture));
     }
     return unpackedSize / channelsPerTexture;
 }
@@ -9051,8 +9932,8 @@ exports.getMatrixSizeFromUnpackedArraySize = getMatrixSizeFromUnpackedArraySize;
 function encodeMatrixToUnpackedArray(matrix, unpackedArray, channelsPerTexture) {
     var requiredSize = getUnpackedArraySizeFromMatrixSize(matrix.length, channelsPerTexture);
     if (unpackedArray.length < requiredSize) {
-        throw new Error('unpackedArray length (' + unpackedArray.length +
-            ') must be >= ' + requiredSize);
+        throw new Error("unpackedArray length (" + unpackedArray.length + ") must be >= " +
+            ("" + requiredSize));
     }
     var dst = 0;
     for (var src = 0; src < matrix.length; ++src) {
@@ -9118,7 +9999,7 @@ exports.decodeToFloatArray = decodeToFloatArray;
 function decodeMatrixFromUnpackedArray(unpackedArray, matrix, channelsPerTexture) {
     var requiredSize = getMatrixSizeFromUnpackedArraySize(unpackedArray.length, channelsPerTexture);
     if (matrix.length < requiredSize) {
-        throw new Error('matrix length (' + matrix.length + ') must be >= ' + requiredSize);
+        throw new Error("matrix length (" + matrix.length + ") must be >= " + requiredSize);
     }
     var dst = 0;
     for (var src = 0; src < unpackedArray.length; src += channelsPerTexture) {
@@ -9126,6 +10007,19 @@ function decodeMatrixFromUnpackedArray(unpackedArray, matrix, channelsPerTexture
     }
 }
 exports.decodeMatrixFromUnpackedArray = decodeMatrixFromUnpackedArray;
+function decodeMatrixFromUnpackedColorRGBAArray(unpackedArray, matrix, channels) {
+    var requiredSize = unpackedArray.length * channels / 4;
+    if (matrix.length < requiredSize) {
+        throw new Error("matrix length (" + matrix.length + ") must be >= " + requiredSize);
+    }
+    var dst = 0;
+    for (var src = 0; src < unpackedArray.length; src += 4) {
+        for (var c = 0; c < channels; c++) {
+            matrix[dst++] = unpackedArray[src + c];
+        }
+    }
+}
+exports.decodeMatrixFromUnpackedColorRGBAArray = decodeMatrixFromUnpackedColorRGBAArray;
 function getPackedMatrixTextureShapeWidthHeight(rows, columns) {
     return [Math.ceil(columns / 2), Math.ceil(rows / 2)];
 }
@@ -9138,8 +10032,7 @@ exports.getPackedRGBAArraySizeFromMatrixShape = getPackedRGBAArraySizeFromMatrix
 function encodeMatrixToPackedRGBA(matrix, rows, columns, packedRGBA) {
     var requiredSize = getPackedRGBAArraySizeFromMatrixShape(rows, columns);
     if (packedRGBA.length < requiredSize) {
-        throw new Error('packedRGBA length (' + packedRGBA.length +
-            ') must be >= ' + requiredSize);
+        throw new Error("packedRGBA length (" + packedRGBA.length + ") must be >= " + requiredSize);
     }
     var _a = getPackedMatrixTextureShapeWidthHeight(rows, columns), textureWidth = _a[0], textureHeight = _a[1];
     var oddWidth = (columns % 2) === 1;
@@ -9194,7 +10087,7 @@ exports.encodeMatrixToPackedRGBA = encodeMatrixToPackedRGBA;
 function decodeMatrixFromPackedRGBA(packedRGBA, rows, columns, matrix) {
     var requiredSize = rows * columns;
     if (requiredSize < matrix.length) {
-        throw new Error('matrix length (' + matrix.length + ') must be >= ' + requiredSize);
+        throw new Error("matrix length (" + matrix.length + ") must be >= " + requiredSize);
     }
     var oddWidth = (columns % 2) === 1;
     var oddHeight = (rows % 2) === 1;
@@ -9247,7 +10140,7 @@ function decodeMatrixFromPackedRGBA(packedRGBA, rows, columns, matrix) {
 }
 exports.decodeMatrixFromPackedRGBA = decodeMatrixFromPackedRGBA;
 
-},{}],87:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var TextureManager = (function () {
@@ -9294,7 +10187,7 @@ var TextureManager = (function () {
             return;
         }
         var total = this.numFreeTextures + this.numUsedTextures;
-        console.log('Free/Used', this.numFreeTextures + ' / ' + this.numUsedTextures, "(" + total + ")");
+        console.log('Free/Used', this.numFreeTextures + " / " + this.numUsedTextures, "(" + total + ")");
     };
     TextureManager.prototype.getNumUsedTextures = function () {
         return this.numUsedTextures;
@@ -9315,10 +10208,60 @@ var TextureManager = (function () {
 }());
 exports.TextureManager = TextureManager;
 function getKeyFromTextureShape(shapeRowsCol) {
-    return shapeRowsCol[0] + '_' + shapeRowsCol[1];
+    return shapeRowsCol[0] + "_" + shapeRowsCol[1];
 }
 
-},{}],88:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var TransposeProgram = (function () {
+    function TransposeProgram(aShape, newDim) {
+        this.variableNames = ['A'];
+        var outputShape = new Array(aShape.length);
+        for (var i = 0; i < outputShape.length; i++) {
+            outputShape[i] = aShape[newDim[i]];
+        }
+        this.outputShape = outputShape;
+        this.rank = outputShape.length;
+        this.params = [newDim.toString()];
+        var dtype = getDataType(this.rank);
+        var switched = getSwitchedCoords(newDim);
+        this.userCode = "\n    void main() {\n      " + dtype + " resRC = getOutputCoords();\n      setOutput(getA(" + switched + "));\n    }\n    ";
+    }
+    return TransposeProgram;
+}());
+exports.TransposeProgram = TransposeProgram;
+function getSwitchedCoords(newDim) {
+    var rank = newDim.length;
+    if (rank > 4) {
+        throw Error("SwitchDim for rank " + rank + " is not yet supported");
+    }
+    var originalOrder = ['resRC.x', 'resRC.y', 'resRC.z', 'resRC.w'];
+    var switchedCoords = new Array(rank);
+    for (var i = 0; i < newDim.length; i++) {
+        switchedCoords[newDim[i]] = originalOrder[i];
+    }
+    return switchedCoords.join();
+}
+function getDataType(rank) {
+    if (rank === 1) {
+        return 'int';
+    }
+    else if (rank === 2) {
+        return 'ivec2';
+    }
+    else if (rank === 3) {
+        return 'ivec3';
+    }
+    else if (rank === 4) {
+        return 'ivec4';
+    }
+    else {
+        throw Error("SwitchDim for rank " + rank + " is not yet supported");
+    }
+}
+
+},{}],92:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var UnaryOpProgram = (function () {
@@ -9334,8 +10277,15 @@ exports.UnaryOpProgram = UnaryOpProgram;
 exports.CHECK_NAN_SNIPPET = "\n  if (isNaN(x)) {\n    return x;\n  }\n";
 exports.ABS = "\n  return abs(x);\n";
 exports.RELU = "\n  return (x < 0.0) ? 0.0 : x;\n";
+exports.ELU = "\n  return (x >= 0.0) ? x : (exp(x) - 1.0);\n";
+function LEAKY_RELU(alpha) {
+    return "\n  return (x >= 0.0) ? x : " + alpha + " * x;\n  ";
+}
+exports.LEAKY_RELU = LEAKY_RELU;
 exports.STEP = "\n  return (x == x) ? (x > 0.0 ? 1.0 : 0.0) : x;\n";
 exports.NEG = "\n  return -x;\n";
+exports.CEIL = "\n  return ceil(x);\n";
+exports.FLOOR = "\n  return floor(x);\n";
 exports.EXP = "\n  return exp(x);\n";
 exports.LOG = "\n  return log(x);\n";
 exports.SQRT = exports.CHECK_NAN_SNIPPET + "\n  return sqrt(x);\n";
@@ -9350,7 +10300,7 @@ exports.SINH = "\n  float e2x = exp(x);\n  return (e2x - 1.0 / e2x) / 2.0;\n";
 exports.COSH = "\n  float e2x = exp(-x);\n  return (e2x + 1.0 / e2x) / 2.0;\n";
 exports.TANH = "\n  float e2x = exp(-2.0 * abs(x));\n  return sign(x) * (1.0 - e2x) / (1.0 + e2x);\n";
 
-},{}],89:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var MAX_TEXTURE_SIZE = null;
@@ -9416,7 +10366,7 @@ function getWebGLErrorMessage(gl, status) {
         case gl.CONTEXT_LOST_WEBGL:
             return 'CONTEXT_LOST_WEBGL';
         default:
-            return 'Unknown error code ' + status;
+            return "Unknown error code " + status;
     }
 }
 exports.getWebGLErrorMessage = getWebGLErrorMessage;
@@ -9456,8 +10406,10 @@ function logShaderSourceAndInfoLog(shaderSource, shaderInfoLog) {
     }
     var lineNumber = +lineNumberRegexResult[1];
     var shaderLines = shaderSource.split('\n');
-    var pad = ('' + shaderLines.length).length + 2;
-    var linesWithLineNumbers = shaderLines.map(function (line, lineNumber) { return util.rightPad('' + (lineNumber + 1), pad) + line; });
+    var pad = shaderLines.length.toString().length + 2;
+    var linesWithLineNumbers = shaderLines.map(function (line, lineNumber) {
+        return util.rightPad((lineNumber + 1).toString(), pad) + line;
+    });
     var maxLineLength = 0;
     for (var i = 0; i < linesWithLineNumbers.length; i++) {
         maxLineLength = Math.max(linesWithLineNumbers[i].length, maxLineLength);
@@ -9530,12 +10482,12 @@ exports.createTexture = createTexture;
 function validateTextureSize(gl, width, height) {
     var maxTextureSize = queryMaxTextureSize(gl);
     if ((width <= 0) || (height <= 0)) {
-        var requested = '[' + width + 'x' + height + ']';
+        var requested = "[" + width + "x" + height + "]";
         throw new Error('Requested texture size ' + requested + ' is invalid.');
     }
     if ((width > maxTextureSize) || (height > maxTextureSize)) {
-        var requested = '[' + width + 'x' + height + ']';
-        var max = '[' + maxTextureSize + 'x' + maxTextureSize + ']';
+        var requested = "[" + width + "x" + height + "]";
+        var max = "[" + maxTextureSize + "x" + maxTextureSize + "]";
         throw new Error('Requested texture size ' + requested +
             ' greater than WebGL maximum on this browser / GPU ' + max + '.');
     }
@@ -9616,7 +10568,7 @@ function getFramebufferErrorMessage(gl, status) {
         case gl.FRAMEBUFFER_UNSUPPORTED:
             return 'FRAMEBUFFER_UNSUPPORTED';
         default:
-            return 'unknown error ' + status;
+            return "unknown error " + status;
     }
 }
 exports.getFramebufferErrorMessage = getFramebufferErrorMessage;
@@ -9631,8 +10583,8 @@ function validateTextureUnit(gl, textureUnit) {
     var maxTextureUnit = gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS - 1;
     var glTextureUnit = textureUnit + gl.TEXTURE0;
     if (glTextureUnit < gl.TEXTURE0 || glTextureUnit > maxTextureUnit) {
-        var textureUnitRange = '[gl.TEXTURE0, gl.TEXTURE' + maxTextureUnit + ']';
-        throw new Error('textureUnit must be in ' + textureUnitRange + '.');
+        var textureUnitRange = "[gl.TEXTURE0, gl.TEXTURE" + maxTextureUnit + "]";
+        throw new Error("textureUnit must be in " + textureUnitRange + ".");
     }
 }
 function getTextureShapeFromLogicalShape(gl, logShape, preferredTexShape) {
@@ -9668,26 +10620,32 @@ function getTextureShapeFromLogicalShape(gl, logShape, preferredTexShape) {
 }
 exports.getTextureShapeFromLogicalShape = getTextureShapeFromLogicalShape;
 
-},{"../../environment":15,"../../util":91}],90:[function(require,module,exports){
+},{"../../environment":15,"../../util":95}],94:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var environment = require("./environment");
 var environment_1 = require("./environment");
 var math_cpu_1 = require("./math/math_cpu");
 var math_gpu_1 = require("./math/math_gpu");
+var util = require("./util");
 exports.TEST_EPSILON = 1e-2;
 function expectArraysClose(actual, expected, epsilon) {
     if (epsilon === void 0) { epsilon = exports.TEST_EPSILON; }
+    var aType = actual.constructor.name;
+    var bType = expected.constructor.name;
+    if (aType !== bType) {
+        throw new Error("Arrays are of different type " + aType + " vs " + bType);
+    }
     if (actual.length !== expected.length) {
-        throw new Error('Matrices have different lengths (' + actual.length + ' vs ' +
-            expected.length + ').');
+        throw new Error("Matrices have different lengths (" + actual.length + " vs " +
+            (expected.length + ")."));
     }
     for (var i = 0; i < expected.length; ++i) {
         var a = actual[i];
         var e = expected[i];
         if (!areClose(a, e, epsilon)) {
-            var actualStr = 'actual[' + i + '] === ' + a;
-            var expectedStr = 'expected[' + i + '] === ' + e;
+            var actualStr = "actual[" + i + "] === " + a;
+            var expectedStr = "expected[" + i + "] === " + e;
             throw new Error('Arrays differ: ' + actualStr + ', ' + expectedStr);
         }
     }
@@ -9696,7 +10654,7 @@ exports.expectArraysClose = expectArraysClose;
 function expectNumbersClose(a, e, epsilon) {
     if (epsilon === void 0) { epsilon = exports.TEST_EPSILON; }
     if (!areClose(a, e, epsilon)) {
-        throw new Error('Numbers differ: actual === ' + a + ', expected === ' + e);
+        throw new Error("Numbers differ: actual === " + a + ", expected === " + e);
     }
 }
 exports.expectNumbersClose = expectNumbersClose;
@@ -9726,16 +10684,6 @@ function makeIdentity(n) {
     return i;
 }
 exports.makeIdentity = makeIdentity;
-function setValue(m, mNumRows, mNumCols, v, row, column) {
-    if (row >= mNumRows) {
-        throw new Error('row (' + row + ') must be in [0 ' + mNumRows + '].');
-    }
-    if (column >= mNumCols) {
-        throw new Error('column (' + column + ') must be in [0 ' + mNumCols + '].');
-    }
-    m[(row * mNumCols) + column] = v;
-}
-exports.setValue = setValue;
 function cpuMultiplyMatrix(a, aRow, aCol, b, bRow, bCol) {
     var result = new Float32Array(aRow * bCol);
     for (var r = 0; r < aRow; ++r) {
@@ -9774,7 +10722,7 @@ function describeMathGPU(name, tests, featuresList) {
 }
 exports.describeMathGPU = describeMathGPU;
 function describeCustom(name, tests, featuresList, customBeforeEach, customAfterEach) {
-    describeWithFeaturesAndExecutor(name, tests, function (testName, tests, features) { return executeTests(testName, tests, features, customBeforeEach, customAfterEach); }, featuresList);
+    describeWithFeaturesAndExecutor(name, [tests], function (testName, tests, features) { return executeTests(testName, tests, features, customBeforeEach, customAfterEach); }, featuresList);
 }
 exports.describeCustom = describeCustom;
 function describeWithFeaturesAndExecutor(testNameBase, tests, executor, featuresList) {
@@ -9788,6 +10736,20 @@ function describeWithFeaturesAndExecutor(testNameBase, tests, executor, features
         executor(testNameBase, tests);
     }
 }
+var PROMISE_IT = function (name, testFunc) {
+    it(name, function (done) {
+        var result = testFunc();
+        if (result instanceof Promise) {
+            result.then(done, function (e) {
+                fail(e);
+                done();
+            });
+        }
+        else {
+            done();
+        }
+    });
+};
 function executeMathTests(testName, tests, mathFactory, features) {
     var math;
     var customBeforeEach = function () {
@@ -9799,13 +10761,13 @@ function executeMathTests(testName, tests, mathFactory, features) {
         math.dispose();
     };
     var customIt = function (name, testFunc) {
-        it(name, function () { return testFunc(math); });
+        PROMISE_IT(name, function () { return testFunc(math); });
     };
     executeTests(testName, tests, features, customBeforeEach, customAfterEach, customIt);
 }
 exports.executeMathTests = executeMathTests;
 function executeTests(testName, tests, features, customBeforeEach, customAfterEach, customIt) {
-    if (customIt === void 0) { customIt = it; }
+    if (customIt === void 0) { customIt = PROMISE_IT; }
     describe(testName, function () {
         beforeEach(function () {
             if (features != null) {
@@ -9827,8 +10789,14 @@ function executeTests(testName, tests, features, customBeforeEach, customAfterEa
     });
 }
 exports.executeTests = executeTests;
+function assertIsNan(val, dtype) {
+    if (!util.isValNaN(val, dtype)) {
+        throw new Error("Value " + val + " does not represent NaN for dtype " + dtype);
+    }
+}
+exports.assertIsNan = assertIsNan;
 
-},{"./environment":15,"./math/math_cpu":58,"./math/math_gpu":59}],91:[function(require,module,exports){
+},{"./environment":15,"./math/math_cpu":61,"./math/math_gpu":62,"./util":95}],95:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function shuffle(array) {
@@ -9872,7 +10840,7 @@ exports.randGauss = randGauss;
 function distSquared(a, b) {
     var result = 0;
     for (var i = 0; i < a.length; i++) {
-        var diff = a[i] - b[i];
+        var diff = Number(a[i]) - Number(b[i]);
         result += diff * diff;
     }
     return result;
@@ -9890,14 +10858,14 @@ function assertShapesMatch(shapeA, shapeB, errorMessagePrefix) {
 }
 exports.assertShapesMatch = assertShapesMatch;
 function flatten(arr, ret) {
-    ret = (ret === undefined ? [] : ret);
-    for (var i = 0; i < arr.length; ++i) {
-        if (Array.isArray(arr[i])) {
+    if (ret === void 0) { ret = []; }
+    if (Array.isArray(arr)) {
+        for (var i = 0; i < arr.length; ++i) {
             flatten(arr[i], ret);
         }
-        else {
-            ret.push(arr[i]);
-        }
+    }
+    else {
+        ret.push(arr);
     }
     return ret;
 }
@@ -9976,36 +10944,6 @@ function createShuffledIndices(n) {
     return shuffledIndices;
 }
 exports.createShuffledIndices = createShuffledIndices;
-function assertAndGetBroadcastedShape(shapeA, shapeB) {
-    var result = [];
-    var nextADimMustBeOne = false;
-    var nextBDimMustBeOne = false;
-    var errMsg = "Operands could not be broadcast together with shapes " +
-        (shapeA + " and " + shapeB + ". Currently, we only support a ") +
-        "stricter version of broadcasting than numpy.";
-    var l = Math.max(shapeA.length, shapeB.length);
-    shapeA = shapeA.slice().reverse();
-    shapeB = shapeB.slice().reverse();
-    for (var i = 0; i < l; i++) {
-        var a = shapeA[i] || 1;
-        var b = shapeB[i] || 1;
-        if ((b > 1 && nextBDimMustBeOne) || (a > 1 && nextADimMustBeOne)) {
-            throw Error(errMsg);
-        }
-        if (a > 1 && b === 1) {
-            nextBDimMustBeOne = true;
-        }
-        if (b > 1 && a === 1) {
-            nextADimMustBeOne = true;
-        }
-        if (a > 1 && b > 1 && a !== b) {
-            throw Error(errMsg);
-        }
-        result.push(Math.max(a, b));
-    }
-    return result.reverse();
-}
-exports.assertAndGetBroadcastedShape = assertAndGetBroadcastedShape;
 function rightPad(a, size) {
     if (size <= a.length) {
         return a;
@@ -10083,6 +11021,45 @@ function inferFromImplicitShape(shape, size) {
     return newShape;
 }
 exports.inferFromImplicitShape = inferFromImplicitShape;
+exports.NAN_INT32 = 1 << 31;
+exports.NAN_BOOL = 255;
+exports.NAN_FLOAT32 = NaN;
+function getNaN(dtype) {
+    if (dtype === 'float32') {
+        return exports.NAN_FLOAT32;
+    }
+    else if (dtype === 'int32') {
+        return exports.NAN_INT32;
+    }
+    else if (dtype === 'bool') {
+        return exports.NAN_BOOL;
+    }
+    else {
+        throw new Error("Unknown dtype " + dtype);
+    }
+}
+exports.getNaN = getNaN;
+function isValNaN(val, dtype) {
+    if (dtype === 'float32') {
+        return isNaN(val);
+    }
+    else if (dtype === 'int32') {
+        return val === exports.NAN_INT32;
+    }
+    else if (dtype === 'bool') {
+        return val === exports.NAN_BOOL;
+    }
+    else {
+        throw new Error("Unknown dtype " + dtype);
+    }
+}
+exports.isValNaN = isValNaN;
 
-},{}]},{},[50])(50)
+},{}],96:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var version = '0.3.3';
+exports.version = version;
+
+},{}]},{},[51])(51)
 });
