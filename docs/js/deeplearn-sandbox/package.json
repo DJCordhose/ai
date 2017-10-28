@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "deeplearn": "^0.2.4"
+    "deeplearn": "latest"
   }
 }
