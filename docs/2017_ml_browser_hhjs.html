@@ -75,27 +75,6 @@
 <div class="reveal">
     <div class="slides">
 
-
-<!--
-1. Learn Experiment (Supervised)
-2. Google Sheets on Flights (Unsupervised)
-3. Find something for Reinforcement Learning?
-4. NN with TensorFlow Playground?
-5. CNNs with keras.io
-6. Style Transfer with tensor
-7. Deeplearn.js Intro
--->
-
-        <section data-markdown class="preparation">
-            <script type="text/template">
-### Preparation
-- Open all demos way ahead of time when there still is internet
-- Rehearse all Demos
-- Open Bonkers in one tab to have URL ready as input to Resnet on keras.js
-  - https://djcordhose.github.io/ai/img/cat-bonkers.png
-            </script>
-        </section>
-
         <section>
             <h2>Machine Learning in the Browser</h2>
             <h3>Using deeplearn.js</h3>
@@ -157,6 +136,80 @@
             </a>
             <p><small><a href="https://djcordhose.github.io/ai/js/deeplearn-sandbox" target="_blank">
                 https://djcordhose.github.io/ai/js/deeplearn-sandbox</a></small></p>
+        </section>
+
+        <section>
+            <h3>First Step: Set up computational graph</h3>
+            <p><code>y = a * x<sup>2</sup> + b * x + c</code></p>
+            <pre class="fragment"><code class="javascript" data-trim>
+const graph = new Graph();
+            </code></pre>
+            <pre class="fragment"><code class="javascript" data-trim data-num-start="2">
+const x = graph.placeholder('x', []);
+            </code></pre>
+            <pre class="fragment"><code class="javascript" data-trim data-num-start="3">
+const a = graph.variable('a', Scalar.new(Math.random()));
+const b = graph.variable('b', Scalar.new(Math.random()));
+const c = graph.variable('c', Scalar.new(Math.random()));
+            </code></pre>
+            <pre class="fragment"><code class="javascript" data-trim data-num-start="6">
+const order2 = graph.multiply(a, graph.square(x));
+const order1 = graph.multiply(b, x);
+
+const y = graph.add(graph.add(order2, order1), c);
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Second Step: Push it over to the GPU for processing</h3>
+            <p>wildly asynchronous, but <code>async/await</code> help</p>
+            <pre class="fragment"><code data-trim class="javascript">
+const math = new NDArrayMathGPU(); // could also be CPU
+const session = new Session(graph, math);
+            </code></pre>
+            <pre class="fragment"><code data-trim class="javascript" data-trim data-num-start="3"  data-leftpad>
+const sampleX = 4;
+math.scope(async (keep, track) => {
+  const result =
+    session.eval(y, [{ tensor: x,
+                       data: track(Scalar.new(sampleX))
+                    }]);
+  console.log(await result.get())
+});
+            </code></pre>
+            <p class="fragment">GPU resource management is partially on us (<code>keep, track</code>)</p>
+        </section>
+
+        <section>
+            <h3>Step Three: Learning by minimizing Error</h3>
+            <p>Long running, complex computations on GPU</p>
+<pre class="fragment" data-fragment-index="2"><code data-trim class="javascript">
+const yLabel = graph.placeholder('y label', []);
+const cost = graph.meanSquaredCost(y, yLabel);
+</code></pre>
+<pre class="fragment" data-fragment-index="3"><code data-trim class="javascript" data-num-start="3">
+const LEARNING_RATE = .01;
+const optimizer = new SGDOptimizer(LEARNING_RATE);
+</code></pre>
+<pre class="fragment" data-fragment-index="1"><code data-trim class="javascript" data-num-start="5" data-leftpad>
+// repeat a number of times (epochs)
+session.train(
+    cost,
+    // matching x/y pairs
+    [{ tensor: x, data: xProvider },
+     { tensor: yLabel, data: yProvider }],
+    optimizer, CostReduction.MEAN);
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Objectives Met</h3>
+            <ul>
+                <li><strong>Deploy</strong> (as Web App over GitHub): Zero Install, every GPU
+                <li><strong>Educate</strong>: make it accessible to everyone
+                <li><strong>Visualize</strong>: show how it works
+                <li><strong>Develop</strong>: let's you develop in JavaScript
+            </ul>
         </section>
 
         <section>
