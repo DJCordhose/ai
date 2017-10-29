@@ -129,6 +129,25 @@
         </section>
 
         <section>
+            <h3>Simple Example: Scalar times Array</h3>
+            <pre class="fragment"><code class="javascript" data-trim>
+const math = new NDArrayMathGPU();
+// const math = new NDArrayMathCPU();
+            </code></pre>
+
+            <pre class="fragment"><code class="javascript" data-trim  data-num-start="3">
+const array = Array1D.new([1, 2, 3]);
+const scalar = Scalar.new(2);
+            </code></pre>
+
+            <pre class="fragment"><code class="javascript" data-trim  data-num-start="5">
+const result = math.scalarTimesArray(scalar, array);
+console.log(await result.data());
+// => Float32Array([2, 4, 6])
+            </code></pre>
+        </section>
+
+        <section>
             <h3>Our small project</h3>
             <p>Fit a polynomial curve through some data points</p>
             <a href="http://localhost:8080" target="_blank">
@@ -249,6 +268,7 @@ session.train(
                     simple and straing forward NN implementation</li>
                 <li><a target="_blank" href="http://caza.la/synaptic/#/">synaptic.js</a>: similar to Brain.js, a bit more active</li>
                 <li><a target="_blank" href="https://github.com/mljs/ml">ml.js</a>: generic low level libs for machine learning</li>
+                <!--https://github.com/laoqiren/mlhelper-->
             </ul>
         </section>
 
@@ -283,9 +303,13 @@ session.train(
 <script src="lib/jquery-2.2.4.js"></script>
 
 <script>
-    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
-//    $('section').attr('data-background-image', "backgrounds/tiles-raw.jpg")
-//    $('section').attr('data-background-image', "backgrounds/white-transparent.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-valley.jpg")
+//    $('section').attr('data-background-image', "backgrounds/blur-floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/blur-floor2.jpg")
+//    $('section').attr('data-background-image', "backgrounds/floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/floor2.jpg")
 </script>
 <script>
     if (window.location.hostname.indexOf('localhost') !== -1) {
