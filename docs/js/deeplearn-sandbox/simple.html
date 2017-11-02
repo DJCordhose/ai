@@ -8,12 +8,23 @@
     const math = new NDArrayMathGPU();
     // const math = new NDArrayMathCPU();
 
+    math.enableDebugMode()
+
     const array = Array1D.new([1, 2, 3]);
     const scalar = Scalar.new(2);
 
     const result = math.scalarTimesArray(scalar, array);
 
     console.log(await result.data());  // Float32Array([2, 4, 6])
+
+  // alternative with explicit tracking context 
+    math.scope((keep, track) => {
+      // does not make any sense
+      // track(null);
+    const result = math.add(array, track(Scalar.new(10)))
+    console.log(result.getValues())  // Float32Array([11, 12, 13])
+  });
+
   })();
 </script>
 

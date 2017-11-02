@@ -5180,6 +5180,28 @@ function assertAxesAreInnerMostDims(msg, axes, rank) {
     }
 }
 exports.assertAxesAreInnerMostDims = assertAxesAreInnerMostDims;
+function getPermutedAxes(axes, rank) {
+    if (axesAreInnerMostDims(axes, rank)) {
+        return null;
+    }
+    var result = [];
+    for (var i = 0; i < rank; ++i) {
+        if (axes.indexOf(i) === -1) {
+            result.push(i);
+        }
+    }
+    axes.forEach(function (axis) { return result.push(axis); });
+    return result;
+}
+exports.getPermutedAxes = getPermutedAxes;
+function getInnerMostAxes(numAxes, rank) {
+    var res = [];
+    for (var i = rank - numAxes; i < rank; ++i) {
+        res.push(i);
+    }
+    return res;
+}
+exports.getInnerMostAxes = getInnerMostAxes;
 
 },{}],55:[function(require,module,exports){
 "use strict";
@@ -5431,12 +5453,28 @@ var NDArrayMath = (function () {
         this.ndarraysToKeep.push(newNDArraysToKeep);
         this.activeScopeNDArraysToKeep = newNDArraysToKeep;
     };
+    NDArrayMath.prototype.extractNDArraysFromScopeResult = function (result) {
+        if (result == null) {
+            return [];
+        }
+        if (result instanceof ndarray_1.NDArray) {
+            return [result];
+        }
+        var list = [];
+        var resultObj = result;
+        for (var k in resultObj) {
+            var val = resultObj[k];
+            if (val instanceof ndarray_1.NDArray) {
+                list.push(val);
+            }
+        }
+        return list;
+    };
     NDArrayMath.prototype.endScope = function (result) {
         var _this = this;
         var arraysToKeep = this.activeScopeNDArraysToKeep;
-        if (result != null) {
-            arraysToKeep = arraysToKeep.concat(result);
-        }
+        var resultArrays = this.extractNDArraysFromScopeResult(result);
+        arraysToKeep = arraysToKeep.concat(resultArrays);
         for (var i = 0; i < this.activeScope.length; i++) {
             var ndarray = this.activeScope[i];
             if (this.isNDArrayDataInList(ndarray, arraysToKeep)) {
@@ -5448,18 +5486,11 @@ var NDArrayMath = (function () {
         this.activeScope = this.ndarrayScopes.length === 0 ?
             null :
             this.ndarrayScopes[this.ndarrayScopes.length - 1];
-        if (result instanceof ndarray_1.NDArray &&
-            !this.isNDArrayDataInList(result, this.activeScopeNDArraysToKeep)) {
-            this.track(result);
-        }
-        else if (Array.isArray(result)) {
-            result.forEach(function (r) {
-                if (r instanceof ndarray_1.NDArray &&
-                    !_this.isNDArrayDataInList(r, _this.activeScopeNDArraysToKeep)) {
-                    _this.track(r);
-                }
-            });
-        }
+        resultArrays.forEach(function (val) {
+            if (!_this.isNDArrayDataInList(val, _this.activeScopeNDArraysToKeep)) {
+                _this.track(val);
+            }
+        });
         this.ndarraysToKeep.pop();
         this.activeScopeNDArraysToKeep = this.ndarraysToKeep.length === 0 ?
             null :
@@ -5503,8 +5534,8 @@ var NDArrayMath = (function () {
             }
             return result;
         }
-        if (!result || !result.getData || !(result instanceof ndarray_1.NDArray)) {
-            throw new Error("Tracking data not of type NDArray " + result);
+        if (this.safeMode && (!result || !result.getData || !(result instanceof ndarray_1.NDArray))) {
+            throw new Error("Tracking data not of type NDArray: " + result);
         }
         this.activeScope.push(result);
         return result;
@@ -5643,8 +5674,12 @@ var NDArrayMath = (function () {
         if (axis === void 0) { axis = null; }
         if (keepDims === void 0) { keepDims = false; }
         var axes = axis_util.parseAxisParam(axis, input.shape);
-        axis_util.assertAxesAreInnerMostDims('logSumExp', axes, input.rank);
+        var permutedAxes = axis_util.getPermutedAxes(axes, input.rank);
         return this.executeOp('logSumExp', function () {
+            if (permutedAxes != null) {
+                input = _this.transpose(input, permutedAxes);
+                axes = axis_util.getInnerMostAxes(axes.length, input.rank);
+            }
             var res = _this.logSumExpInternal(input, axes);
             if (keepDims) {
                 var newShape = axis_util.expandShapeToKeepDim(res.shape, axes);
@@ -5658,8 +5693,12 @@ var NDArrayMath = (function () {
         if (axis === void 0) { axis = null; }
         if (keepDims === void 0) { keepDims = false; }
         var axes = axis_util.parseAxisParam(axis, input.shape);
-        axis_util.assertAxesAreInnerMostDims('sum', axes, input.rank);
+        var permutedAxes = axis_util.getPermutedAxes(axes, input.rank);
         return this.executeOp('sum', function () {
+            if (permutedAxes != null) {
+                input = _this.transpose(input, permutedAxes);
+                axes = axis_util.getInnerMostAxes(axes.length, input.rank);
+            }
             var res = _this.sumInternal(input, axes);
             if (keepDims) {
                 var newShape = axis_util.expandShapeToKeepDim(res.shape, axes);
@@ -5668,19 +5707,46 @@ var NDArrayMath = (function () {
             return res;
         });
     };
+    NDArrayMath.prototype.mean = function (x, axis, keepDims) {
+        var _this = this;
+        if (axis === void 0) { axis = null; }
+        if (keepDims === void 0) { keepDims = false; }
+        var axes = axis_util.parseAxisParam(axis, x.shape);
+        var shapes = axis_util.computeOutAndReduceShapes(x.shape, axes);
+        var reduceShape = shapes[1];
+        var reduceSize = util.sizeFromShape(reduceShape);
+        return this.executeOp('mean', function () {
+            return _this.scope(function (keep, track) {
+                var res = _this.divide(x, track(ndarray_1.Scalar.new(reduceSize)));
+                return _this.sum(res, axis, keepDims);
+            });
+        });
+    };
     NDArrayMath.prototype.argMin = function (input, axis) {
         var _this = this;
         if (axis === void 0) { axis = null; }
         var axes = axis_util.parseAxisParam(axis, input.shape);
-        axis_util.assertAxesAreInnerMostDims('argMin', axes, input.rank);
-        return this.executeOp('argMin', function () { return _this.argMinInternal(input, axes); });
+        var permutedAxes = axis_util.getPermutedAxes(axes, input.rank);
+        return this.executeOp('argMin', function () {
+            if (permutedAxes != null) {
+                input = _this.transpose(input, permutedAxes);
+                axes = axis_util.getInnerMostAxes(axes.length, input.rank);
+            }
+            return _this.argMinInternal(input, axes);
+        });
     };
     NDArrayMath.prototype.argMax = function (input, axis) {
         var _this = this;
         if (axis === void 0) { axis = null; }
         var axes = axis_util.parseAxisParam(axis, input.shape);
-        axis_util.assertAxesAreInnerMostDims('argMax', axes, input.rank);
-        return this.executeOp('argMax', function () { return _this.argMaxInternal(input, axes); });
+        var permutedAxes = axis_util.getPermutedAxes(axes, input.rank);
+        return this.executeOp('argMax', function () {
+            if (permutedAxes != null) {
+                input = _this.transpose(input, permutedAxes);
+                axes = axis_util.getInnerMostAxes(axes.length, input.rank);
+            }
+            return _this.argMaxInternal(input, axes);
+        });
     };
     NDArrayMath.prototype.argMaxEquals = function (x1, x2) {
         var _this = this;
@@ -5714,8 +5780,12 @@ var NDArrayMath = (function () {
         if (axis === void 0) { axis = null; }
         if (keepDims === void 0) { keepDims = false; }
         var axes = axis_util.parseAxisParam(axis, input.shape);
-        axis_util.assertAxesAreInnerMostDims('min', axes, input.rank);
+        var permutedAxes = axis_util.getPermutedAxes(axes, input.rank);
         return this.executeOp('min', function () {
+            if (permutedAxes != null) {
+                input = _this.transpose(input, permutedAxes);
+                axes = axis_util.getInnerMostAxes(axes.length, input.rank);
+            }
             var res = _this.minInternal(input, axes);
             if (keepDims) {
                 var newShape = axis_util.expandShapeToKeepDim(res.shape, axes);
@@ -5729,8 +5799,12 @@ var NDArrayMath = (function () {
         if (axis === void 0) { axis = null; }
         if (keepDims === void 0) { keepDims = false; }
         var axes = axis_util.parseAxisParam(axis, input.shape);
-        axis_util.assertAxesAreInnerMostDims('max', axes, input.rank);
+        var permutedAxes = axis_util.getPermutedAxes(axes, input.rank);
         return this.executeOp('max', function () {
+            if (permutedAxes != null) {
+                input = _this.transpose(input, permutedAxes);
+                axes = axis_util.getInnerMostAxes(axes.length, input.rank);
+            }
             var res = _this.maxInternal(input, axes);
             if (keepDims) {
                 var newShape = axis_util.expandShapeToKeepDim(res.shape, axes);
@@ -5765,8 +5839,8 @@ var NDArrayMath = (function () {
         if (perm == null) {
             perm = a.shape.map(function (s, i) { return i; }).reverse();
         }
-        util.assert(a.rank === perm.length, "Error in switchDim: length of input shape " + a.shape + " " +
-            ("must match size of newDim array " + perm + "."));
+        util.assert(a.rank === perm.length, "Error in transpose: rank of input " + a.rank + " " +
+            ("must match length of perm " + perm + "."));
         return this.executeOp('transpose', function () { return _this.transposeInternal(a, perm); });
     };
     NDArrayMath.prototype.scalarPlusArray = function (c, a) {
@@ -5860,6 +5934,10 @@ var NDArrayMath = (function () {
         var _this = this;
         return this.executeOp('sqrt', function () { return _this.sqrtInternal(ndarray); });
     };
+    NDArrayMath.prototype.square = function (x) {
+        var _this = this;
+        return this.executeOp('square', function () { return _this.squareInternal(x); });
+    };
     NDArrayMath.prototype.abs = function (ndarray) {
         var _this = this;
         return this.executeOp('abs', function () { return _this.absInternal(ndarray); });
@@ -5881,9 +5959,7 @@ var NDArrayMath = (function () {
     NDArrayMath.prototype.leakyRelu = function (ndarray, alpha) {
         var _this = this;
         if (alpha === void 0) { alpha = 0.2; }
-        return this.executeOp('leakyRelu', function () {
-            return _this.leakyReluInternal(ndarray, alpha);
-        });
+        return this.executeOp('leakyRelu', function () { return _this.leakyReluInternal(ndarray, alpha); });
     };
     NDArrayMath.prototype.sigmoid = function (ndarray) {
         var _this = this;
@@ -6155,6 +6231,23 @@ var NDArrayMath = (function () {
         }
         return this.executeOp('oneHot', function () { return _this.oneHotInternal(indices, depth, onValue, offValue); });
     };
+    NDArrayMath.prototype.moments = function (x, axis, keepDims) {
+        var _this = this;
+        if (axis === void 0) { axis = null; }
+        if (keepDims === void 0) { keepDims = false; }
+        var axes = axis_util.parseAxisParam(axis, x.shape);
+        var result = this.scope(function () {
+            var mean = _this.mean(x, axes, keepDims);
+            var keepDimsShape = mean.shape;
+            if (!keepDims) {
+                keepDimsShape = axis_util.expandShapeToKeepDim(mean.shape, axes);
+            }
+            var devSquared = _this.square(_this.subtract(x, mean.reshape(keepDimsShape)));
+            var variance = _this.mean(devSquared, axes, keepDims);
+            return { mean: mean, variance: variance };
+        });
+        return result;
+    };
     return NDArrayMath;
 }());
 exports.NDArrayMath = NDArrayMath;
@@ -6421,7 +6514,7 @@ var NDArrayMathCPU = (function (_super) {
         for (var i = 0; i < newValues.length; ++i) {
             newValues[i] = aValues[i % a.size] / bValues[i % b.size];
         }
-        return ndarray_1.NDArray.make(newShape, { values: newValues });
+        return ndarray_1.NDArray.make(newShape, { values: newValues }, 'float32');
     };
     NDArrayMathCPU.prototype.sumInternal = function (input, axes) {
         axis_util.assertAxesAreInnerMostDims('sum', axes, input.rank);
@@ -6553,7 +6646,7 @@ var NDArrayMathCPU = (function (_super) {
         var aVals = input.getValues();
         for (var i = 0; i < vals.length; ++i) {
             var offset = i * reduceSize;
-            var max = aVals[0];
+            var max = aVals[offset];
             for (var j = 0; j < reduceSize; ++j) {
                 var value = aVals[offset + j];
                 if (isNaN(value)) {
@@ -6609,6 +6702,15 @@ var NDArrayMathCPU = (function (_super) {
             newValues[i] = Math.sqrt(value);
         }
         return ndarray_1.NDArray.make(ndarray.shape, { values: newValues });
+    };
+    NDArrayMathCPU.prototype.squareInternal = function (x) {
+        var values = x.getValues();
+        var newValues = new Float32Array(values.length);
+        for (var i = 0; i < values.length; ++i) {
+            var value = values[i];
+            newValues[i] = value * value;
+        }
+        return ndarray_1.NDArray.make(x.shape, { values: newValues });
     };
     NDArrayMathCPU.prototype.logSumExpInternal = function (input, axes) {
         axis_util.assertAxesAreInnerMostDims('logSumExp', axes, input.rank);
@@ -7364,7 +7466,8 @@ var NDArrayMathGPU = (function (_super) {
     };
     NDArrayMathGPU.prototype.divideInternal = function (a, b) {
         var program = new binaryop_gpu_1.BinaryOpProgram(binaryop_gpu.DIV, a.shape, b.shape);
-        return this.compileAndRun(program, [a, b]);
+        var output = this.makeOutputArray(program.outputShape, 'float32');
+        return this.compileAndRun(program, [a, b], output);
     };
     NDArrayMathGPU.prototype.addInternal = function (a, b) {
         var program = new binaryop_gpu_1.BinaryOpProgram(binaryop_gpu.ADD, a.shape, b.shape);
@@ -7397,6 +7500,10 @@ var NDArrayMathGPU = (function (_super) {
     NDArrayMathGPU.prototype.sqrtInternal = function (a) {
         var program = new unaryop_gpu_1.UnaryOpProgram(a.shape, unary_op.SQRT);
         return this.compileAndRun(program, [a]);
+    };
+    NDArrayMathGPU.prototype.squareInternal = function (x) {
+        var program = new unaryop_gpu_1.UnaryOpProgram(x.shape, unary_op.SQUARE);
+        return this.compileAndRun(program, [x]);
     };
     NDArrayMathGPU.prototype.reluInternal = function (a) {
         var program = new unaryop_gpu_1.UnaryOpProgram(a.shape, unary_op.RELU);
@@ -10234,7 +10341,7 @@ exports.TransposeProgram = TransposeProgram;
 function getSwitchedCoords(newDim) {
     var rank = newDim.length;
     if (rank > 4) {
-        throw Error("SwitchDim for rank " + rank + " is not yet supported");
+        throw Error("Transpose for rank " + rank + " is not yet supported");
     }
     var originalOrder = ['resRC.x', 'resRC.y', 'resRC.z', 'resRC.w'];
     var switchedCoords = new Array(rank);
@@ -10257,7 +10364,7 @@ function getDataType(rank) {
         return 'ivec4';
     }
     else {
-        throw Error("SwitchDim for rank " + rank + " is not yet supported");
+        throw Error("Transpose for rank " + rank + " is not yet supported");
     }
 }
 
@@ -10299,6 +10406,7 @@ exports.ATAN = exports.CHECK_NAN_SNIPPET + "\n  return atan(x);\n";
 exports.SINH = "\n  float e2x = exp(x);\n  return (e2x - 1.0 / e2x) / 2.0;\n";
 exports.COSH = "\n  float e2x = exp(-x);\n  return (e2x + 1.0 / e2x) / 2.0;\n";
 exports.TANH = "\n  float e2x = exp(-2.0 * abs(x));\n  return sign(x) * (1.0 - e2x) / (1.0 + e2x);\n";
+exports.SQUARE = "\n  return x * x;\n";
 
 },{}],93:[function(require,module,exports){
 "use strict";

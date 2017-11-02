@@ -104,8 +104,10 @@ async function fitCurveThroughPoints(points, checkpointCallback) {
     // const LEARNING_RATE = .01;
     // const optimizer = new SGDOptimizer(LEARNING_RATE);
     // http://cs231n.github.io/neural-networks-3/#ada
+    // https://distill.pub/2017/momentum/
     const LEARNING_RATE = 20;
-    const beta1 = .9;
+     // typically you do not touch these
+    const beta1 = .9; // (decay rate: typical values are [0.9, 0.99, 0.999])
     const beta2 = 0.999;
     const optimizer = new AdamOptimizer(LEARNING_RATE, beta1, beta2);
 
