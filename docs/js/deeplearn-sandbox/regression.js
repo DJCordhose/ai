@@ -120,7 +120,7 @@ async function fitCurveThroughPoints(points, checkpointCallback, config = {}) {
       const beta2 = config.beta2 || 0.999;
       optimizer = new AdamOptimizer(LEARNING_RATE, beta1, beta2);
     } else {
-      console.log('Using SGD Optimizer');
+      console.log('Using Vanilla SGD Optimizer');
       const LEARNING_RATE = config.learningRate || .01;
       optimizer = new SGDOptimizer(LEARNING_RATE);
     }
