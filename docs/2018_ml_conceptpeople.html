@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Machine Learning in the Browser</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        pre code {
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+            font-size: larger !important;
+        }
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            /*height: 500px;*/
+        }
+        .left-img {
+            margin-left: 10px !important;
+            float: left;
+            /*height: 500px;*/
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+Vortragssprache Deutsch
+60 Minuten mit Spiel
+-->
+
+        <section>
+            <h2>Introduction to Machine Learning</h2>
+            <h3>For Software Developers</h3>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <p><small><a href="http://bit.ly/ml-hhjs">
+                http://bit.ly/ml-concept
+            </a></small></p>
+        </section>
+
+        <section class="todo">
+            <pre>
+- German Abstract
+- Exercise for audience: draw decision boundaries
+- Wrapup
+- Extend Demo (Optional):
+  - Draw Points by clicking
+  - Change Optimizer (basic, momentum, adaptive), change learning rate
+            </pre>
+        </section>
+
+        <section>
+            <h3>Kicking it off with a Demo</h3>
+            <h4>How does Supervised Machine learning work for Classification?</h4>
+            <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                <img src="img/browser/teachable-machine.png" height="350px">
+            </a>
+            <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+                <br>
+                Part of
+            <a href="https://experiments.withgoogle.com/ai" target="_blank">Google AI Experiments</a></small></p>
+        </section>
+
+        <section>
+            <h3>How does programming work?</h3>
+            <img src="img/sketch/coding.jpg">
+        </section>
+
+        <section>
+            <h3>How does machine learning work?</h3>
+            <img src="img/sketch/ml.jpg">
+        </section>
+
+        <section>
+            <img src="img/sketch/types-of-ml.png">
+        </section>
+
+        <section>
+            <h3>However, <strong>practically</strong>, all that seems to work today is Supervised Machine Learning</h3>
+            <p><em>Surprisingly, despite AI’s breadth of impact, the types of it being deployed are still extremely limited. Almost all of AI’s recent progress is through one type, in which some input data (A) is used to quickly generate some simple response (B)</em></p>
+            <p><small>Andrew Ng: <a href="https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now" target="_blank">https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h3>Main application of supervised Learning: Classification</h3>
+            <img src="img/sketch/classification.jpg" height="450px">
+        </section>
+
+        <section>
+            <h3>Demo #2: <br>Learning a continuous function</h3>
+            <h4>Second type of Supervised Learning</h4>
+            <a href="js/deeplearn-sandbox" target="_blank">
+                <img src="img/browser/deeplearn-regression.png" height="350px">
+            </a>
+            <p><small><a href="https://djcordhose.github.io/ai/js/deeplearn-sandbox" target="_blank">
+                https://djcordhose.github.io/ai/js/deeplearn-sandbox</a></small></p>
+        </section>
+
+        <section>
+            <h3>Choosing the right architecture</h3>
+            <img src="img/twitter-architecture.png">
+            <p>This is true for both Software Development as well as Machine Learning</p>
+            <p><small><a href="https://twitter.com/cwlatschiha/status/926171954993946624" target="_blank">
+                https://twitter.com/cwlatschiha/status/926171954993946624</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h3>What is architecture and what is learned model?</h3>
+            <h4 class="fragment">Architecture: a polynomial function of grade 2</h4>
+            <p class="fragment"><code>y = a * x<sup>2</sup> + b * x + c</code></p>
+            <h4 class="fragment">Learnable parameters</h4>
+            <p class="fragment"><code>a, b, c</code></p>
+            <h4 class="fragment">Complete Model</h4>
+            <p class="fragment">Everything needed to reproduce the trained state: Architecture plus learned parameters</p>
+        </section>
+
+        <section>
+            <h3>The right architecture depends on the specific problem</h3>
+            <a href="js/deeplearn-sandbox/linear.html" target="_blank">
+                <img src="img/browser/linear.png" height="350px">
+            </a>
+            <p>These points are much better matched with a line</p>
+        </section>
+
+        <section>
+            <h3>deeplearn.js: Model Builder</h3>
+            <p>Convolutional Neural Networks: A pretty complex Architecture</p>
+            <a href="https://deeplearnjs.org/demos/model-builder/" target="_blank">
+                <img src="img/browser/deeplearn-model-builder.png" height="350px">
+            </a>
+            <p><small>
+                <a href="https://deeplearnjs.org/demos/model-builder/" target="_blank">
+                    https://deeplearnjs.org/demos/model-builder/</a></small></p>
+        </section>
+
+        <section>
+            <h4>Wrapup</h4>
+            <ul>
+                <li>
+            </ul>
+            <p><small>
+                Introduction to Machine Learning for Software Developers
+                <br>
+            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>
+            <a href="http://bit.ly/ml-hhjs">
+                http://bit.ly/ml-concept
+            </a>
+            </small></p>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+//    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-valley.jpg")
+//    $('section').attr('data-background-image', "backgrounds/blur-floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/blur-floor2.jpg")
+//    $('section').attr('data-background-image', "backgrounds/floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/floor2.jpg")
+</script>
+<script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

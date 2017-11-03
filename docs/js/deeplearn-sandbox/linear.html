@@ -7,7 +7,7 @@
         <script src="regression.js"></script>
 
         <body>
-        <p>Fitting a quadratic equation like <code>y = a*x<sup>2</sup> + b*x + c</code> through a set of points</p>
+          <p>Fitting a linear equation like <code>y = b * x + c</code> through a set of points</p>
           <p>Press any key to begin computation</p>
           <canvas id="regression-canvas" height="600" width="800"></canvas>
           <p id='decription'></p>
@@ -29,42 +29,15 @@ const myGraph = new Plot({
 });
 const sampleX = myGraph.samplePositions();
 
-const drawPrediction = async () => {
-  const predictions = await predict(sampleX);
-  const zipped = sampleX.map((x, index) => [x, predictions[index]]);
-  myGraph.drawPoints(zipped, 'green', 1);
-};
-await drawPrediction();
-
-// myGraph.drawEquation(x => {
-//   // y = b * x + c
-//   const b = 5;
-//   const c = 20;
-//   const y = b * x + c;
-//   return y;
-// }, 'blue', 1);
-
 const points = [
   [0, 1.1],
   [1, 5.9],
   [2, 16.8],
   [3, 33.9],
   [-1, 2],
-  [-4, 45]
+  [-4, -45]
 ];
-
-// const points = [
-//   [0, -41.1],
-//   [1, -5.9],
-//   [2, -16.8],
-//   [3, -33.9],
-//   [-1, -30],
-//   [-2, -10],
-//   [-4, -45]
-
-// ];
 const drawScatter = () => myGraph.scatterPlot(points, 'red', 2);
-
 drawScatter();
 
 const timeout = millis => new Promise(resolve => setTimeout(() => resolve(), millis));
@@ -72,17 +45,16 @@ const timeout = millis => new Promise(resolve => setTimeout(() => resolve(), mil
 const keypress = () => new Promise(resolve => window.onkeypress = () => resolve());
 await keypress();
 
-const draw = async ({a, b, c, loss}) => {
-  console.log(`a=${a}, b=${b}, c=${c}, loss=${loss}`);
+const draw = async ({b, c, loss}) => {
+  console.log(`b=${b}, c=${c}, loss=${loss}`);
   myGraph.clear();
-  description.innerHTML = `a=${a}, b=${b}, c=${c}, loss=${loss}`;
+  description.innerHTML = `b=${b}, c=${c}, loss=${loss}`;
   drawScatter();
-  // drawPrediction();
-  myGraph.drawEquation(x => a * x ** 2 + b * x + c, 'green', 1);
+  myGraph.drawEquation(x => b * x + c, 'green', 1);
   return timeout(100);
 };
 
-const {a, b, c, loss} = await fitCurveThroughPoints(points, draw);
+const {b, c, loss} = await fitCurveThroughPoints(points, draw);
 
 })();
         </script>
