@@ -1,7 +1,8 @@
 // import {Array1D, NDArrayMathGPU, Scalar} from 'deeplearn';
 const { Array1D, NDArrayMathGPU, Scalar } = deeplearn;
 const { Graph, Array2D } = deeplearn;
-const { CostReduction, InCPUMemoryShuffledInputProviderBuilder, Session, SGDOptimizer, AdamOptimizer } = deeplearn;
+const { CostReduction, InCPUMemoryShuffledInputProviderBuilder, Session,
+  SGDOptimizer, AdamOptimizer, MomentumOptimizer } = deeplearn;
 
 // y = a * x^2 + b * x + c
 
@@ -43,18 +44,18 @@ async function collectValues(costValue) {
 
 // TODO: There must be a faster way to predict a list of input values in one step
 async function predict(samples) {
-    return await math.scope(async (keep, track) => {
-      const results = [];
-      for (const sample of samples) {
-        let result =
-          session.eval(y, [{ tensor: x, data: track(Scalar.new(sample)) }]);
-          results.push(await result.get())
-      }
-      return results;
-    });
+  return await math.scope(async (keep, track) => {
+    const results = [];
+    for (const sample of samples) {
+      let result =
+        session.eval(y, [{ tensor: x, data: track(Scalar.new(sample)) }]);
+      results.push(await result.get())
+    }
+    return results;
+  });
 }
-  
-async function fitCurveThroughPoints(points, checkpointCallback) {
+
+async function fitCurveThroughPoints(points, checkpointCallback, config = {}) {
 
   // For more information on scope / track, check out the [tutorial on performance](/docs/tutorials/performance.html).
   return await math.scope(async (keep, track) => {
@@ -81,7 +82,7 @@ async function fitCurveThroughPoints(points, checkpointCallback) {
 
     const xs = [];
     const ys = [];
-    for (const [x,y] of points) {
+    for (const [x, y] of points) {
       xs.push(track(Scalar.new(x)));
       ys.push(track(Scalar.new(y)));
     }
@@ -93,26 +94,38 @@ async function fitCurveThroughPoints(points, checkpointCallback) {
       shuffledInputProviderBuilder.getInputProviders();
 
     // Training is broken up into batches.
-    const NUM_BATCHES = 100;
+    const NUM_BATCHES = config.numBatchs || 100;
     const BATCH_SIZE = xs.length;
     // Before we start training, we need to provide an optimizer. This is the
     // object that is responsible for updating weights. The learning rate param
     // is a value that represents how large of a step to make when updating
     // weights. If this is too big, you may overstep and oscillate. If it is too
     // small, the model may take a long time to train.
-    // https://github.com/PAIR-code/deeplearnjs/releases/tag/v0.3.0
-    // const LEARNING_RATE = .01;
-    // const optimizer = new SGDOptimizer(LEARNING_RATE);
+
     // http://cs231n.github.io/neural-networks-3/#ada
     // https://distill.pub/2017/momentum/
-    const LEARNING_RATE = 20;
-     // typically you do not touch these
-    const beta1 = .9; // (decay rate: typical values are [0.9, 0.99, 0.999])
-    const beta2 = 0.999;
-    const optimizer = new AdamOptimizer(LEARNING_RATE, beta1, beta2);
+    // http://cs231n.github.io/neural-networks-3/#sgd
+
+    let optimizer;
+    if (config.optimizer === 'momentum') {
+      console.log('Using Momentum Optimizer');
+      const LEARNING_RATE = config.learningRate || .01;
+      const MOMENTUM = config.momentum || 0.9; // [0.5, 0.9, 0.95, 0.99]
+      optimizer = new MomentumOptimizer(LEARNING_RATE, MOMENTUM);
+    } else if (config.optimizer === 'adam') {
+      console.log('Using Adam Optimizer');
+      const LEARNING_RATE = config.learningRate || 20;
+      // typically you do not touch these
+      const beta1 = config.beta1 || .9; // (decay rate: typical values are [0.9, 0.99, 0.999])
+      const beta2 = config.beta2 || 0.999;
+      optimizer = new AdamOptimizer(LEARNING_RATE, beta1, beta2);
+    } else {
+      console.log('Using SGD Optimizer');
+      const LEARNING_RATE = config.learningRate || .01;
+      optimizer = new SGDOptimizer(LEARNING_RATE);
+    }
 
     const checkpointSteps = 1;
-
     let costValue;
     for (let i = 0; i < NUM_BATCHES; i++) {
       // Train takes a cost tensor to minimize; this call trains one batch and
