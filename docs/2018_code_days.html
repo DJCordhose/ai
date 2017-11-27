@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Code Days - Big Data Analyse mit Elasticsearch</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+
+
+  <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+        .reveal pre code {
+            max-height: 1000px !important;
+        }
+        img {
+            border: 0 !important;
+            box-shadow:0 0 0 0 !important;
+        }
+        .reveal {
+            -ms-touch-action: auto !important;
+            touch-action: auto !important;
+        }
+        .reveal h2,
+        .reveal h3 {
+          letter-spacing: 2px;
+        }
+
+        .reveal h2 {
+          font-family: 'Amiri', serif;
+          /* font-family: 'Times New Roman', Times, serif; */
+          font-weight: bold;
+          font-style: italic;
+          letter-spacing: -2px;
+          text-transform: none !important;
+        }
+
+        .reveal em {
+          font-weight: bold;
+        }
+        .reveal .step-subtitle h1 {
+          letter-spacing: 1px;
+        }
+        .reveal .step-subtitle h2,
+        .reveal .step-subtitle h3 {
+          text-transform: none;
+          font-style: italic;
+          font-weight: normal;
+          /* font-weight: 400; */
+          /* font-family: 'Amiri', serif; */
+          font-family: 'Lobster', serif;
+          letter-spacing: 1px;
+          color: #2aa198;
+          text-decoration: underline;
+        }
+
+    </style>
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+http://www.code-days.de/programm/programm-details/82/big-data-analyse-mit-elasticsearch/
+
+In großen Datenmenge verbergen sich oft interessante Informationen, die allerdings in einer Flut von
+weniger spannenden Daten untergehen.
+Was dabei interessant sein kann hängt sowohl vom Format der Daten als auch von deren Domäne ab.
+
+In diesem Talk werde ich zeigen, wie du große Datenmengen, auch kontinuierlich,
+in Elasticsearch importieren und danach analysieren kannst.
+Mit Kibana werden wir dann ein Dashboard erzeugen, das interessante Metriken auf diesen Daten grafisch darstellt.
+Mit diesem Dashboard können wir dann sowohl explorativ interessante Datensätze und Sachverhalte erkennen,
+als auch Fragestellungen, die beim Import aufgekommen sind, beantworten.
+
+Content
+```
+ML is the race car
+Data is the fuel
+```
+
+Consider
+- Adding tsne.js
+- https://github.com/bloomberg/bqplot
+- https://plot.ly/products/dash/
+
+Unsupervised with Sklearn
+- http://scikit-learn.org/stable/unsupervised_learning.html
+- https://unsupervisedlearning.wordpress.com/tag/pandas/
+- https://bugra.github.io/work/notes/2014-11-16/an-introduction-to-unsupervised-learning-scikit-learn/
+- http://scikit-learn.org/stable/modules/outlier_detection.html
+
+- add locations as lat lon in import?
+  - resolve using airports_geo_data.csv over Origin and Destination
+
+-->
+
+                <section class="preparation">
+<pre>
+- Start ES and Kibana on AWS GPU
+  - ssh -i "/mnt/c/Users/olive/Google Drive/ML-Buch/aws-gpu-ubuntu.pem" ubuntu@ec2-52-43-168-34.us-west-2.compute.amazonaws.com
+  - sudo sysctl -w vm.max_map_count=262144
+  - tmux
+    - cd elasticsearch-5.5.2/
+      - ./bin/elasticsearch
+    - cd kibana-5.5.2-linux-x86_64/
+      - ./bin/kibana
+      - http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601
+        - Discover
+          - Load Not Cancelled
+          - Set interval from (2000-2003(
+      - go to dashboard
+
+- Unsupervised in ELK: https://www.elastic.co/downloads/x-pack#preview-release
+
+- Notebooks: ai/notebooks/es
+  - Run incremntell import as shown in last step of ```import.ipynb```
+</pre>
+        </section>
+
+        <section>
+            <h2>Big Data Analyse mit Elasticsearch</h2>
+            <p><a target="_blank" href="http://www.code-days.de/programm/programm-details/82/big-data-analyse-mit-elasticsearch/">
+                Code Days, München 2018
+            </a></p>
+                <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a> /
+                    <a href="https://www.embarc.de/">Embarc GmbH</a>
+                </h4>
+            <p><small><a href="http://bit.ly/code-days-big-data">
+                http://bit.ly/code-days-big-data
+            </a></small></p>
+        </section>
+
+<!--
+        <section class="todo">
+            <pre>
+            </pre>
+        </section>
+-->
+
+        <section>
+            <h2><small>Domestic US flights from 2000 to 2002</small></h2>
+            <div style="margin-top: -30px">
+                <a href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200)))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)" target="_blank">
+                    <img src="img/dataviz/kibana-dashboard.png">
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h2>The raw data (per year)</h2>
+            <p>approx. 6 million data sets</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> wc -l 2001.csv
+5967781 2001.csv
+            </code></pre>
+            <p>approx. 600 MB of data</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> ls -hl 2001.csv
+573M Jan 10  2016 2001.csv
+            </code></pre>
+            <p>29 colums, <strong>timestamps</strong></p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> head 2001.csv
+Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
+2001,1,17,3,1806,1810,1931,1934,US,375,N700��,85,84,60,-3,-4,BWI,CLT,361,5,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,18,4,1805,1810,1938,1934,US,375,N713��,93,84,64,4,-5,BWI,CLT,361,9,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
+2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
+        </section>
+
+        <section>
+            <h3>Data has gaps, but looks consistent overall</h3>
+            <a href="https://pair-code.github.io/facets/index.html#facets-overview" target="_blank">
+                <img src="img/browser/screenshot-flights-facets.png" height="500px">
+            </a>
+            <p><small><a href="https://pair-code.github.io/facets/" target="_blank">https://pair-code.github.io/facets/</a></small></p>
+            <!--<p><small>Also by PAIR like deeplearn.js</small></p>-->
+        </section>
+
+        <section>
+            <h2>No specific task or question</h2>
+            <h3>Exploring what just might be interesting</h3>
+            <h3>Finding the unknown unknowns</h3>
+            <div>
+                <img src="img/icons/question-mark.jpg">
+            </div>
+        </section>
+
+        <section>
+            <h2><small>Your #data from another perspective with #dataviz</small></h2>
+            <div>
+                <a href="https://twitter.com/Creatuluw/status/749151998415634432" target="_blank">
+                <img src="img/dataviz/cat-upside-down.jpg" height="450px"
+                     style="float: left; padding-right: 50px; padding-left: 150px">
+                    </a>
+                    <a href="https://twitter.com/planetepics/status/914792139309150208" target="_blank">
+                <img src="img/dataviz/dataviz-cat.jpg" height="450px" style="float: left">
+                </a>
+
+            </div>
+            <p style="clear: both"><small><a target="_blank" href="https://twitter.com/Creatuluw/status/749151998415634432">
+                https://twitter.com/Creatuluw/status/749151998415634432</a>
+                <br>
+                <a href="https://twitter.com/planetepics/status/914792139309150208" target="_blank">
+                    https://twitter.com/planetepics/status/914792139309150208
+                </a>
+                </small></p>
+        </section>
+
+        <section>
+            <h2>Our first investigation</h2>
+        </section>
+
+        <section>
+            <h2>Explore Data</h2>
+            <h3>Visual Statistical analysis using Correlation and Joint Plot</h3>
+            <p>Tools Used</p>
+            <ul>
+                <li>Basic Processing: UNIX tools
+                <li>Cleaning and Import: Dask (Python)
+                <li>Statistical analysis: Pandas (Python)
+                <li>Display and Interactive Filtering: Elasticsearch and Kibana
+            </ul>
+        </section>
+
+        <section>
+                <h2><small>Getting an overview using a correlation plot</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="500px">
+                <p><small>Darker Colours indicate more correlation</small></p>
+            </div>
+        </section>
+
+<!--
+        <section>
+            <h2><small>Pearson's r: Linear Correlation</small></h2>
+            <div style="margin-top: -40px">
+            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
+            &lt;!&ndash;<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">&ndash;&gt;
+                &lt;!&ndash;<img src="Correlation_examples2.svg" height="400px">&ndash;&gt;
+            &lt;!&ndash;</a>&ndash;&gt;
+            &lt;!&ndash;<p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">&ndash;&gt;
+                &lt;!&ndash;https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient&ndash;&gt;
+            &lt;!&ndash;</a></small></p>&ndash;&gt;
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+            <img src="img/Correlation_coefficient.png">
+            </a>
+            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966</a></small></p>
+                </div>
+        </section>
+-->
+
+        <section>
+            <h3>Arrival Time to Departure Time</h3>
+            <div class="fragment">
+                <img src="img/flight-analysis/ArrTime_DepTime.png" height="500px">
+            </div>
+        </section>
+
+        <section>
+                <h2><small>Pearson's r 0.77: high Correlation</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="550px">
+            </div>
+        </section>
+
+        <section>
+            <h2>Of Course Arrival Time and Departure Time Are Correlated</h2>
+            <h2 class="fragment">Verdict: plausible but trivial</h2>
+        </section>
+
+        <section>
+        <h2><small>Second highest correlation: Distance to Unique Carrier</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="550px">
+            </div>
+        </section>
+
+        <section>
+            <h3>Distance to Unique Carrier</h3>
+            <div class="fragment">
+
+            <img src="img/flight-analysis/Distance_UniqueCarrier_.png" height="500px">
+                </div>
+        </section>
+
+        <section data-transition="none">
+            <h3>Distance to Unique Carrier</h3>
+            <div>
+
+                <img src="img/flight-analysis/Distance_UniqueCarrier_AQ.png" height="500px">
+                <p><small>
+                    <em>1 = AQ (Aloha Airlines)</em>
+                    <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
+                </small></p>
+                <!--Answer AQ in D3 part: mainly between Hawaii and California -->
+            </div>
+        </section>
+
+        <section>
+            <h2>Question: Why only short flight distances for Carrier Aloha Airlines (AQ)?</h2>
+            <h3 class="fragment">Does anyone know already?</h3>
+        </section>
+
+        <section data-transition="zoom">
+            <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
+                <img src="img/dataviz//twitter-creatuluw.png">
+            </a>
+            <p><small>
+                <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
+                    https://twitter.com/Creatuluw/status/770519427771170816
+                </a>
+                </small></p>
+        </section>
+
+        <section>
+            <h3>Answer</h3>
+            <div class="fragment">
+                <a target="_blank" href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:UniqueCarrier,negate:!f,type:phrase,value:AQ),query:(match:(UniqueCarrier:(query:AQ,type:phrase)))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:Origin,negate:!f,type:phrase,value:HNL),query:(match:(Origin:(query:HNL,type:phrase))))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
+                    <img src="img/flight-analysis/screenshot_aq.png" height="300px" style="float: left">
+                </a>
+                <small>
+                    <br><br>
+                <ul style="float: right">
+                    <li>HNL: Honolulu International Airport
+<li>KOA: Kona International Airport
+<li>OGG: Kahului Airport
+<li>LIH: Lihue Airport
+<li>ITO: Hilo International Airport
+                </ul>
+                </small>
+                <p style="clear: both"><small><a href="video/AQ-kibana.mp4" target="_blank">Video of incremental search</a></small></p>
+            </div>
+            <div class="fragment">
+            <p><a href="https://en.wikipedia.org/wiki/Aloha_Airlines" target="_blank">
+                Aloha Airlines (AQ) mainly operated on Hawaii</a></p>
+            <p><small>Only data for about 1 year, but AQ existed from from 1946 - 2008</small></p>
+            </div>
+        </section>
+
+        <section>
+                <h2><small>Another (weaker) correlation: Origin to Unique Carrier</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="550px">
+            </div>
+        </section>
+
+        <section>
+            <h3>Origin to Unique Carrier</h3>
+
+            <div class="fragment">
+                <img src="img/flight-analysis/Origin__UniqueCarrier_.png" height="500px">
+            </div>
+        </section>
+
+        <section  data-transition="none">
+            <h3>Origin to Unique Carrier</h3>
+
+            <div>
+                <img src="img/flight-analysis/Origin__UniqueCarrier_ATL.png" height="500px">
+                <p><small>
+                    <!--0 = AA(American Airlines),-->
+                    <em>4 = (DL) Delta</em>
+                    <!--, 7 = NW (Northwest), 11 = WN (Southwest)-->
+                </small></p>
+                <!--Answer DL in D3 part: that is ATL (Atlanta) -->
+            </div>
+        </section>
+
+        <section>
+            <h2>Question: What is the prominent Origin for Carrier Delta (DL) and why is there one?</h2>
+            <h3 class="fragment">Again: Does anyone know already?</h3>
+        </section>
+
+        <section>
+            <h3>Answer</h3>
+            <div class="fragment">
+                <a target="_blank" href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:UniqueCarrier,negate:!f,type:phrase,value:DL),query:(match:(UniqueCarrier:(query:DL,type:phrase))))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
+                    <img src="img/flight-analysis/screenshot_dl.png" height="400px">
+                </a>
+            </div>
+            <p class="fragment"><a href="https://en.wikipedia.org/wiki/Delta_Air_Lines" target="_blank">
+                Delta (DL) mainly flies from Atlanta (ATL) its headquarter and largest hub
+            </a></p>
+        </section>
+
+        <section>
+            <h2>One More Interesting Observation as an exercise to the audience</h2>
+        </section>
+
+        <section>
+            <h2><small>When zooming into time series data: What is the recurring dent in the histogram?</small></h2>
+            <div class="fragment">
+                <a target="_blank" href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2002-01-12T08:20:00.000Z',mode:absolute,to:'2002-03-14T13:40:00.000Z'))&_a=(description:'',filters:!(),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
+                    <img src="img/flight-analysis/screenshot_dent.png" height="400px">
+                </a>
+            </div>
+            <p class="fragment"><small>Hint: When filtering for JFK and other mainly international airports, this dent disappears</small></p>
+        </section>
+
+        <section>
+            <h2>You can only do this using fancy tools, right?</h2>
+        </section>
+
+        <section>
+            <h2 style="margin-top: -10px"><small>Why not just load it into Excel and wing it?</small></h2>
+            <ul style="margin-top: -60px">
+                <li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loads data relatively fast
+                        <li>truncates after 1M lines
+                    </ul>
+                </li>
+                <li class="fragment">Google Sheets: <em style="color: red">nope</em>
+                    <ul>
+                        <li>limited to 2.000.000 cells (not lines)
+                        <li>does not load data at all
+                    </ul>
+                </li>
+                <li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loading takes long
+                        <li>truncates after 64k lines
+                    </ul>
+                </li>
+                <li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>
+                    <ul>
+                        <li>very fast and almost no memory overhead
+                        <li>just a text editor
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Data Size too big</h2>
+            <h3>
+But we can at least work on samples</h3>
+        </section>
+
+        <section>
+            <h2><small>Exploring Data using Google Sheets</small></h2>
+            <div style="margin-top: -30px">
+            <img src="img/google_sheets/screenshot_explore.png">
+            <br>
+            <img height="300px" src="img/google_sheets/screenshot_explore2.png">
+                </div>
+        </section>
+
+        <section>
+            <h2><small>Uses Unsupervised Machine Learning</small></h2>
+            <div style="margin-top: -30px">
+            <img src="img/sketch/types-of-ml.png" height="500px">
+            </div>
+        </section>
+
+        <section>
+            <h2>Correlations, Outliers, etc.</h2>
+            <p>Sheets can automatically find this</p>
+            <div style="transform: scale(1.3); margin-left: 40px">
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_depArrDelay.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_distance_airtime.png">
+                </div>
+                <div style="height: 250px; float: left">
+                    <img src="img/google_sheets/screenshot_depDelay_outliers.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_histogram_distance.png">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Facets Dive</h3>
+            <p>Lets you pivot on random data</p>
+            <a href="https://pair-code.github.io/facets/index.html#facets-dive" target="_blank">
+                <img src="img/flight-analysis/screenshot-flight-facets-dest-origin-carier.png" height="400px">
+            </a>
+            <p><small>Destination to Origin, Carrier encoded as color<br><a href="https://pair-code.github.io/facets/index.html#facets-dive" target="_blank">https://pair-code.github.io/facets/index.html#facets-dive</a></small></p>
+        </section>
+
+        <section>
+            <h2>What I have learned</h2>
+            <p>Without asking</p>
+            <ul>
+                <li>long arrival delays are caused by departure delays
+                <li>per 100 minutes you can fly around 857 miles
+                <li>some flights where delayed more than 1000 minutes (more than 16 hours)
+                <li>there seems to be a flight distance of 4962 miles in the US (around 10 hours of flight)
+                <li>ATL is DL's home base
+                <li>there is an interesting gap at weekends
+                <li>there is plenty more insights hidden inside that data
+            </ul>
+        </section>
+
+        <section>
+            <h2>Wrapup</h2>
+            <ul>
+                <li class="fragment">Statistic Analysis gives first insights
+                <li class="fragment">Interactive Exporation lets us find most interesting relationships
+                <li class="fragment">Unsupervised ML reveals hidden structures
+                <li class="fragment">interpretation requires domain knowledge
+                <li class="fragment">experiments also help with interpretation of data
+                <li class="fragment">interpretation and understanding is the prerequisite to action
+            </ul>
+
+            <small>
+            <p><a href="http://bit.ly/data-insights-ml-101">
+                http://bit.ly/data-insights-ml-101</a>
+                                <br>
+
+                Ping me for questions / help / comments: <a href="http://zeigermann.eu">http://zeigermann.eu</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>
+                </small>
+        </section>
+
+<!--
+        <section>
+            <h2>A journey through exploring <em>all</em> domestic US flights</h2>
+            <h2>from 2000 to 2002</h2>
+            <img src="img/airline-pictures/a26.jpg" height="200px">
+            <p><a target="_blank" href="http://stat-computing.org/dataexpo/2009/">http://stat-computing.org/dataexpo/2009/</a></p>
+        </section>
+
+-->
+<!--
+        <section>
+            <h2 style="margin-top: -10px"><small>Why not just load it into Excel and wing it?</small></h2>
+            <ul style="margin-top: -60px">
+                <li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loads data relatively fast
+                        <li>truncates after 1M lines
+                    </ul>
+                </li>
+                <li class="fragment">Google Sheets: <em style="color: red">nope</em>
+                    <ul>
+                        <li>limited to 2.000.000 cells (not lines)
+                        <li>does not load data at all
+                    </ul>
+                </li>
+                <li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loading takes long
+                        <li>truncates after 64k lines
+                    </ul>
+                </li>
+                <li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>
+                    <ul>
+                        <li>very fast and almost no memory overhead
+                        <li>just a text editor
+                    </ul>
+                </li>
+            </ul>
+        </section>
+-->
+
+<!--
+        <section>
+            <h2>Challenge</h2>
+            <p class="fragment">Handling large amounts of data while maintaining the interactivity and the intuitive UI</p>
+            <p class="fragment">Like: benefits of Excel and Access at the same time</p>
+        </section>
+
+-->
+<!--
+        <section>
+            <a href="https://twitter.com/DJCordhose/status/784683545457467392" target="_blank">
+                <img src="img/dataviz/twitter-bottleneck.png" height="600px">
+            </a>
+            <p><small><a href="https://twitter.com/DJCordhose/status/784683545457467392" target="_blank">
+                https://twitter.com/DJCordhose/status/784683545457467392</a></small></p>
+        </section>
+-->
+<!--
+        <section>
+            <h2>The Journey</h2>
+            <h3 class="fragment">Making sense of the data step by step</h3>
+            <h3 class="fragment">All software shown here is Open Source and Free of Charge</h3>
+        </section>
+-->
+
+<!--
+        <section>
+            <h2>Step I: Statistical pre-analysis to learn about data</h2>
+            <p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>
+            <ul>
+                <li>What is the nature of the data (e.g. time series data)?</li>
+                <li>Does the data look plausible?</li>
+                <li>What visualizations seem most promising?</li>
+            </ul>
+        </section>
+
+-->
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+$('section').attr('data-background-image', "backgrounds/light-chalk.jpg");
+//    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
+    //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+        // $('.fragment').removeClass('fragment');
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
