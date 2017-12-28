@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Machine Learning in the Browser</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+        .reveal pre code {
+            max-height: 1000px !important;
+        }
+
+        img {
+            border: 0 !important;
+            box-shadow:0 0 0 0 !important;
+        }
+
+        .reveal {
+            -ms-touch-action: auto !important;
+            touch-action: auto !important;
+				}
+
+				.reveal h2,
+                .reveal h3,
+				.reveal h4 {
+					letter-spacing: 2px;
+                    font-family: 'Amiri', serif;
+                    /* font-family: 'Times New Roman', Times, serif; */
+                    font-weight: bold;
+                    font-style: italic;
+                    letter-spacing: -2px;
+                    text-transform: none !important;
+                }
+
+                .reveal em {
+                    font-weight: bold;
+                }
+
+				.reveal .step-subtitle h1 {
+					letter-spacing: 1px;
+				}
+				.reveal .step-subtitle h2,
+				.reveal .step-subtitle h3 {
+					text-transform: none;
+					font-style: italic;
+					font-weight: normal;
+					/* font-weight: 400; */
+					/* font-family: 'Amiri', serif; */
+					font-family: 'Lobster', serif;
+					letter-spacing: 1px;
+					color: #2aa198;
+					text-decoration: underline;
+				}
+
+				.reveal .front-page h1,
+				.reveal .front-page h2 {
+					font-family: "League Gothic";
+					font-style: normal;
+					text-transform: uppercase !important;
+					letter-spacing: 1px;
+				}
+
+				.reveal .front-page h1 {
+					font-size: 2.5em !important;
+				}
+
+				.reveal .highlight {
+					background-color: #D3337B;
+					color: white;
+				}
+
+				.reveal img.with-border {
+					border: 1px solid #586e75 !important;
+					box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+				}
+
+				.reveal li {
+					margin-bottom: 8px;
+				}
+
+				/* For li's that use FontAwesome icons as bullet-point */
+			.reveal ul.fa-ul li {
+				list-style-type: none;
+			}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+https://www.m3-konferenz.de/veranstaltung-6458-wie-gut-ist-ein-machine-learning-modell.html?id=6458
+
+
+Wie gut ist dein Machine-Learning-Modell?
+
+Ein kleines Beispielprojekt ist schnell trainiert. Wenn es allerdings darum geht, ein ML-Modell produktiv zu nutzen, sollten Entwickler wissen, wie sehr sie dem Modell vertrauen können.
+
+Zuerst müssen sie erkennen, ob das Modell für reale Daten geeignet ist. Dazu können sie anhand von Metriken bestimmen, wie stark sie es mit Overfitting und Underfitting zu tun haben.
+
+Aber lässt sich überhaupt immer nachvollziehen, warum ein Modell bestimmte Ergebnisse liefert?
+
+Dieser Vortrag beschäftigt sich neben den Qualitätsansprüchen an den Trainingsdaten und dem trainiertes Modell auch mit den softwaretechnischen Prozessen wie Test und Deployment um das Modell herum.
+
+Vorkenntnisse
+Optimal ist es, wenn die Besucher bereits Machine-Learning-Modelle trainiert und evtl. sogar in Produktion gebracht haben.
+Lernziele
+Kenntnis über die Herausforderungen bei produktiven ML-Modellen
+
+
+-->
+
+        <section>
+            <h2>Wie gut ist dein Machine-Learning-Modell?</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <p><small><a href="http://bit.ly/m3-ml-quality">
+                http://bit.ly/m3-ml-quality
+            </a></small></p>
+        </section>
+
+        <section class="todo">
+            <pre>
+
+
+* Andrew Ng (@AndrewYNg) tweeted at 1:26 AM on Tue, Nov 28, 2017:
+
+Here's our full paper on improving palliative care with deep learning. Neural net with 18 hidden layers inputs EHR, estimates chance of mortality in next 3-12 months. Also generates report to explain predictions to clinicians. https://t.co/Vp2uRLAn3A
+(https://twitter.com/AndrewYNg/status/935303734787129344?s=03)
+
+* Google Research (@googleresearch) tweeted at 10:16 PM on Tue, Nov 28, 2017:
+In order to build better and more robust DNN-based systems, one must be able to effectively interpret the models. We introduce a simple and scalable method to both compare and interpret the representations learned by DNNs https://t.co/Z8shujfkVu
+(https://twitter.com/googleresearch/status/935618525246382080?s=03)
+
+Bewertung insgesamt
+
+	* Sampling repräsentativ? (Kühn bei XING fragen)
+	*
+
+	* Interpretierbarkeit
+
+		* Haben wir die richtige Methode gwählt?
+
+			* http://hyperparameter.space/blog/when-not-to-use-deep-learning/
+		* LIME Bewertung: https://www.oreilly.com/learning/introduction-to-local-interpretable-model-agnostic-explanations-lime
+		* https://twitter.com/ChristophMolnar/status/937328240959590400
+
+			* https://christophm.github.io/interpretable-ml-book/
+			* https://twitter.com/ChristophMolnar/status/938716611707580417
+		* https://medium.com/@akelleh/causal-inference-with-pandas-dataframes-fc3e64fce5d
+		* ML is Alchemy: https://youtu.be/Qi1Yry33TQE
+	* Das Google Paper: https://research.google.com/pubs/pub45742.html
+
+
+Validation
+
+	* Getrenntes Test-Set
+	* Passt Test-Set zu realer Anwendung?
+	* Methoden, wie in Kapitel 6
+
+
+Introspection of CNN
+
+	* https://distill.pub/2017/feature-visualization/
+	*
+
+Vorgehen
+Notebook aus Kap 6 nehmen und aufbrezeln
+
+
+- Baseline
+- Confusion Matrix wie in Speed Limit Signs
+            </pre>
+        </section>
+
+        <section>
+            <h4>Wrapup</h4>
+            <ul>
+                <li>
+            </ul>
+            <p><small>
+                Introduction to Machine Learning for Software Developers
+                <br>
+            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>
+            <a href="http://bit.ly/m3-ml-quality">
+                http://bit.ly/m3-ml-quality
+            </a>
+            </small></p>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+//    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+//     $('section').attr('data-background-image', "backgrounds/dark-floor.jpg")
+    $('section').attr('data-background-image', "backgrounds/white.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-valley.jpg")
+//    $('section').attr('data-background-image', "backgrounds/blur-floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/blur-floor2.jpg")
+//    $('section').attr('data-background-image', "backgrounds/floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/floor2.jpg")
+</script>
+<script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
