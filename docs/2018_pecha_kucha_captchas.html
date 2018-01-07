@@ -75,13 +75,18 @@
 <div class="reveal">
     <div class="slides">
 
-        <section>
-            <h1>Pushing the limits of Captchas</h1>
-                <h3><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                </h3>
-            <p><small><a href="http://djcordhose.github.io/machine-learning-in-the-browser/2017_pydata_london_captchas_lightning.html">http://djcordhose.github.io/machine-learning-in-the-browser/2017_pydata_london_captchas_lightning.html</a></small></p>
-        </section>
 
+        <!--
+    You don't know what a Pecha Kucha is?
+    Short version: A Pecha Kucha is a presentation style, where the speaker tells a story with the help of 20 pictures,
+     where each picture is only shown for 20 seconds.
+     The whole presentation therefore lasts only 6'40 min - long enough to make a fine point.
+
+     http://www.sigs.de/kongresse/oop_2018/Helpful%20Things%20to%20Know%20About%20Pecha%20Kucha%20V1.1.pdf
+
+        -->
+
+<!--
  <section class="todo">
  <pre>
  - Macht Recsptcha einen Request zu Google?
@@ -101,27 +106,38 @@ Extension: Retrain inception model to be even better
 
  </pre>
  </section>
+-->
+
 
         <section>
-            <h3>Can a machine tell the dog from the muffin?</h3>
-            <img src="dog-vs-muffin.jpg">
+            <h2>Bagel or Dog?</h2>
+            <h3> What ready-made image recognition can accomplish today</h3>
+                <p><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </p>
+            <p><small><a href="https://djcordhose.github.io/ai/2018_pecha_kucha_captchas.html">https://djcordhose.github.io/ai/2018_pecha_kucha_captchas.html.html</a></small></p>
+        </section>
+
+        <section class="todo">
+<pre>
+    - Choose a number of other entertaining examples
+    - move to powerpoint template
+</pre>
         </section>
 
         <section>
-            <h1>Question</h1>
-            <h2>If Google Creates those Captchas, can Google also Recognize them?</h2>
-            <h3>And it they can, are they sill reasonable?</h3>
+            <h3>Can a machine tell the dog from the muffin?</h3>
+            <img src="img/captchas/dog-vs-muffin/dog-vs-muffin.jpg">
         </section>
 
         <section>
             <h3>Using Googles Pre-Trained Inception Model</h3>
-            <img src="inception_v3_architecture.png" height="480px">
+            <img src="img/architectures/inception_v3_architecture.png" height="400px">
             <p><small><a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a></small></p>
         </section>
 
         <section>
             <h3>Dog 1</h3>
-            <img src="captchas/dog-vs-muffin/dog1.jpg" height="300px">
+            <img src="img/captchas/dog-vs-muffin/dog1.jpg" height="300px">
             <div class="fragment">
                 <pre><code data-trim>
 Chihuahua (score = 0.70387)
@@ -135,7 +151,7 @@ beagle (score = 0.00598)
 
         <section>
             <h3>Dog 2</h3>
-            <img src="captchas/dog-vs-muffin/dog2.jpg" height="300px">
+            <img src="img/captchas/dog-vs-muffin/dog2.jpg" height="300px">
             <div class="fragment">
                 <pre><code data-trim>
 Chihuahua (score = 0.94613)
@@ -149,7 +165,7 @@ ski mask (score = 0.00084)
 
         <section>
             <h3>Muffin 1</h3>
-            <img src="captchas/dog-vs-muffin/muffin1.jpg" height="300px">
+            <img src="img/captchas/dog-vs-muffin/muffin1.jpg" height="300px">
             <div class="fragment">
                 <pre><code data-trim>
 vase (score = 0.05576)
@@ -163,7 +179,7 @@ Sealyham terrier, Sealyham (score = 0.02031)
 
         <section>
             <h3>Muffin 2</h3>
-            <img src="captchas/dog-vs-muffin/muffin2.jpg" height="300px">
+            <img src="img/captchas/dog-vs-muffin/muffin2.jpg" height="300px">
             <div class="fragment">
                 <pre><code data-trim>
 teddy, teddy bear (score = 0.25262)
@@ -180,7 +196,7 @@ toyshop (score = 0.01996)
         </section>
 
         <section>
-            <img src="dog-vs-bread.jpg" height="500px">
+            <img src="img/captchas/dog-vs-bread/dog-vs-bread.jpg" height="500px">
         </section>
 
         <section>
@@ -192,15 +208,15 @@ toyshop (score = 0.01996)
         </section>
 
         <section>
-            <img src="captchas/dog-vs-bread-term.png">
+            <img src="img/captchas/dog-vs-bread-term.png">
         </section>
 
         <section>
-            <img src="dog-vs-chicken-wing.jpg" height="500px">
+            <img src="img/captchas/dog-vs-chicken-wing.jpg" height="500px">
         </section>
 
         <section>
-            <img src="captchas/dog-vs-wing-term.png">
+            <img src="img/captchas/dog-vs-wing-term.png">
         </section>
 
         <section>
@@ -231,6 +247,15 @@ toyshop (score = 0.01996)
             <h1>So?</h1>
             <h2>Yes!</h2>
             <h3>At least for our examples Google Inception Model knows what is a dog and what is not</h3>
+        </section>
+
+        <section>
+            <h3>Disclaimer</h3>
+            <p>These are not real Captchas</p>
+            <p>They have been created by <a href="https://twitter.com/teenybiscuit/status/713179281845673984" target="_blank">
+        @teenybiscuit
+            </a> and other anonymous artists</p>
+            <p>If you want to see real ones, go into Incognito Mode and to <a href="https://www.dhl.de/anmelden" target="_blank">https://www.dhl.de/anmelden</a></p>
         </section>
 
         <section>
