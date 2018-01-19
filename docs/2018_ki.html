@@ -4,10 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Machine Learning in the Browser</title>
-
-    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-    <meta name="author" content="Hakim El Hattab">
+    <title>Können Maschinen denken?</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -17,7 +14,6 @@
 
     <link rel="stylesheet" href="reveal.js/css/reveal.css">
     <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
-    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
@@ -110,6 +106,10 @@
 					color: white;
 				}
 
+        .reveal section img {
+          background: none;
+        }
+
 				.reveal img.with-border {
 					border: 1px solid #586e75 !important;
 					box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
@@ -142,127 +142,130 @@
 <body>
 
 <div class="reveal">
+    <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
-<!--
-https://www.m3-konferenz.de/veranstaltung-6458-wie-gut-ist-ein-machine-learning-modell.html?id=6458
-
-
-Wie gut ist dein Machine-Learning-Modell?
-
-Ein kleines Beispielprojekt ist schnell trainiert. Wenn es allerdings darum geht, ein ML-Modell produktiv zu nutzen, sollten Entwickler wissen, wie sehr sie dem Modell vertrauen können.
-
-Zuerst müssen sie erkennen, ob das Modell für reale Daten geeignet ist. Dazu können sie anhand von Metriken bestimmen, wie stark sie es mit Overfitting und Underfitting zu tun haben.
-
-Aber lässt sich überhaupt immer nachvollziehen, warum ein Modell bestimmte Ergebnisse liefert?
-
-Dieser Vortrag beschäftigt sich neben den Qualitätsansprüchen an den Trainingsdaten und dem trainiertes Modell auch mit den softwaretechnischen Prozessen wie Test und Deployment um das Modell herum.
-
-Vorkenntnisse
-Optimal ist es, wenn die Besucher bereits Machine-Learning-Modelle trainiert und evtl. sogar in Produktion gebracht haben.
-Lernziele
-Kenntnis über die Herausforderungen bei produktiven ML-Modellen
-
-
--->
-
         <section>
-            <h2>Wie gut ist dein Machine-Learning-Modell?</h2>
-            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-            </h4>
-            <p><small><a href="http://bit.ly/m3-ml-quality">
-                http://bit.ly/m3-ml-quality
-            </a></small></p>
+            <h1>Können Maschinen denken?</h1>
+            <div>
+                    <a href="http://zeigermann.eu">Oliver Zeigermann</a> /
+                    <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </div>
         </section>
 
-        <section class="todo">
-            <pre>
-
-Mehr auf das Google Paper beziehen, LIME nur erwähnen und auf den Talk
-und den Post verweisen:
-* https://blog.codecentric.de/2018/01/vertrauen-und-vorurteile-maschinellem-lernen/?utm_content=65461486&utm_medium=social&utm_source=twitter
-* https://blog.codecentric.de/en/2018/01/look-beyond-accuracy-improve-trust-machine-learning/?utm_content=65461834&utm_medium=social&utm_source=twitter
-
-
-* Visualisieren von Ergebnissen
-  * Plots der Decision Boundaries wie im Intro Notebook
-
-
-* Andrew Ng (@AndrewYNg) tweeted at 1:26 AM on Tue, Nov 28, 2017:
-
-Here's our full paper on improving palliative care with deep learning. Neural net with 18 hidden layers inputs EHR, estimates chance of mortality in next 3-12 months. Also generates report to explain predictions to clinicians. https://t.co/Vp2uRLAn3A
-(https://twitter.com/AndrewYNg/status/935303734787129344?s=03)
-
-* Google Research (@googleresearch) tweeted at 10:16 PM on Tue, Nov 28, 2017:
-In order to build better and more robust DNN-based systems, one must be able to effectively interpret the models. We introduce a simple and scalable method to both compare and interpret the representations learned by DNNs https://t.co/Z8shujfkVu
-(https://twitter.com/googleresearch/status/935618525246382080?s=03)
-
-Bewertung insgesamt
-
-	* Sampling repräsentativ? (Kühn bei XING fragen)
-	*
-
-	* Interpretierbarkeit
-
-		* Haben wir die richtige Methode gwählt?
-
-			* http://hyperparameter.space/blog/when-not-to-use-deep-learning/
-		* LIME Bewertung: https://www.oreilly.com/learning/introduction-to-local-interpretable-model-agnostic-explanations-lime
-		* https://twitter.com/ChristophMolnar/status/937328240959590400
-
-			* https://christophm.github.io/interpretable-ml-book/
-			* https://twitter.com/ChristophMolnar/status/938716611707580417
-		* https://medium.com/@akelleh/causal-inference-with-pandas-dataframes-fc3e64fce5d
-		* ML is Alchemy: https://youtu.be/Qi1Yry33TQE
-	* Das Google Paper: https://research.google.com/pubs/pub45742.html
-
-
-Validation
-
-	* Getrenntes Test-Set
-	* Passt Test-Set zu realer Anwendung?
-	* Methoden, wie in Kapitel 6
-
-
-Introspection of CNN
-
-	* https://distill.pub/2017/feature-visualization/
-	*
-
-Vorgehen
-Notebook aus Kap 6 nehmen und aufbrezeln
-
-
-- Baseline
-- Confusion Matrix wie in Speed Limit Signs
-
-* https://www.coursera.org/learn/machine-learning-projects
-
-* Concept drift: https://en.m.wikipedia.org/wiki/Concept_drift
-
-More people are confused an looking for the right thing to do
-* https://twitter.com/bearloga/status/946161804241125376
-* https://twitter.com/beeonaposy/status/946406328288923654?s=03
-  'Data scientists: what's your team's approach to tracking the quality of models in production? (How do you know if a model is decaying? How do you quality-check the data going into a model? Who builds and tracks these things?)'
-  * https://twitter.com/agibsonccc/status/946598483598876673
-  * https://twitter.com/snoble/status/946600113002053633
-            </pre>
+        <section class="step-subtitle">
+            <h3>Teil 1</h3>
+            <h2>Was ist Intelligenz?</h2>
         </section>
 
         <section>
-            <h4>Wrapup</h4>
-            <ul>
-                <li>
-            </ul>
+            <h2>Initial Exercise</h2>
+            <p>Specify criteria whether a machine can think</p>
             <p><small>
-                Introduction to Machine Learning for Software Developers
-                <br>
-            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                <br>
-            <a href="http://bit.ly/m3-ml-quality">
-                http://bit.ly/m3-ml-quality
-            </a>
+                Example Definition:
+                A machine leading a court trial and coming to a fair judgement
             </small></p>
+            <p><strong>Discuss in groups and come up with a definition of your own</strong></p>
+            <p><small>10 Minutes Time</small></p>
+        </section>
+
+        <section>
+            <h3>Collecting Results</h3>
+            <pre contenteditable="true">
+- Team 1:
+
+- Team 2:
+
+- Team 3:
+
+- Team 4:
+
+            </pre>
+            <p><small>5 Minuten</small></p>
+
+
+
+	* 1. Stunde:  Was ist Intelligenz?
+
+		* Anfängliche Übung ,damit ich Technik in Betrieb nehmen kann. Beamer, Internet.
+
+			* In Gruppen: Wie definiert ihr Intelligenz?
+			* Meine Definition: ein selbstfahrendes Auto.
+
+				* https://twitter.com/scott_kerr/status/949995916941037568?s=03
+		* Weak vs Strong
+		* Die ganzen coolen Beispiele
+
+			* Hundepopos
+		* Warum gerade jetzt?
+
+			* Wie hat sich die Rechenpower entwickelt?
+			* Schach Programm
+			* Datenmengen
+			* Neue Lernstrategien
+		* Experiment: ML
+
+
+
+        </section>
+
+        <section class="step-subtitle">
+            <h3>Teil 2</h3>
+            <h2>Welche Fragen müssen wir neuerdings beantworten?</h2>
+        </section>
+
+        <section>
+            <h3>Müssen wir uns fürchten vor der Unterjochung durch Machinen?</h3>
+        </section>
+
+        <section>
+            <h3>Die Zukunft ist bereits da, nur noch gleichmäßig verteilt</h3>
+
+            <p>Die tatäschlichen Herausforderungen sind bereits Realität, nur viel weniger spektakulär</p>
+
+        </section>
+
+        <section>
+            <h3>Macht man alles nur weil es geht?</h3>
+            <ul>
+                <li>Welche Arbeit will man weiterhin machen?
+                <li>Welche Information will man nutzen?
+            </ul>
+
+        </section>
+
+        <section>
+            <h3>Was geht denn eigentlich?</h3>
+        </section>
+
+        <section>
+            <h3>Die Post setzt selbstfahrende Lieferfahrzeuge ein</h3>
+            <p><em>
+                Sie werden in der Lage sein, dem Zusteller autonom zu folgen - sodass er nicht vor jedem Hauseingang aus- und wieder einsteigen und wenige Meter fahren muss.
+                </em>
+            </p>
+            <img src="img/post_dhl_truck.jpg">
+            <a target="_blank" href="http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html">http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html</a>
+        </section>
+
+        <section>
+            <h2>Wenn eine Maschine töten muss</h2>
+            <p>Was passiert in Situation wo ein tötlicher Unfall nicht zu vermeiden ist?</p>
+            <h3>Wen soll ein selbstfahrendes Fahrzeug opfern?</h3>
+            <p><em> Ethik-Kommission zum autonomen Fahren lehnt eine Abwägung zum Wert von Menschen ab</em> (
+                <a target="_blank" href="http://www.taz.de/Autonomes-Fahren-und-seine-Hindernisse/!5470265/">http://www.taz.de/Autonomes-Fahren-und-seine-Hindernisse/!5470265/</a>)</p>
+            <p>Aber würdet ihr ein Auto fahren, dass euch selbst opfern würde? Halten Hersteller das ein?</p>
+        </section>
+
+        <section>
+            <h3>Moral Machine</h3>
+            <p>Muss man wieder Kant lesen? <a target="_blank" href="https://de.wikipedia.org/wiki/Kritik_der_praktischen_Vernunft">https://de.wikipedia.org/wiki/Kritik_der_praktischen_Vernunft</a></p>
+            <p><a target="_blank" href="http://moralmachine.mit.edu/hl/de">http://moralmachine.mit.edu/hl/de</a></p>
+        </section>
+
+        <section>
+            <h3>Abschluss Fish Bowl</h3>
+            <p>Haben Menschen einen unterschiedlichen Wert?</p>
         </section>
 
     </div>
@@ -272,17 +275,6 @@ More people are confused an looking for the right thing to do
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
 <script src="lib/jquery-2.2.4.js"></script>
-
-<script>
-//    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
-//     $('section').attr('data-background-image', "backgrounds/dark-floor.jpg")
-    $('section').attr('data-background-image', "backgrounds/white.jpg")
-//    $('section').attr('data-background-image', "backgrounds/dark-valley.jpg")
-//    $('section').attr('data-background-image', "backgrounds/blur-floor.jpg")
-//    $('section').attr('data-background-image', "backgrounds/blur-floor2.jpg")
-//    $('section').attr('data-background-image', "backgrounds/floor.jpg")
-//    $('section').attr('data-background-image', "backgrounds/floor2.jpg")
-</script>
 <script>
     if (window.location.hostname.indexOf('localhost') !== -1) {
     } else {
@@ -300,7 +292,12 @@ More people are confused an looking for the right thing to do
         // applies to all versions
         $('code').addClass('line-numbers');
     } );
+    // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+    // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+    $('section').attr('data-background-image', "backgrounds/white.jpg");
+//    $('section').attr('data-background-image', "backgrounds/code.jpg");
 </script>
+
 
 <script>
 
@@ -312,7 +309,7 @@ More people are confused an looking for the right thing to do
         history: true,
         center: true,
 
-        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
 
         // Optional reveal.js plugins
         dependencies: [
@@ -340,7 +337,6 @@ More people are confused an looking for the right thing to do
             },
             {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
             {src: 'reveal.js/plugin/notes/notes.js', async: true},
-            // https://github.com/mikemiles86/reveal-line-numbers
             {src: 'lib/js/line-numbers.js'}
         ]
     });
