@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa76d5bd-44d6-4768-90e0-937b74fab986" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/docs/pecha-kucha-captchas.pptx" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,11 +34,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+            <state relative-caret-position="132">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2018_pecha_kucha_captchas.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/2018_pecha_kucha_captchas.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="39">
+              <caret line="194" column="34" lean-forward="true" selection-start-line="194" selection-start-column="34" selection-end-line="194" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -183,7 +193,36 @@
             <path>
               <item name="ai" type="b2602c69:ProjectViewProjectNode" />
               <item name="ai" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ai" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ai" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+              <item name="captchas" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ai" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ai" type="462c0819:PsiDirectoryNode" />
+              <item name="notebooks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ai" type="462c0819:PsiDirectoryNode" />
+              <item name="notebooks" type="462c0819:PsiDirectoryNode" />
+              <item name="booster" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -198,19 +237,19 @@
     <property name="full.screen.before.presentation.mode" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\olive\Development\ml\ai\docs\img" />
-      <recent name="C:\Users\olive\Development\ml\ai\docs" />
-      <recent name="C:\Users\olive\Development\ml\ai\docs\img\captchas" />
-      <recent name="C:\Users\olive\Development\ml\ai\notebooks\intro" />
-      <recent name="C:\Users\olive\Development\ml\ai\docs\backgrounds" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\olive\Development\ml\ai\docs" />
       <recent name="C:\Users\olive\Development\ml\ai\docs\img\sketch" />
       <recent name="C:\Users\olive\Development\ml\ai\docs\img\browser" />
       <recent name="C:\Users\olive\Development\ml\ai\notebooks\talks" />
       <recent name="C:\Users\olive\Development\ml\ai\docs\img\squirrels\original" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\olive\Development\ml\ai" />
+      <recent name="C:\Users\olive\Development\ml\ai\docs\img" />
+      <recent name="C:\Users\olive\Development\ml\ai\docs" />
+      <recent name="C:\Users\olive\Development\ml\ai\docs\img\captchas" />
+      <recent name="C:\Users\olive\Development\ml\ai\notebooks\intro" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -387,13 +426,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498311648794</updated>
-    </task>
-    <task id="LOCAL-00094" summary="siggate: clear structure">
-      <created>1507917837120</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1507917837121</updated>
     </task>
     <task id="LOCAL-00095" summary="2018 ml ai 1: rc1">
       <created>1507923645768</created>
@@ -731,7 +763,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517041216731</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="house keeping">
+      <created>1517041400632</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1517041400632</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -822,7 +861,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="vgg fragments: reverted sigmoid activation for classifiers (vgg actually suggests relu)" />
     <MESSAGE value="slides by https://people.eecs.berkeley.edu/~jordan/ at http://www.sfdatainstitute.org/conference.html 2017" />
     <MESSAGE value="hh.js" />
     <MESSAGE value="image dl models overpowered" />
@@ -847,7 +885,8 @@
     <MESSAGE value="schule wip" />
     <MESSAGE value="schule final" />
     <MESSAGE value="VSC settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="VSC settings" />
+    <MESSAGE value="house keeping" />
+    <option name="LAST_COMMIT_MESSAGE" value="house keeping" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1081,13 +1120,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/2018_pecha_kucha_captchas.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7326">
-          <caret line="222" column="64" lean-forward="false" selection-start-line="222" selection-start-column="64" selection-end-line="222" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/notebooks/es/analysis.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -1151,8 +1183,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+        <state relative-caret-position="132">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/2018_pecha_kucha_captchas.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="194" column="34" lean-forward="true" selection-start-line="194" selection-start-column="34" selection-end-line="194" selection-end-column="34" />
           <folding />
         </state>
       </provider>
