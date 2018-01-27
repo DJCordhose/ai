@@ -1,4 +1,4 @@
-.idea/inspectionProfiles/
+.idea
 models
 data
 notebooks/*/.ipynb_checkpoints
