@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa76d5bd-44d6-4768-90e0-937b74fab986" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/docs/pecha-kucha-captchas.pptx" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/test.docx" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/test.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/train.docx" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/train.png" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/notebooks/booster/plot.ipynb" afterPath="$PROJECT_DIR$/notebooks/booster/plot.ipynb" />
+      <change beforePath="$PROJECT_DIR$/notebooks/booster/prediction.ipynb" afterPath="$PROJECT_DIR$/notebooks/booster/prediction.ipynb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,8 +52,8 @@
       <file leaf-file-name="2018_pecha_kucha_captchas.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/2018_pecha_kucha_captchas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="194" column="34" lean-forward="true" selection-start-line="194" selection-start-column="34" selection-end-line="194" selection-end-column="34" />
+            <state relative-caret-position="732">
+              <caret line="215" column="18" lean-forward="true" selection-start-line="215" selection-start-column="18" selection-end-line="215" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -245,11 +250,11 @@
       <recent name="C:\Users\olive\Development\ml\ai\docs\img\squirrels\original" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\olive\Development\ml\ai\notebooks\booster" />
       <recent name="C:\Users\olive\Development\ml\ai" />
       <recent name="C:\Users\olive\Development\ml\ai\docs\img" />
       <recent name="C:\Users\olive\Development\ml\ai\docs" />
       <recent name="C:\Users\olive\Development\ml\ai\docs\img\captchas" />
-      <recent name="C:\Users\olive\Development\ml\ai\notebooks\intro" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -426,13 +431,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498311648794</updated>
-    </task>
-    <task id="LOCAL-00095" summary="2018 ml ai 1: rc1">
-      <created>1507923645768</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1507923645769</updated>
     </task>
     <task id="LOCAL-00096" summary="2017 sipgate: rc1">
       <created>1507924295219</created>
@@ -770,7 +768,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517041400632</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="oop pecha kucha">
+      <created>1517050763788</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1517050763788</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -861,7 +866,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="slides by https://people.eecs.berkeley.edu/~jordan/ at http://www.sfdatainstitute.org/conference.html 2017" />
     <MESSAGE value="hh.js" />
     <MESSAGE value="image dl models overpowered" />
     <MESSAGE value="added raw data slide" />
@@ -886,7 +890,8 @@
     <MESSAGE value="schule final" />
     <MESSAGE value="VSC settings" />
     <MESSAGE value="house keeping" />
-    <option name="LAST_COMMIT_MESSAGE" value="house keeping" />
+    <MESSAGE value="oop pecha kucha" />
+    <option name="LAST_COMMIT_MESSAGE" value="oop pecha kucha" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1191,8 +1196,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/2018_pecha_kucha_captchas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="194" column="34" lean-forward="true" selection-start-line="194" selection-start-column="34" selection-end-line="194" selection-end-column="34" />
+        <state relative-caret-position="732">
+          <caret line="215" column="18" lean-forward="true" selection-start-line="215" selection-start-column="18" selection-end-line="215" selection-end-column="18" />
           <folding />
         </state>
       </provider>
