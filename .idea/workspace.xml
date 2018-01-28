@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa76d5bd-44d6-4768-90e0-937b74fab986" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/insurance-customers-300-2.csv" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/test1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/test2.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/train1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/train2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/0-generate.ipynb" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/1-plot.ipynb" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/2-manual-prediction.ipynb" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/3-base-line.ipynb" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/4-sklearn-knn.ipynb" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/notebooks/booster/5-keras-tensorflow-nn.ipynb" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/notebooks/booster/generate.ipynb" afterPath="$PROJECT_DIR$/notebooks/booster/generate.ipynb" />
-      <change beforePath="$PROJECT_DIR$/notebooks/booster/prediction.ipynb" afterPath="$PROJECT_DIR$/notebooks/booster/prediction.ipynb" />
-      <change beforePath="$PROJECT_DIR$/notebooks/booster/test.docx" afterPath="$PROJECT_DIR$/notebooks/booster/test.docx" />
-      <change beforePath="$PROJECT_DIR$/notebooks/booster/test.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/notebooks/booster/train.docx" afterPath="$PROJECT_DIR$/notebooks/booster/train.docx" />
-      <change beforePath="$PROJECT_DIR$/notebooks/booster/train.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/notebooks/booster/generate.ipynb" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/notebooks/booster/insurance-customers-1500.csv" afterPath="$PROJECT_DIR$/notebooks/booster/insurance-customers-1500.csv" />
+      <change beforePath="$PROJECT_DIR$/notebooks/booster/insurance.ipynb" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/notebooks/booster/plot.ipynb" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/notebooks/booster/prediction.ipynb" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -57,8 +57,8 @@
       <file leaf-file-name="2018_pecha_kucha_captchas.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/2018_pecha_kucha_captchas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="211" column="18" lean-forward="false" selection-start-line="211" selection-start-column="8" selection-end-line="211" selection-end-column="18" />
+            <state relative-caret-position="864">
+              <caret line="219" column="18" lean-forward="false" selection-start-line="219" selection-start-column="18" selection-end-line="219" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -437,13 +437,6 @@
       <option name="presentableId" value="Default" />
       <updated>1498311648794</updated>
     </task>
-    <task id="LOCAL-00097" summary="vgg fragments: use sigmoid activation for classifiers">
-      <created>1508008474945</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1508008474945</updated>
-    </task>
     <task id="LOCAL-00098" summary="vgg fragments: reverted sigmoid activation for classifiers (vgg actually suggests relu)">
       <created>1508011662271</created>
       <option name="number" value="00098" />
@@ -780,7 +773,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517075378319</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="booster conf: exericse on paper">
+      <created>1517080794022</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1517080794022</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1201,8 +1201,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/2018_pecha_kucha_captchas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="211" column="18" lean-forward="false" selection-start-line="211" selection-start-column="8" selection-end-line="211" selection-end-column="18" />
+        <state relative-caret-position="864">
+          <caret line="219" column="18" lean-forward="false" selection-start-line="219" selection-start-column="18" selection-end-line="219" selection-end-column="18" />
           <folding />
         </state>
       </provider>
