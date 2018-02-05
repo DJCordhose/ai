@@ -303,26 +303,82 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
                 </small></p>
         </section>
 
+        <section data-transition="zoom">
+            <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
+                <img src="img/dataviz//twitter-creatuluw.png">
+            </a>
+            <p><small>
+                <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
+                    https://twitter.com/Creatuluw/status/770519427771170816
+                </a>
+                </small></p>
+        </section>
+
         <section>
-            <h2>Our first investigation</h2>
+            <h2><small>Dashboard: This is what we would like to have</small></h2>
+            <div style="margin-top: -30px">
+                <a href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200)))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)" target="_blank">
+                    <img src="img/dataviz/kibana-dashboard.png">
+                </a>
+            </div>
+        </section>
+
+        <section>
+                <h2>Introducing Elasticsearch</h2>
+                    <p><a href="https://www.elastic.co/products/elasticsearch" target="_blank">
+                        https://www.elastic.co/products/elasticsearch
+                    </a></p>
+                    <ul>
+                        <li>Search and Analytics Engine
+                        <li>Indexes and stores structured or unstructured data
+                        <li>Offers query language to search or aggregate data
+                    </ul>
+                </section>
+        
+                <section>
+                    <h3>Checking time series data for the first time</h3>
+                    <div class="fragment">
+                        <p>using Kibana adhoc queries</p>
+                        <a href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(columns:!(Cancelled,Origin,Dest,UniqueCarrier),filters:!(),index:expo2009_airline,interval:h,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:ArrDelay,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
+                            <img src="img/screenshot_kibana_discover.png">
+                        </a>
+                        <p>Demo: filter for <em>'Cancelled:false'</em></p>
+                    </div>
+                </section>
+        
+                <section>
+                    <h2>Kibana</h2>
+                    <ul>
+                        <li>generic frontend for Elasticsearch
+                        <li>browser based
+                        <li>allows for dashboards
+                        <li>also allows to make arbitrary adhoc queries
+                    </ul>
+                </section>
+        
+        <section>
+            <h3>Maybe the most important slide!</h3>
+            <p>To be dynamic and interactive with a dashboard, 
+                we need to restrict our degrees of freedom to a few visualizations and charts.</p>
+            <p>But which?</p>
         </section>
 
         <section>
             <h2>Explore Data</h2>
             <h3>Visual Statistical analysis using Correlation and Joint Plot</h3>
+            <p>Elastic Search can not do this for us</p>
             <p>Tools Used</p>
             <ul>
                 <li>Basic Processing: UNIX tools
                 <li>Cleaning and Import: Dask (Python)
                 <li>Statistical analysis: Pandas, Seaborn (Python)
-                <li>Display and Interactive Filtering: Elasticsearch and Kibana
             </ul>
         </section>
 
         <section>
             <h3>Data needs to be loaded, cleaned, analysed and stored into ElasticSearch</h3>
             <p class="fragment">Problem: Data is too big to be held in reasonable amounts of memory</p>
-            <p class="fragment">Solution: Process data lazyly in chunks</p>
+            <p class="fragment">Solution: Process data lazily in chunks</p>
         </section>
 
         <section>
@@ -434,51 +490,6 @@ sns.jointplot(df[col1],df[col2])
             <h3 class="fragment">Does anyone know already?</h3>
         </section>
 
-        <section data-transition="zoom">
-            <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
-                <img src="img/dataviz//twitter-creatuluw.png">
-            </a>
-            <p><small>
-                <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
-                    https://twitter.com/Creatuluw/status/770519427771170816
-                </a>
-                </small></p>
-        </section>
-
-        <section>
-        <h2>Introducing Elasticsearch</h2>
-            <p><a href="https://www.elastic.co/products/elasticsearch" target="_blank">
-                https://www.elastic.co/products/elasticsearch
-            </a></p>
-            <ul>
-                <li>Search and Analytics Engine
-                <li>Indexes and stores structured or unstructured data
-                <li>Offers query language to search or aggregate data
-            </ul>
-        </section>
-
-        <section>
-            <h3>Checking time series data for the first time</h3>
-            <div class="fragment">
-                <p>using Kibana adhoc queries</p>
-                <a href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(columns:!(Cancelled,Origin,Dest,UniqueCarrier),filters:!(),index:expo2009_airline,interval:h,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:ArrDelay,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
-                    <img src="img/screenshot_kibana_discover.png">
-                </a>
-                <p>Demo: filter for <em>'Cancelled:false'</em></p>
-                <p><small>Interactive Dashboards also possible</small></p>
-            </div>
-        </section>
-
-        <section>
-            <h2>Kibana</h2>
-            <ul>
-                <li>generic frontend for Elasticsearch
-                <li>browser based
-                <li>allows for dashboards
-                <li>also allows to make arbitrary adhoc queries
-            </ul>
-        </section>
-
         <section>
             <h3>Answer</h3>
             <div class="fragment">
@@ -549,6 +560,22 @@ sns.jointplot(df[col1],df[col2])
                 Delta (DL) mainly flies from Atlanta (ATL) its headquarter and largest hub
             </a></p>
         </section>
+
+        <section>
+            <h2>A final interesting Observation as a shared exercise</h2>
+        </section>
+
+        <section>
+            <h2><small>When zooming into time series data: What is the recurring dent in the histogram?</small></h2>
+            <div class="fragment">
+                <a target="_blank" href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2002-01-12T08:20:00.000Z',mode:absolute,to:'2002-03-14T13:40:00.000Z'))&_a=(description:'',filters:!(),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
+                    <img src="img/flight-analysis/screenshot_dent.png" height="400px">
+                </a>
+            </div>
+            <p class="fragment"><small>Hint: When filtering for JFK and other mainly international airports, this dent disappears</small></p>
+        </section>
+    
+    
 
         <section>
             <h2>Wrapup</h2>
