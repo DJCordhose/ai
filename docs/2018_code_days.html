@@ -166,7 +166,9 @@ Unsupervised with Sklearn
       - go to dashboard
 
 - Notebooks: ai/notebooks/es
-  - Run incremntell import as shown in last step of ```import.ipynb```
+  - Run incremental import as shown in last step of ```import.ipynb```
+- Demo
+  - Discover 2000-2002, Cancelled: false  
 </pre>
         </section>
 
@@ -340,13 +342,21 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
                     <div class="fragment">
                         <p>using Kibana adhoc queries</p>
                         <a href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(columns:!(Cancelled,Origin,Dest,UniqueCarrier),filters:!(),index:expo2009_airline,interval:h,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:ArrDelay,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
-                            <img src="img/screenshot_kibana_discover.png">
+                            <img src="img/flight-analysis/kibana-5-discover.png">
                         </a>
                         <p>Demo: filter for <em>'Cancelled:false'</em></p>
                     </div>
-                </section>
+            </section>
         
-                <section>
+            <section>
+                <h4>Demo Video</h4>
+                <video controls
+                poster="img/flight-analysis/kibana-5-discover.png"
+                src="img/flight-analysis/Kibana-discover.mp4" type="video/mp4"
+                ></video>
+            </a>
+        </section>
+            <section>
                     <h2>Kibana</h2>
                     <ul>
                         <li>generic frontend for Elasticsearch
@@ -360,6 +370,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <h3>Maybe the most important slide!</h3>
             <p>To be dynamic and interactive with a dashboard, 
                 we need to restrict our degrees of freedom to a few visualizations and charts.</p>
+            <p>Like a solo when playing music</p>    
             <p>But which?</p>
         </section>
 
@@ -491,6 +502,27 @@ sns.jointplot(df[col1],df[col2])
         </section>
 
         <section>
+            <h1>Interlude</h1>
+            <h2>Creating the Dashboard</h1>            
+        </section>
+
+        <section>
+            <h4>Step 1: Visualization</h4>
+            <video controls
+            src="img/flight-analysis/Kibana-visualize.mp4" type="video/mp4"
+            ></video>
+        </a>
+    </section>
+
+    <section>
+            <h4>Step 2: Dashboard composed of Visualizations</h4>
+            <video controls
+            src="img/flight-analysis/Kibana-dashboard.mp4" type="video/mp4"
+            ></video>
+        </a>
+    </section>
+
+    <section>
             <h3>Answer</h3>
             <div class="fragment">
                 <a target="_blank" href="http://localhost:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:UniqueCarrier,negate:!f,type:phrase,value:AQ),query:(match:(UniqueCarrier:(query:AQ,type:phrase)))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:Origin,negate:!f,type:phrase,value:HNL),query:(match:(Origin:(query:HNL,type:phrase))))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
@@ -506,9 +538,8 @@ sns.jointplot(df[col1],df[col2])
 <li>ITO: Hilo International Airport
                 </ul>
                 </small>
-                <p style="clear: both"><small><a href="video/AQ-kibana.mp4" target="_blank">Video of incremental search</a></small></p>
             </div>
-            <div class="fragment">
+            <div  style="clear: both" class="fragment">
             <p><a href="https://en.wikipedia.org/wiki/Aloha_Airlines" target="_blank">
                 Aloha Airlines (AQ) mainly operated on Hawaii</a></p>
             <p><small>Only data for about 1 year, but AQ existed from from 1946 - 2008</small></p>
@@ -516,6 +547,15 @@ sns.jointplot(df[col1],df[col2])
         </section>
 
         <section>
+            <h4>Demo Video</h4>
+            <video controls
+            poster="img/flight-analysis/screenshot_aq.png"
+            src="video/AQ-kibana.mp4" type="video/mp4"
+            ></video>
+        </a>
+    </section>
+
+    <section>
                 <h2><small>Another (weaker) correlation: Origin to Unique Carrier</small></h2>
             <div class="fragment" style="margin-top: -40px">
                 <img src="img/flight-analysis/corr.png" height="550px">
