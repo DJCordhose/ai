@@ -164,16 +164,6 @@ Unsupervised with Sklearn
       - ./bin/elasticsearch
     - cd kibana-5.5.2-linux-x86_64/
       - ./bin/kibana
-      - http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601
-        - Discover
-          - Load Not Cancelled
-          - Set interval from (2000-2003(
-      - go to dashboard
-
-- Unsupervised in ELK: https://www.elastic.co/downloads/x-pack#preview-release
-
-- Notebooks: ai/notebooks/es
-  - Run incremntell import as shown in last step of ```import.ipynb```
 </pre>
         </section>
 
@@ -286,15 +276,6 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         https://twitter.com/DJCordhose/status/784683545457467392</a></small></p>
 </section>
 
-<!-- <section>
-            <h2><small>Domestic US flights from 2000 to 2002</small></h2>
-            <div style="margin-top: -30px">
-                <a href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200)))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)" target="_blank">
-                    <img src="img/dataviz/kibana-dashboard.png">
-                </a>
-            </div>
-        </section>
- -->
         <section>
             <h2>Explore Data</h2>
             <h3>Visual Statistical analysis using Correlation and Joint Plot</h3>
@@ -308,21 +289,14 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h2>First Step: Visual Statistical Analysis</h2>
-            <p>Objective: What data might quality for further investigation</p>
-            <p>To be dynamic and interactive with a dashboard, 
-                we need to restrict our degrees of freedom to a few visualizations and charts.</p>
-        </section>
-
-        <section>
             <h2>Challenge: Data is too big for statistical analysis</h2>
             <h3 class="fragment">Solution: Subsampling</h3>
             <div class="fragment">
                 <p>Lazy import with Dask (Python)</p>
                 <pre><code data-trim contenteditable class="line-numbers">
-    import dask.dataframe as dd
-    lazy_df = dd.read_csv('../../data/raw/200*.csv')
-    df = lazy_df.sample(0.001)
+import dask.dataframe as dd
+lazy_df = dd.read_csv('./data/200*.csv')
+df = lazy_df.sample(0.001)
         </code></pre>
             </div>
             <p class="fragment"><small>Caution: If you need hight accuracy, you need to work on many samples</small></p>
@@ -448,7 +422,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <section>
                 <h2><small>Allows you to create Dashboards like this</small></h2>
                 <div style="margin-top: -30px">
-                    <a href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200)))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)" target="_blank">
+                    <a href="http://localhost:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200)))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)" target="_blank">
                         <img src="img/dataviz/kibana-dashboard.png">
                     </a>
                 </div>
@@ -571,7 +545,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         <section>
             <h3>Answer</h3>
             <div class="fragment">
-                <a target="_blank" href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:UniqueCarrier,negate:!f,type:phrase,value:DL),query:(match:(UniqueCarrier:(query:DL,type:phrase))))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
+                <a target="_blank" href="http://localhost:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'1999-12-31T23:00:00.000Z',mode:absolute,to:'2002-12-31T23:00:00.000Z'))&_a=(description:'',filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:ArrDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(ArrDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:DepDelay,negate:!f,type:range,value:'-50%20to%20200'),range:(DepDelay:(gte:-50,lt:200))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:expo2009,key:UniqueCarrier,negate:!f,type:phrase,value:DL),query:(match:(UniqueCarrier:(query:DL,type:phrase))))),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
                     <img src="img/flight-analysis/screenshot_dl.png" height="400px">
                 </a>
             </div>
@@ -581,17 +555,21 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h2>One More Interesting Observation as an exercise to the audience</h2>
+            <h2>A shared exercise</h2>
+            <ol>
+                <li>Which Carrier dominates Domestic American Airspace?</li>
+                <li>Which Carrier is most punctual?</li>
+            </ol>
         </section>
 
         <section>
-            <h2><small>When zooming into time series data: What is the recurring dent in the histogram?</small></h2>
-            <div class="fragment">
-                <a target="_blank" href="http://ec2-52-43-168-34.us-west-2.compute.amazonaws.com:5601/app/kibana#/dashboard/dd815830-9477-11e7-a310-45e710a68d94?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2002-01-12T08:20:00.000Z',mode:absolute,to:'2002-03-14T13:40:00.000Z'))&_a=(description:'',filters:!(),options:(darkTheme:!f),panels:!((col:1,id:f117de80-9474-11e7-a310-45e710a68d94,panelIndex:1,row:4,size_x:12,size_y:2,type:visualization),(col:1,id:'26142b70-9475-11e7-a310-45e710a68d94',panelIndex:2,row:1,size_x:5,size_y:3,type:visualization),(col:6,id:be42b750-9474-11e7-a310-45e710a68d94,panelIndex:3,row:1,size_x:7,size_y:3,type:visualization),(col:1,id:f89e5fb0-9476-11e7-a310-45e710a68d94,panelIndex:4,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'1054ee30-9477-11e7-a310-45e710a68d94',panelIndex:5,row:6,size_x:6,size_y:3,type:visualization),(col:7,id:'6be96880-9476-11e7-a310-45e710a68d94',panelIndex:7,row:9,size_x:6,size_y:3,type:visualization),(col:1,id:'9e8caa40-9476-11e7-a310-45e710a68d94',panelIndex:8,row:9,size_x:6,size_y:3,type:visualization)),query:(match_all:()),timeRestore:!f,title:Flights,uiState:(P-1:(vis:(legendOpen:!f)),P-2:(vis:(defaultColors:('0%20-%20100':'rgb(0,104,55)'))),P-4:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-5:(vis:(params:(sort:(columnIndex:!n,direction:!n)))),P-7:(vis:(legendOpen:!f)),P-8:(vis:(legendOpen:!f))),viewMode:view)">
-                    <img src="img/flight-analysis/screenshot_dent.png" height="400px">
-                </a>
-            </div>
-            <p class="fragment"><small>Hint: When filtering for JFK and other mainly international airports, this dent disappears</small></p>
+            <h4>American Airlines has the most accumulated airtime</h4>
+            <img src="img/flight-analysis/aa-airtime.png">
+        </section>
+
+        <section>
+            <h4>United has the longest accumulated delays</h4>
+            <img src="img/flight-analysis/ua-delays.png">
         </section>
 
         <section>
