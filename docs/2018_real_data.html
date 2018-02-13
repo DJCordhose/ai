@@ -156,14 +156,13 @@ Unsupervised with Sklearn
 
                 <section class="preparation">
 <pre>
-- Start ES and Kibana on AWS GPU
-  - ssh -i "/mnt/c/Users/olive/Google Drive/ML-Buch/aws-gpu-ubuntu.pem" ubuntu@ec2-52-43-168-34.us-west-2.compute.amazonaws.com
-  - sudo sysctl -w vm.max_map_count=262144
+- Start Local ES and Kibana
   - tmux
     - cd elasticsearch-5.5.2/
       - ./bin/elasticsearch
     - cd kibana-5.5.2-linux-x86_64/
       - ./bin/kibana
+- Start local Jupyer Notebook
 </pre>
         </section>
 
