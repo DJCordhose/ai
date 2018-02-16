@@ -232,7 +232,7 @@ I will also train and deploy a simple TensorFlow model that predicts the categor
         </section>
     
         <section>
-            <h3>Create TensorFlow model by applying alchemy</h3>
+            <h3>Create TensorFlow / Keras model by applying alchemy</h3>
             <pre><code contenteditable data-trim class="fragment line-numbers python">
 inputs = Input(name='input', shape=(2, ))
 </code></pre>
@@ -242,13 +242,13 @@ x = Dense(100, name='hidden2', activation='relu')(x)
 x = Dense(100, name='hidden3', activation='relu')(x)
 predictions = Dense(3, name='softmax', activation='softmax')(x)
 </code></pre>
-        <pre><code contenteditable data-trim class="fragment line-numbers python">
+        <!-- <pre><code contenteditable data-trim class="fragment line-numbers python">
 model = Model(input=inputs, output=predictions)
 model.compile(optimizer='adam',
             loss='categorical_crossentropy',
             metrics=['accuracy'])
  model.fit(X_train, y_train_categorical, epochs=1000)
-</code></pre>
+</code></pre> -->
 <p><small>Buzzword alarm: Deep Learning</small></p>
 
         </section>
@@ -260,15 +260,15 @@ model.compile(optimizer='adam',
         </section>
         <section>
             <h3>Deployment</h3>
-            <img src="img/insurance/cloud-ml.png" height="500px">
-            <!-- <pre><code contenteditable data-trim class="fragment line-numbers bash">
+            <pre><code contenteditable data-trim class="line-numbers bash">
 # https://cloud.google.com/ml-engine/docs/deploying-models
 
 # Copy model to bucket
 gsutil cp -R tf/1 gs://booster_bucket
 
-# create model and version at https://console.cloud.google.com/mlengine
-</code></pre> -->
+# https://console.cloud.google.com/mlengine: create model and version
+</code></pre>
+            <img src="img/insurance/cloud-ml.png" height="300px">
         </section>
 
         <section>
@@ -286,20 +286,29 @@ gcloud ml-engine predict --model=booster --version=v1
 </code></pre>
 
             </p>
-                        </section>
+        </section>
+
+        <section>
+            <h3>Try it yourself in an Azure Notebook</h3>
+            <img src="img/screenshot_notebook.png" height="400px">
+            <p><small><a target="_blank" href="https://notebooks.azure.com/djcordhose/libraries/scipy2018-viz/html/5-keras-tensorflow-nn.ipynb">
+                https://notebooks.azure.com/djcordhose/libraries/scipy2018-viz/html/5-keras-tensorflow-nn.ipynb</a></small></p>
+        </section>
     
         <section>
             <h2>Wrapup</h2>
             <ul>
                 <li class="fragment">Prebuilt ML Services are at your finger tips
-                <li class="fragment">If standard services are not sufficient, train your custom model with free software
-                <li class="fragment">Models can be deployed to managed clouds (Google Cloud ML, Microsoft Azure) with ease
+                <li class="fragment">If standard services are not sufficient, 
+                    train your custom model with free software (e.g. TensorFlow)
+                 <li class="fragment">Models can be deployed to managed clouds (Google Cloud ML, Microsoft Azure, AWS) with ease
             </ul>
             
-            <p><small></small>Ping me for questions / help / comments: <a href="http://zeigermann.eu">http://zeigermann.eu</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a> /                     <a href="http://floreysoft.com">floreysoft</a>
-
-                </small>
-            </p>
+            <p>Ping me for questions / help / comments: <a href="http://zeigermann.eu">http://zeigermann.eu</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a> /                     <a href="http://floreysoft.com">floreysoft</a>
+</p>
+            <p><a href="http://bit.ly/ml-jeffconf">
+                http://bit.ly/ml-jeffconf
+            </a></p>
         </section>
         </div>
 
