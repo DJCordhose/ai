@@ -139,6 +139,7 @@ Unsupervised with Sklearn
     - cd kibana-5.5.2-linux-x86_64/
       - ./bin/kibana
 - Start local Jupyer Notebook
+  - /mnt/c/Users/olive/Development/ml/ai/notebooks/es
 </pre>
         </section>
 
@@ -263,10 +264,10 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 </section>
 
 <section>
-    <p>Our brains do a phenomenal job when processing images.</i></p>
-    <p class="fragment">We quickly see patterns and do automatic clustering without even thinking.</i></p>
-    <p class="fragment">As humans looking at a computer screen we are also naturally limited to two-dimensional visualizations that at best change over time and reaction to interaction.</i></p>
-    <p class="fragment"><small> - Oliver Zeigermann</small></p>
+    <p>Our brains do a phenomenal job when processing images.</p>
+    <p class="fragment">We quickly see patterns and do automatic clustering without even thinking.</p>
+    <p class="fragment">As humans looking at a computer screen we are also naturally limited to two-dimensional visualizations that at best change over time and reaction to interaction.</p>
+    <p class="fragment" style="float: right"><small>Oliver Zeigermann</small></p>
 </section>
 
         <section>
@@ -276,7 +277,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <ul>
                 <li>Basic Processing: UNIX tools
                 <li>Cleaning and Import: Dask (Python)
-                <li>Statistical analysis: Pandas (Python)
+                <li>Statistical analysis: Pandas, Seaborn (Python)
                 <li>Display and Interactive Filtering: Elasticsearch and Kibana
             </ul>
         </section>
@@ -376,7 +377,6 @@ df = lazy_df.sample(0.001)
 
         <section>
             <h2>Question: Why only short flight distances for Carrier Aloha Airlines (AQ)?</h2>
-            <h3 class="fragment">Does anyone know already?</h3>
         </section>
 
         <section data-transition="zoom">
@@ -531,7 +531,6 @@ df = lazy_df.sample(0.001)
 
         <section>
             <h2>Question: What is the prominent Origin for Carrier Delta (DL) and why is there one?</h2>
-            <h3 class="fragment">Again: Does anyone know already?</h3>
         </section>
 
         <section>
@@ -565,10 +564,18 @@ df = lazy_df.sample(0.001)
         </section>
 
         <section>
+            <h3>Where to go from here?</h4>
+            <p>Python Notebooks for analysis and import (exactly the ones I used)</p>
+            <p><small>
+                <a target="_blank" href="https://github.com/DJCordhose/ai/tree/master/notebooks/es">
+                    https://github.com/DJCordhose/ai/tree/master/notebooks/es</a></small></p>
+        </section>
+    
+        <section>
             <h2>Wrapup</h2>
             <ul>
                 <li class="fragment">Statistic Analysis gives first insights
-                <li class="fragment">Interactive Exporation lets us find most interesting relationships
+                <li class="fragment">Interactive Exploration lets us find most interesting relationships
                 <li class="fragment">interpretation requires domain knowledge
                 <li class="fragment">experiments also help with interpretation of data
                 <li class="fragment">interpretation and understanding is the prerequisite to action
