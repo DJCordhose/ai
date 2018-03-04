@@ -169,6 +169,8 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
         <section>
             <h2>Wie gut ist dein Machine-Learning-Modell?</h2>
             <p>Oder: Wie ich Null Punkte im Google Test bekam und mein Boss mich trotzdem nicht feuerte</p>
+            <p><a href="https://www.m3-konferenz.de/veranstaltung-6458-wie-gut-ist-ein-machine-learning-modell.html?id=6458" target="_blank">
+                M3, Köln</a></p>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
             <p><small><a href="http://bit.ly/m3-ml-quality">
@@ -176,11 +178,270 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
             </a></small></p>
         </section>
 
+        <section>
+            <h3>Bewertung basiert auf: What’s your ML Test Score? A rubric for ML
+                    production systems</h3>
+                    <p>Präsentiert auf der NIPS 2016</p>
+            <p><small><a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf" target="_blank">
+                https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf</a></small></p>
+        </section>
+
+        <section>
+                <h3>Unser Projekt</h3>
+                <p>Kunden-Ranking für KfZ-Versicherung</p>
+                <img src="img/insurance/automobile-insurance.png" height="400px">
+                <p>Basiert auf einem echten Projekt</p>
+        </section>
+
+        <section>
+            <h3>Vorgehen</h3>
+            <p>Ein Punkt für das Erfüllen eines Test-Kriteriums</p>
+            <p>Ein weiterer falls die Erfüllung automatisiert ist</p>
+        </section>
+
+        <section>
+            <h1>Kategorie 1</h1>
+            <h2>Features und Daten</h2>
+        </section>
+
+        <section>
+            <h3>Test: Verteilung der tatsächlichen Features entspricht den Erwartungen</h3>
+        </section>
+
+        <section>
+            <h3>Manueller Plot</h3>
+            <div class="fragment">
+                    <img src="img/insurance/scatter-matrix.png" height="450px">
+            </div>
+            <p>1 Punkt!</p>
+        </section>
+        
+        <section>
+            <h3>Test: Beziehung zwischen den Features</h3>
+        </section>
+    
+        <section>
+            <h3>Korrelation Plot</h3>
+            <div class="fragment">
+                    <img src="img/insurance/corr.png" height="450px">
+            </div>
+            <p>Noch ein Punkt! Es sind jetzt schon zwei!</p>
+        </section>
+            
+        <section>
+            <h3>Test: Wie teuer ist ein Feature?</h3>
+            <p>Wie teuer ist die Beschaffung? Wie viele Ressourcen belegt es im Modell?</p>
+        </section>
+    
+        <section>
+            <h2>Kein Plan</h2>
+        </section>
+
+        <section>
+            <h3>Test: Sind die Feaures brauchbar?</h3>
+            <p>Ist das Feature immer verfügbar und von konstanter Qualität?</p>
+        </section>
+        
+        <section>
+            <h2>Kein Plan</h2>
+        </section>
+    
+        <section>
+            <h3>Test: Werden Privacy Belange in der kompletten Kette eingehalten?</h3>
+            <p><a target="_blank" href="https://www.heise.de/newsticker/meldung/DSGVO-Folterfragebogen-im-Selbsttest-3974512.html">
+                https://www.heise.de/newsticker/meldung/DSGVO-Folterfragebogen-im-Selbsttest-3974512.html</a></p>
+                <p><a target="_blank" href="https://gdpr-info.eu/">
+                    https://gdpr-info.eu/</a></p>
+        </section>
+
+        <section>
+                <h3>Daten werden von vorn herein nur anonymisiert verwendet</h3>
+                <pre><code>
+str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@example.com'
+                </code></pre>
+                <p>Zwei Punkte, da das hier automatisiert ist! Vier insgesamt!</p>
+            </section>
+                
+            <section>
+                <h3>Test: Wie lange dauer es, ein Feature hinzuzufügen?</h3>
+                <p>Wie schnell kann reagiert werden?</p>
+            </section>
+                
+            <section>
+                <h2>Kein Plan</h2>
+            </section>
+            
+            <section>
+                <h3>Test: Funktioniet der Code, der Features für Test und Produktion liefert?</h3>
+            </section>
+                
+            <section>
+                <h2>Kein Plan</h2>
+            </section>
+
+            <section>
+                <h3>Ergebnis</h3>
+                <p>4 von 14 Punkten</p>
+                <p><em>3-4 points: There’s been first pass at basic productionization, but additional investment may
+                        be needed.</em></p>
+            </section>
+
+        <section>
+                <h1>Kategorie 2</h1>
+                <h2>Modell Entwicklung</h2>
+        </section>
+
+        <section>
+            <h3>Test: Ist die Modell-Spezifikation versioniert und unterliegt einem Code-Review?</h3>
+        </section>
+                
+        <section>
+            <h3>Test: In welchem Zusammenhang stehen Modell-Vorhersage und echte Welt?</h3>
+        </section>
+
+        <section>
+            <h3>Test: Welchen Einfluss haben Hyper-Parameter auf das Ergebnis?</h3>
+        </section>
+    
+        <section>
+            <h3>Test: Passt sich das Modell an die Entwicklung der Daten aus der realen Welt an?</h3>
+            <p>Verhält sich das Modell mit Daten von dieser Woche anders als das von letztem Jahr</p>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Besteht noch nicht lang genug, um das sicher sagen zu können</p>
+        </section>
+
+        <section>
+            <h3>Test: Liefert das Modell bessere Ergebnisse als ein Baseline-Model?</h3>
+            <p>Wenn ja, mit welchem Aufwand erreichen wir das bessere Ergebnis? Lohnt sich das eigentlich?</p>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Unser Baseline-Modell ist ein von Hand kodiertes stochastisches Modell</p>
+            <p>Unser ML Modell ist auf Testdaten 20% besser und passt sich an die Daten an</p>
+            <p>Ein Punkt!</p>
+        </section>
+    
+        <section>
+            <h3>Test: Wie verhält sich das Modell wenn man es nur auf Teildaten anwendet?</h3>
+            <p>Betrachtung z.B. nach Land kann schwächen zeigen, die im Gesamtmodell untergehen</p>
+        </section>
+
+        <section>
+            <h3>Test: Gibt es impliziten Bias?</h3>
+            <p>Decken die Trainingsdaten alle realistischen Szenarien ab</p>
+        </section>
+    
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Wir wissen sicher, dass wir Bias in den Trainingsdaten haben</p>
+            <p>Dazu gibt es von bestimmten Daten sehr viel und von anderen sehr wenig Datensätze</p>
+            <p>Kein Punkt!</p>
+        </section>
+
+        <section>
+                <h3>Ergebnis</h3>
+                <p>1 von 14 Punkten</p>
+                <p><em>1-2 points: Not totally untested, but it is worth considering the possibility of serious holes
+                        in reliability.</em></p>
+        </section>
+
+        <section>
+                <h1>Kategorie 3</h1>
+                <h2>Machine Learning Infrastruktur</h2>
+        </section>
+
+        <section>
+            <h3>Test: Sind die Trainingsergebnisse reproduzierbar?</h3>
+            <p>Liefern Modelle, die auf denselben Trainingsdaten trainiert werden dieselben Ergebnisse?</p>
+        </section>
+
+        <section>
+            <h3>Test: Gibt es Unit-Tests für den Trainingscode?</h3>
+            <p>Geht Loss beim Training tatsächlich herunter? Kann man nach einem Crash wieder aufsetzen? Funktioniert Early-Stopping?
+                Sind Checkpoints brauchbar?
+            </p>
+        </section>
+    
+        <section>
+            <h3>Test: Gibt es Integrationstests für die komplette Pipeline?</h3>
+            <p></p>
+        </section>
+    
+        <section>
+            <h3>Test: Wir die Modell-Qualität vor Produktivstellung getestet?</h3>
+            <p>Funktioniert das Modell besser als ein vorheriges? Werden bekannte Ergebnisse richtig vorhergesagt?</p>
+        </section>
+        
+        <section>
+            <h3>Test: Verhält sich das Modell nachvollziehbar wenn man nur mit wenig Daten füttert?</h3>
+            <p class="todo">Was heißt das? Gibt leider kein Live Video</p>
+        </section>
+        <section>
+            <h3>Test: Gibt es im Staging-Prozess ein System, das Production nachempfunden ist?</h3>
+            <p>Nur so kann man sicher stellen, dass System-Änderungen aus dem Training auch in Produktion Funktionieren</p>
+        </section>
+
+        <section>
+            <h3>Test: Kann ein Modell sicher und schnell aus Production zurück gerollt werden?</h3>
+        </section>
+            
+        <section>
+            <h1>Kategorie 4</h1>
+            <h2>Monitoring</h2>
+        </section>
+                        
+        <section class="todo">
+            <pre>
+                    5 Monitoring Tests for ML
+                    Monitoring is crucial for models that automatically incorporate new data in a continual or ongoing
+                    fashion at training time, and is always needed for models that serve predictions in an on-demand
+                    fashion.
+                    Test for upstream instability in features, both in training and serving. Upstream instability can
+                    create problems both at training and serving (inference) time. Training time instability is especially
+                    problematic when models are updated or retrained frequently. Serving time instability can occur even
+                    when the models themselves remain static. As examples, what alert would fire if one datacenter stops
+                    sending data? What if an upstream signal provider did a major version upgrade?
+                    Test that data invariants hold in training and serving inputs. For example, test if Feature A and
+                    Feature B should always have the same number of non-zero values in each example, or that Feature
+                    C is always in the range (0; 100) or that class distribution is about 10:1.
+                    Test that your training and serving features compute the same values. The codepaths that
+                    actually generate input features may differ for training and inference time, due to tradeoffs for
+                    flexibility vs. efficiency and other concerns. This is sometimes called “training/serving skew” and
+                    requires careful monitoring to detect and avoid.
+                    Test for model staleness. For models that continually update, this means monitoring staleness
+                    throughout the training pipeline, to be able to determine in the case of a stale model where the pipeline
+                    has stalled. For example, if a daily job stopped generating an important table, what alert would fire?
+                    Test for NaNs or infinities appearing in your model during training or serving. Invalid numeric
+                    values can easily crop up in your learning model, and knowing that they have occurred can speed
+                    diagnosis of the problem.
+                    Test for dramatic or slow-leak regressions in training speed, serving latency, throughput, or
+                    RAM usage. The computational performance (as opposed to predictive quality) of an ML system
+                    is often a key concern at scale, and should be monitored via specialized regression testing. Dramatic
+                    regressions and slow regressions over time may require different kinds of monitoring.
+                    Test for regressions in prediction quality on served data. For many systems, monitoring for
+                    nonzero bias can be an effective canary for identifying real problems, though it may also result from
+                    changes in the world.                
+            </pre>
+        </section>
+<!-- 
         <section class="todo">
             <pre>
 
 * Interpretierbarkeit, 
-https://christophm.github.io/interpretable-ml-book/
+ * https://christophm.github.io/interpretable-ml-book/
+ Christoph Molnar (@ChristophMolnar) tweeted at 4:23 PM on Sun, Feb 25, 2018:
+Most common arguments against interpretable ML: 
+- Humans can't explain their actions either
+- Performance > Interpretability
+- Slows down ML adoption
+- Linear model also not interpretable
+- Might create illusion of understanding the model
+   * (https://twitter.com/ChristophMolnar/status/967782105815142400?s=03)
+
 https://blog.openai.com/interpretable-machine-learning-through-teaching/?utm_campaign=Revue%20newsletter&utm_medium=Newsletter&utm_source=The%20Wild%20Week%20in%20AI
 
 * Nachvollziehbarkeit
@@ -270,7 +531,7 @@ More people are confused an looking for the right thing to do
   * https://twitter.com/snoble/status/946600113002053633
             </pre>
         </section>
-
+ -->
         <section>
             <h4>Zusammenfassung</h4>
             <ul>
