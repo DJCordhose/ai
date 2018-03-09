@@ -425,10 +425,20 @@ model.fit(X_train, y_train_categorical, epochs=1000)
                 </code></pre>
                 <p class="fragment"><small>Trains around 90 seconds on fast GPU (might take up to 100 times more on conventional hardware)</small></p>
             </section>
+        <section>
+            <h3>Use of GPU</h3>
+            <img src="albon-gpu-gaming.png">
+            <p>
+                <small>
+                    <a href="https://twitter.com/chrisalbon/status/907028933693947904?s=03" target="_blank">
+                        https://twitter.com/chrisalbon/status/907028933693947904?s=03</a>
+                </small>
+            </p>
+        </section>
 
         <section>
             <h3>Not bad, but: Neural Networks are best for non symbolic data</h3>
-            <p>Running on the famous mnist data set</p>
+            <p>Exploring the different types layers together</p>
             <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
                 <img src="img/browser/keras-browser.png" height="350px">
             </a>
@@ -454,9 +464,29 @@ model.fit(X_train, y_train_categorical, epochs=1000)
                 </p>
             </section>
 
-            <section class="todo">
-<pre>https://deeplearnjs.org/demos/model-builder/</pre>
+            <section>
+                <h3>Building your own network</h3>
+                    <a target="_blank" href="https://deeplearnjs.org/demos/model-builder/">
+                <img src="img/deeplearn-model-builder.png" height="500px">
+                </a>
+            <p>
+                <small>
+                    <a target="_blank" href="https://deeplearnjs.org/demos/model-builder/">
+                         https://deeplearnjs.org/demos/model-builder/</a>
+                </small>
+            </p>
             </section>
+
+                <section>
+                    <h3>Exercise #4</h3>
+                    <p>Use the model builder to experiment on the MNIST data set</p>
+                    <ol>
+                        <li>Try both Fully Connected Layers as well as Convolutional Layers</li>
+                        <li>Deliberately change the learning rate to a value that now longer allows a succesful training</li>
+                        <li>Advanced: try to configure a custom network</li>
+                    </ol>
+                </section>
+
         <section>
             <h3>Where to go from here?</h3>
             <h4>Try it yourself in an Azure Notebook</h3>
