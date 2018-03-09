@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Introduction to Machine Learning for Beginners</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+Vortragssprache Deutsch
+60 Minuten mit Spiel
+-->
+
+        <section>
+            <h2>Introduction to Machine Learning for Beginners</h2>
+            <h4><a href="https://www.smidig.de/">Julia Dellnitz</a> / <a href="http://twitter.com/learnical">@learnical</a>
+            </h4>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <p><a href="https://2018.boosterconf.no/talks/1154">Booster Conference, Bergen, Norway, 2018</a></p>
+            <p><small><a href="http://bit.ly/booster-ml-intro">
+                http://bit.ly/booster-ml-intro
+            </a></small></p>
+        </section>
+
+        <section>
+            <h1>Part 1 - The Basics</h1>
+            <h2>How does Machine Learning work?</h2>
+        </section>
+
+                <section>
+                    <h3>Customer Data - Car Insurance</h3>
+                    <img src="img/insurance/automobile-insurance.png" height="400px">
+                    <p>
+                        <small>How would you rank me (47) for a car with 160 km/h top speed?</small>
+                    </p>
+                </section>
+
+<section>
+    <h2>How do you create a general prediction?</h3>
+</section>
+
+<section>
+    <h3>Classic Approach: Code Rules by hand</h3>
+    <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if age < 25:
+    if speed > 180:
+        return red
+    else:
+        return yellow
+if age > 75:
+    return red
+if km_per_year > 50:
+    return red
+if km_per_year > 35:
+    return yellow
+return green
+                </code></pre>
+    </div>
+</section>
+
+<section>
+    <h3>No great results</h3>
+    <p>Do we have all the rules? Are they even correct?</p>
+    <div class="fragment">
+        <img src="img/insurance/manual.png" height="400px">
+            <p>
+                <small>approx. 43% correct predictions (guessing would be 33%)</small>
+            </p>
+    </div>
+</section>
+
+<section>
+    <h3>Different Approach: Machine Learning</h3>
+    <div class="fragment">
+        <img src="img/insurance/ml-phases.png" height="450px">
+    </div>
+</section>
+
+    <section>
+        <h2>Exercise #1 - Understanding the Supervised Learning Approach</h2>
+        <p>Manually cluster areas of different customer types </p>
+        <ol>
+            <li>
+                <em>dark (green)</em>: good customer</li>
+            <li><em>light (yellow)</em>: mediocre customers</li>
+            <li>
+                <em>middle (red)</em>: red customers</li>
+        </ol>
+        <p>Make sure you draw with pressure</p>
+    </section>
+
+    <section>
+        <h3>Plot Twist</h3>
+        <p>Generalisation, not perfect reproduction is the objective</p>
+        <ol>
+            <li class="fragment">We split existing data into two sets</li>
+            <li class="fragment">The larger set (60 or 80%) we use to build our model</li>
+            <li class="fragment">The smaller set we use to validate the model</li>
+        </ol>
+        <p class="fragment"><strong>Turn the page: How well did the generalisation work for unknown data?</strong></p>
+    </section>
+
+        <section>
+            <h3>Machine Learning and AI</h3>
+            <p>Why I like the term artificial intelligence: I think it's good to have an umbrella term for the field that encompasses a
+            range of techniques – ML, knowledge rep, planning, heuristic search, goal formation, behavior modeling, etc. – and it's the
+            one we have.</p>
+            <p><small><a target="_blank" href="https://twitter.com/mjntendency/status/970091564864286726">https://twitter.com/mjntendency/status/970091564864286726</a></small></p>
+        </section>
+
+        <section>
+            <img src="img/AI-1.png">
+        </section>
+        
+        <section>
+            <img src="img/AI-2.png">
+        </section>
+        
+        <section>
+            <img src="img/AI-3.png">
+        </section>
+        
+        <section>
+            <img src="img/AI-4.png">
+        </section>
+
+        <section>
+            <h2>
+                <small>There are differen types of machine learning</small>
+            </h2>
+            <div style="margin-top: -30px">
+                <img src="img/sketch/types-of-ml.png" height="500px">
+            </div>
+        </section>
+
+<section>
+    <h3>Machine Learning as an Experiment</h3>
+    <!--<div>-->
+    <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+        <img src="img/browser/teachable-machine.png" height="350px">
+    </a>
+    <p>
+        <small>
+            <a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+        </small>
+    </p>
+    <!--</div>-->
+</section>
+        <section>
+            <h3>Supervised Machine Learning</h3>
+        <ul>
+            <li class="fragment">What we just did</li>
+            <li class="fragment">Train a system using known data</li>
+            <li class="fragment">There are different strategies to train a system</li>
+            <li class="fragment">For our problem a simple strategy will do: KNN</li>
+        </ul>
+        </section>
+
+    <section>
+        <h3>KNN: k Nearest Neighbors</h3>
+        <img src="img//insurance/knn.png">
+    </section>
+
+    <section>
+        <h3>Algorithm</h3>
+        <p>For a case to predict</p>
+        <ol>
+            <li>Plot the case together with the known samples
+            <li>Look at a number (k) of nearest data points
+            <li>Choose k in such a way that you can get a majority
+            <li>Your prediction is the color of the majority
+        </ol>
+    </section>
+    
+    <section>
+        <h3>Exercise #2</h3>
+        <ol>
+            <li>Experiment with the teachable machine to understand supervised learning
+            <li>Manually apply KNN to our problem in the lower part of our sample sheet</li>
+            <li>Choose a k that looks suitable</li>
+            <li>How would k affect the result?
+        </ol>
+    </section>
+
+    <section>
+        <h3>Computed results for k = 1</h3>
+        <div class="fragment">
+    
+            <img src="img/insurance/knn-1.png" height="400px">
+            <p>
+                <small>approx. 98% accuracy on train data, but only 65% on test data</small>
+            </p>
+        </div>
+        <p class="fragment">This is what we call Overfitting</p>
+    </section>
+
+    <section>
+        <h3>Computed results for k = 13</h3>
+        <div class="fragment">
+    
+            <img src="img/insurance/knn-13.png" height="400px">
+            <p>
+                <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
+            </p>
+        </div>
+        <p class="fragment">Notice the smooth boundaries</p>
+    </section>
+
+
+
+        <section>
+            <h1>Part 2 - Hipster Stuff</h1>
+            <h2>Neural Networks and Deep Learning</h2>
+        </section>
+
+                <section>
+                    <h3>Tensorflow Playground</h3>
+                    <p>Understanding the Basics of Neural Networks</p>
+                    <a href="http://playground.tensorflow.org" target="_blank">
+                        <img src="img/browser/playground.png">
+                    </a>
+                    <p>
+                        <a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a>
+                    </p>
+                </section>
+                
+    <section>
+        <h3>Exercise #3</h3>
+        <ol>
+            <li>Configure your network to underfit (not being able to separate classes)</li>
+            <li>Configure your network to overfit (good on train, but bad on test) - you might have to choose a more complex data set for that</li>
+            <li>Configure a minimal network to deliver a good result on the initial data set</li>
+        </ol>
+    </section>
+
+            <section>
+                <h3>How does a Neural Network Learn?</h3>
+                <p>(Stochastic) Gradient Descent (SGD)</p>
+                <a href="http://www.benfrederickson.com/numerical-optimization/" target="_blank">
+                    <img src="img/browser/screenshot-numerical-optimizaion.png" height="250px">
+                </a>
+                <p>
+                    <small>
+                        <a href="http://www.benfrederickson.com/numerical-optimization/" target="_blank">http://www.benfrederickson.com/numerical-optimization/</a>
+                    </small>
+                </p>
+                <p>
+                    <small>A too high learning rate might miss the mimimum, a too low one might be slow
+                    </small>
+                </p>
+            </section>
+            
+    <section>
+        <h3>Applying Deep Neural Networks to our problem</h3>
+        <div class="fragment">
+    
+            <img src="img/insurance/cnn.png" height="400px">
+            <p>
+                <small>only approx. 79% accuracy on train data, but also 77% on test data</small>
+            </p>
+        </div>
+        <p class="fragment">Boundaries even more smooth</p>
+    </section>
+            <section>
+                <h3>Code for Model</h3>
+                <p>Using TensorFlow and Keras</p>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+inputs = Input(name='input', shape=(2, ))
+                </code></pre>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+x = Dense(100, name='hidden1', activation='relu')(inputs)
+x = Dense(100, name='hidden2', activation='relu')(x)
+x = Dense(100, name='hidden3', activation='relu')(x)
+predictions = Dense(3, name='softmax', activation='softmax')(x)
+                </code></pre>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+model = Model(input=inputs, output=predictions)
+model.compile(optimizer='adam',
+            loss='categorical_crossentropy',
+            metrics=['accuracy'])
+model.fit(X_train, y_train_categorical, epochs=1000)
+                </code></pre>
+                <p class="fragment"><small>Trains around 90 seconds on fast GPU (might take up to 100 times more on conventional hardware)</small></p>
+            </section>
+
+        <section>
+            <h3>Not bad, but: Neural Networks are best for non symbolic data</h3>
+            <p>Running on the famous mnist data set</p>
+            <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
+                <img src="img/browser/keras-browser.png" height="350px">
+            </a>
+            <p><small>
+                <a href="https://transcranial.github.io/keras-js" target="_blank">https://transcranial.github.io/keras-js</a>
+            </small></p>
+        </section>
+
+
+            <section>
+                <h3>How do Convolutions work - Image Kernels</h3>
+                <p>You might know from Photoshop etc., used in Convolutional Neural Networks</p>
+                <a href="http://setosa.io/ev/image-kernels/" target="_blank">
+                    <img src="img/browser/setosa_io_image-kernels.png" height="300px">
+                </a>
+                <p>
+                    <small>
+                        <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
+                        <br>
+                        <br> There are many more interactive explanations here:
+                        <a href="http://setosa.io/ev" target="_blank">http://setosa.io/ev</a>
+                    </small>
+                </p>
+            </section>
+
+            <section class="todo">
+<pre>https://deeplearnjs.org/demos/model-builder/</pre>
+            </section>
+        <section>
+            <h3>Where to go from here?</h3>
+            <h4>Try it yourself in an Azure Notebook</h3>
+            <img src="img/screenshot_notebook.png" height="400px">
+            <p>
+                <small>
+                    <a target="_blank" href="https://notebooks.azure.com/djcordhose/libraries/booster">
+                         https://notebooks.azure.com/djcordhose/libraries/booster</a>
+                </small>
+            </p>
+        </section>
+        <section>
+            <h2>Wrapup</h2>
+            <ul>
+                <li class="fragment">Machine Learning can be a powerful addition to traditional programming
+                <li class="fragment">Objective is to generalize
+                <li class="fragment">Often not even a deep Understanding of the domain is required
+                <li class="fragment">Neural Networks and Deep Learning are especially powerful on the sub symbolic level
+            </ul>
+        
+            <p>Ping us for questions / help / comments:
+                <a href="http://twitter.com/learnical">@learnical</a> /
+                <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </p>
+            <p><small>
+                <a href="http://bit.ly/booster-ml-intro">
+                     http://bit.ly/booster-ml-intro
+                </a>
+                </small>
+            </p>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.preparation').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
