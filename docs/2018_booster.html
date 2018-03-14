@@ -170,7 +170,7 @@
             </a></small></p>
         </section>
 
-        <section>
+        <section class="local">
             <h2>Questions and Discussion welcome at any time!</h2>
         </section>
 
@@ -375,8 +375,6 @@ return green
         <p class="fragment">Notice the smooth boundaries</p>
     </section>
 
-
-
         <section>
             <h1>Part 2 - Hipster Stuff</h1>
             <h2>Neural Networks and Deep Learning</h2>
@@ -393,15 +391,6 @@ return green
                     </p>
                 </section>
                 
-    <section>
-        <h3>Exercise #3</h3>
-        <ol>
-            <li>Configure your network to underfit (not being able to separate classes)</li>
-            <li>Configure your network to overfit (good on train, but bad on test) - you might have to choose a more complex data set for that</li>
-            <li>Configure a minimal network to deliver a good result on the initial data set</li>
-        </ol>
-    </section>
-
             <section>
                 <h3>How does a Neural Network Learn?</h3>
                 <p>(Stochastic) Gradient Descent (SGD)</p>
@@ -420,6 +409,19 @@ return green
             </section>
             
     <section>
+        <h3>Exercise #3</h3>
+        <p>Make some sense of artificial neurons and neural networks using the TensorFlow Playground</p>
+        <ol>
+            <li class="fragment">Configure your network to underfit (not being able to separate classes)</li>
+            <li class="fragment">Configure a minimal network to deliver a good result on the initial data set</li>
+            <li class="fragment">Play with the learning rate - can you change the learning rate in such a way the network no longer trains properly?</li>
+        </ol>
+        <p>
+            <a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a>
+        </p>
+    </section>
+
+    <section>
         <h3>Applying Deep Neural Networks to our problem</h3>
         <div class="fragment">
     
@@ -431,7 +433,7 @@ return green
         <p class="fragment">Boundaries even more smooth</p>
     </section>
             <section>
-                <h3>Code for Model</h3>
+                <h3>Code for our Model</h3>
                 <p>Using TensorFlow and Keras</p>
                 <pre><code contenteditable data-trim class="fragment line-numbers python">
 inputs = Input(name='input', shape=(2, ))
@@ -505,7 +507,7 @@ model.fit(X_train, y_train_categorical, epochs=1000)
                 </section>
 
         <section>
-            <h3>Playing with the most famous image data set</h3>
+            <h3>MNIST - Using a model <em>already trained</em></h3>
             <p>Exploring the different types layers together</p>
             <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
                 <img src="img/browser/keras-browser.png" height="350px">
@@ -518,7 +520,7 @@ model.fit(X_train, y_train_categorical, epochs=1000)
 
             <section>
                 <h3>How do Convolutions work - Image Kernels</h3>
-                <p>You might know from Photoshop etc., used in Convolutional Neural Networks</p>
+                <p><small>You might know from Photoshop etc., used in Convolutional Neural Networks</small></p>
                 <a href="http://setosa.io/ev/image-kernels/" target="_blank">
                     <img src="img/browser/setosa_io_image-kernels.png" height="300px">
                 </a>
@@ -533,7 +535,7 @@ model.fit(X_train, y_train_categorical, epochs=1000)
             </section>
 
             <section>
-                <h3>Building your own network</h3>
+                <h3>Training a network</h3>
                     <a target="_blank" href="https://deeplearnjs.org/demos/model-builder/">
                 <img src="img/deeplearn-model-builder.png" height="500px">
                 </a>
@@ -545,7 +547,128 @@ model.fit(X_train, y_train_categorical, epochs=1000)
             </p>
             </section>
 
+                <section data-markdown>
+                    <small>
+                        <textarea data-template>
+                ### Further Reading: How do Neural Networks work inside
+                - https://distill.pub/2018/building-blocks/
+                - https://distill.pub/2017/feature-visualization/
+                - https://research.googleblog.com/2018/03/the-building-blocks-of-interpretability.html
+                - https://www.nytimes.com/2018/03/06/technology/google-artificial-intelligence.html
+                - https://twitter.com/enjalot/status/971116427598950400?s=03
+                - https://github.com/tensorflow/lucid
+                - https://colab.research.google.com/github/tensorflow/lucid/blob/master/notebooks/tutorial.ipynb
+                </textarea>
+                    </small>
+                </section>
+
+        <section>
+            <h1>Part 3</h1>
+            <h2>Applications</h2>
+        </section>
+
                 <section>
+                    <h3>Face Detection</h3>
+                    <img src="img/facial-recognition.png">
+                    <p>
+                        <small>
+                            <a href="https://aws.amazon.com/rekognition/" target="_blank">
+                                https://aws.amazon.com/rekognition/</a>
+                        </small>
+                    </p>
+                    <!--https://us-west-2.console.aws.amazon.com/rekognition/home?region=us-west-2#/face-comparison-->
+                </section>
+                
+                <section>
+                    <h3>What also works in that area</h3>
+                    <ul>
+                        <li>Image moderation (what is in that picture)
+                        <li>Facial analysis
+                        <li>Celebrity recognition
+                    </ul>
+                </section>
+                
+                <section>
+                    <h4>Only two of these images are actual images</h4>
+                    <img src="img/applications/gan.jpg" height="500px">
+                    <p>
+                        <small>
+                            <a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
+                                https://twitter.com/goodfellow_ian/status/918900712901197824</a>
+                        </small>
+                    </p>
+                </section>
+                
+                <section>
+                    <h4>All others generated by neural networks</h4>
+                    <img src="img/applications/gan-real-images.jpg" height="500px">
+                    <p>
+                        <small>
+                            <a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a>
+                        </small>
+                    </p>
+                </section>
+                
+                <section>
+                    <h4>Minimal information sufficient for value prop</h4>
+                    <img src="img/applications/style-prediction.jpg" height="500px">
+                    <p>
+                        <small>
+                            <a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a>
+                        </small>
+                    </p>
+                </section>
+                
+                <section>
+                    <h3>More applications include</h3>
+                    <small>
+                    <ul>
+                        <li class="fragment">
+                            <strong>Medicine</strong>: Many AI System are at the same level as human doctors (e.g. skin cancer screening)
+                        </li>
+                        <li class="fragment">
+                            <strong>Recommendation Systems</strong>: Spotify and Netflix know me better than I do
+                        </li>
+                        <li class="fragment">
+                            <strong>Making decisions</strong>: Should you be granted private health insurance or a loan
+                        </li>
+                        <li class="fragment">
+                            <strong>Fraud Detection</strong>: AI can detect Credit Card Scams and other suspicious activities (tax declarations)
+                        </li>
+                        <li class="fragment">
+                            <strong>Predictive Maintenance</strong>: AI systems tell you when to repair something before it is breaks
+                        </li>
+                                            <li class="fragment">
+                                                <strong>Desaster Recovery - How does a flooded Road look like?</strong>:
+                                                <a target="_blank" href="https://blog.insightdatascience.com/deep-learning-for-disaster-recovery-45c8cd174d7a?imm_mid=0fbcdf">https://blog.insightdatascience.com/deep-learning-for-disaster-recovery-45c8cd174d7a?imm_mid=0fbcdf</a>
+                                            </li>
+                                            <li class="fragment">
+                                                <strong>Do People in a Movie Theatre Laugh?</strong>:
+                                                <a target="_blanl" href="https://gizmodo.com/disney-is-building-facial-recognition-to-figure-out-whe-1797267294?imm_mid=0fbcdf&cmp=em-data-na-na-newsltr_ai_20180305">
+                                                    https://gizmodo.com/disney-is-building-facial-recognition-to-figure-out-whe-1797267294?imm_mid=0fbcdf&cmp=em-data-na-na-newsltr_ai_20180305
+                                                </a>
+                                            </li>
+
+                    </ul>
+                    </small>
+                </section>
+
+                <section>
+                    <h3>Exercise #4: How to apply Machine Learning to your data</h3>
+                    <p class="fragment">Machine Learning is the engine, but your data is the fuel</p>
+                    <p class="fragment"> Again, discuss with your neighbor(s) - do you know a problem or data you could tackle with Machine Learning or more generally
+                    AI</p>
+                    <p>Revisiting inital discussion with your neighbors</p>
+                </section>
+
+                        <section>
+                            <h3>Would you mind sharing your ideas with the</h3>
+                            <pre contenteditable="true">
+- 
+                                    </pre>
+                        </section>
+
+                <!-- <section>
                     <h3>Exercise #4</h3>
                     <p>Use the model builder to experiment on the MNIST data set</p>
                     <ol>
@@ -554,21 +677,7 @@ model.fit(X_train, y_train_categorical, epochs=1000)
                         <li>Advanced: try to configure a custom network</li>
                     </ol>
                 </section>
-
-                <section data-markdown>
-                    <small>
-<textarea data-template>
-### Further Reading: How do Neural Networks work inside
-- https://distill.pub/2018/building-blocks/
-- https://distill.pub/2017/feature-visualization/
-- https://research.googleblog.com/2018/03/the-building-blocks-of-interpretability.html
-- https://www.nytimes.com/2018/03/06/technology/google-artificial-intelligence.html
-- https://twitter.com/enjalot/status/971116427598950400?s=03
-- https://github.com/tensorflow/lucid
-- https://colab.research.google.com/github/tensorflow/lucid/blob/master/notebooks/tutorial.ipynb
-</textarea>
-</small>
-        </section>
+ -->
         <section>
             <h3>Where to go from here?</h3>
             <h4>Try it yourself in an Azure Notebook</h3>
@@ -614,6 +723,7 @@ model.fit(X_train, y_train_categorical, epochs=1000)
         } else {
             // only applies to public version
             $('.preparation').remove();
+            $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
             if (window.location.hostname.indexOf('localhost') !== -1) {
