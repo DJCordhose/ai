@@ -147,10 +147,16 @@
 <div class="reveal">
     <div class="slides">
 
-<!--
-Vortragssprache Deutsch
-60 Minuten mit Spiel
--->
+<section class="preparation">
+<pre>
+- Notebook auf machen in Azure nur falls ich was zeigen muss.
+- Auch alle anderen Links auf
+- TS Playground Übung selbst machen
+- Toolbox ausprobieren und Übung selbst machen
+
+- Fragen, wie viele Entwickler sind.
+</pre>
+</section>
 
         <section>
             <h2>Introduction to Machine Learning for Beginners</h2>
@@ -162,6 +168,20 @@ Vortragssprache Deutsch
             <p><small><a href="http://bit.ly/booster-ml-intro">
                 http://bit.ly/booster-ml-intro
             </a></small></p>
+        </section>
+
+        <section>
+            <h2>Questions and Discussion welcome at any time!</h2>
+        </section>
+
+        <section>
+            <h2>Getting to know each other</h2>
+             <p>Introduce yourself to your neighbor(s) and talk about</p>
+             <ul>
+                 <li>What interests you with Machine Learning?</li>
+                 <li>Are you already doing Machine Learning or do you plan to do so? What for?</li>
+             </ul>
+             <p><small>5 Minutes</small></p>
         </section>
 
         <section>
@@ -240,7 +260,13 @@ return green
             <li class="fragment">The larger set (60 or 80%) we use to build our model</li>
             <li class="fragment">The smaller set we use to validate the model</li>
         </ol>
-        <p class="fragment"><strong>Turn the page: How well did the generalisation work for unknown data?</strong></p>
+    </section>
+
+    <section>
+        <h2>Exercise #1, Part2 - How well did you generalize?</h2>
+        <p>Turn the page and redraw the lines you printed through from the first page</p>
+        <p>What do you think, is this result worse?</p>
+        <p>What would you have done differently if you had been given this information before (that it is all about generalisation)?</p>
     </section>
 
         <section>
@@ -425,8 +451,21 @@ model.fit(X_train, y_train_categorical, epochs=1000)
                 </code></pre>
                 <p class="fragment"><small>Trains around 90 seconds on fast GPU (might take up to 100 times more on conventional hardware)</small></p>
             </section>
+
+
         <section>
-            <h3>Use of GPU</h3>
+            <h3>Not bad, but: Neural Networks are best for non symbolic data</h3>
+            <p class="fragment">Like classifying images</p>
+            <div class="fragment">
+            <img src="img/insurance/vgg.png" height="350px">
+            <p>
+                <small>There are a number of specialized neural network layers</small>
+            </p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Use of GPU for non symbolic data</h3>
             <img src="albon-gpu-gaming.png">
             <p>
                 <small>
@@ -435,9 +474,38 @@ model.fit(X_train, y_train_categorical, epochs=1000)
                 </small>
             </p>
         </section>
+        
+        <section>
+            <h3>Why the recent break throughs?</h3>
+            <div class="fragment" style="float: left">
+                <img src="img/cray2.png" height="250">
+                <p>
+                    <small>Cray X-MP
+                        <br> Supercomputer (1982)</small>
+                </p>
+            </div>
+            <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+                x 100.000 =
+            </div>
+            <div class="fragment" style="float: left">
+                <img src="img/titan5.jpg" height="250" style="float: right">
+                <p>
+                    <small>
+                        <br>Titan 5 im Gamer PC (2017)</small>
+                </p>
+            </div>
+        </section>
+
+                <section>
+                    <h3>... but we also have</h3>
+                    <ol>
+                        <li>Smarter Learning Strategies (more hidden layers = Deep Learning)
+                        <li>Big Data
+                    </ol>
+                </section>
 
         <section>
-            <h3>Not bad, but: Neural Networks are best for non symbolic data</h3>
+            <h3>Playing with the most famous image data set</h3>
             <p>Exploring the different types layers together</p>
             <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
                 <img src="img/browser/keras-browser.png" height="350px">
