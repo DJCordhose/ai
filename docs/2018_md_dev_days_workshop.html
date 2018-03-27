@@ -149,8 +149,6 @@
 
 <section class="preparation">
 <pre>
-- Notebook auf machen in Azure nur falls ich was zeigen muss.
-- Auch alle anderen Links auf
 - TS Playground Übung selbst machen
 - Toolbox ausprobieren und Übung selbst machen
 
@@ -170,13 +168,11 @@
                 http://bit.ly/md-ml-workshop
             </a></small></p>
         </section>
+        
         <section class="todo local">
 <pre>
-Generell:
-- Material aus CNN Notebooks in Slides kopieren
+- How do Decistion Trees work
 
-- Gradient Descent:
-  - https://towardsdatascience.com/improving-vanilla-gradient-descent-f9d91031ab1d
 </pre>
         </section>
 
@@ -203,6 +199,7 @@ Generell:
                     <ul>
                         <li>Neural Networks</li>
                         <li>Deep Learning</li>
+                        <li>Optionally: Convolutional Neural Networks</li>
                     </ul>
                 </li>
             </ul>
@@ -428,7 +425,7 @@ We will explore Jupyter Notebooks and walk through the code together as a first 
         </ul>
         </section>
 
-    <section class="todo">
+    <section>
         <h3>Decision Trees</h3>
         <p>A simple classic</p>
     </section>
@@ -505,8 +502,8 @@ We will explore Jupyter Notebooks and walk through the code together as a first 
     </section>
 
     <section>
-        <h3>How to reduce Overfitting</h3>
-        <p>Intution: How would you make the decision boundaries more smooth</p>
+        <h3>Regularisation: How to reduce Overfitting</h3>
+        <p>Intuition: How would you make the decision boundaries more smooth</p>
         <ul>
             <li class="fragment">Limit Depth of Tree (unlimited is default)</li>
             <li class="fragment">Increase Number of Samples for Leaf Node (1 is default)</li>
@@ -624,6 +621,37 @@ clf = DecisionTreeClassifier(max_depth=6,
                 </div>
         </section>
 
+        <section data-markdown>
+    <textarea data-template>
+### Activation Functions
+
+An activation function (or non-linearity) takes a single number and performs a certain fixed mathematical operation on it.
+
+http://cs231n.github.io/neural-networks-1/#actfun
+</textarea>
+</section>
+
+        <section>
+            <p>There are several activation functions you may encounter in practice:</p>
+        </section>
+        <section>
+            <h3>Step</h3>
+            <img src="img/cnn/step.png" height="400px">
+            <p>original version simulating transition from passive to active</p>
+        </section>
+
+        <section>
+            <h3>Sigmoid</h3>
+            <img src="img/cnn/sigmoid.png" height="400px">
+            <p>continuously differentiable version of step function</p>
+        </section>
+
+        <section>
+            <h3>Relu: Rectified Linear Unit</h3>
+            <img src="img/cnn/relu.png" height="400px">
+            <p>Mostly used for Convolutional Networks (more later)</p>
+        </section>
+
         <section>
             <h3>Artificial neuron to neural networks</h3>
                 <div class="fragment">
@@ -637,6 +665,26 @@ clf = DecisionTreeClassifier(max_depth=6,
                     <img src="img/sketch/fc_nn.jpg" height="550px">
                 </div>
         </section>
+
+        <section>
+            <img src="img/flashcards/Architecture_Of_A_Neural_Network_print.png">
+        </section>
+
+        <section>
+            <p>In Theory a single hidden can approximate any function</p>
+            <p>In practice 2-3 hidden layers seem optimal</p>
+            <p>Convolutional Networks often have more than 100 layers (more on that later)</p>
+                        <p>
+                            <small>
+                                <a href="http://cs231n.github.io/neural-networks-1/#power">
+                                     http://cs231n.github.io/neural-networks-1/#power
+                                </a>
+                            </small>
+                        </p>
+
+         
+        </section>
+
 
                 <section>
                     <h3>Tensorflow Playground</h3>
@@ -813,13 +861,12 @@ x = Dropout(0.15)(x)
 
         <section>
             <h3>Not bad, but: Neural Networks are best for non symbolic data</h3>
-            <p class="fragment">Like classifying images</p>
-            <div class="fragment">
-            <img src="img/insurance/vgg.png" height="350px">
-            <p>
-                <small>There are a number of specialized neural network layers</small>
+            <p>Like classifying images</p>
+            <p>Reference:
+                    <a href="http://cs231n.github.io/convolutional-networks/" target="_blank">
+                         http://cs231n.github.io/convolutional-networks/</a>
             </p>
-            </div>
+             
         </section>
 
         <section>
@@ -875,23 +922,90 @@ x = Dropout(0.15)(x)
                         <img src="img/flashcards/Supervised_Deep_Learning_Rule_Of_Thumb_print.png" height="500px">
                     </section>
 
+<section>
+    <h3>Architectures of Convolutional Neural Networks: VGG</h3>
+        <img src="img/sketch/vgg.png" height="350px">
+        <p>
+            <small>There are a number of specialized neural network layers</small>
+        </p>
+</section>
 
-<section class="todo">
-    <pre>
-- Add material for Convolutional NNs from speed limit Notebook 
-</pre></section>
+<section data-markdown>
+    <textarea data-template>
+### Classic VGG like Architecture
+* we use a VGG like architecture
+* based on https://arxiv.org/abs/1409.1556
+* basic idea: sequential, deep, small convolutional filters, use dropouts to reduce overfitting
+* 16/19 layers are typical
+* many architectures are based on that
+</textarea>
+</section>
 
-        <section>
-            <h3>MNIST - Using a model <em>already trained</em></h3>
-            <p>Exploring the different types layers together</p>
-            <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
-                <img src="img/browser/keras-browser.png" height="350px">
-            </a>
-            <p><small>
-                <a href="https://transcranial.github.io/keras-js" target="_blank">https://transcranial.github.io/keras-js</a>
-            </small></p>
-        </section>
+<section data-markdown>
+    <textarea data-template>
+### Convolutional Blocks: Cascading many Convolutional Layers having down sampling in between
 
+![Applying filters](http://cs231n.github.io/assets/cnn/cnn.jpeg)
+
+http://cs231n.github.io/convolutional-networks/#conv
+</textarea>
+</section>
+
+<section data-markdown style="font-size: x-large">
+    <textarea data-template>
+### Example of a Convolution
+![Dog](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog.png)
+#### Many convolutional filters applied over all channels
+![Dog after Convolutional Filters applied](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog-conv1.png)
+http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
+</textarea>
+</section>
+
+                <section data-markdown>
+    <textarea data-template>
+### Feature Channels
+Each output of a filter operation is called a feature channel.
+The deeper the channel the more abstract it is supposed to be.
+
+https://distill.pub/2017/feature-visualization/
+https://distill.pub/2018/building-blocks/
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Edges
+![Edges](img/cnn/edges.png)
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Textures
+![Textures](img/cnn/textures.png)
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Patterns
+![Patterns](img/cnn/patterns.png)
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Parts
+![Parts](img/cnn/parts.png)
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Objects
+![Objects](img/cnn/objects.png)
+    </textarea>
+</section>
 
             <section>
                 <h3>How do Convolutions work - Image Kernels</h3>
@@ -909,6 +1023,74 @@ x = Dropout(0.15)(x)
                 </p>
             </section>
 
+                <section data-markdown>
+    <textarea data-template>
+### Relu for CNNs
+
+* Intuition: regions that are not matched by filter are taken out
+  * perfect for blacking out everyhing beyond threshold
+  * good for CNN to completely take out a feature channel
+  * high values from CNN indicate high match, will be passed through
+* seems to enable fast learning
+* this is just what most people actually uses
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Downlsampling Layer: Reduces data sizes and risk of overfitting
+![Pooling](http://cs231n.github.io/assets/cnn/pool.jpeg)
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Max Pooling
+![Max Pooling](http://cs231n.github.io/assets/cnn/maxpool.jpeg)
+http://cs231n.github.io/convolutional-networks/#pool
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Standard CNN Architecture
+
+![Performance of CNN Architectures](https://cdn-images-1.medium.com/max/1600/1*kBpEOy4fzLiFxRLjpxAX6A.png)
+
+https://medium.com/towards-data-science/neural-network-architectures-156e5bad51ba
+</textarea>
+</section>
+
+        <section>
+            <h3>Sample Architecture: Google Inception V3</h3>
+            <img src="img/inception_v3_architecture.png" height="400px">
+            <p>
+                <small>
+                    <a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a>
+                </small>
+            </p>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+#### VGG and many basic models start with a number of convolutional blocks for feature extraction and ends with a fully connected classifier 
+![VGG architecture](img/sketch/vgg.png)
+</textarea>
+</section>
+
+
+        <section>
+            <h3>MNIST - Using a model <em>already trained</em></h3>
+            <p>Exploring the different types layers together</p>
+            <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
+                <img src="img/browser/keras-browser.png" height="350px">
+            </a>
+            <p><small>
+                <a href="https://transcranial.github.io/keras-js" target="_blank">https://transcranial.github.io/keras-js</a>
+            </small></p>
+        </section>
+
             <section>
                 <h3>Training a network</h3>
                     <a target="_blank" href="https://deeplearnjs.org/demos/model-builder/">
@@ -921,7 +1103,7 @@ x = Dropout(0.15)(x)
                 </small>
             </p>
             </section>
-
+<!-- 
                 <section data-markdown  style="font-size: x-large">
                         <textarea data-template>
 ## Further Reading: How do Neural Networks work inside
@@ -933,7 +1115,7 @@ x = Dropout(0.15)(x)
 - https://github.com/tensorflow/lucid
 - https://colab.research.google.com/github/tensorflow/lucid/blob/master/notebooks/tutorial.ipynb
                 </textarea>
-                </section>
+                </section> -->
 
                 <section>
                     <h3>Exercise #4</h3>
@@ -945,7 +1127,21 @@ x = Dropout(0.15)(x)
                     </ol>
                 </section>
 
-
+                <section>
+                    <h3>Final Thoughts: How to apply Machine Learning to your data</h3>
+                    <p class="fragment">Machine Learning is the engine, but your data is the fuel</p>
+                    <p class="fragment">Again, discuss with your neighbor(s) - do you know a problem or data you could tackle with Machine Learning or more generally
+                        AI
+                    </p>
+                    <p>Revisiting inital discussion with your neighbors</p>
+                </section>
+                
+                <section>
+                    <h3>Would you mind sharing your ideas with the</h3>
+                    <pre contenteditable="true">
+                                - 
+                                                                    </pre>
+                </section>
     </div>
 
 </div>
