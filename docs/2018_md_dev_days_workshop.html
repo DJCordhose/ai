@@ -170,33 +170,13 @@
                 http://bit.ly/md-ml-workshop
             </a></small></p>
         </section>
-        <section class="todo">
+        <section class="todo local">
 <pre>
 Generell:
 - Material aus CNN Notebooks in Slides kopieren
-  - Notebooks immer nur wenig Text, wie bei Booster
 
 - Gradient Descent:
   - https://towardsdatascience.com/improving-vanilla-gradient-descent-f9d91031ab1d
-- Model Builder Übung wieder mit hinein nehmen
-
-Basic:
-- Vielleicht doch vorher KNN, weil einfacher zu verstehen?
-- DT als erstes?
-  - Bisschen Theorie und so ausm Buch klauen für Folien
-    - gini Faktor und wie gelernt wird
-    - motiviert durch den geplotteten DT
-  - Übung: Overfitting verhindern und dabei Underfitting vermeiden
-    - Lernerfolg: beides geht nicht, man muss sweet spot suchen
-
-Dt als Übung für unten das kann man leichter einzeichnen. Also auch zuerst DT einführen. Dann knn.
-- Decision Trees passen sehr gut auf manuelle Verarbeitung
-  - Manuelle Lösung als Decision Tree aufzeichnen
-  - auch als 2. Übung, einzeichnen von den Decsion Break Points
-
-Uni:
-- Intro ML
-- wie Vormittag MD Dev days
 </pre>
         </section>
 
@@ -223,7 +203,6 @@ Uni:
                     <ul>
                         <li>Neural Networks</li>
                         <li>Deep Learning</li>
-                        <li>Applications of Machine Learning</li>
                     </ul>
                 </li>
             </ul>
@@ -242,8 +221,83 @@ Uni:
                     </p>
                 </section>
 
+
+                    <section>
+                        <h3>Paper Exercise #1 - Understanding the Supervised Learning Approach</h2>
+                            <p>Manually cluster areas of different customer types on the
+                                <em>upper part</em> of the handout</p>
+                            <ol>
+                                <li>
+                                    <em>dark (green)</em>: good customer</li>
+                                <li>
+                                    <em>light (yellow)</em>: mediocre customers</li>
+                                <li>
+                                    <em>middle (red)</em>: red customers</li>
+                            </ol>
+                            <p>Make sure you draw with pressure</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Plot Twist</h3>
+                        <p>Generalisation, not perfect reproduction is the objective</p>
+                        <ol>
+                            <li class="fragment">We split existing data into two sets</li>
+                            <li class="fragment">The larger set (60 or 80%) we use to build our model</li>
+                            <li class="fragment">The smaller set we use to validate the model</li>
+                        </ol>
+                    </section>
+                    
+                        <section>
+                            <img src="img/flashcards/Genderalization_print.png">
+                        </section>
+
+                    <section>
+                        <h2>Exercise #1, Part2 - How well did you generalize?</h2>
+                        <p>Turn the page and redraw the lines you printed through from the first page</p>
+                        <p>What do you think, is this result worse?</p>
+                        <p>What would you have done differently if you had been given this information before (that it is all about generalisation)?</p>
+                    </section>
+
+                        <section>
+                            <img src="img/flashcards/Test_Training_And_Validation_Sets_print.png">
+                        </section>
+
+                    <section>
+                        <h3>Sample Solution: Fine</h3>
+                        <div class="fragment" style="float: left">
+                            <img src="img/insurance/manual_predictions/train_fine.jpg" height="250">
+                            <p>
+                                <small>Train</small>
+                            </p>
+                        </div>
+                        <div class="fragment" style="float: left">
+                            <img src="img/insurance/manual_predictions/test_fine.jpg" height="250">
+                            <p>
+                                <small>Test</small>
+                            </p>
+                        </div>
+                        <p class="fragment">Not ideal, especially in the middle where everything mixes</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Sample Solution: Coarse</h3>
+                        <div class="fragment" style="float: left">
+                            <img src="img/insurance/manual_predictions/train_coarse.jpg" height="250">
+                            <p>
+                                <small>Train</small>
+                            </p>
+                        </div>
+                        <div class="fragment" style="float: left">
+                            <img src="img/insurance/manual_predictions/test_coarse.jpg" height="250">
+                            <p>
+                                <small>Test</small>
+                            </p>
+                        </div>
+                        <p class="fragment">Not so bad - we humans are good at clustering in 2-d</p>
+                    </section>
+
 <section>
-    <h2>How do you create a general prediction?</h3>
+    <h2>How do we make an automatic, general prediction?</h3>
 </section>
 
 <section>
@@ -278,7 +332,7 @@ return green
 </section>
 
 <section>
-    <h3>Programming Exercise #1</h3>
+    <h3>Programming Exercise #1 - Get familiar with the Python Notebook</h3>
     <p>Maximize score starting from existing code</p>
     <ul>
         <li>change rules?</li>
@@ -317,70 +371,6 @@ We will explore Jupyter Notebooks and walk through the code together as a first 
         <img src="img/sketch/classification.jpg" height="450px">
     </div>
 </section>
-
-    <section>
-        <h3>Paper Exercise #1 - Understanding the Supervised Learning Approach</h2>
-        <p>Manually cluster areas of different customer types on the <em>upper part</em> of the handout</p>
-        <ol>
-            <li>
-                <em>dark (green)</em>: good customer</li>
-            <li><em>light (yellow)</em>: mediocre customers</li>
-            <li>
-                <em>middle (red)</em>: red customers</li>
-        </ol>
-        <p>Make sure you draw with pressure</p>
-    </section>
-
-    <section>
-        <h3>Plot Twist</h3>
-        <p>Generalisation, not perfect reproduction is the objective</p>
-        <ol>
-            <li class="fragment">We split existing data into two sets</li>
-            <li class="fragment">The larger set (60 or 80%) we use to build our model</li>
-            <li class="fragment">The smaller set we use to validate the model</li>
-        </ol>
-    </section>
-
-    <section>
-        <h2>Exercise #1, Part2 - How well did you generalize?</h2>
-        <p>Turn the page and redraw the lines you printed through from the first page</p>
-        <p>What do you think, is this result worse?</p>
-        <p>What would you have done differently if you had been given this information before (that it is all about generalisation)?</p>
-    </section>
-
-    <section>
-        <h3>Sample Solution: Fine</h3>
-        <div class="fragment" style="float: left">
-            <img src="img/insurance/manual_predictions/train_fine.jpg" height="250">
-            <p>
-                <small>Train</small>
-            </p>
-        </div>
-        <div class="fragment" style="float: left">
-            <img src="img/insurance/manual_predictions/test_fine.jpg" height="250">
-            <p>
-                <small>Test</small>
-            </p>
-        </div>
-        <p class="fragment">Not ideal, especially in the middle where everything mixes</p>
-    </section>
-
-    <section>
-        <h3>Sample Solution: Coarse</h3>
-                    <div class="fragment" style="float: left">
-                        <img src="img/insurance/manual_predictions/train_coarse.jpg" height="250">
-                        <p>
-                            <small>Train</small>
-                        </p>
-                    </div>
-                    <div class="fragment" style="float: left">
-                        <img src="img/insurance/manual_predictions/test_coarse.jpg" height="250">
-                        <p>
-                            <small>Test</small>
-                        </p>
-                    </div>
-                    <p class="fragment">Not so bad - we humans are good at clustering in 2-d</p>
-    </section>
 
         <section>
             <h3>Machine Learning and AI</h3>
@@ -441,32 +431,152 @@ We will explore Jupyter Notebooks and walk through the code together as a first 
     <section class="todo">
         <h3>Decision Trees</h3>
         <p>A simple classic</p>
-        <p>Supply my hand drawn decision tree</p>
+    </section>
+
+    <section>
+        <img src="img/flashcards/Decision_Trees_print.png">
     </section>
 
     <section>
         <h3>Paper Exercise #2</h3>
         <ol>
             <li>Experiment with the teachable machine to understand supervised learning</li>
-            <li>Create a decision tree for our problem by hand and draw it on paper</li>
+            <li>Manually translate the rules you encoded in the first programming exercise into a decision tree draw it on paper</li>
             <li>Manually apply the decision tree to our problem in the lower part of our sample sheet</li>
             <li>How does the result look like?</li>
-            <li>Does it remind you of anything?</li>
         </ol>
     </section>
 
     <section>
-        <h3>The computer is actually better at doing repetative work</h3>
-        <img src="img/dt/dt-underfit.png">
-        <p class="todo">Explain what we see here, then samples for full depth for overfitting, then underfitting for depth=3 and sweet spot for depth =6</p>
+        <h3>What you just drew is called a Decision Boundaries</h3>
     </section>
 
     <section>
-        <h3>KNN: k Nearest Neighbors</h3>
-        <p>Another simple classic</p>
-        <img src="img//insurance/knn.png" height="400px">
+        <img src="img/flashcards/Decision_Boundary_print.png">
+    </section>
+    <section>
+        <h3>The computer is actually better at doing repetative work</h3>
     </section>
 
+    <section>
+        <img src="img/dt/dt-underfit.png">
+        <p><small>Generated by Machine Learning</small></p>
+    </section>
+
+    <section class="todo">
+        <h3>How are Decision Trees trained?</h3>
+        <pre>
+- DT: General: wie funktioniert das?
+-  Greedy algorithm: https://en.wikipedia.org/wiki/Decision_tree_learning
+- Vor und Nachteile: http://scikit-learn.org/stable/modules/tree.html
+
+- Bisschen Theorie und so ausm Buch klauen für Folien
+- gini Faktor und wie gelernt wird
+- motiviert durch den geplotteten DT
+
+        </pre>
+    </section>
+
+    <section>
+        <img src="img/flashcards/Gini_Index_print.png">
+    </section>
+
+    <section>
+        <img src="img/flashcards/Overfit_Vs_Underfit_print.png">
+    </section>
+
+    <section>
+        <img src="img/dt/dt-all.png">
+    </section>
+
+    <section>
+        <img src="img/dt/dt-boundaries-full.png">
+        <p>
+            <small>approx. 98% accuracy on train data, but only 61% on test data</small>
+        </p>
+    </section>
+
+    <section>
+        <p>Is this a good result?</p>
+    </section>
+
+    <section>
+        <p>This is what we call Overfitting</p>
+    </section>
+
+    <section>
+        <h3>How to reduce Overfitting</h3>
+        <p>Intution: How would you make the decision boundaries more smooth</p>
+        <ul>
+            <li class="fragment">Limit Depth of Tree (unlimited is default)</li>
+            <li class="fragment">Increase Number of Samples for Leaf Node (1 is default)</li>
+            <li class="fragment">Increase Number of Samples that justify a split (2 is default)</li>
+        </ul>
+    </section>
+
+    <section>
+        <pre><code data-trim>
+clf = DecisionTreeClassifier(max_depth=3,
+                             min_samples_leaf=20,
+                             min_samples_split=20)
+            </code></pre>
+    </section>
+    <section>
+        <img src="img/dt/dt-boundaries-underfit.png">
+            <p>
+                <small>only approx. 65% accuracy on train data, and only 59% on test data</small>
+            </p>
+            <p class="fragment">This is what we call Underfitting</p>
+    </section>
+
+    <section>
+        <h3>Programming Exercise #2 - Find the Sweet Spot</h3>
+        <p>Get rid of overfitting, but avoid underfitting as much as possible</p>
+        <ul>
+            <li>Can you do better than the hand coded classifier?</li>
+            <li>Which parameters give the best results?</li>
+            <!-- <li>How do you explain the different results for training and test data?</li>
+            <li>What is the value you should optimize for?</li> -->
+            <li>How do the decision boundaries for the different results look like? Do you see a pattern?</li>
+        </ul>
+        <p>Do your work in on Jupyter Notebook
+            <em>2-sklearn-decision-trees</em>
+        </p>
+    </section>
+
+    <section>
+        <h3>Finding the sweet spot always is a compromise</h3>
+        <pre><code data-trim>
+clf = DecisionTreeClassifier(max_depth=6,
+                            min_samples_leaf=10,
+                            min_samples_split=10)
+            </code></pre>
+    </section>
+
+    <section>
+        <img src="img/dt/dt-boundaries-sweet.png">
+        <p>
+            <small>only approx. 77% accuracy on train data, but also 68% on test data</small>
+        </p>
+        <p class="fragment">Sweet Spot, notice the similarity to our hand crafted tree?</p>
+    </section>
+    <section>
+        <h3>What's next?</h3>
+    </section>
+    <section>
+        <img src="img/flashcards/Random_Forest_print.png">
+    </section>
+    <section>
+        <img src="img/flashcards/The_Random_In_Random_Forest_print.png">
+    </section>
+    <section>
+        <h3>KNN: k Nearest Neighbors</h3>
+        <p>Another simple classic</p>
+    </section>
+
+    <section>
+        <img src="img//insurance/knn.png">
+    </section>
     <section>
         <h3>Algorithm</h3>
         <p>For a case to predict</p>
@@ -479,20 +589,6 @@ We will explore Jupyter Notebooks and walk through the code together as a first 
     </section>
 
     <section>
-        <h3>Programming Exercise #2</h3>
-        <ul>
-            <li>Can you do better than the hand coded classifier?</li>
-            <li>Which number of neighbors gives the best results?</li>
-            <li>How do you explain the different results for training and test data?</li>
-            <li>What is the value you should optimize for?</li>
-            <li>How do the different results look like? Do you see a pattern?</li>
-        </ul>
-        <p>Do your work in on Jupyter Notebook
-            <em>3-sklearn-knn</em>
-        </p>
-    </section>
-
-    <section>
         <h3>Computed results for k = 1</h3>
         <div class="fragment">
     
@@ -501,7 +597,7 @@ We will explore Jupyter Notebooks and walk through the code together as a first 
                 <small>approx. 98% accuracy on train data, but only 65% on test data</small>
             </p>
         </div>
-        <p class="fragment">This is what we call Overfitting</p>
+        <p class="fragment">Again Overfitting</p>
     </section>
 
     <section>
@@ -586,6 +682,10 @@ model.fit(X_train, y_train_categorical, epochs=1000)
                 </code></pre>
             </section>
 
+    <section>
+        <img src="img/flashcards/Tensors_print.png">
+    </section>
+
             <section>
                 <h3>What does the neural network learn?</h3>
                 <p class="fragment">All the weights of a the neurons</p>
@@ -610,8 +710,12 @@ _________________________________________________________________</code>
                                 </pre>
             </section>
 
+                <section>
+                    <img src="img/flashcards/Learning_Rate_print.png">
+                </section>
+
             <section>
-                <h3>How does a Neural Network Learn?</h3>
+                <h3>Visualizing the learning Process</h3>
                 <p>(Stochastic) Gradient Descent (SGD)</p>
                 <p><small>Minimizing the error by changing the trainable parameters</small></p>
                 <p><small>For just 2 parameters you can image a scenary with hills and you try to find the deepest valley</small></p>
@@ -628,19 +732,39 @@ _________________________________________________________________</code>
                     </small>
                 </p>
             </section>
+
+            <section>
+                <h3>More on SGD</h3>
+                <img src="img/sgd.png">
+                <p>
+                    <small>
+                        <a href="https://towardsdatascience.com/improving-vanilla-gradient-descent-f9d91031ab1d">
+                         https://towardsdatascience.com/improving-vanilla-gradient-descent-f9d91031ab1d</a>
+
+                    </small>
+                </p>
+                 
+            </section>
+
+<section>
+    <h3>Avoid Overfitting</h3>
+</section>
+
     <section>
-        <h3>Programming Exercise #3</h3>
-        <p>Configure a deep neural network to solve our problem</p>
-        <ul>
-            <li>Use all available input features (3)</li>
-            <li>Change the configured number of neurons per layer</li>
-            <li>Change the number of layers</li>
-            <li>Can you explain the number of trainable parameters?</li>
-            <li>How do you explain the very different decision boundaries per km per year?</li>
-        </ul>
-        <p>Do your work in <em>4-keras-tensorflow-nn</em>
-        </p>
+        <img src="img/flashcards/The_Effect_Of_Dropout_On_Hidden_Units_print.png">
     </section>
+
+    <section>
+        <pre><code data-trim>
+from keras.layers import Dropout
+
+x = Dense(100, name='hidden1', activation='relu')(inputs)
+x = Dropout(0.15)(x)
+x = Dense(100, name='hidden2', activation='relu')(x)
+x = Dropout(0.15)(x)
+            </code></pre>
+    </section>
+
 <section data-markdown>
     <textarea data-template>
 ### Install Keras and TensorFlow
@@ -656,7 +780,22 @@ _________________________________________________________________</code>
 </section>
 
     <section>
-        <h3>Best known results</h3>
+        <h3>Programming Exercise #3</h3>
+        <p>Configure a deep neural network to solve our problem</p>
+        <ul>
+            <li>Use all available input features (3)</li>
+            <li>Change the configured number of neurons per layer</li>
+            <li>Add dropout to reduce overfitting</li>
+            <li>Change the number of layers</li>
+            <li>Can you explain the number of trainable parameters?</li>
+            <li>How do you explain the very different decision boundaries per km per year?</li>
+        </ul>
+        <p>Do your work in <em>4-keras-tensorflow-nn</em>
+        </p>
+    </section>
+
+    <section>
+        <h3>Best known results using Dropout</h3>
         <div class="fragment">
     
             <img src="img/insurance/cnn.png" height="400px">
@@ -731,6 +870,12 @@ _________________________________________________________________</code>
                     <p class="fragment"><strong>We restrict ourselves to basic examples on the web that work with any GPU</strong></p>
                 </section>
 
+                    <section>
+                        <p>Additionally...</p>
+                        <img src="img/flashcards/Supervised_Deep_Learning_Rule_Of_Thumb_print.png" height="500px">
+                    </section>
+
+
 <section class="todo">
     <pre>
 - Add material for Convolutional NNs from speed limit Notebook 
@@ -777,144 +922,20 @@ _________________________________________________________________</code>
             </p>
             </section>
 
-                <section data-markdown>
-                    <small>
+                <section data-markdown  style="font-size: x-large">
                         <textarea data-template>
-                ### Further Reading: How do Neural Networks work inside
-                - https://distill.pub/2018/building-blocks/
-                - https://distill.pub/2017/feature-visualization/
-                - https://research.googleblog.com/2018/03/the-building-blocks-of-interpretability.html
-                - https://www.nytimes.com/2018/03/06/technology/google-artificial-intelligence.html
-                - https://twitter.com/enjalot/status/971116427598950400?s=03
-                - https://github.com/tensorflow/lucid
-                - https://colab.research.google.com/github/tensorflow/lucid/blob/master/notebooks/tutorial.ipynb
+## Further Reading: How do Neural Networks work inside
+- https://distill.pub/2018/building-blocks/
+- https://distill.pub/2017/feature-visualization/
+- https://research.googleblog.com/2018/03/the-building-blocks-of-interpretability.html
+- https://www.nytimes.com/2018/03/06/technology/google-artificial-intelligence.html
+- https://twitter.com/enjalot/status/971116427598950400?s=03
+- https://github.com/tensorflow/lucid
+- https://colab.research.google.com/github/tensorflow/lucid/blob/master/notebooks/tutorial.ipynb
                 </textarea>
-                    </small>
-                </section>
-
-        <section>
-            <h1>Part 4</h1>
-            <h2>Applications</h2>
-        </section>
-
-                <section>
-                    <h3>Face Detection</h3>
-                    <img src="img/facial-recognition.png">
-                    <p>
-                        <small>
-                            <a href="https://aws.amazon.com/rekognition/" target="_blank">
-                                https://aws.amazon.com/rekognition/</a>
-                        </small>
-                    </p>
-                    <!--https://us-west-2.console.aws.amazon.com/rekognition/home?region=us-west-2#/face-comparison-->
-                </section>
-                
-                <section>
-                    <h3>What also works in that area</h3>
-                    <ul>
-                        <li>Image moderation (what is in that picture)
-                        <li>Facial analysis
-                        <li>Celebrity recognition
-                    </ul>
-                </section>
-                
-                <section>
-                    <h4>Only two of these images are actual images</h4>
-                    <img src="img/applications/gan.jpg" height="500px">
-                    <p>
-                        <small>
-                            <a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
-                                https://twitter.com/goodfellow_ian/status/918900712901197824</a>
-                        </small>
-                    </p>
-                </section>
-                
-                <section>
-                    <h4>All others generated by neural networks</h4>
-                    <img src="img/applications/gan-real-images.jpg" height="500px">
-                    <p>
-                        <small>
-                            <a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a>
-                        </small>
-                    </p>
-                </section>
-                
-                <section>
-                    <h4>Minimal information sufficient for value prop</h4>
-                    <img src="img/applications/style-prediction.jpg" height="500px">
-                    <p>
-                        <small>
-                            <a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a>
-                        </small>
-                    </p>
-                </section>
-
-                        <section>
-                            <h3>Getting rid of marketing people</h3>
-                            <p>
-                                <em>
-                                    Zalando is getting rid of <a href="https://www.heise.de/newsticker/meldung/KI-gesteuertes-Marketing-Zalando-streicht-250-Arbeitsplaetze-3990425.html" target="_blank">
-                                    250 marketing people</a> at head quarter in Berlin. Marketing will be data and AI based.</em>
-                            </p>
-                            <p>
-                                <small>
-                                    <a target="_blank" href="https://corporate.zalando.com/en/newsroom/en/stories/our-customers-evolve-so-do-we">
-                                         https://corporate.zalando.com/en/newsroom/en/stories/our-customers-evolve-so-do-we</a>
-                                </small>
-                            </p>
-                        </section>
-
-                
-                <section>
-                    <h3>More applications include</h3>
-                    <small>
-                    <ul>
-                        <li class="fragment">
-                            <strong>Medicine</strong>: Many AI System are at the same level as human doctors (e.g. skin cancer screening)
-                        </li>
-                        <li class="fragment">
-                            <strong>Recommendation Systems</strong>: Spotify and Netflix know me better than I do
-                        </li>
-                        <li class="fragment">
-                            <strong>Making decisions</strong>: Should you be granted private health insurance or a loan
-                        </li>
-                        <li class="fragment">
-                            <strong>Fraud Detection</strong>: AI can detect Credit Card Scams and other suspicious activities (tax declarations)
-                        </li>
-                        <li class="fragment">
-                            <strong>Predictive Maintenance</strong>: AI systems tell you when to repair something before it is breaks
-                        </li>
-                                            <li class="fragment">
-                                                <strong>Desaster Recovery - How does a flooded Road look like?</strong>:
-                                                <a target="_blank" href="https://blog.insightdatascience.com/deep-learning-for-disaster-recovery-45c8cd174d7a?imm_mid=0fbcdf">https://blog.insightdatascience.com/deep-learning-for-disaster-recovery-45c8cd174d7a?imm_mid=0fbcdf</a>
-                                            </li>
-                                            <li class="fragment">
-                                                <strong>Do People in a Movie Theatre Laugh?</strong>:
-                                                <a target="_blanl" href="https://gizmodo.com/disney-is-building-facial-recognition-to-figure-out-whe-1797267294?imm_mid=0fbcdf&cmp=em-data-na-na-newsltr_ai_20180305">
-                                                    https://gizmodo.com/disney-is-building-facial-recognition-to-figure-out-whe-1797267294?imm_mid=0fbcdf&cmp=em-data-na-na-newsltr_ai_20180305
-                                                </a>
-                                            </li>
-
-                    </ul>
-                    </small>
                 </section>
 
                 <section>
-                    <h3>Exercise #4: How to apply Machine Learning to your data</h3>
-                    <p class="fragment">Machine Learning is the engine, but your data is the fuel</p>
-                    <p class="fragment"> Again, discuss with your neighbor(s) - do you know a problem or data you could tackle with Machine Learning or more generally
-                    AI</p>
-                    <p>Revisiting inital discussion with your neighbors</p>
-                </section>
-
-                        <section>
-                            <h3>Would you mind sharing your ideas with the</h3>
-                            <pre contenteditable="true">
-- 
-                                    </pre>
-                        </section>
-
-                <!-- <section>
                     <h3>Exercise #4</h3>
                     <p>Use the model builder to experiment on the MNIST data set</p>
                     <ol>
@@ -923,26 +944,7 @@ _________________________________________________________________</code>
                         <li>Advanced: try to configure a custom network</li>
                     </ol>
                 </section>
- -->
-        <section>
-            <h2>Wrapup</h2>
-            <ul>
-                <li class="fragment">Machine Learning can be a powerful addition to traditional programming
-                <li class="fragment">Objective is to generalize
-                <li class="fragment">Often not even a deep Understanding of the domain is required
-                <li class="fragment">Neural Networks and Deep Learning are especially powerful on the sub symbolic level
-            </ul>
-        
-            <p>Ping me for questions / help / comments:
-                <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-            </p>
-            <p><small>
-                <a href="http://bit.ly/md-ml-workshop">
-                     http://bit.ly/md-ml-workshop
-                </a>
-                </small>
-            </p>
-        </section>
+
 
     </div>
 
@@ -956,6 +958,7 @@ _________________________________________________________________</code>
         if (window.location.hostname.indexOf('localhost') !== -1) {
         } else {
             // only applies to public version
+            $('.todo').remove();
             $('.preparation').remove();
             $('.local').remove();
         }
