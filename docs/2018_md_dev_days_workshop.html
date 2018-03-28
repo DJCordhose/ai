@@ -904,6 +904,21 @@ x = Dropout(0.15)(x)
         <p class="fragment">Boundaries even more smooth</p>
     </section>
 
+    <section>
+        <h3>Matching Model</h3>
+        <pre><code data-trim>
+drop_out = 0.15
+
+inputs = Input(name='input', shape=(3, ))
+x = Dense(100, name='hidden1', activation='relu')(inputs)
+x = Dropout(drop_out)(x)
+x = Dense(100, name='hidden2', activation='relu')(x)
+x = Dropout(drop_out)(x)
+x = Dense(100, name='hidden3', activation='relu')(x)
+x = Dropout(drop_out)(x)
+predictions = Dense(3, name='softmax', activation='softmax')(x)
+            </code></pre>
+    </section>
         <section>
             <h1>Part 3 - Let the GPU burn</h1>
             <h2>Convolutional neural networks</h2>
@@ -1173,7 +1188,7 @@ https://medium.com/towards-data-science/neural-network-architectures-156e5bad51b
                     <p>Use the model builder to experiment on the MNIST data set</p>
                     <ol>
                         <li>Try both Fully Connected Layers as well as Convolutional Layers</li>
-                        <li>Deliberately change the learning rate to a value that now longer allows a succesful training</li>
+                        <li>Deliberately change the learning rate to a value that now longer allows for a succesful training</li>
                         <li>Advanced: try to configure a custom network</li>
                     </ol>
                 </section>
