@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Machine Learning in the Browser</title>
+    <title>Quality in Machine Learning</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -180,9 +180,25 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
 
         <section class="todo">
             <pre>
-- erst alle Tests einer Kategorie, dann Projekt vorstellen und bewerten.
-- dann nächste Kategorie                
+- am Ende Gesamtbewertung                
             </pre>
+        </section>
+
+        <section>
+            <h3>Eine kleine Umfrage</h3>
+            <p>Ich biete und bitte um Ehrlichkeit</p>
+            <ul>
+                <li class="fragment">Wer versioniert seine Modell-Spezifikation?</li>
+                <li class="fragment">Wer macht Code-Reviews Modell-Spezifikation?</li>
+                <li class="fragment">Wer vergleicht mit einem (nicht-trivialen) Baseline-Modell?</li>
+                <li class="fragment">Wer hat Unit-Tests für den Trainingscode?</li>
+                <li class="fragment">Wer hat Deploy-Pipeline?</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Mein Eindruck</h3>
+            <p>Verglichen mit Software-Entwicklung sind wir mehrere Jahre zurück</p>
         </section>
 
         <section>
@@ -194,18 +210,22 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
         </section>
 
         <section>
-            <p class="todo">Vorstellung und die Bewertung erst am Ende dieser ersten Kategorie</p>
-                <h3>Unser Projekt</h3>
-                <p>Kunden-Ranking für KfZ-Versicherung</p>
-                <img src="img/insurance/automobile-insurance.png" height="400px">
-                <p>Basiert auf einem echten Projekt</p>
+            <h3>Wir illustrieren die Anforderungen anhand einer Beispielbewertung</h3>
         </section>
 
+        <section>
+            <h3>Unser Projekt</h3>
+            <p>Kunden-Ranking für KfZ-Versicherung</p>
+            <img src="img/insurance/automobile-insurance.png" height="400px">
+            <p>Basiert auf einem echten Projekt</p>
+        </section>
+        
         <section>
             <h3>Vorgehen</h3>
             <p>Ein Punkt für das Erfüllen eines Test-Kriteriums</p>
             <p>Ein weiterer falls die Erfüllung automatisiert ist</p>
         </section>
+
 
         <section>
             <h1>Kategorie 1</h1>
@@ -242,16 +262,8 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
         </section>
     
         <section>
-            <h2>Kein Plan</h2>
-        </section>
-
-        <section>
             <h3>Test: Sind die Feaures brauchbar?</h3>
             <p>Ist das Feature immer verfügbar und von konstanter Qualität?</p>
-        </section>
-        
-        <section>
-            <h2>Kein Plan</h2>
         </section>
     
         <section>
@@ -264,34 +276,28 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
 
         <section>
                 <h3>Daten werden von vorn herein nur anonymisiert verwendet</h3>
-                <pre><code>
+                <pre><code data-trim>
 str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@example.com'
                 </code></pre>
                 <p>Zwei Punkte, da das hier automatisiert ist! Vier insgesamt!</p>
             </section>
                 
             <section>
-                <h3>Test: Wie lange dauer es, ein Feature hinzuzufügen?</h3>
+                <h3>Test: Wie lange dauert es, ein Feature hinzuzufügen?</h3>
                 <p>Wie schnell kann reagiert werden?</p>
             </section>
                 
-            <section>
-                <h2>Kein Plan</h2>
-            </section>
             
             <section>
                 <h3>Test: Funktioniet der Code, der Features für Test und Produktion liefert?</h3>
             </section>
                 
             <section>
-                <h2>Kein Plan</h2>
-            </section>
-
-            <section>
                 <h3>Ergebnis</h3>
                 <p>4 von 14 Punkten</p>
-                <p><em>3-4 points: There’s been first pass at basic productionization, but additional investment may
-                        be needed.</em></p>
+                <p>
+                    <em>3-4 points: There’s been first pass at basic productionization, but additional investment may be needed.</em>
+                </p>
             </section>
 
         <section>
@@ -380,7 +386,7 @@ str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@ex
         </section>
     
         <section>
-            <h3>Test: Wir die Modell-Qualität vor Produktivstellung getestet?</h3>
+            <h3>Test: Wird die Modell-Qualität vor Produktivstellung getestet?</h3>
             <p>Funktioniert das Modell besser als ein vorheriges? Werden bekannte Ergebnisse richtig vorhergesagt?</p>
         </section>
         
@@ -396,45 +402,134 @@ str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@ex
         <section>
             <h3>Test: Kann ein Modell sicher und schnell aus Production zurück gerollt werden?</h3>
         </section>
-            
+
+        <section class="todo">
+            <h3>Ergebnis</h3>
+            <p>4 von 14 Punkten</p>
+            <p>
+                <em>3-4 points: There’s been first pass at basic productionization, but additional investment may be needed.</em>
+            </p>
+        </section>
+
         <section>
             <h1>Kategorie 4</h1>
             <h2>Monitoring</h2>
         </section>
                         
-        <section class="todo">
-            <pre>
-                    5 Monitoring Tests for ML
-                    Monitoring is crucial for models that automatically incorporate new data in a continual or ongoing
-                    fashion at training time, and is always needed for models that serve predictions in an on-demand
-                    fashion.
-                    Test for upstream instability in features, both in training and serving. Upstream instability can
-                    create problems both at training and serving (inference) time. Training time instability is especially
-                    problematic when models are updated or retrained frequently. Serving time instability can occur even
-                    when the models themselves remain static. As examples, what alert would fire if one datacenter stops
-                    sending data? What if an upstream signal provider did a major version upgrade?
-                    Test that data invariants hold in training and serving inputs. For example, test if Feature A and
-                    Feature B should always have the same number of non-zero values in each example, or that Feature
-                    C is always in the range (0; 100) or that class distribution is about 10:1.
-                    Test that your training and serving features compute the same values. The codepaths that
-                    actually generate input features may differ for training and inference time, due to tradeoffs for
-                    flexibility vs. efficiency and other concerns. This is sometimes called “training/serving skew” and
-                    requires careful monitoring to detect and avoid.
-                    Test for model staleness. For models that continually update, this means monitoring staleness
-                    throughout the training pipeline, to be able to determine in the case of a stale model where the pipeline
-                    has stalled. For example, if a daily job stopped generating an important table, what alert would fire?
-                    Test for NaNs or infinities appearing in your model during training or serving. Invalid numeric
-                    values can easily crop up in your learning model, and knowing that they have occurred can speed
-                    diagnosis of the problem.
-                    Test for dramatic or slow-leak regressions in training speed, serving latency, throughput, or
-                    RAM usage. The computational performance (as opposed to predictive quality) of an ML system
-                    is often a key concern at scale, and should be monitored via specialized regression testing. Dramatic
-                    regressions and slow regressions over time may require different kinds of monitoring.
-                    Test for regressions in prediction quality on served data. For many systems, monitoring for
-                    nonzero bias can be an effective canary for identifying real problems, though it may also result from
-                    changes in the world.                
-            </pre>
+        <section>
+            <h3>Test: Test for upstream instability in features, both in training and serving</h3>
+            <p>Upstream instability can create problems both at training and serving (inference) time. Training time instability is especially
+            problematic when models are updated or retrained frequently. Serving time instability can occur even when the models themselves
+            remain static. As examples, what alert would fire if one datacenter stops sending data? What if an upstream signal provider
+            did a major version upgrade?</p>
         </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Test that data invariants hold in training and serving inputs. 
+
+For example, test if Feature A and Feature B should always
+have the same number of non-zero values in each example, or that Feature C is always in the range (0; 100) or that class
+distribution is about 10:1.
+
+
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Test that your training and serving features compute the same values.
+
+The codepaths that actually generate input features
+may differ for training and inference time, due to tradeoffs for flexibility vs. efficiency and other concerns. This is sometimes
+called “training/serving skew” and requires careful monitoring to detect and avoid.
+
+
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Test for model staleness. 
+
+For models that continually update, this means monitoring staleness throughout the training pipeline,
+to be able to determine in the case of a stale model where the pipeline has stalled. For example, if a daily job stopped
+generating an important table, what alert would fire?
+
+
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Test for NaNs or infinities appearing in your model during training or serving. 
+
+Invalid numeric values can easily crop up
+in your learning model, and knowing that they have occurred can speed diagnosis of the problem.
+
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Test for dramatic or slow-leak regressions in training speed, serving latency, throughput, or RAM usage. 
+
+The computational
+performance (as opposed to predictive quality) of an ML system is often a key concern at scale, and should be monitored via
+specialized regression testing. Dramatic regressions and slow regressions over time may require different kinds of monitoring.
+
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Test for regressions in prediction quality on served data. 
+
+For many systems, monitoring for nonzero bias can be an effective
+canary for identifying real problems, though it may also result from changes in the world.
+
+            </textarea>
+        </section>
+
+            <section>
+                <h3>Ergebnis</h3>
+                <p>0 von 14 Punkten</p>
+                <p>
+                    <em>0 points: More of a research project than a productionized system.</em>
+                </p>
+            </section>
+
+        <section class="todo">
+            <h3>Endergebnis</h3>
+            <p>Das Minimum eines Ergebnisses jeder Kategorie</p>
+            <p>Das bedeutet leider insgesamt 0 Punkte</p>
+                <p>
+                    <em>0 points: More of a research project than a productionized system.</em>
+                </p>
+        </section>
+
+                <section>
+                    <h3>Zusammenfassung</h3>
+                    <ul>
+                        <li class="fragment">Machine Learning läuft klassischer Software-Technik um Jahre hinterher</li>
+                        <li class="fragment">Wenige haben dieselben hohen Anforderungen an ihr Modell wie Google</li>
+                        <li class="fragment">Bewusstsein für diese Liste von Tests in jedem Fall sinnvoll</li>
+                        <li class="fragment">Jeder muss individuell entscheiden, welcher Test Sinn macht</li>
+                    </ul>
+                    <p>
+                        <small>
+                             Wie gut ist dein Machine-Learning-Modell?
+                            <br>
+                            <a href="http://zeigermann.eu">Oliver Zeigermann</a> /
+                            <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                            <br>
+                            <a href="http://bit.ly/m3-ml-quality">
+                                http://bit.ly/m3-ml-quality
+                            </a>
+                        </small>
+                    </p>
+                </section>
+
 <!-- 
         <section class="todo">
             <pre>
@@ -540,22 +635,6 @@ More people are confused an looking for the right thing to do
             </pre>
         </section>
  -->
-        <section>
-            <h4>Zusammenfassung</h4>
-            <ul>
-                <li>
-            </ul>
-            <p><small>
-                Wie gut ist dein Machine-Learning-Modell?
-                <br>
-            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                <br>
-            <a href="http://bit.ly/m3-ml-quality">
-                http://bit.ly/m3-ml-quality
-            </a>
-            </small></p>
-        </section>
-
     </div>
 
 </div>
