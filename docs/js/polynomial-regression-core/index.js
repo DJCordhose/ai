@@ -42,9 +42,30 @@ const d = tf.variable(tf.scalar(Math.random()));
 
 // Step 2. Create an optimizer, we will use this later. You can play
 // with some of these values to see how the model perfoms.
-const numIterations = 200;
-const learningRate = 0.5;
-const optimizer = tf.train.sgd(learningRate);
+// https://js.tensorflow.org/api/0.6.1/#Training-Optimizers
+let optimizer;
+{
+  // http://cs231n.github.io/neural-networks-3/#sgd
+  // https://js.tensorflow.org/api/0.6.1/#train.sgd
+  const learningRate = 0.5;
+  const sgdOptimizer = tf.train.sgd(learningRate);
+  // optimizer = sgdOptimizer ;
+}
+{
+  // https://distill.pub/2017/momentum/
+  // https://js.tensorflow.org/api/0.6.1/#train.momentum
+  const LEARNING_RATE = 0.1;
+  const MOMENTUM = 0.9; // possibly good values [0.5, 0.9, 0.95, 0.99]
+  momentumOptimizer = new tf.train.momentum(LEARNING_RATE, MOMENTUM);
+  // optimizer = momentumOptimizer;
+}
+{
+  // http://cs231n.github.io/neural-networks-3/#ada
+  // https://js.tensorflow.org/api/0.6.1/#train.adam
+  const LEARNING_RATE = 0.1;
+  const adamOptimizer = new tf.train.adam(LEARNING_RATE);
+  optimizer = adamOptimizer;
+}
 
 // Step 3. Write our training process functions.
 
@@ -107,7 +128,7 @@ async function train(trainingData, numIterations, checkpointCallback) {
       return loss(pred, trainingData.ys);
     });
 
-    await checkpointCallback({a,b,c,d}, trainingData);
+    await checkpointCallback({ a, b, c, d }, trainingData);
 
     // Use tf.nextFrame to not block the browser.
     await tf.nextFrame();
@@ -117,6 +138,7 @@ async function train(trainingData, numIterations, checkpointCallback) {
 async function learnCoefficients() {
   const trueCoefficients = { a: -0.8, b: -0.2, c: 0.9, d: 0.5 };
   const trainingData = generateData(100, trueCoefficients);
+  const numIterations = 200;
 
   // Plot original data
   renderCoefficients("#data .coeff", trueCoefficients);
