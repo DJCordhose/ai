@@ -64,7 +64,10 @@ const renderChart = vegaEmbed;
          }
        },
        {
-         'mark': 'line',
+        "mark": {
+          "type": "line",
+          'orient': 'vertical',
+        },
          'encoding': {
            'x': {'field': 'x', 'type': 'quantitative'},
            'y': {'field': 'pred', 'type': 'quantitative'},

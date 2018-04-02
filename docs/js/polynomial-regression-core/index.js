@@ -40,10 +40,9 @@ const b = tf.variable(tf.scalar(Math.random()));
 const c = tf.variable(tf.scalar(Math.random()));
 const d = tf.variable(tf.scalar(Math.random()));
 
-
 // Step 2. Create an optimizer, we will use this later. You can play
 // with some of these values to see how the model perfoms.
-const numIterations = 75;
+const numIterations = 200;
 const learningRate = 0.5;
 const optimizer = tf.train.sgd(learningRate);
 
@@ -61,7 +60,8 @@ const optimizer = tf.train.sgd(learningRate);
 function predict(x) {
   // y = a * x ^ 3 + b * x ^ 2 + c * x + d
   return tf.tidy(() => {
-    return a.mul(x.pow(tf.scalar(3, 'int32')))
+    return a
+      .mul(x.pow(tf.scalar(3, "int32")))
       .add(b.mul(x.square()))
       .add(c.mul(x))
       .add(d);
@@ -77,7 +77,10 @@ function predict(x) {
  */
 function loss(prediction, labels) {
   // Having a good error function is key for training a machine learning model
-  const error = prediction.sub(labels).square().mean();
+  const error = prediction
+    .sub(labels)
+    .square()
+    .mean();
   return error;
 }
 
@@ -87,11 +90,11 @@ function loss(prediction, labels) {
  * xs - training data x values
  * ys — training data y values
  */
-async function train(xs, ys, numIterations) {
+async function train(trainingData, numIterations, checkpointCallback) {
   for (let iter = 0; iter < numIterations; iter++) {
-    // optimizer.minimize is where the training happens. 
+    // optimizer.minimize is where the training happens.
 
-    // The function it takes must return a numerical estimate (i.e. loss) 
+    // The function it takes must return a numerical estimate (i.e. loss)
     // of how well we are doing using the current state of
     // the variables we created at the start.
 
@@ -100,51 +103,61 @@ async function train(xs, ys, numIterations) {
     // loss.
     optimizer.minimize(() => {
       // Feed the examples into the model
-      const pred = predict(xs);
-      return loss(pred, ys);
+      const pred = predict(trainingData.xs);
+      return loss(pred, trainingData.ys);
     });
-    
+
+    await checkpointCallback({a,b,c,d}, trainingData);
+
     // Use tf.nextFrame to not block the browser.
     await tf.nextFrame();
   }
 }
 
 async function learnCoefficients() {
-  const trueCoefficients = {a: -.8, b: -.2, c: .9, d: .5};
+  const trueCoefficients = { a: -0.8, b: -0.2, c: 0.9, d: 0.5 };
   const trainingData = generateData(100, trueCoefficients);
 
   // Plot original data
-  renderCoefficients('#data .coeff', trueCoefficients);
-  await plotData('#data .plot', trainingData.xs, trainingData.ys)
+  renderCoefficients("#data .coeff", trueCoefficients);
+  await plotData("#data .plot", trainingData.xs, trainingData.ys);
 
   // See what the predictions look like with random coefficients
-  renderCoefficients('#random .coeff', {
+  renderCoefficients("#random .coeff", {
     a: a.dataSync()[0],
     b: b.dataSync()[0],
     c: c.dataSync()[0],
-    d: d.dataSync()[0],
+    d: d.dataSync()[0]
   });
   const predictionsBefore = predict(trainingData.xs);
   await plotDataAndPredictions(
-      '#random .plot', trainingData.xs, trainingData.ys, predictionsBefore);
+    "#random .plot",
+    trainingData.xs,
+    trainingData.ys,
+    predictionsBefore
+  );
+  predictionsBefore.dispose();
 
   // Train the model!
-  await train(trainingData.xs, trainingData.ys, numIterations);
+  await train(trainingData, numIterations, predictAndPlot);
+  await predictAndPlot({ a, b, c, d }, trainingData);
+}
 
-  // See what the final results predictions are after training.
-  renderCoefficients('#trained .coeff', {
+async function predictAndPlot({ a, b, c, d }, trainingData) {
+  renderCoefficients("#trained .coeff", {
     a: a.dataSync()[0],
     b: b.dataSync()[0],
     c: c.dataSync()[0],
-    d: d.dataSync()[0],
+    d: d.dataSync()[0]
   });
   const predictionsAfter = predict(trainingData.xs);
   await plotDataAndPredictions(
-      '#trained .plot', trainingData.xs, trainingData.ys, predictionsAfter);
-
-  predictionsBefore.dispose();
+    "#trained .plot",
+    trainingData.xs,
+    trainingData.ys,
+    predictionsAfter
+  );
   predictionsAfter.dispose();
 }
-
 
 learnCoefficients();

@@ -9,6 +9,7 @@
         const result = a.add(b); // a is not modified, result is a new tensor
         const data = await result.data();
         console.log(data); // Float32Array([3, 4, 5]
+        result.print();
     })();
 </script>
 </html>
