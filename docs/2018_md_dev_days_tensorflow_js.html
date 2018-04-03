@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Machine Learning in the Browser</title>
+    <title>tensorflow.js</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -124,6 +124,7 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
 
         <section class="todo">
                 <pre>
+- https://djcordhose.github.io/ai/js/mnist/index.html als Dev Beispiel?
 - Deploy Beispiel mit Modell laden zuende machen
   - http://localhost:8080/docs/js/tensorflow-sandbox/load_model.html
 - Beispiel mit layers bei Develop
@@ -241,7 +242,8 @@ Unter Deploy zeigen wie das aus Keras geht und Pläne für Node GpU
 const a = tf.tensor1d([1, 2, 3]);
 const b = tf.scalar(2);
 
-const result = a.add(b); // a is not modified, result is a new tensor
+// a is not modified, result is a new tensor
+const result = a.add(b);
                 </code></pre>
                                     
                 <pre><code contenteditable data-trim class="fragment line-numbers python">
@@ -268,63 +270,23 @@ console.log(data); // Float32Array([3, 4, 5]
 * Changing to first https://js.tensorflow.org/api/0.6.1/#train.momentum and then https://js.tensorflow.org/api/0.6.1/#train.adam 
 </textarea>
 </section>
+
+<section data-markdown>
+    <textarea data-template>
+### High Level Layer API
+
+<p>Experiments with state of the art neural networks with zero installation directly in JavaScript: <a href="js/mnist/model.js" target="_blank">
+    model.js</a></p>
+
+<a href="js/mnist" target="_blank">
+<img src="img/tfjs/minst.png" height="350px">
+</a>
+<p><small><a href="js/mnist" target="_blank">
+    https://djcordhose.github.io/ai/js/mnist</a></small></p>
+
+</textarea>
+</section>
         
-        <section>
-            <h3>deeplearn.js</h3>
-            <p>Full TypeScript ML library using browser GPU</p>
-            <a href="https://pair-code.github.io/deeplearnjs/demos/imagenet/imagenet-demo.html" target="_blank">
-                <img src="img/browser/deeplearn-sigurd.png" height="300px">
-            </a>
-            <p><a href="https://pair-code.github.io/deeplearnjs" target="_blank">https://pair-code.github.io/deeplearnjs</a></p>
-            <p><small>Includes full training mimicking TensorFlow and NumPy API
-                <a href="https://research.googleblog.com/2017/08/harness-power-of-machine-learning-in.html" target="_blank">
-                    https://research.googleblog.com/2017/08/harness-power-of-machine-learning-in.html</a></small></p>
-        </section>
-
-        <section>
-            <h4>More Machine Learning with JavaScript</h4>
-            <ul>
-                <li>
-                    <a href="http://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank">
-                        ConvNetJS</a>: Visual NN exploration for learning
-                    (<a href="http://cs.stanford.edu/people/karpathy/tsnejs/" target="_blank">t-SNE</a>
-                    cluster exploration from same auhtor)
-
-                <li><a target="_blank" href="https://github.com/harthur-org/brain.js">
-                    Brain.js
-                </a>:
-                    simple and straing forward NN implementation</li>
-                <li><a href="http://caza.la/synaptic/#/">synaptic.js</a>: similar scope as Brain.js, a bit more active</li>
-                <li><a href="https://github.com/mljs/ml">ml.js</a>: generic low level libs for machine learning</li>
-
-                <!--<li><a href="https://scienceai.github.io/neocortex/" target="_blank">-->
-                    <!--neocortex.js-->
-                <!--</a>runs pre-trained deep neural networks (<a href="http://keras.io/" target="_blank">Keras</a> models)-->
-                <!--<li><a href="https://www.npmjs.com/package/scikit-node" target="_blank">-->
-                    <!--scikit-node-->
-            <!--</a>: Wrapper for Python's <a target="_blank" href="http://scikit-learn.org/">scikit-learn</a> (mainstream lib)-->
-            </ul>
-        </section>
-
-        <section>
-            <h3>Demo: deeplearn.js</h3>
-            <p>Use all Browser features in combination with Machine Learning</p>
-            <!--<ul class="fragment">-->
-                <!--<li>Written in TypeScript-->
-                <!--<li>camera-->
-                <!--<li>high interaction-->
-            <!--</ul>-->
-            <a href="http://localhost:8080" target="_blank">
-                <img src="img/browser/NDArrayMathGPU.png" height="350px">
-            </a>
-            <p><small><a href="https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html" target="_blank">
-                https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html</a></small></p>
-            <!--<ul class="fragment">-->
-                <!--<li>Operations on Tensors-->
-                <!--<li>Basic Learning-->
-            <!--</ul>-->
-        </section>
-
         <section>
             <h1>(III) Play</h1>
             <p class="fragment">Everyone can be educated, they just need a browser and internet</p>
@@ -379,9 +341,7 @@ https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
     <textarea data-template>
 ### Going over WebGL to reach the GPU
 
-_We store NDArrays as floating point WebGLTextures (in rgba channels). Mathematical operations are defined as fragment shaders that operate on WebGLTextures and produce new WebGLTextures._
-
-_The fragment shaders we write operate in the context of a single output value of our result NDArray, which gets parallelized by the WebGL stack._
+_We use fragment shaders to parallelize the tensor operations and use 2D color textures to store data. Operations trigger shader programs that run over textures and generate new textures (tensors)._
 
 @nsthorat via https://news.ycombinator.com/item?id=15856647
 </textarea>
