@@ -110,7 +110,7 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
         </section>
 
         <section>
-            <h2>Educate, Visualize, Develop, Deploy with tensforflow.js</h2>
+            <h2>Educate, Visualize, Develop, Play, Deploy with tensforflow.js</h2>
             <h3>Why the Browser and Machine Learning are a perfect match</h3>
             <p><a target="_blank" href="https://www.md-devdays.de/Act?id=99">Magdeburger Developer Days, 2018</a></p>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -124,6 +124,18 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
             <img src="img/tensorflow_js.png">
             <p><a href="https://js.tensorflow.org/" target="_blank">https://js.tensorflow.org/</a></p>
         </section>
+
+        <section class="todo">
+                <pre>
+- Deploy Beispiel mit Modell laden zuende machen
+  - http://localhost:8080/docs/js/tensorflow-sandbox/load_model.html
+- Beispiel mit layers bei Develop
+  - Beispiel mit Layers
+- Zwischen Develop und Deploy: Play
+  - die Spiele aus tensorflow.js
+            </pre>
+        </section>
+                    
 
         <section class="todo">
             <pre>
@@ -405,8 +417,10 @@ const model = await tf.loadModel('tfjs_artifacts/model.json');
 <script>
     if (window.location.hostname.indexOf('localhost') !== -1) {
     } else {
-        // only applies to public version
-        $('.preparation').remove();
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
     }
     Reveal.addEventListener( 'ready', function( event ) {
         if (window.location.hostname.indexOf('localhost') !== -1) {

@@ -162,6 +162,12 @@ Vortragssprache Deutsch
             </a></small></p>
         </section>
 
+<section class="todo">
+<pre>
+- Teil 3: 
+- Daten-Entscheidung
+</pre>    
+</section>
         <section>
             <h1>Teil 1</h1>
             <h2>Ein Beispiel zum Einstieg</h2>
@@ -238,68 +244,6 @@ Vortragssprache Deutsch
             <h2>Idee von Machine Learning</h2>
         </section>
 
-    <section>
-        <h3>Ansatz: Machine Learning</h3>
-        <div class="fragment">
-                <img src="img/insurance/ml-phases.png" height="450px">
-        </div>
-    </section>
-
-                    <section>
-                        <h3>Typische Anwendung: Klassifikation</h3>
-                        <div class="fragment">
-                            <img src="img/sketch/classification.jpg" height="450px">
-                        </div>
-                    </section>
-
-                <section>
-                    <img src="img/AI-1.png">
-                </section>
-                
-                <section>
-                    <img src="img/AI-2.png">
-                </section>
-
-                        <section>
-                            <h3>Schachprogramme nutzen Suchen</h3>
-                            <p>Hier reicht stumpfes durchrechnen, um jeden Menschen zu besiegen</p>
-                            <p>Das hat nichts mit dem zu tun, was Menschen machen</p>
-                            <p>Aber vom Ergebnis ist die Maschine nicht als solche zu erkennen</p>
-                        </section>
-
-                        <section>
-                            <h3>Schachprogramme haben Menschen überwunden weil</h3>
-                            <div class="fragment" style="float: left">
-                                <img src="img/cray2.png" height="250">
-                                <p>
-                                    <small>Cray X-MP
-                                        <br> Supercomputer (1982)</small>
-                                </p>
-                            </div>
-                            <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
-                                x 100.000 =
-                            </div>
-                            <div class="fragment" style="float: left">
-                                <img src="img/titan5.jpg" height="250" style="float: right">
-                                <p>
-                                    <small>
-                                        <br>Titan 5 im Gamer PC (2017)</small>
-                                </p>
-                            </div>
-                        </section>
-                        
-                        <section>
-                            <h3>Neuerdings haben wir allerdings auch</h3>
-                            <ol>
-                                <li>Schlauere Strategien (Programme)
-                                    <li>Sehr große Datenmengen
-                            </ol>
-                        </section>
-                
-                <section>
-                    <img src="img/AI-3.png">
-                </section>
-                
                 <section>
                     <h2>
                         <small>Oft werden 3 Arten von Machine Learning unterschieden</small>
@@ -308,6 +252,20 @@ Vortragssprache Deutsch
                         <img src="img/sketch/types-of-ml.png" height="500px">
                     </div>
                 </section>
+
+                <section>
+                        <h3>Supervised Machine Learning</h3>
+                        <div class="fragment">
+                                <img src="img/insurance/ml-phases.png" height="450px">
+                        </div>
+                    </section>
+                
+                                <section>
+                        <h3>Typische Anwendung: Klassifikation</h3>
+                        <div class="fragment">
+                            <img src="img/sketch/classification.jpg" height="450px">
+                        </div>
+                    </section>
 
     <section>
         <h3>Machine Learning als Klassifikation: Ein Experiment</h3>
@@ -384,21 +342,15 @@ Vortragssprache Deutsch
             <li>Neural Networks (Deep Learning): Zusammenschaltung vieler Logistischer Regression
         </ul>
     </section>
+    <section data-markdown>
+            <textarea data-template>
+### Regression anstatt Klassifikation
+Die andere Art des Machine Learnings
+<img src="img/linear_regression.png" height="400px">
+https://beta.observablehq.com/@tmcw/bring-your-own-doodles-linear-regression
+    </textarea>
+    </section>
     
-                <section>
-                    <img src="img/AI-4.png">
-                </section>
-
-                <section>
-                    <h3>Verarbeitung natürlicher Sprache</h3>
-                    <ul>
-                        <li>Klassifikation von Texten</li>
-                        <li>Automatische Erkennung von Rechnungen / Belegen</li>
-                        <li>Zusammenfassen von Texten</li>
-                        <li>Dialogsysteme</li>
-                    </ul>
-                </section>
-                
         <section>
                 <h1>Teil 3</h1>
                 <h2>Wie findet ihr eigene Anwendungsmöglichkeiten?</h2>
@@ -417,6 +369,7 @@ Vortragssprache Deutsch
 ### Mögliche Ziele
 * Marketing
 * weniger Fehler
+* Intuitive Bauchentscheidungen los werden
 * schnelleres Arbeiten, höherer Durchsatz
 * bessere Qualität, zufriedenere Kunden
 * Personal einsparen
@@ -426,7 +379,7 @@ Vortragssprache Deutsch
 </section>
 
 <section>
-    <h3>Beispiele</h3>
+    <h2>Beispiele</h2>
 </section>
 
 <section>
@@ -503,13 +456,16 @@ Vortragssprache Deutsch
             <p style="clear: both">Einfache Regeln reichen oft nicht</p>
         </section>
 
-        <section class="todo">
-            <h3>Kreativität</h3>
-<pre>
-        https://experiments.withgoogle.com/ai/beat-blender
-        https://magenta.tensorflow.org/music-vae    
-</pre>
+        <section data-markdown>
+                <textarea data-template>
+### Kreativität
+
+<img src="img/beat_blender.png" height="400px">
+
+https://experiments.withgoogle.com/ai/beat-blender/view/
+                </textarea>
         </section>
+                            
 
         <section>
                 <h3>Customer Churn / Conversion</h3>
@@ -519,11 +475,11 @@ Vortragssprache Deutsch
                             <small>Kunde vor und nach Abschluss</small>
                         </p>
                     </div>
-                    <div class="fragment" style="float: left; padding-left: 20px; padding-right: 20px; padding-top: 120px; font-weight: bold">
+                    <div class="fragment" style="float: left; padding-left: 100px; padding-right: 20px; padding-top: 120px; font-weight: bold">
                         ==> 
                     </div>
                     <div class="fragment" style="float: right">
-                        <img src="img/churn/log7335277f@example.com.png" height="350">
+                        <img src="img/glaskugel.jpg" height="350">
                         <p>
                             <small>Glaskugel</small>
                         </p>
@@ -542,36 +498,59 @@ Vortragssprache Deutsch
                 </ul>
             </small>
         </section>
-    <section data-markdown class="todo">
-    <textarea data-template>
-### Business Success Stories
-
-Hier aufzählen aus dem Artikel unten
-
-https://www.cio.com/article/3225445/artificial-intelligence/machine-learning-success-stories.html
-</textarea>
-</section>
-
-        <section>
-                
-        </section>
     
     <section>
         <h3>Welche Daten sind da?</h3>
     </section>
+
+<section data-markdown>
+        <textarea data-template>
+### If Your Data Is Bad, Your Machine Learning Tools Are Useless
+
+
+https://hbr.org/2018/04/if-your-data-is-bad-your-machine-learning-tools-are-useless
+        </textarea>
+</section>
+
 
     <section>
             <h3>Eine Analogie</h3>
             <p class="fragment">Die Machine Learning Technologie ist der Motor</p>
             <p class="fragment">Eure Daten sind das Benzin</p>
             <p class="fragment"><em>Nur wenn beides da ist läuft die Maschine</em></p>
+
     </section>
-        
+
+    <section>
+        <h3>Und ihr müsst entscheiden wo ihr hinfahren wollt</h3>
+    </section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+Entscheidungsbaum auf Englisch
+
+Oben: labelled Data? No Unsupervised
+
+Dann auf 2. Seite Unsupervised
+
+Was will man wissen? Als Kriterium
+
+PCA: what is important?
+
+Clustering: what belongs together?
+
+3. Seite Supervised
+
+LSTM: Time Series Data
+
+</textarea>
+</section>
+
 
             
-            <section>
+            <!-- <section>
                     <img src="img/flashcards/Curse_Of_Dimensionality_print.png">
-                </section>
+                </section> -->
         
                     <section>
             <h3>Zusammenfassung</h3>
@@ -606,7 +585,9 @@ https://www.cio.com/article/3225445/artificial-intelligence/machine-learning-suc
         if (window.location.hostname.indexOf('localhost') !== -1) {
         } else {
             // only applies to public version
+            $('.todo').remove();
             $('.preparation').remove();
+            $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
             if (window.location.hostname.indexOf('localhost') !== -1) {
