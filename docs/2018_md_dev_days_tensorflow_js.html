@@ -149,6 +149,8 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
 
 * https://medium.com/tensorflow/introducing-tensorflow-js-machine-learning-in-javascript-bf3eab376db
 
+* https://js.tensorflow.org/tutorials/
+
 Educate
 Auch die anderen coolen Beispiele zeigen
 
@@ -336,7 +338,35 @@ console.log(data); // Float32Array([3, 4, 5]
                 <p class="fragment">TensorFlow only supports NVIDIA GPUs</p>
                 <p class="fragment"><strong>Tensorflow.js allows you to train and predict on any GPU</strong></p>
             </section>
+<section data-markdown>
+    <textarea data-template>
+* save a Keras model, e.g. `insurance.hdf5` 
+* `pip install tensorflowjs`
+* `tensorflowjs_converter --input_format keras insurance.hdf5 tfjs_artifacts`
+* 
 
+https://js.tensorflow.org/tutorials/import-keras.html
+</textarea>
+</section>
+<section data-markdown>
+        <textarea data-template>
+inputs = tf.keras.Input(name='input', shape=(3, ))
+x = tf.keras.layers.Dense(100, name='hidden1', activation='relu')(inputs)
+x = tf.keras.layers.Dense(100, name='hidden2', activation='relu')(x)
+predictions = tf.keras.layers.Dense(3, name='softmax', activation='softmax')(x)
+model = tf.keras.models.Model(inputs=inputs, outputs=predictions)
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+</textarea>
+</section>
+<section data-markdown>
+        <textarea data-template>
+const model = await tf.loadModel('tfjs_artifacts/model.json');
+</textarea>
+</section>
+            
 
         <section>
             <h3>Wrapping Up</h3>
