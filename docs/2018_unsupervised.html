@@ -164,8 +164,12 @@ sich damit auseiander zu setzen
             <h2>Structure</h2>
             <ol>
                 <li>Correlations</li>
-                <li>T-SNE: Visualizing High Dimensional Data</li>
-                <li>PCA: Find out what really matters</li>
+                <li>Dimensionality Reduction
+                    <ol>
+                        <li>T-SNE: Visualizing High Dimensional Data</li>
+                        <li>PCA: Find out what really matters</li>
+                    </ol>
+                </li>
                 <li>Clustering</li>
             </ol>
         </section>
@@ -255,7 +259,9 @@ sich damit auseiander zu setzen
         if (window.location.hostname.indexOf('localhost') !== -1) {
         } else {
             // only applies to public version
+            $('.todo').remove();
             $('.preparation').remove();
+            $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
             if (window.location.hostname.indexOf('localhost') !== -1) {

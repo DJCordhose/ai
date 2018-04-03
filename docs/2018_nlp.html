@@ -154,6 +154,18 @@
         </section>
 
         <section class="todo">
+                <pre>
+Embeddings:
+- https://www.quora.com/What-does-the-word-embedding-mean-in-the-context-of-Machine-Learning
+- https://www.tensorflow.org/programmers_guide/embedding
+- 
+
+TF-IDF + LogReg: 
+https://github.com/keras-team/keras/blob/master/examples/imdb_lstm.py
+</pre>
+</section>
+
+<section class="todo">
             <pre>
 
 Termin 1, Intro nur 1 Stunde
@@ -337,7 +349,9 @@ Nicht mehr planen, weil letzter Teil, der sicher zuende gebracht werden soll.
         if (window.location.hostname.indexOf('localhost') !== -1) {
         } else {
             // only applies to public version
+            $('.todo').remove();
             $('.preparation').remove();
+            $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
             if (window.location.hostname.indexOf('localhost') !== -1) {

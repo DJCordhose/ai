@@ -92,7 +92,6 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
         <section data-markdown class="preparation">
             <script type="text/template">
 ### Preparation
-
 - tensforflow Playground Demo vorbereiten
   - Learn about the process of training
   - How does a neuron work?
@@ -102,10 +101,8 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
   - start ```http-server``` in terminal
   - Color Scheme: High Contrast
   - Zoom In
-- Open all demos way ahead of time when there still is internet
-- Copy data/flights.csv to download for facets overview
-- Open Bonkers in one tab to have URL ready as input to Resnet on keras.js
-  - https://djcordhose.github.io/ai/img/cat-bonkers.png
+
+  - Open all demos way ahead of time when there still is internet
             </script>
         </section>
 
@@ -329,7 +326,43 @@ console.log(data); // Float32Array([3, 4, 5]
         </section>
 
         <section>
-            <h1>(III) Deploy</h1>
+            <h1>(III) Play</h1>
+            <p class="fragment">Everyone can be educated, they just need a browser and internet</p>
+        </section>
+
+            <section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Find Emojis in the real world
+
+Loads a MobileNet (Neural Network optimized for mobile devices) fully trained on all the Emojis
+
+<a href="https://emojiscavengerhunt.withgoogle.com/">
+<img src="img/tfjs/scavenger_hunt.png" height="350px">
+</a>
+
+https://github.com/google/emoji-scavenger-hunt
+https://js.tensorflow.org/tutorials/mnist.html
+
+</textarea>
+</section>
+
+            <section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Pacman using gesture control
+
+Loads a pretrained MobileNet and let's you refine it to your face (transfer learning) 
+
+<a href="https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html">
+<img src="img/tfjs/pacman.png" height="350px">
+</a>
+
+https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
+
+</textarea>
+</section>
+
+        <section>
+            <h1>(IV) Deploy</h1>
             <p>JavaScript might be the only language around</p>
             <p class="fragment">because all you have is a browser</p>
 
@@ -342,14 +375,27 @@ console.log(data); // Float32Array([3, 4, 5]
 
         </section>
 
-        <section>
-                <h3>GPU?</h3>
-                <p class="fragment">Graphics Processing Unit, originally for graphics</p>
-                <p class="fragment">GPUs are specialized on parallel matrix operations</p>
-                <p class="fragment">For all real problems you will need very powerful GPUs</p>
-                <p class="fragment">TensorFlow only supports NVIDIA GPUs</p>
-                <p class="fragment"><strong>Tensorflow.js allows you to train and predict on any GPU</strong></p>
-            </section>
+<section data-markdown>
+    <textarea data-template>
+### Going over WebGL to reach the GPU
+
+_We store NDArrays as floating point WebGLTextures (in rgba channels). Mathematical operations are defined as fragment shaders that operate on WebGLTextures and produce new WebGLTextures._
+
+_The fragment shaders we write operate in the context of a single output value of our result NDArray, which gets parallelized by the WebGL stack._
+
+@nsthorat via https://news.ycombinator.com/item?id=15856647
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src="img/tfjs/gtx_1060.png" height="500px">
+
+GPU usage when re-training for Pacman
+    </textarea>
+    </section>
+    
+
 <section data-markdown>
     <textarea data-template>
 * save a Keras model, e.g. `insurance.hdf5` 
@@ -362,7 +408,7 @@ https://js.tensorflow.org/tutorials/import-keras.html
 </section>
 <section data-markdown>
         <textarea data-template>
-inputs = tf.keras.Input(name='input', shape=(3, ))
+```inputs = tf.keras.Input(name='input', shape=(3, ))
 x = tf.keras.layers.Dense(100, name='hidden1', activation='relu')(inputs)
 x = tf.keras.layers.Dense(100, name='hidden2', activation='relu')(x)
 predictions = tf.keras.layers.Dense(3, name='softmax', activation='softmax')(x)
@@ -370,15 +416,28 @@ model = tf.keras.models.Model(inputs=inputs, outputs=predictions)
 
 model.compile(optimizer='adam',
               loss='categorical_crossentropy',
-              metrics=['accuracy'])
+              metrics=['accuracy'])```
 </textarea>
 </section>
 <section data-markdown>
         <textarea data-template>
-const model = await tf.loadModel('tfjs_artifacts/model.json');
+```const model = await tf.loadModel('tfjs_artifacts/model.json');```
 </textarea>
 </section>
             
+            <section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Sentiment Analysis
+
+Loads a custom convolutional Keras Model trained on the IMDB database
+
+<a href="https://storage.googleapis.com/tfjs-examples/sentiment/dist/index.html">
+<img src="img/tfjs/sentiment.png" height="350px">
+</a>
+
+https://github.com/keras-team/keras/blob/master/examples/imdb_cnn.py
+</textarea>
+</section>
 
         <section>
             <h3>Wrapping Up</h3>
