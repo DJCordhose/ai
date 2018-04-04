@@ -376,18 +376,43 @@ How would you cluster this unlabelled data?
                 <h3>There are more issues with the k-means approach</h3>            
         </section>
 
-        <section data-markdown class="todo">
+        <section data-markdown>
                 <textarea data-template>
+    <img src="img/unsupervised/noisy_circles.png" height="500px">
 
-                    Example with no classic clusters that does not work, no matter how many clusters we have
-
-    <img src="img/unsupervised/blobs.png" height="500px">
-    
-Some shapes we as humans can identify, but can k-means?
+Some shapes we can identify, but can k-means?    
                 </textarea>
     </section>
-    
-        <section>
+
+    <section data-markdown>
+            <textarea data-template>
+<img src="img/unsupervised/no_structure.png" height="500px">
+
+What about no structure at all?    
+            </textarea>
+</section>
+
+<section>
+        <h3>Results for k-means</h3>            
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src="img/unsupervised/noisy_circles_kmeans.png" height="500px">
+
+even with k=2 not a chance    
+        </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src="img/unsupervised/no_structure_kmeans.png" height="500px">
+
+structure out of nothing
+    </textarea>
+</section>
+
+<section>
             <h2>Comparing Clustering Algorithms</h2>
             <!-- <pre>
 - http://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
@@ -425,7 +450,9 @@ http://scikit-learn.org/stable/modules/clustering.html
 
         <section data-markdown class="todo">
                 <textarea data-template>
-Details here, notebook
+- Repeat example data sets from k k-means
+- add dbscan to notebook k-means_vs_dbscan
+- show results
                 </textarea>
     </section>
 
