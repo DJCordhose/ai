@@ -160,14 +160,19 @@ sich damit auseiander zu setzen
             </pre>
 </section>
 
+<section>
+        <h3>You can devide Machine Learning into three different categories</h3>
+        <img src="img/sketch/types-of-ml.png" height="500px">
+    </section>
+
         <section>
             <h2>Structure</h2>
             <ol>
                 <li>Correlations</li>
                 <li>Dimensionality Reduction
                     <ol>
-                        <li>T-SNE: Visualizing High Dimensional Data</li>
-                        <li>PCA: Find out what really matters</li>
+                            <li>Linear Correlations: PCA: Find out what really matters</li>
+                            <li>Non-Linear Correlations: T-SNE: Visualizing High Dimensional Data</li>
                     </ol>
                 </li>
                 <li>Clustering</li>
@@ -186,7 +191,93 @@ sich damit auseiander zu setzen
             <p>What is related to which?</p>
         </section>
 
+        <section class="todo">
+                <pre>
+- Add exaplanation of example from 2018_real_data.html
+                </pre>
+            </section>
+    
+            <section>
+                <h2><small>Getting an overview using a correlation plot</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="500px">
+                <p><small>Darker Colours indicate more correlation</small></p>
+            </div>
+        </section>
+
         <section>
+            <h2><small>Pearson's r: Linear Correlation</small></h2>
+            <div style="margin-top: -40px">
+            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+            <img src="img/Correlation_coefficient.png">
+            </a>
+            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966</a></small></p>
+                </div>
+        </section>
+
+        <section>
+            <h3>This is just linear correlation</h3>
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+            <img src="img/Correlation_examples2.svg" height="350px">
+            </a>
+            <p><small>correlation coefficient (r) above each figure</small></p>
+            <p>Notice: figures at the bottom row obviously are correlated, just not linearly </p>
+            </section>
+    
+            <section>
+                <h2>Need to look at the individual figures</h2>
+            </section>
+    
+        <section>
+            <h3>Arrival Time to Departure Time</h3>
+            <div class="fragment">
+                <img src="img/flight-analysis/ArrTime_DepTime.png" height="500px">
+            </div>
+        </section>
+
+        <section>
+                <h2><small>Pearson's r approx. 0.75: high Correlation</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="550px">
+            </div>
+        </section>
+
+        <section>
+            <h2>Of Course Arrival Time and Departure Time Are Correlated</h2>
+            <h2 class="fragment">Verdict: plausible but trivial</h2>
+        </section>
+
+        <section>
+        <h2><small>Second highest correlation: Distance to Unique Carrier</small></h2>
+            <div class="fragment" style="margin-top: -40px">
+                <img src="img/flight-analysis/corr.png" height="550px">
+            </div>
+        </section>
+
+        <section>
+            <h3>Distance to Unique Carrier</h3>
+            <div class="fragment">
+
+            <img src="img/flight-analysis/Distance_UniqueCarrier_.png" height="500px">
+                </div>
+        </section>
+
+        <section data-transition="none">
+            <h3>Distance to Unique Carrier</h3>
+            <div>
+
+                <img src="img/flight-analysis/Distance_UniqueCarrier_AQ.png" height="500px">
+                <p><small>
+                    <em>1 = AQ (Aloha Airlines)</em>
+                    <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
+                </small></p>
+                <!--Answer AQ in D3 part: mainly between Hawaii and California -->
+            </div>
+        </section>
+
+    
+            <section>
             <img src="img/flashcards/Pearsons_Correlation_print.png">
         </section>
 
@@ -199,10 +290,26 @@ sich damit auseiander zu setzen
         </section>
 
         <section>
+                <h2>PCA</h2>
+                <p>Principal Component Analysis</p>
+            </section>
+    
+            <section>
+                <img src="img/flashcards/Principal_Component_Analysis_print.png">
+            </section>
+    
+            <section>
+                <img src="img/flashcards/Principal_Components_print.png">
+            </section>
+    
+        <section>
             <h2>T-SNE</h2>
             <p>Visualizing High Dimensional Data</p>
         </section>
-
+        <section>
+                <p>As humans looking at a computer screen we are also naturally limited to two-dimensional visualizations that at best change over time and reaction to interaction.</p>
+        </section>
+        
         <section class="todo">
             <h3>Intuition</h3>
             <pre>
@@ -213,39 +320,132 @@ sich damit auseiander zu setzen
         </section>
 
         <section>
-            <h2>PCA</h2>
-            <p>Principal Component Analysis</p>
-        </section>
-
-        <section>
-            <img src="img/flashcards/Principal_Component_Analysis_print.png">
-        </section>
-
-        <section>
-            <img src="img/flashcards/Principal_Components_print.png">
-        </section>
-
-        <section>
             <h2>Clustering</h2>
         </section>
 
-        <section>
-            <img src="img/flashcards/K-Means_Clustering_print.png">
-        </section>
-        
-        <section>
-            <img src="img/flashcards/DBSCAN_print.png">
+        <section data-markdown>
+                <textarea data-template>
+_Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
+similar (in some sense) to each other than to those in other groups (clusters)._
+
+https://en.wikipedia.org/wiki/Cluster_analysis
+                </textarea>
+    </section>
+    
+    <section data-markdown>
+            <textarea data-template>
+<img src="img/unsupervised/blobs.png" height="500px">
+
+How would you cluster this unlabelled data?
+            </textarea>
+</section>
+    <section>
+        <h3>Our brains do a phenomenal job when processing images</h3>
+        <p class="fragment">We quickly see patterns and do automatic clustering without even thinking.</p>
+    </section>
+    
+    <section>
+            <h3>Exercise: How to automate this?</h3>
+            <p class="fragment">Come up with an informal algorithm and apply it to a hand drawn example</p>
         </section>
 
+        <section>
+            <img src="img/flashcards/K-Means_Clustering_print.png" height="550px">
+            <p>Most Basic Algorithm</p>
+        </section>
 
-        <section class="todo">
-            <h3>Comparing Clustering Algorithms</h3>
-            <pre>
-- http://scikit-learn.org/stable/modules/clustering.html
+        <section>
+            <h3>What do you think is the fundamental weakness of this approach?</h3>            
+        </section>
+
+        <section>
+                <img src="img/unsupervised/blobs_kmeans_3.png" height="550px">
+                <p>Perfect result for k = 3</p>
+        </section>
+            
+        <section>
+            <img src="img/unsupervised/blobs_kmeans_10.png" height="550px">
+            <p>And this is the result for k = 10</p>
+        </section>
+
+        <section>
+            <h3>You need to make a good guess of how many reasonable clusters there are</h3>
+        </section>
+
+        <section>
+                <h3>There are more issues with the k-means approach</h3>            
+        </section>
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+
+                    Example with no classic clusters that does not work, no matter how many clusters we have
+
+    <img src="img/unsupervised/blobs.png" height="500px">
+    
+Some shapes we as humans can identify, but can k-means?
+                </textarea>
+    </section>
+    
+        <section>
+            <h2>Comparing Clustering Algorithms</h2>
+            <!-- <pre>
 - http://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
 - http://hdbscan.readthedocs.io/en/latest/performance_and_scalability.html
-            </pre>
+            </pre> -->
         </section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src="img/unsupervised/cluster_compare.png" height="550px">
+
+<p><small><a href="http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html">
+    http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
+</a></small></p>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src="img/unsupervised/sphx_glr_plot_cluster_comparison_001.png" height="550px">
+
+<p><small><a href="http://scikit-learn.org/stable/modules/clustering.html">
+http://scikit-learn.org/stable/modules/clustering.html
+</a></small></p>
+
+</textarea>
+</section>
+
+        
+        <section>
+                <img src="img/flashcards/DBSCAN_print.png" height="550px">
+                <p>State of the Art Algorithm</p>
+        </section>
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+Details here, notebook
+                </textarea>
+    </section>
+
+    <section data-markdown class="todo">
+            <textarea data-template>
+### Applications of clustering
+* Outlier Detection: one of these things is not like the others
+            </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Other Unsupervised Techniques
+
+* Autoencoder, traditionally used for dimensionality reduction, but lately also for generative models: https://en.wikipedia.org/wiki/Autoencoder
+* 
+</textarea>
+</section>
+
+        
 
     </div>
 
