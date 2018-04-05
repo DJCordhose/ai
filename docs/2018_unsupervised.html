@@ -169,14 +169,18 @@ sich damit auseiander zu setzen
             <h2>Structure</h2>
             <ol>
                 <li>Correlations</li>
+                <li>Clustering</li>
                 <li>Dimensionality Reduction
                     <ol>
                             <li>Linear Correlations: PCA: Find out what really matters</li>
                             <li>Non-Linear Correlations: T-SNE: Visualizing High Dimensional Data</li>
                     </ol>
                 </li>
-                <li>Clustering</li>
             </ol>
+        </section>
+
+        <section>
+            <h3>So here we are talking about what you do when your data is not labelled</h3>
         </section>
 
         <section class="todo">
@@ -288,37 +292,6 @@ sich damit auseiander zu setzen
         <section>
             <img src="img/flashcards/Probability_Density_Function_print.png">
         </section>
-
-        <section>
-                <h2>PCA</h2>
-                <p>Principal Component Analysis</p>
-            </section>
-    
-            <section>
-                <img src="img/flashcards/Principal_Component_Analysis_print.png">
-            </section>
-    
-            <section>
-                <img src="img/flashcards/Principal_Components_print.png">
-            </section>
-    
-        <section>
-            <h2>T-SNE</h2>
-            <p>Visualizing High Dimensional Data</p>
-        </section>
-        <section>
-                <p>As humans looking at a computer screen we are also naturally limited to two-dimensional visualizations that at best change over time and reaction to interaction.</p>
-        </section>
-        
-        <section class="todo">
-            <h3>Intuition</h3>
-            <pre>
-- The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI
-- Michael Murphy's Epic Anti-Gun Artwork for the DNC: https://youtu.be/l-GR9IVjU54
-
-            </pre>
-        </section>
-
         <section>
             <h2>Clustering</h2>
         </section>
@@ -344,7 +317,20 @@ How would you cluster this unlabelled data?
         <p class="fragment">We quickly see patterns and do automatic clustering without even thinking.</p>
     </section>
     
-    <section>
+    <section data-markdown>
+        <textarea data-template>
+### Gestalt principles apply
+
+We see things as belonging together when
+
+* they are close to each other (proximity)
+* are aligned in the same direction (continuity)
+
+https://twitter.com/pablostanley/status/974303621092225024
+        </textarea>
+</section>
+
+<section>
             <h3>Exercise: How to automate this?</h3>
             <p class="fragment">Come up with an informal algorithm and apply it to a hand drawn example</p>
         </section>
@@ -460,8 +446,45 @@ http://scikit-learn.org/stable/modules/clustering.html
             <textarea data-template>
 ### Applications of clustering
 * Outlier Detection: one of these things is not like the others
+* https://hackernoon.com/unsupervised-machine-learning-for-fun-profit-with-basket-clusters-17a1161e7aa1
+* https://flowingdata.com/2018/03/07/visualizing-outliers/?imm_mid=0fbfda&cmp=em-data-na-na-newsltr_20180314
             </textarea>
 </section>
+
+<section>
+    <h2>Dimensionality Reduction</h2>
+</section>
+
+<section>
+    <h2>PCA</h2>
+    <p>Principal Component Analysis</p>
+</section>
+
+<section>
+    <img src="img/flashcards/Principal_Component_Analysis_print.png">
+</section>
+
+<section>
+    <img src="img/flashcards/Principal_Components_print.png">
+</section>
+
+<section>
+<h2>T-SNE</h2>
+<p>Visualizing High Dimensional Data</p>
+</section>
+<section>
+    <p>As humans looking at a computer screen we are also naturally limited to two-dimensional visualizations that at best change over time and reaction to interaction.</p>
+</section>
+
+<section class="todo">
+<h3>Intuition</h3>
+<pre>
+- The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI
+- Michael Murphy's Epic Anti-Gun Artwork for the DNC: https://youtu.be/l-GR9IVjU54
+
+</pre>
+</section>
+
 
 <section data-markdown>
         <textarea data-template>
