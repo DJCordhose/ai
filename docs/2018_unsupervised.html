@@ -191,7 +191,7 @@ sich damit auseiander zu setzen
         </section>
 
         <section>
-            <h3>Correlations</h3>
+            <h3>The Basics: Correlations</h3>
             <p>What is related to which?</p>
         </section>
 
@@ -399,26 +399,26 @@ structure out of nothing
 </section>
 
 <section>
-            <h2>Comparing Clustering Algorithms</h2>
-            <!-- <pre>
+    <h2>Comparing Clustering Algorithms</h2>
+    <!-- <pre>
 - http://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
 - http://hdbscan.readthedocs.io/en/latest/performance_and_scalability.html
-            </pre> -->
-        </section>
+    </pre> -->
+</section>
 
 <section data-markdown>
-        <textarea data-template>
+<textarea data-template>
 <img src="img/unsupervised/cluster_compare.png" height="550px">
 
 <p><small><a href="http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html">
-    http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
+http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
 </a></small></p>
 
 </textarea>
 </section>
 
 <section data-markdown>
-        <textarea data-template>
+<textarea data-template>
 <img src="img/unsupervised/sphx_glr_plot_cluster_comparison_001.png" height="550px">
 
 <p><small><a href="http://scikit-learn.org/stable/modules/clustering.html">
@@ -428,21 +428,29 @@ http://scikit-learn.org/stable/modules/clustering.html
 </textarea>
 </section>
 
-        
-        <section>
-                <img src="img/flashcards/DBSCAN_print.png" height="550px">
-                <p>State of the Art Algorithm</p>
-        </section>
+<section>
+            <img src="img/flashcards/DBSCAN_print.png" height="550px">
+            <p>Density-Based Spatial Clustering</p>
+    </section>
+
+    <section>
+        <h3>A quick guess: What is the crucial factor here?</h3>
+    </section>
 
         <section data-markdown class="todo">
                 <textarea data-template>
+- epsilon, maximum distance
 - Repeat example data sets from k k-means
 - add dbscan to notebook k-means_vs_dbscan
+  - why does dbscan not detect double circles?
 - show results
+
+- metrics
                 </textarea>
     </section>
 
-    <section data-markdown class="todo">
+    
+<section data-markdown class="todo">
             <textarea data-template>
 ### Applications of clustering
 * Outlier Detection: one of these things is not like the others
@@ -450,6 +458,15 @@ http://scikit-learn.org/stable/modules/clustering.html
 * https://flowingdata.com/2018/03/07/visualizing-outliers/?imm_mid=0fbfda&cmp=em-data-na-na-newsltr_20180314
             </textarea>
 </section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### Code Exercise: 
+* Add at least one implementation of one clustering algorithm shown in the overview above
+* Experiment with the remaining data sets: how do the different clustering algorithms cope with them?
+    </textarea>
+</section>
+
 
 <section>
     <h2>Dimensionality Reduction</h2>
