@@ -168,7 +168,7 @@ sich damit auseiander zu setzen
         <section>
             <h2>Structure</h2>
             <ol>
-                <li>Correlations</li>
+                <li>Basics and a little bit of statistics</li>
                 <li>Clustering</li>
                 <li>Dimensionality Reduction
                     <ol>
@@ -194,6 +194,13 @@ sich damit auseiander zu setzen
             <h3>The Basics: Correlations</h3>
             <p>What is related to which?</p>
         </section>
+        <section class="todo">
+                <pre>
+        https://en.wikipedia.org/wiki/Covariance_and_correlation
+        - Covariante: two variables change in a synced way
+        - Corrleation: one variable causes the changes to the other
+    </pre>
+</section>
 
         <section class="todo">
                 <pre>
@@ -292,7 +299,27 @@ sich damit auseiander zu setzen
         <section>
             <img src="img/flashcards/Probability_Density_Function_print.png">
         </section>
+
         <section>
+                <h3>The Basics: Statistics</h3>
+            </section>
+    
+        <section data-markdown class="todo">
+                <textarea data-template>
+- mean, std dev explained with the scaler
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+            </textarea>
+</section>                    
+
+<section data-markdown class="todo">
+        <textarea data-template>
+- Normal Distribution
+
+- Interactive Example from t-sne notebook?
+    </textarea>
+</section>                    
+
+<section>
             <h2>Clustering</h2>
         </section>
 
@@ -400,6 +427,7 @@ structure out of nothing
 
 <section>
     <h2>Comparing Clustering Algorithms</h2>
+    <p>Choose your favorite!</p>
     <!-- <pre>
 - http://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
 - http://hdbscan.readthedocs.io/en/latest/performance_and_scalability.html
@@ -429,6 +457,10 @@ http://scikit-learn.org/stable/modules/clustering.html
 </section>
 
 <section>
+    <h3>Which one is our favorite?</h3>
+</section>
+
+<section>
             <img src="img/flashcards/DBSCAN_print.png" height="550px">
             <p>Density-Based Spatial Clustering</p>
     </section>
@@ -439,17 +471,54 @@ http://scikit-learn.org/stable/modules/clustering.html
 
         <section data-markdown class="todo">
                 <textarea data-template>
-- epsilon, maximum distance
+### Notebook
+
+- plot noise (-1) in black 
+  - like here http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html#sphx-glr-auto-examples-cluster-plot-dbscan-py
 - Repeat example data sets from k k-means
-- add dbscan to notebook k-means_vs_dbscan
-  - why does dbscan not detect double circles?
 - show results
 
-- metrics
+- clean part in metrics notebook
                 </textarea>
     </section>
 
-    
+    <section data-markdown>
+            <textarea data-template>
+### Metrics
+
+How well are we doing?
+
+ Hard to tell, since there is no (or we do not know) the ground truth
+
+http://scikit-learn.org/stable/modules/classes.html#clustering-metrics
+    </textarea>
+
+</section>
+
+<section data-markdown>
+<textarea data-template>
+<img src="img/flashcards/Silhouette_Coefficients_print.png" height="550px">
+https://en.m.wikipedia.org/wiki/Silhouette_(clustering)
+</textarea>
+
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+Show metrics from notebook
+
+http://scikit-learn.org/stable/modules/clustering.html#silhouette-coefficient
+        </textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+Alternative without scaling between -1 and 1, again show metrics from notebook
+
+http://scikit-learn.org/stable/modules/clustering.html#calinski-harabaz-index
+        </textarea>
+</section>
+
 <section data-markdown class="todo">
             <textarea data-template>
 ### Applications of clustering
@@ -477,6 +546,37 @@ http://scikit-learn.org/stable/modules/clustering.html
     <p>Principal Component Analysis</p>
 </section>
 
+<section data-markdown class="todo">
+    <textarea data-template>
+        Grafiken und Ansatz von hier übernehmen
+            http://setosa.io/ev/principal-component-analysis/
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### 2d
+
+http://setosa.io/ev/principal-component-analysis/
+    </textarea>
+    </section>
+<section class="todo">
+        <h3>3d Intuition</h3>
+        <pre>
+        - The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI
+        - Michael Murphy's Epic Anti-Gun Artwork for the DNC: https://youtu.be/l-GR9IVjU54
+        
+        </pre>
+        </section>
+        
+<section data-markdown class="todo">
+        <textarea data-template>
+### 3d
+
+http://setosa.io/ev/principal-component-analysis/
+    </textarea>
+    </section>
+        
 <section>
     <img src="img/flashcards/Principal_Component_Analysis_print.png">
 </section>
@@ -485,21 +585,27 @@ http://scikit-learn.org/stable/modules/clustering.html
     <img src="img/flashcards/Principal_Components_print.png">
 </section>
 
+<section data-markdown class="todo">
+        <textarea data-template>
+Herleitung über Covariance
+
+https://en.m.wikipedia.org/wiki/Principal_component_analysis
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+Beispiele zeigen unten auf der Seite sind die Links
+            http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
+        </textarea>
+    </section>
+    
 <section>
 <h2>T-SNE</h2>
 <p>Visualizing High Dimensional Data</p>
 </section>
 <section>
     <p>As humans looking at a computer screen we are also naturally limited to two-dimensional visualizations that at best change over time and reaction to interaction.</p>
-</section>
-
-<section class="todo">
-<h3>Intuition</h3>
-<pre>
-- The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI
-- Michael Murphy's Epic Anti-Gun Artwork for the DNC: https://youtu.be/l-GR9IVjU54
-
-</pre>
 </section>
 
 
