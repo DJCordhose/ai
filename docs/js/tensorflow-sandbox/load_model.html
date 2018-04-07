@@ -1,9 +1,21 @@
 <html>
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.6.1"></script> -->
-<script src="lib/tfjs@0.6.1"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"></script> -->
+<script src="lib/tfjs@0.8.0"></script>
 <script>
     (async () => {
         const model = await tf.loadModel('tfjs_artifacts/model.json');
+
+        // max speed, age, thousand kilometers per year
+        const example = tf.tensor([[150, 45, 10]]);
+        const prediction = model.predict(example);
+
+        const value = await prediction.data();
+        // softmax 
+        // # 0: red
+        // # 1: green
+        // # 2: yellow        
+        console.log(value);
+        // [0.0937359631061554, 0.7274655699729919, 0.17879831790924072]
     })();
 </script>
 

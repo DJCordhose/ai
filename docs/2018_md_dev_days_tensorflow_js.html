@@ -122,13 +122,10 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
             <p><a href="https://js.tensorflow.org/" target="_blank">https://js.tensorflow.org/</a></p>
         </section>
 
-        <section class="todo">
+        <!-- <section class="todo">
                 <pre>
-- Deploy Beispiel mit Modell laden zuende machen
-  - http://localhost:8080/docs/js/tensorflow-sandbox/load_model.html
-- Glätten
             </pre>
-        </section>
+        </section> -->
                     
         <section>
             <h2>Wait, but why?</h2>
@@ -191,6 +188,7 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
             <p class="fragment">Most obvious reason: JavaScript is the language you are most comfortable with</p>
             <p class="fragment">You just happen to develop for the browser</p>
             <p class="fragment">You are intrigued by how JavaScript development works</p>
+            <p class="fragment">Combination with interactive visualizations and other browser features (like audio and video)</p>
         </section>
 
         <section>
@@ -289,7 +287,6 @@ https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
             <ul class="fragment">
                 <li>you on your mobile phone
                 <li>AI in browser based game
-                <li>combination with interactive visualizations and other browser features (like audio and video)
                 <li>use any GPU
             </ul>
 
@@ -314,35 +311,70 @@ GPU usage when re-training for Pacman
     </section>
     
 
+<section>
+    <h3>Scenario: Train using beefey machine using raw TensorFlow, deploy to browser</h3>
+</section>
+
 <section data-markdown>
     <textarea data-template>
-* save a Keras model, e.g. `insurance.hdf5` 
-* `pip install tensorflowjs`
-* `tensorflowjs_converter --input_format keras insurance.hdf5 tfjs_artifacts`
-* 
+### Approach
+* Train Tensorflow / Keras Modell 
+* Convert to tensorflow.js format
+* Load into browser
+* use in the same way as on server
 
 https://js.tensorflow.org/tutorials/import-keras.html
 </textarea>
 </section>
-<section data-markdown>
-        <textarea data-template>
-```inputs = tf.keras.Input(name='input', shape=(3, ))
-x = tf.keras.layers.Dense(100, name='hidden1', activation='relu')(inputs)
-x = tf.keras.layers.Dense(100, name='hidden2', activation='relu')(x)
-predictions = tf.keras.layers.Dense(3, name='softmax', activation='softmax')(x)
-model = tf.keras.models.Model(inputs=inputs, outputs=predictions)
 
+<section>
+        <h3>Using the fully trained modell in JavaScript</h3>
+        <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const model = await tf.loadModel('model.json');
+        </code></pre>
+        <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// max speed, age, thousand kilometers per year
+const example = tf.tensor([[150, 45, 10]]);
+const prediction = model.predict(example);
+                </code></pre>
+        <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const value = await prediction.data();
+// softmax 
+// # 0: red
+// # 1: green
+// # 2: yellow        
+console.log(value);
+// [0.0937359631061554, 
+    0.7274655699729919, 
+    0.17879831790924072]
+</code></pre>
+<p><a href='js/tensorflow-sandbox/load_model.html' target="_blank">https://djcordhose.github.io/ai/js/tensorflow-sandbox/load_model.html</a></small></p>
+</section>
+
+<section>
+        <h3>A quick look at the original model</h3>
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
+inputs = tf.keras.Input(name='input', shape=(3, ))
+        </code></pre>
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
+x = tf.keras.layers.Dense(100)(inputs)
+x = tf.keras.layers.Dense(100)(x)
+        </code></pre>
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
+predictions = 
+    tf.keras.layers.Dense(3, activation='softmax')(x)
+model = 
+    tf.keras.models.Model(inputs=inputs, 
+                          outputs=predictions)
+        </code></pre>
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
 model.compile(optimizer='adam',
               loss='categorical_crossentropy',
-              metrics=['accuracy'])```
-</textarea>
-</section>
-<section data-markdown>
-        <textarea data-template>
-```const model = await tf.loadModel('tfjs_artifacts/model.json');```
-</textarea>
-</section>
-            
+              metrics=['accuracy'])
+        </code></pre>
+<p>This is Python, but tensorflow.js code would always be indistinguishable</p>
+                    </section>
+
             <!-- <section data-markdown style="font-size: xx-large">
     <textarea data-template>
 ### Sentiment Analysis
@@ -357,9 +389,11 @@ https://github.com/keras-team/keras/blob/master/examples/imdb_cnn.py
 </textarea>
 </section> -->
 
-<section data-markdown class="todo">
+<section data-markdown>
         <textarea data-template>
-### Deployment to observablehq notebook
+### Deployment to observablehq
+
+<img src='img/tfjs/observablehq.png' height="400px">
 
 https://beta.observablehq.com/@nsthorat/introduction-to-deeplearn-js
 </textarea>
