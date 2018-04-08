@@ -164,13 +164,14 @@ Vortragssprache Deutsch
 
 <!-- <section class="todo">
 <pre>
+- Für Mach alles auskonmmentierte wieder hinein nehmen
 - Für spätere Versionen: LSTM Beispiel mit tensorflow.js mit NLP Beispiel
 </pre>    
 </section> -->
-        <section>
+        <!-- <section>
             <h1>Teil 1</h1>
             <h2>Ein Beispiel zum Einstieg</h2>
-        </section>
+        </section> -->
 
         <section>
                 <h3>Ein Fallbeispiel</h3>
@@ -244,15 +245,6 @@ Vortragssprache Deutsch
         </section>
 
                 <section>
-                    <h2>
-                        <small>Oft werden 3 Arten von Machine Learning unterschieden</small>
-                    </h2>
-                    <div style="margin-top: -30px">
-                        <img src="img/sketch/types-of-ml.png" height="500px">
-                    </div>
-                </section>
-
-                <section>
                         <h3>Supervised Machine Learning</h3>
                         <div class="fragment">
                                 <img src="img/insurance/ml-phases.png" height="450px">
@@ -266,27 +258,24 @@ Vortragssprache Deutsch
                         </div>
                     </section>
 
-    <section>
+    <!-- <section>
         <h3>Machine Learning als Klassifikation: Ein Experiment</h3>
-        <!--<div>-->
         <a href="https://teachablemachine.withgoogle.com/" target="_blank">
             <img src="img/browser/teachable-machine.png" height="350px">
         </a>
         <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
         </small></p>
-            <!--</div>-->
-    </section>
+    </section> -->
     
     <section>
         <h3>Strategien</h3>
         <ul>
             <li class="fragment">Es gibt unterschiedliche Lernstrategien</li>
-            <li class="fragment">Im Beispiel davor war Deep Learning im Einsatz</li>
             <li class="fragment">Für unser Problem reicht eines der einfachsten Strategien: KNN</li>
         </ul>
     </section>
 
-    <section>
+    <!-- <section>
         <h3>Validierung</h3>
         <p>Generalisierung, nicht perfekte Reproduktion ist unser Ziel</p>
         <ol>
@@ -296,7 +285,7 @@ Vortragssprache Deutsch
             <li class="fragment">Den zweiten Satz nehmen wir zur Überprüfung: passen die vorhergesagten Ausgaben zu den uns bekannten Ausgaben?</li>
         </ol>
     </section>
-
+ -->
     <section>
         <h3>KNN: k Nearest Neighbors</h3>
         <img src="img//insurance/knn.png">
@@ -311,7 +300,7 @@ Vortragssprache Deutsch
             </ol>
         </section>
     
-                <section data-markdown>
+                <!-- <section data-markdown>
     <textarea data-template>
 ### KNN wurde auch bei unserem Beispiel mit der Gesichtserkennung benutzt
 
@@ -321,7 +310,7 @@ _The KNN image classifier works much great with small amounts of data._
 
 https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
 </textarea>
-</section>
+</section> -->
 
                 <section>
                     <h3>Ergebnisse für k = 1</h3>
@@ -352,27 +341,51 @@ https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
             <li>Neural Networks (Deep Learning): Zusammenschaltung vieler Logistischer Regression
         </ul>
     </section>
-    <section data-markdown>
+
+    <section>
+            <h3>Daten: Quantität</h3>
+            <img src='img/applications/decisions/classic.png'>
+        </section>
+    
+    <!-- <section data-markdown>
             <textarea data-template>
 ### Regression anstatt Klassifikation
 Die andere Art des Machine Learnings
 <img src="img/linear_regression.png" height="400px">
 https://beta.observablehq.com/@tmcw/bring-your-own-doodles-linear-regression
     </textarea>
-    </section>
+    </section> -->
     <section>
-            <h1>Teil 2.1</h1>
+            <h1>Teil 3</h1>
             <h2>Unsupervised Learning: Clustering</h2>
-            <p>Was man macht, wenn man keine Labels hat</p>
         </section>
-        <section data-markdown>
+        <section>
+                <h2>
+                    <small>Oft werden 3 Arten von Machine Learning unterschieden</small>
+                </h2>
+                <div style="margin-top: -30px">
+                    <img src="img/sketch/types-of-ml.png" height="500px">
+                </div>
+            </section>
+
+    <section>
+            <h3>Daten: Zentraler Punkt</h3>
+            <img src='img/applications/decisions/type.png'>
+        </section>
+                    
+    <section>
+        <h3>Unsupervised Learning</h3>
+        <img src='img/applications/decisions/question.png'>
+    </section>
+
+        <!-- <section data-markdown>
                 <textarea data-template>
 _Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
 similar (in some sense) to each other than to those in other groups (clusters)._
 
 https://en.wikipedia.org/wiki/Cluster_analysis
                 </textarea>
-    </section>
+    </section> -->
     
     <section data-markdown>
             <textarea data-template>
@@ -391,9 +404,21 @@ Wie würde man das clustern, ohne Labels zu haben?
         </section>
 
         <section>
-                <h1>Teil 3</h1>
-                <h2>Wie findet ihr eigene Anwendungsmöglichkeiten?</h2>
-            </section>
+            <h1>Teil 4</h1>
+            <h2>Wie findet ihr eigene Anwendungsmöglichkeiten?</h2>
+        </section>
+
+        <section>
+                <h3>Eine Analogie</h3>
+                <p class="fragment">Die Machine Learning Technologie ist der Motor</p>
+                <p class="fragment">Eure Daten sind das Benzin</p>
+                <p class="fragment"><em>Nur wenn beides da ist läuft die Maschine</em></p>
+        </section>
+        
+        <section>
+                <h3>Ansatz nach Art der Daten</h3>
+                <img src='img/applications/decisions/data.png'>
+        </section>
     
         <section>
             <h3>Fragestellungen</h3>
@@ -526,8 +551,8 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
                 <p style="clear: both">Wie verhält sich jemand, der später Kunde wird / kündigt?</p>
             </section>
             <section>
-                <h3>Weitere Anwendungsgebiete</h3>
-                <small>
+                <h4>Weitere Anwendungsgebiete</h4>
+                <!-- <small> -->
                 <ul>
                     <li class="fragment"><strong>Recommendation Systems</strong>: Spotify und Netflix kennen mich besser als ich mich selbst
                     <li class="fragment"><strong>Making decisions</strong>: Sollte jemand einen Kredit bekommen oder versichert werden?
@@ -535,42 +560,9 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
                     <li class="fragment"><strong>Predictive Maintenance</strong>: KI systems sagen wann man ein Wasserrohr ersetzen soll bevor es bricht
                     <li class="fragment"><strong>Expert System</strong>: Zuordnung von Krankheit und Maßnahmen</li>
                 </ul>
-            </small>
+            <!-- </small> -->
         </section>
     
-    <section>
-        <h2>Entscheidungshilfen</h2>
-    </section>
-
-    <section>
-            <h3>Eine Analogie</h3>
-            <p class="fragment">Die Machine Learning Technologie ist der Motor</p>
-            <p class="fragment">Eure Daten sind das Benzin</p>
-            <p class="fragment"><em>Nur wenn beides da ist läuft die Maschine</em></p>
-
-    </section>
-
-    <section>
-        <h3>Daten: Zentraler Punkt</h3>
-        <img src='img/applications/decisions/type.png'>
-    </section>
-            
-    <section>
-        <h3>Unsupervised Learning</h3>
-        <img src='img/applications/decisions/question.png'>
-    </section>
-
-    <section>
-            <h3>Supervised Learning</h3>
-    </section>
-        <section>
-            <h3>Daten: Quantität</h3>
-            <img src='img/applications/decisions/classic.png'>
-        </section>
-    <section>
-            <h3>Art der Daten</h3>
-            <img src='img/applications/decisions/data.png'>
-    </section>
                 <!-- <section>
                     <img src="img/flashcards/Curse_Of_Dimensionality_print.png">
                 </section> -->
