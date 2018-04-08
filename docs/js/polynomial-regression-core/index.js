@@ -49,7 +49,7 @@ let optimizer;
   // https://js.tensorflow.org/api/0.6.1/#train.sgd
   const learningRate = 0.5;
   const sgdOptimizer = tf.train.sgd(learningRate);
-  // optimizer = sgdOptimizer ;
+  optimizer = sgdOptimizer;
 }
 {
   // https://distill.pub/2017/momentum/
@@ -64,7 +64,7 @@ let optimizer;
   // https://js.tensorflow.org/api/0.6.1/#train.adam
   const LEARNING_RATE = 0.1;
   const adamOptimizer = new tf.train.adam(LEARNING_RATE);
-  optimizer = adamOptimizer;
+  // optimizer = adamOptimizer;
 }
 
 // Step 3. Write our training process functions.

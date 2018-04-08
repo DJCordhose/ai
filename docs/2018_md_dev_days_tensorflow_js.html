@@ -92,17 +92,10 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
         <section data-markdown class="preparation">
             <script type="text/template">
 ### Preparation
-- tensforflow Playground Demo vorbereiten
-  - Learn about the process of training
-  - How does a neuron work?
-  - Neural Network Architecture
-
-- Open Deep Learn js sample in VSC
+- Open model.js and polynomial-regression-core/index.js in VSC
   - start ```http-server``` in terminal
   - Color Scheme: High Contrast
   - Zoom In
-
-  - Open all demos way ahead of time when there still is internet
             </script>
         </section>
 
@@ -194,7 +187,7 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
         <section>
                 <h3>Core Concepts</h3>
             <p>It's all about matrix operations</p>
-                <pre><code contenteditable data-trim class="fragment line-numbers python">
+                <pre><code contenteditable data-trim class="fragment line-numbers javascript">
 const a = tf.tensor1d([1, 2, 3]);
 const b = tf.scalar(2);
 
@@ -202,7 +195,7 @@ const b = tf.scalar(2);
 const result = a.add(b);
                 </code></pre>
                                     
-                <pre><code contenteditable data-trim class="fragment line-numbers python">
+                <pre><code contenteditable data-trim class="fragment line-numbers javascript">
 const data = await result.data(); 
 console.log(data); // Float32Array([3, 4, 5]
                 </code>
@@ -222,14 +215,34 @@ console.log(data); // Float32Array([3, 4, 5]
 <section data-markdown>
     <textarea data-template>
 ### Steps
-* Find API documentation about Optimizers: https://js.tensorflow.org/api/0.6.1/#Training-Optimizers
-* Changing to first https://js.tensorflow.org/api/0.6.1/#train.momentum and then https://js.tensorflow.org/api/0.6.1/#train.adam 
+* Find API documentation about Optimizers: https://js.tensorflow.org/api/0.8.0/#Training-Optimizers
+* Changing to first https://js.tensorflow.org/api/0.8.0/#train.momentum and then https://js.tensorflow.org/api/0.8.0/#train.adam 
 </textarea>
 </section>
 
+<section>
+        <h3>High Level Layer API</h3>
+    <p>If you have ever seen Keras, you will feel right at home</p>
+        <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const model = tf.sequential();
+          </code></pre>
+        <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(tf.layers.dense({units: 10}));
+          </code></pre>
+                            
+        <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(tf.layers.conv2d({
+  inputShape: [28, 28, 1],
+  kernelSize: 5,
+  filters: 8,
+  activation: 'relu'
+}));
+        </code>
+    </pre>
+</section>
 <section data-markdown>
     <textarea data-template>
-### High Level Layer API
+### Zero Installation
 
 <p>Experiments with state of the art neural networks with zero installation directly in JavaScript: <a href="js/mnist/model.js" target="_blank">
     model.js</a></p>
@@ -372,7 +385,7 @@ model.compile(optimizer='adam',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
         </code></pre>
-<p>This is Python, but tensorflow.js code would always be indistinguishable</p>
+<p>This is Python, but tensorflow.js code almost is indistinguishable</p>
                     </section>
 
             <!-- <section data-markdown style="font-size: xx-large">
