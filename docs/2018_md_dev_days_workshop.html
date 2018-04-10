@@ -592,25 +592,29 @@ https://machinelearningmastery.com/classification-and-regression-trees-for-machi
 </section>
 
     <!-- <section>
+        <img src="img/flashcards/Gini_Index_print.png">
+    </section> -->
+
+    <section>
         <h3>Gini Impurity used by CART</h3>
         <p>Gini impurity is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly
         labeled according to the distribution of labels in the subset.</p>
         <script type="math/tex; mode=display">
-Gini = 1 - \sum_{i=1}^J p_i^2
+Gini = \sum_{i=1}^J p_i \sum_{i \neq k} p_k
         </script>
         <p>The smaller the impurity, the purer (=better) is the node</p>
 
         <p><small><a target="_blank" href="https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity">https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity</a></small></p>
          
-    </section> -->
+    </section>
  
-<!--   
     <section>
         <h3>What's next?</h3>
     </section>
     <section>
         <img src="img/flashcards/Random_Forest_print.png">
     </section>
+<!--   
     <section>
         <img src="img/flashcards/The_Random_In_Random_Forest_print.png">
     </section>
