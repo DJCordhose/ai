@@ -92,280 +92,333 @@ Ich führe dabei auch in die Programmierung von deeplearn ein, sodass du einen S
         <section data-markdown class="preparation">
             <script type="text/template">
 ### Preparation
+- Open all demos way ahead of time when there still is internet
 
-- tensforflow Playground Demo vorbereiten
-  - Learn about the process of training
-  - How does a neuron work?
-  - Neural Network Architecture
-
-- Open Deep Learn js sample in VSC
+- Open model.js and polynomial-regression-core/index.js in VSC
   - start ```http-server``` in terminal
   - Color Scheme: High Contrast
   - Zoom In
-- Open all demos way ahead of time when there still is internet
-- Copy data/flights.csv to download for facets overview
-- Open Bonkers in one tab to have URL ready as input to Resnet on keras.js
-  - https://djcordhose.github.io/ai/img/cat-bonkers.png
             </script>
         </section>
 
         <section>
-            <h2>Educate, Develop, Visualize, Deploy with tensforflow.js</h2>
-            <h3>Why the Browser and Machine Learning are a perfect match</h3>
-            <p><a target="_blank" href="TODO">
-                enterjs, Darmstadt 2018
-            </a></p>
-            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-            </h4>
-            <p><small><a href="http://bit.ly/enterjs-tensorflow-js">
-                http://bit.ly/enterjs-tensorflow-js
-            </a></small></p>
-        </section>
-
-
-        <section class="todo">
-            <pre>
-- Bei Educate die Demos von der Webseite zeigen und damit erklären, was es tut. 
-  - Muss bei js Konferenz eben auch Einführung in ML sein, sonst versteht keiner was
-- Für Develop: Code wie bei hh.js. 
-  - Intro: Was ist eigentlich Tensorflow?
-  - Mein App portieren: (https://twitter.com/nsthorat/status/979955896032755712)
-  - auch slider und so mit observablehq?
-- Tensorflow Dev Summit, Tensorflow.js: https://youtu.be/YB-kfeNIPCE?list=PLQY2H8rRoyvxjVx3zfw4vA4cvlKogyLNN
-  - Auch Screenshots machen für Bilder
-  - Auch hier Bilder klauen
-    - https://js.tensorflow.org/
-    - https://github.com/tensorflow/tfjs
-- Beispiel Sentiment Analysis: https://beta.observablehq.com/@jashkenas/sentiment-analysis-with-tensorflow-js
-            </pre>
-        </section>
+                <h2>Educate, Visualize, Develop, Play, Deploy with tensforflow.js</h2>
+                <h3>Why the Browser and Machine Learning are a perfect match</h3>
+        <p><a target="_blank" href="https://www.enterjs.de/single?id=6445&deeplearn.js-%E2%80%93-warum-der-browser-und-machine-learning-perfekt-zusammen-passen">
+            enterjs, Darmstadt 2018
+        </a></p>
+        <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        </h4>
+        <p><small><a href="http://bit.ly/enterjs-tensorflow-js">
+            http://bit.ly/enterjs-tensorflow-js
+        </a></small></p>
+    </section>
 
         <section class="todo">
             <pre>
-
-Educate
-Auch die anderen coolen Beispiele zeigen
-
-Visualize evtl. löschen?
-
-In Develop zeigen wie das im Browser geht, ohne Installation und nvidia GPU und Treiber. Aus Workshop übernehmen.
-
-Unter Deploy zeigen wie das aus Keras geht und Pläne für Node GpU        
+- Kürzen von 55 auf 45 Minuten
+- auf aktuellste Version updaten
             </pre>
+        </section>
+
+        <section>
+            <img src="img/tensorflow_js.png">
+            <p><a href="https://js.tensorflow.org/" target="_blank">https://js.tensorflow.org/</a></p>
+        </section>
+
+        <section>
+                <h2>Wait, but why?</h2>
+                    <div class="fragment">
+                        <h3>Python is predominant in the area of Machine Learning</h3>
+                        <ul>
+                            <li>Has a large and mature set of libs
+                            <li>Is reasonably fast
+                            <li>Uses bindings to C/C++ or Fortran for speed and reuse
+                        </ul>
+                    </div>
             </section>
-        <section>
-            <h2>Wait, but why?</h2>
-                <div class="fragment">
-                    <h3>Python and R are predominant</h3>
-                    <ul>
-                        <li>Have a large and mature set of libs
-                        <li>Are reasonably fast
-                        <li>Use bindings to C/C++ or Fortran for speed and reuse
-                    </ul>
-                </div>
-        </section>
-
-        <section>
-            <h1>(I) Educate</h1>
-            <p class="fragment">Everyone can be educated, they just need a browser and internet</p>
-            <p class="fragment">Concepts are much easier to grok when you can play around with them</p>
-        </section>
-
-        <section>
-            <h3>Experiment to explore how machine learning works</h3>
-            <p>
-                <small>Built using tensorflow.js</small>
-            </p>
-            <div style="margin-top: -40px">
-                <a href="https://teachablemachine.withgoogle.com/" target="_blank">
-                    <img src="img/browser/teachable-machine.png" height="350px">
+    
+            <section>
+                <h1>(I) Educate</h1>
+                <p class="fragment">Everyone can be educated, they just need a browser and internet</p>
+                <p class="fragment">Concepts are much easier to grok when you can play around with them</p>
+            </section>
+    
+            <section>
+                <h3>Experiment to explore how machine learning works</h3>
+                <p>
+                    <small>Built using deeplearn.js (predecessor of tensorflow.js)</small>
+                </p>
+                <div style="margin-top: -40px">
+                    <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                        <img src="img/browser/teachable-machine.png" height="350px">
+                    </a>
+                    <p>
+                        <small>
+                            <a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+                        </small>
+                    </p>
+            </section>
+            
+            <section>
+                <h3>Tensorflow Playground</h3>
+                <p>Where it all started - Playing with Neural Networks without any installation</p>
+                <a href="http://playground.tensorflow.org" target="_blank">
+                    <img src="img/browser/playground.png">
                 </a>
+                <p><small><a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a></small></p>
+            </section>
+    
+            <section>
+                    <h3>Training a network</h3>
+                        <a target="_blank" href="https://deeplearnjs.org/demos/model-builder/">
+                    <img src="img/deeplearn-model-builder.png" height="500px">
+                    </a>
                 <p>
                     <small>
-                        <a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+                        <a target="_blank" href="https://deeplearnjs.org/demos/model-builder/">
+                             https://deeplearnjs.org/demos/model-builder/</a>
                     </small>
                 </p>
+                </section>
+            
+            <section>
+                <h1>(II) Develop</h1>
+                <p class="fragment">Most obvious reason: JavaScript is the language you are most comfortable with</p>
+                <p class="fragment">You just happen to develop for the browser</p>
+                <p class="fragment">You are intrigued by how JavaScript development works</p>
+                <p class="fragment">Combination with interactive visualizations and other browser features (like audio and video)</p>
+            </section>
+    
+            <section>
+                    <h3>Core Concepts</h3>
+                <p>It's all about matrix operations</p>
+                    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const a = tf.tensor1d([1, 2, 3]);
+    const b = tf.scalar(2);
+    
+    // a is not modified, result is a new tensor
+    const result = a.add(b);
+                    </code></pre>
+                                        
+                    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const data = await result.data(); 
+    console.log(data); // Float32Array([3, 4, 5]
+                    </code>
+                </pre>
+                <!-- <p><a href="js/tensorflow-sandbox/minimal.html" target="_blank">Minimal Example</a></p> -->
+                <p><a href="https://github.com/tensorflow/tfjs" target="_blank">https://github.com/tensorflow/tfjs</a></p>
+                <p><a href="https://js.tensorflow.org/tutorials/core-concepts.html" target="_blank">
+                    https://js.tensorflow.org/tutorials/core-concepts.html</a></p>
+            </section>
+        
+                <section>
+                <h3>Demo: Changing the Optimizer in a simple example</h3>
+                <p>Getting an impression of how to code and how the turnaround cycle works</p>
+                <p><a href="js/polynomial-regression-core/" target="_blank">Polynomial Regression Example</a></p>
+            </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+    ### Steps
+    * Find API documentation about Optimizers: https://js.tensorflow.org/api/0.8.0/#Training-Optimizers
+    * Changing to first https://js.tensorflow.org/api/0.8.0/#train.momentum and then https://js.tensorflow.org/api/0.8.0/#train.adam 
+    </textarea>
+    </section>
+    
+    <section>
+            <h3>High Level Layer API</h3>
+        <p>If you have ever seen Keras, you will feel right at home</p>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const model = tf.sequential();
+              </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    model.add(tf.layers.dense({units: 10}));
+              </code></pre>
+                                
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    model.add(tf.layers.conv2d({
+      inputShape: [28, 28, 1],
+      kernelSize: 5,
+      filters: 8,
+      activation: 'relu'
+    }));
+            </code>
+        </pre>
+    </section>
+    <section data-markdown>
+        <textarea data-template>
+    ### Zero Installation
+    
+    <p>Experiments with state of the art neural networks with zero installation directly in JavaScript: <a href="js/mnist/model.js" target="_blank">
+        model.js</a></p>
+    
+    <a href="js/mnist" target="_blank">
+    <img src="img/tfjs/minst.png" height="350px">
+    </a>
+    <p><small><a href="js/mnist" target="_blank">
+        https://djcordhose.github.io/ai/js/mnist</a></small></p>
+    
+    </textarea>
+    </section>
+            
+            <section>
+                <h1>(III) Play</h1>
+                <p class="fragment">Browser games can benefit from Machine Learning</p>
+            </section>
+    
+                <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+    ### Find Emojis in the real world
+    
+    Loads a MobileNet (Neural Network optimized for mobile devices) fully trained on all the Emojis
+    
+    <a href="https://emojiscavengerhunt.withgoogle.com/">
+    <img src="img/tfjs/scavenger_hunt.png" height="350px">
+    </a>
+    
+    https://github.com/google/emoji-scavenger-hunt
+    https://js.tensorflow.org/tutorials/mnist.html
+    
+    </textarea>
+    </section>
+    
+                <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+    ### Pacman using gesture control
+    
+    Loads a pretrained MobileNet and let's you refine it to your face (transfer learning) 
+    
+    <a href="https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html">
+    <img src="img/tfjs/pacman.png" height="350px">
+    </a>
+    
+    https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
+    
+    </textarea>
+    </section>
+    
+            <section>
+                <h1>(IV) Deploy</h1>
+                <p>JavaScript might be the only language around</p>
+                <p class="fragment">because all you have is a browser</p>
+    
+                <ul class="fragment">
+                    <li>you on your mobile phone
+                    <li>AI in browser based game
+                    <li>use any GPU
+                </ul>
+    
+            </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+    ### Going over WebGL to reach the GPU
+    
+    _We use fragment shaders to parallelize the tensor operations and use 2D color textures to store data. Operations trigger shader programs that run over textures and generate new textures (tensors)._
+    
+    @nsthorat via https://news.ycombinator.com/item?id=15856647
+    </textarea>
+    </section>
+    
+    <section data-markdown>
+            <textarea data-template>
+    <img src="img/tfjs/gtx_1060.png" height="500px">
+    
+    GPU usage when re-training for Pacman
+        </textarea>
         </section>
         
-        <section>
-            <h3>Tensorflow Playground</h3>
-            <p>Where it all started - Playing with Neural Networks without any installation</p>
-            <a href="http://playground.tensorflow.org" target="_blank">
-                <img src="img/browser/playground.png">
-            </a>
-            <p><small><a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a></small></p>
-        </section>
-
-        <section>
-            <h1>(II) Develop</h1>
-            <p class="fragment">Most obvious reason: JavaScript is the language you are most comfortable with</p>
-            <p class="fragment">You just happen to develop for the browser</p>
-        </section>
-
-        <section>
-            <h3>deeplearn.js</h3>
-            <p>Full TypeScript ML library using browser GPU</p>
-            <a href="https://pair-code.github.io/deeplearnjs/demos/imagenet/imagenet-demo.html" target="_blank">
-                <img src="img/browser/deeplearn-sigurd.png" height="300px">
-            </a>
-            <p><a href="https://pair-code.github.io/deeplearnjs" target="_blank">https://pair-code.github.io/deeplearnjs</a></p>
-            <p><small>Includes full training mimicking TensorFlow and NumPy API
-                <a href="https://research.googleblog.com/2017/08/harness-power-of-machine-learning-in.html" target="_blank">
-                    https://research.googleblog.com/2017/08/harness-power-of-machine-learning-in.html</a></small></p>
-        </section>
-
-        <section>
-            <h4>More Machine Learning with JavaScript</h4>
-            <ul>
-                <li>
-                    <a href="http://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank">
-                        ConvNetJS</a>: Visual NN exploration for learning
-                    (<a href="http://cs.stanford.edu/people/karpathy/tsnejs/" target="_blank">t-SNE</a>
-                    cluster exploration from same auhtor)
-
-                <li><a target="_blank" href="https://github.com/harthur-org/brain.js">
-                    Brain.js
-                </a>:
-                    simple and straing forward NN implementation</li>
-                <li><a href="http://caza.la/synaptic/#/">synaptic.js</a>: similar scope as Brain.js, a bit more active</li>
-                <li><a href="https://github.com/mljs/ml">ml.js</a>: generic low level libs for machine learning</li>
-
-                <!--<li><a href="https://scienceai.github.io/neocortex/" target="_blank">-->
-                    <!--neocortex.js-->
-                <!--</a>runs pre-trained deep neural networks (<a href="http://keras.io/" target="_blank">Keras</a> models)-->
-                <!--<li><a href="https://www.npmjs.com/package/scikit-node" target="_blank">-->
-                    <!--scikit-node-->
-            <!--</a>: Wrapper for Python's <a target="_blank" href="http://scikit-learn.org/">scikit-learn</a> (mainstream lib)-->
-            </ul>
-        </section>
-
-        <section>
-            <h3>Demo: deeplearn.js</h3>
-            <p>Use all Browser features in combination with Machine Learning</p>
-            <!--<ul class="fragment">-->
-                <!--<li>Written in TypeScript-->
-                <!--<li>camera-->
-                <!--<li>high interaction-->
-            <!--</ul>-->
-            <a href="http://localhost:8080" target="_blank">
-                <img src="img/browser/NDArrayMathGPU.png" height="350px">
-            </a>
-            <p><small><a href="https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html" target="_blank">
-                https://pair-code.github.io/deeplearnjs/docs/tutorials/intro.html</a></small></p>
-            <!--<ul class="fragment">-->
-                <!--<li>Operations on Tensors-->
-                <!--<li>Basic Learning-->
-            <!--</ul>-->
-        </section>
-
-        <!--<section>-->
-            <!--<h3>convnet.js</h3>-->
-            <!--<p>The mother of CNNs in the Browser with JS</p>-->
-            <!--<a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html" target="_blank">-->
-                <!--<img src="img/browser/convnet.png" height="350px">-->
-            <!--</a>-->
-            <!--<p><a href="http://cs.stanford.edu/people/karpathy/convnetjs/intro.html" target="_blank">http://cs.stanford.edu/people/karpathy/convnetjs/intro.html</a></p>-->
-            <!--<p><small>Can even do CNNs, but with no GPU support</small></p>-->
-        <!--</section>-->
-
-        <!--<section>-->
-            <!--<h4>Words from the Google Brain Team</h4>-->
-            <!--<div><small>-->
-<!--We also believe in the importance of clear and understandable explanations of the concepts in modern machine learning. <a href="http://distill.pub/">Distill.pub</a> is an online technical journal providing a forum for this purpose, <a href="https://research.googleblog.com/2017/03/distill-supporting-clarity-in-machine.html">launched by</a> Brain team members Chris Olah and Shan Carter. <a href="http://playground.tensorflow.org/">TensorFlow Playground</a> is an in-browser experimental venue created by the Google Brain team’s visualization experts to give people insight into how neural networks behave on simple problems, and <a href="https://www.blog.google/topics/machine-learning/pair-people-ai-research-initiative/">PAIR</a>’s <a href="https://research.googleblog.com/2017/08/harness-power-of-machine-learning-in.html">deeplearn.js</a> is an open source WebGL-accelerated JavaScript library for machine learning that runs entirely in your browser, with no installations and no backend.<br>-->
-                        <!--</small></div>-->
-            <!--<p><small>-->
-            <!--<a href="https://research.googleblog.com/2017/09/the-google-brain-teams-approach-to.html" target="_blank">-->
-                <!--https://research.googleblog.com/2017/09/the-google-brain-teams-approach-to.html-->
-            <!--</a></small></p>-->
-        <!--</section>-->
-
-        <!--<section>-->
-            <!--<h2>Interactivity and Visualization</h2>-->
-            <!--<ul>-->
-                <!--<li>concepts are much easier to grok when you can play around with them-->
-                <!--<li>makes exploring data sets much easier-->
-                <!--<li>snappiness for expert tooling-->
-                    <!--<ul>-->
-                        <!--<li>Jupyter Notebooks-->
-                        <!--<li>TensorBoard-->
-                        <!--<li>CNN Feature Channel Exploration-->
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</section>-->
-
-
-        <section>
-            <h1>(III) Visualize</h1>
-            <p class="fragment">Interactively explore your data</p>
-        </section>
-
-        <section>
-            <h3>Demo: Data Insight</h3>
-            <p>Interactively explore even large amounts of data to understand what goes inside your model</p>
-            <a href="https://pair-code.github.io/facets/index.html#facets-overview" target="_blank">
-                <img src="img/browser/screenshot-flights-facets.png" height="350px">
-            </a>
-            <p><small><a href="https://pair-code.github.io/facets/" target="_blank">https://pair-code.github.io/facets/</a></small></p>
-            <!--<p><small>Also by PAIR like deeplearn.js</small></p>-->
-        </section>
-
-        <section>
-            <h3>Demo 2: Looking at the Quickdraw Dataset</h3>
-            <p>Pivoting on random data</p>
-            <a href="https://pair-code.github.io/facets/quickdraw.html" target="_blank">
-                <img src="img/browser/screenshot-quick-draw-facets.png" height="350px">
-            </a>
-            <p><small><a href="https://pair-code.github.io/facets/quickdraw.html" target="_blank">https://pair-code.github.io/facets/quickdraw.html</a></small></p>
-        </section>
-
-        <section>
-            <h1>(IV) Deploy</h1>
-            <p>JavaScript might be the only language around</p>
-            <p class="fragment">because all you have is a browser</p>
-
-            <ul class="fragment">
-                <li>you on your mobile phone
-                <li>AI in browser based game
-                <li>combination with interactive visualizations and other browser features (like audio and video)
-            </ul>
-
-        </section>
-
-        <section>
-            <h3>Keras.js</h3>
-            <p>Running Keras Models in the Browser using GPU</p>
-            <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
-                <img src="img/browser/keras-browser.png" height="350px">
-            </a>
-            <p><a href="https://transcranial.github.io/keras-js" target="_blank">https://transcranial.github.io/keras-js</a></p>
-            <p><small>Alternative: <a href="https://mil-tokyo.github.io/webdnn/" target="_blank">https://mil-tokyo.github.io/webdnn/</a></small></p>
-        </section>
-
-        <section>
-            <h3>TensorFire</h3>
-            <p>GPU based inference (no training) in the browser, runs Keras and TensorFlow models</p>
-            <a href="https://tenso.rs/demos/fast-neural-style/" target="_blank">
-                <img src="img/browser/merp.png" height="350px">
-            </a>
-            <p><a href="https://tenso.rs/" target="_blank">https://tenso.rs/</a></p>
-        </section>
-
-        <section>
-            <h3>Demo: Keras.js</h3>
-            <h4>Deploying production grade Keras Models</h4>
-            <a href="https://transcranial.github.io/keras-js" target="_blank">
-                <img src="img/browser/screenshot-sentiment-analysis.png" height="350px">
-            </a>
-            <ul class="fragment">
-                <li>Sentiment Analysis trained on IMDB
-                <li>ResNet / Inception V3 on ImageNet
-            </ul>
-        </section>
-
+    
+    <section>
+        <h3>Scenario: Train using beefey machine using raw TensorFlow, deploy to browser</h3>
+    </section>
+    
+                    <section>
+                        <h3>Customer Data - Car Insurance</h3>
+                        <img src="img/insurance/automobile-insurance.png" height="400px">
+                        <p>
+                            <small>How would you rank me (47) for a car with 160 km/h top speed?</small>
+                        </p>
+                    </section>
+    
+    
+    
+    <section data-markdown>
+        <textarea data-template>
+    ### Approach
+    * Train Tensorflow / Keras Modell 
+    * Convert to tensorflow.js format
+    * Load into browser
+    * use in the same way as on server
+    
+    https://js.tensorflow.org/tutorials/import-keras.html
+    </textarea>
+    </section>
+    
+    
+    
+    <section>
+            <h3>Using the fully trained modell in JavaScript</h3>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const model = await tf.loadModel('model.json');
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    // max speed, age, thousand kilometers per year
+    const example = tf.tensor([[150, 45, 10]]);
+    const prediction = model.predict(example);
+                    </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const value = await prediction.data();
+    // softmax 
+    // # 0: red
+    // # 1: green
+    // # 2: yellow        
+    console.log(value);
+    // [0.0937359631061554, 
+        0.7274655699729919, 
+        0.17879831790924072]
+    </code></pre>
+    <p><a href='js/tensorflow-sandbox/load_model.html' target="_blank">https://djcordhose.github.io/ai/js/tensorflow-sandbox/load_model.html</a></small></p>
+    </section>
+    
+    <section>
+            <h3>A quick look at the original model</h3>
+            <pre><code contenteditable data-trim class="fragment line-numbers python">
+    inputs = tf.keras.Input(name='input', shape=(3, ))
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers python">
+    x = tf.keras.layers.Dense(100)(inputs)
+    x = tf.keras.layers.Dense(100)(x)
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers python">
+    predictions = 
+        tf.keras.layers.Dense(3, activation='softmax')(x)
+    model = 
+        tf.keras.models.Model(inputs=inputs, 
+                              outputs=predictions)
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers python">
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+            </code></pre>
+    <p>This is Python, but tensorflow.js code almost is indistinguishable</p>
+                        </section>
+    
+    <section data-markdown>
+            <textarea data-template>
+    ### Deployment to observablehq
+    
+    <img src='img/tfjs/observablehq.png' height="400px">
+    
+    https://beta.observablehq.com/@nsthorat/introduction-to-deeplearn-js
+    </textarea>
+    </section>
+            
         <section>
             <h3>Wrapping Up</h3>
-            <p>Browser based ML apps</p>
+            <p>tensorflow.js browser apps</p>
             <ul>
                 <li>can make use of any GPU (not only CUDA)
                 <li>have highest reach due to zero installation
@@ -374,12 +427,12 @@ Unter Deploy zeigen wie das aus Keras geht und Pläne für Node GpU
                 <li>are ideal for interactive learning
             </ul>
             <p><small>
-                Machine Learning in the Browser, Minds Mastering Machines [M³], London 2017
+                    Educate, Visualize, Develop, Play, Deploy with tensforflow.js, enterjs 2018
                 <br>
             <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 <br>
-            <a href="http://bit.ly/mcubed-js">
-                http://bit.ly/mcubed-js
+            <a href="http://bit.ly/enterjs-tensorflow-js">
+                http://bit.ly/enterjs-tensorflow-js
             </a>
             </small></p>
         </section>
