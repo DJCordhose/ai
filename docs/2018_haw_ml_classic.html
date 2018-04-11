@@ -162,16 +162,14 @@
         <section class="todo local">
 <pre>
 - wie funktioniert categorical_crossentropy, Algorithm
-- Formel Gini
-
-- KNN vor Decision Trees
+- Formel Gini, was bedeutet die?
 - RF und Boost in Notebook
   - Decision Boundaries generieren und in Folien aufnehmen
 </pre>
         </section>
 
                 <section>
-                        <h1>Part 1 - The Basics</h1>
+                        <h1>The Basics</h1>
                         <h2>How does Machine Learning work?</h2>
                     </section>
             
@@ -309,7 +307,7 @@
                 <h3>Do we have all the rules? Are they even correct?</h3>
             </section>
             
-            <section>
+            <!-- <section>
                 <h3>Programming Exercise #1 - Get familiar with the Python Notebook</h3>
                 <p>Improve score starting from existing code</p>
                 <ul>
@@ -319,24 +317,41 @@
                 </ul>   
                 <p>Do your work in on Jupyter Notebook <em>1-classic-code</em>
             </p>
-            </section>
-            <section data-markdown style="font-size: xx-large">
+            </section> -->
+            <section>
+                    <h3>Shared Programming Expriment #1 - Getting familiar with the Python Notebook</h3>
+                    <p>Improve score starting from existing code</p>
+                    <ul>
+                        <li>change rules?</li>
+                        <li>add some?</li>
+                        <li>remove some?</li>
+                    </ul>   
+                    <p></em>
+                </p>
+                </section>
+                <section data-markdown style="font-size: xx-large">
                     <textarea data-template>
             ## Install ML Software
             ### Local Installation:
             * https://www.anaconda.com/download/
             * Important: Install verison 3.x
-            * git clone git@github.com:DJCordhose/ai.git
-            * cd ai/notebooks/md
+            * git clone git@github.com:DJCordhose/haw.git
+            * cd haw/notebooks
             * jupyter notebook
             
             ### Or clone on Azure Notebooks:
-            * https://notebooks.azure.com/djcordhose/libraries/md-dev-days
-            
-            We will explore Jupyter Notebooks and walk through the code together as a first step
+            * https://notebooks.azure.com/djcordhose/libraries/ai-haw
             </textarea>
             </section>
             
+            <section data-markdown style="font-size: xx-large">
+                    <textarea data-template>
+We do our work in on Jupyter Notebook <em>1-classic-code</em>.
+
+We will explore Jupyter Notebooks and walk through the code together
+            </textarea>
+            </section>
+
             <section>
                 <h3>Different Approach: Machine Learning</h3>
                 <div class="fragment">
@@ -344,13 +359,6 @@
                 </div>
             </section>
             
-            <section>
-                    <h3>Typical application: Classification</h3>
-                    <div class="fragment">
-                        <img src="img/sketch/classification.jpg" height="450px">
-                    </div>
-                </section>
-                
                         <section>
                             <h3>Machine Learning and AI</h3>
                             <p>Why I like the term artificial intelligence: I think it's good to have an umbrella term for the field that encompasses a
@@ -383,10 +391,13 @@
                             <img src="img/sketch/types-of-ml.png" height="500px">
                         </div>
                     </section>
+
+                    <section>
+                            <img src='img/applications/decisions/type.png'>
+                        </section>
             
             <section>
-                <h3>Machine Learning as an Experiment</h3>
-                <!--<div>-->
+                <h3>Supervised Machine Learning as an Experiment</h3>
                 <a href="https://teachablemachine.withgoogle.com/" target="_blank">
                     <img src="img/browser/teachable-machine.png" height="350px">
                 </a>
@@ -395,7 +406,6 @@
                         <a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
                     </small>
                 </p>
-                <!--</div>-->
             </section>
                     <section>
                         <h3>Supervised Machine Learning</h3>
@@ -408,35 +418,91 @@
                     </section>
             
                     <section>
-                        <h3>Typical application: Classification</h3>
-                        <div class="fragment">
-                            <img src="img/sketch/classification.jpg" height="450px">
-                        </div>
-                        <p class="fragment">We have to deal with a classification problem</p>
-                    </section>
+                            <h3>Typical application: Classification</h3>
+                            <div class="fragment">
+                                <img src="img/sketch/classification.jpg" height="450px">
+                            </div>
+                            <p class="fragment">We have to deal with a classification problem</p>
+                        </section>
+
+                        <section>
+                                <h3>Data: Quantity</h3>
+                                <img src='img/applications/decisions/classic.png' height="500px">
+                                <p>We have 300 data sets, this is small</p>
+                            </section>
                     
                         <section>
+                            <h3>KNN: k Nearest Neighbors</h3>
+                            <p>A simple classic</p>
+                        </section>
+                    
+                        <section>
+                            <img src="img//insurance/knn.png">
+                        </section>
+                        <section>
+                            <h3>Algorithm</h3>
+                            <p>For a case to predict</p>
+                            <ol>
+                                <li>Plot the case together with the known samples
+                                <li>Look at a number (k) of nearest data points
+                                <li>Choose k in such a way that you can get a majority
+                                <li>Your prediction is the color of the majority
+                            </ol>
+                        </section>
+                    
+                        <section>
+                            <h3>Computed results for k = 1</h3>
+                            <div class="fragment">
+                        
+                                <img src="img/insurance/knn-1.png" height="400px">
+                                <p>
+                                    <small>approx. 98% accuracy on train data, but only 65% on test data</small>
+                                </p>
+                            </div>
+                        </section>
+                        <section>
+                                <h3>This is what we call Overfitting</h3>
+                            </section>
+                        
+                            <section>
+                                <img src="img/flashcards/Overfit_Vs_Underfit_print.png">
+                            </section>
+            
+                    
+                        <section>
+                            <h3>Computed results for k = 13</h3>
+                            <div class="fragment">
+                        
+                                <img src="img/insurance/knn-13.png" height="400px">
+                                <p>
+                                    <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
+                                </p>
+                            </div>
+                            <p class="fragment">Notice the smooth boundaries</p>
+                        </section>
+
+                        <section>
                     <h3>Decision Trees</h3>
-                    <p>A simple classic</p>
+                    <p>Another simple classic</p>
                 </section>
             
                 <section>
                     <img src="img/flashcards/Decision_Trees_print.png">
                 </section>
             
-                <!-- Only for the "Machine Learning Without Machines Workshop"
                 <section>
                     <h3>Paper Exercise #2</h3>
                     <ol>
-                        <li>Create a decision tree and draw it on paper</li>
+                        <li>Create a binary decision tree and draw it on paper</li>
                         <li>Apply the decision tree to our problem in the lower part of our sample sheet</li>
-                        <li>How does the result look like?</li>
+                        <li>How do the decision boundaries look like?</li>
+                        <li>Check the test set see how well this worked</li>
                     </ol>
                 </section>
             
                 <section>
                     <h3>The computer is actually better at doing repetative work</h3>
-                </section> -->
+                </section>
             
                 <section>
                     <h3>Decision Boundaries for our problem</h3>
@@ -458,20 +524,13 @@
                 </section>
             
                 <section>
-                    <h3>How good is this?</h3>
+                    <h3>Overfitting</h3>
                     <img src="img/dt/dt-boundaries-full.png">
                     <p>
                         <small>approx. 98% accuracy on train data, but only 61% on test data</small>
                     </p>
                 </section>
             
-                <section>
-                    <h3>This is what we call Overfitting</h3>
-                </section>
-            
-                <section>
-                    <img src="img/flashcards/Overfit_Vs_Underfit_print.png">
-                </section>
                 <section>
                     <img src="img/flashcards/Avoid_Overfitting_print.png">
                 </section>
@@ -491,22 +550,24 @@
                 </section>
             
                 <section>
+                    <h3>An example for regularization</h3> 
                     <pre><code data-trim>
-            clf = DecisionTreeClassifier(max_depth=3,
-                                         min_samples_leaf=20,
-                                         min_samples_split=20)
+max_depth=3,
+min_samples_leaf=20,
+min_samples_split=20
                         </code></pre>
+                        <p>How will this perform?</p>
                 </section>
                 <section>
+                    <p>Underfitting</p>
                     <img src="img/dt/dt-boundaries-underfit.png">
                         <p>
                             <small>only approx. 65% accuracy on train data, and only 59% on test data</small>
                         </p>
-                        <p class="fragment">This is what we call Underfitting</p>
                 </section>
             
                 <section>
-                    <h3>Programming Exercise #2 - Find the Sweet Spot</h3>
+                    <h3>Shared Programming Exercise #2 - Find the Sweet Spot</h3>
                     <p>Get rid of overfitting, but avoid underfitting as much as possible</p>
                     <ul>
                         <li>Can you do better than the hand coded classifier?</li>
@@ -516,7 +577,7 @@
                         <li>How do the decision boundaries for the different results look like? Do you see a pattern?</li>
                     </ul>
                     <p>Do your work in on Jupyter Notebook
-                        <em>2-sklearn-decision-trees</em>
+                        <em>3-sklearn-decision-trees</em>
                     </p>
                 </section>
             
@@ -598,49 +659,7 @@
                 <section>
                     <img src="img/flashcards/AdaBoost_print.png">
                 </section>
-                <section>
-                    <h3>KNN: k Nearest Neighbors</h3>
-                    <p>Another simple classic</p>
-                </section>
-            
-                <section>
-                    <img src="img//insurance/knn.png">
-                </section>
-                <section>
-                    <h3>Algorithm</h3>
-                    <p>For a case to predict</p>
-                    <ol>
-                        <li>Plot the case together with the known samples
-                        <li>Look at a number (k) of nearest data points
-                        <li>Choose k in such a way that you can get a majority
-                        <li>Your prediction is the color of the majority
-                    </ol>
-                </section>
-            
-                <section>
-                    <h3>Computed results for k = 1</h3>
-                    <div class="fragment">
-                
-                        <img src="img/insurance/knn-1.png" height="400px">
-                        <p>
-                            <small>approx. 98% accuracy on train data, but only 65% on test data</small>
-                        </p>
-                    </div>
-                    <p class="fragment">Again Overfitting</p>
-                </section>
-            
-                <section>
-                    <h3>Computed results for k = 13</h3>
-                    <div class="fragment">
-                
-                        <img src="img/insurance/knn-13.png" height="400px">
-                        <p>
-                            <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
-                        </p>
-                    </div>
-                    <p class="fragment">Notice the smooth boundaries</p>
-                </section>
-          
+
                 <section>
                     <h2>WICHTIG: Laptop oder Handy mitbringen nächstes Mal</h2>
                     <p>Wir haben ein paar Experimente</p>

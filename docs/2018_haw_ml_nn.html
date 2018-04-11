@@ -266,7 +266,7 @@ http://cs231n.github.io/neural-networks-1/#actfun
                 </section>
                 
     <section>
-        <h3>Exercise #3</h3>
+        <h3>Experiment</h3>
         <p>Make some sense of artificial neurons and neural networks using the TensorFlow Playground</p>
         <ol>
             <li class="fragment">What can you do with a single neuron and why?</li>
@@ -278,9 +278,22 @@ http://cs231n.github.io/neural-networks-1/#actfun
         </p>
     </section>
 
-            <section>
-                <h3>Applying Deep Neural Networks to our problem</h3>
-                <p>Using TensorFlow and Keras</p>
+    <section>
+            <h3>Applying Deep Neural Networks to our problem</h3>
+            <p>Using TensorFlow</p>
+            <img src='img/tf.png'>
+            <a href="https://www.tensorflow.org/" target="_blank">https://www.tensorflow.org/</a>
+        </section>
+
+        <section>
+                <img src="img/flashcards/Tensors_print.png" height="550px">
+                <p><small><a target="_blank" href="https://towardsdatascience.com/linear-algebra-for-deep-learning-f21d7e7d7f23">
+                    Tensors and Operations on them
+                </a></small></p>
+        </section>
+    
+        <section>
+                <h3>A sample architecture using 2 fully connected hidden layers</h3>
                 <pre><code contenteditable data-trim class="fragment line-numbers python">
 inputs = Input(name='input', shape=(3, ))
                 </code></pre>
@@ -331,13 +344,6 @@ model.fit(X_train, y_train_categorical, epochs=1000)
                 </code></pre>
     </section>
     
-    <section>
-        <img src="img/flashcards/Tensors_print.png" height="550px">
-        <p><small><a target="_blank" href="https://towardsdatascience.com/linear-algebra-for-deep-learning-f21d7e7d7f23">
-            Tensors and Operations on them
-        </a></small></p>
-    </section>
-
             <section>
                 <h3>What does the neural network learn?</h3>
                 <p class="fragment">All the weights of a the neurons</p>
@@ -385,7 +391,7 @@ _________________________________________________________________</code></pre>
             </section>
 
 
-            <section>
+            <!-- <section>
                 <h3>More on SGD</h3>
                 <img src="img/sgd.png">
                 <p>
@@ -396,7 +402,7 @@ _________________________________________________________________</code></pre>
                     </small>
                 </p>
                  
-            </section>
+            </section> -->
 
     <section>
         <img src="img/flashcards/BackProp_print.png">
@@ -426,30 +432,27 @@ x = Dropout(0.15)(x)
 
 <section data-markdown>
     <textarea data-template>
-### Install Keras and TensorFlow
+### Install TensorFlow
 #### Local Installation depends on OS
-* TensorFlow: https://www.tensorflow.org/install/
-* Keras
-  * Using pip: https://keras.io/#installation
-  * Using conda: https://anaconda.org/conda-forge/keras
+* https://www.tensorflow.org/install/
 
 #### Azure Notebooks:
-* Keras and TensorFlow already installed
+* TensorFlow already installed
 </textarea>
 </section>
 
     <section>
-        <h3>Programming Exercise #3</h3>
+        <h3>Shared Programming Exercise</h3>
         <p>Configure a deep neural network to solve our problem</p>
         <ul>
-            <li>Use all available input features (3)</li>
+            <li>We Use all available input features (3)</li>
             <li>Change the configured number of neurons per layer</li>
             <li>Add dropout to reduce overfitting</li>
             <li>Change the number of layers</li>
             <li>Can you explain the number of trainable parameters?</li>
             <li>How do you explain the very different decision boundaries per km per year?</li>
         </ul>
-        <p>Do your work in <em>4-keras-tensorflow-nn</em>
+        <p>Do your work in <em>4-tf-keras-nn</em>
         </p>
     </section>
 
@@ -481,9 +484,8 @@ predictions = Dense(3, name='softmax', activation='softmax')(x)
             </code></pre>
     </section>
         <section>
-            <h1>Part 3 - Let the GPU burn</h1>
+            <h1>Let the GPU burn</h1>
             <h2>Convolutional neural networks</h2>
-            <p style="color: red">Optional</p>
         </section>
 
         <section>
@@ -494,6 +496,11 @@ predictions = Dense(3, name='softmax', activation='softmax')(x)
                          http://cs231n.github.io/convolutional-networks/</a>
             </p>
              
+        </section>
+
+        <section>
+                <h3>Ansatz nach Art der Daten</h3>
+                <img src='img/applications/decisions/data.png'>
         </section>
 
         <section>
@@ -742,25 +749,16 @@ The classifier more or less is what we used for our previous example
                 </textarea>
                 </section> -->
 
-                <section>
-                    <h3>Exercise #4</h3>
-                    <p>Use the model builder to experiment on the MNIST data set</p>
-                    <ol>
-                        <li>Try both Fully Connected Layers as well as Convolutional Layers</li>
-                        <li>Advanced: try to configure a custom network</li>
-                    </ol>
-                </section>
-
                 <section style="font-size: xx-large">
-                    <h3>Alternative Exercise #4</h3>
+                    <h3>Shared Exercise #4</h3>
                     <p>Use tensorflow.js to experiment on the MNIST data set</p>
-                    <p>
+                    <!-- <p>
                                     <a href="js/mnist" target="_blank">
                                         https://djcordhose.github.io/ai/js/mnist</a>
                         </p>
                     <ol>
                         <li>clone this repository and locate <code>docs/js/mnist</code></li>
-                        <li>run a local http server in this folder</li>
+                        <li>run a local http server in this folder</li> -->
                         <li>make your changes to <code>model.js</code></li>
                         <li>Experiment with number of epochs (TRAIN_BATCHES), learning rate, and number of filters in convolutional layers</li>
                         <li>Monitor GPU performance using the tools of your OS (try to reach 100% utilization)</li>
