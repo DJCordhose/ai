@@ -160,7 +160,6 @@
 <pre>
 - Chinesiches Startup: https://twitter.com/data2day/status/983331353776148480
 - Magenta: https://twitter.com/TensorFlow/status/983479708796014592
-- alles auskonmmentierte wieder hinein nehmen
 - LSTM Beispiel mit tensorflow.js mit NLP Beispiel
 - Mehr Unsupervised und Übung
   - Jeweils eine Papier Übung für Supervised und Unsupervised und eine am Ende für Applications
@@ -169,10 +168,6 @@
   - Optional: https://www.quora.com/What-is-Bayesian-machine-learning
 </pre>    
 </section>
-        <!-- <section>
-            <h1>Teil 1</h1>
-            <h2>Ein Beispiel zum Einstieg</h2>
-        </section> -->
 
         <section>
                 <h3>Ein Fallbeispiel</h3>
@@ -189,18 +184,18 @@
                 <h3>Ansatz: Von Hand kodierte Regeln</h3>
                 <div class="fragment">
                 <pre><code contenteditable data-trim class="line-numbers python">
-    if age < 25:
-        if speed > 180:
-            return red
-        else:
-            return yellow
-    if age > 75:
+if age < 25:
+    if speed > 180:
         return red
-    if km_per_year > 50:
-        return red
-    if km_per_year > 35:
+    else:
         return yellow
-    return green
+if age > 75:
+    return red
+if km_per_year > 50:
+    return red
+if km_per_year > 35:
+    return yellow
+return green
                     </code></pre>
                 </div>
             </section>
@@ -259,14 +254,14 @@
                         </div>
                     </section>
 
-    <!-- <section>
+    <section>
         <h3>Machine Learning als Klassifikation: Ein Experiment</h3>
         <a href="https://teachablemachine.withgoogle.com/" target="_blank">
             <img src="img/browser/teachable-machine.png" height="350px">
         </a>
         <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
         </small></p>
-    </section> -->
+    </section>
     
     <section>
         <h3>Strategien</h3>
@@ -276,7 +271,7 @@
         </ul>
     </section>
 
-    <!-- <section>
+    <section>
         <h3>Validierung</h3>
         <p>Generalisierung, nicht perfekte Reproduktion ist unser Ziel</p>
         <ol>
@@ -286,7 +281,7 @@
             <li class="fragment">Den zweiten Satz nehmen wir zur Überprüfung: passen die vorhergesagten Ausgaben zu den uns bekannten Ausgaben?</li>
         </ol>
     </section>
- -->
+
     <section>
         <h3>KNN: k Nearest Neighbors</h3>
         <img src="img//insurance/knn.png">
@@ -301,7 +296,7 @@
             </ol>
         </section>
     
-                <!-- <section data-markdown>
+                <section data-markdown>
     <textarea data-template>
 ### KNN wurde auch bei unserem Beispiel mit der Gesichtserkennung benutzt
 
@@ -311,7 +306,7 @@ _The KNN image classifier works much great with small amounts of data._
 
 https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
 </textarea>
-</section> -->
+</section>
 
                 <section>
                     <h3>Ergebnisse für k = 1</h3>
@@ -353,14 +348,14 @@ https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
         </section>
 
     
-    <!-- <section data-markdown>
+    <section data-markdown>
             <textarea data-template>
 ### Regression anstatt Klassifikation
 Die andere Art des Machine Learnings
 <img src="img/linear_regression.png" height="400px">
 https://beta.observablehq.com/@tmcw/bring-your-own-doodles-linear-regression
     </textarea>
-    </section> -->
+    </section>
     <section>
             <h1>Teil 3</h1>
             <h2>Unsupervised Learning: Clustering</h2>
@@ -382,14 +377,14 @@ https://beta.observablehq.com/@tmcw/bring-your-own-doodles-linear-regression
         <img src='img/applications/decisions/question.png'>
     </section>
 
-        <!-- <section data-markdown>
+        <section data-markdown>
                 <textarea data-template>
 _Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
 similar (in some sense) to each other than to those in other groups (clusters)._
 
 https://en.wikipedia.org/wiki/Cluster_analysis
                 </textarea>
-    </section> -->
+    </section>
     
     <section data-markdown>
             <textarea data-template>
