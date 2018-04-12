@@ -148,12 +148,283 @@
     <div class="slides">
 
         <section>
-            <h2>Introduction to Natural Language Processing</h2>
+            <h2>Introduction to Natural Language Processing (NLP)</h2>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
         </section>
+        <section data-markdown class="todo">
+                <textarea data-template>
 
-        <section class="todo">
+        Tf-df
+        Next Step: Type of NN - feeding in words
+        LSTMs erklären nach Coah
+        </textarea>
+        </section>
+
+        <section>
+            <h2>Structure</h2>
+            <ol>
+                <li>Encoding text to make it accessible to Machine Learning
+                        <ol>
+                                <li>Basics</li>
+                                <li>Word2Vec: Word Embeddings</li>
+                            </ol>
+                
+                </li>
+                <li>Machine Learning architectures applicable to text
+                        <ol>
+                                <li>RNNs</li>
+                                <li>LSTMs</li>
+                                <li>Applications</li>
+                            </ol>
+                
+                </li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Part 1: Making text accissible to Machine Learning</h2>
+            <p>How to encode text into a vector?</p>
+        </section>
+
+            <section data-markdown>
+                <textarea data-template>
+### Classic approach: Bag of Words
+
+https://en.wikipedia.org/wiki/Bag-of-words_model
+            </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+<img src="img/flashcards/Bag_Of_Words_print.png">
+                    </textarea>
+        </section>
+        
+
+            <section>
+                <img src="img/flashcards/Stop_Words_print.png">
+            </section>
+    
+            <section>
+                <img src="img/flashcards/Stemming_Words_print.png">
+            </section>
+    
+            <section class="todo">
+                <p>Where to put this?</p>
+                <img src="img/flashcards/TF-IDF_print.png">
+            </section>
+    
+        <section>
+            <h2>Word Embeddings</h2>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Motivation: What makes text and sequences so different?
+<img src="img/tf/audio-image-text.png">
+https://www.tensorflow.org/tutorials/word2vec
+                </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Distributional Hypothesis
+
+__Words that appear in the same contexts share semantic meaning.__
+
+https://en.wikipedia.org/wiki/Distributional_semantics
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Two Categories of approaches
+
+1. _count-based methods_: compute the statistics of how often some word co-occurs with its neighbor words in a large text corpus, and then map these count-statistics down to a small, dense vector for each word
+1. _predictive methods_: directly try to predict a word from its neighbors in terms of learned small, dense embedding vectors
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Standard Predictive Method: word2vec
+
+Comes in two flavours
+
+1. _Continuous Bag-of-Words model (CBOW)_: predicts target words (e.g. 'mat') from source context words ('the cat sits on the') - _good for small data sets_
+1. _Skip-Gram model_: does the inverse and predicts source context-words from the target words - _good for larger datasets_. 
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Skip-Gram model
+
+We will restrict ourselves to this model
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Exmaple using the Skip-Gram model
+
+_the quick brown fox jumped over the lazy dog_
+
+* Form a dataset of the context of each word
+* vanialla context for a word are the words left and right to it
+* each context is a pair of _(context, target)_ 
+
+_([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ..._
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Skip-Gram model inversion
+
+* Skip-Gram tries to infer *each* context word from its target words
+* each pair becomes _(input, output)_ 
+
+_([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ..._
+
+becomes
+
+_(quick, the), (quick, brown), (brown, quick), (brown, fox), ..._
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### How do we train for that objective?
+
+* objective is to learn to predict the output for the input
+* that means we have to have a loss function to minimize
+* minimization as in supervised learning using SGD
+
+But how does our model look like?
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Naive approach: Expensive
+<img src='img/tf/softmax-nplm.png' height="500px">
+Have a probability for all words (v)
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Inexpensive Approach 
+
+Just choose k random words
+
+<img src='img/tf/nce-nplm.png' height="500px">
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### The loss function
+
+* objective is maximized when the model assigns high probabilities to the real words, and low probabilities to noise words
+* this is called Negative Sampling
+* scales only with the number (k) of noise words that we select, not all words in the vocabulary (v)
+* makes it much faster to train
+
+This is called noise-contrastive estimation (NCE) loss
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### What are the actual parameters learned?
+
+* vectors for Embedding per word
+* in other words: where in the vector space is a word located
+* similar words have similar vectors
+
+similarity is expressed by the context a word occurs in
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### We can visualize these similarities
+
+<img src='img/tf/linear-relationships.png'>
+
+Using t-SNE to project from high dimensions to 2d
+</textarea>
+</section>
+
+<section>
+        <img src="img/sketch/types-of-ml.png">
+    </section>
+
+<section>
+    <h3>Discussion: What kind of learning is this?</h3>
+    <ol>
+        <li class="fragment">there is no need manual labelling</li>
+        <li class="fragment">but labelling is implicit in sequence of words in training data</li>
+    </ol>
+    <p class="fragment">supervised vs unsupervised</p>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Now what?
+
+You can either
+
+* use the results all by themselves to find out about similarities - visualize by projecting down to 2d using t-SNE as shown before
+* or use the vectors as representations for words - treat texts as sequences of words
+</textarea>
+</section>
+
+<section class="todo">
+        <h2>Part 2: Using Sequences of Words</h2>
+    </section>
+
+
+    <section>
+            <h3>Text is special</h3>
+            <img src='img/applications/decisions/data.png'>
+        </section>
+
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+### RNNs / LSTMs
+* https://www.tensorflow.org/tutorials/recurrent
+        </textarea>
+        </section>
+    
+    <section data-markdown class="todo">
+            <textarea data-template>
+### Applications
+* https://www.tensorflow.org/tutorials/text_classification_with_tf_hub
+* https://www.tensorflow.org/tutorials/seq2seq
+    </textarea>
+    </section>
+
+
+
+    <section data-markdown class="todo">
+            <textarea data-template>
+    # From here on just material
+    </textarea>
+    </section>
+        
+
+
+
+<section class="todo">
                 <pre>
 https://medium.com/@alyafey22/sentiment-classification-from-keras-to-the-browser-7eda0d87cdc6
 
@@ -190,6 +461,7 @@ In der letzten Stunde zeigen wir uns sprechen über die Praktikumsaufgaben, Stud
 damit auseiander zu setzen
 
 Embeddings
+- https://www.tensorflow.org/tutorials/word2vec
 - https://www.tensorflow.org/programmers_guide/embedding
 - Our preprint that creates embeddings for over 100k medical concepts using data from 60 million patients, 1.7 million journal articles and 20 million notes is up: https://t.co/u6C7lN7jl4
 
@@ -243,10 +515,6 @@ NLP wie Stanford Kurs nur einstreuen
             <p><em>What is the most basic solution to encode the text into something that is accessible to a machine learning solution</em></p>
             <p>Disucss and groups and come up with a solution</p>
             <p><small>10 Minutes Work and 10 Minutes Discussion</small></p>
-        </section>
-
-        <section class="todo">
-            <h3>Bag of Words</h3>
         </section>
 
         <section>
@@ -305,28 +573,6 @@ https://www.smartdatacollective.com/natural-language-processing-essential-elemen
             </pre>
         </section>
 
-        <section>
-            <img src="img/flashcards/Bag_Of_Words_print.png">
-        </section>
-
-        <section>
-            <img src="img/flashcards/Stop_Words_print.png">
-        </section>
-
-        <section>
-            <img src="img/flashcards/Stemming_Words_print.png">
-        </section>
-
-        <section>
-            <img src="img/flashcards/TF-IDF_print.png">
-        </section>
-
-        <section class="todo">
-            <pre>
- * word2vec: https://www.tensorflow.org/tutorials/word2vec
-            
-        </pre>
-        </section>
 
         <section class="todo">
 <pre>
