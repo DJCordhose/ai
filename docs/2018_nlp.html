@@ -154,10 +154,7 @@
         </section>
         <section data-markdown class="todo">
                 <textarea data-template>
-
-        Tf-df
-        Next Step: Type of NN - feeding in words
-        LSTMs erklären nach Coah
+LSTMs erklären nach Coah
         </textarea>
         </section>
 
@@ -184,14 +181,73 @@
 
         <section>
             <h2>Part 1: Making text accissible to Machine Learning</h2>
-            <p>How to encode text into a vector?</p>
+            <p>Linguistic Processing</p>
         </section>
 
-            <section data-markdown>
+        <section data-markdown>
+            <textarea data-template>
+### Basic Linguistic Processing
+
+* Tokenizing
+* Stemming
+* Stop-Words
+* Part-of-Speach (POS) Tagging
+
+De-facto standard Python library: https://spacy.io/
+            </textarea>
+        </section>
+        
+        <section>
+                <img src="img/flashcards/Tokenizing_Text_print.png">
+            </section>
+
+            <section>
+                <img src="img/flashcards/Stemming_Words_print.png">
+            </section>
+    
+            <section>
+                    <img src="img/flashcards/Stop_Words_print.png">
+                </section>
+        
+<section data-markdown>
+        <textarea data-template>
+## Part-of-Speach (POS) Tagging 
+
+https://spacy.io/usage/linguistic-features
+</textarea>
+</section>
+
+<section>
+        <h3>Terms</h3>
+        <img src='img/nlp/spacy/pos_terms.png'>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Example 
+
+_Apple is looking at buying U.K. startup for $1 billion_
+</textarea>
+</section>
+
+<section>
+    <h3>Terms for Example</h3>
+    <img src='img/nlp/spacy/pos_example.png' height="500px">
+    <p><small>Apple is looking at buying U.K. startup for $1 billion</small></p>
+</section>
+
+
+<section data-markdown>
                 <textarea data-template>
-### Classic approach: Bag of Words
+### Bag of Words
+
+Classic approach to turn words into a vector representation accessible for machine learning. 
 
 https://en.wikipedia.org/wiki/Bag-of-words_model
+
+<small>
+        http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html
+</small>
             </textarea>
         </section>
 
@@ -200,23 +256,46 @@ https://en.wikipedia.org/wiki/Bag-of-words_model
 <img src="img/flashcards/Bag_Of_Words_print.png">
                     </textarea>
         </section>
-        
+
+        <section data-markdown>
+                <textarea data-template>
+### Limitations of Bag of Words
+
+* Positions and context of words get lost
+* No notion of semantics to words
+* Common words, not specific to domain probably get highest frequencies
+
+            </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### TF-IDF
+
+* approach to strip off common words from a measure
+* TF: term frequency
+* IDF: inverse document-frequency
+* TF-IDF: TF times IDF
+
+<div  style="font-size: x-large">
+http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html
+</div>
+
+<div  style="font-size: x-large">
+http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html
+</div>
+</textarea>
+        </section>
+
 
             <section>
-                <img src="img/flashcards/Stop_Words_print.png">
-            </section>
-    
-            <section>
-                <img src="img/flashcards/Stemming_Words_print.png">
-            </section>
-    
-            <section class="todo">
-                <p>Where to put this?</p>
                 <img src="img/flashcards/TF-IDF_print.png">
             </section>
     
         <section>
             <h2>Word Embeddings</h2>
+            <p>Taking position and context of words into account</p>
+            <p>Semantics of words by proximity to other words</p>
         </section>
 
         <section data-markdown>
@@ -313,7 +392,8 @@ But how does our model look like?
 <section data-markdown>
         <textarea data-template>
 ### Naive approach: Expensive
-<img src='img/tf/softmax-nplm.png' height="500px">
+<img src='img/tf/softmax-nplm.png' height="450px">
+
 Have a probability for all words (v)
 </textarea>
 </section>
@@ -322,9 +402,9 @@ Have a probability for all words (v)
         <textarea data-template>
 ### Inexpensive Approach 
 
-Just choose k random words
+<img src='img/tf/nce-nplm.png' height="450px">
 
-<img src='img/tf/nce-nplm.png' height="500px">
+Just choose k random words
 </textarea>
 </section>
 
@@ -364,16 +444,20 @@ Using t-SNE to project from high dimensions to 2d
 </section>
 
 <section>
+        <h2>Discussion: What kind of learning is this?</h2>
+    </section>
+    
+    <section>
         <img src="img/sketch/types-of-ml.png">
     </section>
 
 <section>
-    <h3>Discussion: What kind of learning is this?</h3>
+    <h3>Supervised vs Unsupervised</h3>
     <ol>
         <li class="fragment">there is no need manual labelling</li>
         <li class="fragment">but labelling is implicit in sequence of words in training data</li>
     </ol>
-    <p class="fragment">supervised vs unsupervised</p>
+    <p class="fragment">We would still call this Unsupervised</p>
 </section>
 
 <section data-markdown>
