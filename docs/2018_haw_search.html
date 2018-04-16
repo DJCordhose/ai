@@ -147,144 +147,112 @@
 <div class="reveal">
     <div class="slides">
 
+<section>
+        <h3>Diskussion: Auf der Suche nach Intelligenz</h3>
+        <p>Sind die Ansätze intelligent?</p>
+    </section>
 
-        <section>
-            <h2>Graph Search: The Silver Bullet of Symbolic AI</h2>
-            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-            </h4>
-            <!-- <p><small><a href="xxx">
-                xxx
-            </a></small></p> -->
-        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Praktikum: Organisatorisches
+
+* Ziel des Praktikums: etwas neues lernen
+* Olli ist jeden Montag zu sprechen von 10-12
+  * Fragen und Diskussion
+  * Sicherung des Ergebnisses
+  * Frage: was hast du gelernt?
+
+</textarea>
+</section>
 
 <section>
-    <h2>Search</h2>
+    <p><em>
+        Learning results from what the student does and thinks, and only from what the student does and thinks. The teacher can advance learning only by influencing the student to learn.
+    </em></p>
+    <p><small><a target="_blank" href="https://en.m.wikipedia.org/wiki/Herbert_A._Simon">Herbert Simon</a>: 
+        <a target="_blank" href="http://www.azquotes.com/quote/765143">http://www.azquotes.com/quote/765143</a></small></p>
+</section>
+
+<section>
+        <h2>Mögliche Aufgaben für Praktium</h2>
+    </section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Suche Anwendungen
+* Welche Problemstellungen könnten durch eine Suche gelöst werden?
+* Wie transformiert du diese in ein Suchproblem?
+* Welche Suchstrategie nimmst du?
+
+* Wie funktioniert die Routen-Planung wenn man es ernst meint? https://www.quora.com/How-does-the-algorithm-of-Google-Maps-work
+</textarea>
 </section>
 
 <section data-markdown>
     <textarea data-template>
-### A simple Example - Robot Run
-<img src="img/search/robot_run.jpg" alt="Alpha Beta" height="450px">
+### Suche Notebook
 
-Robot needs to find Portal/Goal
-</textarea>
-</section>
+* Anderen Suchalgorithmus dazu bauen
+* In anderer Programmiersprache nachbauen
+* Für ein anderes Problem nutzen wir oben beschrieben
+
+<small>
+https://github.com/DJCordhose/haw/blob/master/notebooks/Search.ipynb
+</small>
         
-<section data-markdown>
-    <textarea data-template>
-### How to find a path
-
-<img src="img/search/search.jpg" height="450px">
-
-By expanding possibilities
-</textarea>
-</section>
-
-<section>
-    <h2>Game Play</h2>
-</section>
-
-<!-- http://www.dokchess.de/_downloads/szoerner_majug2012_architekturentwurf_schach_deploy.pdf -->
-<section data-markdown >
-    <textarea data-template>
-### On the importance of looking ahead
-
-Why looking ahead? Isn't a heuristic evaluation good enough?
-
-Kudos for position to https://twitter.com/StefanZoerner
-
-https://www.embarc.de/schachbegriffe-auf-englisch/
 </textarea>
 </section>
 
 <section data-markdown>
+        <textarea data-template>
+### Jupyter Notebooks
+    
+* Basis für unsere Programmieraufgaben mit Python
+* Programmieraufgaben mit JavaScript werden später dazu kommen
+
+<small>
+http://opentechschool.github.io/python-data-intro/core/notebook.html
+</small>
+            
+    </textarea>
+    </section>
+    
+
+<section data-markdown>
     <textarea data-template>
-### Checkmate unavoidable?
+### Spielen Notebook
 
-<img src="img/search/pos1.jpg" height="450px">
+* Anderes Beispiel für minimax
+* Anschauliche Erklärung für Alpha-Beta
+* https://en.wikipedia.org/wiki/Late_Move_Reductions in Alpha-Beta einbauen
+* GraphViz o.ä., um Graphen für Suche zu visualisieren
 
-FEN: 2R5/8/p7/7p/6pP/5pP1/5P1K/k4q2 w - - 0 1
+<small>
+https://github.com/DJCordhose/haw/blob/master/notebooks/Play.ipynb
+</small>
 </textarea>
 </section>
 
 <section data-markdown>
     <textarea data-template>
-### Using a heuristic to avoid loss of a piece
+### Spielen Anwendungen
 
-<img src="img/search/pos2_no_loss.jpg" height="450px">
+Wie könnte man ein Schachprogramm bauen?
+* https://en.wikipedia.org/wiki/Stockfish_(chess)
 
-Random move of Rook, but no loss
-</textarea>
-</section>
 
-<section data-markdown>
-    <textarea data-template>
-### But Checkmate in next move
+Suche und KI in Spielen
+* https://www.redblobgames.com/
 
-<img src="img/search/pos3_mate.jpg" height="450px">
+_Eher eine theoretische Auseinandersetzung oder ein Thema für die Prüfung_
 
-Rook saved, but not effectively used
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Rewind to initial position
-
-<img src="img/search/pos1.jpg" height="450px">
-
-This time we look ahead
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Certain loss of Rook
-
-<img src="img/search/pos2_check.jpg" height="450px">
-
-Bad local evaluation
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Of course Queen has to capture Rook
-
-<img src="img/search/pos3_stalemate.jpg" height="450px">
-
-But this means Stalemate and a Draw
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Intuition for Alpha Beta Pruning
-<img src="img/search/alpha-beta-intuition.png" alt="Alpha Beta Intuition" height="400px">
-
-No matter what Min does, Max can always win in leftmost branch, no need to check for the others
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Complete Search Tree for Robot Run
-<img src="img/search/mini-max-tree.jpg" alt="Alpha Beta" height="450px">
-
-Top Right Branch can be pruned completely
-</textarea>
-</section>
-
-<section data-markdown style="font-size: xx-large">
-    <textarea data-template>
-### How does Stockfish Play
-
-* Alpha-Beta Search Pruning: https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_search
-* Bitboards: https://en.wikipedia.org/wiki/Bitboard
-* Transposition Tables: https://en.wikipedia.org/wiki/Transposition_table
-* Late Move Reductions:: https://en.wikipedia.org/wiki/Late_Move_Reductions 
-
-https://en.wikipedia.org/wiki/Stockfish_(chess)
+<small>http://www.dokchess.de/_downloads/szoerner_majug2012_architekturentwurf_schach_deploy.pdf</small>
 
 </textarea>
 </section>
+
+
     </div>
 
 </div>
