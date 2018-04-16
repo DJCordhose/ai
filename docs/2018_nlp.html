@@ -154,7 +154,8 @@
         </section>
         <section data-markdown class="todo">
                 <textarea data-template>
-LSTMs erklären nach Coah
+- Tauglich als motivierendes Beispiel
+- LSTMs erklären nach Coah
         </textarea>
         </section>
 
@@ -583,6 +584,24 @@ Nicht mehr planen, weil letzter Teil, der sicher zuende gebracht werden soll.
 
         <section data-markdown class="todo">
                 <textarea data-template>
+Cholet: Kap 6.2.2 als Motivation für LSTMs
+
+SimpleRNN isn’t the only recurrent layer available in Keras. There are two others: LSTM
+and GRU. In practice, you’ll always use one of these, because SimpleRNN is generally too
+simplistic to be of real use. SimpleRNN has a major issue: although it should theoretically
+be able to retain at time t information about inputs seen many timesteps before, in
+practice, such long-term dependencies are impossible to learn. This is due to the vanishing
+gradient problem, an effect that is similar to what is observed with non-recurrent
+networks (feedforward networks) that are many layers deep: as you keep adding layers
+to a network, the network eventually becomes untrainable. The theoretical reasons for
+this effect were studied by Hochreiter, Schmidhuber, and Bengio in the early 1990s.2
+The LSTM and GRU layers are designed to solve this problem.
+                    </textarea>
+        </section>
+
+
+        <section data-markdown class="todo">
+                <textarea data-template>
 ### RNNs / LSTMs
 * https://www.tensorflow.org/tutorials/recurrent
         </textarea>
@@ -670,6 +689,8 @@ Keras LSTMs: https://www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.h
 
 NLP wie Stanford Kurs nur einstreuen
  * NLP with Deep Learning Course: http://web.stanford.edu/class/cs224n/
+
+ https://machinelearningmastery.com/develop-word-embeddings-python-gensim/
 
             </pre>
         </section>
