@@ -181,7 +181,7 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
 
         <section class="todo">
             <pre>
-- am Ende Gesamtbewertung                
+- Testdurchgang                
             </pre>
         </section>
 
@@ -193,7 +193,7 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
                 <li class="fragment">Wer macht Code-Reviews Modell-Spezifikation?</li>
                 <li class="fragment">Wer vergleicht mit einem (nicht-trivialen) Baseline-Modell?</li>
                 <li class="fragment">Wer hat Unit-Tests für den Trainingscode?</li>
-                <li class="fragment">Wer hat Deploy-Pipeline?</li>
+                <li class="fragment">Wer hat eine Deploy-Pipeline?</li>
             </ul>
         </section>
 
@@ -208,11 +208,14 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
 
 What’s your ML Test Score? A rubric for ML production systems
 
+<small>
 https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf
+</small>
 
 Präsentiert auf der NIPS 2016
 
 https://nips.cc/Conferences/2016/Schedule?showEvent=6255
+</textarea>
         </section>
 
         <section>
@@ -224,9 +227,18 @@ https://nips.cc/Conferences/2016/Schedule?showEvent=6255
             <h3>Unser Projekt</h3>
             <p>Kunden-Ranking für KfZ-Versicherung</p>
             <img src="img/insurance/automobile-insurance.png" height="400px">
-            <p>Basiert auf einem echten Projekt</p>
+            <p>Abgeleitet von einem echten Projekt</p>
         </section>
         
+        <section>
+            <h3>Technik / Umsetzung</h3>
+            <ul>
+                    <li>Pipeline basiert auf Pandas/Sklearn</li>
+                    <li>Modell mit TensorFlow/Keras</li>
+                    <li>Deployment auf Google Cloud ML</li>
+            </ul>
+        </section>
+            
         <section>
             <h3>Vorgehen</h3>
             <p>Ein Punkt für das Erfüllen eines Test-Kriteriums</p>
@@ -283,8 +295,8 @@ https://nips.cc/Conferences/2016/Schedule?showEvent=6255
 
         <section>
                 <h3>Daten werden von vorn herein nur anonymisiert verwendet</h3>
-                <pre><code data-trim>
-str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@example.com'
+                <pre><code data-trim class="python">
+str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
                 </code></pre>
                 <p>Zwei Punkte, da das hier automatisiert ist! Vier insgesamt!</p>
             </section>
@@ -296,7 +308,7 @@ str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@ex
                 
             
             <section>
-                <h3>Test: Funktioniet der Code, der Features für Test und Produktion liefert?</h3>
+                <h3>Test: Funktioniert der Code, der Features für Test und Produktion liefert?</h3>
             </section>
                 
             <section>
@@ -309,7 +321,7 @@ str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@ex
 
         <section>
                 <h1>Kategorie 2</h1>
-                <h2>Modell Entwicklung</h2>
+                <h2>Modell-Entwicklung</h2>
         </section>
 
         <section>
@@ -388,8 +400,15 @@ str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@ex
         </section>
     
         <section>
+            <h2>Unser Projekt</h2>
+            <p>Loss wird über das TensorBoard überprüft (manuell)</p>
+            <p>Early Stopping Callbacks wenn Validation Loss nicht mehr herunter geht</p>
+            <p>Checkpoints werden geschrieben</p>
+            <p>Zwei Punkte, weil Callbacks automatisch!</p>
+        </section>
+
+        <section>
             <h3>Test: Gibt es Integrationstests für die komplette Pipeline?</h3>
-            <p></p>
         </section>
     
         <section>
@@ -398,23 +417,48 @@ str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@ex
         </section>
         
         <section>
-            <h3>Test: Verhält sich das Modell nachvollziehbar wenn man nur mit wenig Daten füttert?</h3>
-            <p class="todo">Was heißt das? Gibt leider kein Live Video</p>
+            <h2>Unser Projekt</h2>
+            <p>Accuracy alles Test-Daten wird automatisch berechnet</p>
+            <p>Ausgewählte Datensätze werden nur manuell überprüft</p>
+            <p>Ein Punkt (bekannte Ergebnisse könnten Unit-Tests sein)!</p>
         </section>
+    
+            <section>
+            <h3>Test: Verhält sich das Modell nachvollziehbar?</h3>
+            <p>Kann man das Verhalten nachvollziehen wenn man es nur mit einem Datensatz füttert?</p>
+            <p>Was passiert wenn man einen kleinen Trainingsdatensatz füttert?</p>
+            <p>Hat man irgendeinen Einblick in die internen Abläufe des Modells?</p>
+        </section>
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Wir 2 Hidden Fully Connected Layers, jeweils 100 Nodes</p>
+            <p>Bei Convolutional Layers (nicht in diesem Projekt) nutzen wir die bekannten Strategien</p>
+            <p>Größe und Komplexität erlauben keinen Einblick in die Funktionsweise des Netzes</p>
+            <p>Kein Punkt!</p>
+        </section>
+    
         <section>
             <h3>Test: Gibt es im Staging-Prozess ein System, das Production nachempfunden ist?</h3>
             <p>Nur so kann man sicher stellen, dass System-Änderungen aus dem Training auch in Produktion Funktionieren</p>
         </section>
 
         <section>
+            <h2>Unser Projekt</h2>
+            <p>Auf Google Cloud ML ist ein Modell mit einer bestimmten Version default</p>
+            <p>Diese Versionsnummer kann jederzeit umgesetzet werden</p>
+            <p>Ein Punkt!</p>
+        </section>
+        
+            <section>
             <h3>Test: Kann ein Modell sicher und schnell aus Production zurück gerollt werden?</h3>
         </section>
 
-        <section class="todo">
+        <section>
             <h3>Ergebnis</h3>
-            <p>4 von 14 Punkten</p>
+            <p>5 von 14 Punkten</p>
             <p>
-                <em>3-4 points: There’s been first pass at basic productionization, but additional investment may be needed.</em>
+                <em>5-6 points: Reasonably tested, but it’s possible that more of those tests and procedures may
+                        be automated.</em>
             </p>
         </section>
 
@@ -424,20 +468,38 @@ str(hashlib.sha512(str(row['Licensee']).encode('utf-8')).hexdigest())[:8] + '@ex
         </section>
                         
         <section>
-            <h3>Test: Test for upstream instability in features, both in training and serving</h3>
-            <p>Upstream instability can create problems both at training and serving (inference) time. Training time instability is especially
-            problematic when models are updated or retrained frequently. Serving time instability can occur even when the models themselves
-            remain static. As examples, what alert would fire if one datacenter stops sending data? What if an upstream signal provider
-            did a major version upgrade?</p>
+            <h3>Test: Kommen Daten von weiteren Systemen weiterhin in richtiger Menge an?</h3>
+            <p>Das kann sich auf regelmäßiges (Nach-)Training beziehen und sich auf die Trainingszeiten auswirken</p>
         </section>
 
         <section data-markdown>
             <textarea data-template>
-### Test: Test that data invariants hold in training and serving inputs. 
+### Test: Werden bekannte Invarianten in Trainingsdaten und Vorhersagedaten eingehalten?
 
-For example, test if Feature A and Feature B should always
-have the same number of non-zero values in each example, or that Feature C is always in the range (0; 100) or that class
-distribution is about 10:1.
+Häufig findet man bestimmte Korrelationen oder Konstanten in Eingabedaten. 
+
+Ändern sich diese kann das ein Hinweis darauf sein, dass sich die Natur der Daten verändert hat und wir das Modell überdenken müssen. Oder die Daten sind nicht mehr sinnvoll.
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Wird _training-serving skew_ vermieden?
+
+Falls Vorverarbeitung von Eingabedaten statt findet, wird dies für Training und Production gleich getan? 
+
+Wenn nicht, kommt dann trotzdem dieselbe Art Daten in Production an, mit der wir auch trainiert haben?
+
+
+https://research.googleblog.com/2017/02/preprocessing-for-machine-learning-with.html
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Ist das Modell korrekt aktualisiert worden?
+
+Kann festgestellt werden, ob ein (Nach-)Training korrekt ausgeführt wurde?
 
 
             </textarea>
@@ -445,55 +507,25 @@ distribution is about 10:1.
 
         <section data-markdown>
             <textarea data-template>
-### Test: Test that your training and serving features compute the same values.
+### Test: Tauchen ungültige Werte (NaNs oder Infinity) im Modell auf?
 
-The codepaths that actually generate input features
-may differ for training and inference time, due to tradeoffs for flexibility vs. efficiency and other concerns. This is sometimes
-called “training/serving skew” and requires careful monitoring to detect and avoid.
-
-
+Das Aufauchen von ungültigen Werten irgendwo in der Pipeline sollte so früh wie möglich festgestellt werden
             </textarea>
         </section>
 
         <section data-markdown>
             <textarea data-template>
-### Test: Test for model staleness. 
+### Test: Gibt es Regressionen in Produktion für Ausführungsgeschwindigkeit, Latenz, Durchsatz, RAM Verbrauch? 
 
-For models that continually update, this means monitoring staleness throughout the training pipeline,
-to be able to determine in the case of a stale model where the pipeline has stalled. For example, if a daily job stopped
-generating an important table, what alert would fire?
-
-
+So etwas geht manchmal schleichend, dann besonders schwer zu entdecken
             </textarea>
         </section>
 
         <section data-markdown>
             <textarea data-template>
-### Test: Test for NaNs or infinities appearing in your model during training or serving. 
+### Test: Nimmt die Vorhersagekraft des Productionsmodells ab?
 
-Invalid numeric values can easily crop up
-in your learning model, and knowing that they have occurred can speed diagnosis of the problem.
-
-            </textarea>
-        </section>
-
-        <section data-markdown>
-            <textarea data-template>
-### Test: Test for dramatic or slow-leak regressions in training speed, serving latency, throughput, or RAM usage. 
-
-The computational
-performance (as opposed to predictive quality) of an ML system is often a key concern at scale, and should be monitored via
-specialized regression testing. Dramatic regressions and slow regressions over time may require different kinds of monitoring.
-
-            </textarea>
-        </section>
-
-        <section data-markdown>
-            <textarea data-template>
-### Test: Test for regressions in prediction quality on served data. 
-
-For many systems, monitoring for nonzero bias can be an effective
-canary for identifying real problems, though it may also result from changes in the world.
+Das kann an einem verschlechterten Modell oder aber auch an neuen, unvorhergesehenen Eingabendaten aus der realen Welt liegen.
 
             </textarea>
         </section>
@@ -506,7 +538,7 @@ canary for identifying real problems, though it may also result from changes in 
                 </p>
             </section>
 
-        <section class="todo">
+        <section>
             <h3>Endergebnis</h3>
             <p>Das Minimum eines Ergebnisses jeder Kategorie</p>
             <p>Das bedeutet leider insgesamt 0 Punkte</p>
@@ -515,7 +547,15 @@ canary for identifying real problems, though it may also result from changes in 
                 </p>
         </section>
 
-                <section>
+        <section>
+                <h3>Der Vollständigkeit halber: Die restlichen Bewertungen, die wir nicht erreicht haben</h3>
+                <ul>
+                    <li>7-10 points: Strong levels of automated testing and monitoring, appropriate for missioncritical
+                            systems.</li>
+                    <li>12+ points: Exceptional levels of automated testing and monitoring.</li>
+                </ul>
+        </section>
+        <section>
                     <h3>Zusammenfassung</h3>
                     <ul>
                         <li class="fragment">Machine Learning läuft klassischer Software-Technik um Jahre hinterher</li>
@@ -663,8 +703,10 @@ More people are confused an looking for the right thing to do
 <script>
     if (window.location.hostname.indexOf('localhost') !== -1) {
     } else {
-        // only applies to public version
-        $('.preparation').remove();
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
     }
     Reveal.addEventListener( 'ready', function( event ) {
         if (window.location.hostname.indexOf('localhost') !== -1) {
