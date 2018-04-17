@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Search</title>
+    <title>ML Praktikum</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -147,214 +147,130 @@
 <div class="reveal">
     <div class="slides">
 
-
-        <section>
-            <h2>Graph Search: The Silver Bullet of Symbolic AI</h2>
-            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-            </h4>
-            <!-- <p><small><a href="xxx">
-                xxx
-            </a></small></p> -->
-        </section>
+<!-- <section>
+        <h3>Diskussion: Auf der Suche nach Intelligenz</h3>
+        <p>Sind die Ansätze intelligent?</p>
+    </section> -->
 
 <section>
-    <h2>Search</h2>
+    <h1>Praktikum IS</h1>
+    <h2>Block Machine Learning</h2>
+
 </section>
 
-<section data-markdown class="todo">
-        <textarea data-template>
-### Alpha-Beta Pruning
 
-<img src='img/haw/alpha_beta_pruning.jpg'>
-            </textarea>
-            </section>
-<section data-markdown class="todo">
-        <textarea data-template>
-### Game Search
+<section data-markdown>
+    <textarea data-template>
+### Praktikum: Organisatorisches
 
-Full Search often not feasible (Zahlen von Michael klauen aus den Folien, WP.odp, Seite 16)
-* Limit in Depth: Mini Max / Alpha Beta Pruning
-* Limit in Breadth: Monte-Carlo Tree Search
+* Ziel des Praktikums: etwas neues lernen
+* Wir sind jeden Montag zu sprechen
+  * von 10:00 - 12:00 (12.81) oder 
+  * 17:30 - 18:30 (Vorlesungsraum)
+  * Fragen und Diskussion
+  * Praktikumsabnahme
+  * Frage: was hast du gelernt?
+
+</textarea>
+</section>
+
+<section>
+        <h2>Mögliche Aufgaben für Praktium</h2>
+    </section>
+
+    <section data-markdown class="todo">
+            <textarea data-template>
+* Neural Style Transfer umsetzen: https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/8.3-neural-style-transfer.ipynb
+* Object detection im Browser: https://twitter.com/samim/status/983675334942953473
+* Transfer Learning: https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html
+* RL: 
+  * https://blog.openai.com/retro-contest/
+  * https://twitter.com/Mvandepanne/status/983753861146918912
+
+
+</textarea>
+</section>
+    
+<section data-markdown>
+        <textarea data-template>
+## Classic ML
+### Beispiel Stufe 1: Random Forest und Adaboost anwenden
+
+* Dasselbe wie bei Decision Trees für Random Forest und Ada Boost machen
+* Parameter herausfinden
+* Algorithmen verstehen
+
+    
+    <small>
+            3-sklearn-decision-trees
+    </small>
     </textarea>
     </section>
     
-    <section data-markdown class="todo">
-            <textarea data-template>
-### Reasonable Heuristic is cruical
+<section data-markdown>
+    <textarea data-template>
+## Classic ML
+### Beispiel Stufe 3: Wende Machine Learning auf eine eigene Problemstellung an
 
-* Good solutions available for chess
-* No good solutions for Go
-    * Only a win as a state is a reliable indication
-    * Need to search to the end
-    * Branching Factor Higher than Chess as well
+<small>
+</small>
+</textarea>
+</section>
 
-        </textarea>
-        </section>
-        
-        <section data-markdown class="todo">
-                <textarea data-template>
-### Monte Carlo Game Search
+<section data-markdown>
+    <textarea data-template>
+## Deep Learning / CNNs
+### Beispiel Stufe 3: Ein Convolutional Neural Network mit eigenen Bilddaten trainieren
 
-* Start from a next move beginning from an initial state
-* For each next move
-    * Play a game to the _end_ using a random set of moves
-    * Repeat for a number of times
-    * Count number of times for win, loose, draw
-* Choose the move with the best probability for a win
+Aufwändig, da lokale installation oder tensorflow.js nötig und eigene Bilder besondere Herausforderung
 
-Choose number of random experiment wisely based on branching factor
+* if you are looking for a handy python  script for 'searching' and 'downloading' hundreds of Google images to the local hard disk for you next DL project, that's the one: https://t.co/4nh3hnoZr1
+(https://twitter.com/rasbt/status/982822969947848704?s=03)
+* Pokemon Images: https://www.pyimagesearch.com/2018/04/16/keras-and-convolutional-neural-networks-cnns/
+</textarea>
+</section>
 
-https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Pure_Monte_Carlo_game_search
-            </textarea>
-            </section>
-        
-            <section data-markdown class="todo">
-                    <textarea data-template>
-### Monte Carlo Game Search
+<section data-markdown>
+    <textarea data-template>
+## Deep Learning / CNNs
+### Beispiel Stufe 1: Experimente wie funktionieren CNNs?
 
-<img src='img/haw/monte_carlo_game_search.jpg'>
-                        </textarea>
-                        </section>
-                <section data-markdown class="todo">
-                    <textarea data-template>
-Mittlere Züge bis zum Spielende: aus WP.opd, Seite 20
-                </textarea>
-                </section>
+<small>
+https://distill.pub/2018/building-blocks/
+</small>
+</textarea>
+</section>
 
-        <section data-markdown class="todo">
-            <textarea data-template>
-### Monte Carlo Tree Search
+<section data-markdown>
+        <textarea data-template>
+## Deep Learning
+### Beispiel Stufe 1: Neural Network tunen
 
-* https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/
-* https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
-        </textarea>
-        </section>
+* Netzwerk für Problemstellung optimieren.
+* Kannst du es verbessern? 
+* Woran erkennst du eine Verbesserung? 
+
     
-        <section data-markdown>
-    <textarea data-template>
-### A simple Example - Robot Run
-<img src="img/search/robot_run.jpg" alt="Alpha Beta" height="450px">
-
-Robot needs to find Portal/Goal
-</textarea>
-</section>
-        
-<section data-markdown>
-    <textarea data-template>
-### How to find a path
-
-<img src="img/search/search.jpg" height="450px">
-
-By expanding possibilities
-</textarea>
-</section>
-
-<section>
-    <h2>Game Play</h2>
-</section>
-
-<!-- http://www.dokchess.de/_downloads/szoerner_majug2012_architekturentwurf_schach_deploy.pdf -->
-<section data-markdown >
-    <textarea data-template>
-### On the importance of looking ahead
-
-Why looking ahead? Isn't a heuristic evaluation good enough?
-
-Kudos for position to https://twitter.com/StefanZoerner
-
-https://www.embarc.de/schachbegriffe-auf-englisch/
-</textarea>
-</section>
+    <small>
+            4-tf-keras-nn
+    </small>
+    </textarea>
+    </section>
+        </div>
 
 <section data-markdown>
     <textarea data-template>
-### Checkmate unavoidable?
+## Unsupervised ML
+### Beispiel Stufe 3: Experimente mit Clustering Algorithmen
 
-<img src="img/search/pos1.jpg" height="450px">
+* mit den Parametern der bekannten Algos experimentieren.
+* Clustering. Anderer Algo, Birch. 
 
-FEN: 2R5/8/p7/7p/6pP/5pP1/5P1K/k4q2 w - - 0 1
+<small>
+    TODO: Notebook
+</small>
 </textarea>
 </section>
-
-<section data-markdown>
-    <textarea data-template>
-### Using a heuristic to avoid loss of a piece
-
-<img src="img/search/pos2_no_loss.jpg" height="450px">
-
-Random move of Rook, but no loss
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### But Checkmate in next move
-
-<img src="img/search/pos3_mate.jpg" height="450px">
-
-Rook saved, but not effectively used
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Rewind to initial position
-
-<img src="img/search/pos1.jpg" height="450px">
-
-This time we look ahead
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Certain loss of Rook
-
-<img src="img/search/pos2_check.jpg" height="450px">
-
-Bad local evaluation
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Of course Queen has to capture Rook
-
-<img src="img/search/pos3_stalemate.jpg" height="450px">
-
-But this means Stalemate and a Draw
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Intuition for Alpha Beta Pruning
-<img src="img/search/alpha-beta-intuition.png" alt="Alpha Beta Intuition" height="400px">
-
-No matter what Min does, Max can always win in leftmost branch, no need to check for the others
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Complete Search Tree for Robot Run
-<img src="img/search/mini-max-tree.jpg" alt="Alpha Beta" height="450px">
-
-Top Right Branch can be pruned completely
-</textarea>
-</section>
-
-<section data-markdown style="font-size: xx-large">
-    <textarea data-template>
-### How does Stockfish Play
-
-* Alpha-Beta Search Pruning: https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_search
-* Bitboards: https://en.wikipedia.org/wiki/Bitboard
-* Transposition Tables: https://en.wikipedia.org/wiki/Transposition_table
-* Late Move Reductions:: https://en.wikipedia.org/wiki/Late_Move_Reductions 
-
-https://en.wikipedia.org/wiki/Stockfish_(chess)
-
-</textarea>
-</section>
-    </div>
 
 </div>
 
