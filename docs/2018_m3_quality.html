@@ -27,102 +27,129 @@
     <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
     <style>
         /*pre code {*/
-            /*display: block;*/
-            /*padding: 0.5em;*/
-            /*background: #FFFFFF !important;*/
-            /*color: #000000 !important;*/
+    
+        /*display: block;*/
+    
+        /*padding: 0.5em;*/
+    
+        /*background: #FFFFFF !important;*/
+    
+        /*color: #000000 !important;*/
+    
         /*}*/
-
+    
         .right-img {
             margin-left: 10px !important;
             float: right;
             height: 500px;
         }
+    
         .todo:before {
             content: 'TODO: ';
         }
+    
         .todo {
             color: red !important;
         }
+    
         code span.line-number {
             color: lightcoral;
         }
+    
         .reveal pre code {
             max-height: 1000px !important;
         }
-
+    
         img {
             border: 0 !important;
-            box-shadow:0 0 0 0 !important;
+            box-shadow: 0 0 0 0 !important;
         }
-
+    
         .reveal {
             -ms-touch-action: auto !important;
             touch-action: auto !important;
-				}
-
-				.reveal h2,
-                .reveal h3,
-				.reveal h4 {
-					letter-spacing: 2px;
-                    font-family: 'Amiri', serif;
-                    /* font-family: 'Times New Roman', Times, serif; */
-                    font-weight: bold;
-                    font-style: italic;
-                    letter-spacing: -2px;
-                    text-transform: none !important;
-                }
-
-                .reveal em {
-                    font-weight: bold;
-                }
-
-				.reveal .step-subtitle h1 {
-					letter-spacing: 1px;
-				}
-				.reveal .step-subtitle h2,
-				.reveal .step-subtitle h3 {
-					text-transform: none;
-					font-style: italic;
-					font-weight: normal;
-					/* font-weight: 400; */
-					/* font-family: 'Amiri', serif; */
-					font-family: 'Lobster', serif;
-					letter-spacing: 1px;
-					color: #2aa198;
-					text-decoration: underline;
-				}
-
-				.reveal .front-page h1,
-				.reveal .front-page h2 {
-					font-family: "League Gothic";
-					font-style: normal;
-					text-transform: uppercase !important;
-					letter-spacing: 1px;
-				}
-
-				.reveal .front-page h1 {
-					font-size: 2.5em !important;
-				}
-
-				.reveal .highlight {
-					background-color: #D3337B;
-					color: white;
-				}
-
-				.reveal img.with-border {
-					border: 1px solid #586e75 !important;
-					box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
-				}
-
-				.reveal li {
-					margin-bottom: 8px;
-				}
-
-				/* For li's that use FontAwesome icons as bullet-point */
-			.reveal ul.fa-ul li {
-				list-style-type: none;
-			}
+            color: black !important;
+        }
+    
+        .reveal h2,
+        .reveal h3,
+        .reveal h4 {
+            letter-spacing: 2px;
+            font-family: 'Amiri', serif;
+            /* font-family: 'Times New Roman', Times, serif; */
+            font-weight: bold;
+            font-style: italic;
+            letter-spacing: -2px;
+            text-transform: none !important;
+            color: black !important;
+        }
+    
+        .reveal em {
+            font-weight: bold;
+        }
+    
+        .reveal p {
+            font-weight: bold;
+            color: black !important;
+        }
+    
+        .reveal li {
+            font-weight: bold;
+            color: black !important;
+        }
+        .reveal .step-subtitle h1 {
+            letter-spacing: 1px;
+        }
+    
+        .reveal .step-subtitle h2,
+        .reveal .step-subtitle h3 {
+            text-transform: none;
+            font-style: italic;
+            font-weight: normal;
+            /* font-weight: 400; */
+            /* font-family: 'Amiri', serif; */
+            font-family: 'Lobster', serif;
+            letter-spacing: 1px;
+            color: #2aa198;
+            text-decoration: underline;
+            color: black !important;
+        }
+    
+        .reveal .front-page h1,
+        .reveal .front-page h2 {
+            font-family: "League Gothic";
+            font-style: normal;
+            text-transform: uppercase !important;
+            letter-spacing: 1px;
+            color: black !important;
+        }
+    
+        .reveal .front-page h1 {
+            font-size: 2.5em !important;
+            color: black !important;
+        }
+    
+        .reveal .highlight {
+            background-color: #D3337B;
+            color: white;
+        }
+    
+        .reveal img.with-border {
+            border: 1px solid #586e75 !important;
+            box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+        }
+    
+        .reveal li {
+            margin-bottom: 8px;
+            color: black !important;
+        }
+    
+        /* For li's that use FontAwesome icons as bullet-point */
+    
+        .reveal ul.fa-ul li {
+            list-style-type: none;
+            color: black !important;
+        }
     </style>
 
     <!-- Printing and PDF exports -->
@@ -169,7 +196,7 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
 
         <section>
             <h2>Wie gut ist dein Machine-Learning-Modell?</h2>
-            <p>Oder: Wie ich Null Punkte im Google Test bekam</p>
+            <h3>Oder: Wie ich Null Punkte im Google Test bekam</h3>
             <p><a href="https://www.m3-konferenz.de/veranstaltung-6458-wie-gut-ist-ein-machine-learning-modell.html?id=6458" target="_blank">
                 M3, Köln</a></p>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -185,7 +212,7 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
             </pre>
         </section>
 
-        <section>
+        <section class="local">
             <h3>Eine kleine Umfrage</h3>
             <p>Ich biete und bitte um Ehrlichkeit</p>
             <ul>
@@ -197,7 +224,7 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
             </ul>
         </section>
 
-        <section>
+        <section class="local">
             <h3>Mein Eindruck</h3>
             <p>Verglichen mit Software-Entwicklung sind wir mehrere Jahre zurück</p>
         </section>
@@ -693,7 +720,10 @@ More people are confused an looking for the right thing to do
 <script>
 //    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
 //     $('section').attr('data-background-image', "backgrounds/dark-floor.jpg")
-    $('section').attr('data-background-image', "backgrounds/white.jpg")
+    $('section').attr('data-background-image', "backgrounds/murmel1.jpg")
+    // $('section').attr('data-background-image', "backgrounds/lights.jpg")
+    // $('section').attr('data-background-image', "backgrounds/white-transparent.jpg")
+    // $('section').attr('data-background-image', "backgrounds/white.jpg")
 //    $('section').attr('data-background-image', "backgrounds/dark-valley.jpg")
 //    $('section').attr('data-background-image', "backgrounds/blur-floor.jpg")
 //    $('section').attr('data-background-image', "backgrounds/blur-floor2.jpg")

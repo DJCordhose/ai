@@ -156,14 +156,14 @@
             </a></small></p>
         </section>
 
-        <section class="todo">
+        <!-- <section class="todo">
                 <pre>
 - Kürzen von 65 auf 40 Minuten
 - Predicting military action using the number of cars in a Pentagon parking lot: https://twitter.com/chrisalbon/status/984586200986959872
 - Chinesiches Startup: https://twitter.com/data2day/status/983331353776148480
 - Magenta: https://twitter.com/TensorFlow/status/983479708796014592
                 </pre>
-            </section>
+            </section> -->
             <section>
                     <h3>Ein Fallbeispiel</h3>
                     <p>Kunden-Ranking für KfZ-Versicherung</p>
@@ -242,12 +242,12 @@
                             </div>
                         </section>
                     
-                                    <section>
+                                    <!-- <section>
                             <h3>Typische Anwendung: Klassifikation</h3>
                             <div class="fragment">
                                 <img src="img/sketch/classification.jpg" height="450px">
                             </div>
-                        </section>
+                        </section> -->
     
         <!-- <section>
             <h3>Machine Learning als Klassifikation: Ein Experiment</h3>
@@ -338,9 +338,9 @@
                 <img src='img/applications/decisions/classic.png' height="500px">
             </section>
     
-            <section>
+            <!-- <section>
                 <img src="img/flashcards/Supervised_Deep_Learning_Rule_Of_Thumb_print.png">
-            </section>
+            </section> -->
     
         
         <!-- <section data-markdown>
@@ -457,7 +457,7 @@
     
         </div>    </section>
     
-        <section>
+        <!-- <section>
                 <h3>Die Post testet 2018 selbstfahrende Lieferfahrzeuge</h3>
                 <p class="fragment"><em>"Sie werden in der Lage sein, dem Zusteller autonom zu folgen - sodass er nicht vor jedem Hauseingang aus- und wieder einsteigen und wenige Meter fahren muss."</em></p>
                 <img src="img/post_dhl_truck.jpg" height="200">
@@ -487,7 +487,7 @@
                 <h4>Minimale Information reicht, um ein gutes Angebot zu machen</h4>
                 <img src="img/applications/style-prediction.jpg" height="500px">
                 <p><small><a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a></small></p>
-            </section>
+            </section> -->
     
             <section>
                 <h3>schnelleres Arbeiten, höherer Durchsatz</h3>
@@ -590,7 +590,9 @@
         if (window.location.hostname.indexOf('localhost') !== -1) {
         } else {
             // only applies to public version
+            $('.todo').remove();
             $('.preparation').remove();
+            $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
             if (window.location.hostname.indexOf('localhost') !== -1) {
@@ -605,7 +607,9 @@
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/white-transparent.jpg")
+
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
     </script>
     
