@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Machine Learning auch für dein Projekt</title>
+    <title>Workshop: Machine Learning auch für dein Projekt</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -148,7 +148,7 @@
     <div class="slides">
 
         <section>
-            <h2>Machine Learning auch für dein Projekt</h2>
+            <h2>Workshop: Machine Learning auch für dein Projekt</h2>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
             <p><small><a href="http://bit.ly/ml-intro-workshop">
@@ -199,7 +199,12 @@ return green
                     </code></pre>
                 </div>
             </section>
-    
+            <section data-markdown>
+                <textarea data-template>
+        <img src='img/sketch/classic-development.jpg'>
+            </textarea>
+            </section>
+            
         <section>
             <h3>Keine tollen Ergebnisse</h3>
             <p>Sind das alle Regeln? Sind die richtig?</p>
@@ -241,12 +246,24 @@ return green
         </section>
 
                 <section>
-                        <h3>Supervised Machine Learning</h3>
-                        <div class="fragment">
-                                <img src="img/insurance/ml-phases.png" height="450px">
-                        </div>
+                        <h2>Supervised Machine Learning</h2>
+                    </section>
+                        
+                    <section data-markdown>
+                        <textarea data-template>
+<img src='img/sketch/supervised-ml.jpg'>
+                    </textarea>
+                </section>
+                        <section>
+
+                        <img src="img/insurance/ml-phases.png" height="450px">
                     </section>
                 
+                    <section data-markdown>
+                        <textarea data-template>
+<img src='img/sketch/using-a-model.jpg'>
+                    </textarea>
+                </section>
                                 <section>
                         <h3>Typische Anwendung: Klassifikation</h3>
                         <div class="fragment">
@@ -379,6 +396,8 @@ https://beta.observablehq.com/@tmcw/bring-your-own-doodles-linear-regression
 
         <section data-markdown>
                 <textarea data-template>
+### Clustering
+
 _Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
 similar (in some sense) to each other than to those in other groups (clusters)._
 
@@ -388,9 +407,32 @@ https://en.wikipedia.org/wiki/Cluster_analysis
     
     <section data-markdown>
             <textarea data-template>
-<img src="img/unsupervised/blobs.png" height="500px">
+### Aufgabe: Cluster von Hand einzeichnen
+<img src='img/sketch/clustering.jpg' height="550px">
+        </textarea>
+    </section>
+    <section data-markdown>
+            <textarea data-template>
+### Fragen
 
-Wie würde man das clustern, ohne Labels zu haben?
+1. Welche Formen haben die Cluster? Wie hast du diese als Cluster erkannt?
+1. Welche Formen hältst du für mehr oder weniger realistisch?
+1. Was könnte an den Achsen stehen? War das wichtig für das Clustering?
+1. Was könnte ein Cluster ausdrücken?
+1. Was passt nicht zu einem Cluster?
+1. Wie kann man diese Punkte interpretieren?
+        </textarea>
+    </section>
+
+    <section>
+        <h2>Automatisierung</h2>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+<img src="img/unsupervised/blobs.png" height="450px">
+
+Wie würde man  das _automatisch_ clustern, ohne Labels zu haben?
             </textarea>
 </section>
         <section>
