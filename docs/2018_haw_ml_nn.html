@@ -133,7 +133,8 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        var printMode = window.location.search.match(/print-pdf/gi);
+        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
 
@@ -147,7 +148,7 @@
 <div class="reveal">
     <div class="slides">
 
-<section class="preparation">
+<!-- <section class="preparation">
 <pre>
 - TS Playground Übung selbst machen
 - Toolbox ausprobieren und Übung selbst machen
@@ -157,7 +158,7 @@
 - Use Hourglass to show remaining time
 
 </pre>
-</section>
+</section> -->
 
         <section>
             <h2>Neural Networks and Deep Learning</h2>
@@ -169,6 +170,13 @@
 
         <section class="todo local">
 <pre>
+- Mehr Übungen
+  - Mnist als echte Übung
+    - https://djcordhose.github.io/ai/2018_haw_ml_nn.html#/62
+    - Code in Codepen, evtl. von Codepen auf tensorflow.js Seite starten
+  - Conv-Kernel: Anleitung und Fragen ausdenken wie bei Playground
+    - https://djcordhose.github.io/ai/2018_haw_ml_nn.html#/53
+
 - js.tensorflow im Codepen für mninst Beispiel    
 - wie funktioniert categorical_crossentropy, Algorithm
 - Distill Pub (https://distill.pub/2018/building-blocks/) als Praktikum: Also Erklärung wie CNNs funktionieren
@@ -186,6 +194,27 @@ https://twitter.com/dennybritz/status/984972760039342082
 </small>        
 </textarea>
 </section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-ml1.png' height="550px">
+
+<small>
+https://twitter.com/colinraffel/status/988467433072726022
+</small>        
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-ml2.png' height="550px">
+
+<small>
+https://twitter.com/dunmireg/status/988480873296211968
+</small>        
+</textarea>
+</section>
+
         <section data-markdown>
                 <textarea data-template>
 ### Glossary
@@ -635,7 +664,7 @@ https://distill.pub/2018/building-blocks/
 <section data-markdown>
     <textarea data-template>
 ### Edges
-![Edges](img/cnn/edges.png)
+![Edges](img/cnn/edges.PNG)
     </textarea>
 </section>
 
@@ -811,7 +840,7 @@ The classifier more or less is what we used for our previous example
 <script src="lib/jquery-2.2.4.js"></script>
 
 <script>
-        if (window.location.hostname.indexOf('localhost') !== -1) {
+        if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
         } else {
             // only applies to public version
             $('.todo').remove();
