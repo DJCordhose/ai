@@ -156,11 +156,10 @@
             </a></small></p>
         </section>
 
-        <section class="todo">
+        <!-- <section class="todo">
                 <pre>
-- weiter kürzen
                 </pre>
-            </section>
+            </section> -->
             <section>
                     <h3>Ein Fallbeispiel</h3>
                     <p>Kunden-Ranking für KfZ-Versicherung</p>
@@ -207,7 +206,7 @@
                 </div>        
             </section>
         
-            <section>
+            <!-- <section>
                 <h3>Ansatz: Stochastisches Modell</h3>        
                 <div class="fragment">
         
@@ -222,14 +221,15 @@
         
                 <img src="img/insurance/stats.png" height="450px">
                 <p>ca. 53% korrekte Vorhersagen</p>
-                    </section>
+                    </section> -->
         
                     <section>
-                            <h3>Aber</h3>        
+                            <h3>Bewertung</h3>        
                 <ul>
-                    <li class="fragment">53% ist nun auch nicht ein sooo tolles Ergebnis</li>
+                    <li class="fragment">43% ist nun auch nicht ein sooo tolles Ergebnis</li>
                     <li class="fragment">Modellierung erfordert viel Domänenwissen</li>
                     <li class="fragment">Modell passt sich nicht automatisch an</li>
+                    <li class="fragment">Wie behält man den Überblick in hohen Dimensionen</li>
                 </ul>
             </section>
             
@@ -247,7 +247,7 @@
 <img src='img/sketch/supervised-ml.jpg'>
                     </textarea>
                 </section>
-                        <section>
+                        <!-- <section>
 
                                 <img src="img/insurance/ml-phases.png" height="450px">
                     </section>
@@ -256,7 +256,7 @@
                         <textarea data-template>
 <img src='img/sketch/using-a-model.jpg'>
                     </textarea>
-                </section>
+                </section> -->
                     
                                     <!-- <section>
                             <h3>Typische Anwendung: Klassifikation</h3>
@@ -274,13 +274,13 @@
             </small></p>
         </section> -->
         
-        <section>
+        <!-- <section>
             <h3>Strategien</h3>
             <ul>
                 <li class="fragment">Es gibt unterschiedliche Lernstrategien</li>
                 <li class="fragment">Für unser Problem reicht eines der einfachsten Strategien: KNN</li>
             </ul>
-        </section>
+        </section> -->
     
         <!-- <section>
             <h3>Validierung</h3>
@@ -297,7 +297,7 @@
             <h3>KNN: k Nearest Neighbors</h3>
             <img src="img//insurance/knn.png">
         </section>
-        <section>
+        <!-- <section>
                 <h3>Algorithmus</h3>
                 <p>Für die Vorhersage für die Kategorie eines bisher unbekannten Datenpunkts</p>
                 <ol>
@@ -305,7 +305,7 @@
                     <li>k Nachbarn betrachten</li>
                     <li>Vorhersage ist die Farbe der Mehrheit der Nachbarn</li>
                 </ol>
-            </section>
+            </section> -->
         
                     <!-- <section data-markdown>
         <textarea data-template>
@@ -319,7 +319,7 @@
     </textarea>
     </section> -->
     
-                    <section>
+                    <!-- <section>
                         <h3>Ergebnisse für k = 1</h3>
                         <div class="fragment">
                     
@@ -329,15 +329,16 @@
                             </p>
                         </div>
                         <p class="fragment">So etwas nennt man Overfitting</p>
-                    </section>
+                    </section> -->
         <section>
-            <h3>Ergebnisse für k=13 nicht so schlecht</h3>
+            <h3>Beste Ergebnisse für k=13</h3>
             <div class="fragment">
     
             <img src="img/insurance/knn-13.png" height="400px">
-            <p><small>nur ca. 81% korrekte Vorhersagen auf Trainingsaten, aber auch 75% auf Testdaten</small></p>        
+            <!-- <p><small>nur ca. 81% korrekte Vorhersagen auf Trainingsaten, aber auch 75% auf Testdaten</small></p>         -->
+            <p><small>ca. 75% auf Testdaten</small></p>        
             </div>
-            <p class="fragment">Beachte die geschmeidigen Grenzen</p>
+            <!-- <p class="fragment">Beachte die geschmeidigen Grenzen</p> -->
         </section>
     
         <section>
@@ -349,10 +350,10 @@
             </ul>
         </section>
     
-        <section>
+        <!-- <section>
                 <h3>Daten: Quantität</h3>
                 <img src='img/applications/decisions/classic.png' height="500px">
-            </section>
+            </section> -->
     
             <!-- <section>
                 <img src="img/flashcards/Supervised_Deep_Learning_Rule_Of_Thumb_print.png">
@@ -369,14 +370,14 @@
         </section> -->
         <section>
                 <h1>Teil 3</h1>
-                <h2>Unsupervised Learning: Clustering</h2>
+                <h2>Andere arten von Machine Learning</h2>
             </section>
-            <section>
+            <!-- <section>
                     <h3>
                         3 Arten von Machine Learning
                     </h3>
                     <img src="img/sketch/types-of-ml.png" height="550px">
-                </section>
+                </section> -->
     
         <section>
                 <h3>Daten: Zentraler Punkt</h3>
@@ -404,16 +405,63 @@
     Wie würde man das clustern, ohne Labels zu haben?
                 </textarea>
     </section>
-            <section>
+            <!-- <section>
                 <img src="img/flashcards/K-Means_Clustering_print.png" height="550px">
                 <p>Grundlegendster Algorithmus</p>
-            </section>
+            </section> -->
             <section>
-                    <img src="img/unsupervised/blobs_kmeans_3.png" height="550px">
+                    <h3>K-Means Clustering: Grundlegendster Algorithmus</h3>
+                    <img src="img/unsupervised/blobs_kmeans_3.png" height="400px">
                     <p>Hätten wir auch nicht besser hinbekommen</p>
             </section>
     
             <section>
+                    <h2>Reinforcement Learning</h2>
+                    <h3>Am ehesten die Roboter, die uns Menschen ausrotten</h3>
+                </section>
+
+<section data-markdown style="font-size: x-large">
+<textarea data-template>
+### Alpha(Go) Zero
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px">
+</a>
+
+* Monte Carlo Tree Search und Deep Convolutional Neural Networks
+* Zielfunktion ist Sieg
+* schlagen jeden Menschen und Maschine ohne menschliche Expertise (in perfect information game)
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
+<br>
+Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
+<br>
+Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### World Model
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<img src='img/rf/world-models.gif' height="300px">
+</a>
+
+Lernen wie man Auto fährt ohne menschliche Expertise mit LSTMs
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-model-using-python-and-keras-64fb388ba459
+<br>
+Code: https://github.com/AppliedDataSciencePartners/WorldModels
+</small>
+</textarea>
+</section>
+
+
+        <section>
                 <h1>Teil 4</h1>
                 <h2>Wie findet ihr eigene Anwendungsmöglichkeiten?</h2>
             </section>
@@ -426,11 +474,6 @@
             </section>
             
             <section>
-                    <h3>Ansatz nach Art der Daten</h3>
-                    <img src='img/applications/decisions/data.png'>
-            </section>
-        
-            <section>
                 <h3>Fragestellungen</h3>
                 <ol>
                     <li>Was wollt ihr mit ML erreichen?</li>
@@ -438,6 +481,11 @@
                 </ol>
             </section>
     
+            <section>
+                    <h3>Ansatz nach Art der Daten</h3>
+                    <img src='img/applications/decisions/data.png'>
+            </section>
+        
             <section>
                 <h3>Mögliche Ziele</h3>
                 <ul>
