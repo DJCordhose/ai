@@ -255,9 +255,9 @@ https://nips.cc/Conferences/2016/Schedule?showEvent=6255
 
         <section>
             <h3>Unser Projekt</h3>
-            <p>Kunden-Ranking für KfZ-Versicherung</p>
-            <img src="img/insurance/automobile-insurance.png" height="400px">
-            <p>Abgeleitet von einem echten Projekt</p>
+            <p>Customer Churn / Conversion</p>
+            <img src="img/churn/log7335277f@example.com.png" height="400px">
+            <p><small>Wie verhält sich jemand, der später Kunde wird / kündigt?</small></p>
         </section>
         
         <section>
@@ -270,9 +270,10 @@ https://nips.cc/Conferences/2016/Schedule?showEvent=6255
         </section>
             
         <section>
-            <h3>Vorgehen</h3>
+            <h3>Bewertung</h3>
             <p>Ein Punkt für das Erfüllen eines Test-Kriteriums</p>
             <p>Ein weiterer falls die Erfüllung automatisiert ist</p>
+            <p>Vier Kategorien mit jeweils maximal 14 Punkten</p>
         </section>
 
 
@@ -286,11 +287,11 @@ https://nips.cc/Conferences/2016/Schedule?showEvent=6255
         </section>
 
         <section>
-            <h3>Manueller Plot</h3>
+                <h3>Unser Projekt: Manueller Plot</h3>
             <div class="fragment">
                     <img src="img/insurance/scatter-matrix.png" height="450px">
-            </div>
-            <p>1 Punkt!</p>
+                    <p>1 Punkt!</p>
+                </div>
         </section>
         
         <section>
@@ -298,11 +299,11 @@ https://nips.cc/Conferences/2016/Schedule?showEvent=6255
         </section>
     
         <section>
-            <h3>Korrelation Plot</h3>
+            <h3>Unser Projekt: Korrelation Plot</h3>
             <div class="fragment">
                     <img src="img/insurance/corr.png" height="450px">
-            </div>
-            <p>Noch ein Punkt! Es sind jetzt schon zwei!</p>
+                    <p>Noch ein Punkt! Es sind jetzt schon zwei!</p>
+                </div>
         </section>
             
         <section>
@@ -324,7 +325,7 @@ https://nips.cc/Conferences/2016/Schedule?showEvent=6255
         </section>
 
         <section>
-                <h3>Daten werden von vorn herein nur anonymisiert verwendet</h3>
+                <h3>Unser Projekt: Daten werden von vorn herein nur anonymisiert verwendet</h3>
                 <pre><code data-trim class="python">
 str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
                 </code></pre>
@@ -336,13 +337,14 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
                 <p>Wie schnell kann reagiert werden?</p>
             </section>
                 
-            
             <section>
                 <h3>Test: Funktioniert der Code, der Features für Test und Produktion liefert?</h3>
+                <p>Auch so simpler, aber extrem wichtiger, zentraler Code braucht Unit-Tests</p>
             </section>
                 
             <section>
                 <h3>Ergebnis</h3>
+                <h2>Features und Daten</h2>
                 <p>4 von 14 Punkten</p>
                 <p>
                     <em>3-4 points: There’s been first pass at basic productionization, but additional investment may be needed.</em>
@@ -357,23 +359,47 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
         <section>
             <h3>Test: Ist die Modell-Spezifikation versioniert und unterliegt einem Code-Review?</h3>
         </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <ul>
+                <li>Modelle werden in Jupyter Noteboks entwickelt</li>
+                <li>Modell-Spezifikationen selbst wird in puren Python-Code gewandelt und in Git versioniert</li>
+                <li>Entweder Pair-Programming oder Code Review</li>
+            </ul>
+            <p>Zwei Punkte</p>
+        </section>
                 
         <section>
-            <h3>Test: In welchem Zusammenhang stehen Modell-Vorhersage und echte Welt?</h3>
+            <h3>Test: In welchem Zusammenhang stehen Modell Metriken und Auswirkung in der echten Welt?</h3>
+            <p>Wenn sich der Test-Score erhöht, kann man dann eine Auswirkung auf relevante Business-Größen ferstellen? Kaufen mehr Leute? Sind Kunden zufriedener?</p>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Wie für jedes Feature wollen wir das überprüfen, dies ist bisher aber nicht geschehen</p>
+            <p>Kein Punkt</p>
         </section>
 
         <section>
             <h3>Test: Welchen Einfluss haben Hyper-Parameter auf das Ergebnis?</h3>
+            <p>Systematische Untersuchung von Hyper-Parametern kann zu deutlich besseren Ergebnissen führen</p>
         </section>
     
         <section>
+                <h2>Unser Projekt</h2>
+                <p>Parameter-Raum ist zu groß und Laufzeit für Training zu lang für Grid-Search, wir nehmen Random-Search</p>
+                <p>Zwei Punkte</p>
+        </section>
+        <section>
             <h3>Test: Passt sich das Modell an die Entwicklung der Daten aus der realen Welt an?</h3>
-            <p>Verhält sich das Modell mit Daten von dieser Woche anders als das von letztem Jahr</p>
+            <p>Verhält sich das Modell mit Daten von dieser Woche anders als das von letztem Jahr?</p>
         </section>
 
         <section>
             <h2>Unser Projekt</h2>
             <p>Besteht noch nicht lang genug, um das sicher sagen zu können</p>
+            <p>Kein Punkt</p>
         </section>
 
         <section>
@@ -407,10 +433,13 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
 
         <section>
                 <h3>Ergebnis</h3>
-                <p>1 von 14 Punkten</p>
-                <p><em>1-2 points: Not totally untested, but it is worth considering the possibility of serious holes
-                        in reliability.</em></p>
-        </section>
+                <h2>Features und Daten</h2>
+                <p>5 von 14 Punkten</p>
+                <p>
+                        <em>5-6 points: Reasonably tested, but it’s possible that more of those tests and procedures may
+                                be automated.</em>
+                    </p>
+            </section>
 
         <section>
                 <h1>Kategorie 3</h1>
@@ -423,6 +452,14 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
         </section>
 
         <section>
+            <h2>Unser Projekt</h2>
+            <p>Ist gewährleistet</p>
+            <p>Ramdom Seeds fest gesetzt</p>
+            <p>Initiale Weights immer gleich geladen</p>
+            <p>Zwei Punkte</p>
+        </section>
+    
+            <section>
             <h3>Test: Gibt es Unit-Tests für den Trainingscode?</h3>
             <p>Geht Loss beim Training tatsächlich herunter? Kann man nach einem Crash wieder aufsetzen? Funktioniert Early-Stopping?
                 Sind Checkpoints brauchbar?
@@ -448,12 +485,12 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
         
         <section>
             <h2>Unser Projekt</h2>
-            <p>Accuracy alles Test-Daten wird automatisch berechnet</p>
+            <p>Accuracy aller Test-Daten wird automatisch berechnet</p>
             <p>Ausgewählte Datensätze werden nur manuell überprüft</p>
             <p>Ein Punkt (bekannte Ergebnisse könnten Unit-Tests sein)!</p>
         </section>
     
-            <section>
+        <section>
             <h3>Test: Verhält sich das Modell nachvollziehbar?</h3>
             <p>Kann man das Verhalten nachvollziehen wenn man es nur mit einem Datensatz füttert?</p>
             <p>Was passiert wenn man einen kleinen Trainingsdatensatz füttert?</p>
