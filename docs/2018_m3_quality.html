@@ -496,12 +496,13 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
             <p>Was passiert wenn man einen kleinen Trainingsdatensatz füttert?</p>
             <p>Hat man irgendeinen Einblick in die internen Abläufe des Modells?</p>
         </section>
+
         <section>
             <h2>Unser Projekt</h2>
-            <p>Wir 2 Hidden Fully Connected Layers, jeweils 100 Nodes</p>
-            <p>Bei Convolutional Layers (nicht in diesem Projekt) nutzen wir die bekannten Strategien</p>
-            <p>Größe und Komplexität erlauben keinen Einblick in die Funktionsweise des Netzes</p>
-            <p>Kein Punkt!</p>
+            <p>Bei Convolutional Layers nutzen wir die bekannten Strategien</p>
+            <p>Manuell überprüfen wir Aktivierungen von Feature Channels, Activation Maps, und welche Feature Channels pro Bild angesprochen werden</p>
+            <p>Fully Connected Layers sind allerdings komplett intransparent</p>
+            <p>Ein Punkt!</p>
         </section>
     
         <section>
@@ -521,11 +522,18 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
         </section>
 
         <section>
+            <h2>Unser Projekt</h2>
+            <p>Manuell, aber auch dafür ist Google Clound ML gut geeignet</p>
+            <p>Produzierte Modelle werden aber auch im Git mitversioniert</p>
+            <p>Ein Punkt!</p>
+        </section>
+            
+            <section>
             <h3>Ergebnis</h3>
-            <p>5 von 14 Punkten</p>
+            <p>8 von 14 Punkten</p>
             <p>
-                <em>5-6 points: Reasonably tested, but it’s possible that more of those tests and procedures may
-                        be automated.</em>
+                <em>7-10 points: Strong levels of automated testing and monitoring, appropriate for missioncritical
+                                systems.</em>
             </p>
         </section>
 
@@ -603,10 +611,11 @@ Das kann an einem verschlechterten Modell oder aber auch an neuen, unvorhergeseh
                 <p>
                     <em>0 points: More of a research project than a productionized system.</em>
                 </p>
+                <p>Hier muss noch viel passieren</p>
             </section>
 
         <section>
-            <h3>Endergebnis</h3>
+            <h2>Endergebnis</h2>
             <p>Das Minimum eines Ergebnisses jeder Kategorie</p>
             <p>Das bedeutet leider insgesamt 0 Punkte</p>
                 <p>
@@ -617,8 +626,8 @@ Das kann an einem verschlechterten Modell oder aber auch an neuen, unvorhergeseh
         <section>
                 <h3>Der Vollständigkeit halber: Die restlichen Bewertungen, die wir nicht erreicht haben</h3>
                 <ul>
-                    <li>7-10 points: Strong levels of automated testing and monitoring, appropriate for missioncritical
-                            systems.</li>
+                    <li>5-6 points: Reasonably tested, but it’s possible that more of those tests and procedures may
+                                be automated.</li>
                     <li>12+ points: Exceptional levels of automated testing and monitoring.</li>
                 </ul>
         </section>
