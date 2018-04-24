@@ -168,23 +168,15 @@
                 https://djcordhose.github.io/ai/2018_haw_ml_nn.html</a>
         </section>
 
-        <section class="todo local">
+        <!-- <section class="todo">
 <pre>
-- Mehr Übungen
-  - Mnist als echte Übung
-    - https://djcordhose.github.io/ai/2018_haw_ml_nn.html#/62
-    - Code in Codepen, evtl. von Codepen auf tensorflow.js Seite starten
-  - Conv-Kernel: Anleitung und Fragen ausdenken wie bei Playground
-    - https://djcordhose.github.io/ai/2018_haw_ml_nn.html#/53
-
 - js.tensorflow im Codepen für mninst Beispiel    
-- wie funktioniert categorical_crossentropy, Algorithm
 - Distill Pub (https://distill.pub/2018/building-blocks/) als Praktikum: Also Erklärung wie CNNs funktionieren
 - https://beta.observablehq.com/@nsthorat/visualizing-activations-of-mobilenet-with-tensorflow-js
 - Convert mninst to observablehq notebook if possible https://beta.observablehq.com/@zaidalyafeai/an-intractive-introduction-to-tensorflow-js
 </pre>
         </section>
-
+ -->
         <section data-markdown>
                 <textarea data-template>
 <img src='img/dl_paper_2018.png' height="550px">
@@ -369,7 +361,11 @@ model.compile(optimizer='adam',
             loss='categorical_crossentropy',
             metrics=['accuracy'])
                             </code></pre>
-                    <p class="fragment"><code>adam</code> is the algorithm to minimize loss</p>
+                            <p><a target="_blank"
+                                href="http://cs231n.github.io/neural-networks-3/#ada">
+                                <code>adam</code> is one algorithm to minimize loss</a></p>
+                    <p><a target="_blank"
+                         href="https://en.wikipedia.org/wiki/Cross_entropy">https://en.wikipedia.org/wiki/Cross_entropy</a></p>
                 </section>
                             
     <section>
@@ -459,9 +455,16 @@ _________________________________________________________________</code></pre>
                  
             </section> -->
 
-    <section>
-        <img src="img/flashcards/BackProp_print.png">
-    </section>
+    <section data-markdown>
+            <textarea data-template>
+<img src="img/flashcards/BackProp_print.png" height="550px">
+
+<small>
+http://cs231n.github.io/optimization-2
+</small>
+        </textarea>
+        </section>
+
     <section>
         <h3>Regularization: Avoid Overfitting</h3>
     </section>
@@ -650,7 +653,40 @@ http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
 </textarea>
 </section>
 
-                <section data-markdown>
+
+<section>
+        <h3>How do Convolutions work - Image Kernels</h3>
+        <p><small>You might know from Photoshop etc., used in Convolutional Neural Networks</small></p>
+        <a href="http://setosa.io/ev/image-kernels/" target="_blank">
+            <img src="img/browser/setosa_io_image-kernels.png" height="300px">
+        </a>
+        <p>
+            <small>
+                <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
+            </small>
+        </p>
+    </section>
+
+<section>
+    <h3>Expriment with Image Kernels</h3>
+    <ol>
+        <li class="fragment">How can a matrix of numbers can represent an image? How could you encode color?</li>
+        <li class="fragment">Explain the effect the filter kernels Sharpen and Blur have on the sample image - explain the effect of the specific values to the result</li>
+        <li class="fragment">Starting from the identity kernel - how can you create a filter that highlights edges on the top of shown digits? What about the bottom?</li>
+    </ol>
+    <p>
+            <small>
+                <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
+                <br>
+                Sample image: <a 
+                href="https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg" target="_blank">
+                https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg</a>
+                
+            </small>
+        </p>
+</section>
+    
+        <section data-markdown>
     <textarea data-template>
 ### Feature Channels
 Each output of a filter operation is called a feature channel.
@@ -695,20 +731,7 @@ https://distill.pub/2018/building-blocks/
 ![Objects](img/cnn/objects.png)
     </textarea>
 </section>
-
-            <section>
-                <h3>How do Convolutions work - Image Kernels</h3>
-                <p><small>You might know from Photoshop etc., used in Convolutional Neural Networks</small></p>
-                <a href="http://setosa.io/ev/image-kernels/" target="_blank">
-                    <img src="img/browser/setosa_io_image-kernels.png" height="300px">
-                </a>
-                <p>
-                    <small>
-                        <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
-                    </small>
-                </p>
-            </section>
-
+                        
                 <section data-markdown>
     <textarea data-template>
 ### Relu Activations for CNNs
