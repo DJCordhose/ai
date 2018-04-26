@@ -214,7 +214,7 @@ Kenntnis über die Herausforderungen bei produktiven ML-Modellen
 
         <section class="local">
             <h3>Eine kleine Umfrage</h3>
-            <p>Ich biete und bitte um Ehrlichkeit</p>
+            <!-- <p>Ich biete und bitte um Ehrlichkeit</p> -->
             <ul>
                 <li class="fragment">Wer versioniert seine Modell-Spezifikation?</li>
                 <li class="fragment">Wer macht Code-Reviews Modell-Spezifikation?</li>
@@ -260,7 +260,7 @@ https://nips.cc/Conferences/2016/Schedule?showEvent=6255
         <section>
             <h3>Technik / Umsetzung</h3>
             <ul>
-                    <li>Pipeline basiert auf Pandas/Sklearn</li>
+                    <li>Präprocessing mit Pandas/Sklearn</li>
                     <li>Modell mit TensorFlow/Keras</li>
                     <li>Deployment auf Google Cloud ML</li>
             </ul>
@@ -413,7 +413,7 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
     
         <section>
             <h3>Test: Wie verhält sich das Modell wenn man es nur auf Teildaten anwendet?</h3>
-            <p>Betrachtung z.B. nach Land kann schwächen zeigen, die im Gesamtmodell untergehen</p>
+            <p>Betrachtung z.B. nach Land kann Schwächen zeigen, die im Gesamtmodell untergehen</p>
         </section>
 
         <section>
@@ -424,7 +424,7 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
         <section>
             <h2>Unser Projekt</h2>
             <p>Wir wissen sicher, dass wir Bias in den Trainingsdaten haben</p>
-            <p>Dazu gibt es von bestimmten Daten sehr viel und von anderen sehr wenig Datensätze</p>
+            <p>Dazu gibt es von bestimmten Daten viel und von anderen weniger Datensätze</p>
             <p>Kein Punkt!</p>
         </section>
 
@@ -468,7 +468,7 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
             <p>Loss wird über das TensorBoard überprüft (manuell)</p>
             <p>Early Stopping Callbacks wenn Validation Loss nicht mehr herunter geht</p>
             <p>Checkpoints werden geschrieben</p>
-            <p>Zwei Punkte, weil Callbacks automatisch!</p>
+            <p>Ein Punkt, keine automatische Überprüfung</p>
         </section>
 
         <section>
@@ -527,7 +527,7 @@ str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
             
             <section>
             <h3>Ergebnis</h3>
-            <p>8 von 14 Punkten</p>
+            <p>7 von 14 Punkten</p>
             <p>
                 <em>7-10 points: Strong levels of automated testing and monitoring, appropriate for missioncritical
                                 systems.</em>
