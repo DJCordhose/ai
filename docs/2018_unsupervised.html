@@ -153,9 +153,9 @@
             </h4>
         </section>
 
-<section class="todo">
+    <section class="todo">
     <pre>
-- Übungsblatt Clustering übernehmen
+- exercise-clustering ausdrucken und mitnehmen
 - Pro Gebiet eine Übung
 - Skript alle Links automatisch in neuem Tab öffnen
 - http://students.brown.edu/seeing-theory/
@@ -166,6 +166,26 @@
 sich damit auseiander zu setzen
             </pre>
 </section>
+
+<section>
+        <h2>Structure</h2>
+        <ol>
+            <li>Clustering</li>
+            <li>Dimensionality Reduction
+                <ol>
+                    <li>Linear Correlations: PCA: Find out what really matters</li>
+                    <li>Non-Linear Correlations: T-SNE: Visualizing High Dimensional Data</li>
+                </ol>
+            </li>
+            <li>Autoencoders and GANs</li>
+        </ol>
+    </section>
+
+
+    <section>
+        <h1>Part I</h1>
+        <h2>Clustering</h2>
+    </section>
 
 <section>
         <h3>Three different categories of ML</h3>
@@ -200,176 +220,19 @@ sich damit auseiander zu setzen
         </textarea>
     </section>
 
-
-
-        <section>
-            <h2>Structure</h2>
-            <ol>
-                <li>Basics, Correlations and a little bit of statistics</li>
-                <li>Clustering</li>
-                <li>Dimensionality Reduction
-                    <ol>
-                            <li>Linear Correlations: PCA: Find out what really matters</li>
-                            <li>Non-Linear Correlations: T-SNE: Visualizing High Dimensional Data</li>
-                    </ol>
-                </li>
-                <li>Optional: Autoencoders</li>
-            </ol>
-        </section>
-
-
-        <section class="todo">
-            <pre>
-- http://scikit-learn.org/stable/unsupervised_learning.html
-- http://deeplearning.stanford.edu/tutorial/
-- https://beta.observablehq.com/@maryzam/what-do-you-mean-average
-            </pre>
-        </section>
-
-        <section>
-            <h3>The Basics: Correlations</h3>
-            <p>What is related to which?</p>
-        </section>
-
-        <section class="todo">
-                <pre>
-http://students.brown.edu/seeing-theory/
-- Distributions
-- Central Limit Theorem
-    </pre>
-</section>
-
-        <section class="todo">
-                <pre>
-        https://en.wikipedia.org/wiki/Covariance_and_correlation
-        - Covariante: two variables change in a synced way
-        - Corrleation: one variable causes the changes to the other
-    </pre>
-</section>
-
-        <section class="todo">
-                <pre>
-- Add exaplanation of example from 2018_real_data.html
-                </pre>
-            </section>
-    
-            <section>
-                <h2><small>Getting an overview using a correlation plot</small></h2>
-            <div class="fragment" style="margin-top: -40px">
-                <img src="img/flight-analysis/corr.png" height="500px">
-                <p><small>Darker Colours indicate more correlation</small></p>
-            </div>
-        </section>
-
-        <section>
-            <h2><small>Pearson's r: Linear Correlation</small></h2>
-            <div style="margin-top: -40px">
-            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
-            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
-            <img src="img/Correlation_coefficient.png">
-            </a>
-            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966</a></small></p>
-                </div>
-        </section>
-
-        <section>
-            <h3>This is just linear correlation</h3>
-            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
-            <img src="img/Correlation_examples2.svg" height="350px">
-            </a>
-            <p><small>correlation coefficient (r) above each figure</small></p>
-            <p>Notice: figures at the bottom row obviously are correlated, just not linearly </p>
-            </section>
-    
-            <section>
-                <h2>Need to look at the individual figures</h2>
-            </section>
-    
-        <section>
-            <h3>Arrival Time to Departure Time</h3>
-            <div class="fragment">
-                <img src="img/flight-analysis/ArrTime_DepTime.png" height="500px">
-            </div>
-        </section>
-
-        <section>
-                <h2><small>Pearson's r approx. 0.75: high Correlation</small></h2>
-            <div class="fragment" style="margin-top: -40px">
-                <img src="img/flight-analysis/corr.png" height="550px">
-            </div>
-        </section>
-
-        <section>
-            <h2>Of Course Arrival Time and Departure Time Are Correlated</h2>
-            <h2 class="fragment">Verdict: plausible but trivial</h2>
-        </section>
-
-        <section>
-        <h2><small>Second highest correlation: Distance to Unique Carrier</small></h2>
-            <div class="fragment" style="margin-top: -40px">
-                <img src="img/flight-analysis/corr.png" height="550px">
-            </div>
-        </section>
-
-        <section>
-            <h3>Distance to Unique Carrier</h3>
-            <div class="fragment">
-
-            <img src="img/flight-analysis/Distance_UniqueCarrier_.png" height="500px">
-                </div>
-        </section>
-
-        <section data-transition="none">
-            <h3>Distance to Unique Carrier</h3>
-            <div>
-
-                <img src="img/flight-analysis/Distance_UniqueCarrier_AQ.png" height="500px">
-                <p><small>
-                    <em>1 = AQ (Aloha Airlines)</em>
-                    <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
-                </small></p>
-                <!--Answer AQ in D3 part: mainly between Hawaii and California -->
-            </div>
-        </section>
-
-    
-            <section>
-            <img src="img/flashcards/Pearsons_Correlation_print.png">
-        </section>
-
-        <section>
-            <img src="img/flashcards/Chi-Squared_For_Feature_Selection_print.png">
-        </section>
-
-        <section>
-            <img src="img/flashcards/Probability_Density_Function_print.png">
-        </section>
-
-        <section>
-                <h3>The Basics: Statistics</h3>
-            </section>
-    
-        <section data-markdown class="todo">
-                <textarea data-template>
-- mean, std dev explained with the scaler
-http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+    <!-- <section data-markdown class="todo">
+            <textarea data-template>
+### Applications of clustering
+* Outlier Detection: one of these things is not like the others
+* https://hackernoon.com/unsupervised-machine-learning-for-fun-profit-with-basket-clusters-17a1161e7aa1
+* https://flowingdata.com/2018/03/07/visualizing-outliers/?imm_mid=0fbfda&cmp=em-data-na-na-newsltr_20180314
             </textarea>
-</section>                    
-
-<section data-markdown class="todo">
-        <textarea data-template>
-- Normal Distribution
-
-- Interactive Example from t-sne notebook?
-    </textarea>
-</section>                    
-
-<section>
-            <h2>Clustering</h2>
-        </section>
+</section> -->
 
         <section data-markdown>
                 <textarea data-template>
+### Automatic Clustering
+
 _Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
 similar (in some sense) to each other than to those in other groups (clusters)._
 
@@ -398,13 +261,19 @@ We see things as belonging together when
 * they are close to each other (proximity)
 * are aligned in the same direction (continuity)
 
+<small>
 https://twitter.com/pablostanley/status/974303621092225024
+</small>
         </textarea>
 </section>
 
-<section>
+        <section>
             <h3>Exercise: How to automate this?</h3>
-            <p class="fragment">Come up with an informal algorithm and apply it to a hand drawn example</p>
+            <ol>
+                <li>Work in groups</li>
+                <li>Come up with an informal algorithm</li>
+                <li>Manually apply the algorithm to the our clustering example</li>
+            </ol>
         </section>
 
         <section>
@@ -533,15 +402,18 @@ http://scikit-learn.org/stable/modules/clustering.html
 
 How well are we doing?
 
- Hard to tell, since there is no (or we do not know) the ground truth
+Hard to tell, since there is no (or we do not know) the ground truth
 
+<small>
 http://scikit-learn.org/stable/modules/classes.html#clustering-metrics
+<br>
 http://scikit-learn.org/stable/modules/clustering.html#clustering-evaluation
+</small>
     </textarea>
 
 </section>
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
 <textarea data-template>
 Aus textanalyse-2.ipynb
 
@@ -553,7 +425,7 @@ http://scikit-learn.org/stable/modules/clustering.html#clustering-evaluation
 </textarea>
 
 </section>
-
+ -->
 <section data-markdown>
 <textarea data-template>
 <img src="img/flashcards/Silhouette_Coefficients_print.png" height="550px">
@@ -562,110 +434,168 @@ https://en.m.wikipedia.org/wiki/Silhouette_(clustering)
 
 </section>
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
         <textarea data-template>
 Show metrics from notebook
 
 http://scikit-learn.org/stable/modules/clustering.html#silhouette-coefficient
         </textarea>
-</section>
+</section> -->
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
         <textarea data-template>
 Alternative without scaling between -1 and 1, again show metrics from notebook
 
 http://scikit-learn.org/stable/modules/clustering.html#calinski-harabaz-index
         </textarea>
 </section>
-
-<section data-markdown class="todo">
-            <textarea data-template>
-### Applications of clustering
-* Outlier Detection: one of these things is not like the others
-* https://hackernoon.com/unsupervised-machine-learning-for-fun-profit-with-basket-clusters-17a1161e7aa1
-* https://flowingdata.com/2018/03/07/visualizing-outliers/?imm_mid=0fbfda&cmp=em-data-na-na-newsltr_20180314
-            </textarea>
-</section>
+ -->
 
 <section data-markdown class="todo">
     <textarea data-template>
 ### Code Exercise: 
 * Add at least one implementation of one clustering algorithm shown in the overview above
 * Experiment with the remaining data sets: how do the different clustering algorithms cope with them?
+* How much work do you have to put into tweaking the meta parameters?
     </textarea>
 </section>
-
-
-<section>
-    <h2>Dimensionality Reduction</h2>
-</section>
+    
 
 <section>
-    <h2>PCA</h2>
-    <p>Principal Component Analysis</p>
+        <h1>Part II</h2>
+        <h2>Dimensionality Reduction</h2>
 </section>
+
+<section data-markdown>
+        <textarea data-template>
+### What is Dimensionality Reduction?
+
+* Linear Correlations: PCA: Find out what really matters in your data
+* Non-Linear Correlations: T-SNE: Visualizing High Dimensional Data
+</textarea>
+    </section>
+    
+<section data-markdown>
+        <textarea data-template>
+## PCA
+### Principal Component Analysis
+
+https://en.wikipedia.org/wiki/Principal_component_analysis
+</textarea>
+    </section>
+
+    <section>
+        <h3>Intition</h3>
+    </section>
+
+    <section>
+        <img src="img/flashcards/Principal_Component_Analysis_print.png">
+    </section>
+    
+    <section>
+        <img src="img/flashcards/Principal_Components_print.png">
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Experiment with PCA on your mobile device in 2d
+
+<img src="img/unsupervised/pca_setosa.png">
+
+http://setosa.io/ev/principal-component-analysis/
+    </textarea>
+    </section>
+    <section data-markdown>
+        <textarea data-template>
+### Questions
+
+1. Why is a transformation from 2d to 2d reasonable in the first place?
+1. With the initial data points, why don't we loose much when we drop principal component 2? 
+1. Where in the visualization do you see high and low variance of a principal component? How is this expressed? 
+1. Can you find a configuration of points where none of the principal components could be dropped without loosing a lot of information?
+
+    </textarea>
+    </section>
 
 <section data-markdown class="todo">
-    <textarea data-template>
-* Grafiken und Ansatz von hier übernehmen
-  * http://setosa.io/ev/principal-component-analysis/
-* PCA mit sklearn an unserem Beispiel zeigen        
+        <textarea data-template>
+### Deriving PCA
+
+* Herleitung über Covariance?
+
+* https://en.m.wikipedia.org/wiki/Principal_component_analysis
+* Add Statistics where needed
+* http://students.brown.edu/seeing-theory/
+  - Distributions
+  - Central Limit Theorem
+* https://en.wikipedia.org/wiki/Covariance_and_correlation
+  - Covariante: two variables change in a synced way
+  - Corrleation: one variable causes the changes to the other
+
+  http://ufldl.stanford.edu/tutorial/unsupervised/PCAWhitening/
 </textarea>
 </section>
 
 <section data-markdown class="todo">
         <textarea data-template>
-### 2d
-
-http://setosa.io/ev/principal-component-analysis/
-    </textarea>
-    </section>
-<section class="todo">
-        <h3>3d Intuition</h3>
-        <pre>
-        - The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI
-        - Michael Murphy's Epic Anti-Gun Artwork for the DNC: https://youtu.be/l-GR9IVjU54
-        
-        </pre>
-        </section>
-        
-<section data-markdown class="todo">
-        <textarea data-template>
-### 3d
-
-http://setosa.io/ev/principal-component-analysis/
-    </textarea>
-    </section>
-        
-<section>
-    <img src="img/flashcards/Principal_Component_Analysis_print.png">
-</section>
-
-<section>
-    <img src="img/flashcards/Principal_Components_print.png">
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
-Herleitung über Covariance
-
-https://en.m.wikipedia.org/wiki/Principal_component_analysis
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
+### PCA with Sklearn
 Beispiele zeigen unten auf der Seite sind die Links
             http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
+            http://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca
         </textarea>
+    </section>
+    
+
+    <section class="todo">
+            <h3>3d Intuition</h3>
+            <pre>
+            - The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI
+            - Michael Murphy's Epic Anti-Gun Artwork for the DNC: https://youtu.be/l-GR9IVjU54
+            
+            </pre>
+            </section>
+                
+<section data-markdown>
+        <textarea data-template>
+### Optional: Experiment with PCA on your mobile device in 3d
+
+<img src="img/unsupervised/pca_setosa_3d.png">
+
+http://setosa.io/ev/principal-component-analysis/
+    </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Questions
+
+1. Manually "rotate the camera" to find the best principal components
+1. Compare your manual solution to the automated PCA transformation 
+1. How would you tell which one is better? Is it even different? 
+1. How many principal components would you advice to drop?
+    </textarea>
     </section>
     
 <section>
 <h2>T-SNE</h2>
 <p>Visualizing High Dimensional Data</p>
 </section>
+
 <section>
-    <p>As humans looking at a computer screen we are also naturally limited to two-dimensional visualizations that at best change over time and reaction to interaction.</p>
+    <p>As humans looking at a computer screen we are naturally limited to two-dimensional visualizations that at best change over time and to reactions to interaction.</p>
+</section>
+    
+
+<section data-markdown class="todo">
+        <textarea data-template>
+https://www.quora.com/How-does-t-SNE-work-in-simple-words
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+https://distill.pub/2016/misread-tsne/
+</textarea>
 </section>
 
 <section data-markdown class="todo">
@@ -673,15 +603,30 @@ Beispiele zeigen unten auf der Seite sind die Links
 ### Examples T-SNE
 
 * https://twitter.com/ChaseClarkatUIC/status/984839270132338688?s=03
+* TensorFlow Embeddings
 </textarea>
 </section>
 
-<section data-markdown>
+<section data-markdown class="todo">
         <textarea data-template>
-## Other Unsupervised Techniques
+https://www.oreilly.com/learning/an-illustrated-introduction-to-the-t-sne-algorithm
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Interactively coming up with the T-SNE algorithm
+
+* Derive from Oberservable HQ: https://beta.observablehq.com/@nstrayer/t-sne-explained-in-plain-javascript
+* Add statistics where-ever needed: * http://students.brown.edu/seeing-theory/
 
 </textarea>
 </section>
+
+<section>
+        <h1>Part III</h1>
+        <h2>Autoencoders and GANs</h2>
+    </section>
 
 <section data-markdown>
         <textarea data-template>
@@ -694,6 +639,11 @@ Beispiele zeigen unten auf der Seite sind die Links
 
 https://en.wikipedia.org/wiki/Autoencoder
 </textarea>
+</section>
+
+<section data-markdown class="todo">
+        http://ufldl.stanford.edu/tutorial/unsupervised/Autoencoders/
+    </textarea>
 </section>
 
 <section data-markdown class="todo">
@@ -750,7 +700,8 @@ GAN Examples:
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
     </script>
     
