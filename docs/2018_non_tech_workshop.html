@@ -148,7 +148,7 @@
     <div class="slides">
 
         <section>
-            <h2>Workshop: Machine Learning auch für dein Projekt</h2>
+            <h2>Workshop: Machine Learning auch für euer Projekt</h2>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
             <p><small><a href="http://bit.ly/ml-intro-workshop">
@@ -156,7 +156,7 @@
             </a></small></p>
         </section>
 
-<section class="todo">
+<!-- <section class="todo">
 <pre>
 - Skizze Qualität: Ablauf der Vorhersage, Skizze des Modells etc.
 - Was kann ich mit 60% Accuracy machen?
@@ -167,7 +167,29 @@
 - LSTM Beispiel mit tensorflow.js mit NLP Beispiel
 - Optional: https://www.quora.com/What-is-Bayesian-machine-learning
 </pre>    
+</section> -->
+
+<section data-markdown>
+        <textarea data-template>
+### ML ist eher Chemie als Programmieren
+<img src='img/ml_is_not_programming.jpg' height="550px">
+    </textarea>
+    </section>
+
+<section>
+    <h3>Agenda</h3>
+    <ol>
+        <li>Einführung in die Idee von Machine Learning: 60 Minuten</li>
+        <li>Anwendungsgebiete: 60 Minuten</li>
+        <li>Was existiert schon bei Mach?: 15 Minuten</li>
+        <li>Abschlussdiskussion: 15 Minuten</li>
+    </ol>
 </section>
+
+        <section>
+            <h1>Teil I</h1>
+            <h2>Was geht mit Machine Learning (und was nicht)</h2>
+        </section>
 
         <section>
                 <h3>Ein Fallbeispiel</h3>
@@ -175,7 +197,85 @@
                 <img src="img/insurance/automobile-insurance.png" height="400px">
                 <p><small>Wie würde ich (47) mit einem 56-PS-Auto abschneiden?</small></p>
             </section>
-    
+
+            
+            <section>
+                    <h3>Experiment #1 - Wie funktioniert Supervised Learning?</h3>
+                        <p>Bildet Cluster der unterschiedlichen Kundenarten auf dem Handout</p>
+                        <ol>
+                            <li>
+                                <em>grün (dunkel)</em>: guter Kunde</li>
+                            <li>
+                                <em>gelb (hell)</em>: mittelguter Kunde</li>
+                            <li>
+                                <em>rot (mittel)</em>: schwacher Kunde</li>
+                        </ol>
+                        <p>Wichtig: Bitte die Cluster mit Kugelschreiber malen und ordentlich aufdrücken</p>
+                </section>
+                
+                <section>
+                    <h2>Plötzliche Wendung</h2>
+                    <h3>Verallgemeinerung und nicht perfekte Wiedergabe sind das Ziel</h3>
+                    <p>Es macht keinen Sinn, die Kundenqualität für Daten vorherzusagen, die man schon kennt.</p>
+                    <p>Unser Cluster müssen daher auch für Daten funktionieren, die wir noch nicht betrachtet haben</p>
+                </section>
+                
+                <section>
+                    <h3>Wie gut funktioniert die Vorhersage auf unbekannten Daten?</h3>
+                    <ol>
+                        <li class="fragment">Wir teilen alle zur Verfügung stehenden Daten in 2 Teile</li>
+                        <li class="fragment">Den größeren Teil der Daten (60 oder 80%) benutzen wir, um unser Modell zu bilden</li>
+                        <li class="fragment">Das Modell ist in diesem Fall euer Zettel mit der Clustern</li>
+                        <li class="fragment">Der kleinere Teil der Daten wird zur Überprüfung des Modells verwendet - diesen Teil dürfen wir uns nicht vorher ansehen</li>
+                    </ol>
+                </section>
+                
+                <section>
+                    <h3>Experiment #1, Teil #2 - Wie gut hat die Verallgemeinerung funktioniert?</h3>
+                    <ul>
+                        <li>Bitte umblättern und die durchgedrückten Linien nachzeichnen</li>
+                        <li>Auf diesem Blatt sehr ihr die Testdaten zur Überprüfung des Modells</li>
+                        <li>Passen eure Cluster immer noch genau so gut auf diese Daten?</li>
+                        <li>Hättet ihr die Cluster anders eingezeichnet wenn ihr gewusst hättet, das es um eine Generalisierung geht?</li>
+                    </ul>
+                </section>
+
+                    <!-- <section>
+                        <img src="img/flashcards/Test_Training_And_Validation_Sets_print.png">
+                    </section> -->
+
+                <section>
+                    <h3>Beispiellösung: Fein</h3>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/train_fine.jpg" height="250">
+                        <p>
+                            <small>Train</small>
+                        </p>
+                    </div>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/test_fine.jpg" height="250">
+                        <p>
+                            <small>Test</small>
+                        </p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3>Beispiellösung: Grob</h3>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/train_coarse.jpg" height="250">
+                        <p>
+                            <small>Train</small>
+                        </p>
+                    </div>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/test_coarse.jpg" height="250">
+                        <p>
+                            <small>Test</small>
+                        </p>
+                    </div>
+                </section>
+
             <section>
                 <h2>Wie automatisiert man das?</h3>
             </section>
@@ -210,7 +310,7 @@ return green
             <p>Sind das alle Regeln? Sind die richtig?</p>
             <div class="fragment">
                     <img src="img/insurance/manual.png" height="400px">
-                    <p><small>ca. 43% korrekte Vorhersagen (raten wäre 33%)</small></p>
+                    <p><small>ca. 43% korrekte Vorhersagen auf unbekannten Daten (raten wäre 33%)</small></p>
             </div>        
         </section>
     
@@ -240,11 +340,6 @@ return green
             </ul>
         </section>
         
-        <section>
-            <h1>Teil 2</h1>
-            <h2>Idee von Machine Learning</h2>
-        </section>
-
                 <section>
                         <h2>Supervised Machine Learning</h2>
                     </section>
@@ -264,7 +359,7 @@ return green
 <img src='img/sketch/using-a-model.jpg'>
                     </textarea>
                 </section>
-                                <section>
+                    <!-- <section>
                         <h3>Typische Anwendung: Klassifikation</h3>
                         <div class="fragment">
                             <img src="img/sketch/classification.jpg" height="450px">
@@ -278,7 +373,7 @@ return green
         </a>
         <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
         </small></p>
-    </section>
+    </section> -->
     
     <section>
         <h3>Strategien</h3>
@@ -288,7 +383,7 @@ return green
         </ul>
     </section>
 
-    <section>
+    <!-- <section>
         <h3>Validierung</h3>
         <p>Generalisierung, nicht perfekte Reproduktion ist unser Ziel</p>
         <ol>
@@ -297,13 +392,13 @@ return green
             <li class="fragment">Wie im Beispiel oben verknüpfen wir Eingaben mit passenden Ausgaben</li>
             <li class="fragment">Den zweiten Satz nehmen wir zur Überprüfung: passen die vorhergesagten Ausgaben zu den uns bekannten Ausgaben?</li>
         </ol>
-    </section>
+    </section> -->
 
     <section>
         <h3>KNN: k Nearest Neighbors</h3>
         <img src="img//insurance/knn.png">
     </section>
-    <section>
+    <!-- <section>
             <h3>Algorithmus</h3>
             <p>Für die Vorhersage für die Kategorie eines bisher unbekannten Datenpunkts</p>
             <ol>
@@ -311,9 +406,9 @@ return green
                 <li>k Nachbarn betrachten</li>
                 <li>Vorhersage ist die Farbe der Mehrheit der Nachbarn</li>
             </ol>
-        </section>
+        </section> -->
     
-                <section data-markdown>
+                <!-- <section data-markdown>
     <textarea data-template>
 ### KNN wurde auch bei unserem Beispiel mit der Gesichtserkennung benutzt
 
@@ -323,9 +418,9 @@ _The KNN image classifier works much great with small amounts of data._
 
 https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
 </textarea>
-</section>
+</section> -->
 
-                <section>
+                <!-- <section>
                     <h3>Ergebnisse für k = 1</h3>
                     <div class="fragment">
                 
@@ -335,27 +430,28 @@ https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
                         </p>
                     </div>
                     <p class="fragment">So etwas nennt man Overfitting</p>
-                </section>
-    <section>
-        <h3>Ergebnisse für k=13 nicht so schlecht</h3>
-        <div class="fragment">
+                </section> -->
+        <section>
+            <h3>Beste Ergebnisse für k=13</h3>
+            <div class="fragment">
+    
+            <img src="img/insurance/knn-13.png" height="400px">
+            <!-- <p><small>nur ca. 81% korrekte Vorhersagen auf Trainingsaten, aber auch 75% auf Testdaten</small></p>         -->
+            <p><small>ca. 75% auf Testdaten</small></p>        
+            </div>
+            <!-- <p class="fragment">Beachte die geschmeidigen Grenzen</p> -->
+        </section>
+    
+        <section>
+            <h3>Weitere Lernstrategien</h3>
+            <ul>
+                <li>Logistische Regression: Trennung von Klassen per Logistischer Funktion (Sigmoid)
+                <li>Decision Trees: Entscheidungsbaum bei dem die Ebenen und Unterscheidungsegeln erlernt werden
+                <li>Neural Networks (Deep Learning): Zusammenschaltung vieler Logistischer Regression
+            </ul>
+        </section>
 
-        <img src="img/insurance/knn-13.png" height="400px">
-        <p><small>nur ca. 81% korrekte Vorhersagen auf Trainingsaten, aber auch 75% auf Testdaten</small></p>        
-        </div>
-        <p class="fragment">Beachte die geschmeidigen Grenzen</p>
-    </section>
-
-    <section>
-        <h3>Weitere Lernstrategien</h3>
-        <ul>
-            <li>Logistische Regression: Trennung von Klassen per Logistischer Funktion (Sigmoid)
-            <li>Decision Trees: Entscheidungsbaum bei dem die Ebenen und Unterscheidungsegeln erlernt werden
-            <li>Neural Networks (Deep Learning): Zusammenschaltung vieler Logistischer Regression
-        </ul>
-    </section>
-
-    <section>
+    <!-- <section>
             <h3>Daten: Quantität</h3>
             <img src='img/applications/decisions/classic.png' height="500px">
         </section>
@@ -363,7 +459,7 @@ https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
         <section>
             <img src="img/flashcards/Supervised_Deep_Learning_Rule_Of_Thumb_print.png">
         </section>
-
+ -->
     
     <section data-markdown>
             <textarea data-template>
@@ -374,15 +470,14 @@ https://beta.observablehq.com/@tmcw/bring-your-own-doodles-linear-regression
     </textarea>
     </section>
     <section>
-            <h1>Teil 3</h1>
             <h2>Unsupervised Learning: Clustering</h2>
         </section>
-        <section>
+        <!-- <section>
                 <h3>
                     3 Arten von Machine Learning
                 </h3>
                 <img src="img/sketch/types-of-ml.png" height="550px">
-            </section>
+            </section> -->
 
     <section>
             <h3>Daten: Zentraler Punkt</h3>
@@ -394,7 +489,7 @@ https://beta.observablehq.com/@tmcw/bring-your-own-doodles-linear-regression
         <img src='img/applications/decisions/question.png'>
     </section>
 
-        <section data-markdown>
+        <!-- <section data-markdown>
                 <textarea data-template>
 ### Clustering
 
@@ -403,7 +498,7 @@ similar (in some sense) to each other than to those in other groups (clusters)._
 
 https://en.wikipedia.org/wiki/Cluster_analysis
                 </textarea>
-    </section>
+    </section> -->
     
     <section data-markdown>
             <textarea data-template>
@@ -411,10 +506,11 @@ https://en.wikipedia.org/wiki/Cluster_analysis
 <img src='img/sketch/clustering.jpg' height="550px">
         </textarea>
     </section>
-    <section data-markdown>
+    <section data-markdown  style="font-size: xx-large">
             <textarea data-template>
 ### Fragen
 
+1. Was ist bei diesen Daten grundsätzlich anders als bei der ersten Übung?
 1. Welche Formen haben die Cluster? Wie hast du diese als Cluster erkannt?
 1. Welche Formen hältst du für mehr oder weniger realistisch?
 1. Was könnte an den Achsen stehen? War das wichtig für das Clustering?
@@ -489,7 +585,7 @@ Code: https://github.com/AppliedDataSciencePartners/WorldModels
 </section>
 
         <section>
-            <h1>Teil 4</h1>
+            <h1>Teil II</h1>
             <h2>Wie findet ihr eigene Anwendungsmöglichkeiten?</h2>
         </section>
 
@@ -516,13 +612,13 @@ https://www.mercurynews.com/2018/04/20/artificial-intelligence-will-wipe-out-hal
                 <p class="fragment"><em>Nur wenn beides da ist läuft die Maschine</em></p>
         </section>
 
-        <section data-markdown class="todo">
+        <!-- <section data-markdown class="todo">
                 <textarea data-template>
 ### Zentrale Hinweise
 
 https://machinelearningmastery.com/how-to-get-the-most-from-your-machine-learning-data/
 </textarea>
-</section>        
+</section>         -->
         <section>
                 <h3>Ansatz nach Art der Daten</h3>
                 <img src='img/applications/decisions/data.png'>
@@ -539,7 +635,7 @@ https://machinelearningmastery.com/how-to-get-the-most-from-your-machine-learnin
         <section>
             <h3>Mögliche Ziele</h3>
             <ul>
-                <li class="fragment">Marketing</li>
+                <!-- <li class="fragment">Marketing</li> -->
                 <li class="fragment">weniger Fehler</li>
                 <li class="fragment">intuitive Bauchentscheidungen los werden</li>
                 <li class="fragment">schnelleres Arbeiten, höherer Durchsatz</li>
@@ -675,24 +771,21 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
                     <img src="img/flashcards/Curse_Of_Dimensionality_print.png">
                 </section> -->
 
-        <section class="todo">
-            <h3>Final Thoughts: How to apply Machine Learning to your data</h3>
-            <p class="fragment">Machine Learning is the engine, but your data is the fuel</p>
-            <p class="fragment">Again, discuss with your neighbor(s) - do you know a problem or data you could tackle with Machine Learning or more generally
-                AI
-            </p>
-            <p class="fragment"><em>Please create a DRAWING of your ideas to encourage a more open mindset</em>
+        <section>
+            <h3>Abschlussübung: Ideen für den Einsatz von Machine Learning in eurem Bereich oder auf euren Daten</h3>
+            <ol>
+                <li>Aufteilen in Vierer-Gruppen</li>
+                <li>Pro Gruppe ein Tisch und ein Flip-Chart</li>
+                <li>Bitte erstellt eine <em>Skizze/grafische Darstellung</em> eurer Ideen</li>
+                <li>Stellt eure Skizze kurz den anderen vor</li>
+            </ol>
+            <p><em>Gruppenarbeit 30 Minuten, Vorstellung max. 5 Minuten pro Gruppe
+                </em>
                 </p>
             </section>
         
-        <section class="todo">
-            <h3>Would you mind sharing your ideas with us?</h3>
-            <pre contenteditable="true">
-- 
-            </pre>
-        </section>
                 
-                    <section>
+                    <!-- <section>
             <h3>Zusammenfassung</h3>
             <ul>
                 <li class="fragment">Machine Learning kann bei bestehenden Daten von diesen abstrahieren und generalisieren
@@ -710,7 +803,7 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
             </a>
             </small></p>
             <p><small>Mehr: <a href="https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html">https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html</a></small></p>
-        </section>
+        </section> -->
 
 
     </div>
@@ -742,8 +835,10 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+        $('section').attr('data-background-image', "backgrounds/murmel2.jpg")
+
     </script>
     
 <script>
