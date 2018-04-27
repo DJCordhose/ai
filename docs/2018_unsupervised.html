@@ -479,13 +479,7 @@ http://scikit-learn.org/stable/modules/clustering.html#calinski-harabaz-index
         <textarea data-template>
 ## PCA
 ### Principal Component Analysis
-
-https://en.wikipedia.org/wiki/Principal_component_analysis
 </textarea>
-    </section>
-
-    <section>
-        <h3>Intition</h3>
     </section>
 
     <section>
@@ -517,43 +511,91 @@ http://setosa.io/ev/principal-component-analysis/
     </textarea>
     </section>
 
-<section data-markdown class="todo">
+    <section>
+        <h2>How does PCA work?</h2>
+    </section>
+
+    <section data-markdown>
         <textarea data-template>
-### Deriving PCA
+### Overview
 
-* Herleitung über Covariance?
+1. Fit an n-dimensional ellipsoid to the data
+1. Each axis of the ellipsoid represents one principal component
+1. Each principal component has a range of values
+1. If this range is small, the variance of this principal component is also small
+1. Principal components of small range can be dropped without loosing a lot of information 
 
-* https://en.m.wikipedia.org/wiki/Principal_component_analysis
-* Add Statistics where needed
-* http://students.brown.edu/seeing-theory/
-  - Distributions
-  - Central Limit Theorem
-* https://en.wikipedia.org/wiki/Covariance_and_correlation
-  - Covariante: two variables change in a synced way
-  - Corrleation: one variable causes the changes to the other
-
-  http://ufldl.stanford.edu/tutorial/unsupervised/PCAWhitening/
+<small>
+https://en.wikipedia.org/wiki/Principal_component_analysis
+</small>
 </textarea>
 </section>
 
-<section data-markdown class="todo">
+<section data-markdown>
+    <textarea data-template>
+### How to find the axis of the ellipsoid?
+
+1. Normalize each original variable
+1. Calculate a _linear_ correlation matrix from these normalized variables
+1. Find the eigenvectors of the correlation matrix
+1. These are mutually orthogonal on the correlation matrix
+1. _Thus they are uncorrelated_
+1. These eigenvectors are the principal components
+1. Calculate the variance of each eigenvector
+
+
+<small>
+http://setosa.io/ev/eigenvectors-and-eigenvalues/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
         <textarea data-template>
 ### PCA with Sklearn
-Beispiele zeigen unten auf der Seite sind die Links
-            http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
-            http://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca
+
+_notebook: unsupervised/pca_
+
+<small>
+http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA
+</small>
+
+
         </textarea>
     </section>
     
 
-    <section class="todo">
-            <h3>3d Intuition</h3>
-            <pre>
-            - The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI
-            - Michael Murphy's Epic Anti-Gun Artwork for the DNC: https://youtu.be/l-GR9IVjU54
-            
-            </pre>
-            </section>
+    <section>
+        <h3>Intuition in 3d</h3>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Example 1
+
+<a href='https://youtu.be/4DpdpZkl8HI?t=65' target="_blank">
+<img src='img/unsupervised/perceptual-shift.png' height="500px">
+</a>
+
+<small>
+The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI?t=65
+</small>
+</textarea>
+    </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+### Example 2
+
+<a href='https://youtu.be/l-GR9IVjU54' target="_blank">
+<img src='img/unsupervised/anti-gun.png' height="500px">
+</a>
+
+<small>
+Michael Murphy's Epic Anti-Gun Artwork for the DNC: https://youtu.be/l-GR9IVjU54
+</small>
+</textarea>
+    </section>
                 
 <section data-markdown>
         <textarea data-template>
@@ -580,6 +622,16 @@ http://setosa.io/ev/principal-component-analysis/
 <h2>T-SNE</h2>
 <p>Visualizing High Dimensional Data</p>
 </section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Vorgehen
+- T-sne Intro mit Grafiken aus den Einführungen
+- Perplexity erklären vorher
+- dann praktische Übung mit ObservableHQ Notebook
+</textarea>
+</section>
+
 
 <section>
     <p>As humans looking at a computer screen we are naturally limited to two-dimensional visualizations that at best change over time and to reactions to interaction.</p>
@@ -617,9 +669,17 @@ https://www.oreilly.com/learning/an-illustrated-introduction-to-the-t-sne-algori
         <textarea data-template>
 ### Interactively coming up with the T-SNE algorithm
 
-* Derive from Oberservable HQ: https://beta.observablehq.com/@nstrayer/t-sne-explained-in-plain-javascript
+* Derive from Oberservable HQ: 
+ * https://beta.observablehq.com/@nstrayer/t-sne-explained-in-plain-javascript
+ * Korrigiert: https://beta.observablehq.com/@djcordhose/t-sne-explained-in-plain-javascript
+ *  data in 10 dimensions centered around 5 randomly placed clusters  
+* Maybe import parts: https://beta.observablehq.com/@mbostock/introduction-to-imports
 * Add statistics where-ever needed: * http://students.brown.edu/seeing-theory/
 
+* Exercise
+  * Can you find a configuration of data generation that gives bad results
+  * Can you fix this by changing the perplexity?
+  * If not, slowly change the data generation back until you again get good results 
 </textarea>
 </section>
 
