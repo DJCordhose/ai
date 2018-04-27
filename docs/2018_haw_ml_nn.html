@@ -469,6 +469,8 @@ _________________________________________________________________</code></pre>
 
 <small>
 http://cs231n.github.io/optimization-2
+<br>
+http://neuralnetworksanddeeplearning.com/chap2.html
 </small>
         </textarea>
         </section>
@@ -565,7 +567,7 @@ predictions = Dense(3, name='softmax', activation='softmax')(x)
         </section>
 
         <section>
-                <h3>Ansatz nach Art der Daten</h3>
+                <!-- <h3>Ansatz nach Art der Daten</h3> -->
                 <img src='img/applications/decisions/data.png'>
         </section>
 
@@ -749,7 +751,7 @@ https://distill.pub/2018/building-blocks/
   * good for CNN to completely take out a feature channel
   * high values from CNN indicate high match, will be passed through
 * seems to enable fast learning
-* this is just what most people actually uses
+* this is just what most people actually use
 </textarea>
 </section>
 
@@ -835,16 +837,49 @@ The classifier more or less is what we used for our previous example
                 </textarea>
                 </section> -->
 
+                <section>
+                    <h2>Practical Deep Learning with TensorFlow.js</h2>
+                </section>
+
+                <section>
+                    <h3>Sample Code: Creating a model</h3>
+                <pre><code contenteditable data-trim class="fragment javascript">
+const model = tf.sequential();
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment javascript">
+model.add(tf.layers.conv2d({
+    inputShape: [28, 28, 1],
+    kernelSize: 5,
+    filters: 8,
+    activation: 'relu'
+}));
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment javascript">
+model.add(tf.layers.maxPooling2d({poolSize: [2, 2]}));
+</code></pre>
+<pre><code contenteditable data-trim class="fragment javascript">
+model.add(tf.layers.flatten());
+model.add(tf.layers.dense({units: 10, activation: 'softmax'}));
+</code></pre>
+<pre><code contenteditable data-trim class="fragment javascript">
+model.compile({
+    optimizer: 'sgd',
+    loss: 'categoricalCrossentropy',
+    metrics: ['accuracy'],
+});                                        
+</code></pre>
+</section>
+
                 <section style="font-size: xx-large">
-                    <h3>Shared Exercise #4</h3>
+                    <h3>Shared Exercise</h3>
                     <p>Use tensorflow.js to experiment on the MNIST data set</p>
-                    <!-- <p>
+                    <p>
                                     <a href="js/mnist" target="_blank">
-                                        https://djcordhose.github.io/ai/js/mnist</a>
+                                        https://djcordhose.github.io/haw/code/</a>
                         </p>
                     <ol>
-                        <li>clone this repository and locate <code>docs/js/mnist</code></li>
-                        <li>run a local http server in this folder</li> -->
+                        <li>clone <em>https://github.com/DJCordhose/haw</em> and locate <em>code/mnist</em></li>
+                        <li>run a local http server in this folder</li>
                         <li>make your changes to <code>model.js</code></li>
                         <li>Experiment with number of epochs (TRAIN_BATCHES), learning rate, and number of filters in convolutional layers</li>
                         <li>Monitor GPU performance using the tools of your OS (try to reach 100% utilization)</li>
@@ -852,8 +887,8 @@ The classifier more or less is what we used for our previous example
                     </ol>
                     <p>
                             Reference: 
-                                    <a href="https://js.tensorflow.org/api/0.8.0/" target="_blank">
-                                        https://js.tensorflow.org/api/0.8.0/</a>
+                                    <a href="https://js.tensorflow.org/api/0.10.0/" target="_blank">
+                                        https://js.tensorflow.org/api/0.10.0/</a>
                         </p>
                 </section>
 
@@ -891,7 +926,8 @@ The classifier more or less is what we used for our previous example
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
     </script>
     
