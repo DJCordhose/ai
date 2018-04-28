@@ -523,7 +523,7 @@ http://setosa.io/ev/principal-component-analysis/
 1. Each axis of the ellipsoid represents one principal component
 1. Each principal component has a range of values
 1. If this range is small, the variance of this principal component is also small
-1. Principal components of small range can be dropped without loosing a lot of information 
+1. Principal components of low variance can be dropped without loosing a lot of information 
 
 <small>
 https://en.wikipedia.org/wiki/Principal_component_analysis
@@ -533,16 +533,14 @@ https://en.wikipedia.org/wiki/Principal_component_analysis
 
 <section data-markdown>
     <textarea data-template>
-### How to find the axis of the ellipsoid?
+### Objective: Transform to another basis to maximize variance
 
 1. Normalize each original variable
 1. Calculate a _linear_ correlation matrix from these normalized variables
 1. Find the eigenvectors of the correlation matrix
-1. These are mutually orthogonal on the correlation matrix
+1. These are mutually orthogonal on the symmetric correlation matrix
 1. _Thus they are uncorrelated_
 1. These eigenvectors are the principal components
-1. Calculate the variance of each eigenvector
-
 
 <small>
 http://setosa.io/ev/eigenvectors-and-eigenvalues/
@@ -550,20 +548,30 @@ http://setosa.io/ev/eigenvectors-and-eigenvalues/
 </textarea>
 </section>
 
-<section data-markdown>
-        <textarea data-template>
-### PCA with Sklearn
-
-_notebook: unsupervised/pca_
-
-<small>
-http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA
-</small>
-
-
-        </textarea>
-    </section>
     
+<section>
+<h3>Example</h3>
+<div class="fragment" style="float: left">
+    <img src="img/unsupervised/pca_plot/original.png" height="300">
+    <p>
+        <small>Original</small>
+    </p>
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+    <img src="img/unsupervised/pca_plot/correlation.png" height="300">
+    <p>
+        <small>Correlation</small>
+    </p>
+</div>
+<div class="fragment" style="float: right">
+    <img src="img/unsupervised/pca_plot/reduced.png" height="300">
+    <p>
+        <small>Reduced</small>
+    </p>
+</div>
+<p style="clear: both"><em>notebook: unsupervised/pca</em></p>
+</section>
+
 
     <section>
         <h3>Intuition in 3d</h3>
