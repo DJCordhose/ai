@@ -471,7 +471,7 @@ http://scikit-learn.org/stable/modules/clustering.html#calinski-harabaz-index
 ### What is Dimensionality Reduction?
 
 * Linear Correlations: PCA: Find out what really matters in your data
-* Non-Linear Correlations: T-SNE: Visualizing High Dimensional Data
+* Non-Linear Correlations: t-SNE: Visualizing High Dimensional Data
 </textarea>
     </section>
     
@@ -623,9 +623,15 @@ http://setosa.io/ev/principal-component-analysis/
     </section>
     
 <section>
-<h2>T-SNE</h2>
+<h2>t-SNE</h2>
 <p>Visualizing High Dimensional Data</p>
 </section>
+
+<section>
+    <h3>Motivation</h3>
+    <p>As humans looking at a computer screen we are naturally limited to two-dimensional visualizations that at best change over time and to reactions to interaction.</p>
+</section>
+    
 
 <section data-markdown class="todo">
         <textarea data-template>
@@ -637,14 +643,22 @@ http://setosa.io/ev/principal-component-analysis/
 </section>
 
 
-<section>
-    <p>As humans looking at a computer screen we are naturally limited to two-dimensional visualizations that at best change over time and to reactions to interaction.</p>
-</section>
-    
-
-<section data-markdown class="todo">
+<section data-markdown>
         <textarea data-template>
-https://www.quora.com/How-does-t-SNE-work-in-simple-words
+### Idea of t-SNE
+
+_Describe projection from high dimension to 2-d as a machine learning problem_
+
+1. Create pairwise probability distributions over high dimensional data 
+1. Create similar distribution in 2-d
+1. Loss is distance between the two using relative entropy
+1. Minimize loss
+
+<small>
+https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding
+<br>
+https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence
+</small>
 </textarea>
 </section>
 
@@ -705,14 +719,11 @@ https://en.wikipedia.org/wiki/Autoencoder
 </textarea>
 </section>
 
-<section data-markdown class="todo">
-    <textarea data-template>
-        After I signed up for @stitchfix, @ioanapatrin sent me this paper that used GANs to generate new clothes based on what it thinks are a user's preferences. https://t.co/z1OvCryt2U
-        This user seems to be a fan of the long shoe. https://t.co/MqFQLUsWE0
-        (https://twitter.com/JanelleCShane/status/990013864250150912?s=03)
-</textarea>
+<section>
+    <h4>State of the Art GAN</h4>
+    <img src="img/unsupervised/gan-clothes.jpg" height="500px">
+    <p><small><a href="https://arxiv.org/abs/1711.02231" target="_blank">Visually-Aware Fashion Recommendation and Design with Generative Image Models</a></small></p>
 </section>
-
 
 <section data-markdown class="todo">
     <textarea data-template>
