@@ -224,6 +224,24 @@ Nicht mehr planen, weil letzter Teil, der sicher zuende gebracht werden soll.
             </pre>
         </section>
 
+        <section data-markdown>
+        <textarea data-template>
+### Example application for RNNs
+
+Add two numbers encoded in a string, e.g.
+
+```
+Input: "535+61"
+Output: "596"
+```
+Padding is handled by using a repeated sentinel character (space)
+
+<small>
+Notebook: rnn-add-example
+</small>
+    </textarea>
+    </section>
+
 
         <section data-markdown>
                 <textarea data-template>
@@ -362,7 +380,6 @@ https://arxiv.org/pdf/1406.1078v3.pdf
 </section>
         
 
-
 <section data-markdown>
         <textarea data-template>
 ### Update Gate
@@ -481,7 +498,6 @@ h'_t = tanh(Wx_t + r_t \odot Uh_{t-1})
         <textarea data-template>
 ### Final memory at current time step
 
-
 <img src='img/nlp/gru-final-memory.png' height="450px">
 
 <small>
@@ -513,6 +529,11 @@ h_t = z_t \odot h_{t-1} + (1 - z_t) \odot h'_{t}
 </section>
 
 
+<section data-markdown class="todo">
+        <textarea data-template>
+Can up with two reviews, one having the relevant information at the start, the other at the end 
+</textarea>
+</section>
 
 
 
