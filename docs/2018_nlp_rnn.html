@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>RNNs</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section>
+            <h2>Recurrent Neural Networks</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+        </section>
+    <section>
+            <h3>Text is special</h3>
+            <img src='img/applications/decisions/data.png'>
+        </section>
+
+
+        <section>
+            <h2>RNNs</h2>
+            <h3>Recurrent Neural Networks</h3>
+        </section>
+
+
+        <section>
+            <h3>Motivation</h3>
+            <p>Traditional Networks have no memory of previous events</p>
+        </section>
+
+            
+        <section data-markdown>
+            <textarea data-template>
+### Solution: RNNs - Networks with Loops
+<img src='img/nlp/colah/RNN-rolled.png' height="450px">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+            </textarea>
+        </section>
+            
+        <section data-markdown>
+            <textarea data-template>
+### Unrolling the loop
+<img src='img/nlp/colah/RNN-unrolled.png'>
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+            </textarea>
+        </section>
+
+        <section>
+            <h2>Perfect for sequences, lists, sentences</h2>
+        </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Example: Using sequences of events
+<img src='img/magenta-rnn-duck.png' height="450px">
+
+<small>
+https://twitter.com/random_forests/status/987394050914385927
+</small>
+                </textarea>
+            </section>
+        <section class="todo">
+            <pre>
+Durchgehen und sofort Bilder klauen
+  - http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+  - Illustration aus anderem Artikel: https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
+- Nach RNN gleich Anwendungen in: http://karpathy.github.io/2015/05/21/rnn-effectiveness/
+- https://medium.com/@erikhallstrm/hello-world-rnn-83cd7105b767
+
+- Danach: Anwendungen für NLP wie bei Cholett
+
+1. Stunde Intro wie hier
+2. NLP wie bei Cholett
+3. NLP wie Stanford Kurs
+
+Nicht mehr planen, weil letzter Teil, der sicher zuende gebracht werden soll.
+            </pre>
+        </section>
+
+
+        <section data-markdown>
+                <textarea data-template>
+### Main issues with RNNs
+
+_Vanishing or exploding gradient problem:_
+* Each step in training applies the same weights to the output, also in back-propagation  
+* The further we move backwards, the bigger (explodes) or smaller (vanishes) our error signal becomes
+
+<small>
+https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Intution of effect
+
+_Effectively long term memory does not work:_
+
+* RNNs experiences difficulty in memorising words from far away in the sequence
+* Predictions based on most recent words only
+
+<small>
+        https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+    </small>
+    </textarea>
+</section>
+    <section data-markdown>
+                <textarea data-template>
+## LSTMs
+
+Note:
+* Motivation: RNNs packen es nicht
+* echt schwierig
+* Erst einmal an der Tafel zusammen entwickeln
+* dann mit den LSTM-Grafiken abgleichen
+
+</textarea>
+    </section>
+
+    <!-- <section data-markdown data-separator-notes="^Note:"> -->
+            <section data-markdown>
+                    <textarea data-template>
+            <img src='img/nlp/LSTM.png' height="550px">
+
+<small>
+https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
+</small>
+
+        </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Units get chained together                    
+
+<img src='img/nlp/LSTMs-blocks.png'>
+
+<small>
+https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
+</small>
+
+    </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Managing Memory
+
+* most important feature
+* done by deciding what memory to take over from previous unit
+* managed by two valves
+ 
+            </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Forget valve
+
+<img src='img/nlp/LSTMs-blocks.png'>
+
+open = keep, closed = forget
+            </textarea>
+    </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### GRU (Gated Recurrent Unit)
+
+As powerful as LSTMs, but simpler
+
+* Invented in 2014
+* variation of LSTMs
+
+<small>
+https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/nlp/gru-overview.png' height="500px">
+<img src='img/nlp/gru-legend.png'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Gates
+
+* Decide which information is passed to output
+* Can be trained to keep information from long ago
+* Can decide to copy all the information from the past eliminating the risk of vanishing gradient problem
+* Update Gate
+* Reset Gate
+
+<small>
+https://arxiv.org/pdf/1406.1078v3.pdf
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Intution
+
+* _reset gates_ can be trained to _wash out previous memories_ if they turn out to be irrelevant
+* _update gates_ can be trained to much more _rely on past memories_ if they are more relevant to the output
+
+    </textarea>
+</section>
+        
+
+
+<section data-markdown>
+        <textarea data-template>
+### Update Gate
+
+
+<img src='img/nlp/gru-update-gate.png' height="450px">
+
+<small>
+Helps to determine how much of the past information (from previous time steps) needs to be passed along to the future.
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Update Gate
+
+<br>        
+<script type="math/tex; mode=display">
+z_t = \sigma(W(z)x_t + U(z)h_{t-1})
+</script>
+
+<small>
+* When x(t) is plugged into the network unit, it is multiplied by its own weight W(z). 
+* The same goes for h(t-1) which holds the information for the previous t-1 units and is multiplied by its own weight U(z). 
+* Both results are added together and a sigmoid activation function is applied to squash the result between 0 and 1. 
+
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Reset Gate
+
+
+<img src='img/nlp/gru-reset-gate.png' height="450px">
+
+<small>
+Used to decide how much of the past information to forget
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Reset Gate
+
+<br>        
+<script type="math/tex; mode=display">
+r_t = \sigma(W(r)x_t + U(r)h_{t-1})
+</script>
+
+<small>
+* Same formula as for Update Gate 
+* But other weights
+* Different usage
+
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Current memory content
+
+
+<img src='img/nlp/gru-current-memory.png' height="450px">
+
+<small>
+Uses the reset gate to store relevant information from the past
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Hadamard product
+
+* Multiply two matrices of the same dimension
+* Multiply entry by entry
+* Results in a matrix of the same dimension
+
+Example:
+
+<img src='img/nlp/hadamard_example.svg'>
+
+<small>
+https://en.wikipedia.org/wiki/Hadamard_product_(matrices)
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Current memory content
+
+<br>        
+<script type="math/tex; mode=display">
+h'_t = tanh(Wx_t + r_t \odot Uh_{t-1})
+</script>
+
+<small>
+* Hadamard (element-wise) product will determine what to remove from the previous time step
+* elements of r(t) will be between 0 and 1
+* 0 will mean wash out past memories in this unit
+* 1 means keep all past memories in this unit
+* tanh makes overall output between -1 and 1
+
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Final memory at current time step
+
+
+<img src='img/nlp/gru-final-memory.png' height="450px">
+
+<small>
+Uses update gate to determines what to collect from the current memory content what from the past
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Final memory at current time step
+
+Final output is a weighted sum of past and current memory
+
+<br>        
+<script type="math/tex; mode=display">
+h_t = z_t \odot h_{t-1} + (1 - z_t) \odot h'_{t} 
+</script>
+
+<small>
+* h(t) is the final output of this unit 
+* elements of update gate z(t) will be between 0 and 1
+* h(t-1) as the input from the previous unit 
+* 1 - z(t) will be the inverse
+* h’(t) is the current memory content
+
+</small>
+</textarea>
+</section>
+
+
+
+
+
+
+<section data-markdown class="todo">
+        <textarea data-template>
+https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+                <textarea data-template>
+### Attention in Networks
+        https://distill.pub/2016/augmented-rnns/
+    </textarea>
+</section>
+
+
+
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+### RNNs / LSTMs
+* https://www.tensorflow.org/tutorials/recurrent
+        </textarea>
+        </section>
+    
+    <section data-markdown class="todo">
+            <textarea data-template>
+### Applications
+* https://www.tensorflow.org/tutorials/text_classification_with_tf_hub
+* https://www.tensorflow.org/tutorials/seq2seq
+* https://medium.com/@alyafey22/sentiment-classification-from-keras-to-the-browser-7eda0d87cdc6
+    </textarea>
+    </section>
+
+
+
+<section class="todo">
+                <pre>
+
+
+Embeddings:
+- https://www.quora.com/What-does-the-word-embedding-mean-in-the-context-of-Machine-Learning
+- https://www.tensorflow.org/programmers_guide/embedding
+- Dense Embeddings / SkipGram
+  - https://www.tensorflow.org/tutorials/word2vec
+
+</pre>
+</section>
+
+<section class="todo">
+            <pre>
+
+* https://medium.com/@ageitgey/machine-learning-is-fun-part-5-language-translation-with-deep-learning-and-the-magic-of-sequences-2ace0acca0aa
+- Our preprint that creates embeddings for over 100k medical concepts using data from 60 million patients, 1.7 million journal articles and 20 million notes is up: https://t.co/u6C7lN7jl4
+
+Pretrained embeddings: https://t.co/bk5aStgaA3
+
+Interactive explorer https://t.co/1MdPq40ohf https://t.co/ig8AlIasuI
+(https://twitter.com/AndrewLBeam/status/981877899174318081?s=03)
+
+1. Stunde Intro aus Colah
+2. Stunde
+- http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/
+- https://medium.com/@ageitgey/machine-learning-is-fun-part-5-language-translation-with-deep-learning-and-the-magic-of-sequences-2ace0acca0aa
+- https://medium.com/@ageitgey/machine-learning-is-fun-part-6-how-to-do-speech-recognition-with-deep-learning-28293c162f7a
+3. Stunde: NLP wie bei Cholett
+* Praxis-Teil mit Notebook aus 
+
+    * C:\Users\olive\Google Drive\ML-Buch\Docs
+    * Deep_Learning_with_Python
+    * Kapitel 6
+    * https://github.com/fchollet/deep-learning-with-python-notebooks (ist schon gecloned)
+
+Keras LSTMs: https://www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.html
+
+NLP wie Stanford Kurs nur einstreuen
+ * NLP with Deep Learning Course: http://web.stanford.edu/class/cs224n/
+
+ https://machinelearningmastery.com/develop-word-embeddings-python-gensim/
+
+            </pre>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
