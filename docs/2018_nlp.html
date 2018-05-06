@@ -152,38 +152,137 @@
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
         </section>
-        <section data-markdown class="todo">
+        
+        
+        <!-- <section data-markdown class="todo">
                 <textarea data-template>
-- Skript alle Links automatisch in neuem Tab öffnen
-- https://machinelearningmastery.com/prepare-text-data-machine-learning-scikit-learn/                    
-- LSTMs erklären nach Coah
         </textarea>
+        </section> -->
+
+        <section data-markdown>
+                <textarea data-template>
+### What is Natural Language Processing (NLP)?
+
+Natural language processing (NLP), is the skill of a machine to understand and process human language within the context
+in which it is spoken.
+
+<small>
+https://www.smartdatacollective.com/natural-language-processing-essential-element-ai/    
+</small>
+                </textarea>
         </section>
 
-        <section>
-            <h2>Structure</h2>
-            <ol>
-                <li>Encoding text to make it accessible to Machine Learning
-                        <ol>
-                                <li>Basics</li>
-                                <li>Word2Vec: Word Embeddings</li>
-                            </ol>
-                
-                </li>
-                <li>Machine Learning architectures applicable to text
-                        <ol>
-                                <li>RNNs</li>
-                                <li>LSTMs</li>
-                                <li>Applications</li>
-                            </ol>
-                
-                </li>
-            </ol>
+        <section data-markdown>
+                <textarea data-template>
+### Structure
+
+1. _NLP without Machine Learning_: Basic Linguistic Processing
+1. _NLP with Machine Learning_: Word Embeddings
+1. _Neural Networks with Memory_: RNNs, LSTMs, GRUs
+                </textarea>
         </section>
 
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Applications of NLP
+
+* _Machine Translation_: automatic translation of one human language into another
+* _Name Entity Recognition (NER)_: recognizing and identifying proper names and types (person, location or an organization) in text
+* _Optical Character Recognition (OCR)_: text from the image of the printed text
+* _Question-Answer Session_: determine the answer to a question asked in human language
+* _Topic Segmentation_: separate text into parts being related to a specific topic
+* _Speech Recognition_: convert spoken lanuage to its corresponding textual representation
+* _Sentiment Analysis_: judge emotions in texts
+
+https://www.smartdatacollective.com/natural-language-processing-essential-element-ai/    
+                </textarea>
+        </section>
+
+            <section>
+                <h3>Where are we in NLP today?</h3>
+            </section>
+            <section>
+                <h4>Maschines can properly react to written language</h4>
+                <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
+            </section>
+            
+        <section data-markdown>
+                <textarea data-template>
+### Wavenet: Machines can synthesize human language
+
+<small>
+Google launches more realistic text-to-speech service powered by DeepMind’s AI    
+</small>
+<img src='img/nlp/wavenet/wavenet_progress.gif' height="250px">
+
+<small>
+Industry-leading: <audio
+  src="img/nlp/wavenet/Hol_before.wav"
+  controls></audio> WaveNet: <audio
+  src="img/nlp/wavenet/Hol_before.wav"
+  controls></audio>
+<br>
+<br>
+https://www.theverge.com/2018/3/27/17167200/google-ai-speech-tts-cloud-deepmind-wavenet
+</small>
+                    </textarea>
+                    </section>
+
+        <section class="todo">
+            <pre>
+- Come up with more state of the art examples
+            </pre>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Classic Application: Sentiment Analysis in Written Texts
+
+<small>
+https://en.wikipedia.org/wiki/Sentiment_analysis
+</small>
+
+Generally speaking, sentiment analysis aims to determine the attitude of a speaker, writer, or other subject with respect
+to some topic or the overall contextual polarity or emotional reaction to a document, interaction, or event.
+
+_Example: Does a Tweet mention something negative about my company?_
+    
+                </textarea>
+            </section>
+
+            <section>
+                <h3>Cloud Natural Language: Google's ML API for Speech</h3>
+                <img src="img/screenshot_sentiment_analysis.png">
+                <p><small><a target="_blank" href="https://cloud.google.com/natural-language/">
+                    https://cloud.google.com/natural-language/
+                </a></small></p>
+            </section>
+                    
+            <section>
+                <h3>Initial Exercise: How to build sentiment analysis?</h3>
+                <p>Image you have a number of texts labelled to categories of positive (1) or negative (0)</p>
+                <p><em>You are free to either use machine learning or not</em></p>
+                <p>Disucss in groups and come up with a solution</p>
+                <p><small>10 Minutes Work and 10 Minutes Discussion</small></p>
+            </section>
+
+    
+        <section class="todo">
+                <pre>
+Show approaches to sentiment analysis
+- http://text-processing.com/demo/sentiment/
+- http://www.nltk.org/howto/sentiment.html
+- https://www.kaggle.com/ngyptr/python-nltk-sentiment-analysis
+- https://www.kaggle.com/ngyptr/lstm-sentiment-analysis-keras
+    
+    
+                </pre>
+            </section>
+                
         <section>
-            <h2>Part 1: Making text accissible to Machine Learning</h2>
-            <p>Linguistic Processing</p>
+            <h3>NLP without Machine Learning</h3>
+            <p>Even when you do not use machine learning to process and analyse text, there is a couple of techniques that can be helpful</p>
+            <p>These techniques can also be applied to make text accessible to machine learning</p>
         </section>
 
         <section data-markdown>
@@ -194,10 +293,14 @@
 * Stemming
 * Stop-Words
 * Part-of-Speach (POS) Tagging
+* Bag of Words etc.
 
 De-facto standard Python library: https://spacy.io/
-            </textarea>
+Notebook: spacy-sandbox
+https://spacy.io/usage/linguistic-features
+</textarea>
         </section>
+
         
         <section>
                 <img src="img/flashcards/Tokenizing_Text_print.png">
@@ -241,6 +344,7 @@ _Apple is looking at buying U.K. startup for $1 billion_
 <section>
         <h3>Bringing in Knowledge about the World</h3>
         <img src='img/nlp/spacy/entity.PNG'>
+        <p>Name Entity Recognition (NER)</p>
     </section>
 
     <section>
@@ -261,9 +365,49 @@ https://spacy.io/api/#nn-model
             </textarea>
         </section>
         
-    
 <section>
     <h2>Transforming Text into Vectors</h2>
+    <p>Making it accessible to Machine Learning</p>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Label Encoding    
+
+Normalize words such that they contain only values between 0 and number_of_words_in_vocab-1.
+
+<pre><code>text = ["paris", "paris", "tokyo", "amsterdam"]
+paris = 0
+tokyo = 1
+amsterdam = 2
+encoded_text = [0, 0, 1, 2]</code></pre>
+
+Variation: Encode using frequency
+
+<small>
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html
+</small>
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Label Encoding    
+
+Normalize words such that they contain only values between 0 and number_of_words_in_vocab-1.
+
+<pre><code>text = ["paris", "paris", "tokyo", "amsterdam"]
+paris = 0
+tokyo = 1
+amsterdam = 2
+encoded_text = [0, 0, 1, 2]</code></pre>
+
+Variation: Encode using frequency
+
+<small>
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html
+</small>
+    </textarea>
 </section>
 
 <section data-markdown>
@@ -275,7 +419,11 @@ Classic approach to turn words into a vector representation accessible for machi
 https://en.wikipedia.org/wiki/Bag-of-words_model
 
 <small>
-        http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
+<br>
+http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html
+<br>
+https://machinelearningmastery.com/prepare-text-data-machine-learning-scikit-learn/
 </small>
             </textarea>
         </section>
@@ -321,8 +469,13 @@ http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text
                 <img src="img/flashcards/TF-IDF_print.png">
             </section>
     
+
+            <section>
+                <h2>Entering the world of NLP based on Machine Lerning</h2>
+            </section>
+    
         <section>
-            <h2>Word Embeddings</h2>
+            <h3>Word Embeddings</h3>
             <p>Taking position and context of words into account</p>
             <p>Semantics of words by proximity to other words</p>
         </section>
@@ -513,95 +666,6 @@ You can either
 </textarea>
 </section>
 
-        <section data-markdown class="todo">
-                <textarea data-template>
-    <img src="img/md_dev_days/dbscan.jpg">
-    
-                </textarea>
-    </section>
-
-    <section data-markdown class="todo">
-            <textarea data-template>
-<img src="img/md_dev_days/word_encoding.jpg">
-
-            </textarea>
-</section>
-
-    <section>
-            <h3>Introduction to NLP</h3>
-        </section>
-
-        <section>
-            <h3>Exercise: How to build the most basic solution</h3>
-            <p>Consider you have a number of texts mapped to specific categories</p>
-            <p><em>What is the most basic solution to encode the text into something that is accessible to a machine learning solution</em></p>
-            <p>Disucss and groups and come up with a solution</p>
-            <p><small>10 Minutes Work and 10 Minutes Discussion</small></p>
-        </section>
-
-        <section>
-            <h3>Where are we in NLP today?</h3>
-        </section>
-
-        <section class="todo">
-            <pre>
-https://www.theverge.com/2018/3/27/17167200/google-ai-speech-tts-cloud-deepmind-wavenet
-            </pre>
-        </section>
-
-        <section class="todo">
-            <pre>
-- Sentiment
-  - http://text-processing.com/demo/sentiment/
-  - http://www.nltk.org/howto/sentiment.html
-  - https://www.kaggle.com/ngyptr/python-nltk-sentiment-analysis
-  - https://www.kaggle.com/ngyptr/lstm-sentiment-analysis-keras
-
-- Nlp: enron dataset machine learning
-
-
-            </pre>
-        </section>
-
-        <section>
-            <h2>Basics of NLP</h2>
-        </section>
-
-                <section class="todo">
-                    <h3>Motivation</h3>
-                    <pre>
- * François Chollet (@fchollet) tweeted at 7:41 PM on Thu, Mar 08, 2018:It's clear to me that language (la langue, pas le
-langage) has significant influence on thought -- on what one can think, and on how one thinks (https://twitter.com/fchollet/status/971818179595984896?s=03
-                                    
-                                </pre>
-                </section>
-
-        <section class="todo">
-            <pre>
-https://www.smartdatacollective.com/natural-language-processing-essential-element-ai/
-                    
-                </pre>
-        </section>
-
-        <section class="todo">
-            <h3>Applications</h3>
-            <pre>
-* Chatbot
-	* https://github.com/RasaHQ/rasa_nlu/blob/master/README.md
-	* https://www.quora.com/How-do-I-develop-an-AI-based-chatbot-in-Python-from-scratch
-
-
-
-            </pre>
-        </section>
-
-
-        <section class="todo">
-<pre>
- * Spacy: https://www.oreilly.com/ideas/comparing-production-grade-nlp-libraries-accuracy-performance-and-scalability?imm_mid=0fbcdf&cmp=em-data-na-na-newsltr_ai_20180305
-    
-</pre>            
-        </section>
 
     </div>
 

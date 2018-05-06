@@ -152,6 +152,46 @@
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
         </section>
+
+        <section class="todo">
+            <pre>
+* https://www.tensorflow.org/tutorials/recurrent
+
+- https://medium.com/@ageitgey/machine-learning-is-fun-part-5-language-translation-with-deep-learning-and-the-magic-of-sequences-2ace0acca0aa
+- https://medium.com/@ageitgey/machine-learning-is-fun-part-6-how-to-do-speech-recognition-with-deep-learning-28293c162f7a
+3. Stunde: NLP wie bei Cholett
+* Praxis-Teil mit Notebook aus 
+
+    * C:\Users\olive\Google Drive\ML-Buch\Docs
+    * Deep_Learning_with_Python
+    * Kapitel 6
+    * https://github.com/fchollet/deep-learning-with-python-notebooks (ist schon gecloned)
+
+Keras LSTMs: https://www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.html
+
+NLP wie Stanford Kurs nur einstreuen
+ * NLP with Deep Learning Course: http://web.stanford.edu/class/cs224n/
+
+
+            </pre>
+        </section>
+
+        
+        <section>
+                <h2>Structure</h2>
+                <ol>
+                    <li>Machine Learning architectures applicable to text
+                            <ol>
+                                    <li>RNNs</li>
+                                    <li>LSTMs</li>
+                                    <li>Applications</li>
+                                </ol>
+                    
+                    </li>
+                </ol>
+            </section>
+    
+    
     <section>
             <h3>Text is special</h3>
             <img src='img/applications/decisions/data.png'>
@@ -206,23 +246,6 @@ https://twitter.com/random_forests/status/987394050914385927
 </small>
                 </textarea>
             </section>
-        <section class="todo">
-            <pre>
-Durchgehen und sofort Bilder klauen
-  - http://colah.github.io/posts/2015-08-Understanding-LSTMs/
-  - Illustration aus anderem Artikel: https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
-- Nach RNN gleich Anwendungen in: http://karpathy.github.io/2015/05/21/rnn-effectiveness/
-- https://medium.com/@erikhallstrm/hello-world-rnn-83cd7105b767
-
-- Danach: Anwendungen für NLP wie bei Cholett
-
-1. Stunde Intro wie hier
-2. NLP wie bei Cholett
-3. NLP wie Stanford Kurs
-
-Nicht mehr planen, weil letzter Teil, der sicher zuende gebracht werden soll.
-            </pre>
-        </section>
 
         <section data-markdown>
         <textarea data-template>
@@ -323,6 +346,18 @@ https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
     <section data-markdown>
             <textarea data-template>
 ### Forget valve
+
+<img src='img/nlp/LSTMs-blocks.png'>
+
+open = keep, closed = forget
+            </textarea>
+    </section>
+        
+    <section data-markdown class="todo">
+            <textarea data-template>
+TODO: add second value, but not more, as we will concentrate on GRU
+
+### 
 
 <img src='img/nlp/LSTMs-blocks.png'>
 
@@ -531,7 +566,7 @@ h_t = z_t \odot h_{t-1} + (1 - z_t) \odot h'_{t}
 
 <section data-markdown class="todo">
         <textarea data-template>
-Can up with two reviews, one having the relevant information at the start, the other at the end 
+Came up with two reviews, one having the relevant information at the start, the other at the end 
 </textarea>
 </section>
 
@@ -544,80 +579,36 @@ https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
 </textarea>
 </section>
 
-<section data-markdown class="todo">
-                <textarea data-template>
-### Attention in Networks
-        https://distill.pub/2016/augmented-rnns/
-    </textarea>
-</section>
 
-
-
-
-        <section data-markdown class="todo">
-                <textarea data-template>
-### RNNs / LSTMs
-* https://www.tensorflow.org/tutorials/recurrent
-        </textarea>
-        </section>
-    
     <section data-markdown class="todo">
             <textarea data-template>
 ### Applications
 * https://www.tensorflow.org/tutorials/text_classification_with_tf_hub
 * https://www.tensorflow.org/tutorials/seq2seq
 * https://medium.com/@alyafey22/sentiment-classification-from-keras-to-the-browser-7eda0d87cdc6
+* http://karpathy.github.io/2015/05/21/rnn-effectiveness/
+* https://medium.com/@erikhallstrm/hello-world-rnn-83cd7105b767
     </textarea>
     </section>
 
+    <section data-markdown>
+            <textarea data-template>
+### What's next?
 
+<img src='img/colah-next.png'>
 
-<section class="todo">
-                <pre>
-
-
-Embeddings:
-- https://www.quora.com/What-does-the-word-embedding-mean-in-the-context-of-Machine-Learning
-- https://www.tensorflow.org/programmers_guide/embedding
-- Dense Embeddings / SkipGram
-  - https://www.tensorflow.org/tutorials/word2vec
-
-</pre>
+<small>
+https://distill.pub/2016/augmented-rnns/
+</small>
+</textarea>
 </section>
 
-<section class="todo">
-            <pre>
+<section data-markdown>
+        <textarea data-template>
+### Ideen für Praktikum: 30 Minuten
+</textarea>
+</section>
 
-* https://medium.com/@ageitgey/machine-learning-is-fun-part-5-language-translation-with-deep-learning-and-the-magic-of-sequences-2ace0acca0aa
-- Our preprint that creates embeddings for over 100k medical concepts using data from 60 million patients, 1.7 million journal articles and 20 million notes is up: https://t.co/u6C7lN7jl4
-
-Pretrained embeddings: https://t.co/bk5aStgaA3
-
-Interactive explorer https://t.co/1MdPq40ohf https://t.co/ig8AlIasuI
-(https://twitter.com/AndrewLBeam/status/981877899174318081?s=03)
-
-1. Stunde Intro aus Colah
-2. Stunde
-- http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/
-- https://medium.com/@ageitgey/machine-learning-is-fun-part-5-language-translation-with-deep-learning-and-the-magic-of-sequences-2ace0acca0aa
-- https://medium.com/@ageitgey/machine-learning-is-fun-part-6-how-to-do-speech-recognition-with-deep-learning-28293c162f7a
-3. Stunde: NLP wie bei Cholett
-* Praxis-Teil mit Notebook aus 
-
-    * C:\Users\olive\Google Drive\ML-Buch\Docs
-    * Deep_Learning_with_Python
-    * Kapitel 6
-    * https://github.com/fchollet/deep-learning-with-python-notebooks (ist schon gecloned)
-
-Keras LSTMs: https://www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.html
-
-NLP wie Stanford Kurs nur einstreuen
- * NLP with Deep Learning Course: http://web.stanford.edu/class/cs224n/
-
- https://machinelearningmastery.com/develop-word-embeddings-python-gensim/
-
-            </pre>
-        </section>
 
     </div>
 
