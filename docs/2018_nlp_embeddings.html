@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>ML Praktikum</title>
+    <title>NLP</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -147,324 +147,217 @@
 <div class="reveal">
     <div class="slides">
 
-<!-- <section>
-        <h3>Diskussion: Auf der Suche nach Intelligenz</h3>
-        <p>Sind die Ansätze intelligent?</p>
-    </section> -->
+        <section>
+            <h2>Introduction to Natural Language Processing (NLP)</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+        </section>
+        
+        
+        <!-- <section data-markdown class="todo">
+                <textarea data-template>
+        </textarea>
+        </section> -->
 
-<section>
-    <h1>Praktikum IS</h1>
-    <h2>Block Machine Learning</h2>
-
-</section>
-
-
-<section data-markdown>
-    <textarea data-template>
-### Praktikum: Organisatorisches
-
-* Ziel des Praktikums: etwas neues lernen
-* Wir sind jeden Montag zu sprechen
-  * von 10:00 - 12:00 (12.81) oder 
-  * 17:30 - 18:30 (Vorlesungsraum)
-  * Fragen und Diskussion
-  * Praktikumsabnahme
-  * Frage: was hast du gelernt?
-
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-### Letzter Abnahme-Termin für die Praktika
-
-* _Suche_: KW21, 23.05.2018
-* _Lernen_: KW24, 11.06.2018
-* _Natürliche Sprache_, erste Prüfungen möglich: KW26, 25.06.2018
-
-
-            </textarea>
+            <section>
+                <h2>Entering the world of NLP based on Machine Lerning</h2>
+            </section>
+    
+        <section>
+            <h3>Word Embeddings</h3>
+            <p>Taking position and context of words into account</p>
+            <p>Semantics of words by proximity to other words</p>
         </section>
 
         <section data-markdown>
                 <textarea data-template>
-### Update: Prüfungen
-
-* Zwei Studierende haben ein gemeinsames Basisthema vorberereitet mit eigener, individueller Erweiterung. 
-* Die Basis wird gemeinsam vorgetragen, also jeder mit ca. 50% Redeanteil. 
-* Danach trägt jeder seine eigene Ergänzung vor.
-*  Die Ausarbeitungen sind individuell.
-* Die Noten werden auch individuell vergeben.
-
-</textarea>
-            </section>
-
-    <section data-markdown>
-            <textarea data-template>
-
-<img src="img/confusion.png" height="650px">
-        
-https://twitter.com/math_rachel/status/991375671648702464
-    </textarea>
+### Motivation: What makes text and sequences so different?
+<img src="img/tf/audio-image-text.png">
+https://www.tensorflow.org/tutorials/word2vec
+                </textarea>
         </section>
 
-
-<section>
-        <h2>Mögliche Aufgaben für Praktium</h2>
-    </section>
-
-    <section data-markdown class="todo">
+        <section data-markdown>
             <textarea data-template>
-* Neural Style Transfer umsetzen: https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/8.3-neural-style-transfer.ipynb
-* Transfer Learning: https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html
-* RL: 
-  * https://blog.openai.com/retro-contest/
-  * https://twitter.com/Mvandepanne/status/983753861146918912
-
-
-</textarea>
-</section>
-    
-<section data-markdown style="font-size: xx-large">
-        <textarea data-template>
-## Install ML Software
-### Local Installation:
-* https://www.anaconda.com/download/
-* _Important_: Install verison 3.x
-* git clone git@github.com:DJCordhose/haw.git
-* cd haw/notebooks
-* jupyter notebook
-
-### Or clone on Azure Notebooks:
-* https://notebooks.azure.com/djcordhose/libraries/ml-haw
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-## Classic ML
-### Beispiel Stufe 1: Random Forest und Adaboost anwenden
-
-* Dasselbe wie bei Decision Trees für Random Forest und Ada Boost machen
-* Parameter herausfinden
-* Algorithmen verstehen
-
-    
-    <small>
-            3-sklearn-decision-trees
-    </small>
-    </textarea>
-    </section>
-    
-<section data-markdown>
-    <textarea data-template>
-## Classic ML
-### Beispiel Stufe 3: Regulasierung auf Neuronalen Netzwerken
-
-* Dropout: https://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/
-* BatchNormalizatiion: https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c
-* L1 und L2: https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a
-* Zum experimentieren mit L1 und L2: http://playground.tensorflow.org
-* Allgemeine Hinweise: https://machinelearningmastery.com/improve-deep-learning-performance/
-<small>
-</small>
-</textarea>
-</section>
-      
-<section data-markdown>
-    <textarea data-template>
-## Classic ML
-### Beispiel Stufe 3: Wende Machine Learning auf eine eigene Problemstellung an
+<img src="img/nlp/word_embeddings.png" height="550px">
 
 <small>
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## Classic ML
-### Beispiel Stufe 2: Erarbeite dir die Strategie Support Vector Machines
-
-Nutze die Implementierung von sklearn und versuche einen besseren Wert zu erreichen als mit RandomForest
-
-<small>
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## Deep Learning / CNNs
-### Beispiel Stufe 3: Ein Convolutional Neural Network mit eigenen Bilddaten trainieren
-
-Aufwändig, da lokale installation oder tensorflow.js nötig und eigene Bilder besondere Herausforderung
-
-* if you are looking for a handy python  script for 'searching' and 'downloading' hundreds of Google images to the local hard disk for you next DL project, that's the one: https://t.co/4nh3hnoZr1
-(https://twitter.com/rasbt/status/982822969947848704?s=03)
-* Pokemon Images: https://www.pyimagesearch.com/2018/04/16/keras-and-convolutional-neural-networks-cnns/
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## Deep Learning / CNNs
-### Beispiel Stufe 3: Object Detection
-
-<small>
-https://www.datacamp.com/community/tutorials/object-detection-guide
-<br>
-https://towardsdatascience.com/deep-learning-in-your-browser-a-brisk-guide-ca06c2198846
-<br>
-https://github.com/ModelDepot/tfjs-yolo-tiny
-</small></textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## Deep Learning / CNNs
-### Beispiel Stufe 1: Experimente wie funktionieren CNNs?
-
-<img src='img/building-blocks.jpg' height="500px">
-
-<small>
-https://distill.pub/2018/building-blocks/
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-## Deep Learning
-### Beispiel Stufe 1: Neural Network tunen
-
-* Netzwerk für Problemstellung optimieren.
-* Kannst du es verbessern? 
-* Woran erkennst du eine Verbesserung? 
-* Wie klein kann man das Netzwerk machen?
-* Bringen CNNs was?
-* Was bringt Dropout?
-    
-    <small>
-            4-tf-keras-nn / 4-keras-tensorflow-nn
-    </small>
-    </textarea>
-    </section>
-
-    <section>
-            <h2>Unsupervised Learning</h2>
-        </section>
-        
-<section data-markdown>
-        <textarea data-template>
-### Beispiel Stufe 2: Finde ein eigenes Beispiel und probiere unterschiedliche Strategien aus
-    </textarea>
-    </section>
-
-    <section data-markdown>
-            <textarea data-template>
-### Beispiel Stufe 3: Implementiere einen eigenen Clustering Algorithmus
-
-* den Algorithmus sollte es so noch nicht geben
-* wie unterscheidet er sich von DBSCANN und k-means?
-        </textarea>
-        </section>
-    
-    <section>
-    <h2>Deep Reinforcement Learning</h2>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-### Tutorial: Write an AI to win at Pong from scratch with Reinforcement Learning. 
-
-* Unklar welche Stufe, für die Prüfung müsstet ihr euch da noch etwas ausdenken
-
-https://medium.com/@dhruvp/how-to-write-a-neural-network-to-play-pong-from-scratch-956b57d4f6e0
-</textarea>    
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Beispiel Stufe 3: Atari spielen lernen auf dem eigenen PC
-
-aufwändig, lokale Installation und GPU notwendig, aber Code und Blogpost sind vorhanden
-
-<small>
-Post: https://eng.uber.com/accelerated-neuroevolution/
-<br>
-Code: https://github.com/uber-common/deep-neuroevolution/tree/master/gpu_implementation
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Beispiel Stufe 3: AlphaGo Zero
-
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px">
+<a href="https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/6.1-using-word-embeddings.ipynb">
+Deep Learning with Python
 </a>
-
-aufwändig, lokale Installation notwendig, aber Code und Tutorial ist vorhanden
-
-<small>
-Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
-<br>
-Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
-<br>
-Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
 </small>
+            </textarea>
+    </section>
+
+
+        <section data-markdown>
+                <textarea data-template>
+### Distributional Hypothesis
+
+__Words that appear in the same contexts share semantic meaning.__
+
+https://en.wikipedia.org/wiki/Distributional_semantics
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Two Categories of approaches
+
+1. _count-based methods_: compute the statistics of how often some word co-occurs with its neighbor words in a large text corpus, and then map these count-statistics down to a small, dense vector for each word
+1. _predictive methods_: directly try to predict a word from its neighbors in terms of learned small, dense embedding vectors
+
 </textarea>
 </section>
 
 <section data-markdown>
-    <textarea data-template>
-### Beispiel Stufe 3: World Model
+        <textarea data-template>
+### Standard Predictive Method: word2vec
 
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-    <img src='img/rf/world-models.gif' height="300px">
-</a>
+Comes in two flavours
 
-aufwändig, lokale Installation notwendig, aber Code und Tutorial ist vorhanden
+1. _Continuous Bag-of-Words model (CBOW)_: predicts target words (e.g. 'mat') from source context words ('the cat sits on the') - _good for small data sets_
+1. _Skip-Gram model_: does the inverse and predicts source context-words from the target words - _good for larger datasets_. 
 
-<small>
-Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-model-using-python-and-keras-64fb388ba459
-<br>
-Code: https://github.com/AppliedDataSciencePartners/WorldModels
-</small>
 </textarea>
 </section>
 
 <section data-markdown>
-    <textarea data-template>
-## Unsupervised ML
-### Beispiel Stufe 1: Experimente mit Clustering Algorithmen
+        <textarea data-template>
+## Skip-Gram model
 
-* mit den Parametern der bekannten Algos experimentieren.
-* Clustering. Anderer Algo, Birch. 
+We will restrict ourselves to this model
+</textarea>
+</section>
 
-<small>
-    TODO: Notebook
-</small>
+
+<section data-markdown>
+        <textarea data-template>
+### Exmaple using the Skip-Gram model
+
+_the quick brown fox jumped over the lazy dog_
+
+* Form a dataset of the context of each word
+* vanialla context for a word are the words left and right to it
+* each context is a pair of _(context, target)_ 
+
+_([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ..._
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Skip-Gram model inversion
+
+* Skip-Gram tries to infer *each* context word from its target words
+* each pair becomes _(input, output)_ 
+
+_([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ..._
+
+becomes
+
+_(quick, the), (quick, brown), (brown, quick), (brown, fox), ..._
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### How do we train for that objective?
+
+* objective is to learn to predict the output for the input
+* that means we have to have a loss function to minimize
+* minimization as in supervised learning using SGD
+
+But how does our model look like?
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Naive approach: Expensive
+<img src='img/tf/softmax-nplm.png' height="450px">
+
+Have a probability for all words (v)
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Inexpensive Approach 
+
+<img src='img/tf/nce-nplm.png' height="450px">
+
+Just choose k random words
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### The loss function
+
+* objective is maximized when the model assigns high probabilities to the real words, and low probabilities to noise words
+* this is called Negative Sampling
+* scales only with the number (k) of noise words that we select, not all words in the vocabulary (v)
+* makes it much faster to train
+
+This is called noise-contrastive estimation (NCE) loss
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### What are the actual parameters learned?
+
+* vectors for Embedding per word
+* in other words: where in the vector space is a word located
+* similar words have similar vectors
+
+similarity is expressed by the context a word occurs in
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### We can visualize these similarities
+
+<img src='img/tf/linear-relationships.png'>
+
+Using t-SNE to project from high dimensions to 2d
 </textarea>
 </section>
 
 <section>
-    <h2>Natural Language Processing</h2>
+        <h2>Discussion: What kind of learning is this?</h2>
+    </section>
+    
+    <section>
+        <img src="img/sketch/types-of-ml.png">
+    </section>
+
+<section>
+    <h3>Supervised vs Unsupervised</h3>
+    <ol>
+        <li class="fragment">there is no need manual labelling</li>
+        <li class="fragment">but labelling is implicit in sequence of words in training data</li>
+    </ol>
+    <p class="fragment">We would still call this Unsupervised</p>
 </section>
 
 <section data-markdown>
-    <textarea data-template>
-### Beispiel Stufe 3: Classifying text with TensorFlow Estimators
+        <textarea data-template>
+### Now what?
 
-aufwändig, lokale Installation notwendig
+You can either
 
-<small>
-https://medium.com/tensorflow/classifying-text-with-tensorflow-estimators-a99603033fbe
-</small>
+* use the results all by themselves to find out about similarities - visualize by projecting down to 2d using t-SNE as shown before
+* or use the vectors as representations for words - treat texts as sequences of words
 </textarea>
 </section>
+
+
+    </div>
+
 </div>
 
 <script src="reveal.js/lib/js/head.min.js"></script>
@@ -492,7 +385,8 @@ https://medium.com/tensorflow/classifying-text-with-tensorflow-estimators-a99603
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/bark.jpg");
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
     </script>
     
@@ -507,11 +401,6 @@ https://medium.com/tensorflow/classifying-text-with-tensorflow-estimators-a99603
         center: true,
 
         transition: 'fade', // none/fade/slide/convex/concave/zoom
-
-        math: {
-            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-        },
 
         // Optional reveal.js plugins
         dependencies: [
@@ -540,8 +429,7 @@ https://medium.com/tensorflow/classifying-text-with-tensorflow-estimators-a99603
             {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
             {src: 'reveal.js/plugin/notes/notes.js', async: true},
             // https://github.com/mikemiles86/reveal-line-numbers
-            {src: 'lib/js/line-numbers.js'},
-            { src: 'reveal.js/plugin/math/math.js', async: true }
+            {src: 'lib/js/line-numbers.js'}
         ]
     });
 
