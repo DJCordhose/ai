@@ -187,8 +187,9 @@ https://twitter.com/math_rachel/status/991375671648702464
 
 * AlphaGoZero beat all human players and all programs in the Go game
 * No human knowledge on how to evaluate a position has gone into it
-* Uses Monte Carlo Tree Search and a Convolutional Neural Network to score game positions
-* Could be called reinforcement learning
+* Uses an improved Monte Carlo Tree Search
+* Expert policy given by Convolutional Neural Network (CNN) to dramatically reduce high branching factor
+* CNN is trained by self-play
 
 <small>
 http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
@@ -196,13 +197,22 @@ http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
 </textarea>
 </section>
         
+        <section data-markdown>
+    <textarea data-template>
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="650px">
+</a>
+</textarea>
+</section>
+
 <section data-markdown>
         <textarea data-template>
 ### Alpha Zero
 
 * A generalized version of AlphaGoZero
-* Applies strategies similar to AlphaGo Zero
+* Applies strategies close to AlphaGo Zero
 * Has been adapted to play Chess and Shogi
+* Symmetries of Board existing in Go only no longer used
 * 4 hours of training to reach level of play of Stockfish (on 5000 TPUs)
 * Could be adapted to any perfect information game with a well defined win condition    
 
@@ -238,14 +248,6 @@ except the game rules, AlphaZero achieved within 24 hours a superhuman level of 
 the games of chess and shogi (Japanese chess) as well as Go, and convincingly defeated a
 world-champion program in each case._
 
-</textarea>
-</section>
-
-        <section data-markdown>
-    <textarea data-template>
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="650px">
-</a>
 </textarea>
 </section>
 
