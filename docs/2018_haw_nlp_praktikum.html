@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Alpha(Go)Zero</title>
+    <title>NLP Praktikum</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -133,8 +133,7 @@
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        var printMode = window.location.search.match(/print-pdf/gi);
-        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
 
@@ -148,102 +147,89 @@
 <div class="reveal">
     <div class="slides">
 
-        <section>
-            <h2>Understanding Alpha(Go) Zero</h2>
-            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-            </h4>
-        </section>
+<!-- <section>
+        <h3>Diskussion: Auf der Suche nach Intelligenz</h3>
+        <p>Sind die Ansätze intelligent?</p>
+    </section> -->
 
-            <!-- <section class="todo local">
-<pre>
-</pre>
-        </section> -->
-        <section data-markdown>
-    <textarea data-template>
-### Google DeepMind's Deep Q-learning playing Atari Breakout
-
-<a href='https://youtu.be/V1eYniJ0Rnk' target="_blank">
-<img src='img/q-learn-atari.png' height="400px">
-</a>
-
-<small>
-https://youtu.be/V1eYniJ0Rnk
-</small>
-</textarea>
+<section>
+    <h1>Praktikum IS</h1>
+    <h2>Block Natural Language Processing</h2>
 </section>
 
-        <section data-markdown>
+<section data-markdown>
     <textarea data-template>
-### AlphaGo Zero
+### Praktikum: Organisatorisches
 
-* AlphaGoZero beat all human players and all programs in the Go game
-* No human knowledge on how to evaluate a position has gone into it
-* Uses an improved Monte Carlo Tree Search
-* Expert policy given by Convolutional Neural Network (CNN) to dramatically reduce high branching factor
-* CNN is trained by self-play
+* Ziel des Praktikums: etwas neues lernen
+* Wir sind jeden Montag zu sprechen
+  * von 10:00 - 12:00 (12.81) oder 
+  * 17:30 - 18:30 (Vorlesungsraum)
+  * Fragen und Diskussion
+  * Praktikumsabnahme
 
-<small>
-http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
-</small>
-</textarea>
-</section>
-        
-        <section data-markdown>
-    <textarea data-template>
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="650px">
-</a>
 </textarea>
 </section>
 
 <section data-markdown>
         <textarea data-template>
-### Alpha Zero
+### Letzter Abnahme-Termin für die Praktika
 
-* A generalized version of AlphaGoZero
-* Applies strategies close to AlphaGo Zero
-* Has been adapted to play Chess and Shogi
-* Symmetries of Board existing in Go only no longer used
-* 4 hours of training to reach level of play of Stockfish (on 5000 TPUs)
-* Could be adapted to any perfect information game with a well defined win condition    
+* _Suche_: KW21, 23.05.2018
+* _Lernen_: KW24, 11.06.2018
+* _Natürliche Sprache_, erste Prüfungen möglich: KW26, 25.06.2018
+            </textarea>
+        </section>
 
-<small>
-https://en.wikipedia.org/wiki/AlphaZero
-</small>
+<section data-markdown>
+        <textarea data-template>
+### Prüfungstermine
+* KW26, 25.06.2018
+* KW27
+* KW29
+
+            </textarea>
+        </section>
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Prüfungen
+
+* Zwei Studierende haben ein gemeinsames Basisthema vorbereitet mit eigener, individueller Erweiterung. 
+* Die Basis wird gemeinsam vorgetragen, also jeder mit ca. 50% Redeanteil. (5 Minuten)
+* Danach trägt jeder seine eigene Ergänzung vor. (2 x 5 Minuten).
+* Gesamtzeit 4 x 15 = 60 Minuten.
+* Die Ausarbeitungen sind individuell.
+* Die Noten werden auch individuell vergeben.
+* Einzelprüfung möglich, dann 7,5 bis 10 Minuten pro Thema.
+
+</textarea>
+            </section>
+
+    <section data-markdown>
+            <textarea data-template>
+
+<img src="img/confusion.png" height="650px">
         
+https://twitter.com/math_rachel/status/991375671648702464
     </textarea>
+        </section>
+
+
+<section>
+        <h2>Mögliche Aufgaben für Praktium</h2>
     </section>
 
 <section data-markdown>
     <textarea data-template>
-### AlphaZero: Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm
+### Beispiel Stufe 3: Classifying text with TensorFlow Estimators
 
-_The strongest (chess) programs are based on a combination of sophisticated search techniques,
-domain-specific adaptations, and handcrafted evaluation functions that have been
-refined by human experts over several decades..._
+aufwändig, lokale Installation notwendig
 
 <small>
-https://arxiv.org/pdf/1712.01815.pdf
+https://medium.com/tensorflow/classifying-text-with-tensorflow-estimators-a99603033fbe
 </small>
 </textarea>
 </section>
-
-<section data-markdown>
-    <textarea data-template>
-_... In contrast, the AlphaGo Zero program
-recently achieved superhuman performance in the game of Go, by tabula rasa reinforcement
-learning from games of self-play._ 
-
-_ Starting from random play, and given no domain knowledge
-except the game rules, AlphaZero achieved within 24 hours a superhuman level of play in
-the games of chess and shogi (Japanese chess) as well as Go, and convincingly defeated a
-world-champion program in each case._
-
-</textarea>
-</section>
-
-</div>
-
 </div>
 
 <script src="reveal.js/lib/js/head.min.js"></script>
@@ -251,7 +237,7 @@ world-champion program in each case._
 <script src="lib/jquery-2.2.4.js"></script>
 
 <script>
-        if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
         } else {
             // only applies to public version
             $('.todo').remove();
@@ -271,8 +257,7 @@ world-champion program in each case._
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        // $('section').attr('data-background-image', "backgrounds/white.jpg");
-        $('section').attr('data-background-image', "backgrounds/tree.jpg");
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
     </script>
     
