@@ -325,6 +325,19 @@ Aufwändig, da lokale installation oder tensorflow.js nötig und eigene Bilder b
 </textarea>
 </section>
 
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Hinweise: Ein Convolutional Neural Network mit eigenen Bilddaten trainieren
+
+* Man braucht mind. 5000 Bilder pro Kategorie
+* Das hat man oft gar nicht. Dann kann man künstlich Variationen erzeugen
+* passende Architektur wählen (eigene, z.B. ResNet, ImageNet)
+* Evtl. auf ImageNet vortrainierte Modelle nehmen und nur die letzten Layers nachtrainieren
+* Auch mit sehr guter Hardware dauern Experimente Stunden
+* Mit Teildaten Overfitten, um zu sehen, ob das Modell überhaupt genug Kapazität hat
+</textarea>
+</section>
+
 <section data-markdown>
     <textarea data-template>
 ### Beispiel Stufe 3: Object Detection
@@ -366,7 +379,17 @@ https://distill.pub/2018/building-blocks/
     </section>
 
     <section>
-    <h2>Deep Reinforcement Learning</h2>
+    <h2>Reinforcement Learning</h2>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Beispiel Stufe 1-3: Experimente aus dem Open AI gym
+
+Python Kenntnisse notwendig, alle Schwierigkeitsstufen denkbar
+
+https://gym.openai.com/envs/#classic_control
+</textarea>    
 </section>
 
 <section data-markdown>

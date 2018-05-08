@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>NLP</title>
+    <title>NLP Embeddings</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -238,7 +238,7 @@ We will restrict ourselves to this model
 
 <section data-markdown>
         <textarea data-template>
-### Exmaple using the Skip-Gram model
+### Example using the Skip-Gram model
 
 _the quick brown fox jumped over the lazy dog_
 
@@ -324,6 +324,34 @@ similarity is expressed by the context a word occurs in
 
 <section data-markdown>
         <textarea data-template>
+### Now what?
+
+You can either
+
+* use the results all by themselves to find out about similarities - visualize by projecting down to 2d using t-SNE as shown before
+* or use the vectors as representations for words - treat texts as sequences of words
+* use these representations to train a classifier etc.
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Practical Example: 
+
+* vectors for Embedding per word
+* in other words: where in the vector space is a word located
+* similar words have similar vectors
+
+similarity is expressed by the context a word occurs in
+<small>
+Notebook: embedding.ipynb    
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
 ### We can visualize these similarities
 
 <img src='img/tf/linear-relationships.png'>
@@ -331,6 +359,38 @@ similarity is expressed by the context a word occurs in
 Using t-SNE to project from high dimensions to 2d
 </textarea>
 </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Embeddings 300 d on Google News
+
+<img src='img/nlp/word2dev_google_news.jpg' height="500px">
+
+<small>
+https://twitter.com/pmbaumgartner/status/989512625934434309
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise: Get an intuition for Word Embeddings
+
+* Was bedeuten die Farben?
+* Hättest du dieselben Wörter verwendet?
+* Zoome in einen Bereich mit eher geringerer Magnitude
+* Suche dir einen Cluster mit 5 Wörtern und überprüfe ob auch du die Wörter semantisch benachbart ansiedeln würdest
+
+<small>
+https://plot.ly/~pmbaumgartner/88/word2vec-google-news-2d-umap-embeddings/
+</small>
+
+Note:
+* Was bedeuten die Farben? (Magnitude, je heller desto mehr)
+* Hättest du dieselben Wörter verwendet? (Typische Stopwords raus)
+</textarea>
+</section>
+
 
 <section>
         <h2>Discussion: What kind of learning is this?</h2>
@@ -347,17 +407,6 @@ Using t-SNE to project from high dimensions to 2d
         <li class="fragment">but labelling is implicit in sequence of words in training data</li>
     </ol>
     <p class="fragment">We would still call this Unsupervised</p>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-### Now what?
-
-You can either
-
-* use the results all by themselves to find out about similarities - visualize by projecting down to 2d using t-SNE as shown before
-* or use the vectors as representations for words - treat texts as sequences of words
-</textarea>
 </section>
 
 
