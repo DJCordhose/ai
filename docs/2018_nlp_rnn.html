@@ -158,30 +158,11 @@
 
         </section>
 
-        <section class="todo">
+        <!-- <section class="todo">
             <pre>
-* https://www.tensorflow.org/tutorials/recurrent
-
-- https://medium.com/@ageitgey/machine-learning-is-fun-part-5-language-translation-with-deep-learning-and-the-magic-of-sequences-2ace0acca0aa
-- https://medium.com/@ageitgey/machine-learning-is-fun-part-6-how-to-do-speech-recognition-with-deep-learning-28293c162f7a
-3. Stunde: NLP wie bei Cholett
-* Praxis-Teil mit Notebook aus 
-
-    * C:\Users\olive\Google Drive\ML-Buch\Docs
-    * Deep_Learning_with_Python
-    * Kapitel 6
-    * https://github.com/fchollet/deep-learning-with-python-notebooks (ist schon gecloned)
-
-Keras LSTMs: https://www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.html
-
-NLP wie Stanford Kurs nur einstreuen
- * NLP with Deep Learning Course: http://web.stanford.edu/class/cs224n/
-
-
             </pre>
-        </section>
+        </section> -->
 
-        
         <section>
                 <h2>Structure</h2>
                 <ol>
@@ -189,6 +170,7 @@ NLP wie Stanford Kurs nur einstreuen
                             <ol>
                                     <li>RNNs</li>
                                     <li>LSTMs</li>
+                                    <li>GRUs</li>
                                     <li>Applications</li>
                                 </ol>
                     
@@ -204,7 +186,7 @@ NLP wie Stanford Kurs nur einstreuen
 
 
         <section>
-            <h2>RNNs</h2>
+            <h2>Simple RNNs</h2>
             <h3>Recurrent Neural Networks</h3>
         </section>
 
@@ -217,7 +199,7 @@ NLP wie Stanford Kurs nur einstreuen
             
         <section data-markdown>
             <textarea data-template>
-### Solution: RNNs - Networks with Loops
+### Solution: Basic RNNs - Networks with Loops
 <img src='img/nlp/colah/RNN-rolled.png' height="450px">
 
 <small>
@@ -302,23 +284,20 @@ _Effectively long term memory does not work:_
     <section data-markdown>
                 <textarea data-template>
 ## LSTMs
-
-Note:
-* Motivation: RNNs packen es nicht
-* echt schwierig
-* Erst einmal an der Tafel zusammen entwickeln
-* dann mit den LSTM-Grafiken abgleichen
-
 </textarea>
     </section>
 
-    <!-- <section data-markdown data-separator-notes="^Note:"> -->
             <section data-markdown>
                     <textarea data-template>
-            <img src='img/nlp/LSTM.png' height="550px">
+### Starting from a Simple RNN
+Activation typically _tanh_
+<img src='img/nlp/fchollet_rnn.png'>
 
 <small>
-https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
+<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/129">
+            Deep Learning with Python, Chapter 6, François Chollet, Manning            
+    </a>
+
 </small>
 
         </textarea>
@@ -326,50 +305,64 @@ https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
 
         <section data-markdown>
                 <textarea data-template>
-### Units get chained together                    
+### Adding Carry
+Modulate the next output and the next state via a carry across timesteps
+<img src='img/nlp/fchollet_rnn_carry.png'>
 
-<img src='img/nlp/LSTMs-blocks.png'>
+<small>
+<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/161">
+        Deep Learning with Python, Chapter 6, François Chollet, Manning            
+</a>
+</small>
+    </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Complete LSTM
+New carry is computed from input, output and previous carry
+
+<img src='img/nlp/fchollet_lstm.png'>
+
+<small>
+<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/167">
+Deep Learning with Python, Chapter 6, François Chollet, Manning            
+</a>
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### LSTM Intution
+
+two valves manage what memory to take over
+
+1. Forget Valve: how much to forget about carry
+2. Keep Valve: how much to keep about new information
 
 <small>
 https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
 </small>
+</textarea>
+</section>
 
-    </textarea>
-    </section>
+<section data-markdown>
+        <textarea data-template>
+### ... but don't overdo it
 
-    <section data-markdown>
-            <textarea data-template>
-### Managing Memory
+In summary: you don’t need to understand anything
+about the specific architecture of an LSTM cell; as a human, it shouldn’t be your job to
+understand it. Just keep in mind what the LSTM cell is meant to do: allow past information
+to be reinjected at a later time, thus fighting the vanishing-gradient problem.
 
-* most important feature
-* done by deciding what memory to take over from previous unit
-* managed by two valves
- 
-            </textarea>
-    </section>
-
-    <section data-markdown>
-            <textarea data-template>
-### Forget valve
-
-<img src='img/nlp/LSTMs-blocks.png'>
-
-open = keep, closed = forget
-            </textarea>
-    </section>
-        
-    <section data-markdown class="todo">
-            <textarea data-template>
-TODO: add second value, but not more, as we will concentrate on GRU
-
-### 
-
-<img src='img/nlp/LSTMs-blocks.png'>
-
-open = keep, closed = forget
-            </textarea>
-    </section>
-        
+<small>
+<a href="https://www.manning.com/books/deep-learning-with-python">
+Deep Learning with Python, Chapter 6.2.2, François Chollet, Manning            
+</a>
+</small>
+</textarea>
+</section>
         <section data-markdown>
                 <textarea data-template>
 ### GRU (Gated Recurrent Unit)
@@ -381,6 +374,8 @@ As powerful as LSTMs, but simpler
 
 <small>
 https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
+<br>
+https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
 </small>
 </textarea>
 </section>
@@ -389,6 +384,37 @@ https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
         <textarea data-template>
 <img src='img/nlp/gru-overview.png' height="500px">
 <img src='img/nlp/gru-legend.png'>
+
+</textarea>
+</section>
+
+<section>
+        <h3>Repetition Activation Functions</h3>
+        <div style="float: left">
+                <img src="img/sigmoid-activation.png" height="300px">
+                <p>
+                    <small>Sigmoid, floating from 0 to 1</small>
+                </p>
+            </div>
+            <div style="float: right">
+                    <img src="img/tanh-activation.png" height="300px">
+                    <p>
+                    <small>Tangens Hyperbolicus, floating from -1 to 1</small>
+                </p>
+            </div>
+        <small>
+            <a href="https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb">
+                https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb
+        </a>
+        </small>    
+                </section>
+        
+
+<section data-markdown>
+        <textarea data-template>
+### Feeding input over time into a single unit            
+
+<img src='img/nlp/gru-timestamps.png'>
 
 </textarea>
 </section>
@@ -423,7 +449,6 @@ https://arxiv.org/pdf/1406.1078v3.pdf
 <section data-markdown>
         <textarea data-template>
 ### Update Gate
-
 
 <img src='img/nlp/gru-update-gate.png' height="450px">
 
@@ -568,33 +593,29 @@ h_t = z_t \odot h_{t-1} + (1 - z_t) \odot h'_{t}
 </textarea>
 </section>
 
-
-<section data-markdown class="todo">
-        <textarea data-template>
-Came up with two reviews, one having the relevant information at the start, the other at the end 
-</textarea>
-</section>
-
-
-
-
-<section data-markdown class="todo">
-        <textarea data-template>
-https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
-</textarea>
-</section>
-
-
-    <section data-markdown class="todo">
+    <section data-markdown style="font-size: xx-large">
             <textarea data-template>
-### Applications
-* https://www.tensorflow.org/tutorials/text_classification_with_tf_hub
-* https://www.tensorflow.org/tutorials/seq2seq
-* https://medium.com/@alyafey22/sentiment-classification-from-keras-to-the-browser-7eda0d87cdc6
-* http://karpathy.github.io/2015/05/21/rnn-effectiveness/
-* https://medium.com/@erikhallstrm/hello-world-rnn-83cd7105b767
+## Applications
+* _Speech Recognition_: https://medium.com/@ageitgey/machine-learning-is-fun-part-6-how-to-do-speech-recognition-with-deep-learning-28293c162f7a
+* _Neural Machine Translation (seq2seq)_: https://www.tensorflow.org/tutorials/seq2seq
+* _Sentiment Analysis_: https://medium.com/@alyafey22/sentiment-classification-from-keras-to-the-browser-7eda0d87cdc6
+* _Text / Source Code Generators_: http://karpathy.github.io/2015/05/21/rnn-effectiveness/
     </textarea>
     </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Material from Stanford
+
+<a href='http://web.stanford.edu/class/cs224n/syllabus.html'>
+<img src='img/cs224n-syllabus.png'>
+</a>
+
+<small>
+http://web.stanford.edu/class/cs224n/
+</small>
+</textarea>
+</section>
 
     <section data-markdown>
             <textarea data-template>
@@ -604,13 +625,9 @@ https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
 
 <small>
 https://distill.pub/2016/augmented-rnns/
+<br>
+Attention is all you need: https://arxiv.org/pdf/1706.03762.pdf
 </small>
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-### Ideen für Praktikum: 30 Minuten
 </textarea>
 </section>
 
