@@ -147,6 +147,23 @@
 <div class="reveal">
     <div class="slides">
 
+            <section data-markdown class="preparation" style="font-size: xx-large">
+                    <textarea data-template>
+### Preparation
+
+Insgesamt 90 Minuten für den ganzen Satz. Die Folien gehen in 2
+Teilen, die zeitlich getrennt sein können:
+1. Teil RNNs/LSTMs: Sehr kurze Zusammenfassung / Wiederholung - Vortrag von dem
+Vortrag des Studenten mit Notebook Addierer mit RNNs
+1. Teil GRUs im Detail mit Notebook / Anwendung Sentiment Analysis
+
+Beide Notebooks noch mal ansehen:
+1. rnn-add-example
+1. gru-sandbox
+                        </textarea>
+                        </section>
+        
+
         <section>
             <h2>Recurrent Neural Networks</h2>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -198,7 +215,7 @@
             
         <section data-markdown>
             <textarea data-template>
-### Solution: Basic RNNs - Networks with Loops
+### Solution: RNNs - Networks with Loops
 <img src='img/nlp/colah/RNN-rolled.png' height="450px">
 
 <small>
@@ -218,7 +235,48 @@ http://colah.github.io/posts/2015-08-Understanding-LSTMs/
             </textarea>
         </section>
 
-        <section>
+        <section data-markdown>
+            <textarea data-template>
+### Simple RNN
+
+<img src='img/nlp/fchollet_rnn.png'>
+
+<script type="math/tex; mode=display">
+output_t = \tanh(W input_t + U output_{t-1} + b)
+</script>
+    
+<small>
+<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/129">
+    Deep Learning with Python, Chapter 6, François Chollet, Manning            
+</a>
+
+</small>
+
+</textarea>
+</section>
+
+<section>
+    <h3>Repetition Activation Functions</h3>
+    <div style="float: left">
+            <img src="img/sigmoid-activation.png" height="300px">
+            <p>
+                <small>Sigmoid, floating from 0 to 1</small>
+            </p>
+        </div>
+        <div style="float: right">
+                <img src="img/tanh-activation.png" height="300px">
+                <p>
+                <small>Tangens Hyperbolicus, floating from -1 to 1</small>
+            </p>
+        </div>
+    <small>
+        <a href="https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb">
+            https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb
+    </a>
+    </small>    
+</section>
+
+<section>
             <h2>Perfect for sequences, lists, sentences</h2>
         </section>
         
@@ -289,7 +347,7 @@ _Effectively long term memory does not work:_
             <section data-markdown>
                     <textarea data-template>
 ### Starting from a Simple RNN
-Activation typically _tanh_
+
 <img src='img/nlp/fchollet_rnn.png'>
 
 <small>
@@ -335,13 +393,13 @@ Deep Learning with Python, Chapter 6, François Chollet, Manning
         <textarea data-template>
 ### LSTM Intution
 
-two valves manage what memory to take over
+gates manage what memory to take over
 
-1. Forget Valve: how much to forget about carry
-2. Keep Valve: how much to keep about new information
+1. Forget Gate: forget irrelevant information in the carry dataflow (one weights matrix)
+1. Keep Gate: provide information about the present, updating the carry track with new information (two weights matrices)
 
 <small>
-https://medium.com/mlreview/understanding-lstm-and-its-diagrams-37e2f46f1714
+https://arxiv.org/ftp/arxiv/papers/1701/1701.05923.pdf
 </small>
 </textarea>
 </section>
@@ -375,6 +433,8 @@ As powerful as LSTMs, but simpler
 https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
 <br>
 https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
+<br>
+https://arxiv.org/ftp/arxiv/papers/1701/1701.05923.pdf
 </small>
 </textarea>
 </section>
@@ -386,27 +446,6 @@ https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
 
 </textarea>
 </section>
-
-<section>
-        <h3>Repetition Activation Functions</h3>
-        <div style="float: left">
-                <img src="img/sigmoid-activation.png" height="300px">
-                <p>
-                    <small>Sigmoid, floating from 0 to 1</small>
-                </p>
-            </div>
-            <div style="float: right">
-                    <img src="img/tanh-activation.png" height="300px">
-                    <p>
-                    <small>Tangens Hyperbolicus, floating from -1 to 1</small>
-                </p>
-            </div>
-        <small>
-            <a href="https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb">
-                https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb
-        </a>
-        </small>    
-                </section>
         
 
 <section data-markdown>
