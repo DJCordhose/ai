@@ -152,10 +152,11 @@
                     <textarea data-template>
 ### Preparation
 
-* Insgesamt 45, steuerbar Übungen und Diskussion am Ende 
+* Insgesamt 45 Minuten, steuerbar Übungen und Diskussion am Ende 
 
 Notebooks noch mal ansehen:
 1. embedding
+2. glove-embedding
                         </textarea>
                         </section>
 
@@ -176,19 +177,27 @@ Notebooks noch mal ansehen:
         </textarea>
         </section> -->
 
-        <section>
-            <h3>Word Embeddings</h3>
-            <p>Taking position and context of words into account</p>
-            <p>Semantics of words by proximity to other words</p>
-        </section>
-
         <section data-markdown>
                 <textarea data-template>
 ### Motivation: What makes text and sequences so different?
 <img src="img/tf/audio-image-text.png">
+
+<small>
 https://www.tensorflow.org/tutorials/word2vec
+</small>
                 </textarea>
         </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### One Hot Encoding
+<img src="img/nlp/acolyer/word2vec-one-hot.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+                </textarea>
+        </section>
+        
 
         <section data-markdown>
             <textarea data-template>
@@ -202,18 +211,89 @@ Deep Learning with Python
             </textarea>
     </section>
 
+    <section data-markdown>
+            <textarea data-template>
+### Word Embeddings can carry semantics 
+<img src="img/nlp/acolyer/word2vec-distributed-representation.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+            </textarea>
+    </section>
 
-        <section data-markdown>
-                <textarea data-template>
+<section data-markdown>
+        <textarea data-template>
+### Using t-SNE to project from higher dimensions to 2d
+
+<img src='img/tf/linear-relationships.png'>
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+    </textarea>
+</section>
+
+<section>
+    <h3>Arithmetic on Vectors may express semantics</h3>
+    <div style="float: left">
+            <img src="img/nlp/acolyer/word2vec-king-queen-vectors.png" height="250px">
+            <p>
+                <small>Vectors for King, Man, Queen, & Woman</small>
+            </p>
+        </div>
+        <div style="float: right">
+                <img src="img/nlp/acolyer/word2vec-king-queen-composition.png" height="250px">
+                <p>
+                <small>King – Man + Woman = ?</small>
+            </p>
+        </div>
+    <small>
+        <a href="https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/">
+            https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+    </a>
+    </small>    
+</section>
+    
+<section data-markdown>
+        <textarea data-template>
+### Practical Example: 
+
+* vectors for Embedding per word
+* in other words: where in the vector space is a word located
+* similar words have similar vectors
+
+similarity is expressed by the context a word occurs in
+<code>
+Notebook: embedding.ipynb    
+</code>
+</textarea>
+</section>
+
+<section>
+    <h2>Learning Word Vectors</h2>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
 ### Distributional Hypothesis
 
 __Words that appear in the same contexts share semantic meaning.__
 
 https://en.wikipedia.org/wiki/Distributional_semantics
-    </textarea>
+</textarea>
 </section>
 
 <section data-markdown>
+        <textarea data-template>
+### Sliding Word Window
+<img src="img/nlp/acolyer/word2vec-context-words.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+<!-- <section data-markdown>
         <textarea data-template>
 ### Two Categories of approaches
 
@@ -221,7 +301,7 @@ https://en.wikipedia.org/wiki/Distributional_semantics
 1. _predictive methods_: directly try to predict a word from its neighbors in terms of learned small, dense embedding vectors
 
 </textarea>
-</section>
+</section> -->
 
 <section data-markdown>
         <textarea data-template>
@@ -237,12 +317,25 @@ Comes in two flavours
 
 <section data-markdown>
         <textarea data-template>
-## Skip-Gram model
+### Continuous Bag-of-Words
 
-We will restrict ourselves to this model
-</textarea>
+<img src="img/nlp/acolyer/word2vec-cbow.png" height="500px">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+### Skip-Gram
+
+<img src="img/nlp/acolyer/word2vec-skip-gram.png" height="500px">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
 
 <section data-markdown>
         <textarea data-template>
@@ -282,11 +375,10 @@ _(quick, the), (quick, brown), (brown, quick), (brown, fox), ..._
 * that means we have to have a loss function to minimize
 * minimization as in supervised learning using SGD
 
-But how does our model look like?
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
         <textarea data-template>
 ### Naive approach: Expensive
 <img src='img/tf/softmax-nplm.png' height="450px">
@@ -303,9 +395,9 @@ Have a probability for all words (v)
 
 Just choose k random words
 </textarea>
-</section>
+</section> -->
 
-<section data-markdown>
+<!-- <section data-markdown>
         <textarea data-template>
 ### The loss function
 
@@ -317,7 +409,7 @@ Just choose k random words
 This is called noise-contrastive estimation (NCE) loss
 </textarea>
 </section>
-
+ -->
 <section data-markdown>
         <textarea data-template>
 ### What are the actual parameters learned?
@@ -344,27 +436,23 @@ You can either
 
 <section data-markdown>
         <textarea data-template>
-### Practical Example: 
+### Visualizing Embeddings
 
-* vectors for Embedding per word
-* in other words: where in the vector space is a word located
-* similar words have similar vectors
+<img src="img/nlp/embedding-projector.png" height="500px">
 
-similarity is expressed by the context a word occurs in
 <small>
-Notebook: embedding.ipynb    
+https://projector.tensorflow.org
 </small>
 </textarea>
 </section>
 
-
 <section data-markdown>
         <textarea data-template>
-### We can visualize these similarities
+### Using a pre-trained embedding 
 
-<img src='img/tf/linear-relationships.png'>
-
-Using t-SNE to project from high dimensions to 2d
+<code>
+Notebook: glove-embedding.ipynb    
+</code>
 </textarea>
 </section>
 
