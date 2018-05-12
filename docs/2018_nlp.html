@@ -464,6 +464,35 @@ https://machinelearningmastery.com/prepare-text-data-machine-learning-scikit-lea
         </section>
 
         <section data-markdown>
+            <textarea data-template>
+### n-grams
+
+_n-grams are groups of N (or fewer) consecutive words that you can extract from a sentence_
+<pre>
+The cat sat on the mat.
+
+2-grams:
+
+{"The", "The cat", "cat", "cat sat", "sat",
+"sat on", "on", "on the", "the", "the mat", "mat"}
+</pre>
+
+
+Extracting n-grams is a powerful,
+unavoidable feature-engineering tool when using lightweight, shallow text-processing
+models such as logistic regression and random forests.
+
+<small>
+<a href="https://www.manning.com/books/deep-learning-with-python">
+Deep Learning with Python, Chapter 6.1, François Chollet, Manning            
+</a>
+</small>
+
+                </textarea>
+    </section>
+    
+
+        <section data-markdown>
                 <textarea data-template>
 ### Limitations of Bag of Words
 
