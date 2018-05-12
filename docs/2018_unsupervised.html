@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Unsupervised Machine Learning</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+            <section data-markdown class="preparation" style="font-size: xx-large">
+                    <textarea data-template>
+### Preparation
+
+* 60 Minuten Clustering
+* 60 Minuten Dimensionality Reduction
+* 15 Minuten für GANs
+* 45 Minuten am Ende für Praktikumsaufgaben
+
+Zeit steuerbar über Übungen 
+
+Notebooks noch mal ansehen:
+1. k-means_vs_dbscan
+1. pca
+                        </textarea>
+                        </section>
+        
+        <section>
+            <h2>Introduction to Unsupervised Machine Learning</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <small>
+                    <a href="https://djcordhose.github.io/ai/2018_unsupervised.html">
+                        https://djcordhose.github.io/ai/2018_unsupervised.html</a>
+                        </small>
+                
+        </section>
+
+    <section class="todo">
+    <pre>
+- in 3 Teile aufspalten als Foliensaetze
+- exercise-clustering ausdrucken und mitnehmen
+- Pro Gebiet eine Übung
+- Skript alle Links automatisch in neuem Tab öffnen
+- http://students.brown.edu/seeing-theory/
+    - Distributions
+    - Central Limit Theorem
+      - Zeigen mit random prediction aus notebook 1-classic-code mit Code aus Jannis-Notebook              
+- insgesamt nur 3 Stunden, in der letzten zeigen wid uns sprechen über die Praktikumsaufgaben, Studenten kriegen Zeit, 
+sich damit auseiander zu setzen
+            </pre>
+</section>
+
+<section>
+        <h2>Structure</h2>
+        <ol>
+            <li>Clustering</li>
+            <li>Dimensionality Reduction
+                <ol>
+                    <li>Linear Correlations: PCA: Find out what really matters</li>
+                    <li>Non-Linear Correlations: T-SNE: Visualizing High Dimensional Data</li>
+                </ol>
+            </li>
+            <li>Autoencoders and GANs</li>
+        </ol>
+    </section>
+
+
+    <section>
+        <h1>Part I</h1>
+        <h2>Clustering</h2>
+    </section>
+
+<section>
+        <h3>Three different categories of ML</h3>
+        <img src="img/sketch/types-of-ml.png" height="500px">
+    </section>
+    <section>
+            <img src='img/applications/decisions/type.png'>
+        </section>
+                    
+    <section>
+        <h3>Unsupervised Learning</h3>
+        <img src='img/applications/decisions/question.png'>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Aufgabe: Cluster von Hand einzeichnen
+<img src='img/sketch/clustering.jpg' height="550px">
+        </textarea>
+    </section>
+    <section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+### Fragen
+
+1. Was ist bei diesen Daten grundsätzlich anders als bei den Daten zum Supervised Learning?
+1. Welche Formen haben die Cluster? Wie hast du diese als Cluster erkannt?
+1. Welche Formen hältst du für mehr oder weniger realistisch?
+1. Was könnte an den Achsen stehen? War das wichtig für das Clustering?
+1. Was könnte ein Cluster ausdrücken?
+1. Was passt nicht zu einem Cluster?
+1. Wie kann man diese Punkte interpretieren?
+        </textarea>
+    </section>
+
+    <!-- <section data-markdown class="todo">
+            <textarea data-template>
+### Applications of clustering
+* Outlier Detection: one of these things is not like the others
+* https://hackernoon.com/unsupervised-machine-learning-for-fun-profit-with-basket-clusters-17a1161e7aa1
+* https://flowingdata.com/2018/03/07/visualizing-outliers/?imm_mid=0fbfda&cmp=em-data-na-na-newsltr_20180314
+            </textarea>
+</section> -->
+
+        <section data-markdown>
+                <textarea data-template>
+### Automatic Clustering
+
+_Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
+similar (in some sense) to each other than to those in other groups (clusters)._
+
+https://en.wikipedia.org/wiki/Cluster_analysis
+                </textarea>
+    </section>
+    
+    <section data-markdown>
+            <textarea data-template>
+<img src="img/unsupervised/blobs.png" height="500px">
+
+How would you cluster this unlabelled data?
+            </textarea>
+</section>
+    <section>
+        <h3>Our brains do a phenomenal job when processing images</h3>
+        <p class="fragment">We quickly see patterns and do automatic clustering without even thinking.</p>
+    </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+### Gestalt principles apply
+
+We see things as belonging together when
+
+* they are close to each other (proximity)
+* are aligned in the same direction (continuity)
+
+Click this link (no, really!): 
+<small>
+https://twitter.com/pablostanley/status/974303621092225024
+</small>
+        </textarea>
+</section>
+
+        <section>
+            <h3>Exercise: How to automate this?</h3>
+            <ol>
+                <li>Work in groups</li>
+                <li>Come up with an informal algorithm</li>
+                <li>Manually apply the algorithm to the our clustering example</li>
+            </ol>
+        </section>
+
+        <section>
+            <img src="img/flashcards/K-Means_Clustering_print.png" height="550px">
+            <p>Most Basic Algorithm</p>
+        </section>
+
+        <section>
+            <h3>What do you think is the fundamental weakness of this approach?</h3>            
+        </section>
+
+        <section>
+                <img src="img/unsupervised/blobs_kmeans_3.png" height="550px">
+                <p>Perfect result for k = 3</p>
+        </section>
+            
+        <section>
+            <img src="img/unsupervised/blobs_kmeans_10.png" height="550px">
+            <p>And this is the result for k = 10</p>
+        </section>
+
+        <section>
+            <h3>You need to make a good guess of how many reasonable clusters there are</h3>
+        </section>
+
+        <section>
+                <h3>There are more issues with the k-means approach</h3>            
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+    <img src="img/unsupervised/noisy_circles.png" height="500px">
+
+Some shapes we can identify, but can k-means?    
+                </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+<img src="img/unsupervised/no_structure.png" height="500px">
+
+What about no structure at all?    
+            </textarea>
+</section>
+
+<section>
+        <h3>Results for k-means</h3>            
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src="img/unsupervised/noisy_circles_kmeans.png" height="500px">
+
+even with k=2 not a chance    
+        </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src="img/unsupervised/no_structure_kmeans.png" height="500px">
+
+structure out of nothing
+    </textarea>
+</section>
+
+<section>
+    <h2>Comparing Clustering Algorithms</h2>
+    <p>Choose your favorite!</p>
+    <!-- <pre>
+- http://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
+- http://hdbscan.readthedocs.io/en/latest/performance_and_scalability.html
+    </pre> -->
+</section>
+
+<section data-markdown>
+<textarea data-template>
+<img src="img/unsupervised/cluster_compare.png" height="550px">
+
+<p><small><a href="http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html">
+http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
+</a></small></p>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+<img src="img/unsupervised/sphx_glr_plot_cluster_comparison_001.png" height="550px">
+
+<p><small><a href="http://scikit-learn.org/stable/modules/clustering.html">
+http://scikit-learn.org/stable/modules/clustering.html
+</a></small></p>
+
+</textarea>
+</section>
+
+<section>
+    <h3>Which one is our favorite?</h3>
+</section>
+
+<section>
+            <img src="img/flashcards/DBSCAN_print.png" height="550px">
+            <p>Density-Based Spatial Clustering</p>
+    </section>
+
+    <section>
+        <h3>A quick guess: What is the crucial factor here?</h3>
+    </section>
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+### Notebook
+
+- plot noise (-1) in black 
+  - like here http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html#sphx-glr-auto-examples-cluster-plot-dbscan-py
+- Repeat example data sets from k k-means
+- show results
+
+- clean part in metrics notebook
+                </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Metrics
+
+How well are we doing?
+
+Hard to tell, since there is no (or we do not know) the ground truth
+
+<small>
+http://scikit-learn.org/stable/modules/classes.html#clustering-metrics
+<br>
+http://scikit-learn.org/stable/modules/clustering.html#clustering-evaluation
+</small>
+    </textarea>
+
+</section>
+
+<!-- <section data-markdown class="todo">
+<textarea data-template>
+Aus textanalyse-2.ipynb
+
+from sklearn import metrics
+
+metrics.adjusted_mutual_info_score(labels1, labels2)
+
+http://scikit-learn.org/stable/modules/clustering.html#clustering-evaluation   
+</textarea>
+
+</section>
+ -->
+<section data-markdown>
+<textarea data-template>
+<img src="img/flashcards/Silhouette_Coefficients_print.png" height="550px">
+https://en.m.wikipedia.org/wiki/Silhouette_(clustering)
+</textarea>
+
+</section>
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+Show metrics from notebook
+
+http://scikit-learn.org/stable/modules/clustering.html#silhouette-coefficient
+        </textarea>
+</section> -->
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+Alternative without scaling between -1 and 1, again show metrics from notebook
+
+http://scikit-learn.org/stable/modules/clustering.html#calinski-harabaz-index
+        </textarea>
+</section>
+ -->
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### Code Exercise: 
+* Add at least one implementation of one clustering algorithm shown in the overview above
+* Experiment with the remaining data sets: how do the different clustering algorithms cope with them?
+* How much work do you have to put into tweaking the meta parameters?
+    </textarea>
+</section>
+    
+
+<section>
+        <h1>Part II</h2>
+        <h2>Dimensionality Reduction</h2>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### What is Dimensionality Reduction?
+
+* Linear Correlations: PCA: Find out what really matters in your data
+* Non-Linear Correlations: t-SNE: Visualizing High Dimensional Data
+</textarea>
+    </section>
+    
+<section data-markdown>
+        <textarea data-template>
+## PCA
+### Principal Component Analysis
+</textarea>
+    </section>
+
+    <section>
+        <img src="img/flashcards/Principal_Component_Analysis_print.png">
+    </section>
+    
+    <section>
+        <img src="img/flashcards/Principal_Components_print.png">
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Experiment with PCA on your mobile device in 2d
+
+<img src="img/unsupervised/pca_setosa.png">
+
+http://setosa.io/ev/principal-component-analysis/
+    </textarea>
+    </section>
+    <section data-markdown>
+        <textarea data-template>
+### Questions
+
+1. Why is a transformation from 2d to 2d reasonable in the first place?
+1. With the initial data points, why don't we loose much when we drop principal component 2? 
+1. Where in the visualization do you see high and low variance of a principal component? How is this expressed? 
+1. Can you find a configuration of points where none of the principal components could be dropped without loosing a lot of information?
+
+    </textarea>
+    </section>
+
+    <section>
+        <h2>How does PCA work?</h2>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Overview
+
+1. Fit an n-dimensional ellipsoid to the data
+1. Each axis of the ellipsoid represents one principal component
+1. Each principal component has a range of values
+1. If this range is small, the variance of this principal component is also small
+1. Principal components of low variance can be dropped without loosing a lot of information 
+
+<small>
+https://en.wikipedia.org/wiki/Principal_component_analysis
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Objective: Transform to another basis to maximize variance
+
+1. Normalize each original variable
+1. Calculate a _linear_ correlation matrix from these normalized variables
+1. Find the eigenvectors of the correlation matrix
+1. These are mutually orthogonal on the symmetric correlation matrix
+1. _Thus they are uncorrelated_
+1. These eigenvectors are the principal components
+
+<small>
+http://setosa.io/ev/eigenvectors-and-eigenvalues/
+</small>
+</textarea>
+</section>
+
+    
+<section>
+<h3>Example</h3>
+<div class="fragment" style="float: left">
+    <img src="img/unsupervised/pca_plot/original.png" height="300">
+    <p>
+        <small>Original</small>
+    </p>
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+    <img src="img/unsupervised/pca_plot/correlation.png" height="300">
+    <p>
+        <small>Correlation</small>
+    </p>
+</div>
+<div class="fragment" style="float: right">
+    <img src="img/unsupervised/pca_plot/reduced.png" height="300">
+    <p>
+        <small>Reduced</small>
+    </p>
+</div>
+<p style="clear: both"><em>notebook: unsupervised/pca</em></p>
+</section>
+
+
+    <section>
+        <h3>Intuition in 3d</h3>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+<a href='https://youtu.be/4DpdpZkl8HI?t=65' target="_blank">
+<img src='img/unsupervised/perceptual-shift.png' height="500px">
+</a>
+
+<small>
+The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI?t=65
+</small>
+</textarea>
+    </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+<a href='https://youtu.be/l-GR9IVjU54' target="_blank">
+<img src='img/unsupervised/anti-gun.png' height="500px">
+</a>
+
+<small>
+Michael Murphy's Epic Anti-Gun Artwork for the DNC: https://youtu.be/l-GR9IVjU54
+</small>
+</textarea>
+    </section>
+                
+<section data-markdown>
+        <textarea data-template>
+### Optional: Experiment with PCA on your mobile device in 3d
+
+<img src="img/unsupervised/pca_setosa_3d.png">
+
+http://setosa.io/ev/principal-component-analysis/
+    </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Questions
+
+1. Manually "rotate the camera" to find the best principal components
+1. Compare your manual solution to the automated PCA transformation 
+1. How would you tell which one is better? Is it even different? 
+1. How many principal components would you advice to drop?
+    </textarea>
+    </section>
+    
+<section>
+<h2>t-SNE</h2>
+<h3>t-distributed stochastic neighbor embedding</h3>
+<p>Visualizing High Dimensional Data</p>
+</section>
+
+<section>
+    <h3>Motivation</h3>
+    <p>As humans looking at a computer screen we are naturally limited to two-dimensional visualizations that at best change over time and to reactions to interaction.</p>
+</section>
+    
+<section data-markdown>
+        <textarea data-template>
+### Idea of t-SNE
+
+_Describe projection from high dimension to 2-d as a machine learning problem_
+
+1. Create pairwise probability distributions over high dimensional data 
+1. Create similar distribution in 2-d
+1. Loss is distance between the two using relative entropy
+1. Minimize loss
+
+<small>
+https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding
+<br>
+https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Watch t-SNE learn - Dancing Bacteria
+
+<img src='img/unsupervised/animated_tSNE.gif'>
+
+<small>
+https://twitter.com/ChaseClarkatUIC/status/984839270132338688
+<br>
+https://chasemc.github.io/post/animated-t-sne/
+</small></textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Examples T-SNE
+TensorFlow Embeddings
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+https://distill.pub/2016/misread-tsne/
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Reference: Statistical Foundations
+
+* https://machinelearningmastery.com/a-gentle-introduction-to-calculating-normal-summary-statistics/
+* http://students.brown.edu/seeing-theory/
+        </textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Interactively coming up with the T-SNE algorithm
+
+* Derive from Oberservable HQ: 
+ * https://beta.observablehq.com/@nstrayer/t-sne-explained-in-plain-javascript
+ * Korrigiert: https://beta.observablehq.com/@djcordhose/t-sne-explained-in-plain-javascript
+ *  data in 10 dimensions centered around 5 randomly placed clusters  
+* Maybe import parts: https://beta.observablehq.com/@mbostock/introduction-to-imports
+* Add statistics where-ever needed: * http://students.brown.edu/seeing-theory/
+
+* Exercise
+  * Can you find a configuration of data generation that gives bad results
+  * Can you fix this by changing the perplexity?
+  * If not, slowly change the data generation back until you again get good results 
+</textarea>
+</section>
+
+<section>
+<h3>UMAP: Alternative to t-SNE</h3>
+<p><small>Searching for a low dimensional projection of the data that has the closest possible equivalent fuzzy topological structure (Riemannian manifold).</small></p>
+<div style="float: left">
+        <img src="img/unsupervised/umap_example_mnist1.png" height="300px">
+        <p>
+            <small>MNIST Digit Dataset</small>
+        </p>
+    </div>
+    <div style="float: right">
+            <img src="img/unsupervised/umap_example_fashion_mnist1.png" height="300px">
+            <p>
+            <small>Fashion Items</small>
+        </p>
+    </div>
+<small>
+    <a href="https://github.com/lmcinnes/umap">
+https://github.com/lmcinnes/umap
+</a>
+</small>    
+        </section>
+        
+        <section data-markdown>
+            <textarea data-template>
+### Fashion MNIST
+
+28x28 grayscale images of fashion Items
+
+<img src="img/fashion-mnist-sprite.png" height="400px">
+
+
+<small>
+https://github.com/zalandoresearch/fashion-mnist
+<br>
+https://arxiv.org/abs/1708.07747
+</small>    
+        
+            </textarea>
+        </section>
+        
+<section>
+        <h1>Part III</h1>
+        <h2>Autoencoders and GANs</h2>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Autoencoders
+
+* for autoencoders the input is the same as the output
+* they are somewhere between supervised and unsupervised learning
+* traditionally used for dimensionality reduction
+* lately also for generative models
+
+https://en.wikipedia.org/wiki/Autoencoder
+</textarea>
+</section>
+
+<section>
+    <h4>State of the Art GAN</h4>
+    <img src="img/unsupervised/gan-clothes.jpg" height="500px">
+    <p><small><a href="https://arxiv.org/abs/1711.02231" target="_blank">Visually-Aware Fashion Recommendation and Design with Generative Image Models</a></small></p>
+</section>
+
+
+<section data-markdown class="todo">
+        <textarea data-template>
+    https://www.heise.de/newsticker/meldung/Kuenstliche-Intelligenz-kreiert-neue-Level-fuer-DOOM-4044951.html
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+        http://ufldl.stanford.edu/tutorial/unsupervised/Autoencoders/
+    </textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+https://hackernoon.com/autoencoders-deep-learning-bits-1-11731e200694
+https://hackernoon.com/latent-space-visualization-deep-learning-bits-2-bd09a46920df
+https://hackernoon.com/the-implications-of-adversarial-examples-deep-learning-bits-3-4086108287c7
+https://www.quora.com/What-does-the-word-embedding-mean-in-the-context-of-Machine-Learning
+            </textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/8.4-generating-images-with-vaes.ipynb
+https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/8.5-introduction-to-gans.ipynb
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+GAN Examples:
+- https://twitter.com/liu_mingyu/status/985677397172207616?s=03
+- https://twitter.com/alanyttian/status/988242167998148608?s=03
+</textarea>
+</section>
+        
+<section>
+    <h3>Diskussion: Auf der Suche nach Intelligenz</h3>
+    <p>Sind die Ansätze intelligent?</p>
+</section>
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

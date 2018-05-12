@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>NLP Praktikum</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!-- <section>
+        <h3>Diskussion: Auf der Suche nach Intelligenz</h3>
+        <p>Sind die Ansätze intelligent?</p>
+    </section> -->
+
+<section>
+    <h1>Praktikum IS</h1>
+    <h2>Block Natural Language Processing</h2>
+    <small>
+
+    <a href="https://djcordhose.github.io/ai/2018_haw_nlp_praktikum.html">
+        https://djcordhose.github.io/ai/2018_haw_nlp_praktikum.html</a>
+        </small>
+    <h2 style="color: red">Work in Progress</h2>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Praktikum: Organisatorisches
+
+* Ziel des Praktikums: etwas neues lernen
+* Wir sind jeden Montag zu sprechen
+  * von 10:00 - 12:00 (12.81) oder 
+  * 17:30 - 18:30 (Vorlesungsraum)
+  * Fragen und Diskussion
+  * Praktikumsabnahme
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Letzter Abnahme-Termin für die Praktika
+
+* _Suche_: KW21, 23.05.2018
+* _Lernen_: KW24, 11.06.2018
+* _Natürliche Sprache_, erste Prüfungen möglich: KW26, 25.06.2018
+            </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Prüfungstermine
+* KW26, 25.06.2018
+* KW27
+* KW29
+
+            </textarea>
+        </section>
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Prüfungen
+
+* Zwei Studierende haben ein gemeinsames Basisthema vorbereitet mit eigener, individueller Erweiterung. 
+* Die Basis wird gemeinsam vorgetragen, also jeder mit ca. 50% Redeanteil. (5 Minuten)
+* Danach trägt jeder seine eigene Ergänzung vor. (2 x 5 Minuten).
+* Gesamtzeit 4 x 15 = 60 Minuten.
+* Die Ausarbeitungen sind individuell.
+* Die Noten werden auch individuell vergeben.
+* Einzelprüfung möglich, dann 7,5 bis 10 Minuten pro Thema.
+
+</textarea>
+            </section>
+
+    <section data-markdown>
+            <textarea data-template>
+#### Trost
+<img src="img/confusion.png" height="600px">
+        
+https://twitter.com/math_rachel/status/991375671648702464
+    </textarea>
+        </section>
+
+
+<section>
+        <h2>Mögliche Aufgaben für Praktium</h2>
+    </section>
+<section data-markdown>
+        <textarea data-template>
+## RNNs
+            </textarea>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+## Beispiel Stufen 2-3: Ein eigenes Beispiel für RNNs finden
+
+* Startpunkt: Adder mit RNNs
+
+<small>
+Notebook: rnn-adder
+</small>
+        
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Beispiel Stufe 3: World Model Zero nachbauen
+
+<img src='img/rf/world-models.gif' height="300px">
+
+aufwändig, lokale Installation notwendig, aber Code und Tutorial ist vorhanden
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-model-using-python-and-keras-64fb388ba459
+<br>
+Code: https://github.com/AppliedDataSciencePartners/WorldModels
+</small>
+</textarea>
+</section>
+
+    <section data-markdown>
+            <textarea data-template>
+## NLP
+                </textarea>
+                </section>
+
+                <section data-markdown>
+                        <textarea data-template>
+## Sammlung von Datasätzen im Bereich NLP
+
+https://machinelearningmastery.com/datasets-natural-language-processing/                
+        </textarea>
+                            </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Beispiel Stufe 1-3: Einen Teil des iX-Tutorials 
+
+1. nachvollziehen (1)
+2. experimentieren (2) oder 
+3. erweitern (3)
+
+<small>
+Teil 1: https://www.heise.de/ix/artikel/2018/03/links/118.shtml
+<br>
+Teil 2: https://www.heise.de/ix/artikel/2018/04/links/124.shtml
+<br>
+Teil 3: https://www.heise.de/ix/artikel/2018/05/links/136.shtml
+</small>
+        
+</textarea>
+</section>
+                            
+    <section data-markdown>
+        <textarea data-template>
+## Beispiel Stufe 3: Modelle für POS Tagging vergleichen
+
+Ein kleines Forschungsprojekt
+
+<small>
+https://en.wikipedia.org/wiki/Part-of-speech_tagging
+<br>
+https://spacy.io/api/#nn-model
+</small>
+        
+</textarea>
+</section>
+                
+    <section data-markdown>
+        <textarea data-template>
+## Beispiel Stufen 2-3: Ein eigenes Beispiel für Sprachverarbeitung finden
+
+* Eher 2 wenn nur Vorverarbeitung
+* Eher 3 wenn komplettes Beispiel
+
+<small>
+Notebook als Startpunkt: text-prep oder rnn-sentiment
+</small>
+        
+</textarea>
+</section>
+
+<section data-markdown>
+            <textarea data-template>
+        ## Beispiel Stufen 1-3: Sentiment-Analyse verbessern
+    </textarea>
+</section>
+        
+<section data-markdown>
+    <textarea data-template>
+### Beispiel Stufen 1-2: Existierendes Netzwerk verbessern
+
+* Dropout?
+* Mehr Units?
+* Mehr Layers?
+
+<small>
+Notebook: rnn-sentiment
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+    ### Beispiel Stufe 3: Classifying text with TensorFlow Estimators
+    
+    aufwändig, lokale Installation notwendig
+    
+    <small>
+    https://medium.com/tensorflow/classifying-text-with-tensorflow-estimators-a99603033fbe
+    </small>
+    </textarea>
+    </section>
+    
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
