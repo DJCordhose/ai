@@ -152,6 +152,7 @@
 ### Preparation
 
 * 60 Minuten Clustering
+  - Silhuette Formel ansehen, kann man aber verstehen. Unten ist nur zur Skalierung
 * 60 Minuten Dimensionality Reduction
 * 15 Minuten für GANs
 * 45 Minuten am Ende für Praktikumsaufgaben
@@ -471,12 +472,43 @@ http://scikit-learn.org/stable/modules/clustering.html#clustering-evaluation
  -->
 <section data-markdown>
 <textarea data-template>
+#### Try to make sense of this yourself, use our clusters as an example
 <img src="img/flashcards/Silhouette_Coefficients_print.png" height="550px">
+<small>
 https://en.m.wikipedia.org/wiki/Silhouette_(clustering)
+</small>
 </textarea>
-
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+### Can you explain how it works?
+
+1. What does the denominator term do?         
+1. Why is the Silhouette Coefficient always between -1 and 1? What would each value mean?
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### What are the strengths and weaknesses of this Metric?
+
+<div class="fragment">
+
+*Strengths*
+<ul>
+    <li>intuition for value exists (-1 bad, 0 not clustered, 1 good)</li>
+    <li>easy to understand</li>
+    <li>fits well for blobs</li>
+</ul>
+
+</div>
+<div class="fragment">
+
+_Weakness_: does not work well for directions and complex patterns
+
+</div>
+</textarea>
 <!-- <section data-markdown class="todo">
         <textarea data-template>
 Show metrics from notebook
@@ -546,8 +578,8 @@ http://setosa.io/ev/principal-component-analysis/
 ### Questions
 
 1. Why is a transformation from 2d to 2d reasonable in the first place?
-1. With the initial data points, why don't we loose much when we drop principal component 2? 
 1. Where in the visualization do you see high and low variance of a principal component? How is this expressed? 
+1. With the initial data points, why don't we loose much when we drop principal component 2? 
 1. Can you find a configuration of points where none of the principal components could be dropped without loosing a lot of information?
 
     </textarea>
@@ -617,6 +649,7 @@ http://setosa.io/ev/eigenvectors-and-eigenvalues/
 
     <section>
         <h3>Intuition in 3d</h3>
+        <p>Rotate the camera to a position that reveals the most information</p>
     </section>
 
     <section data-markdown>
