@@ -189,18 +189,12 @@ Notebooks noch mal ansehen:
 
     <section class="todo">
     <pre>
-- in 3 Teile aufspalten als Foliensaetze
-- Notebooks auf Github und Azure, alle Folien als PDF
-- exercise-clustering auslassen
-- Pro Gebiet eine Übung
-- Skript alle Links automatisch in neuem Tab öffnen
+- 
 - http://students.brown.edu/seeing-theory/
     - Distributions
     - Central Limit Theorem
       - Zeigen mit random prediction aus notebook 1-classic-code mit Code aus Jannis-Notebook              
-- insgesamt nur 3 Stunden, in der letzten zeigen wid uns sprechen über die Praktikumsaufgaben, Studenten kriegen Zeit, 
-sich damit auseiander zu setzen
-            </pre>
+    </pre>
 </section>
 
 <section>
@@ -213,7 +207,7 @@ sich damit auseiander zu setzen
                     <li>Non-Linear Correlations: T-SNE: Visualizing High Dimensional Data</li>
                 </ol>
             </li>
-            <li>Autoencoders and GANs</li>
+            <li>Autoencoders and GANs (short)</li>
         </ol>
     </section>
 
@@ -223,27 +217,19 @@ sich damit auseiander zu setzen
         <h2>Clustering</h2>
     </section>
 
-<section>
+    <section>
         <h3>Three different categories of ML</h3>
         <img src="img/sketch/types-of-ml.png" height="500px">
     </section>
-    <section>
-            <img src='img/applications/decisions/type.png'>
-        </section>
-                    
-    <section>
-        <h3>Unsupervised Learning</h3>
-        <img src='img/applications/decisions/question.png'>
-    </section>
 
     <section data-markdown>
-            <textarea data-template>
+        <textarea data-template>
 ### Aufgabe: Cluster von Hand einzeichnen
 <img src='img/sketch/clustering.jpg' height="550px">
-        </textarea>
-    </section>
-    <section data-markdown style="font-size: xx-large">
-            <textarea data-template>
+    </textarea>
+</section>
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
 ### Fragen
 
 1. Was ist bei diesen Daten grundsätzlich anders als bei den Daten zum Supervised Learning?
@@ -253,8 +239,18 @@ sich damit auseiander zu setzen
 1. Was könnte ein Cluster ausdrücken?
 1. Was passt nicht zu einem Cluster?
 1. Wie kann man diese Punkte interpretieren?
-        </textarea>
+    </textarea>
+</section>
+
+    <section>
+            <img src='img/applications/decisions/type.png'>
+        </section>
+                    
+    <section>
+        <h3>Unsupervised Learning</h3>
+        <img src='img/applications/decisions/question.png'>
     </section>
+
 
     <!-- <section data-markdown class="todo">
             <textarea data-template>
@@ -290,7 +286,7 @@ How would you cluster this unlabelled data?
     
     <section data-markdown>
             <textarea data-template>
-### Fast Feature Decoding
+### Fast Feature Decoding in our Brains
 
 <img src='img/SteveFranconeri_fast_feature_encoding.jpg' height="500px">
 <small>
@@ -308,10 +304,9 @@ We see things as belonging together when
 * they are close to each other (proximity)
 * are aligned in the same direction (continuity)
 
-Click this link (no, really!): 
-<small>
-https://twitter.com/pablostanley/status/974303621092225024
-</small>
+<a href="https://twitter.com/pablostanley/status/974303621092225024" target="_blank">
+    Animated Gestalt Principls</a>
+
         </textarea>
 </section>
 
@@ -499,16 +494,15 @@ http://scikit-learn.org/stable/modules/clustering.html#calinski-harabaz-index
 </section>
  -->
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
     <textarea data-template>
 ### Code Exercise: 
 * Add at least one implementation of one clustering algorithm shown in the overview above
 * Experiment with the remaining data sets: how do the different clustering algorithms cope with them?
 * How much work do you have to put into tweaking the meta parameters?
     </textarea>
-</section>
+</section> -->
     
-
 <section>
         <h1>Part II</h2>
         <h2>Dimensionality Reduction</h2>
@@ -685,7 +679,7 @@ http://setosa.io/ev/principal-component-analysis/
         <textarea data-template>
 ### Idea of t-SNE
 
-_Describe projection from high dimension to 2-d as a machine learning problem_
+_Describe a projection from high dimension to 2-d as a machine learning problem_
 
 1. Create pairwise probability distributions over high dimensional data 
 1. Create similar distribution in 2-d
@@ -874,10 +868,19 @@ GAN Examples:
 </textarea>
 </section>
         
-<section>
-    <h3>Diskussion: Auf der Suche nach Intelligenz</h3>
-    <p>Sind die Ansätze intelligent?</p>
-</section>
+<section data-markdown>
+        <textarea data-template>
+### Diskussion: Auf der Suche nach Intelligenz
+
+Sind die gesehenen Ansätze intelligent?
+
+* Clustering
+* PCA
+* t-SNE, UMAP
+* Autoencoders
+* GANs
+        </textarea>
+    </section>
 
 
     </div>
