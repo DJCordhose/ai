@@ -154,6 +154,7 @@
 * 60 Minuten Clustering
   - Silhuette Formel ansehen, kann man aber verstehen. Unten ist nur zur Skalierung
 * 60 Minuten Dimensionality Reduction
+  - Ableitung für t-sne noch mal ansehen
 * 15 Minuten für GANs
 * 45 Minuten am Ende für Praktikumsaufgaben
 
@@ -509,6 +510,7 @@ _Weakness_: does not work well for directions and complex patterns
 
 </div>
 </textarea>
+</section>
 <!-- <section data-markdown class="todo">
         <textarea data-template>
 Show metrics from notebook
@@ -740,44 +742,60 @@ https://chasemc.github.io/post/animated-t-sne/
 </small></textarea>
 </section>
 
-<section data-markdown class="todo">
+<section data-markdown>
         <textarea data-template>
-### Examples T-SNE
-TensorFlow Embeddings
+### t-SNEs crucial parameter: Perplexity
+
+* Can dramatically change the results of t-SNE
+* Unfortunately, you need to understand some internals to understand what it does and how to adjust it to your problem
+            </textarea>
+        </section>
+                    
+<section data-markdown>
+        <textarea data-template>
+#### 10 dimensions, 5 randomly placed clusters
+
+<img src='img/unsupervised/t-sne-5-10.png' height="550px">
+<small>
+https://beta.observablehq.com/@djcordhose/t-sne-explained-in-plain-javascript#reset_button
+</small>
 </textarea>
 </section>
 
 <section data-markdown class="todo">
         <textarea data-template>
+### Perplexity derived from Variance
+
+data in 10 dimensions centered around 5 randomly placed clusters
+
+<img src='img/unsupervised/t-sne-5-10.png'>
+
+<small>
+https://beta.observablehq.com/@djcordhose/t-sne-explained-in-plain-javascript#variance
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise
+
+* Can you find a configuration of data generation that gives bad results
+* Can you fix this by changing the perplexity?
+* If not, slowly change the data generation back until you again get good results   
+
 https://distill.pub/2016/misread-tsne/
 </textarea>
 </section>
 
-<section data-markdown class="todo">
+
+<section data-markdown>
         <textarea data-template>
 ### Reference: Statistical Foundations
 
 * https://machinelearningmastery.com/a-gentle-introduction-to-calculating-normal-summary-statistics/
 * http://students.brown.edu/seeing-theory/
         </textarea>
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
-### Interactively coming up with the T-SNE algorithm
-
-* Derive from Oberservable HQ: 
- * https://beta.observablehq.com/@nstrayer/t-sne-explained-in-plain-javascript
- * Korrigiert: https://beta.observablehq.com/@djcordhose/t-sne-explained-in-plain-javascript
- *  data in 10 dimensions centered around 5 randomly placed clusters  
-* Maybe import parts: https://beta.observablehq.com/@mbostock/introduction-to-imports
-* Add statistics where-ever needed: * http://students.brown.edu/seeing-theory/
-
-* Exercise
-  * Can you find a configuration of data generation that gives bad results
-  * Can you fix this by changing the perplexity?
-  * If not, slowly change the data generation back until you again get good results 
-</textarea>
 </section>
 
 <section>
