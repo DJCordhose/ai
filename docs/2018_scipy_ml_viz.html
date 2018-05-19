@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Visualizing Machine Learning</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+            <!-- <section data-markdown class="preparation" style="font-size: xx-large">
+                    <textarea data-template>
+### Preparation
+
+                        </textarea>
+                        </section> -->
+                        
+<!-- 
+https://scipy2018.scipy.org/ehome/index.php?eventid=299527&tabid=712461&cid=2233543&sessionid=21618949&sessionchoice=1&
+
+Machine Learning can be extremely helpful, but at the same time very hard to get into. So if you are either struggling to
+understand it yourself or want to help others understanding it, visualizations can be extremely helpful. 
+
+We embrace this
+idea and by looking at plots of a single, simple and intuitive data set we will explain the core concepts and Learning strategies.
+The concepts include the difference between programming and machine learning, validation, and over- and underfitting. We
+will also cover k-nearest neighbors and neural networks. 
+-->
+
+        <section>
+            <h2>Understanding Machine Learning by looking at visualizations of decision boundaries</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <small>
+                    <a href="https://djcordhose.github.io/ai/2018_scipy_ml_viz.html">
+                        https://djcordhose.github.io/ai/2018_scipy_ml_viz.html</a>
+                        </small>
+                
+        </section>
+
+    <!-- <section data-markdown class="todo">
+            <textarea data-template>
+        </textarea>
+    </section> -->
+    
+    <section>
+            <h3>Our Example</h3>
+            <h3>Likelyhood of a car crash</h3>
+            <img src="img/insurance/automobile-insurance.png" height="400px">
+            <p>
+                <small>How would you rank me (47) for a car with 160 km/h top speed?</small>
+            </p>
+        </section>
+
+        <section>
+                <h3>How do we automatically predict the quality of a driver?</h2>
+                    <ol>
+                        <li>
+                            <em>dark (green)</em>: few accidents</li>
+                        <li>
+                            <em>light (yellow)</em>: some accidents</li>
+                        <li>
+                            <em>middle (red)</em>: many accidents</li>
+                    </ol>
+            </section>
+<!-- 
+            <section>
+                <h3>Classic Approach: Code Rules by hand</h3>
+                <div class="fragment">
+                    <pre><code contenteditable data-trim class="line-numbers python">
+if age < 25:
+    if speed > 180:
+        return red
+    else:
+        return yellow
+if age > 75:
+    return red
+else:
+    return green
+                            </code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h3>Decision Boundaries for the Hand Coded Rules</h3>
+                <div class="fragment">
+                    <img src="img/insurance/manual.png" height="400px">
+                        <p>
+                            <small>approx. 43% correct predictions (guessing would be 33%)</small>
+                        </p>
+                </div>
+            </section>
+ -->
+            <section>
+                    <h3>KNN: k Nearest Neighbors</h3>
+                    <p>A classic Machine Learning Strategy</p>
+                </section>
+            
+                <section>
+                    <img src="img//insurance/knn.png">
+                </section>
+    <section>
+                    <h3>Computed results for k = 1</h3>
+                    <div>
+                
+                        <img src="img/insurance/knn-1.png" height="400px">
+                        <p>
+                            approx. 98% accuracy on data, great result!
+                        </p>
+                    </div>
+                </section>
+
+                <section data-markdown>
+                        <textarea data-template>
+# But really?
+
+                    </textarea>
+                </section>
+                
+                <section>
+                    <h1>Plot Twist</h1>
+                </section>
+
+                <section>
+                        <h3>Why predicting data that we already know?</h3>
+                    </section>
+
+                <section>
+                    <h3>Generalisation, not perfect reproduction is the objective</h3>
+                </section>
+
+
+                <section data-markdown>
+                    <textarea data-template>
+### All the data we have
+<img src='img/supervised/generalization-all-data.png' height="450px">
+
+We split existing data into two sets
+                    </textarea>
+                </section>
+
+                <section data-markdown>
+                        <textarea data-template>
+### Training data
+<img src='img/supervised/generalization-train-data.png' height="450px">
+
+The larger set (60 or 80%) we use to build our model
+                    </textarea>
+                </section>
+
+                <section data-markdown>
+                        <textarea data-template>
+### Validation data
+
+<img src='img/supervised/generalization-validation-data.png' height="450px">
+
+The smaller set is used to check how well we generalize
+                    </textarea>
+                </section>
+
+                    <section>
+                        <h3>Revisiting Computed results for k = 1</h3>
+                        <div>
+                    
+                            <img src="img/insurance/knn-1.png" height="400px">
+                            <p>
+                                approx. 98% accuracy on train data, but only 65% on validation data
+                            </p>
+                        </div>
+                    </section>
+
+                <section>
+                        <h3>This is what we call Overfitting</h3>
+                    </section>
+                
+            
+                <section>
+                    <h3>Computed results for k = 13</h3>
+                    <div>
+                
+                        <img src="img/insurance/knn-13.png" height="400px">
+                        <p>
+                            <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
+                        </p>
+                    </div>
+                    <p>Regularisation by increasing neighbors</p>
+                </section>
+
+                <section>
+                    <h3>Overfitting using Decision Trees</h3>
+                    <img src="img/dt/dt-boundaries-full.png">
+                    <p>
+                        <small>approx. 98% accuracy on train data, but only 61% on validation data</small>
+                    </p>
+                </section>  
+    
+                <section>
+                    <h3>Reduced overfitting for Decision Trees</h3>
+                    <img src="img/dt/dt-boundaries-sweet.png" height="400px">
+                    <p>
+                        <small>only approx. 77% accuracy on train data, but also 68% on validation data</small>
+                    </p>
+                    <p>Regularisation by clipping the decision tree</p>
+                </section>
+    
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
