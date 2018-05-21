@@ -156,7 +156,15 @@
 
 Beide Notebooks noch mal ansehen:
 1. spacy-sandbox
-1. text-prep
+1. text-vectorizer
+1. 0-imdb-parse
+
+Sentiment Analysis Story anhand der Notebooks nachvollziehen
+1. 0-imdb-parse
+1. 1-embeddings
+1. 2-rnn / 2-lstm (basic rnn)
+1. 3-gru-dropout (final version avoiding overfitting)
+
                         </textarea>
                         </section>
         
@@ -173,10 +181,11 @@ Beide Notebooks noch mal ansehen:
         </section>
         
         
-        <!-- <section data-markdown class="todo">
+        <section data-markdown class="todo">
                 <textarea data-template>
+
         </textarea>
-        </section> -->
+        </section>
 
         <section data-markdown>
                 <textarea data-template>
@@ -404,11 +413,40 @@ https://en.wikipedia.org/wiki/Part-of-speech_tagging
 https://spacy.io/api/#nn-model
             </textarea>
         </section>
-        
+
+<section data-markdown>
+        <textarea data-template>
+### n-grams
+
+_n-grams are groups of N (or fewer) consecutive words that you can extract from a sentence_
+<pre>
+The cat sat on the mat.
+
+2-grams:
+
+{"The", "The cat", "cat", "cat sat", "sat",
+"sat on", "on", "on the", "the", "the mat", "mat"}
+</pre>
+
+
+Extracting n-grams is a powerful,
+unavoidable feature-engineering tool when using lightweight, shallow text-processing
+models such as logistic regression and random forests.
+
+<small>
+<a href="https://www.manning.com/books/deep-learning-with-python">
+Deep Learning with Python, Chapter 6.1, François Chollet, Manning            
+</a>
+</small>
+
+            </textarea>
+</section>
+
 <section>
-    <h2>Transforming Text into Vectors</h2>
+    <h2>Transforming Text into Vectors of numerical values</h2>
     <p>Making it accessible to Machine Learning</p>
-    <p>Notebook: text-prep</p>
+    <p>Only numerical values can be processed by most machine learning algorithms</p>
+    <p>Notebook: text-vectorizer</p>
 </section>
 
 <section>
@@ -439,6 +477,7 @@ http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEnco
     </textarea>
 </section>
 
+
 <section data-markdown>
                 <textarea data-template>
 ### Bag of Words
@@ -463,34 +502,6 @@ https://machinelearningmastery.com/prepare-text-data-machine-learning-scikit-lea
                     </textarea>
         </section>
 
-        <section data-markdown>
-            <textarea data-template>
-### n-grams
-
-_n-grams are groups of N (or fewer) consecutive words that you can extract from a sentence_
-<pre>
-The cat sat on the mat.
-
-2-grams:
-
-{"The", "The cat", "cat", "cat sat", "sat",
-"sat on", "on", "on the", "the", "the mat", "mat"}
-</pre>
-
-
-Extracting n-grams is a powerful,
-unavoidable feature-engineering tool when using lightweight, shallow text-processing
-models such as logistic regression and random forests.
-
-<small>
-<a href="https://www.manning.com/books/deep-learning-with-python">
-Deep Learning with Python, Chapter 6.1, François Chollet, Manning            
-</a>
-</small>
-
-                </textarea>
-    </section>
-    
 
         <section data-markdown>
                 <textarea data-template>
@@ -498,7 +509,7 @@ Deep Learning with Python, Chapter 6.1, François Chollet, Manning
 
 * Positions and context of words get lost
 * No notion of semantics to words
-* Common words, not specific to domain probably get highest frequencies
+* _Common words, not specific to domain probably get highest frequencies_
 
             </textarea>
         </section>
@@ -512,13 +523,11 @@ Deep Learning with Python, Chapter 6.1, François Chollet, Manning
 * IDF: inverse document-frequency
 * TF-IDF: TF times IDF
 
-<div  style="font-size: x-large">
+<small>
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html
-</div>
-
-<div  style="font-size: x-large">
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html
-</div>
+https://en.wikipedia.org/wiki/Tf%E2%80%93idf
+</small>
 </textarea>
         </section>
 
@@ -526,6 +535,15 @@ http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text
                 <img src="img/flashcards/TF-IDF_print.png">
             </section>
 
+            <section data-markdown>
+            <textarea data-template>
+## Creating our very own sentiment analysis
+### Part I: Encoding pure text data
+Notebook: 0-imdb-parse
+
+            </textarea>
+            </section>
+    
     </div>
 
 </div>
