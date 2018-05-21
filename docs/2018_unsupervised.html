@@ -239,44 +239,7 @@ Notebooks noch mal ansehen:
     </textarea>
 </section>
 
-    <section>
-            <img src='img/applications/decisions/type.png'>
-        </section>
-                    
-    <section>
-        <h3>Unsupervised Learning</h3>
-        <img src='img/applications/decisions/question.png'>
-    </section>
-
-
-    <!-- <section data-markdown class="todo">
-            <textarea data-template>
-### Applications of clustering
-* Outlier Detection: one of these things is not like the others
-* https://hackernoon.com/unsupervised-machine-learning-for-fun-profit-with-basket-clusters-17a1161e7aa1
-* https://flowingdata.com/2018/03/07/visualizing-outliers/?imm_mid=0fbfda&cmp=em-data-na-na-newsltr_20180314
-            </textarea>
-</section> -->
-
-        <section data-markdown>
-                <textarea data-template>
-### Automatic Clustering
-
-_Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
-similar (in some sense) to each other than to those in other groups (clusters)._
-
-https://en.wikipedia.org/wiki/Cluster_analysis
-                </textarea>
-    </section>
-    
-    <section data-markdown>
-            <textarea data-template>
-<img src="img/unsupervised/blobs.png" height="500px">
-
-How would you cluster this unlabelled data?
-            </textarea>
-</section>
-    <section>
+<section>
         <h3>Our brains do a phenomenal job when processing images</h3>
         <p class="fragment">We quickly see patterns and do automatic clustering without even thinking.</p>
     </section>
@@ -307,15 +270,59 @@ We see things as belonging together when
         </textarea>
 </section>
 
+
+<section data-markdown>
+        <textarea data-template>
+### Automatic Clustering
+
+_Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
+similar (in some sense) to each other than to those in other groups (clusters)._
+
+https://en.wikipedia.org/wiki/Cluster_analysis
+        </textarea>
+</section>
+
+<section>
+            <img src='img/applications/decisions/type.png'>
+        </section>
+                    
+    <section>
+        <h3>Unsupervised Learning</h3>
+        <img src='img/applications/decisions/question.png'>
+    </section>
+
+
+    <!-- <section data-markdown class="todo">
+            <textarea data-template>
+### Applications of clustering
+* Outlier Detection: one of these things is not like the others
+* https://hackernoon.com/unsupervised-machine-learning-for-fun-profit-with-basket-clusters-17a1161e7aa1
+* https://flowingdata.com/2018/03/07/visualizing-outliers/?imm_mid=0fbfda&cmp=em-data-na-na-newsltr_20180314
+            </textarea>
+</section> -->
+
         <section>
             <h3>Exercise: How to automate this?</h3>
             <ol>
                 <li>Work in groups</li>
-                <li>Come up with an informal algorithm</li>
-                <li>Manually apply the algorithm to the our clustering example</li>
+                <li>Come up with an informal algorithm / approach / idea</li>
+                <li>Manually apply the algorithm / approach / idea to the our clustering example</li>
             </ol>
         </section>
 
+        <section data-markdown>
+            <textarea data-template>
+## Looking at standard implementations
+            </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+    <img src="img/unsupervised/blobs.png" height="500px">
+    
+    How would you cluster this unlabelled data?
+                </textarea>
+    </section>
         <section>
             <img src="img/flashcards/K-Means_Clustering_print.png" height="550px">
             <p>Most Basic Algorithm</p>
@@ -325,7 +332,8 @@ We see things as belonging together when
             <h3>What do you think is the fundamental weakness of this approach?</h3>            
         </section>
 
-        <section>
+    
+            <section>
                 <img src="img/unsupervised/blobs_kmeans_3.png" height="550px">
                 <p>Perfect result for k = 3</p>
         </section>
@@ -1045,7 +1053,7 @@ https://www.youtube.com/watch?v=ab64TWzWn40
 
 GANs consist of two networks contesting with each other (adversarial)
 1. _discriminator_: convolutional network trained to tell if an image is real or generated
-   * initially trained on a know data set
+   * initially trained on a known data set
    * training objective is to _decrease the error rate_
 1. _generator_: deconvolutional network generating images from a latent representation
   * initial latent space is just random 
