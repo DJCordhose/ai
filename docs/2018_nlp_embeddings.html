@@ -272,9 +272,6 @@ https://www.tensorflow.org/tutorials/word2vec
 * similar words have similar vectors
 
 similarity is expressed by the context a word occurs in
-<code>
-Notebook: embedding.ipynb    
-</code>
 </textarea>
 </section>
 
@@ -369,7 +366,7 @@ https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
 _the quick brown fox jumped over the lazy dog_
 
 * Form a dataset of the context of each word
-* vanialla context for a word are the words left and right to it
+* vanalla context for a word are the words left and right to it
 * each context is a pair of _(context, target)_ 
 
 _([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ..._
@@ -377,7 +374,7 @@ _([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ..._
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
         <textarea data-template>
 ### Skip-Gram model inversion
 
@@ -391,7 +388,7 @@ becomes
 _(quick, the), (quick, brown), (brown, quick), (brown, fox), ..._
 </textarea>
 </section>
-
+ -->
 <section data-markdown>
         <textarea data-template>
 ### How do we train for that objective?
@@ -488,8 +485,8 @@ https://twitter.com/pmbaumgartner/status/989512625934434309
 ### Exercise: Get an intuition for Word Embeddings
 
 * Was bedeuten die Farben?
-* Hättest du dieselben Wörter verwendet?
-* Zoome in einen Bereich mit eher geringerer Magnitude
+* Hättest du dasselbe Vokabular verwendet?
+* Zoome in einen Bereich mit eher höhrer Dichte
 * Suche dir einen Cluster mit 5 Wörtern und überprüfe ob auch du die Wörter semantisch benachbart ansiedeln würdest
 
 <small>
