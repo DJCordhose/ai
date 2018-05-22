@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>RNNs</title>
+    <title>NLP RNNs</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -165,12 +165,12 @@ Beide Notebooks noch mal ansehen:
         
 
         <section>
-            <h2>Recurrent Neural Networks</h2>
+            <h2>Recurrent Neural Networks: LSTMs and GRUs</h2>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
             <small>
-                    <a href="https://djcordhose.github.io/ai/2018_nlp_rnn.html">
-                        https://djcordhose.github.io/ai/2018_nlp_rnn.html</a>
+                    <a href="https://djcordhose.github.io/ai/2018_nlp_lstm_gru.html">
+                        https://djcordhose.github.io/ai/2018_nlp_lstm_gru.html</a>
                         </small>
 
         </section>
@@ -180,134 +180,10 @@ Beide Notebooks noch mal ansehen:
             </pre>
         </section> -->
 
-        <section>
-                <h2>Structure</h2>
-                <ol>
-                    <li>Machine Learning architectures applicable to text
-                            <ol>
-                                    <li>RNNs</li>
-                                    <li>LSTMs</li>
-                                    <li>GRUs</li>
-                                    <li>Applications</li>
-                                </ol>
-                    </li>
-                </ol>
-            </section>
-    
-    
     <section>
-            <h3>Text is special</h3>
+            <h3>Text and sequences are special</h3>
             <img src='img/applications/decisions/data.png'>
         </section>
-
-
-        <section>
-            <h2>Simple RNNs</h2>
-            <h3>Recurrent Neural Networks</h3>
-        </section>
-
-
-        <section>
-            <h3>Motivation</h3>
-            <p>Traditional Networks have no memory of previous events</p>
-        </section>
-
-            
-        <section data-markdown>
-            <textarea data-template>
-### Solution: RNNs - Networks with Loops
-<img src='img/nlp/colah/RNN-rolled.png' height="450px">
-
-<small>
-http://colah.github.io/posts/2015-08-Understanding-LSTMs/
-</small>
-            </textarea>
-        </section>
-            
-        <section data-markdown>
-            <textarea data-template>
-### Unrolling the loop
-<img src='img/nlp/colah/RNN-unrolled.png'>
-
-<small>
-http://colah.github.io/posts/2015-08-Understanding-LSTMs/
-</small>
-            </textarea>
-        </section>
-
-        <section data-markdown>
-            <textarea data-template>
-### Simple RNN
-
-<img src='img/nlp/fchollet_rnn.png'>
-
-<script type="math/tex; mode=display">
-output_t = \tanh(W input_t + U output_{t-1} + b)
-</script>
-    
-<small>
-<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/129">
-    Deep Learning with Python, Chapter 6, François Chollet, Manning            
-</a>
-
-</small>
-
-</textarea>
-</section>
-
-<section>
-    <h3>Repetition Activation Functions</h3>
-    <div style="float: left">
-            <img src="img/sigmoid-activation.png" height="300px">
-            <p>
-                <small>Sigmoid, floating from 0 to 1</small>
-            </p>
-        </div>
-        <div style="float: right">
-                <img src="img/tanh-activation.png" height="300px">
-                <p>
-                <small>Tangens Hyperbolicus, floating from -1 to 1</small>
-            </p>
-        </div>
-    <small>
-        <a href="https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb">
-            https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb
-    </a>
-    </small>    
-</section>
-
-<section>
-            <h2>Perfect for sequences, lists, sentences</h2>
-        </section>
-        
-        <section data-markdown>
-                <textarea data-template>
-### Example: Using sequences of events
-<img src='img/magenta-rnn-duck.png' height="450px">
-
-<small>
-https://twitter.com/random_forests/status/987394050914385927
-</small>
-                </textarea>
-            </section>
-
-        <section data-markdown>
-        <textarea data-template>
-### Example application for RNNs
-
-Add two numbers encoded in a string, e.g.
-
-```
-Input: "535+61"
-Output: "596"
-```
-Padding is handled by using a repeated sentinel character (space)
-
-<small>
-Notebook: rnn-add-example
-</small>
-    </textarea>
-    </section>
 
 
         <section data-markdown>
@@ -316,7 +192,7 @@ Notebook: rnn-add-example
 
 _Vanishing or exploding gradient problem:_
 * Each step in training applies the same weights to the output, also in back-propagation  
-* The further we move backwards, the bigger (explodes) or smaller (vanishes) our error signal becomes
+* The further we move backwards, the bigger (explodes) or smaller (vanishes) our signal becomes
 
 <small>
 https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
@@ -359,6 +235,27 @@ _Effectively long term memory does not work:_
 
         </textarea>
         </section>
+
+<section>
+    <h3>Repetition Activation Functions</h3>
+    <div style="float: left">
+            <img src="img/sigmoid-activation.png" height="300px">
+            <p>
+                <small>Sigmoid, floating from 0 to 1</small>
+            </p>
+        </div>
+        <div style="float: right">
+                <img src="img/tanh-activation.png" height="300px">
+                <p>
+                <small>Tangens Hyperbolicus, floating from -1 to 1</small>
+            </p>
+        </div>
+    <small>
+        <a href="https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb">
+            https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb
+    </a>
+    </small>    
+</section>
 
         <section data-markdown>
                 <textarea data-template>
@@ -642,16 +539,6 @@ Notebooks:
 
         </textarea>
         </section>
-
-    <section data-markdown style="font-size: xx-large">
-            <textarea data-template>
-## Applications
-* _Speech Recognition_: https://medium.com/@ageitgey/machine-learning-is-fun-part-6-how-to-do-speech-recognition-with-deep-learning-28293c162f7a
-* _Neural Machine Translation (seq2seq)_: https://www.tensorflow.org/tutorials/seq2seq
-* _Sentiment Analysis_: https://medium.com/@alyafey22/sentiment-classification-from-keras-to-the-browser-7eda0d87cdc6
-* _Text / Source Code Generators_: http://karpathy.github.io/2015/05/21/rnn-effectiveness/
-    </textarea>
-    </section>
 
     <section data-markdown>
             <textarea data-template>
