@@ -551,7 +551,6 @@ http://scikit-learn.org/stable/modules/clustering.html#calinski-harabaz-index
 ## PCA
 ### Principal Component Analysis
 
-_notebook: pca_example_
 </textarea>
     </section>
 
@@ -642,7 +641,7 @@ http://setosa.io/ev/eigenvectors-and-eigenvalues/
         <small>Reduced</small>
     </p>
 </div>
-<p style="clear: both"><em>notebook: pca_intuition/pca</em></p>
+<p style="clear: both"><em>notebook: pca_example</em></p>
 </section>
 
 
@@ -750,9 +749,9 @@ The following work is based on
         
 <section data-markdown>
         <textarea data-template>
-### What t-SNE does
+### How t-SNE works
 
-1. Randomly initialize mappings
+1. Randomly initialize mappings between high and low dimension data points
 1. Calculate the cost and gradient for the current mapping
 1. Use the gradient to nudge all our mappings to slightly better postions
 1. Repeat 2 and 3 until we've lowered our cost function a satisfactory amount.
@@ -786,8 +785,14 @@ https://beta.observablehq.com/@djcordhose/t-sne-explained-in-plain-javascript#re
         <textarea data-template>
 ### t-SNE's crucial parameter: Perplexity
 
+* Intuition: a guess about the number of close neighbors each point has
+  * Low Perplexity: Local variations dominate
+  * High Perplexity: Include even more remote data in neighborhood (all data as an extreme)
 * Can dramatically change the results of t-SNE
-* Unfortunately, you need to understand some internals to understand what it does and how to adjust it to your problem
+
+<small>
+https://en.wikipedia.org/wiki/Perplexity    
+</small>
             </textarea>
         </section>
 
@@ -820,15 +825,27 @@ https://beta.observablehq.com/@djcordhose/t-sne-explained-in-plain-javascript#ne
 
 <section data-markdown>
         <textarea data-template>
+### Probability Density Function
+
+function of a continuous random variable, whose integral across an interval gives the probability that the value of the variable lies within the same interval
+
+<img src='img/Boxplot_vs_PDF.svg' height="300px">
+
+<small>
+https://en.wikipedia.org/wiki/Probability_density_function
+<br>
+(c) https://en.wikipedia.org/wiki/User:Jhguch
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
 ### Perplexity derived from Variance
 
-What variance to achieve a certain perplexity? How many points to include?
+What variance achieves a certain perplexity? How many points to include?
 
-<img src='img/unsupervised/Variance_to_Perplexity.png' height="400px">
-
-In order to find the optimal variance for each point in our dataset we use a searching technique called binary search. 
-What binary search is doing here is goes point by point and searching in a disciplined way for the variance value that gets 
-the perplexity as close to the desired perplexity as possible. Just like you did with the slider above.
+<img src='img/unsupervised/Variance_to_Perplexity.png' height="370px">
 
 <small>
 https://beta.observablehq.com/@djcordhose/t-sne-explained-in-plain-javascript#variance
