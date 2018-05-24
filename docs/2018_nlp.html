@@ -342,8 +342,9 @@ _Example: Does a Tweet mention something negative about my company?_
 * Bag of Words etc.
 
 De-facto standard Python library: https://spacy.io/
-Notebook: spacy-sandbox
 https://spacy.io/usage/linguistic-features
+
+Notebook: spacy-sandbox
 </textarea>
         </section>
 
@@ -371,11 +372,6 @@ Notebook: spacy-sandbox
 </textarea>
 </section>
 
-<section>
-        <h3>Terms</h3>
-        <img src='img/nlp/spacy/pos_terms.png'>
-</section>
-
 <section data-markdown>
         <textarea data-template>
 ### Example 
@@ -391,15 +387,21 @@ _Apple is looking at buying U.K. startup for $1 billion_
 </section>
 
 <section>
+        <h3>Terms</h3>
+        <img src='img/nlp/spacy/pos_terms.png'>
+</section>
+
+<section>
         <h3>Bringing in Knowledge about the World</h3>
         <img src='img/nlp/spacy/entity.PNG'>
         <p>Name Entity Recognition (NER)</p>
     </section>
 
     <section>
-            <h3>POS</h3>
+            <h4>POS</h4>
             <img src='img/nlp/spacy/pos_example_1.png' height="250px">
             <img src='img/nlp/spacy/pos_example_2.png' height="250px">
+            <small>Have a look at notebook spacy-sandbox for explanation of terms</small>
         </section>
 
         <section data-markdown>
@@ -469,14 +471,28 @@ tokyo = 1
 amsterdam = 2
 encoded_text = [0, 0, 1, 2]</code></pre>
 
-Variation: Encode using frequency
-
 <small>
 http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html
 </small>
     </textarea>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+### Do you see any problems with this encoding?
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Numbers close to each other suggest a relation, but there might actually be none
+
+Variation: Use index of frequency (frequent words get low numbers)
+
+This way similarity in index at least means something
+
+</textarea>
+</section>
 
 <section data-markdown>
                 <textarea data-template>
