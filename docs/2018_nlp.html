@@ -444,11 +444,15 @@ Deep Learning with Python, Chapter 6.1, François Chollet, Manning
             </textarea>
 </section>
 
-<section>
-    <h2>Transforming Text into Vectors of numerical values</h2>
-    <p>Making it accessible to Machine Learning</p>
-    <p>Only numerical values can be processed by most machine learning algorithms</p>
-    <p>Notebook: text-vectorizer</p>
+<section data-markdown>
+    <textarea data-template>
+### Transforming Text into Vectors of numerical values
+    
+Making it accessible to Machine Learning
+
+Only numerical values can be processed by most machine learning algorithms
+
+</textarea>
 </section>
 
 <section>
@@ -540,6 +544,7 @@ https://machinelearningmastery.com/prepare-text-data-machine-learning-scikit-lea
 * TF-IDF: TF times IDF
 
 <small>
+http://scikit-learn.org/stable/modules/feature_extraction.html#tfidf-term-weighting
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html
 https://en.wikipedia.org/wiki/Tf%E2%80%93idf
@@ -551,6 +556,33 @@ https://en.wikipedia.org/wiki/Tf%E2%80%93idf
                 <img src="img/flashcards/TF-IDF_print.png">
             </section>
 
+            <section style="font-size: xx-large">
+<h3>Exercise Bag of Words and TF-IDF</h3>
+
+
+<div style="float: left; width: 300px">
+        <p>Consider this text corpus:</p>
+
+<ol>
+    <li>"Ronaldo did the free kick, yes Ronaldo", 
+    <li>"Messi did the penalty", 
+    <li>"A striker did the penalty"
+</ol>
+
+
+
+            </div>
+    <div style="float: right">
+        <br>
+<img src="img/tf-idf-small.png" height="300px">
+        </div>
+<p style="clear: both"><em>Calculate TF-IDF for every term of the first sentence with <span style="color: red">natural logarithm</span></em></p>
+
+<p><small>Notebook: 
+<a href='https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/text-vectorizer.ipynb'>text-vectorizer.ipynb</a></small></p>
+</section>
+ 
+                
             <section data-markdown>
             <textarea data-template>
 ## Creating our very own sentiment analysis
@@ -604,6 +636,10 @@ Notebook: 0-imdb-parse
         center: true,
 
         transition: 'fade', // none/fade/slide/convex/concave/zoom
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
 
         // Optional reveal.js plugins
         dependencies: [
@@ -632,7 +668,9 @@ Notebook: 0-imdb-parse
             {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
             {src: 'reveal.js/plugin/notes/notes.js', async: true},
             // https://github.com/mikemiles86/reveal-line-numbers
-            {src: 'lib/js/line-numbers.js'}
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+
         ]
     });
 
