@@ -350,6 +350,13 @@ https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
 
 <section data-markdown>
         <textarea data-template>
+### Training objective
+
+_maximize the conditional probability of observing the actual output word (the focus word) given the input context words_
+</textarea>
+</section>
+<section data-markdown>
+        <textarea data-template>
 ### Skip-Gram
 
 <img src="img/nlp/acolyer/word2vec-skip-gram.png" height="500px">
@@ -359,7 +366,7 @@ https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
         </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
         <textarea data-template>
 ### Example using the Skip-Gram model
 
@@ -372,7 +379,7 @@ _the quick brown fox jumped over the lazy dog_
 _([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ..._
 
 </textarea>
-</section>
+</section> -->
 
 <!-- <section data-markdown>
         <textarea data-template>
@@ -400,7 +407,7 @@ _(quick, the), (quick, brown), (brown, quick), (brown, fox), ..._
 </textarea>
 </section>
 
-<!-- <section data-markdown>
+<section data-markdown>
         <textarea data-template>
 ### Naive approach: Expensive
 <img src='img/tf/softmax-nplm.png' height="450px">
@@ -417,9 +424,9 @@ Have a probability for all words (v)
 
 Just choose k random words
 </textarea>
-</section> -->
+</section>
 
-<!-- <section data-markdown>
+<section data-markdown>
         <textarea data-template>
 ### The loss function
 
@@ -431,7 +438,7 @@ Just choose k random words
 This is called noise-contrastive estimation (NCE) loss
 </textarea>
 </section>
- -->
+
 <section data-markdown>
         <textarea data-template>
 ### What are the actual parameters learned?

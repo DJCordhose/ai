@@ -152,7 +152,6 @@
 ### Preparation
 
 * Insgesamt 45, steuerbar über die beiden Übungen? Nur eine machen? 
-* TF-IDF-Formel vorher nach mal ansehen
 
 Beide Notebooks noch mal ansehen:
 1. spacy-sandbox
@@ -181,17 +180,17 @@ Sentiment Analysis Story anhand der Notebooks nachvollziehen
         </section>
         
         
-        <section data-markdown class="todo">
+        <!-- <section data-markdown class="todo">
                 <textarea data-template>
 
         </textarea>
-        </section>
+        </section> -->
 
         <section data-markdown>
                 <textarea data-template>
 ### What is Natural Language Processing (NLP)?
 
-Natural language processing (NLP), is the skill of a machine to understand and process human language within the context
+Natural language processing (NLP) is the skill of a machine to understand and process human language within the context
 in which it is spoken.
 
 <small>
@@ -321,8 +320,8 @@ _Example: Does a Tweet mention something negative about my company?_
                 <h3>Initial Exercise: How to build sentiment analysis?</h3>
                 <p>Imagine you have a number of texts labelled to categories of positive (1) or negative (0)</p>
                 <p><em>You are free to either use machine learning or not</em></p>
-                <p>Disucss in groups and come up with a solution</p>
-                <p><small>5 minutes Work and 5 minutes Discussion</small></p>
+                <p><em>Disucss in groups and come up with a solution</em></p>
+                <!-- <p><small>5 minutes Work and 5 minutes Discussion</small></p> -->
             </section>
             
         <section>
@@ -344,7 +343,6 @@ _Example: Does a Tweet mention something negative about my company?_
 De-facto standard Python library: https://spacy.io/
 https://spacy.io/usage/linguistic-features
 
-Notebook: spacy-sandbox
 </textarea>
         </section>
 
@@ -361,6 +359,34 @@ Notebook: spacy-sandbox
                     <img src="img/flashcards/Stop_Words_print.png">
                 </section>
         
+<section data-markdown>
+        <textarea data-template>
+### n-grams
+
+_n-grams are groups of N (or fewer) consecutive words that you can extract from a sentence_
+<pre>
+The cat sat on the mat.
+
+2-grams:
+
+{"The", "The cat", "cat", "cat sat", "sat",
+"sat on", "on", "on the", "the", "the mat", "mat"}
+</pre>
+
+
+Extracting n-grams is a powerful,
+unavoidable feature-engineering tool when using lightweight, shallow text-processing
+models such as logistic regression and random forests.
+
+<small>
+<a href="https://www.manning.com/books/deep-learning-with-python">
+Deep Learning with Python, Chapter 6.1, François Chollet, Manning            
+</a>
+</small>
+
+            </textarea>
+</section>
+
 <section data-markdown>
         <textarea data-template>
 ## Part-of-Speach (POS) Tagging 
@@ -398,7 +424,7 @@ _Apple is looking at buying U.K. startup for $1 billion_
     </section>
 
     <section>
-            <h4>POS</h4>
+            <h4>POS and Dependencies</h4>
             <img src='img/nlp/spacy/pos_example_1.png' height="250px">
             <img src='img/nlp/spacy/pos_example_2.png' height="250px">
             <small>Have a look at notebook spacy-sandbox for explanation of terms</small>
@@ -417,34 +443,6 @@ https://spacy.io/api/#nn-model
         </section>
 
 <section data-markdown>
-        <textarea data-template>
-### n-grams
-
-_n-grams are groups of N (or fewer) consecutive words that you can extract from a sentence_
-<pre>
-The cat sat on the mat.
-
-2-grams:
-
-{"The", "The cat", "cat", "cat sat", "sat",
-"sat on", "on", "on the", "the", "the mat", "mat"}
-</pre>
-
-
-Extracting n-grams is a powerful,
-unavoidable feature-engineering tool when using lightweight, shallow text-processing
-models such as logistic regression and random forests.
-
-<small>
-<a href="https://www.manning.com/books/deep-learning-with-python">
-Deep Learning with Python, Chapter 6.1, François Chollet, Manning            
-</a>
-</small>
-
-            </textarea>
-</section>
-
-<section data-markdown>
     <textarea data-template>
 ### Transforming Text into Vectors of numerical values
     
@@ -459,8 +457,8 @@ Only numerical values can be processed by most machine learning algorithms
         <h3>Exercise: How could you transform text into something accessible to machine learning?</h3>
         <p>How to encode a word?</p>
         <p>How to encode a sequence of words?</p>
-        <p>Disucss in groups and come up with a solution</p>
-        <p><small>5 minutes Work and 5 minutes Discussion</small></p>
+        <p><em>Disucss in groups and come up with a solution</em></p>
+        <!-- <p><small>5 minutes Work and 5 minutes Discussion</small></p> -->
 </section>
 
 <section data-markdown>
@@ -522,6 +520,33 @@ https://machinelearningmastery.com/prepare-text-data-machine-learning-scikit-lea
                     </textarea>
         </section>
 
+        <section data-markdown>
+                <textarea data-template>
+### Bag of Words - One Hot Encoding
+<img src="img/nlp/acolyer/word2vec-one-hot.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+                </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Bag of Words - Count Encoding    
+
+Token counts where each token is identified by position in list
+
+<pre><code>text = ["paris", "paris", "tokyo", "amsterdam"]
+paris = 0
+tokyo = 1
+amsterdam = 2
+encoded_text = [2, 1, 1]</code></pre>
+
+<small>
+http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html
+</small>
+    </textarea>
+</section>
 
         <section data-markdown>
                 <textarea data-template>
@@ -592,6 +617,237 @@ Notebook: 0-imdb-parse
             </textarea>
             </section>
     
+        <section>
+            <h2>word2vec</h2>
+            <h3>Embeddings: Smart encoding of Word Vectors</h3>
+        </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Motivation: What makes text and sequences so different?
+<img src="img/tf/audio-image-text.png">
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+                </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Limitations of Bag of Words
+
+* _Positions and context of words get lost_
+* _No notion of semantics to words_
+* Common words, not specific to domain probably get highest frequencies
+
+            </textarea>
+        </section>
+
+
+        <section data-markdown>
+            <textarea data-template>
+<img src="img/nlp/word_embeddings.png" height="550px">
+
+<small>
+<a href="https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/6.1-using-word-embeddings.ipynb">
+Deep Learning with Python
+</a>
+</small>
+            </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Word Embeddings can carry semantics 
+<img src="img/nlp/acolyer/word2vec-distributed-representation.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+            </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Using t-SNE to project from higher dimensions to 2d
+
+<img src='img/tf/linear-relationships.png'>
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+    </textarea>
+</section>
+
+<section>
+    <h3>Arithmetic on Vectors may express semantics</h3>
+    <div style="float: left">
+            <img src="img/nlp/acolyer/word2vec-king-queen-vectors.png" height="250px">
+            <p>
+                <small>Vectors for King, Man, Queen, & Woman</small>
+            </p>
+        </div>
+        <div style="float: right">
+                <img src="img/nlp/acolyer/word2vec-king-queen-composition.png" height="250px">
+                <p>
+                <small>King – Man + Woman = ?</small>
+            </p>
+        </div>
+    <small>
+        <a href="https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/">
+            https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+    </a>
+    </small>    
+</section>
+    
+<section data-markdown style="font-size: x-large">
+        <textarea data-template>
+### Fancy Example 
+
+* misspelled words in GloVe embedding are close to each other
+* there is a vector for the concept 'misspelled' that you can apply to any word to retrieve the correct spelling
+
+<img src='img/nlp/embed-misspelling.jpg'>
+
+<small>
+http://forums.fast.ai/t/nlp-any-libraries-dictionaries-out-there-for-fixing-common-spelling-errors/16411/7
+https://twitter.com/jeremyphoward/status/997264148655259648
+</small>
+</textarea>
+</section>
+
+<section>
+    <h2>Learning Word Vectors</h2>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Distributional Hypothesis
+
+__Words that appear in the same contexts share semantic meaning.__
+
+https://en.wikipedia.org/wiki/Distributional_semantics
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Sliding Word Window
+<img src="img/nlp/acolyer/word2vec-context-words.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Standard Predictive Method: word2vec
+
+Comes in two flavours
+
+1. _Continuous Bag-of-Words model (CBOW)_: predicts target words (e.g. 'mat') from source context words ('the cat sits on the') - _good for small data sets_
+1. _Skip-Gram model_: does the inverse and predicts source context-words from the target words - _good for larger datasets_. 
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Continuous Bag-of-Words
+
+<img src="img/nlp/acolyer/word2vec-cbow.png" height="500px">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### What are the actual parameters learned?
+
+_parameters of a hidden fully connected layer_
+
+* vectors for Embedding per word
+* in other words: where in the vector space is a word located
+* similar words have similar vectors
+
+similarity is expressed by the context a word occurs in
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Now what?
+
+You can either
+
+* use the results all by themselves to find out about similarities - visualize by projecting down to 2d using t-SNE as shown before
+* or use the vectors as representations for words - treat texts as sequences of words
+* use these representations to train a classifier etc.
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Visualizing Embeddings
+
+<img src="img/nlp/embedding-projector.png" height="500px">
+
+<small>
+https://projector.tensorflow.org
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Embeddings 300 d on Google News
+
+<img src='img/nlp/word2dev_google_news.jpg' height="500px">
+
+<small>
+https://twitter.com/pmbaumgartner/status/989512625934434309
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise: Get an intuition for Word Embeddings
+
+* Was bedeuten die Farben?
+* Hättest du dasselbe Vokabular verwendet?
+* Zoome in einen Bereich mit eher höhrer Dichte
+* Suche dir einen Cluster mit 5 Wörtern und überprüfe ob auch du die Wörter semantisch benachbart ansiedeln würdest
+
+<small>
+https://plot.ly/~pmbaumgartner/88/word2vec-google-news-2d-umap-embeddings/
+</small>
+
+Note:
+* Was bedeuten die Farben? (Magnitude, je heller desto mehr)
+* Hättest du dieselben Wörter verwendet? (Typische Stopwords raus)
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Creating our very own sentiment analysis
+### Part II: Encoding text as embedding
+
+<small>
+Notebook: https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/1-embeddings.ipynb
+</small>
+ 
+        </textarea>
+        </section>
+
     </div>
 
 </div>
@@ -621,7 +877,9 @@ Notebook: 0-imdb-parse
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/bark.jpg");
+
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
     </script>
     
