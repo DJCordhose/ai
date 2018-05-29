@@ -151,12 +151,13 @@
                     <textarea data-template>
 ### Preparation
 
-* Insgesamt 45, steuerbar über die beiden Übungen? Nur eine machen? 
+* Insgesamt 90 Minuten, steuerbar über die beiden Übungen? Nur eine machen? 
 
-Beide Notebooks noch mal ansehen:
+Notebooks noch mal ansehen:
 1. spacy-sandbox
 1. text-vectorizer
-1. 0-imdb-parse
+1. 0-imdb-parse (vorher starten und einmal durchlaufen lassen, parsing braucht lange)
+1. 1-embeddings
 
 Sentiment Analysis Story anhand der Notebooks nachvollziehen
 1. 0-imdb-parse
@@ -328,6 +329,10 @@ _Example: Does a Tweet mention something negative about my company?_
             <h3>NLP without Machine Learning</h3>
             <p>Even when you do not use machine learning to process and analyse text, there is a couple of techniques that can be helpful</p>
             <p>These techniques can also be applied to make text accessible to machine learning</p>
+        </section>
+
+        <section class="local">
+            <h2>DCGs</h2>
         </section>
 
         <section data-markdown>
@@ -537,10 +542,12 @@ https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
 Token counts where each token is identified by position in list
 
 <pre><code>text = ["paris", "paris", "tokyo", "amsterdam"]
-paris = 0
-tokyo = 1
-amsterdam = 2
-encoded_text = [2, 1, 1]</code></pre>
+paris = [0, 0, 1]
+tokyo = [0, 1, 0]
+amsterdam = [1, 0, 0]
+encoded_text = [[0, 0, 1], [0, 0, 1], [0, 1, 0], [1, 0, 0]]
+frequency = [1, 1, 2]
+</code></pre>
 
 <small>
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html
