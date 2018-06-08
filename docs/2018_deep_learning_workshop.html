@@ -170,7 +170,9 @@
   - sowohl mit tensorflow.js als auch colab
   - Inspiration aus Praktikumsaufgaben
 - Code Samples auch in JavaScript zeigen
-- CNN Teil stark kürzen
+- CNN Teil
+  -  stark kürzen
+  - 3 Übungen MINST für js, colab fashion mnist für Python
 - RNN Teil mit Adder?
             </textarea>
         </section>
@@ -216,19 +218,46 @@
                 </section>
                 
                 <section>
-                    <h3>Plot Twist</h3>
-                    <p>Generalisation, not perfect reproduction is the objective</p>
-                    <ol>
-                        <li class="fragment">We split existing data into two sets</li>
-                        <li class="fragment">The larger set (60 or 80%) we use to build our model</li>
-                        <li class="fragment">The smaller set we use to validate the model</li>
-                    </ol>
-                </section>
-                
-                    <section>
-                        <img src="img/flashcards/Genderalization_print.png">
+                        <h1>Plot Twist</h1>
                     </section>
-
+    
+                    <section>
+                            <h3>Why predicting data that we already know?</h3>
+                        </section>
+    
+                    <section>
+                        <h3>Generalisation, not perfect reproduction is the objective</h3>
+                    </section>
+    
+    
+                    <section data-markdown>
+                        <textarea data-template>
+    ### All the data we have
+    <img src='img/supervised/generalization-all-data.png' height="450px">
+    
+    We split existing data into two sets
+                        </textarea>
+                    </section>
+    
+                    <section data-markdown>
+                            <textarea data-template>
+    ### Training data
+    <img src='img/supervised/generalization-train-data.png' height="450px">
+    
+    The larger set (60 or 80%) we use to build our model
+                        </textarea>
+                    </section>
+    
+                    <section data-markdown>
+                            <textarea data-template>
+    ### Validation data
+    
+    <img src='img/supervised/generalization-validation-data.png' height="450px">
+    
+    The smaller set is used to check how well we generalize
+                        </textarea>
+                    </section>
+    
                 <section>
                     <h2>Exercise #1, Part2 - How well did you generalize?</h2>
                     <p>Turn the page and redraw the lines you printed through from the first page</p>
@@ -284,16 +313,16 @@
 <div class="fragment">
     <pre><code contenteditable data-trim class="line-numbers python">
 if age < 25:
-if speed > 180:
-    return red
-else:
-    return yellow
+    if speed > 180:
+        return red
+    else:
+        return yellow
 if age > 75:
-return red
+    return red
 if km_per_year > 50:
-return red
+    return red
 if km_per_year > 35:
-return yellow
+    return yellow
 return green
             </code></pre>
 </div>
@@ -692,28 +721,28 @@ http://neuralnetworksanddeeplearning.com/chap2.html
         </textarea>
         </section>
 
-    <!-- <section>
-        <h3>Regularization: Avoid Overfitting</h3>
-    </section>
-
-    <section>
-        <img src="img/flashcards/Dropout_print.png">
-    </section>
-
-    <section>
-        <img src="img/flashcards/The_Effect_Of_Dropout_On_Hidden_Units_print.png">
-    </section>
-
-    <section>
-        <pre><code data-trim>
-from keras.layers import Dropout
-
-x = Dense(100, name='hidden1', activation='relu')(inputs)
-x = Dropout(0.15)(x)
-x = Dense(100, name='hidden2', activation='relu')(x)
-x = Dropout(0.15)(x)
-            </code></pre>
-    </section> -->
+        <section>
+            <img src="img/flashcards/Dropout_print.png">
+        </section>
+    
+        <section>
+            <img src="img/flashcards/The_Effect_Of_Dropout_On_Hidden_Units_print.png">
+        </section>
+    
+        <section>
+            <pre><code data-trim>
+    from keras.layers import Dropout
+    
+    x = Dense(100, name='hidden1', activation='relu')(inputs)
+    x = Dropout(0.15)(x)
+    x = Dense(100, name='hidden2', activation='relu')(x)
+    x = Dropout(0.15)(x)
+                </code></pre>
+        </section>
+    
+        <section>
+                <img src="img/flashcards/Overfit_Vs_Underfit_print.png">
+            </section>
 
         <section>
             <h1>Let the GPU burn</h1>
@@ -846,52 +875,13 @@ http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
         </p>
 </section>
     
-        <section data-markdown>
-    <textarea data-template>
-### Feature Channels
-Each output of a filter operation is called a feature channel.
-The deeper the channel the more abstract it is supposed to be.
+<section>
+        <h3>Relu: Rectified Linear Unit</h3>
+        <img src="img/cnn/relu.png" height="400px">
+        <p>Mostly used for Convolutional Networks</p>
+    </section>
 
-https://distill.pub/2017/feature-visualization/
-https://distill.pub/2018/building-blocks/
-</textarea>
-</section>
 
-<section data-markdown>
-    <textarea data-template>
-### Edges
-![Edges](img/cnn/edges.PNG)
-    </textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Textures
-![Textures](img/cnn/textures.png)
-    </textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Patterns
-![Patterns](img/cnn/patterns.png)
-    </textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Parts
-![Parts](img/cnn/parts.png)
-    </textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Objects
-![Objects](img/cnn/objects.png)
-    </textarea>
-</section>
-                        
                 <section data-markdown>
     <textarea data-template>
 ### Relu Activations for CNNs
@@ -960,29 +950,16 @@ The classifier more or less is what we used for our previous example
                 <img src="img/browser/keras-browser.png" height="350px">
             </a>
             <p><small>
-                <a href="https://transcranial.github.io/keras-js" target="_blank">https://transcranial.github.io/keras-js</a>
+                <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">https://transcranial.github.io/keras-js/#/mnist-cnn</a>
             </small></p>
         </section>
 
-            <section>
-                <h3>Training a network</h3>
-                    <a target="_blank" href="https://deeplearnjs.org/demos/model-builder/">
-                <img src="img/deeplearn-model-builder.png" height="500px">
-                </a>
-            <p>
-                <small>
-                    <a target="_blank" href="https://deeplearnjs.org/demos/model-builder/">
-                         https://deeplearnjs.org/demos/model-builder/</a>
-                </small>
-            </p>
-            </section>
-
                 <section>
-                    <h2>Practical Deep Learning with TensorFlow.js</h2>
+                    <h2>Practical Deep Learning with TensorFlow</h2>
                 </section>
 
                 <section>
-                    <h3>Sample Code: Creating a model</h3>
+                    <h3>Creating a convolutional model</h3>
                 <pre><code contenteditable data-trim class="fragment javascript">
 const model = tf.sequential();
             </code></pre>
@@ -1011,14 +988,14 @@ model.compile({
 </section>
 
                 <section style="font-size: xx-large">
-                    <h3>Shared Exercise</h3>
+                    <h3>Exercise Option 1</h3>
                     <p>Use tensorflow.js to experiment on the MNIST data set</p>
                     <p>
                                     <a href="js/mnist" target="_blank">
-                                        https://djcordhose.github.io/haw/code/mnist/</a>
+                                        https://djcordhose.github.io/ai/code/mnist/</a>
                         </p>
                     <ol>
-                        <li>clone <em>https://github.com/DJCordhose/haw</em> and locate <em>code/mnist</em></li>
+                        <li>clone <em>https://github.com/DJCordhose/ai</em> and locate <em>docs/code/mnist</em></li>
                         <li>run a local http server in this folder</li>
                         <li>make your changes to <code>model.js</code></li>
                         <li>Experiment with number of epochs (TRAIN_BATCHES), learning rate, and number of filters in convolutional layers</li>
@@ -1027,10 +1004,18 @@ model.compile({
                     </ol>
                     <p>
                             Reference: 
-                                    <a href="https://js.tensorflow.org/api/0.10.0/" target="_blank">
-                                        https://js.tensorflow.org/api/0.10.0/</a>
+                                    <a href="https://js.tensorflow.org/api/0.11.2/" target="_blank">
+                                        https://js.tensorflow.org/api/0.11.2/</a>
                         </p>
                 </section>
+
+                <section data-markdown>
+                        <textarea data-template>
+## Inspiration for your project
+
+</textarea>
+                </section>
+
 
                 <section data-markdown>
                         <textarea data-template>
@@ -1043,27 +1028,6 @@ https://distill.pub/2018/building-blocks/
 </small>
                 </textarea>
                 </section>
-
-
-                <section data-markdown  style="font-size: x-large">
-                        <textarea data-template>
-## Further Reading: How do Neural Networks work inside
-
-- https://distill.pub/2017/feature-visualization/
-- https://research.googleblog.com/2018/03/the-building-blocks-of-interpretability.html
-- https://www.nytimes.com/2018/03/06/technology/google-artificial-intelligence.html
-- https://twitter.com/enjalot/status/971116427598950400?s=03
-- https://github.com/tensorflow/lucid
-- https://colab.research.google.com/github/tensorflow/lucid/blob/master/notebooks/tutorial.ipynb
-                </textarea>
-                </section>
-
-                <section data-markdown>
-                        <textarea data-template>
-## Inspiration for your project
-
-                </section>
-
     </div>
 
 </div>
