@@ -1,3 +1,5 @@
 .ipynb_checkpoints
 /*.csv
 /*.png
+tmp_figures
+*.hdf5
