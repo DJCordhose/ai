@@ -164,17 +164,25 @@
             </small>
         </section>
 
-        <section data-markdown class="todo">
+        <section data-markdown class="local" style="font-size: xx-large">
                 <textarea data-template>
-- Anwendungen als Anregungen
-  - sowohl mit tensorflow.js als auch colab
-  - Inspiration aus Praktikumsaufgaben
-- Code Samples auch in JavaScript zeigen
-- CNN Teil
-  - Übungen MINST für js, colab fashion mnist für Python
-- RNN Teil mit Adder?
+### Schedule
+
+* 9-9:30: Breakfast @Udslopen
+* 9:30- 12:30: Introduction into Machine Learning with TensorFlow (incl. Breaks)
+* 12:30 - 13:00 Inspiration for Projects, Ideas / Team forming
+* 13 - 14: Lunch
+* 14 - 17:30: Work on Projects
+* 17:30 - 18:00 Presentation (if there is anything to present, no pressure, no winners, no loosers)
+* 18:00 - 20:00 Beer
+* 20:00 Football https://www.fussball-wm.pro/wm-2018/mannschaften-teams/deutschland/
+</textarea>
+</section>
+
+        <!-- <section data-markdown class="todo">
+                <textarea data-template>
             </textarea>
-        </section>
+        </section> -->
                 
 
 
@@ -1007,19 +1015,272 @@ model.compile({
                                         https://js.tensorflow.org/api/0.11.2/</a>
                         </p>
                 </section>
+        <section data-markdown>
+                <textarea data-template>
+### Using TensorFlow with Keras Layers
+
+28x28 grayscale images of fashion Items
+
+<img src="img/fashion-mnist-sprite.png" height="300px">
+
+<small>
+Tutorial: https://medium.com/tensorflow/hello-deep-learning-fashion-mnist-with-keras-50fcff8cd74a
+<br><br>
+Colab Notebook: https://colab.research.google.com/github/margaretmz/deep-learning/blob/master/fashion_mnist_keras.ipynb
+</small>
+        </textarea>
+        </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Exercise Option 2
+
+Use the Fashion MNINST Colab Notebook
+
+* Change Architecture (other/more/less Layers, different Sequence, less/more Filters`)
+* Prevent overfitting even better 
+<small>
+  * https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization
+  * https://stackoverflow.com/questions/34716454/where-do-i-call-the-batchnormalization-function-in-keras
+
+</small>
+</textarea>
+</section>
+
+
+    <section>
+        <h2>Simple RNNs</h2>
+        <h3>Recurrent Neural Networks</h3>
+    </section>
+
+    <section>
+            <h3>Text and sequences are special</h3>
+            <img src='img/applications/decisions/data.png'>
+        </section>
+    
+        <section data-markdown>
+        <textarea data-template>
+### Challenge for traditional neural networks
+
+How would you solve sequence to sequence translation?
+
+Simple and theoretical example: addition digit by digit
+
+```
+216
++648
+===
+864
+```
+
+
+What is the challenge?
+        </textarea>
+    </section>
+                        
+
+    <section>
+        <h3>Motivation</h3>
+        <p>Traditional Networks have no memory of previous events</p>
+        <p>Number to Number enconding needs to factor in carry</p>
+    </section>
+
+        
+    <section data-markdown>
+        <textarea data-template>
+### Solution: RNNs - Networks with Loops
+<img src='img/nlp/colah/RNN-rolled.png' height="450px">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Unrolling the loop
+<img src='img/nlp/colah/RNN-unrolled.png'>
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Simple RNN
+
+<img src='img/nlp/fchollet_rnn.png'>
+
+<script type="math/tex; mode=display">
+output_t = \tanh(W input_t + U output_{t-1} + b)
+</script>
+
+<small>
+<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/129">
+Deep Learning with Python, Chapter 6, François Chollet, Manning            
+</a>
+
+</small>
+
+</textarea>
+</section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Generating musical sequences        
+
+Training a latent space and generating a new sequences
+
+<img src='img/nsynth-ae.png'>
+
+<small>
+https://magenta.tensorflow.org/music-vae
+</small>
+</textarea>
+</section>
+    
+    <section data-markdown>
+            <textarea data-template>
+### Also perfect for natural language Sequence to Sequence translations
+
+<img src='img/nlp/encdec.jpg'>
+
+<small>
+https://www.tensorflow.org/tutorials/seq2seq
+</small>
+</textarea>
+</section>
+    <section data-markdown>
+            <textarea data-template>
+### Encoding addition as a Sequence to Sequence translation
+
+<img src='img/nlp/rnn-adder-input.png' height="500px">
+                </textarea>
+                </section>
+    
+    <section data-markdown>
+            <textarea data-template>
+### Each time step generates a digit of the result
+
+<img src='img/nlp/rnn-adder-output.png' height="500px">
+                </textarea>
+                </section>
+
+    <section data-markdown>
+    <textarea data-template>
+### Seeing the network at work in a notebook
+
+
+```
+Input: "216+648"
+Output: "864"
+```
+
+Padding is handled by using a repeated sentinel character (space)
+
+<small>
+Notebook: https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/rnn-add-example.ipynb
+<br>
+https://machinelearningmastery.com/learn-add-numbers-seq2seq-recurrent-neural-networks/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Example Application: Using sequences of events
+<img src='img/magenta-rnn-duck.png' height="400px">
+
+<small>
+https://twitter.com/random_forests/status/987394050914385927
+<br>
+https://magenta.tensorflow.org/assets/sketch_rnn_demo/index.html
+</small>
+        </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Main issues with RNNs
+
+_Vanishing or exploding gradient problem:_
+* Each step in training applies the same weights to the output, also in back-propagation  
+* The further we move backwards, the bigger (explodes) or smaller (vanishes) our signal becomes
+
+<small>
+https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Intution of effect
+
+_Effectively long term memory does not work:_
+
+* RNNs experiences difficulty in memorising words from far away in the sequence
+* Predictions based on most recent words only
+
+<small>
+    https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### GRU (Gated Recurrent Unit) / LSTMS (Long short-term memory)
+
+_allow past information
+to be reinjected at a later time, thus fighting the vanishing-gradient problem_
+
+<small>
+https://en.wikipedia.org/wiki/Long_short-term_memory
+<br>            
+<a href="https://www.manning.com/books/deep-learning-with-python">
+    Deep Learning with Python, Chapter 6.2.2, François Chollet, Manning            
+</a>            
+https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
+<br>
+<br>
+https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
+<br>
+<br>
+https://arxiv.org/ftp/arxiv/papers/1701/1701.05923.pdf
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+## Creating our very own sentiment analysis
+### Using embeddings to train recurrent networks
+
+Notebooks:
+<small>
+* https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/2-rnn.ipynb
+* https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/2-lstm.ipynb
+* https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/3-gru-dropout.ipynb (final version avoiding overfitting)
+
+</small>
+   
+        </textarea>
+        </section>
+
+
 
                 <section data-markdown>
                         <textarea data-template>
-## Inspiration for your project
+# Inspiration and Starting Points for your project
 
 </textarea>
                 </section>
-
-                <section data-markdown class="todo">
-                        <textarea data-template>
-                https://ml5js.org/
-            </textarea>
-        </section>
+            
 
                 <section data-markdown>
                         <textarea data-template>
@@ -1032,6 +1293,98 @@ https://distill.pub/2018/building-blocks/
 </small>
                 </textarea>
                 </section>
+
+            <section>
+                    <h3>Start with TensorFlow.js Core Concepts</h3>
+                <p>It's all about matrix operations</p>
+                    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const a = tf.tensor1d([1, 2, 3]);
+    const b = tf.scalar(2);
+    
+    // a is not modified, result is a new tensor
+    const result = a.add(b);
+                    </code></pre>
+                                        
+                    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const data = await result.data(); 
+    console.log(data); // Float32Array([3, 4, 5]
+                    </code>
+                </pre>
+                <p>
+                    <small>
+                            <a href="js/tensorflow-sandbox/minimal.html" target="_blank">Minimal Example</a>
+                            <br>
+                            <a href="https://js.tensorflow.org/tutorials/core-concepts.html" target="_blank">
+                                https://js.tensorflow.org/tutorials/core-concepts.html</a>
+            
+                    </small>
+                </p>
+            </section>
+        
+            <section data-markdown>
+                    <textarea data-template>
+### Play with optimizers in a simple example
+<img src='img/curve-fitting.png'>
+<small>
+<a href="js/polynomial-regression-core/" target="_blank">Polynomial Regression Example</a>
+<br>
+https://js.tensorflow.org/api/0.11.6/#Training-Optimizers
+    </small>
+
+        </textarea>
+                </section>
+            
+                    <section data-markdown>
+            <textarea data-template>
+### Understanding binary Classifier using Logistic Regression
+
+<video controls autoplay loop src="https://video.twimg.com/tweet_video/DeAhZjGV0AIslot.mp4" type="video/mp4"></video>
+                
+<small>
+https://kaustubholpadkar.github.io/Logistic%20Regression%20Tensorflow.js/
+https://twitter.com/olpadkar/status/999837765289234432    
+</small>
+</textarea>
+</section>
+            
+                <section data-markdown>
+                        <textarea data-template>
+### Machine Learning accessible for artists based on tensorflow.js
+
+<img src='img/ml5js.png'>
+
+https://ml5js.org/
+            </textarea>
+        </section>
+        <section data-markdown>
+                <textarea data-template>
+### PoseNet: Real-time pose estimation
+
+<img src='img/posenet_camera.gif' height="400px">
+
+<small>
+https://twitter.com/random_forests/status/993639149780459520
+<br>
+https://twitter.com/teropa/status/1001151524351959041
+</small>    
+            
+                </textarea>
+            </section>
+    <section data-markdown>
+            <textarea data-template>
+### Deep Reinforcement learning (DQN)
+
+<img src='img/dqn.png' height="400px">
+
+<small>
+https://twitter.com/sqcai/status/994205618620850176
+<br>
+http://web.sfc.keio.ac.jp/~t15704yn/falling/
+</small>    
+        
+            </textarea>
+        </section>
+
     </div>
 
 </div>
