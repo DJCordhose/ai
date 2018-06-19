@@ -49,7 +49,7 @@ let optimizer;
   // https://js.tensorflow.org/api/0.6.1/#train.sgd
   const learningRate = 0.5;
   const sgdOptimizer = tf.train.sgd(learningRate);
-  // optimizer = sgdOptimizer;
+  optimizer = sgdOptimizer;
 }
 {
   // https://distill.pub/2017/momentum/
@@ -57,7 +57,7 @@ let optimizer;
   const LEARNING_RATE = 0.1;
   const MOMENTUM = 0.9; // possibly good values [0.5, 0.9, 0.95, 0.99]
   momentumOptimizer = new tf.train.momentum(LEARNING_RATE, MOMENTUM);
-  optimizer = momentumOptimizer;
+  // optimizer = momentumOptimizer;
 }
 {
   // http://cs231n.github.io/neural-networks-3/#ada
