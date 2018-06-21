@@ -191,22 +191,238 @@
             </textarea>
         </section>
                 
+        <section data-markdown>
+            <textarea data-template>
+## Why is Machine Learning exciting?
+            </textarea>
+        </section>
+        
+<section data-markdown>
+        <textarea data-template>
+### Wavenet passes turing test?
+
+System can call people and make appointments (without people noticing it is a machine)
+
+<img src='img/rnn_big.png'>
+
+<small>
+https://ai.googleblog.com/2018/05/duplex-ai-system-for-natural-conversation.html
+</small>
+            </textarea>
+            </section>
+    <section data-markdown>
+            <textarea data-template>
+    ### Faking Video
+    
+    Learning a model from a few minutes of video
+    
+    <img src="img/fake_obama.png">
+    
+<small>
+https://s2018.siggraph.org/presentation/?id=papers_129&sess=sess146
+<br>
+https://youtu.be/qc5P2bvfl44?t=60
+<br>
+<a href="https://www.reddit.com/r/MachineLearning/comments/8kj06q/r_ai_tool_controls_people_in_videos_deep_video/">
+        Comments on Reddit
+</a>
+</small>
+    </textarea>
+    </section>
+    
+        <section data-markdown>
+            <textarea data-template>
+## Examples in the Browser using TensorFlow.js
+
+https://js.tensorflow.org/
+            </textarea>
+        </section>
 
 
+        <section data-markdown>
+                <textarea data-template>
+### Real-time pose estimation
 
+<img src='img/posenet_camera.gif' height="400px">
+
+<small>
+Demo: https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html
+<br>
+Links: https://twitter.com/random_forests/status/993639149780459520
+<br>
+Application: https://twitter.com/teropa/status/1001151524351959041
+</small>    
+            
+                </textarea>
+            </section>
+
+                <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+    ### Find Emojis in the real world
+    
+    Loads a MobileNet (Neural Network optimized for mobile devices) fully trained on all the Emojis
+    
+    <a href="https://emojiscavengerhunt.withgoogle.com/">
+    <img src="img/tfjs/scavenger_hunt.png" height="350px">
+    </a>
+    
+    https://github.com/google/emoji-scavenger-hunt
+    https://js.tensorflow.org/tutorials/mnist.html
+    
+    </textarea>
+    </section>
+
+    <section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+        ### Pacman using gesture control
+        
+        Loads a pretrained MobileNet and let's you refine it to your face (transfer learning) 
+        
+        <a href="https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html">
+        <img src="img/tfjs/pacman.png" height="350px">
+        </a>
+        
+        https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
+        
+        </textarea>
+        </section>
+
+<section>
+<h3>Generating Celebreties - From Keras to tensorflow.js</h3>
+<p>Trained for two weeks on a single high-end GPU on CelebA-HQ data set (images of celebreties)</p>
+<div class="fragment" style="float: left">
+    <img src="img/unsupervised/gan-model-male2.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female2.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female1.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-male.png" height="200">
+</div>
+<p style="clear: both">
+<small>
+<a href="https://alantian.net/ganshowcase/" target="_blank">https://alantian.net/ganshowcase/</a>
+<br>
+<a href="https://github.com/alantian/ganshowcase" target="_blank">https://github.com/alantian/ganshowcase</a>
+<br>
+<a href="https://twitter.com/alanyttian/status/988242167998148608" target="_blank">https://twitter.com/alanyttian/status/988242167998148608</a>
+</small>
+                   
+</p>
+</section>                                
+        
  <section>
         <h1>The Basics</h1>
         <h2>How does Machine Learning work?</h2>
     </section>
 
             <section>
-                <h3>Customer Data - Car Insurance</h3>
+                <h3>Our Use Case: Customer Data - Car Insurance</h3>
                 <img src="img/insurance/automobile-insurance.png" height="400px">
                 <p>
                     <small>How would you rank me (47) for a car with 160 km/h top speed?</small>
                 </p>
             </section>
-
+                    
+            <section>
+                    <h3>Classic Approach: Code Rules by hand</h3>
+                    <div class="fragment">
+                        <pre><code contenteditable data-trim class="line-numbers python">
+                    if age < 25:
+                        if speed > 180:
+                            return red
+                        else:
+                            return yellow
+                    if age > 75:
+                        return red
+                    if km_per_year > 50:
+                        return red
+                    if km_per_year > 35:
+                        return yellow
+                    return green
+                                </code></pre>
+                    </div>
+                    </section>
+                    
+                        <section data-markdown>
+                    <textarea data-template>
+                    <img src='img/sketch/classic-development.jpg'>
+                    </textarea>
+                    </section>
+                    
+                    <section>
+                    <h3>No great results</h3>
+                            <p>
+                                approx. 43% correct predictions
+                            </p>
+                    </section>
+                    <section>
+                    <h3>Drawing Decision Boundaries to understand why this does not perform well</h3>
+                    </section>
+                    
+                    <section>
+                    <img src="img/flashcards/Decision_Boundary_print.png">
+                    </section>
+                    <section>
+                    <h3>Decision Boundaries for the Hand Coded Rules</h3>
+                    <div class="fragment">
+                        <img src="img/insurance/manual.png" height="400px">
+                            <p>
+                                <small>approx. 43% correct predictions (guessing would be 33%)</small>
+                            </p>
+                    </div>
+                    </section>
+                    
+                    <section>
+                    <h3>Do we have all the rules? Are they even correct?</h3>
+                    </section>
+                    
+                    <section>
+                            <h2>Different Approach: Machine Learning</h2>
+                        </section>
+                    
+                        <section data-markdown>
+                            <textarea data-template>
+                    <img src='img/sketch/supervised-ml.jpg'>
+                        </textarea>
+                    </section>
+                    
+                        <section>
+                                <img src="img/insurance/ml-phases.png" height="450px">
+                        </section>
+                        <section data-markdown>
+                            <textarea data-template>
+                    <img src='img/sketch/using-a-model.jpg'>
+                        </textarea>
+                    </section>
+                    
+                    <section>
+                            <h2>
+                                <small>There are different types of machine learning</small>
+                            </h2>
+                            <div style="margin-top: -30px">
+                                <img src="img/sketch/types-of-ml.png" height="500px">
+                            </div>
+                        </section>
+                    
+                        <section>
+                                <img src='img/applications/decisions/type.png'>
+                            </section>
+                            <section>
+                                    <h3>Supervised Machine Learning as an Experiment</h3>
+                                    <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                                        <img src="img/browser/teachable-machine.png" height="350px">
+                                    </a>
+                                    <p>
+                                        <small>
+                                            <a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+                                        </small>
+                                    </p>
+                                </section>
+                    
 
                 <section>
                     <h3>Paper Exercise #1 - Understanding the Supervised Learning Approach</h2>
@@ -310,94 +526,77 @@
                     <p class="fragment">Not so bad - we humans are good at clustering in 2-d</p>
                 </section>
 
-<section>
-<h2>How do we make an automatic, general prediction?</h3>
-</section>
+                    <section>
+                        <h3>Supervised Machine Learning</h3>
+                    <ul>
+                        <li class="fragment">What we just did</li>
+                        <li class="fragment">Train a system using known data</li>
+                        <li class="fragment">There are different strategies to train a system</li>
+                        <li class="fragment">For our problem a simple strategy will do</li>
+                    </ul>
+                    </section>
+            
+                    <section>
+                            <h3>Typical application: Classification</h3>
+                            <div class="fragment">
+                                <img src="img/sketch/classification.jpg" height="450px">
+                            </div>
+                            <p class="fragment">We have to deal with a classification problem</p>
+                        </section>
 
-<section>
-<h3>Classic Approach: Code Rules by hand</h3>
-<div class="fragment">
-    <pre><code contenteditable data-trim class="line-numbers python">
-if age < 25:
-    if speed > 180:
-        return red
-    else:
-        return yellow
-if age > 75:
-    return red
-if km_per_year > 50:
-    return red
-if km_per_year > 35:
-    return yellow
-return green
-            </code></pre>
-</div>
-</section>
-
-    <section data-markdown>
-<textarea data-template>
-<img src='img/sketch/classic-development.jpg'>
-</textarea>
-</section>
-
-<section>
-<h3>No great results</h3>
-        <p>
-            approx. 43% correct predictions
-        </p>
-</section>
-<section>
-<h3>Drawing Decision Boundaries to understand why this does not perform well</h3>
-</section>
-
-<section>
-<img src="img/flashcards/Decision_Boundary_print.png">
-</section>
-<section>
-<h3>Decision Boundaries for the Hand Coded Rules</h3>
-<div class="fragment">
-    <img src="img/insurance/manual.png" height="400px">
-        <p>
-            <small>approx. 43% correct predictions (guessing would be 33%)</small>
-        </p>
-</div>
-</section>
-
-<section>
-<h3>Do we have all the rules? Are they even correct?</h3>
-</section>
-
-<section>
-        <h2>Different Approach: Machine Learning</h2>
-    </section>
-
-    <section data-markdown>
-        <textarea data-template>
-<img src='img/sketch/supervised-ml.jpg'>
-    </textarea>
-</section>
-
-    <section>
-            <img src="img/insurance/ml-phases.png" height="450px">
-    </section>
-    <section data-markdown>
-        <textarea data-template>
-<img src='img/sketch/using-a-model.jpg'>
-    </textarea>
-</section>
-
-<section>
-        <h2>
-            <small>There are different types of machine learning</small>
-        </h2>
-        <div style="margin-top: -30px">
-            <img src="img/sketch/types-of-ml.png" height="500px">
-        </div>
-    </section>
-
+                        <section>
+                                <h3>Data: Quantity</h3>
+                                <img src='img/applications/decisions/classic.png' height="500px">
+                                <p>We have 300 data sets, this is small</p>
+                            </section>
+                    
+                        <section>
+                            <h3>KNN: k Nearest Neighbors</h3>
+                            <p>A simple classic</p>
+                            <p>This is also used in the Teachable Machine Example</p>
+                        </section>
+                    
+                        <section>
+                            <img src="img//insurance/knn.png">
+                        </section>
+                        <section>
+                            <h3>Algorithm</h3>
+                            <p>For a case to predict</p>
+                            <ol>
+                                <li>Plot the case together with the known samples
+                                <li>Look at a number (k) of nearest data points
+                                <li>Choose k in such a way that you can get a majority
+                                <li>Your prediction is the color of the majority
+                            </ol>
+                        </section>
+                    
         <section data-markdown>
                 <textarea data-template>
-## What we will use
+### Experiment with different numbers (k) of neighbors
+
+<img src='img/knn-sample.png' height="400px">
+<small>
+https://beta.observablehq.com/@nsthorat/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset
+</small>
+        </textarea>
+        </section>
+
+
+                        <section>
+                                <h3>Computed results for k = 13</h3>
+                                <div class="fragment">
+                            
+                                    <img src="img/insurance/knn-13.png" height="400px">
+                                    <p>
+                                        <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
+                                    </p>
+                                </div>
+                                <p class="fragment">Notice the smooth boundaries</p>
+                            </section>
+    
+        <section data-markdown>
+                <textarea data-template>
+## What we will use for the rest of the Workshop
 * Supervised Machine Learning
 * Neural Networks
 * Deep Learning
@@ -406,7 +605,7 @@ return green
                     </section>
 
     <section>
-            <h3>Best known results using TensorFlow</h3>
+            <h3>Results using Neural Networks and TensorFlow</h3>
             <div class="fragment">
         
                 <img src="img/insurance/cnn.png" height="400px">
@@ -1381,7 +1580,7 @@ https://twitter.com/olpadkar/status/999837765289234432
 https://ml5js.org/
             </textarea>
         </section>
-        <section data-markdown>
+        <!-- <section data-markdown>
                 <textarea data-template>
 ### Real-time pose estimation
 
@@ -1411,7 +1610,7 @@ http://web.sfc.keio.ac.jp/~t15704yn/falling/
 </small>    
         
             </textarea>
-        </section>
+        </section> -->
 
     </div>
 
