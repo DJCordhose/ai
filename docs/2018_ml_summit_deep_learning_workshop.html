@@ -198,8 +198,10 @@ https://t.co/er36sX0OqG
 (https://twitter.com/aureliengeron/status/960509659558932483?s=03
 
 - Immer erst einen einzelen Batch overfitten
-most common neural net mistakes: 1) you didn't try to overfit a single batch first. 2) you forgot to toggle train/eval mode for the net. 3) you forgot to .zero_grad() (in pytorch) before .backward(). 4) you passed softmaxed outputs to a loss that expects raw logits. ; others? :)
+  - most common neural net mistakes: 1) you didn't try to overfit a single batch first. 2) you forgot to toggle train/eval mode for the net. 3) you forgot to .zero_grad() (in pytorch) before .backward(). 4) you passed softmaxed outputs to a loss that expects raw logits. ; others? :)
 (https://twitter.com/karpathy/status/1013244313327681536?s=03)
+  - My main takeaway from this thread (all perfectly good mistakes to make) is how many of these traps you will never fall into by using a suitable higher level API. Except 1 though. 1 is a process mistake and it's a fantastic lesson to learn. https://t.co/chMmdQ8vjm
+  (https://twitter.com/martin_wicke/status/1013550466125328384?s=03)
 
             </textarea>
         </section>
