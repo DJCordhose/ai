@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Search</title>
+    <title>Panel: KI – Utopie oder Dystopie?</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -147,219 +147,146 @@
 <div class="reveal">
     <div class="slides">
 
+<!-- Insbesondere in der Boulevardpresse wird immer wieder auf die mögliche Machtübernahme der Roboter hingewiesen. Diese sollen
+dabei Bewusstsein entwickelt haben und zum Schluss gekommen sein, dass die Welt ohne Menschen ihrem Optimierungsziel noch
+näher kommt.
 
+Jenseits solcher reißerischer Meldungen sprechen wir in diesem Speaker-Panel über die Möglichkeiten, wie Machine Learning
+und KI eine positive Wirkung auf unsere Gesellschaft haben können, aber auch worauf wir achten müssen, um unerwünschte Effekte
+zu vermeiden. -->
         <section>
-            <h2>Graph Search: The Silver Bullet of Symbolic AI</h2>
+            <h2>Panel: KI – Utopie oder Dystopie?</h2>
+            <p><a target="_blank" href="https://ml-summit.de/specialized-topics/panel-ki-utopie-oder-dystopie/">
+                ML Summit, Berlin, October 2018
+            </a></p>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
-            <!-- <p><small><a href="xxx">
-                xxx
-            </a></small></p> -->
+            <p><small><a href="https://djcordhose.github.io/ai/2018_ml_summit_utopie_dystopie.html">
+                https://djcordhose.github.io/ai/2018_ml_summit_utopie_dystopie.html
+            </a></small></p>
         </section>
-    <section data-markdown class="todo">
-        <textarea data-template>
-- https://qiao.github.io/PathFinding.js/visual/
-  - Kann auch zeigen, dass Manhatten Distance als Heuristic nicht admissible ist wenn man auch quer gehen kann
-    </textarea>
-</section>
-
-<section>
-    <h2>Search</h2>
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
-### Alpha-Beta Pruning
-
-<img src='img/haw/alpha_beta_pruning.jpg'>
-            </textarea>
-            </section>
-<section data-markdown class="todo">
-        <textarea data-template>
-### Game Search
-
-Full Search often not feasible (Zahlen von Michael klauen aus den Folien, WP.odp, Seite 16)
-* Limit in Depth: Mini Max / Alpha Beta Pruning
-* Limit in Breadth: Monte-Carlo Tree Search
-    </textarea>
-    </section>
-    
-    <section data-markdown class="todo">
-            <textarea data-template>
-### Reasonable Heuristic is cruical
-
-* Good solutions available for chess
-* No good solutions for Go
-    * Only a win as a state is a reliable indication
-    * Need to search to the end
-    * Branching Factor Higher than Chess as well
-
-        </textarea>
-        </section>
-        
-        <section data-markdown class="todo">
-                <textarea data-template>
-### Monte Carlo Game Search
-
-* Start from a next move beginning from an initial state
-* For each next move
-    * Play a game to the _end_ using a random set of moves
-    * Repeat for a number of times
-    * Count number of times for win, loose, draw
-* Choose the move with the best probability for a win
-
-Choose number of random experiment wisely based on branching factor
-
-https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Pure_Monte_Carlo_game_search
-            </textarea>
-            </section>
-        
-            <section data-markdown class="todo">
-                    <textarea data-template>
-### Monte Carlo Game Search
-
-<img src='img/haw/monte_carlo_game_search.jpg'>
-                        </textarea>
-                        </section>
-                <section data-markdown class="todo">
-                    <textarea data-template>
-Mittlere Züge bis zum Spielende: aus WP.opd, Seite 20
-                </textarea>
-                </section>
 
         <section data-markdown class="todo">
             <textarea data-template>
-### Monte Carlo Tree Search
-
-* https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/
-* https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
-        </textarea>
+- Fazit aus Zusammenfassung
+            </textarea>
         </section>
-    
-        <section data-markdown>
-    <textarea data-template>
-### A simple Example - Robot Run
-<img src="img/search/robot_run.jpg" alt="Alpha Beta" height="450px">
-
-Robot needs to find Portal/Goal
-</textarea>
-</section>
         
-<section data-markdown>
-    <textarea data-template>
-### How to find a path
+        <section data-markdown class="todo">
+            <textarea data-template>
+### Daten
 
-<img src="img/search/search.jpg" height="450px">
+- Volkszählung als Beispiel
+  - in den 80ern boykottiert
+  - Verantwortung für Daten, wie leicht ist es an Daten zu kommen.
+  - wen interessiert es nun?
+            </textarea>
+        </section>
 
-By expanding possibilities
-</textarea>
-</section>
+        <section data-markdown class="todo">
+            <textarea data-template>
+### Wandel der Berufe
 
-<section>
-    <h2>Game Play</h2>
-</section>
+- Schriftsetzer -> Mediengestalter -> KI
+- Fernfahrer, Busfahrer -> Mediengestalter -> KI
+- Paketbote
+- Verkäufer
+- Sekratär
+- Sachbearbeiter
 
-<!-- http://www.dokchess.de/_downloads/szoerner_majug2012_architekturentwurf_schach_deploy.pdf -->
-<section data-markdown >
-    <textarea data-template>
-### On the importance of looking ahead
+            </textarea>
+        </section>
 
-Why looking ahead? Isn't a heuristic evaluation good enough?
+        <section data-markdown class="todo">
+            <textarea data-template>
+### Wer sollte Verantwortung tragen?
 
-Kudos for position to https://twitter.com/StefanZoerner
+- Kunde, Nutzer?
+- Entwickler?
+- Konzerne, Hersteller?  
+- Staat?
+  - Legislative
+  - Judicative
+- Niemand?
 
-https://www.embarc.de/schachbegriffe-auf-englisch/
-</textarea>
-</section>
+            </textarea>
+        </section>
 
-<section data-markdown>
-    <textarea data-template>
-### Checkmate unavoidable?
+        <section data-markdown class="todo">
+            <textarea data-template>
+### Dystopie
 
-<img src="img/search/pos1.jpg" height="450px">
+- Proprietäre KI
+- Datenmonopole 
+- Manipulierte Massen
+- Willkür
+- Autonome KI
+            </textarea>
+        </section>
 
-FEN: 2R5/8/p7/7p/6pP/5pP1/5P1K/k4q2 w - - 0 1
-</textarea>
-</section>
+        <section data-markdown class="todo">
+            <textarea data-template>
+### Utopie
 
-<section data-markdown>
-    <textarea data-template>
-### Using a heuristic to avoid loss of a piece
+- Offene KI
+- Dezentralisierte Daten 
+- Aufgeklärte und mündige Massen
+- Kein Zwang zu Arbeit
+- Unterstützung und Verstärkung des menschlichen Geists
+            </textarea>
+        </section>
 
-<img src="img/search/pos2_no_loss.jpg" height="450px">
+        <section data-markdown class="todo">
+            <textarea data-template>
+### Aktueller Zustand
 
-Random move of Rook, but no loss
-</textarea>
-</section>
+- KI Forschung
+  - Offen
+- Daten und Besitz
+  - Zentralisiert in wenigen Händen
+- Manipulationen
+- Anwendungen
 
-<section data-markdown>
-    <textarea data-template>
-### But Checkmate in next move
 
-<img src="img/search/pos3_mate.jpg" height="450px">
+            </textarea>
+        </section>
 
-Rook saved, but not effectively used
-</textarea>
-</section>
+        <section data-markdown class="todo">
+            <textarea data-template>
+### Verantwortung der Informatiker
 
-<section data-markdown>
-    <textarea data-template>
-### Rewind to initial position
+1. Ergänzen anstatt ersetzen
+2. Gefährdung von Menschen ausschließen
+3. Keine Angriffsfläche bieten
+   1. Übernahem von Robotern
+   1. Schutz von Daten
 
-<img src="img/search/pos1.jpg" height="450px">
+TODO: vs Asimov
+            </textarea>
+        </section>
 
-This time we look ahead
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Certain loss of Rook
 
-<img src="img/search/pos2_check.jpg" height="450px">
+                    <!-- <section>
+            <h3>Zusammenfassung</h3>
+            <ul>
+                <li class="fragment">Machine Learning kann bei bestehenden Daten von diesen abstrahieren und generalisieren
+                <li class="fragment">Durchdringen der Domäne nur für die Datenanalyse erforderlich
+                <li class="fragment">Oft reichen einfache Strategien
+                <li class="fragment">Machine Learning ist die Fortsetzung der Digitalisierung
+            </ul>
+            <p><small>
+                Machine Learning auch für dein Projekt
+                <br>
+            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>
+            <a href="http://bit.ly/ml-intro-workshop">
+                http://bit.ly/ml-intro-workshop
+            </a>
+            </small></p>
+            <p><small>Mehr: <a href="https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html">https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html</a></small></p>
+        </section> -->
 
-Bad local evaluation
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Of course Queen has to capture Rook
 
-<img src="img/search/pos3_stalemate.jpg" height="450px">
-
-But this means Stalemate and a Draw
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Intuition for Alpha Beta Pruning
-<img src="img/search/alpha-beta-intuition.png" alt="Alpha Beta Intuition" height="400px">
-
-No matter what Min does, Max can always win in leftmost branch, no need to check for the others
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Complete Search Tree for Robot Run
-<img src="img/search/mini-max-tree.jpg" alt="Alpha Beta" height="450px">
-
-Top Right Branch can be pruned completely
-</textarea>
-</section>
-
-<section data-markdown style="font-size: xx-large">
-    <textarea data-template>
-### How does Stockfish Play
-
-* Alpha-Beta Search Pruning: https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_search
-* Bitboards: https://en.wikipedia.org/wiki/Bitboard
-* Transposition Tables: https://en.wikipedia.org/wiki/Transposition_table
-* Late Move Reductions:: https://en.wikipedia.org/wiki/Late_Move_Reductions 
-
-https://en.wikipedia.org/wiki/Stockfish_(chess)
-
-</textarea>
-</section>
     </div>
 
 </div>
@@ -389,8 +316,10 @@ https://en.wikipedia.org/wiki/Stockfish_(chess)
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+        $('section').attr('data-background-image', "backgrounds/murmel2.jpg")
+
     </script>
     
 <script>
@@ -404,11 +333,6 @@ https://en.wikipedia.org/wiki/Stockfish_(chess)
         center: true,
 
         transition: 'fade', // none/fade/slide/convex/concave/zoom
-
-        math: {
-            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-        },
 
         // Optional reveal.js plugins
         dependencies: [
@@ -437,8 +361,7 @@ https://en.wikipedia.org/wiki/Stockfish_(chess)
             {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
             {src: 'reveal.js/plugin/notes/notes.js', async: true},
             // https://github.com/mikemiles86/reveal-line-numbers
-            {src: 'lib/js/line-numbers.js'},
-            { src: 'reveal.js/plugin/math/math.js', async: true }
+            {src: 'lib/js/line-numbers.js'}
         ]
     });
 
