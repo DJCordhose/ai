@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Visualizing Machine Learning</title>
+    <title>ML Decision Boundaries</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -167,7 +167,8 @@ will also cover k-nearest neighbors and neural networks.
 -->
 
         <section>
-            <h2>Understanding Machine Learning by looking at visualizations of decision boundaries</h2>
+            <h2>Visualizing Machine Learning Decision Boundaries</h2>
+            <p>Understanding Machine Learning strategies by looking at decision boundaries</p>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
             <small>
@@ -177,187 +178,90 @@ will also cover k-nearest neighbors and neural networks.
                 
         </section>
 
-    <section data-markdown class="todo">
+    <!-- <section data-markdown class="todo">
             <textarea data-template>
-- QR Code hinten
         </textarea>
+    </section> -->
+    
+    <section>
+        <h3>Data Set Insurance</h3>
+        <img src="img/insurance/automobile-insurance.png">
+    </section>
+
+    <section>
+            <h3>Manual Classification - red</h3>
+            <img src="img/decision-boundaries/decision-boundaries-1.jpg">
     </section>
     
     <section>
-            <h3>Our Example</h3>
-            <img src="img/insurance/automobile-insurance.png" height="400px">
-            <p>Likelyhood of a car crash</p>
-        </section>
+            <h3>Manual Classification - yellow</h3>
+        <img src="img/decision-boundaries/decision-boundaries-2.jpg">
+    </section>
 
-        <section>
-                <h3>How do we automatically predict the quality of a driver?</h2>
-                    <ol>
-                        <li>
-                            <em>dark (green)</em>: few accidents</li>
-                        <li>
-                            <em>light (yellow)</em>: some accidents</li>
-                        <li>
-                            <em>middle (red)</em>: many accidents</li>
-                    </ol>
-                    <p>
-                            E.g., how would you rank me (47) for a car with 160 km/h top speed?
-                        </p>
-                        </section>
-<!-- 
-            <section>
-                <h3>Classic Approach: Code Rules by hand</h3>
-                <div class="fragment">
-                    <pre><code contenteditable data-trim class="line-numbers python">
-if age < 25:
-    if speed > 180:
-        return red
-    else:
-        return yellow
-if age > 75:
-    return red
-else:
-    return green
-                            </code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h3>Decision Boundaries for the Hand Coded Rules</h3>
-                <div class="fragment">
-                    <img src="img/insurance/manual.png" height="400px">
-                        <p>
-                            <small>approx. 43% correct predictions (guessing would be 33%)</small>
-                        </p>
-                </div>
-            </section>
- -->
-            <section>
-                    <h3>KNN: k Nearest Neighbors</h3>
-                    <p>A classic Machine Learning Strategy</p>
-                </section>
-            
-                <section>
-                    <img src="img//insurance/knn.png">
-                </section>
     <section>
-                    <h3>Computed results for k = 1</h3>
-                    <div>
-                
-                        <img src="img/insurance/knn-1.png" height="400px">
-                        <p>
-                            approx. 98% accuracy on data, great result!
-                        </p>
-                    </div>
-                </section>
+            <h3>Manual Classification - green</h3>
+        <img src="img/decision-boundaries/decision-boundaries-3.jpg">
+    </section>
+
+    <section>
+            <h3>Decision Bounaries</h3>
+        <img src="img/decision-boundaries/decision-boundaries-4.jpg">
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### How do different machine learning strategies draw those boundaries if they do their best?
+        </textarea>
+    </section>
+    <section>
+            <h3>Random - A Baseline</h3>
+        <img src="img/decision-boundaries/random.png">
+        <p><small>It still gets 33% percents right</small></p>
+    </section>
+    <section>
+            <h3>A few Hand Coded Rules</h3>
+        <img src="img/decision-boundaries/5-prog.png">
+        <p><small>Blocks</small></p>
+    </section>
+    <section>
+            <h3>Decision Trees</h3>
+        <img src="img/decision-boundaries/dt-sweet-test.png">
+        <p><small>Still Rules - but this time learned from data</small></p>
+    </section>
+    <section>
+            <h3>Ensemble - Random Forest</h3>
+        <img src="img/decision-boundaries/11-rf-sweet-test.png">
+        <p><small>Averaging over many decision trees</small></p>
+    </section>
+    <section>
+            <h3>K Nearest Neighbors</h3>
+        <img src="img/decision-boundaries/9-knn23-test.png">
+        <p><small>Simple, but fractal</small></p>
+    </section>
+    <section>
+            <h3>Support Vector Machines</h3>
+        <img src="img/decision-boundaries/13-svm-reg-test.png">
+        <p><small>Simple in a higher dimension</small></p>
+    </section>
+    <section>
+            <h3>Neural Networks</h3>
+        <img src="img/decision-boundaries/15-nn-reg-test.png">
+        <p><small>Composed of many simple neurons</small></p>
+    </section>
+
 
                 <section data-markdown>
-                        <textarea data-template>
-# But really?
-
-                    </textarea>
-                </section>
-                
-                <section>
-                    <h1>Plot Twist</h1>
-                </section>
-
-                <section>
-                        <h3>Why predicting data that we already know?</h3>
-                    </section>
-
-                <section>
-                    <h3>Generalisation, not perfect reproduction is the objective</h3>
-                </section>
-
-
-                <section data-markdown>
-                    <textarea data-template>
-### All the data we have
-<img src='img/supervised/generalization-all-data.png' height="450px">
-
-We split existing data into two sets
-                    </textarea>
-                </section>
-
-                <section data-markdown>
-                        <textarea data-template>
-### Training data
-<img src='img/supervised/generalization-train-data.png' height="450px">
-
-The larger set (60 or 80%) we use to build our model
-                    </textarea>
-                </section>
-
-                <section data-markdown>
-                        <textarea data-template>
-### Validation data
-
-<img src='img/supervised/generalization-validation-data.png' height="450px">
-
-The smaller set is used to check how well we generalize
-                    </textarea>
-                </section>
-
-                    <section>
-                        <h3>Revisiting Computed results for k = 1</h3>
-                        <div>
-                    
-                            <img src="img/insurance/knn-1.png" height="400px">
-                            <p>
-                                approx. 98% accuracy on train data, but only 65% on validation data
-                            </p>
-                        </div>
-                    </section>
-
-                <section>
-                        <h3>This is what we call Overfitting</h3>
-                    </section>
-            
-                <section>
-                    <h3>Computed results for k = 13</h3>
-                    <div>
-                
-                        <img src="img/insurance/knn-13.png" height="400px">
-                        <p>
-                            <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
-                        </p>
-                    </div>
-                    <p>Regularisation by increasing neighbors</p>
-                </section>
-
-                <section>
-                        <h3>A Second classic: Decision Trees</h3>
-                        <img src="img/dt/dt-underfit.png" height="500px">
-                        <p><small>Decision tree trained on our data</small></p>
-                    </section>
-                    
-                <section>
-                    <h3>Overfitting using Decision Trees</h3>
-                    <img src="img/dt/dt-boundaries-full.png">
-                    <p>
-                        <small>approx. 98% accuracy on train data, but only 61% on validation data</small>
-                    </p>
-                </section>  
-    
-                <section>
-                    <h3>Reduced overfitting for Decision Trees</h3>
-                    <img src="img/dt/dt-boundaries-sweet.png" height="400px">
-                    <p>
-                        <small>only approx. 77% accuracy on train data, but also 68% on validation data</small>
-                    </p>
-                    <p>Regularisation by clipping the decision tree</p>
-                </section>
-
-                <section data-markdown class="todo">
                         <textarea data-template>
 ## Thank you
 
-### Come to have a look at my poster for more details
+### Come to have a look at my poster for concepts and more details 
 
 Link to these slides: <a href="http://bit.ly/scipy-ml-viz">
     http://bit.ly/scipy-ml-viz</a>
 
-Link to the notebook that comes with the poster: TODO 
+Link to the notebook that comes with the poster:
+
+<img src='img/qr-colab-dataviz.png'>
 
 <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
 
