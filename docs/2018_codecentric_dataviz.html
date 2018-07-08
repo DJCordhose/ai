@@ -257,7 +257,9 @@ https://lawsofux.com/
 
 ## The Grammar of Graphics
 
-TODO: Leland Wilkinson
+<small>
+Leland Wilkinson, https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448
+</small>
             </textarea>
         </section>
     
@@ -302,6 +304,16 @@ TODO: Leland Wilkinson
         </section>
 
         <section data-markdown>
+            <textarea data-template>
+### Vega-Lite
+
+<img src='img/dataviz/vega-lite.png'>
+<small>https://vega.github.io/vega-lite/</small>
+                </textarea>
+            </section>
+
+
+        <section data-markdown>
                 <textarea data-template>
 ### Misson of Vega-Lite
 
@@ -309,10 +321,11 @@ _Facilitate exploratory data analysis with an expressive yet concise language to
 
 No low level programming necessary, but also not possible. Customizations possible.
 
-TODO: Link
+https://vega.github.io/vega-lite/
                     </textarea>
                 </section>
-            
+
+
         <section data-markdown>
                 <textarea data-template>
 ### Examples of Vega-Lite Charts
@@ -322,6 +335,65 @@ TODO: Link
 <small>Dominik Moritz @domoritz</small>
                     </textarea>
             </section>
+
+            <section data-markdown>
+                <textarea data-template>
+### Demo using Online Editor
+
+https://vega.github.io/editor/#/custom/vega-lite
+                    </textarea>
+            </section>
+
+
+            <section data-markdown>
+                <textarea data-template>
+### Vega-Lite is great, but...
+
+* "programming" in JSON is not everyones cup of tea
+* your language of choice might be Python
+</textarea>
+</section>
+
+
+        <section data-markdown>
+            <textarea data-template>
+### Altair
+
+<img src='img/dataviz/altair.png' height="500px">
+<small>https://altair-viz.github.io/</small>
+                </textarea>
+            </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Altair Installation (using conda as a base)
+
+```
+conda install -c conda-forge altair vega_datasets notebook vega
+```
+<small>
+https://altair-viz.github.io/getting_started/installation.html#installation-notebook
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Altair Fluent API
+
+```
+alt.Chart(cars).mark_point().encode(
+    x='Horsepower',
+    y='Miles_per_Gallon',
+    color='Origin'
+)```
+
+<img src='img/dataviz/altair-iris.png' height="300px">
+
+Nicely matches Grammar of Graphics
+                </textarea>
+            </section>
+
 
         <section data-markdown class="todo">
             <textarea data-template>
