@@ -162,23 +162,21 @@ Mit diesem Grundwissen ausgestattet lernen wir die Grammatik für Visualisierung
 Zum Abschluss sehen wir uns interaktive Visualisierungen an, die sich bei Vega-Lite / Altair sogar aus unterschiedlichen
 Darstellungen kombinieren lassen. -->
        <section>
-            <h2>Datenvisualisierung mit Vega-Lite / Altair</h2>
+            <h2>Explorative Datenvisualisierung mit Vega-Lite / Altair</h2>
             <p><a target="_blank" href="https://www.meetup.com/de-DE/WebTechNight-Karlsruhe/events/252460059/">
                 WebTechNight Karlsruhe, August 2018
             </a></p>
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
             <small>
-            <a href="https://djcordhose.github.io/ai/2018_ml_summit_deep_learning_workshop.html">
-                https://djcordhose.github.io/ai/2018_ml_summit_deep_learning_workshop.html</a>
+            <a href="https://djcordhose.github.io/ai/2018_codecentric_dataviz.html">
+                https://djcordhose.github.io/ai/2018_codecentric_dataviz.html</a>
             </small>
         </section>
 
         <section data-markdown class="todo">
                 <textarea data-template>
-- Cars example aufbauen und dann am Ende mit Interaction (Selection)
-  - Klauen aus file:///C:/Users/olive/Google%20Drive/HAW/material/vega-liteworkshop-180516202952.pdf
-
+- Wrap Up
             </textarea>
         </section>
 
@@ -189,7 +187,7 @@ Darstellungen kombinieren lassen. -->
                 <p class="fragment" style="float: right"><small>Oliver Zeigermann</small></p>
             </section>
 
-        <section data-markdown class="todo">
+        <section data-markdown>
             <textarea data-template>
 # Part I
 ## What relevant information do we have on human perception?
@@ -235,23 +233,21 @@ We see things as belonging together when
         </textarea>
 </section>
 
-<section data-markdown class="todo">
+<section data-markdown>
         <textarea data-template>
 ### Laws of UX
 
+1. Immediate Reactions (<400ms)
+1. Do not surprise people (things should work like people expect)
+1. You can only hold 7 things (+/- 2) in your mind at the same time
 
 https://lawsofux.com/
 
         </textarea>
 </section>
 
-        <section data-markdown class="todo">
-                <textarea data-template>
-            </textarea>
-        </section>
-            
 
-        <section data-markdown class="todo">
+        <section data-markdown>
             <textarea data-template>
 # Part II
 
@@ -325,21 +321,13 @@ https://vega.github.io/vega-lite/
                 </section>
 
 
-        <section data-markdown>
-                <textarea data-template>
-### Examples of Vega-Lite Charts
-
-<img src='img/dataviz/vega-lite-examples.png' height="500px">
-
-<small>Dominik Moritz @domoritz</small>
-                    </textarea>
-            </section>
-
             <section data-markdown>
                 <textarea data-template>
 ### Demo using Online Editor
 
-https://vega.github.io/editor/#/custom/vega-lite
+https://vega.github.io/editor/#/examples/vega-lite/line
+
+Google's stock price over time
                     </textarea>
             </section>
         <section data-markdown>
@@ -354,8 +342,6 @@ https://vega.github.io/editor/#/custom/vega-lite
                 </textarea>
             </section>
 
-
-
             <section data-markdown>
                 <textarea data-template>
 ### Vega-Lite is great, but...
@@ -365,6 +351,32 @@ https://vega.github.io/editor/#/custom/vega-lite
 </textarea>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+### You can get rid of the JSON and get JS Objects
+
+```
+vegalite({
+  data: {
+    values: [
+      {a: "A", b: 28}, {a: "B", b: 55}, {a: "C", b: 43},
+      {a: "D", b: 91}, {a: "E", b: 81}, {a: "F", b: 53},
+      {a: "G", b: 19}, {a: "H", b: 87}, {a: "I", b: 52}
+    ]
+  },
+  mark: "bar",
+  encoding: {
+    x: {field: "a", type: "ordinal"},
+    y: {field: "b", type: "quantitative"}
+  }
+})```
+<small>   
+https://beta.observablehq.com/@djcordhose/vega-lite
+</small>
+    </textarea>
+    </section>
+    
+    
 
         <section data-markdown>
             <textarea data-template>
@@ -374,14 +386,23 @@ https://vega.github.io/editor/#/custom/vega-lite
 <small>https://altair-viz.github.io/</small>
                 </textarea>
             </section>
-            <section data-markdown class="todo">
-                <textarea data-template>
-Demo 1: Getting a quick overview
 
-https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/altair-sandbox/car-insurance.ipynb#scrollTo=N9aCSkyRwhar
+<section data-markdown>
+        <textarea data-template>
+### Philosophy
+
+_We realize that a declarative API will necessarily be limited compared to the full programmatic APIs of Matplotlib, Bokeh,
+etc. That is a deliberate design choice we feel is needed to simplify the user experience of exploratory visualization._
+
+<small>            
+https://github.com/altair-viz/altair#design-approach-and-solution
+<br>
+https://github.com/altair-viz/altair#project-philosophy
+</small>
 </textarea>
 </section>
-        <section data-markdown>
+
+        <!-- <section data-markdown>
             <textarea data-template>
 ### Altair Installation (using conda as a base)
 
@@ -392,34 +413,42 @@ conda install -c conda-forge altair vega_datasets notebook vega
 https://altair-viz.github.io/getting_started/installation.html#installation-notebook
 </small>
 </textarea>
-</section>
+</section> -->
 
 <section data-markdown>
     <textarea data-template>
 ### Altair Fluent API
 
 ```
-alt.Chart(cars).mark_point().encode(
-    x='Horsepower',
-    y='Miles_per_Gallon',
-    color='Origin'
+alt.Chart(customers).mark_point().encode(
+    x='age', 
+    y='max speed', 
+    color='group'
 )```
 
-<img src='img/dataviz/altair-iris.png' height="300px">
+<img src='img/dataviz/car-accidents-altair1.png' height="300px">
 
 <small>
-https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/altair-sandbox/sandbox.ipynb
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/altair-sandbox/car-insurance-plot.ipynb
 </small>
                 </textarea>
             </section>
 
-            <section data-markdown class="todo">
-                <textarea data-template>
-https://github.com/altair-viz/altair#project-philosophy
-            </textarea>
-        </section>
+            <section data-markdown>
+                    <textarea data-template>
+### Demo 1: Tuning our visualization a little bit
+    
+This is what we would like to have:
 
-        <section data-markdown class="todo">
+<img src='img/dataviz/car-accidents-altair2.png' height="300px">
+
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/altair-sandbox/car-insurance-plot.ipynb
+</small>
+    </textarea>
+    </section>
+    
+        <section data-markdown>
             <textarea data-template>
 # Part III
 
@@ -448,7 +477,7 @@ https://github.com/altair-viz/altair#project-philosophy
                 </small></p>
         </section>
 
-        <section data-markdown>
+        <!-- <section data-markdown>
                 <textarea data-template>
 ### Selections - Interaction the Vega-Lite way
 
@@ -456,35 +485,21 @@ https://github.com/altair-viz/altair#project-philosophy
  2. Points of interest — which marks/data points were interacted with? 
  3. Predicate function — what is the full set of selected marks/data points
 </textarea>
-</section>
-<section data-markdown class="todo">
+</section> -->
+
+<section data-markdown>
         <textarea data-template>
-Demo 2: Interactive exploration
+### Demo 2: Interactive exploration specified declaratively
 
-https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/altair-sandbox/car-insurance.ipynb#scrollTo=N9aCSkyRwhar
+<img src='img/dataviz/car-accidents-altair-crossfilter.png'>
+
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/altair-sandbox/car-insurance-crossfilter.ipynb
+</small>
 </textarea>
 </section>
 
-
-<section data-markdown class="todo">
-    <textarea data-template>
-
-https://beta.observablehq.com/@djcordhose/vega-lite
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
-### Philosophy
-
-_We realize that a declarative API will necessarily be limited compared to the full programmatic APIs of Matplotlib, Bokeh,
-etc. That is a deliberate design choice we feel is needed to simplify the user experience of exploratory visualization._
-            
-https://github.com/altair-viz/altair#design-approach-and-solution
-</textarea>
-</section>
-
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
     <textarea data-template>
 ### Alternatives
 
@@ -492,7 +507,15 @@ https://github.com/altair-viz/altair#design-approach-and-solution
   * https://twitter.com/plotlygraphs/status/1012365168834174976?s=03
   * https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6
 </textarea>
-</section>
+</section> -->
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Wrapping Up
+    
+    </textarea>
+    </section>
+    
     </div>
 
 </div>
