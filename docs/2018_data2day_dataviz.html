@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Datenvisualisierung mit Vega-Lite / Altair</title>
+    <title>Data Visualization</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -164,17 +164,51 @@ Mit diesem Grundwissen ausgestattet lernen wir die Grammatik für Visualisierung
 Zum Abschluss sehen wir uns interaktive Visualisierungen an, die sich bei Vega-Lite / Altair sogar aus unterschiedlichen
 Darstellungen kombinieren lassen. -->
        <section>
-            <h2>Explorative Datenvisualisierung mit Vega-Lite / Altair</h2>
-            <p><a target="_blank" href="https://www.meetup.com/de-DE/WebTechNight-Karlsruhe/events/252460059/">
+            <h2>Introduction to Data Visualization</h2>
+            <!-- <p><a target="_blank" href="https://www.meetup.com/de-DE/WebTechNight-Karlsruhe/events/252460059/">
                 WebTechNight Karlsruhe, August 2018
-            </a></p>
+            </a></p> -->
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
             <small>
-            <a href="https://djcordhose.github.io/ai/2018_codecentric_dataviz.html">
-                https://djcordhose.github.io/ai/2018_codecentric_dataviz.html</a>
+            <a href="https://djcordhose.github.io/ai/2018_data2day_dataviz.html">
+                https://djcordhose.github.io/ai/2018_data2day_dataviz.html</a>
             </small>
         </section>
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+- Übungen für alles
+- So machen, dass es auf Colab läuft (umap per pip?)
+
+9.30: Beginn
+	* Einführung in die Grundkonzepte der menschlichen Wahrnehmung (wie hier im ersten Teil, evtl. bisschen mehr)
+    * Explorative Datenvisualisierung mit Matplotlib und Seaborn
+        * Mein Datensatz, alles an Viz was geht
+        * Zeug vom Matplitlib Tutorial klauen
+        * C:\Users\olive\Development\scipy\AnatomyOfMatplotlib>
+		* http://localhost:8889/notebooks/AnatomyOfMatplotlib-Part1-Figures_Subplots_and_layouts.ipynb
+		* subplots: https://github.com/DJCordhose/scikit-learn/commits/master
+
+11.00 - 11.15: Kaffeepause
+    * Visualisierung von Decision Boundaries
+      * Wie in Poster, aber auch in https://github.com/DJCordhose/scikit-learn/commits/master
+    * PCA, t-SNE, UMAP: Visualisierung von hochdimensionalen Daten (aus HAW Folien, neuestes UMAP ausprobieren)
+      * auf meinen Unfalldaten ausprobieren
+      * http://umap-learn.readthedocs.io/en/latest/
+      * http://umap-learn.readthedocs.io/en/latest/transform.html
+      * PCA und t-SNE mit sklearn              
+
+12.30 - 13.30: Mittagspause
+	* Grammatik für Visualisierungen (wie hier)
+	* Interaktive Datenvisualisierung mit Altair (wie hier)
+
+15.30 - 15.45: Kaffeepause
+	* Manifold-Learning etc. (das macht Stefan)
+
+ca. 17.00 Uhr: Ende            </textarea>
+        </section>
+
 
         <section data-markdown class="todo">
                 <textarea data-template>
@@ -383,7 +417,7 @@ https://beta.observablehq.com/@djcordhose/vega-lite
             <textarea data-template>
 ### Altair
 
-<img src='img/dataviz/altair.png' height="475px">
+<img src='img/dataviz/altair.png' height="500px">
 <small>
 https://altair-viz.github.io/
 <br>
@@ -453,29 +487,8 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/alt
 </small>
     </textarea>
     </section>
-
-    <section data-markdown>
-            <textarea data-template>
-### You can always publish to Standalone HTML
-
-```
-chart.save('chart.html')
-```
-
-Our saved chart: https://djcordhose.github.io/ai/js/altair/chart.html
-
-
-Contains
-* complete HTML including all scripts tags
-* all the data 
-<small>
-<br>
-https://altair-viz.github.io/getting_started/starting.html#publishing-your-visualization
-</small>
-</textarea>
-</section>
-
-    <section data-markdown>
+    
+        <section data-markdown>
             <textarea data-template>
 # Part III
 
