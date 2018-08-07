@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Deep Machine Learning</title>
+    <title>Manning</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -233,6 +233,45 @@ Add the screenshots from img/manning
                 </textarea>
             </section>
     
+            <section data-markdown>
+                <textarea data-template>
+### All the data we have
+<img src='img/supervised/generalization-all-data.png' height="450px">
+
+We split existing data into two sets
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+### Training data
+<img src='img/supervised/generalization-train-data.png' height="450px">
+
+The larger set (60 or 80%) we use to build our model
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+### Validation data
+
+<img src='img/supervised/generalization-validation-data.png' height="450px">
+
+The smaller set is used to check how well we generalize
+                </textarea>
+            </section>
+
+
+        <section>
+            <h3>Softmax: Categories with likelyhoods</h3>
+                <div class="fragment">
+                    <img src="img/sketch/fc_nn.jpg" height="450px">
+                </div>
+        <pre><code contenteditable data-trim class="line-numbers python fragment">
+predictions = tf.keras.layers.Dense(num_categories, name='classifier', activation='softmax')
+        </code></pre>
+        </section>
+
         <section data-markdown>
             <textarea data-template>
 # From here just material 
