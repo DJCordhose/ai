@@ -145,8 +145,119 @@
 
 <body>
 
+
 <div class="reveal">
     <div class="slides">
+
+            <section data-markdown>
+                    <textarea data-template>
+            ## U1-M3: What makes Supervised Deep Machine Learning different from classic software development?
+                    </textarea>
+                </section>
+
+                <section data-markdown>
+                        <textarea data-template>
+                ## U1-M3: What makes Supervised Deep Machine Learning different from classic software development?
+                        </textarea>
+                    </section>
+    
+<section data-markdown>
+        <textarea data-template>
+### ML rather is research and a bit of engineering than a craft
+<img src='img/ml_is_not_programming.jpg' height="500px">
+    </textarea>
+    </section>
+                    
+    <section>
+            <h3>Example: Customer Data - Car Insurance</h3>
+            <img src="img/manning/all.png" height="400px">
+            <p>
+                <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
+            </p>
+        </section>
+
+        <section>
+                <h3>Programmer's approach: Code Rules by Hand</h3>
+                <div class="fragment">
+                <pre><code contenteditable data-trim class="line-numbers python">
+if age < 25:
+    if speed > 140:
+        return red
+    else:
+        return yellow
+if age > 75:
+    return red
+if miles_per_year > 30:
+    return red
+if miles_per_year > 20:
+    return yellow
+return green
+                    </code></pre>
+                </div>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+### Plotting the predictions as a background
+<img src='img/manning/manual.png'>
+
+<div class="fragment">
+<p><small>approx. 43% predictions correct</small></p>
+</div>        
+
+Note:
+- Draw Decision Boundaries by Hand like in Scipy Talk
+</textarea>
+                </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### How good is this?
+
+* How good would guessing be?
+* Are all the rules correct?
+* Are some missing?
+* How would we even know?
+
+Note:
+- Draw Decision Boundaries by Hand like in Scipy Talk
+        </textarea>
+    </section>                    
+
+    <section data-markdown>
+            <textarea data-template>
+### Another Approach
+## Supervised Machine Learning
+        </textarea>
+    </section>                    
+
+    <section data-markdown>
+            <textarea data-template>
+<img src='img/sketch/supervised-ml.jpg'>
+        </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Supervised Deep Machine Learning
+
+<img src='img/manning/nn-reg.png'>
+
+<div class="fragment">
+<p><small>up to 80% predictions correct on previously unknown data</small></p>
+</div>        
+
+Note:
+- Draw Decision Boundaries by Hand like in Scipy Talk
+</textarea>
+        </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+            ## U2-M1: What is classification?
+                    </textarea>
+                </section>
+            
 
         <section data-markdown>
             <textarea data-template>
@@ -183,6 +294,12 @@ Add the screenshots from img/manning
         </textarea>
     </section>
 
+
+    <section data-markdown>
+        <textarea data-template>
+## U2-M2: What are activation functions?
+        </textarea>
+    </section>
 
 <section style="font-size: x-large">
         <p><small><em>Activation Functions (or non-linearity) take a single numerical input and performs a certain fixed mathematical operation on it.</em></small></p>
