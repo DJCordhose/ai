@@ -180,11 +180,20 @@ In diesem Vortrag beschäftigen wir uns mit diesen Fragen und betrachten dabei S
 
         <section data-markdown class="todo">
                 <textarea data-template>
-- Material from Evernote
+- https://www.tensorflow.org/tfx/
+  - https://www.tensorflow.org/tfx/transform/
+  - https://www.tensorflow.org/tfx/model_analysis/
+  - https://www.tensorflow.org/serving/
             </textarea>
         </section>
 
-        <section data-markdown>
+        <section data-markdown class="todo">
+            <textarea data-template>
+- Material from Evernote
+        </textarea>
+    </section>
+
+    <section data-markdown>
             <textarea data-template>
 ## Two Parts
 
@@ -197,6 +206,8 @@ Note:
 
 </textarea>
             </section>
+
+
     
             <section data-markdown>
                     <textarea data-template>
@@ -221,6 +232,69 @@ Note:
    * DeppLearn4J
             </textarea>
         </section>
+
+        <section>
+<h3>TensorFlow Serving REST Calls</h3>
+
+<p>Starting the Model Server in Rest Mode</p>
+
+<pre><code contenteditable data-trim>
+tensorflow_model_server --rest_api_port=8501 \
+--model_name=manning_insurance_1 \
+--model_base_path=$(pwd)/tf
+</code></pre>
+
+<p>Curling to it</p>
+
+<pre><code contenteditable data-trim class="python">
+curl -X POST \
+http://localhost:8501/v1/models/manning_insurance_1:predict  \
+-d '{ "instances": [{"inputs": [ 100.0,  47.0,  10.0]}]}' 
+# {
+#     "predictions": [[0.0027608, 0.872088, 0.125151]
+#     ]
+# }</code></pre>
+
+<p><small><a href='https://www.tensorflow.org/serving/api_rest'>https://www.tensorflow.org/serving/api_rest</a></small></p>
+
+    </section>
+
+        <section>
+<h3>Deploying to the Browser</h3>
+
+<p>Converting our Keras Model to TensorFlow.js</p>
+
+<pre><code contenteditable data-trim>
+tensorflowjs_converter --input_format keras \
+./model/insurance.hdf5 \
+./tfjs    
+</code></pre>
+
+<p>Loading and using directly from the Browser</p>
+
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const model = await tf.loadModel('tfjs/model.json');
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// max speed, age, thousand miles per year
+const example = tf.tensor([[100, 47, 10]]);
+const prediction = model.predict(example);
+                    </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+console.log(await prediction.data());
+//[0.00334801129065454, 0.8710343241691589, 0.12561771273612976]
+    </code></pre>
+
+<p><small><a href='https://js.tensorflow.org/tutorials/import-keras.html'>
+    https://js.tensorflow.org/tutorials/import-keras.html</a>
+<br>
+            <a href='js/tensorflow-sandbox/load_manning_model.html' target="_blank">
+                https://djcordhose.github.io/ai/js/tensorflow-sandbox/load_manning_model.html</a></small>
+        </small></p>
+        
+    </section>
+
+
 
         <section data-markdown>
             <textarea data-template>
