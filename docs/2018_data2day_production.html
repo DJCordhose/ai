@@ -152,6 +152,9 @@
                     <textarea data-template>
 ### Preparation
 * Rehearse Demos
+* Start TF Serving
+* Open TF.js demo in tab
+  
 
                 </textarea>
             </section>
@@ -164,6 +167,8 @@ den Job tut, den es soll? Und wie geht man mit neuen Daten um? Automatisch neu t
 lange dauert das?
 
 In diesem Vortrag beschäftigen wir uns mit diesen Fragen und betrachten dabei Sklearn, TensorFlow und eigene Implementierungen.
+
+40 Minuten
  -->
 <section>
             <h2>Wie bringe ich ein Machine-Learning-Modell in Produktion?</h2>
@@ -178,6 +183,41 @@ In diesem Vortrag beschäftigen wir uns mit diesen Fragen und betrachten dabei S
             </small>
         </section>
 
+        <section data-markdown>
+                <textarea data-template>
+## Parts
+
+1. Serving Sklearn Models
+
+1. Specialized TensorFlow Serving
+
+1. Custom Implementations
+
+1. Once you are in production evertyhing changes
+        </textarea>
+    </section>
+
+    <section>
+            <h3>Our Example: Car Insurance Customers</h3>
+            <img src="img/manning/all.png" height="400px">
+            <p>
+                <small><em>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</em></small>
+            </p>
+        </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Our Complete Model
+<div>
+
+<img src='img/manning/nn-reg.png'>
+
+<p><small>up to 80% predictions correct on previously unknown data possible</small></p>
+</div>        
+</textarea>
+        </section>
+
+
         <section data-markdown class="todo">
                 <textarea data-template>
 - https://www.tensorflow.org/tfx/
@@ -190,60 +230,342 @@ In diesem Vortrag beschäftigen wir uns mit diesen Fragen und betrachten dabei S
         <section data-markdown class="todo">
             <textarea data-template>
 - Material from Evernote
-        </textarea>
-    </section>
-
-    <section data-markdown>
-            <textarea data-template>
-## Two Parts
-
-1. Technical
-1. Process
-
-Note:
 - Process für den laberigen Teil
   - Google Test
 
-</textarea>
-            </section>
+        </textarea>
+    </section>
 
 
     
-            <section data-markdown>
-                    <textarea data-template>
-## Parts One: Technical
-                        </textarea>
-                    </section>
+
         <section data-markdown>
                 <textarea data-template>
-### Deployment Scenarios
+# Part I: Serving Sklearn Models
+                    </textarea>
+                </section>
+            
+        <section data-markdown>
+            <textarea data-template>
+### Serving Sklearn models
 
-1. Flask Based Python Servers
-   * Sklearn
-   * Keras
+_Caution: Be very sure you have the same pipeline of steps when serving as you had for training and evaluation!_
 
-1. Specialized TensorFlow Serving
-    * TensorFlow Serving
-    * Google Clound ML
-    * tensorflow.js
+<small>It might make sense to use: http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html</small>
+            </textarea>
+        </section>
 
-1. Java Implementations
-   * Custom Implementation
-   * DeppLearn4J
+        <section data-markdown>
+            <textarea data-template>
+### After training
+
+* Serialize Main Model using Pickle
+* Make sure you also serialze your Encoders (LabelEncoder, OneHotEncoder, StandardScaler, etc.) 
+* If you need different in/out combinations, train multiple models
+
+_Caution: Make sure you Serialize your models using the exact same versions of software as in production (this might be harder than you think)._
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### For Prediction
+
+* Load / Deserialize all Models using Pickle <em>only once on startup</em>
+* Perform all the necessary encoding and decoding steps
+* Consider using VM or Docker for consistent installation
+* Serve requests sequentially using Flask
+* Scale by using multiple instances and load balancers / dedicated ML server per installation
+* Log real world predictions (if ok with <a href='https://gdpr-info.eu/'>GDPR</a>)
             </textarea>
         </section>
 
         <section>
-<h3>TensorFlow Serving REST Calls</h3>
+<h3>Running a Flask Server</h3>
 
-<p>Starting the Model Server in Rest Mode</p>
+<pre><code contenteditable data-trim class="fragment">
+@app.route('/predict', methods=['POST'])
+def do_predict():
+    speed = request.json['speed']
+    age = request.json['age']
+    miles = request.json['miles']
+
+    predicted_category, probabilities, classes = predict(speed, age, miles)
+    return jsonify({
+        'category': predicted_category,
+        'prediction': probabilities,
+        'classes': classes
+    })
+</code></pre>
+
+<pre><code contenteditable data-trim class="python fragment">
+curl http://localhost:8889/predict -X POST \
+-d '{"speed": 100, "age": 47, "miles": 10}'
+# {
+#    'category': 'GREEN',
+#    'prediction': [0.0, 0.87, 0.13],
+#    'classes': ['RED', 'GREEN', 'YELLOW']
+# }</code></pre>
+
+<p><small><a href='http://flask.pocoo.org/'>http://flask.pocoo.org/</a></small></p>
+
+    </section>
+
+
+        <section>
+<h3>Prediction Code</h3>
+
+<pre><code contenteditable data-trim class="fragment">
+# loading models only once on startup
+model = pickle.load(open('models/dt.model', 'rb'))
+
+y_le = pickle.load(open('models/y_le.model', 'rb'))
+speed_std_scale = pickle.load(open('models/speed_std_scale.model', 'rb'))
+age_std_scale = pickle.load(open('models/age_std_scale.model', 'rb'))
+miles_std_scale = pickle.load(open('models/miles_std_scale.model', 'rb'))
+    </code></pre>
+
+<pre><code contenteditable data-trim class="fragment">
+# using models for prediction
+def predict(speed, age, miles):
+    sample = [[speed_std_scale.transform([speed])[0],
+               age_std_scale.transform([age])[0],
+               miles_std_scale.transform([miles])[0]]
+
+    result = model.predict(sample)
+    result_group = y_le.inverse_transform(result)[0]
+    prediction = model.predict_proba(sample)[0].tolist()
+    
+    return result_group, prediction, y_le.classes_.tolist()
+    </code></pre>
+
+    <p><small><a href='https://docs.python.org/3/library/pickle.html'>https://docs.python.org/3/library/pickle.html</a></small></p>
+    
+        </section>
+    
+        <section data-markdown>
+                <textarea data-template>
+# Part II: Serving TensorFlow / Keras Models
+                    </textarea>
+                </section>
+            
+    <section data-markdown>
+            <textarea data-template>
+### Deploying to Google Cloud ML
+
+* Takes away the scaling and installation burden
+* Requires to convert your Keras model to a TensorFlow model
+* You need to define Signatures for input and output
+* The generated serving model also works for your local model servers (more on that later)
+* Can use CPU or GPU
+                </textarea>
+            </section>
+                        
+
+        <section>
+<h3>Preparing our model for serving</h3>
+
+<div class="fragment">
+<p>Creating the Signature</p>
+
+<pre><code contenteditable data-trim class="python">
+signature = saved_model.signature_def_utils.build_signature_def(
+    inputs={'inputs': build_tensor_info(model.input)},
+    outputs={'scores': build_tensor_info(model.output)},
+    method_name=saved_model.signature_constants.PREDICT_METHOD_NAME)
+
+</code></pre>
+<p><small><a href='https://www.tensorflow.org/serving/signature_defs'>https://www.tensorflow.org/serving/signature_defs</a></small></p>
+</div>
+
+<div class="fragment">
+<p>Creating the builder and save model</p>
+
+<pre><code contenteditable data-trim class="python">
+builder = saved_model.builder.SavedModelBuilder(export_path)
+builder.add_meta_graph_and_variables(
+    sess, [saved_model.tag_constants.SERVING],
+    signature_def_map={
+        saved_model.signature_constants.
+            DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature
+    })
+builder.save()
+</code></pre>
+</div>
+    </section>
+
+        <section>
+<h3>Checking our saved model</h3>
+
+<div class="fragment">
+<pre><code contenteditable data-trim class="python">
+saved_model_cli show --dir tf/1 \
+  --tag_set serve --signature_def serving_default
+</code></pre>
+<pre><code contenteditable data-trim class="fragment python">
+The given SavedModel SignatureDef contains the following input(s)
+  inputs['inputs'] tensor_info:
+      dtype: DT_FLOAT
+      shape: (-1, 3)
+      name: hidden1_input:0
+The given SavedModel SignatureDef contains the following output(s)
+  outputs['scores'] tensor_info:
+      dtype: DT_FLOAT
+      shape: (-1, 3)
+      name: softmax/Softmax:0
+Method name is: tensorflow/serving/predict
+</code></pre>
+</div>
+
+<div class="fragment">
+<pre><code contenteditable data-trim class="python">
+saved_model_cli run --dir tf/1 --signature_def serving_default \
+--tag_set serve --input_exprs inputs=[[100.0,47.0,10.0]]
+</code></pre>
+<pre><code contenteditable data-trim class="fragment python">
+Result for output key scores: [[0.0027608  0.8720881  0.12515119]]
+</code></pre>
+</div>
+<p><small><a href='https://www.tensorflow.org/guide/saved_model#cli_to_inspect_and_execute_savedmodel'>https://www.tensorflow.org/guide/saved_model#cli_to_inspect_and_execute_savedmodel</a></small></p>
+    </section>
+
+        <section>
+<h3>Deploying to Google Clound ML</h3>
+
+<div class="fragment">
+    <p>Copy your model to a Cloud Bucket</p>
+<pre><code contenteditable data-trim class="python">
+gsutil mb gs://my_bucket
+gsutil cp -R tf/1 gs://my_bucket
+</code></pre>
+<p><small>
+Needs Google Cloud SDK:         
+    <a href='https://cloud.google.com/sdk/install'>https://cloud.google.com/sdk/install</a></small></p>
+</div>
+<div class="fragment">
+    <p>Deploy from this bucket</p>
+<pre><code contenteditable data-trim class="python">
+gcloud ml-engine models create "ml_insurance" --enable-logging
+gcloud ml-engine versions create "v1" --model "ml_insurance" \
+ --origin "gs://my_bucket/1"
+gcloud ml-engine versions describe "v1" --model "ml_insurance"
+</code></pre>
+<p><small>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/deploying-models'>
+    https://cloud.google.com/ml-engine/docs/tensorflow/deploying-models</a>
+<br>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/prediction-overview#prediction_logging'>
+    https://cloud.google.com/ml-engine/docs/tensorflow/prediction-overview#prediction_logging</a></small></p>
+</div>
+
+    </section>
+
+        <section>
+<h3>Making Predictions</h3>
+
+<div class="fragment">
+    <p>Input Format is a bit special</p>
+<pre><code contenteditable data-trim class="python">
+# sample_insurance.json    
+{"inputs": [ 160,  18,  100]}
+{"inputs": [ 100,  47,  10]}
+{"inputs": [ 90,  20,  20]}    
+</code></pre>
+</div>
+<div class="fragment">
+    <p>Call from Google Cloud Console</p>
+<pre><code contenteditable data-trim class="python fragment">
+gcloud ml-engine predict --model "ml_insurance" --version "v1" \
+ --json-instances ./sample_insurance.json
+</code></pre>
+<pre><code contenteditable data-trim class="python fragment">
+SCORES
+[0.8658562898635864, 7.318668918511809e-14, 0.13414366543293]
+[0.002760800765827298, 0.8720880746841431, 0.12515118718147278]
+[5.452934419736266e-05, 0.005952719133347273, 0.9939927458763123]    
+</code></pre>
+</div>
+
+<p><small>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/online-predict'>https://cloud.google.com/ml-engine/docs/tensorflow/online-predict</a>
+</small></p>
+
+    </section>
+
+        <section>
+<h3>Making Predictions from Python</h3>
+
+<div class="fragment">
+    <p>First we need a few more libraries</p>
+<pre><code contenteditable data-trim class="python">
+pip install google-api-python-client
+pip install tensorflow-serving-api
+</code></pre>
+</div>
+<div class="fragment">
+    <p>Input needs to conform to JSON now</p>
+<pre><code contenteditable data-trim class="python">
+instances = [{"inputs": [100,  47,  10]}]
+predict_json("ml_project", "ml_insurance", instances=instances)
+</code></pre>
+<pre><code contenteditable data-trim class="python fragment">
+[{'scores': 
+  [0.002760800765827298, 0.8720880746841431, 0.12515118718147278]}]
+</code></pre>
+</div>
+
+<p><small>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/online-predict'>https://cloud.google.com/ml-engine/docs/tensorflow/online-predict</a>
+</small></p>
+
+    </section>
+
+            <section>
+<h3>Python API</h3>
+
+<div class="fragment">
+<pre><code contenteditable data-trim class="python">
+import googleapiclient.discovery
+
+def predict_json(project, model, instances):
+    service = googleapiclient.discovery.build('ml', 'v1')
+</code></pre>
+<pre><code contenteditable class="python fragment">    name = 'projects/{}/models/{}'.format(project, model)
+
+    response = service.projects().predict(
+        name=name,
+        body={'instances': instances}
+    ).execute()
+
+    return response['predictions']</code></pre>
+</div>
+
+<p><small>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/online-predict'>https://cloud.google.com/ml-engine/docs/tensorflow/online-predict</a>
+<br>
+<a href='https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/ml_engine/online_prediction/predict.py'>
+    https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/ml_engine/online_prediction/predict.py
+</a>
+
+</small></p>
+
+    </section>
+
+        <section>
+<h3>TensorFlow Serving REST API</h3>
+
+<div class="fragment">
+<p>Starting the Model Server in Rest Mode (needs Linux)</p>
 
 <pre><code contenteditable data-trim>
 tensorflow_model_server --rest_api_port=8501 \
 --model_name=manning_insurance_1 \
 --model_base_path=$(pwd)/tf
 </code></pre>
+<p><small><a href='https://www.tensorflow.org/serving/api_rest'>https://www.tensorflow.org/serving/api_rest</a></small></p>
+</div>
 
+<div class="fragment">
 <p>Curling to it</p>
 
 <pre><code contenteditable data-trim class="python">
@@ -251,25 +573,36 @@ curl -X POST \
 http://localhost:8501/v1/models/manning_insurance_1:predict  \
 -d '{ "instances": [{"inputs": [ 100.0,  47.0,  10.0]}]}' 
 # {
-#     "predictions": [[0.0027608, 0.872088, 0.125151]
-#     ]
+#     "predictions": [[0.0027608, 0.872088, 0.125151]]
 # }</code></pre>
+</div>
 
-<p><small><a href='https://www.tensorflow.org/serving/api_rest'>https://www.tensorflow.org/serving/api_rest</a></small></p>
+<p class="fragment"><small>
+    <em>Note</em>: To make this work from a browser you need a server in between, because 
+    <a href='https://enable-cors.org/'>CORS</a> makes an 
+    <a href='js/serving-sandbox.html'>
+        OPTION request</a>
+     that is not implemented by model server</small></p>
 
     </section>
 
         <section>
 <h3>Deploying to the Browser</h3>
 
+<div class="fragment">
 <p>Converting our Keras Model to TensorFlow.js</p>
 
-<pre><code contenteditable data-trim>
+<pre><code contenteditable data-trim class="python">
 tensorflowjs_converter --input_format keras \
 ./model/insurance.hdf5 \
 ./tfjs    
 </code></pre>
+<p><small><a href='https://js.tensorflow.org/tutorials/import-keras.html'>
+    https://js.tensorflow.org/tutorials/import-keras.html</a></small></p>
 
+</div>
+
+<div class="fragment">
 <p>Loading and using directly from the Browser</p>
 
             <pre><code contenteditable data-trim class="fragment line-numbers javascript">
@@ -279,36 +612,55 @@ const model = await tf.loadModel('tfjs/model.json');
 // max speed, age, thousand miles per year
 const example = tf.tensor([[100, 47, 10]]);
 const prediction = model.predict(example);
-                    </code></pre>
-            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
 console.log(await prediction.data());
 //[0.00334801129065454, 0.8710343241691589, 0.12561771273612976]
     </code></pre>
 
-<p><small><a href='https://js.tensorflow.org/tutorials/import-keras.html'>
-    https://js.tensorflow.org/tutorials/import-keras.html</a>
-<br>
+<p><small>
             <a href='js/tensorflow-sandbox/load_manning_model.html' target="_blank">
                 https://djcordhose.github.io/ai/js/tensorflow-sandbox/load_manning_model.html</a></small>
         </small></p>
-        
+    </div>   
     </section>
 
-
-
-        <section data-markdown>
+        <section data-markdown style="font-size: xx-large">
             <textarea data-template>
 ### Docker Container
 
 * often the runtime environment is pretty complex and needs to scale
 * at least we want something that has all the dependencies resolved and just works
-* starting a Flask Server or TensorFlow serving is also nice
+* automatically starting a Flask Server or TensorFlow serving is also nice
 *  if we need a GPU installed on a server
    * https://github.com/NVIDIA/nvidia-docker
    * https://devblogs.nvidia.com/gpu-containers-runtime/
 * but
   * only works with NVIDIA GPU
   * be careful, if your software requires a GPU make sure the server you run it on has a matching one
+        </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+# Part III: Custom Implementations
+
+* general rule: don't do it
+* it is highly unlikely you can do better than default implementations from specialized libraries
+* only do it if you have very special requirements _and_ know exactly what you are doing
+* if you need native Java access, consider https://deeplearning4j.org/, allows direct import of a Keras model https://deeplearning4j.org/docs/latest/keras-import-overview
+
+        </textarea>
+    </section>
+
+    <section data-markdown class="todo">
+            <textarea data-template>
+# Part IV: Once you are in production evertyhing changes
+* make sure your model works on real data
+* what do you do with new incoming data?
+* how to version?
+* how to roll back?
+* how to monitor the quality of your model?
+
+* Material from m3 quality
         </textarea>
     </section>
 
@@ -336,6 +688,9 @@ console.log(await prediction.data());
             $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
+            // do we want this???
+            $('li').addClass('fragment')
+
             if (window.location.hostname.indexOf('localhost') !== -1) {
                 // only applies to presentation version
                 Reveal.configure({ controls: false });
@@ -345,7 +700,16 @@ console.log(await prediction.data());
             }
             // applies to all versions
             $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+
         } );
+        
+        // make all links open in new tab
+        $('a').attr('target', '_blank')
+
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
         // $('section').attr('data-background-image', "backgrounds/white.jpg");
