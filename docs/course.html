@@ -175,7 +175,7 @@ U1-M2: Introduction to Deep Supervised Machine Learning
                     </textarea>
                 </section>
 
-                <section data-markdown>
+                <section data-markdown data-background="img/manning/background/m0.jpg">
                     <textarea data-template>
 ## Idea of Machine Learning
                     </textarea>
@@ -279,7 +279,8 @@ return green # otherwise: low risk
     <section data-markdown>
             <textarea data-template>
 ### Another Approach
-## Deep Supervised Machine Learning
+## Deep Supervised Machine
+## Learning
         </textarea>
     </section>                    
 
@@ -496,7 +497,12 @@ predictions = tf.keras.layers.Dense(num_categories, name='classifier', activatio
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
         // $('section').attr('data-background-image', "backgrounds/white.jpg");
-        $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
+        // $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
+        // $('section').attr('data-background', "img/manning/background/m0.jpg");
+        // $('section').attr('data-background', "img/manning/background/m1.jpg");
+        $('section:not([data-background])').attr('data-background', "img/manning/background/m3.jpg");
+        $('section').attr('data-background-size', "1620px");
+
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
     </script>
     
@@ -509,7 +515,7 @@ predictions = tf.keras.layers.Dense(num_categories, name='classifier', activatio
         progress: true,
         history: true,
         center: true,
-        width: 1100,
+        width: 1200,
 
         transition: 'fade', // none/fade/slide/convex/concave/zoom
 
