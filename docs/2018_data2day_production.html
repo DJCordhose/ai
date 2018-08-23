@@ -198,6 +198,10 @@ In diesem Vortrag beschäftigen wir uns mit diesen Fragen und betrachten dabei S
   * von MACH übernehmen
   * aus m3 Vortrag
   - https://developers.google.com/machine-learning/fairness-overview/
+  * Asserts einbauen: alles was man für gegeben in der Verarbeitung hält (wie geht das mit Python am besten?)
+  * Server bietet complexere Schnittstelle?
+    * Logging Download, Train, Retrain, Score Schnittstelle, Save Model, Download Model
+
 
         </textarea>
         </section>
@@ -653,10 +657,25 @@ console.log(await prediction.data());
 * general rule: don't do it
 * it is highly unlikely you can do better than default implementations from specialized libraries
 * only do it if you have very special requirements _and_ know exactly what you are doing
-* if you need native Java access, consider https://deeplearning4j.org/, allows direct import of a Keras model https://deeplearning4j.org/docs/latest/keras-import-overview
 
         </textarea>
     </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Java
+
+if you need native Java access, consider 
+
+* https://deeplearning4j.org/
+  * sponsored by Eclipse Foundation
+  * allows direct import of a Keras model https://deeplearning4j.org/docs/latest/keras-import-overview
+* TensorFlow Java API https://www.tensorflow.org/install/install_java
+  * not covered by stability guarantee
+  * JNI binding to TensorFlow core
+    </textarea>
+</section>
+        
 
     <section data-markdown class="todo">
             <textarea data-template>
@@ -670,6 +689,42 @@ console.log(await prediction.data());
 * Material from m3 quality
         </textarea>
     </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Continuity in model predictions
+
+* People who use your model regularly will expect most things to stay the way they know it
+* Even if it not totally accurate
+* That might mean you can not train a model from scratch even if you have better data or a better model architecture
+        </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### The Hedgehog Effect
+
+If the user expects a certain pattern to be in the model, they expect it to persist
+
+<img src="img/production/turtle.png" height="400px">
+
+    </textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Netflix seems to be a more brave
+
+* All <a href="https://eu.usatoday.com/story/life/tv/2018/08/19/netflix-deletes-all-user-reviews/1036294002/">user reviews deleted</a>
+* Exclusively using new Machine Learning Models now
+* in the sense of continuity a counter example
+  * really needs to be much better in some resepct
+
+https://www.fastcompany.com/90221403/netflixs-recommendations-suck-but-its-not-too-late-to-fix-them
+</textarea>
+</section>
+
 
 <section data-markdown class="todo">
         <textarea data-template>
