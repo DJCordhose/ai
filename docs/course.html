@@ -76,9 +76,10 @@
                       .reveal h3,
                       .reveal h4 {
                           letter-spacing: 2px;
-                          font-family: 'Amiri', serif;
+                          font-family: 'Calibri', sans-serif;
                           /* font-family: 'Times New Roman', Times, serif; */
                           font-weight: bold;
+                          color: black;
                           font-style: italic;
                           letter-spacing: -2px;
                           text-transform: none !important;
@@ -166,13 +167,13 @@
 ## A Practical Crash Course in Deep Learning
 ### Bringing your first TensorFlow Model into Production
 
-        <a href="https://djcordhose.github.io/ai/course.html">
-            https://djcordhose.github.io/ai/course.html</a>
+<a href="https://djcordhose.github.io/ai/course.html">
+    https://djcordhose.github.io/ai/course.html</a>
 
 </textarea>
 </section>
 
-            <section data-markdown class="beginning">
+            <section data-markdown class="beginning" id='intro'>
                     <textarea data-template>
 # BEGINNING
 U1-M2: Introduction to Deep Supervised Machine Learning
@@ -181,17 +182,34 @@ U1-M2: Introduction to Deep Supervised Machine Learning
 
                 <section data-markdown data-background="img/manning/background/m0.jpg">
                     <textarea data-template>
-## Idea of Machine Learning
+## Why Machine Learning
                     </textarea>
                 </section>
 
+    <section data-markdown>
+        <textarea data-template>
+### Objective for this Course
+
+_Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
+
+<img src='img/pixabay/accident-151668_1280.png'>
+        </textarea>
+    </section>
+
 <section data-markdown>
         <textarea data-template>
-### ML rather is research and a bit of engineering than a craft
-<img src='img/ml_is_not_programming.jpg' height="450px">
-    </textarea>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<!-- <p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p> -->
+</textarea>
     </section>
-                    
+    
     <section>
             <h3>Example: Customer Data - Risk of Accidents</h3>
             <img src="img/manning/all.png" height="400px" class="fragment">
@@ -200,29 +218,6 @@ U1-M2: Introduction to Deep Supervised Machine Learning
             </p>
         </section>
 
-        <section data-markdown>
-            <textarea data-template>
-### Our Objective for this Course
-
-_Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
-            </textarea>
-        </section>
-
- <section data-markdown>
-            <textarea data-template>
-### ML Car Insurance Risk Calculator
-
-<a href='html/calculator.html'>
-<img src='img/manning/calculator.png' height="450">
-</a>
-<!-- <p><small>
-        <a href='html/calculator.html' target="_blank">
-            https://djcordhose.github.io/ai/html/calculator.html</a></small>
-    </small></p> -->
-    </textarea>
-        </section>
-
-                    
         <section>
                 <h3>Programmer's approach: Code Rules by Hand</h3>
                 <div class="fragment">
@@ -286,7 +281,16 @@ return green # otherwise: low risk
 ## Deep Supervised Machine
 ## Learning
         </textarea>
-    </section>                    
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+<!-- ### ML rather is research and a bit of engineering than a craft -->
+### Machine Learning = Lab Work
+<img src='img/ml_is_not_programming.jpg' height="450px">
+    </textarea>
+    </section>
+
 
     <section data-markdown>
             <textarea data-template>
@@ -374,8 +378,8 @@ Add the screenshots from img/manning
         </textarea>
     </section>
 
-<section style="font-size: x-large">
-        <p><small><em>Activation Functions (or non-linearity) take a single numerical input and performs a certain fixed mathematical operation on it.</em></small></p>
+<section style="font-size: x-large" id='activation'>
+        <h4>Activation Functions (or non-linearity) take a single numerical input and performs a certain fixed mathematical operation on it.</h4>
         <div>
         <div style="float: left; width: 550px">
             <img src="img/cnn/step.png" height="190">
