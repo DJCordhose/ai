@@ -308,16 +308,18 @@ return green # otherwise: low risk
             <textarea data-template>
 ### Classification using Neural Networks
 
-<a href='https://playground.tensorflow.org/#activation=linear&batchSize=10&dataset=gauss&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=1&seed=0.05973&showTestData=false&discretize=true&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false&showTestData_hide=true&stepButton_hide=true&activation_hide=true&problem_hide=true&noise_hide=true&discretize_hide=true&resetButton_hide=true&regularization_hide=true&dataset_hide=true&batchSize_hide=true&playButton_hide=true&learningRate_hide=true&regularizationRate_hide=true&percTrainData_hide=true&numHiddenLayers_hide=true'>
+<a href="https://playground.tensorflow.org/#activation=linear&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.05973&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=true&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;discretize_hide=true&amp;resetButton_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;playButton_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true">
 <img src='img/manning/classicifation.png' class="fragment" height="450px">
 </a>
 
+
 <div class="fragment">
     <small>
-<a href='https://playground.tensorflow.org/#activation=linear&batchSize=10&dataset=gauss&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=1&seed=0.05973&showTestData=false&discretize=true&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false&showTestData_hide=true&stepButton_hide=true&activation_hide=true&problem_hide=true&noise_hide=true&discretize_hide=true&resetButton_hide=true&regularization_hide=true&dataset_hide=true&batchSize_hide=true&playButton_hide=true&learningRate_hide=true&regularizationRate_hide=true&percTrainData_hide=true&numHiddenLayers_hide=true'>
+<a href="https://playground.tensorflow.org">
 https://playground.tensorflow.org
 </a>
 </small>
+
 </div>        
 </textarea>
         </section>
@@ -329,52 +331,83 @@ U1-M2: Introduction to Deep Supervised Machine Learning
                 </textarea>
             </section>
 
-            <section data-markdown>
+            <section data-markdown class="beginning">
                     <textarea data-template>
-            ## U2-M1: What is classification?
+            ## U2-M1: What is an Artificial Neuron
                     </textarea>
                 </section>
             
-
-        <section data-markdown>
-            <textarea data-template>
-### Classification
-
-http://127.0.0.1:58512/#activation=linear&batchSize=10&dataset=gauss&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=1&seed=0.65488&showTestData=false&discretize=true&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false&showTestData_hide=true&stepButton_hide=true&activation_hide=true&problem_hide=true&noise_hide=true&batchSize_hide=true&dataset_hide=true&regularization_hide=true&resetButton_hide=true&discretize_hide=true&playButton_hide=true&learningRate_hide=true&regularizationRate_hide=true&percTrainData_hide=true&numHiddenLayers_hide=true
-
-http://playground.tensorflow.org/#activation=linear&batchSize=10&dataset=gauss&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=1&seed=0.05973&showTestData=false&discretize=true&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false&showTestData_hide=true&stepButton_hide=true&activation_hide=true&problem_hide=true&noise_hide=true&discretize_hide=true&resetButton_hide=true&regularization_hide=true&dataset_hide=true&batchSize_hide=true&playButton_hide=true&learningRate_hide=true&regularizationRate_hide=true&percTrainData_hide=true&numHiddenLayers_hide=true
-
-</textarea>
-</section>
-
 <section data-markdown>
         <textarea data-template>
-### Classification
+### A classification problem
 
-<img src="img/manning/classicifation.png">
-
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-### How an artificial neural network works
-
-<img src="img/manning/nn.png">
+<a href="https://playground.tensorflow.org/#activation=linear&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.05973&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=true&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;discretize_hide=true&amp;resetButton_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;playButton_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true">
+<img src="img/manning/classicifation.png" height="500px">
+</a>
 
 </textarea>
 </section>
 
 <section data-markdown class="todo">
-        <textarea data-template>
-Add the screenshots from img/manning
-        </textarea>
-    </section>
+    <textarea data-template>
+### Physical Screencast: How dos an artificial neuron work?
+
+Part II, sparing room for activation function
+</textarea>
+</section>
 
 
-    <section data-markdown>
+<section data-markdown>
         <textarea data-template>
-## U2-M2: What are activation functions?
+### Hand crafting a classification with a single neuron
+
+<a href="https://playground.tensorflow.org/#activation=linear&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.05973&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=true&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;discretize_hide=true&amp;resetButton_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;playButton_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true">
+<img src="img/manning/nn.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Exercise
+### What kind of decision boundary can a single neuron represent?
+
+* Experiment with the different weights and the bias of our neuron to separate the two classes ‘high risk’ / ‘low risk’.
+* Are there limitations to the decision boundaries you can create?
+
+<a href="https://playground.tensorflow.org/#activation=linear&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.05973&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=true&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;discretize_hide=true&amp;resetButton_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;playButton_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true">
+https://playground.tensorflow.org
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Exercise
+### Why does an artificial neuron need a bias?
+
+* Experiment with the Playground
+* How does changing the Bias influence the decision boundary? 
+* You can change the Bias of the neuron by clicking on the small box on the bottom left corner of the neuron.
+
+<a href="https://playground.tensorflow.org/#activation=linear&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.05973&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=true&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;discretize_hide=true&amp;resetButton_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;playButton_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true">
+https://playground.tensorflow.org
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown class="end">
+    <textarea data-template>
+## U2-M1: What is an Artificial Neuron
+    </textarea>
+</section>
+
+    <section data-markdown class="beginning">
+        <textarea data-template>
+## U2-M4: What are activation functions?
         </textarea>
     </section>
 
@@ -416,6 +449,202 @@ Add the screenshots from img/manning
                     </div>
                 </div>
         </section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### Physical Screencast: How dos an artificial neuron work?
+
+Part II, complete with activation function
+</textarea>
+</section>
+        
+
+<section data-markdown class="end">
+    <textarea data-template>
+## U2-M4: What are activation functions?
+    </textarea>
+</section>
+
+<section data-markdown class="beginning">
+    <textarea data-template>
+## U2-M4: Fully Connected Feed Forward Networks
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### A more complex example
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=false&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/classification4.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Using 2 neurons
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=2&amp;seed=0.90689&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=false&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/2nn.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Exercise
+### How many neurons do you need to decently separate the two classes from each other?
+
+* You might have noticed that two neurons do not give good results. 
+* Can you figure out a minimal number of neurons to get a good result? 
+* As weights and biases are initialized randomly, training results are not deterministic. You might have to train several times.
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=2&amp;seed=0.90689&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=false&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+https://playground.tensorflow.org
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown class="end">
+    <textarea data-template>
+## U2-M4: Fully Connected Feed Forward Networks
+    </textarea>
+</section>
+
+<section data-markdown class="end">
+    <textarea data-template>
+## U2-M5: How does a network learn?
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Determining Error is the key to learning
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=2&amp;seed=0.90689&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=false&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/error.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown id='mse'>
+    <textarea data-template>
+### Mean Squared Error
+
+<script type="math/tex; mode=display">
+MSE = {\frac {1}{n}}\sum _{i=1}^{n}(Y_{i}-{\hat {Y_{i}}})^{2}
+</script>
+
+https://en.wikipedia.org/wiki/Mean_squared_error
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### From Error to Optimal Parameters
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/bias-to-loss.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Job of the Optimizer
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/optimizer.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Overfitting
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/overfit.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Underfitting
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/underfit.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Sweet Spot
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/sweet-spot.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Sweet Spot Shown by Error
+
+<a class="hide-controls-link" href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/test-sweet-spot.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Overfitting Shown by Error
+
+<a class="hide-controls-link" href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/test-overfit.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Exercise
+### Train a network on a complex shape
+
+* Choose the most complex data set (spiral) from the playground (link below) 
+* Play with the learning rate, activation function, ratio of training, noise, the number of neurons and also the number of hidden layers. 
+* Experiments have shown that 2-3 hidden layers are good rule of thumb. Are you able to create a model that overfits heavily?
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=spiral&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=40&amp;networkShape=4,2&amp;seed=0.31018&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;problem_hide=true&amp;regularization_hide=true&amp;batchSize_hide=true&amp;regularizationRate_hide=true">
+https://playground.tensorflow.org
+</a>
+
+</textarea>
+</section>
+
+
+<section data-markdown class="end">
+    <textarea data-template>
+## U2-M5: How does a network learn?
+    </textarea>
+</section>
+
 
 
         <section data-markdown>
@@ -518,8 +747,8 @@ predictions = tf.keras.layers.Dense(num_categories, name='classifier', activatio
     // Full list of configuration options available at:
     // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
-        controls: true,
-        progress: true,
+        controls: false,
+        progress: false,
         history: true,
         center: true,
         width: 1200,
