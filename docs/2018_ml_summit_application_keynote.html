@@ -161,6 +161,38 @@
                 https://djcordhose.github.io/ai/2018_ml_summit_application_keynote.html
             </a></small></p>
         </section>
+        <section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+<img src='img/e9262c3d9263ee9b1243f1b0cf58a857.jpg' height="550px">
+
+<small>Photo by PenMac at Morguefile.com</small>
+
+        </textarea>
+        </section>
+
+
+        <section data-markdown>
+            <textarea data-template>
+### Axiom
+## Allgemeine Künstliche Intelligenz existiert nicht
+
+Und wird auch in absehbarer Zeit nicht existieren
+        </textarea>
+        </section>
+    
+        <section data-markdown>
+            <textarea data-template>
+### Daher: KI hat kein Weltwissen
+
+* Von euch trainierte Systeme "wissen" nur was ihr ihnen einfüttert
+* Allgemeine Zusammenhänge sind eurer KI nicht bekannt
+* Was nicht in euren Daten steckt kann auch die KI nicht wissen
+* Für eine sinnvolle Generalisierung braucht ihr viele Daten
+* Was viel bedeutet hängt von vielen Faktoren ab
+* Pro "Konzept" 5000 Beispiele ist ein guter Richtwert 
+
+        </textarea>
+        </section>
 
 <section data-markdown>
         <textarea data-template>
@@ -341,6 +373,9 @@ Reinforcement learning is a very generic and widely applicable framework. If we 
             $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
+            // do we want this???
+            $('li').addClass('fragment')
+
             if (window.location.hostname.indexOf('localhost') !== -1) {
                 // only applies to presentation version
                 Reveal.configure({ controls: false });
@@ -350,6 +385,10 @@ Reinforcement learning is a very generic and widely applicable framework. If we 
             }
             // applies to all versions
             $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
@@ -365,9 +404,10 @@ Reinforcement learning is a very generic and widely applicable framework. If we 
     // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
         controls: true,
-        progress: true,
+        progress: false,
         history: true,
         center: true,
+        width: 1100,
 
         transition: 'fade', // none/fade/slide/convex/concave/zoom
 
