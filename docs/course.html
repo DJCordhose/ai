@@ -646,6 +646,145 @@ https://playground.tensorflow.org
 </section>
 
 
+<section data-markdown class="begin">
+    <textarea data-template>
+## U3-M6: Generalization
+    </textarea>
+</section>
+
+<section data-markdown class="end">
+    <textarea data-template>
+## U3-M6: Generalization
+    </textarea>
+</section>
+
+<section data-markdown class="begin">
+    <textarea data-template>
+## U3-M7: Regularization
+    </textarea>
+</section>
+
+<section id='overfitting'>
+        <h3>The Issue: Overfitting</h2>
+    <div>
+    <div style="float: left">
+        <img src="img/scans/elements/80_percent.jpg" height="225" class="fragment" data-fragment-index='1'>
+        <p>
+            <small><em>Training Score</em></small>
+        </p>
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='5'>
+        <img src="img/scans/elements/down.jpg" height="225">
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='4'>
+        <img src="img/scans/elements/up.jpg" height="225">
+    </div>
+    <div style="float: left">
+            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
+            <p>
+                <small><em>Test Score</em></small>
+            </p>
+    </div>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and Test scores clearly divert</em></p>
+
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Regularization
+
+_Process to counter Overfitting_
+            </textarea>
+            </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+### First approach: Train for less epochs
+
+<img src='img/accuracy.png'>
+
+_Watch where training and validation accuracy diverge and stop training there_
+
+
+            </textarea>
+            </section>
+    
+<section id='overfitting-capacity'>
+        <h3>Second approach: Reduce Capacity of model</h2>
+    <div style="float: left; width: 500px" class="fragment" data-fragment-index='1'>
+        <img src="img/scans/elements/model-large.jpg" height="225">
+        <p>
+            <small><em>Original Model</em></small>
+        </p>
+    </div>
+    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
+        <br>
+        <img src="img/scans/elements/right.jpg">
+        <br>
+    </div>
+    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
+            <br>
+            <img src="img/scans/elements/model-small.jpg" height="100">
+            <br>
+            <br>
+            <p>
+                <small><em>Smaller Model</em><br>less Hidden Layers, less Neurons per Layer</small>
+            </p>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Give Model less capacity to simply memorize data</em></p>
+    </section>
+
+<section id='overfitting-dropout'>
+        <h3>Third approach: Use Dropout to only train a certain percentage of neurons per Batch</h2>
+    <div style="float: left; width: 500px" class="fragment" data-fragment-index='1'>
+        <img src="img/scans/elements/model-large.jpg" height="225">
+        <p>
+            <small><em>Original Model</em></small>
+        </p>
+    </div>
+    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
+        <br>
+        <img src="img/scans/elements/right.jpg">
+        <br>
+    </div>
+    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
+            <br>
+            <img src="img/scans/elements/model-emsemble.jpg" height="100">
+            <br>
+            <br>
+            <p>
+                <small><em>Ensemble of Small Models</em> (each one overfits on its specific batch)<br></small>
+            </p>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Combination of Models makes result more robust</em></p>
+    </section>
+
+    <section data-markdown id='overfitting-bn'>
+            <textarea data-template>
+### Fourth approach: Batch Normalization
+
+<ul>
+    <li class="fragment">Subtracts Batch Mean
+    <li class="fragment">Multiplies by Standard Deviation     
+</ul>
+
+<img src='img/scans/elements/sigmoid.jpg' class="fragment" height="200">
+    
+<p class="fragment"><em>Intuition: Makes Model robust by adding noise</em></p>
+
+<p class="fragment"><em>Bonus:</em> Lets Model train faster by fighting vanishing gradients</p>
+
+    
+    
+                </textarea>
+                </section>
+<section data-markdown class="end">
+    <textarea data-template>
+## U3-M7: Regularization
+    </textarea>
+</section>
+
 
         <section data-markdown>
                 <textarea data-template>
