@@ -146,24 +146,16 @@
 
 <div class="reveal">
     <div class="slides">
+<!-- 
+Machine Learning hat das Potential, die Art und Weise wie Software funktioniert oder die Art wie Entscheidungen
+getroffen werden, zu revolutionieren. Daten von guter Qualität und Quantität sind dabei der Schlüssel zum Erfolg: Sitzt
+du vielleicht sogar auf einer Goldgrube, ohne es zu ahnen?
+ -->
 
-        <section>
-            <h2>Wie Machine Learning deinen Geschäftsbereich transformieren kann</h2>
-            <p><a target="_blank" href="https://ml-summit.de/applications-for-your-business/keynote-wie-kann-machine-learning-einen-geschaeftsbereich-transformieren/">
-                Keynote, ML Summit, Berlin, October 2018
-            </a></p>
-            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / 
-                <a href="http://twitter.com/djcordhose">@DJCordhose</a> /
-                <a href="https://www.embarc.de/ ">embarc GmbH</a>
+ 
 
-            </h4>
-            <p><small><a href="https://djcordhose.github.io/ai/2018_ml_summit_application_keynote.html">
-                https://djcordhose.github.io/ai/2018_ml_summit_application_keynote.html
-            </a></small></p>
-        </section>
-
-        <section data-markdown class="todo">
-                <textarea data-template>
+ <section data-markdown class="todo">
+        <textarea data-template>
 
 1. Teil Intro
 
@@ -181,18 +173,7 @@
 </section>
 
 <section data-markdown class="todo">
-        <textarea data-template>
-### Teil 3: Real World Use Cases
-
-* was macht man mit 80% Genauigkeit?
-* Und was mit 40%?
-* Ist das überhaupt gut? 
-* Always know your baseline
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
+<textarea data-template>
 ### Teil 3: Und was macht man wenn man gar keine Anwendung hat
 
 Dann sucht man sich eine
@@ -202,6 +183,50 @@ Google released a search engine for datasets: https://t.co/HSFhz8RyYL. Launch bl
 
 </textarea>
 </section>
+
+<section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation
+
+* Ton für Audio und Video
+    </textarea>
+</section>
+
+
+        <section>
+            <h2>Wie Machine Learning deinen Geschäftsbereich transformieren kann</h2>
+            <p><a target="_blank" href="https://ml-summit.de/applications-for-your-business/keynote-wie-kann-machine-learning-einen-geschaeftsbereich-transformieren/">
+                Keynote, ML Summit, Berlin, October 2018
+            </a></p>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / 
+                <a href="http://twitter.com/djcordhose">@DJCordhose</a> /
+                <a href="https://www.embarc.de/ ">embarc GmbH</a>
+
+            </h4>
+            <p><small><a href="https://djcordhose.github.io/ai/2018_ml_summit_application_keynote.html">
+                https://djcordhose.github.io/ai/2018_ml_summit_application_keynote.html
+            </a></small></p>
+        </section>
+<!-- 
+-----------------------------
+        TEIL I: INTRO
+-----------------------------
+ -->
+        <section data-markdown>
+                <textarea data-template>
+### Artificial intelligence will wipe out half the banking jobs in a decade, experts say
+
+_Deutsche Bank, John Cryan_ 
+
+“In our bank we have people doing work like robots,” he said. “Tomorrow we will have robots behaving like people. It doesn’t
+matter if we as a bank will participate in these changes or not, it is going to happen.”
+
+
+<small>
+https://www.mercurynews.com/2018/04/20/artificial-intelligence-will-wipe-out-half-the-banking-jobs-in-a-decade-experts-say/
+</small>
+            </textarea>
+            </section>
 
         <section data-markdown style="font-size: xx-large">
             <textarea data-template>
@@ -324,6 +349,81 @@ Text Vervollständigung Handy
 </textarea>
 </section>
 
+<section>
+        <h3>
+            3 Arten von Machine Learning
+        </h3>
+        <img src="img/sketch/types-of-ml.png" height="550px">
+    </section>
+
+<section>
+        <h2>Reinforcement Learning</h2>
+        <h3>Am ehesten die Roboter, die uns Menschen ausrotten</h3>
+    </section>
+
+<section data-markdown>
+<textarea data-template>
+### Paper Clips
+
+_AI verwandelt die Welt ratzfatz in Büroklammern_
+
+<img src='img/applications/paper-clip.png' height="400">
+
+<small>
+https://en.wikipedia.org/wiki/Universal_Paperclips
+<br>
+http://www.decisionproblem.com/paperclips
+</small>
+</textarea>
+</section>
+            
+
+<section data-markdown style="font-size: x-large">
+<textarea data-template>
+### Alpha(Go) Zero
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<!-- <img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px"> -->
+<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="400px">
+</a>
+
+* Monte Carlo Tree Search und Deep Convolutional Neural Networks
+* Zielfunktion ist Sieg
+* schlagen jeden Menschen und Maschine ohne menschliche Expertise (in perfect information game)
+
+<!-- <small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
+<br>
+Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
+<br>
+Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
+</small> -->
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### World Model
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<img src='img/rf/world-models.gif' height="300px">
+</a>
+
+Lernen wie man Auto fährt ohne menschliche Expertise mit LSTMs
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-model-using-python-and-keras-64fb388ba459
+<br>
+Code: https://github.com/AppliedDataSciencePartners/WorldModels
+</small>
+</textarea>
+</section>
+
+<!-- 
+-----------------------------
+        TEIL II: FANCY ANWENDUNGEN
+-----------------------------
+ -->
 
 
 <section data-markdown>
@@ -344,6 +444,120 @@ https://youtu.be/PCBTZh41Ris
 </small>
 </textarea>
 </section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+Tweet ist weg
+
+- Predicting military action using the number of cars in a Pentagon parking lot: https://twitter.com/chrisalbon/status/984586200986959872
+</textarea>
+</section>
+
+
+ <section>
+        <h3>Die Post testet 2018 selbstfahrende Lieferfahrzeuge</h3>
+        <p class="fragment"><em>"Sie werden in der Lage sein, dem Zusteller autonom zu folgen - sodass er nicht vor jedem Hauseingang aus- und wieder einsteigen und wenige Meter fahren muss."</em></p>
+        <img src="img/post_dhl_truck.jpg" height="200">
+        <p><small><a href="http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html" target="_blank">http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html</a>
+        </small></p>
+    </section>
+
+    <section>
+        <h4>Maschinen verstehen Sprache und können sich dazu verhalten</h4>
+        <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
+    </section>
+
+    <section>
+        <h4>Nur zwei dieser Bilder sind echte Fotos</h4>
+        <img src="img/applications/gan.jpg" height="500px">
+        <p><small><a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
+            https://twitter.com/goodfellow_ian/status/918900712901197824</a></small></p>
+    </section>
+
+    <section>
+        <h4>Die anderen sind mit Neuronalen Netzwerken generiert</h4>
+        <img src="img/applications/gan-real-images.jpg" height="500px">
+        <p><small><a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a></small></p>
+    </section>
+
+    <section>
+            <h4>Aber so ganz kriegt man den Kunden noch nicht angekleidet</h4>
+            <img src="img/unsupervised/gan-clothes.jpg" height="500px">
+            <p><small><a href="https://arxiv.org/abs/1711.02231" target="_blank">Visually-Aware Fashion Recommendation and Design with Generative Image Models</a></small></p>
+        </section>
+                
+
+<!-- 
+-----------------------------
+        TEIL III: REALISTISCHE USE CASES
+-----------------------------
+ -->
+
+ <section>
+        <p>Schachprogramme haben Menschen überwunden weil</p>
+        <div class="fragment" style="float: left">
+            <img src="img/cray2.png" height="250">
+            <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
+        </div>
+        <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+        x 100.000 =
+        </div>
+        <div class="fragment" style="float: left">
+          <img src="img/titan5.jpg" height="250" style="float: right">
+            <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
+        </div>
+   </section>
+
+ <section>
+        <h4>Minimale Information reicht, um ein gutes Angebot zu machen</h4>
+        <img src="img/applications/style-prediction.jpg" height="500px">
+        <p><small><a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a></small></p>
+    </section>
+
+ <section>
+        <h3>schnelleres Arbeiten, höherer Durchsatz</h3>
+        <img src="img/classification/driving-license.jpg">    
+        <p>Welche Dokumente hat der Kunde eingericht?</p>
+    </section>
+
+    <section>
+            <h3>Customer Churn / Conversion</h3>
+            <div class="fragment" style="float: left">
+                    <img src="img/churn/log7335277f@example.com.png" height="350">
+                    <p>
+                        <small>Kunde vor und nach Abschluss</small>
+                    </p>
+                </div>
+                <div class="fragment" style="float: left; padding-left: 100px; padding-right: 20px; padding-top: 120px; font-weight: bold">
+                    ==> 
+                </div>
+                <div class="fragment" style="float: right">
+                    <img src="img/glaskugel.jpg" height="350">
+                    <p>
+                        <small>Glaskugel</small>
+                    </p>
+                </div>
+            <p style="clear: both">Wie verhält sich jemand, der später Kunde wird / kündigt?</p>
+        </section>
+        <section>
+            <h4>Weitere Anwendungsgebiete</h4>
+            <!-- <small> -->
+            <ul>
+                <li class="fragment"><strong>Recommendation Systems</strong>: Spotify und Netflix kennen mich besser als ich mich selbst
+                <li class="fragment"><strong>Making decisions</strong>: Sollte jemand einen Kredit bekommen oder versichert werden?
+                <li class="fragment"><strong>Fraud Detection</strong>: Sieht eine Kredit-Karten-Transaktion oder eine Steuererklärung ungewöhnlich aus?
+                <li class="fragment"><strong>Predictive Maintenance</strong>: KI systems sagen wann man ein Wasserrohr ersetzen soll bevor es bricht
+                <li class="fragment"><strong>Expert System</strong>: Zuordnung von Krankheit und Maßnahmen</li>
+            </ul>
+        <!-- </small> -->
+    </section>
+
+
+<!-- 
+-----------------------------
+MATERIAL
+-----------------------------
+ -->
 
     <section data-markdown class="todo">
         <textarea data-template>
@@ -385,7 +599,6 @@ Marketing
             <textarea data-template>
 - Für Keynote eher unterhalten und ein bisschen informieren
   - best of des Workshops
-  - die ganzen coolen Anwendungen aus der HAW Vorlesung
   - "A lion’s share of the competitive advantages & rewards of #AI are going to be captured by its early adopters, so time is short."
     "Early adopters will share a global profit pool valued at $1 trillion."
   https://t.co/bCjR25EYHM
@@ -413,11 +626,6 @@ This is likely the cleanest, nicest implementation of Neural Style Transfer with
   - https://cloud.google.com/natural-language
   - https://cloud.google.com/translate
   - https://cloud.google.com/vision/
-
-- Anwendungen RL nicht in Industrie
-François Chollet (@fchollet) tweeted at 6:53 PM on Sat, Jul 21, 2018:
-Reinforcement learning is a very generic and widely applicable framework. If we had any way to solve RL problems, we'd use it everywhere. The way convnets are used everywhere in CV nowadays. The fact that RL is nowhere to be seen in the industry is pretty telling...
-(https://twitter.com/fchollet/status/1020713281692917760?s=03)
 
 []Fair ML
     []https://twitter.com/mrtz/status/1019628022897373184
