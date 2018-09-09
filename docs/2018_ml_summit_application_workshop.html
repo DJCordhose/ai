@@ -147,6 +147,22 @@
 <div class="reveal">
     <div class="slides">
 
+        
+<!-- 
+Machine Learning auch für Dein Projekt!
+
+Machine Learning ist im Begriff, viele Bereiche des Arbeitslebens zu transformieren. Dabei gibt es viele unrealistische
+Versprechen und Befürchtungen, aber auch ebenso viele – zum Teil weniger offensichtliche und bahnbrechende –
+Anwendungen, in denen Machine Learning eine große Hilfe sein kann.
+
+Im ersten Teil des Workshops wird erklärt, welche Arten von Machine Learning es gibt und wie insbesondere Supervised
+Machine Learning funktioniert. Dabei wird schon klar, dass du ohne passende Daten kein Machine Learning betreiben
+kannst.
+
+Im zweiten Teil bekommst du Anregungen zu Anwendungsbereichen von Machine Learning und eine Anleitung, wie du eigene
+Anwendungsgebiete in deinem Arbeitsbereich finden kannst. Hier bekommst du auch die Möglichkeiten, eigene Ansätze zu
+entwickeln und daran zu arbeiten.
+ -->
         <section>
             <h2>Workshop: Machine Learning auch für Dein Projekt</h2>
             <p><a target="_blank" href="https://ml-summit.de/applications-for-your-business/machine-learning-auch-fuer-dein-projekt/">
@@ -161,119 +177,35 @@
             </a></small></p>
         </section>
 
-        <section data-markdown class="todo">
-            <textarea data-template>
-<img src='img/MELLI.jpg'>
-                </textarea>
-                </section>
+        <section data-markdown>
+<textarea data-template>
+### Agenda
 
+1. Idee und Arten von Machine Learning
+1. Wie finde ich ein Anwendungsgebiet
+1. Eigene Anwendungsgebiete erarbeiten
 
-        <section data-markdown class="todo">
-                <textarea data-template>
-### Strategien Visualisieren
-
-#### KNN
-- KNN Observable Notebook übernehmen auch aus 2018_deep_learning_workshop
-  - Datenpunkte mehr vermischen, um den Einfluss von k klarer zu zeigen
-  - Eigenen Fork des Notebooks machen 
-
-#### SVM 
-Reza Zadeh (@Reza_Zadeh) tweeted at 8:50 AM on Thu, Aug 09, 2018:
-A nice visualizer for Support Vector Machines, from the good old days of the 2000s.
-Live: https://t.co/5F6RezYB4x
-Code: https://t.co/hdJrp7WTBy https://t.co/tnebZMZpkL
-(https://twitter.com/Reza_Zadeh/status/1027447075552735232?s=03)
-
-#### NN: Playground
-                    </textarea>
-                    </section>
-
-        <section data-markdown class="todo">
-            <textarea data-template>
-- Dramaturgischer Ablauf von 2018_deep_learning_workshop übernehmen
-
-- Noch ein Beispiel auf dem Übungszettel für Data Cleaning
-
-RL
-
-Als anschauliche Beispiele
-- Paperclips Game
-    - https://en.wikipedia.org/wiki/Universal_Paperclips
-    - http://www.decisionproblem.com/paperclips/index2.html
-- The cart-pole control problem is like the hello world for reinforcement learning. In this example, we solve it in the browser using the policy-gradient method & #TensorFlowJS, w/ training- & test-time animation.
-
-Code: https://t.co/Repilh2YqG
-Live demo → https://t.co/cNPph3tAlo https://t.co/p02psOfLkb
-(https://twitter.com/sqcai/status/1024760019168976907?s=03)
-
-- Technik und Anwendung zusammen ziehen
-  - nicht zwei getrennte Teile
-  - für jede Technik gleich auch nach den Anwendungsmöglichkeiten fragen und dazu eine Übung machen
-  - Supervised
-  - Unsupervised
-  - Embedding
-    - PCA, t-SNE
-
-  
-            </textarea>
-        </section>
-        
-        <section data-markdown class="todo">
-            <textarea data-template>
-- Comparing different 
-  - learning strategies
-    - http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
-  - clustering strategies
-    - http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
-    - http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html
-
-- Post einbauen wie im Scipy Talk/Poster
-- Vorher Folien wie in Scipy Talk Concept: Decision Boundary
-    - https://dash-svm-dev.herokuapp.com/
-- What do the colored areas mean?
-- Auch Folien mit Aufspaltung in Train/Test/Validation
-    - In neue Version des Posters aufnehmen
-    - Eine Lernstrategie weniger? KNN?
-
-      
 </textarea>
 </section>
-        
-<!-- <section class="todo">
-<pre>
 
-* Entscheidungsbaum klassisch vs deep
-  * GPU Power available. Constant retraining required.
-- Skizze Qualität: Ablauf der Vorhersage, Skizze des Modells etc.
-- Was kann ich mit 60% Accuracy machen?
-- https://www.techhit.com/SimplyFile/
-- Predicting military action using the number of cars in a Pentagon parking lot: https://twitter.com/chrisalbon/status/984586200986959872
-- Chinesiches Startup: https://twitter.com/data2day/status/983331353776148480
-- Magenta: https://twitter.com/TensorFlow/status/983479708796014592
-- Optional: https://www.quora.com/What-is-Bayesian-machine-learning
-</pre>    
-</section> -->
+        <section data-markdown>
+<textarea data-template>
+### Vorstellung
 
-<section data-markdown>
-        <textarea data-template>
-### ML ist eher Forschung als Software Entwicklung
-<img src='img/ml_is_not_programming.jpg' height="550px">
-    </textarea>
-    </section>
+_Was macht ihr uns was wollt ihr erreichen?_
 
-<section>
-    <h3>Agenda</h3>
-    <ol>
-        <li>Einführung in die Idee von Machine Learning: 90 Minuten</li>
-        <li>Einführung in Anwendungsgebiete: 30 Minuten</li>
-        <li>Eigene Anwendungsgebiete erarbeiten: 30 Minuten</li>
-        <li>Vorstellung und Abschlussdiskussion: 30 Minuten</li>
-    </ol>
+Je nach Größe der Gruppe
+
+1. &lt; 20 im Plenum
+1. stellt euch eurem / euren Nachbarn vor, dann ein paar Blitzlichter
+
+</textarea>
 </section>
+
 
         <section>
             <h1>Teil I</h1>
-            <h2>Was geht mit Machine Learning (und was nicht)</h2>
+            <h2>Idee und Arten von Machine Learning</h2>
         </section>
 
         <section>
@@ -304,17 +236,16 @@ Live demo → https://t.co/cNPph3tAlo https://t.co/p02psOfLkb
                     <p>Es macht keinen Sinn, die Kundenqualität für Daten vorherzusagen, die man schon kennt.</p>
                     <p>Unser Cluster müssen daher auch für Daten funktionieren, die wir noch nicht betrachtet haben</p>
                 </section>
-                
-                <section>
-                    <h3>Wie gut funktioniert die Vorhersage auf unbekannten Daten?</h3>
-                    <ol>
-                        <li class="fragment">Wir teilen alle zur Verfügung stehenden Daten in 2 Teile</li>
-                        <li class="fragment">Den größeren Teil der Daten (60 oder 80%) benutzen wir, um unser Modell zu bilden</li>
-                        <li class="fragment">Das Modell ist in diesem Fall euer Zettel mit den Clustern</li>
-                        <li class="fragment">Der kleinere Teil der Daten wird zur Überprüfung des Modells verwendet - diesen Teil dürfen wir uns nicht vorher ansehen</li>
-                    </ol>
-                </section>
-                
+
+                <section data-markdown>
+    <textarea data-template>
+### Wie gut funktioniert die Vorhersage auf unbekannten Daten?
+
+<img src='img/scans/generalization.jpg' height="600">
+
+</textarea>
+</section>
+
                 <section>
                     <h3>Experiment #1, Teil #2 - Wie gut hat die Verallgemeinerung funktioniert?</h3>
                     <ul>
@@ -370,26 +301,32 @@ Live demo → https://t.co/cNPph3tAlo https://t.co/p02psOfLkb
                 <div class="fragment">
                 <pre><code contenteditable data-trim class="line-numbers python">
 if age < 25:
-    if speed > 180:
-        return red
+    if speed > 140:
+        return red # young people, fast cars: high risk
     else:
-        return yellow
-if age > 75:
-    return red
-if km_per_year > 50:
-    return red
-if km_per_year > 35:
-    return yellow
-return green
+        return yellow # young people: medium risk
                     </code></pre>
                 </div>
-            </section>
-            <section data-markdown>
-                <textarea data-template>
-        <img src='img/sketch/classic-development.jpg'>
-            </textarea>
-            </section>
-            
+                <div class="fragment">
+                <pre><code contenteditable data-trim class="line-numbers python">
+if age > 75:
+    return red # old people: high risk
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                <pre><code contenteditable data-trim class="line-numbers python">
+if miles_per_year > 30:
+    return red # a lot of driving: high risk
+if miles_per_year > 20:
+    return yellow #  a bit of driving: medium risk
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                <pre><code contenteditable data-trim class="line-numbers python">
+return green # otherwise: low risk
+                    </code></pre>
+                </div>
+            </section>            
         <section>
             <h3>Keine tollen Ergebnisse</h3>
             <p>Sind das alle Regeln? Sind die richtig?</p>
@@ -399,52 +336,40 @@ return green
             </div>        
         </section>
     
-        <section>
-            <h3>Ansatz: Stochastisches Modell</h3>        
-            <div class="fragment">
-    
-            <img src="img/insurance/age.png" height="200px">
-            <img src="img/insurance/km.png" height="200px">
-            <img src="img/insurance/speed.png" height="200px">
-            </div>
-        </section>
-    
-        <section>
-            <h3>Bessere Ergebnisse</h3>
-    
-            <img src="img/insurance/stats.png" height="450px">
-            <p>ca. 53% korrekte Vorhersagen</p>
-                </section>
-    
-                <section>
-                        <h3>Aber</h3>        
-            <ul>
-                <li class="fragment">53% ist nun auch nicht ein sooo tolles Ergebnis</li>
-                <li class="fragment">Modellierung erfordert viel Domänenwissen</li>
-                <li class="fragment">Modell passt sich nicht automatisch an</li>
-            </ul>
-        </section>
-        
+        <section data-markdown>
+                <textarea data-template>
+        <img src='img/sketch/classic-development.jpg'>
+            </textarea>
+            </section>
+            
                 <section>
                         <h2>Supervised Machine Learning</h2>
                     </section>
-                        
+                     
+                    
+<section data-markdown>
+        <textarea data-template>
+### ML ist eher Forschung als Software Entwicklung
+<img src='img/ml_is_not_programming.jpg' height="550px">
+    </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+<img src='img/MELLI.jpg'>
+                </textarea>
+                </section>
+
+
+
                     <section data-markdown>
                         <textarea data-template>
 <img src='img/sketch/supervised-ml.jpg'>
                     </textarea>
                 </section>
-                        <section>
 
-                        <img src="img/insurance/ml-phases.png" height="450px">
-                    </section>
-                
-                    <section data-markdown>
-                        <textarea data-template>
-<img src='img/sketch/using-a-model.jpg'>
-                    </textarea>
-                </section>
-                    <!-- <section>
+
+<section>
                         <h3>Typische Anwendung: Klassifikation</h3>
                         <div class="fragment">
                             <img src="img/sketch/classification.jpg" height="450px">
@@ -458,98 +383,88 @@ return green
         </a>
         <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
         </small></p>
-    </section> -->
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Daten sind König
+
+<img src='img/applications/data.png' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Experiment 2: Data Cleaning und Feature Selection
+
+_Data Cleaning_
+* Welche Spalte würdest du vorhergesagen wollen?
+* Und welche Spalten bieten sich als Trainings-Eingaben an?
+* Würdest du einige Spalten gar nicht nutzen? Wenn ja, warum?
+
+_Feature Selection_
+* Findest du Fehler? Markiere diese auf dem Zettel und beschreibe den Fehler
+* Wie würdest du mit diesen Fehlern umgehen?
+
+Note:
+- Übungszettel ai/exercise/exercise-ml-summit.docx
+- Datendopplung Zeile 4/5 => eine löschen
+- Fehlender Wert Zeile 16 => Zeile löschen oder Durchschnitt
+- Spalte 'state' mit mehr als 50% fehlenden Werten
+- Zeile 23 Ausreißer: Zeile löschen oder auf plausiblen Wert korrigieren 
+- Zeile 24: Califorina 
+            </textarea>
+            </section>
+              
+
+                        <section>
+
+                        <img src="img/insurance/ml-phases.png" height="450px">
+                    </section>
+                
+                    <section data-markdown>
+                        <textarea data-template>
+<img src='img/sketch/using-a-model.jpg'>
+                    </textarea>
+                </section>
     
     <section>
         <h3>Strategien</h3>
-        <ul>
-            <li class="fragment">Es gibt unterschiedliche Lernstrategien</li>
-            <li class="fragment">Für unser Problem reicht eines der einfachsten Strategien: KNN</li>
-        </ul>
+        <img src='img/applications/decisions/classic.png' height="500px">
     </section>
 
-    <!-- <section>
-        <h3>Validierung</h3>
-        <p>Generalisierung, nicht perfekte Reproduktion ist unser Ziel</p>
-        <ol>
-            <li class="fragment">Wir teilen die uns bekannten Daten in zwei Sätze auf</li>
-            <li class="fragment">Den ersten Satz (of 60 oder 80%) nehmen wir für das Training</li>
-            <li class="fragment">Wie im Beispiel oben verknüpfen wir Eingaben mit passenden Ausgaben</li>
-            <li class="fragment">Den zweiten Satz nehmen wir zur Überprüfung: passen die vorhergesagten Ausgaben zu den uns bekannten Ausgaben?</li>
-        </ol>
-    </section> -->
-
-    <section>
-        <h3>KNN: k Nearest Neighbors</h3>
-        <img src="img//insurance/knn.png">
-    </section>
-    <!-- <section>
-            <h3>Algorithmus</h3>
-            <p>Für die Vorhersage für die Kategorie eines bisher unbekannten Datenpunkts</p>
-            <ol>
-                <li>Den Datenpunkt zusammen mit den bekannten Punkten auftragen</li>
-                <li>k Nachbarn betrachten</li>
-                <li>Vorhersage ist die Farbe der Mehrheit der Nachbarn</li>
-            </ol>
-        </section> -->
-    
-                <!-- <section data-markdown>
-    <textarea data-template>
-### KNN wurde auch bei unserem Beispiel mit der Gesichtserkennung benutzt
-
-_Teachable machine uses K-nearest neighbors (KNN) on the predictions from a pretrained SqueezeNet model to do classification._
-
-_The KNN image classifier works much great with small amounts of data._
-
-https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
-</textarea>
-</section> -->
-
-                <!-- <section>
-                    <h3>Ergebnisse für k = 1</h3>
-                    <div class="fragment">
-                
-                        <img src="img/insurance/knn-1.png" height="400px">
-                        <p>
-                            <small>ca. 98% korrekte Vorhersagen auf Trainingsaten, aber nur 65% auf Testdaten</small>
-                        </p>
-                    </div>
-                    <p class="fragment">So etwas nennt man Overfitting</p>
-                </section> -->
         <section>
-            <h3>Beste Ergebnisse für k=13</h3>
-            <div class="fragment">
-    
-            <img src="img/insurance/knn-13.png" height="400px">
-            <!-- <p><small>nur ca. 81% korrekte Vorhersagen auf Trainingsaten, aber auch 75% auf Testdaten</small></p>         -->
-            <p><small>ca. 75% auf Testdaten</small></p>        
-            </div>
-            <!-- <p class="fragment">Beachte die geschmeidigen Grenzen</p> -->
-        </section>
-    
-        <section>
-            <h3>Weitere Lernstrategien</h3>
+            <h3>Klassische Lernstrategien</h3>
+
             <ul>
+                <li>Für unser Problem reicht eine der einfachsten Strategien: KNN</li>
                 <li>Logistische Regression: Trennung von Klassen per Logistischer Funktion (Sigmoid)
                 <li>Decision Trees: Entscheidungsbaum bei dem die Ebenen und Unterscheidungsegeln erlernt werden
-                <li>Neural Networks (Deep Learning): Zusammenschaltung vieler Logistischer Regression
             </ul>
-        </section>
-
-    <!-- <section>
-            <h3>Daten: Quantität</h3>
-            <img src='img/applications/decisions/classic.png' height="500px">
+            <p><em>Neural Networks (Deep Learning): Zusammenschaltung vieler Logistischer Regressionen</em></p>
         </section>
 
         <section>
             <img src="img/flashcards/Supervised_Deep_Learning_Rule_Of_Thumb_print.png">
         </section>
- -->
+
+    <section data-markdown>
+            <textarea data-template>
+### Beste Lösung mit Deep Learning
+
+<img src='img/manning/nn-reg.png' class="fragment" height="450px">
+
+<div class="fragment">
+<p><small>bis zu 80% der Vorhersagen auf unbekannten Daten korrekt</small></p>
+</div>        
+</textarea>
+        </section>
     
     <section data-markdown>
             <textarea data-template>
 ### Regression anstatt Klassifikation
-Die andere Art des Machine Learnings
+Die andere Art des Supervised Machine Learnings
 <img src="img/linear_regression.png" height="400px">
 https://beta.observablehq.com/@tmcw/bring-your-own-doodles-linear-regression
     </textarea>
@@ -587,8 +502,8 @@ https://en.wikipedia.org/wiki/Cluster_analysis
     
     <section data-markdown>
             <textarea data-template>
-### Aufgabe: Cluster von Hand einzeichnen
-<img src='img/sketch/clustering.jpg' height="550px">
+### Experiment 3: Cluster von Hand einzeichnen
+<img src='img/sketch/clustering.jpg' height="450px">
         </textarea>
     </section>
     <section data-markdown  style="font-size: xx-large">
@@ -605,100 +520,96 @@ https://en.wikipedia.org/wiki/Cluster_analysis
         </textarea>
     </section>
 
-    <section>
-        <h2>Automatisierung</h2>
+    <section data-markdown>
+        <textarea data-template>
+### Dimensionsreduzierung mit PCA
+
+<a href='https://youtu.be/4DpdpZkl8HI?t=65' target="_blank">
+<img src='img/unsupervised/perceptual-shift.png' height="500px">
+</a>
+
+<small>
+The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI?t=65
+</small>
+</textarea>
     </section>
 
     <section data-markdown>
-            <textarea data-template>
-<img src="img/unsupervised/blobs.png" height="450px">
+        <textarea data-template>
+### Intuition
 
-Wie würde man  das _automatisch_ clustern, ohne Labels zu haben?
-            </textarea>
-</section>
-        <section>
-            <img src="img/flashcards/K-Means_Clustering_print.png" height="550px">
-            <p>Grundlegendster Algorithmus</p>
-        </section>
-        <section>
-                <img src="img/unsupervised/blobs_kmeans_3.png" height="550px">
-                <p>Hätten wir auch nicht besser hinbekommen</p>
-        </section>
+1. Manche Achsen tragen mehr und manche weniger Information
+1. So lange die Kamera bewegen, bis wir nur noch die Achsen mit viel Information sehen
+1. Die Achsen mit wenig Information weg lassen
+    </textarea>
+    </section>
+    
+<section data-markdown>
+        <textarea data-template>
+### Optionales Experiment: PCA auf deinem Handy
+
+<img src="img/unsupervised/pca_setosa_3d.png">
+
+http://setosa.io/ev/principal-component-analysis/
+    </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Aufgabe
+
+1. Bringe die Kamera von Hand in die besten Position
+1. Vergleiche deine Lösung mit der automatischen PCA Transformation
+1. Welche ist besser, gibt es überhaupt einen Unterschied?
+1. Welche Achse(n) würdest du weg lassen?
+    </textarea>
+    </section>
+
         <section>
                 <h2>Reinforcement Learning</h2>
                 <h3>Am ehesten die Roboter, die uns Menschen ausrotten</h3>
             </section>
 
-<section data-markdown style="font-size: x-large">
-<textarea data-template>
-### Alpha(Go) Zero
-
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<!-- <img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px"> -->
-<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="400px">
-</a>
-
-* Monte Carlo Tree Search und Deep Convolutional Neural Networks
-* Zielfunktion ist Sieg
-* schlagen jeden Menschen und Maschine ohne menschliche Expertise (in perfect information game)
-
-<!-- <small>
-Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
-<br>
-Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
-<br>
-Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
-</small> -->
-</textarea>
-</section>
-
-<section data-markdown>
-<textarea data-template>
-### World Model
-
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<img src='img/rf/world-models.gif' height="300px">
-</a>
-
-Lernen wie man Auto fährt ohne menschliche Expertise mit LSTMs
-
-<small>
-Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-model-using-python-and-keras-64fb388ba459
-<br>
-Code: https://github.com/AppliedDataSciencePartners/WorldModels
+        <section data-markdown>
+                <textarea data-template>
+    <img src='img/applications/twtter-fchollet-rl.png' height="550">
+    
+    <small>
+https://twitter.com/fchollet/status/1020713281692917760
+     
 </small>
 </textarea>
-</section>
+                    </section>
+
+        <section data-markdown>
+                <textarea data-template>
+    <img src='img/applications/twitter-reinforcement.png' height="550">
+    
+    <small>
+https://twitter.com/chrisalbon/status/919701254657290240
+     
+</small>
+</textarea>
+                    </section>
+
 
         <section>
             <h1>Teil II</h1>
             <h2>Wie findet ihr eigene Anwendungsmöglichkeiten?</h2>
         </section>
 
-
-        <section data-markdown class="todo">
-                <textarea data-template>
-                                
-        https://www.gartner.com/imagesrv/media-products/pdf/rage_frameworks/rage-frameworks-1-34JHQ0K.pdf
-    </textarea>
-</section>
-
         <section data-markdown>
                 <textarea data-template>
-### Artificial intelligence will wipe out half the banking jobs in a decade, experts say
-
-_Deutsche Bank, John Cryan_ 
-
-“In our bank we have people doing work like robots,” he said. “Tomorrow we will have robots behaving like people. It doesn’t
-matter if we as a bank will participate in these changes or not, it is going to happen.”
-
-
-<small>
-https://www.mercurynews.com/2018/04/20/artificial-intelligence-will-wipe-out-half-the-banking-jobs-in-a-decade-experts-say/
+    <img src='img/twitter-cholett-applications.png' height="550">
+    
+    <small>
+    https://twitter.com/fchollet/status/1035951190276681728
+     
 </small>
-            </textarea>
-            </section>
-
+</textarea>
+                    </section>
+    
+    
         <section>
                 <h3>Eine Analogie</h3>
                 <p class="fragment">Die Machine Learning Technologie ist der Motor</p>
@@ -761,44 +672,12 @@ https://machinelearningmastery.com/how-to-get-the-most-from-your-machine-learnin
 
     </div>    </section>
 
-    <section>
-            <h3>Die Post testet 2018 selbstfahrende Lieferfahrzeuge</h3>
-            <p class="fragment"><em>"Sie werden in der Lage sein, dem Zusteller autonom zu folgen - sodass er nicht vor jedem Hauseingang aus- und wieder einsteigen und wenige Meter fahren muss."</em></p>
-            <img src="img/post_dhl_truck.jpg" height="200">
-            <p><small><a href="http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html" target="_blank">http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html</a>
-            </small></p>
-        </section>
-
-        <section>
-            <h4>Maschinen verstehen Sprache und können sich dazu verhalten</h4>
-            <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
-        </section>
-
-        <section>
-            <h4>Nur zwei dieser Bilder sind echte Fotos</h4>
-            <img src="img/applications/gan.jpg" height="500px">
-            <p><small><a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
-                https://twitter.com/goodfellow_ian/status/918900712901197824</a></small></p>
-        </section>
-
-        <section>
-            <h4>Die anderen sind mit Neuronalen Netzwerken generiert</h4>
-            <img src="img/applications/gan-real-images.jpg" height="500px">
-            <p><small><a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a></small></p>
-        </section>
-
         <section>
             <h4>Minimale Information reicht, um ein gutes Angebot zu machen</h4>
             <img src="img/applications/style-prediction.jpg" height="500px">
             <p><small><a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a></small></p>
         </section>
 
-        <section>
-            <h4>Aber so ganz kriegt man den Kunden noch nicht angekleidet</h4>
-            <img src="img/unsupervised/gan-clothes.jpg" height="500px">
-            <p><small><a href="https://arxiv.org/abs/1711.02231" target="_blank">Visually-Aware Fashion Recommendation and Design with Generative Image Models</a></small></p>
-        </section>
-                
         <section>
             <h3>schnelleres Arbeiten, höherer Durchsatz</h3>
             <img src="img/classification/driving-license.jpg">    
@@ -843,8 +722,8 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
                             <small>Kunde vor und nach Abschluss</small>
                         </p>
                     </div>
-                    <div class="fragment" style="float: left; padding-left: 100px; padding-right: 20px; padding-top: 120px; font-weight: bold">
-                        ==> 
+                    <div class="fragment" style="float: left; padding-left: 20px; padding-right: 20px; padding-top: 50px; font-weight: bold">
+                            <img src="img/scans/elements/right.jpg" height="200">
                     </div>
                     <div class="fragment" style="float: right">
                         <img src="img/glaskugel.jpg" height="350">
@@ -854,6 +733,19 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
                     </div>
                 <p style="clear: both">Wie verhält sich jemand, der später Kunde wird / kündigt?</p>
             </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+### Clustering in Zahlungsdaten
+
+<img src='img/applications/turtle.png' height="350">
+
+* Muster (violett und braun): Interpretation/Analyse möglich 
+* Ausreißer (schwarz): Fehleingabe oder Fraud
+                        </textarea>
+                        </section>
+    
+
             <section>
                 <h4>Weitere Anwendungsgebiete</h4>
                 <!-- <small> -->
@@ -866,45 +758,63 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
                 </ul>
             <!-- </small> -->
         </section>
-    
-                <!-- <section>
-                    <img src="img/flashcards/Curse_Of_Dimensionality_print.png">
-                </section> -->
+
+        <section data-markdown>
+                <textarea data-template>
+### Abschluss-Thema: Genauigkeit
+
+_Wie gut muss ein Modell sein?_
+
+* was macht man mit 80% Genauigkeit? 
+* Und was mit 40%?
+* Ist das überhaupt gut?
+
+        </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Always know your Baseline
+
+_ob eine Genauigkeit gut oder schlecht ist schwer zu beantworten_
+
+* manchmal hat man eine Intuition was zu erwarten ist
+* besser ist eine _Baseline_
+  * ein einfaches, oft intuitives Modell
+  * raten ist oft eine gute Baseline 
+* jedes komplexe Modell muss sich an dieser Baseline messen lassen  
+
+        </textarea>
+        </section>
+
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Welche Genauigkeit?
+
+_Wie hoch die Genauigkeit sein muss hängt vom Anwendungsfall ab_
+
+* Fußgängererkennung bei selbstfahrenden Autos sollte 99.99999999999999%
+  * reicht das überhaupt?
+* 40% Genauigkeit kann ausreichend sein, es kommt an, was man damit tut
+* Oft kommen Vorhersagen mit einer Genauigkeit versehen
+* Diese ist oft nicht klar zu interpretieren
+* Eine Sortierung der Vorhersagen ist damit aber möglich
+* Je nach Anwendungsfall können auch die ersten 3 besten Treffer sinnvoll sein
+
+        </textarea>
+        </section>
 
         <section>
-            <h3>Abschlussübung: Ideen für den Einsatz von Machine Learning in eurem Bereich oder auf euren Daten</h3>
+            <h3>Abschlussübung: Machine Learning in eurem Bereich</h3>
+            <em>Stelle deinen Arbeitsbereich deinem oder mehreren Nachbarn vor</em>
             <ol>
-                <li>Aufteilen in Vierer-Gruppen</li>
-                <li>Pro Gruppe ein Tisch und ein Flip-Chart</li>
-                <li>Bitte erstellt eine <em>Skizze/grafische Darstellung</em> eurer Ideen</li>
-                <li>Stellt eure Skizze kurz den anderen vor</li>
+                <li>Sind Daten da? Könntne sie beschafft werden? Wie sehen die Daten aus?</li>
+                <li>Was soll erreicht werden?</li>
+                <li>Welche Genauigkeit müsste erreicht werden?</li>
+                <li>Ist diese Genauigkeit realistisch zu erreichen?</li>
+                <li>Welche Art(en) von Machine Learning würde sich hier eignen?</li>
             </ol>
-            <p><em>Gruppenarbeit 30 Minuten, Vorstellung max. 5 Minuten pro Gruppe
-                </em>
-                </p>
             </section>
-        
-                
-                    <!-- <section>
-            <h3>Zusammenfassung</h3>
-            <ul>
-                <li class="fragment">Machine Learning kann bei bestehenden Daten von diesen abstrahieren und generalisieren
-                <li class="fragment">Durchdringen der Domäne nur für die Datenanalyse erforderlich
-                <li class="fragment">Oft reichen einfache Strategien
-                <li class="fragment">Machine Learning ist die Fortsetzung der Digitalisierung
-            </ul>
-            <p><small>
-                Machine Learning auch für dein Projekt
-                <br>
-            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                <br>
-            <a href="http://bit.ly/ml-intro-workshop">
-                http://bit.ly/ml-intro-workshop
-            </a>
-            </small></p>
-            <p><small>Mehr: <a href="https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html">https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html</a></small></p>
-        </section> -->
-
 
     </div>
 
@@ -932,12 +842,16 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
             }
             // applies to all versions
             $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank');
+
+            // do we want this???
+            $('li').addClass('fragment')
+
         } );
-        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
-        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        // $('section').attr('data-background-image', "backgrounds/white.jpg");
-    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
-        $('section').attr('data-background-image', "backgrounds/murmel2.jpg")
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/murmel2.jpg")
 
     </script>
     
@@ -950,6 +864,7 @@ https://experiments.withgoogle.com/ai/beat-blender/view/
         progress: true,
         history: true,
         center: true,
+        width: 1000,
 
         transition: 'fade', // none/fade/slide/convex/concave/zoom
 
