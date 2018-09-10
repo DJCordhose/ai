@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Manning U3</title>
+
+    <meta name="description" content="Manning Course Material">
+    <meta name="author" content="Oliver Zeigermann">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              .beginning:before {
+                  content: 'BEGINNING';
+              }
+              .beginning {
+                color: red !important;
+              }
+              .end:before {
+                  content: 'END';
+              }
+              .end {
+                color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        var printMode = window.location.search.match(/print-pdf/gi);
+        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+<div class="reveal">
+    <div class="slides">
+
+                <section data-markdown class="todo">
+            <textarea data-template>
+# U3-M1-intro
+
+## Talking Head
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+# U3-M2-colab                
+            </textarea>
+        </section>
+    
+        <section data-markdown>
+            <textarea data-template>
+### Working with Colab Notebooks
+
+https://colab.research.google.com
+            </textarea>
+        </section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Hands-On
+_Run your first Colab Notbook_
+
+* Go to https://colab.research.google.com 
+* Sign into your Google account or register a new one 
+* Switch on GPU support
+* Execute some code cells
+
+https://colab.research.google.com
+
+</textarea>
+</section>
+    
+<section data-markdown>
+        <textarea data-template>
+# U3-M3-data                
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+## Notebook            
+### Getting to know our data
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M3-data.ipynb
+
+_Stop at Exercise!_
+    </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Exercise
+_Change our pairplot to_
+
+* plot more samples 
+* reduce the number of variables to the first three (leave out the group) 
+* Switch on GPU support
+* make the plot a bit larger
+
+Use the built in help function by typing
+
+<small><em>sns.pairplot?</em></small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# U3-M4-encoding                
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+## Encoding our data
+        </textarea>
+    </section>
+ 
+    <section data-markdown>
+            <textarea data-template>
+### Data Encoding in Deep Learning
+* in Classic Machine Learning selecting and pre-processing is crucial
+* Deep Neural Networks often allow to just stick in our data as is
+* the rest is done by the first layers of our deep neural network   
+* Deep Learning can still benefit from preprocessing and normalizing your data 
+* Often you can compensate with more training data
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Animated Powerpoint 
+
+<a href="data-encoding.pptx">
+<img src='img/data-encoding.png' height="500">
+</a>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# U3-M5-nn-intro                
+        </textarea>
+    </section>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Notebook            
+### Setting Up Our neural Network
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M5-nn-intro
+
+    </textarea>
+    </section>
+
+<section>
+    <h3>Exercise</h3>
+    <p>Run through the notebook</p>
+    <p><em>Can you explain the number of parameters for each layer?</em></p>
+    <pre><code contenteditable data-trim class="line-numbers python">
+Layer (type)                 Output Shape              Param #   
+=================================================================
+hidden1 (Dense)              (None, 50)                200       
+_________________________________________________________________
+softmax (Dense)              (None, 3)                 153       
+=================================================================
+Total params: 353
+Trainable params: 353
+Non-trainable params: 0</code></pre>
+<p><small><em>Add a second layer and increase the number of neurons:<br> do the numbers of parameters still make sense to you?</em></small></p>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# U3-M6-generalization                
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Generalization
+
+_We do not have any idea how well our model performs, yet_
+
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Evaluating our model
+
+* The most important property of a model is if it generalizes well to unknown data
+* A machine learning model is of no use if it only works well on the data it has been trained on
+  * If it was, the easiest way to achieve this would be a dictionary translating from a set of inputs to the known output
+* Conceptually it is a little bit hard to optimize for something you do not know
+* So, we introduce a little trick here
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+## Notebook            
+### Understand Generalization
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M7-nn-training.ipynb
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# U3-M7-nn-training                
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+## Notebook            
+### Train the neural network
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M7-nn-training.ipynb
+
+    </textarea>
+    </section>
+
+
+<section data-markdown  style="font-size: xx-large">
+        <textarea data-template>
+## Exercise
+
+_Train the model_
+
+* Run the notebook as is
+* Adapt the model to your parameters from the previous exercise (or any other model)
+* How well does it perform?
+* Do you see overfitting?
+* Any idea why it performs the way it does?
+* Experiment with the parameters you know
+    </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+# U3-M8-regularization                
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Regularization
+    </textarea>
+</section>
+
+<section id='overfitting'>
+        <h3>The Issue: Overfitting</h2>
+    <div>
+    <div style="float: left">
+        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
+        <p>
+            <small><em>Training Score</em></small>
+        </p>
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='5'>
+        <img src="img/scans/elements/down.jpg" height="200">
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='4'>
+        <img src="img/scans/elements/up.jpg" height="200">
+    </div>
+    <div style="float: left">
+            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
+            <p>
+                <small><em>Test Score</em></small>
+            </p>
+    </div>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and Test scores clearly divert</em></p>
+
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Regularization
+
+_Process to counter Overfitting_
+            </textarea>
+            </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+### First approach: Train for less epochs
+
+<img src='img/accuracy.png'>
+
+_Watch where training and validation accuracy diverge and stop training there_
+
+
+            </textarea>
+            </section>
+    
+<section id='overfitting-capacity'>
+        <h3>Second approach: Reduce Capacity of model</h2>
+    <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
+        <img src="img/scans/elements/model-large.jpg" height="200">
+        <p>
+            <small><em>Original Model</em></small>
+        </p>
+    </div>
+    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
+        <br>
+        <img src="img/scans/elements/right.jpg">
+        <br>
+    </div>
+    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
+            <br>
+            <img src="img/scans/elements/model-small.jpg" height="100">
+            <br>
+            <br>
+            <p>
+                <small><em>Smaller Model</em><br>less Hidden Layers, less Neurons per Layer</small>
+            </p>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Give model less capacity to simply memorize data</em></p>
+    </section>
+
+<section id='overfitting-dropout'>
+        <h3>Third approach: Use Dropout to only train a certain percentage of neurons per Batch</h2>
+    <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
+        <img src="img/scans/elements/model-large.jpg" height="225">
+        <p>
+            <small><em>Original Model</em></small>
+        </p>
+    </div>
+    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
+        <br>
+        <img src="img/scans/elements/right.jpg">
+        <br>
+    </div>
+    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
+            <br>
+            <img src="img/scans/elements/model-emsemble.jpg" height="100">
+            <br>
+            <br>
+            <p>
+                <small><em>Ensemble of Small Models</em> (each one overfits on its specific batch)<br></small>
+            </p>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Combination of models makes result more robust</em></p>
+    </section>
+
+    <section data-markdown id='overfitting-bn'>
+            <textarea data-template>
+### Fourth approach: Batch Normalization
+
+<ul>
+    <li class="fragment">Subtracts Batch Mean
+    <li class="fragment">Multiplies by Standard Deviation     
+</ul>
+
+<img src='img/scans/elements/sigmoid.jpg' class="fragment" height="200">
+    
+<p class="fragment"><em>Intuition: Makes Model robust by adding noise</em></p>
+
+<p class="fragment"><small><em>Bonus:</em> Lets Model train faster by fighting vanishing gradients</small></p>
+
+    
+    
+                </textarea>
+                </section>
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Links Batch Normalization
+
+https://www.quora.com/Is-there-a-theory-for-why-batch-normalization-has-a-regularizing-effect
+
+https://www.quora.com/Why-does-Batch-Normalization-for-deep-Neural-Networks-fix-the-vanishing-gradient-problem
+
+https://stats.stackexchange.com/questions/227114/are-there-any-ways-to-deal-with-the-vanishing-gradient-for-saturating-non-linear
+
+https://stackoverflow.com/questions/34716454/where-do-i-call-the-batchnormalization-function-in-keras
+
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# U3-M9-regularization                
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Notebook            
+### Regularize your neural network
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M9-regularization.ipynb
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+## Exercise
+
+_Apply regularizations to your model_
+
+- keep adding regularization to make test and train scores come closer to each other
+- this will come at the cost of train scores going down
+- if both values start going down you have gone too far
+- each experiment takes some time
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# U3-M10-final-model                
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Notebook            
+### Our final model ready for production
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M10-final-model.ipynb.ipynb
+
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+# U3-M11-outro                
+        </textarea>
+    </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            // do we want this???
+            $('li').addClass('fragment')
+
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                // $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
+        // $('section').attr('data-background', "img/manning/background/m0.jpg");
+        // $('section').attr('data-background', "img/manning/background/m1.jpg");
+        $('section:not([data-background])').attr('data-background', "img/manning/background/m1.jpg");
+        $('section').attr('data-background-size', "1620px");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+</script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: false,
+        progress: false,
+        history: true,
+        center: true,
+        width: 1100,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
