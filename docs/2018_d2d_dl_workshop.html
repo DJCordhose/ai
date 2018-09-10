@@ -208,6 +208,8 @@ ca. 17.00 Uhr: Ende -->
 <section data-markdown class="preparation">
         <textarea data-template>
 ### Preparation
+
+* Print Exercises: https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/exercise/manual-decision-boundaries.pdf
     </textarea>
 </section>
 
@@ -1044,6 +1046,48 @@ _We do not have any idea how well our model performs, yet_
 </section>
 
 <section data-markdown>
+    <textarea data-template>
+## Notebook            
+### Understand Generalization
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M7-nn-training.ipynb
+
+</textarea>
+</section>
+
+
+<section>
+    <h2>Exercise</h2>
+    <p><em>Understanding Generalization</em></p>
+    <p>Manually cluster areas of different customer types </p>
+    <ol>
+        <li>
+            <em>dark (green)</em>: good customer</li>
+        <li><em>light (yellow)</em>: mediocre customers</li>
+        <li>
+            <em>middle (red)</em>: red customers</li>
+    </ol>
+    <p>Use a <em>pen</em> and make sure you apply <em>pressure</em> when you draw</p>
+</section>
+
+<section>
+    <h3>Plot Twist</h3>
+    <p>Remenber, <em>Generalisation</em>, not perfect reproduction is the objective</p>
+    <ol>
+        <li class="fragment">We split existing data into two sets</li>
+        <li class="fragment">The test set is on the second page</li>
+    </ol>
+</section>
+
+<section>
+    <h2>Exercise, Part2</h2>
+    <p><em>How well did you generalize?</em></p>
+    <p>Turn the page to the test set and redraw the lines you printed through from the first page</p>
+    <p>What do you think, is this result worse?</p>
+    <p>What would you have done differently if you had been given the information about this test set before?</p>
+</section>
+
+<section data-markdown>
         <textarea data-template>
 ## Notebook            
 ### Train the neural network
@@ -1052,6 +1096,7 @@ https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-n
 
     </textarea>
     </section>
+
 
 <section data-markdown>
         <textarea data-template>
@@ -1062,7 +1107,9 @@ _Train the model_
 * Run the notebook as is
 * Adapt the model to your parameters from the previous exercise (or any other model)
 * How well does it perform?
+* Do you see overfitting?
 * Any idea why it performs the way it does?
+* Experiment with the parameters you know
     </textarea>
     </section>
 
