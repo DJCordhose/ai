@@ -190,7 +190,7 @@
 
 * Notebooks allow to mix text with code
 * They are like an executable story
-* And are ideal for expriments and tutorials
+* And are ideal for experiments and tutorials
 * Colab, a zero installation notebook service by Google, is recommended
 * But if you really want a local installation or already have one, it will also work if you know what you are doing
 * However, you will be on your own with this
@@ -215,12 +215,12 @@ https://colab.research.google.com
 <section data-markdown>
     <textarea data-template>
 ### Hands-On
-_Run your first Colab Notbook_
+_Run your first Colab Notebook_
 
-* Go to https://colab.research.google.com 
-* Sign into your Google account or register a new one 
-* Switch on GPU support
-* Execute some code cells
+* go to https://colab.research.google.com 
+* sign into your Google account or register a new one 
+* switch on GPU support
+* execute some code cells
 
 https://colab.research.google.com
 
@@ -240,7 +240,7 @@ https://colab.research.google.com
 
 https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M3-data.ipynb
 
-_Stop at Exercise!_
+_Stop at exercise!_
     </textarea>
     </section>
 
@@ -275,11 +275,11 @@ Use the built in help function by typing
     <section data-markdown>
             <textarea data-template>
 ### Data Encoding in Deep Learning
-* in Classic Machine Learning selecting and pre-processing is crucial
+* in classic machine learning selecting and pre-processing is crucial
 * Deep Neural Networks often allow to just stick in our data as is
 * the rest is done by the first layers of our deep neural network   
 * Deep Learning can still benefit from preprocessing and normalizing your data 
-* Often you can compensate with more training data
+* often you can compensate with more training data
 
 </textarea>
 </section>
@@ -306,7 +306,7 @@ Use the built in help function by typing
 <section data-markdown>
         <textarea data-template>
 ## Notebook            
-### Setting Up Our neural Network
+### Setting up our neural network
 
 https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M5-nn-intro
 
@@ -434,7 +434,7 @@ _Train the model_
             </p>
     </div>
     </div>
-    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and Test scores clearly divert</em></p>
+    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and test scores clearly divert</em></p>
 
     </section>
 
@@ -442,13 +442,13 @@ _Train the model_
         <textarea data-template>
 ### Regularization
 
-_Process to counter Overfitting_
+_Process to counter overfitting_
             </textarea>
             </section>
     
     <section data-markdown>
         <textarea data-template>
-### First approach: Train for less epochs
+### First approach: Train for fewer epochs
 
 <img src='img/accuracy.png'>
 
@@ -459,11 +459,11 @@ _Watch where training and validation accuracy diverge and stop training there_
             </section>
     
 <section id='overfitting-capacity'>
-        <h3>Second approach: Reduce Capacity of model</h2>
+        <h3>Second approach: Reduce capacity of model</h2>
     <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
         <img src="img/scans/elements/model-large.jpg" height="200">
         <p>
-            <small><em>Original Model</em></small>
+            <small><em>Original model</em></small>
         </p>
     </div>
     <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
@@ -477,18 +477,18 @@ _Watch where training and validation accuracy diverge and stop training there_
             <br>
             <br>
             <p>
-                <small><em>Smaller Model</em><br>less Hidden Layers, less Neurons per Layer</small>
+                <small><em>Smaller model</em><br>less hidden layers, less neurons per layer</small>
             </p>
     </div>
     <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Give model less capacity to simply memorize data</em></p>
     </section>
 
 <section id='overfitting-dropout'>
-        <h3>Third approach: Use Dropout to only train a certain percentage of neurons per Batch</h2>
+        <h3>Third approach: Use dropout to only train a certain percentage of neurons per batch</h2>
     <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
         <img src="img/scans/elements/model-large.jpg" height="225">
         <p>
-            <small><em>Original Model</em></small>
+            <small><em>Original model</em></small>
         </p>
     </div>
     <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
@@ -502,7 +502,7 @@ _Watch where training and validation accuracy diverge and stop training there_
             <br>
             <br>
             <p>
-                <small><em>Ensemble of Small Models</em> (each one overfits on its specific batch)<br></small>
+                <small><em>Ensemble of small models</em> (each one overfits on its specific batch)<br></small>
             </p>
     </div>
     <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Combination of models makes result more robust</em></p>
@@ -513,15 +513,15 @@ _Watch where training and validation accuracy diverge and stop training there_
 ### Fourth approach: Batch Normalization
 
 <ul>
-    <li class="fragment">Subtracts Batch Mean
-    <li class="fragment">Multiplies by Standard Deviation     
+    <li class="fragment">Subtracts batch mean
+    <li class="fragment">multiplies by standard deviation     
 </ul>
 
 <img src='img/scans/elements/sigmoid.jpg' class="fragment" height="200">
     
-<p class="fragment"><em>Intuition: Makes Model robust by adding noise</em></p>
+<p class="fragment"><em>Intuition: Makes model robust by adding noise</em></p>
 
-<p class="fragment"><small><em>Bonus:</em> Lets Model train faster by fighting vanishing gradients</small></p>
+<p class="fragment"><small><em>Bonus:</em> Lets model train faster by fighting vanishing gradients</small></p>
 
     
     
