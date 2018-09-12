@@ -170,6 +170,53 @@ In diesem Vortrag beschäftigen wir uns mit diesen Fragen und betrachten dabei S
 
 40 Minuten
  -->
+
+ 
+ <section data-markdown class="todo">
+        <textarea data-template>
+[]Wrap Up
+[]Material from Evernote
+[]Video gucken: https://www.tensorflow.org/tfx/
+[]Preparations richtig überlegen
+[]Video auf basis der Folien von Null
+[] Aus course_production Zurück kopieren in
+[]prod Talk (hier)
+[]mcubed tf
+[]Prod Talk letzter Teil
+* von MACH übernehmen
+* aus m3 Vortrag
+- https://developers.google.com/machine-learning/fairness-overview/
+* Asserts einbauen: alles was man für gegeben in der Verarbeitung hält (wie geht das mit Python am besten?)
+* Server bietet complexere Schnittstelle?
+* Logging Download, Train, Retrain, Score Schnittstelle, Save Model, Download Model
+
+
+    </textarea>
+    </section>
+
+    <section data-markdown class="todo">
+            <textarea data-template>
+TensorFlow (@TensorFlow) tweeted at 7:04 PM on Fri, Sep 07, 2018:
+Use the TensorFlow library tf.Transform to help keep pre-processing steps consistent during training and serving. @FsMatt describes using the library on @googlecloud Dataflow in this post. 
+
+Read it here ↓ https://t.co/FzY1VMopu8
+(https://twitter.com/TensorFlow/status/1038110751301324800?s=03)                </textarea>
+            </section>
+
+    <section data-markdown class="todo">
+            <textarea data-template>
+* Introducing TensorFlow Data Validation: Data Understanding, Validation, and Monitoring At Scale
+  * https://medium.com/tensorflow/introducing-tensorflow-data-validation-data-understanding-validation-and-monitoring-at-scale-d38e3952c2f0
+  *TensorFlow (@TensorFlow) tweeted at 10:09 PM on Mon, Sep 10, 2018:
+  Excited to announce the release of another TFX component: @TensorFlow Data Validation -- an open-source library that helps developers understand, validate, and monitor their ML data at scale.
+  
+  Learn more ↓ https://t.co/seFj1dMkvu
+  (https://twitter.com/TensorFlow/status/1039244472050180096?s=03)
+     
+</textarea>
+            </section>
+            
+
 <section>
             <h2>Wie bringe ich ein Machine-Learning-Modell in Produktion?</h2>
             <p><a target="_blank" href="https://www.data2day.de/veranstaltung-7306-wie-bringe-ich-ein-machine-learning-modell-in-produktion.html">
@@ -181,29 +228,6 @@ In diesem Vortrag beschäftigen wir uns mit diesen Fragen und betrachten dabei S
             <a href="https://djcordhose.github.io/ai/2018_data2day_production.html">
                 https://djcordhose.github.io/ai/2018_data2day_production.html</a>
             </small>
-        </section>
-
-
-        <section data-markdown class="todo">
-            <textarea data-template>
-[]Wrap Up
-[]Material from Evernote
-[]Video gucken: https://www.tensorflow.org/tfx/
-[]Preparations richtig überlegen
-[]Video auf basis der Folien von Null
-[] Aus course_production Zurück kopieren in
-    []prod Talk (hier)
-    []mcubed tf
-[]Prod Talk letzter Teil
-  * von MACH übernehmen
-  * aus m3 Vortrag
-  - https://developers.google.com/machine-learning/fairness-overview/
-  * Asserts einbauen: alles was man für gegeben in der Verarbeitung hält (wie geht das mit Python am besten?)
-  * Server bietet complexere Schnittstelle?
-    * Logging Download, Train, Retrain, Score Schnittstelle, Save Model, Download Model
-
-
-        </textarea>
         </section>
 
         <section data-markdown>
@@ -359,7 +383,17 @@ def predict(speed, age, miles):
 # Part II: Serving TensorFlow / Keras Models
                     </textarea>
                 </section>
-            
+
+<section data-markdown>
+        <textarea data-template>
+### You could also use the flask approach
+
+* In principal you can bring TensorFlow and Keras models into production like described before
+* This might be ok for a test installation
+* For the typical production setting there are better options
+            </textarea>
+        </section>
+                
     <section data-markdown>
             <textarea data-template>
 ### Deploying to Google Cloud ML
@@ -374,7 +408,7 @@ def predict(speed, age, miles):
                         
 
         <section>
-<h3>Preparing our model for serving</h3>
+<h3>Preparing a Keras model for serving</h3>
 
 <div class="fragment">
 <p>Creating the Signature</p>
@@ -405,6 +439,32 @@ builder.save()
 </div>
     </section>
 
+    <section data-markdown>
+            <textarea data-template>
+### Alternative
+
+1. Turn your Keras Model into a High-Level TensorFlow Estimator Model Model using <em>model\_to\_estimator</em> 
+1. Freeze the TensorFlow model using <em>freeze\_graph.py</em> 
+
+<small>
+https://cloud.google.com/blog/products/gcp/new-in-tensorflow-14-converting-a-keras-model-to-a-tensorflow-estimator
+<br>
+https://www.tensorflow.org/extend/tool_developers/#freezing
+<br>
+https://towardsdatascience.com/freezing-a-keras-model-c2e26cb84a38
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Whichever approach you take, you now have a TensorFlow Model
+
+* You will have a _.pb_ file at this point
+* which is a frozen TensorFlow model
+            </textarea>
+        </section>
+        
         <section>
 <h3>Checking our saved model</h3>
 
