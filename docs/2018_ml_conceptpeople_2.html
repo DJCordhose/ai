@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Machine Learning - wie mache das denn jetzt?</title>
+    <title>ConceptPeople II</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -166,28 +166,241 @@ Vortragssprache Deutsch
 
         <section>
             <h2>Machine Learning - wie mache das denn jetzt?</h2>
+
+            <p><a target="_blank" href="http://www.conceptpeople.de/ittalk/it-talk-machine-learning-so-geht-das.html">
+                ConceptPeople, September 2018
+            </a></p>
+        
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
-            <p><small><a href="xxx">
-                xxx
-            </a></small></p>
+
+            <small>
+            <a href="https://djcordhose.github.io/ai/2018_ml_conceptpeople_2.html">
+                https://djcordhose.github.io/ai/2018_ml_conceptpeople_2.html</a>
+            </small>
+        
         </section>
 
 
+        
+    <section data-markdown>
+        <textarea data-template>
+### Objective
+
+_Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
+
+<img src='img/pixabay/accident-151668_1280.png'>
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p>
+</textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+## Notebook            
+### Getting to know our data
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M3-data.ipynb
+
+    </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+# OPTIONAL
+## Notebook            
+### Creating a base line
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M3-baseline.ipynb
+
+</textarea>
+</section>
+
+    <section data-markdown>
+        <textarea data-template>
+## Notebook            
+### Setting Up Our neural Network
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M5-nn-intro
+
+    </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Evaluating our model
+
+* The most important property of a model is if it generalizes well to unknown data
+* A machine learning model is of no use if it only works well on the data it has been trained on
+  * If it was, the easiest way to achieve this would be a dictionary translating from a set of inputs to the known output
+* Conceptually it is a little bit hard to optimize for something you do not know
+* So, we introduce a little trick here
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Split known data into training and test
+
+<img class='fragment' src='img/scans/generalization.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Use some training data for validation
+
+<img class='fragment' src='img/scans/generalization1.jpg'>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+## Notebook            
+### Train the neural network
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M7-nn-training.ipynb
+
+    </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Regularization
+    </textarea>
+</section>
+
+<section id='overfitting'>
+        <h3>The Issue: Overfitting</h2>
+    <div>
+    <div style="float: left">
+        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
+        <p>
+            <small><em>Training Score</em></small>
+        </p>
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='5'>
+        <img src="img/scans/elements/down.jpg" height="200">
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='4'>
+        <img src="img/scans/elements/up.jpg" height="200">
+    </div>
+    <div style="float: left">
+            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
+            <p>
+                <small><em>Test Score</em></small>
+            </p>
+    </div>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and Test scores clearly divert</em></p>
+
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Regularization
+
+_Process to counter Overfitting_
+            </textarea>
+            </section>
+    
+
+<section data-markdown>
+    <textarea data-template>
+## Notebook            
+### Our final model ready for production
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M10-final-model.ipynb.ipynb
+
+</textarea>
+</section>
+
         <section>
-            <h3>Zusammenfassung</h3>
+<h3>Deploying to the Browser</h3>
+
+<div class="fragment">
+<p>Converting our Keras Model to TensorFlow.js</p>
+
+<pre><code contenteditable data-trim class="python">
+tensorflowjs_converter --input_format keras \
+./model/insurance.hdf5 \
+./tfjs    
+</code></pre>
+<p><small><a href='https://js.tensorflow.org/tutorials/import-keras.html'>
+    https://js.tensorflow.org/tutorials/import-keras.html</a></small></p>
+
+</div>
+
+<div class="fragment">
+<p>Loading and using directly from the Browser</p>
+
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const model = await tf.loadModel('tfjs/model.json');
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// max speed, age, thousand miles per year
+const example = tf.tensor([[100, 47, 10]]);
+const prediction = model.predict(example);
+console.log(await prediction.data());
+//[0.00334801129065454, 0.8710343241691589, 0.12561771273612976]
+    </code></pre>
+
+<p><small>
+            <a href='js/tensorflow-sandbox/load_manning_model.html' target="_blank">
+                https://djcordhose.github.io/ai/js/tensorflow-sandbox/load_manning_model.html</a></small>
+        </small></p>
+    </div>   
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p>
+</textarea>
+    </section>
+
+        <section style="font-size: xx-large">
+            <h2>Zusammenfassung</h2>
             <ul>
-                <li class="fragment">xxx
-            </ul>
-            <p><small>
-                    Machine Learning - wie mache das denn jetzt?
+                <li class="fragment">TensorFlow und Colab Notebooks erlauben Machine Learning ohne lokale Installation
+                <li class="fragment">Colab bietet sogar eine leistungsfähige GPU
+                <li class="fragment">Mit wenigen Schritten kommt man von der Analyse zur Produktion
+                <li class="fragment">Man kann ein Modell auf Colab trainieren und mit tensorflow.js produktiv setzen
+                <li class="fragment">Nie war die Schwelle so gering, Machine Learning zu betreiben
+                <li class="fragment">Was für Daten habt ihr?
+                            </ul>
+            <p>
+                    <em>Machine Learning - wie mache das denn jetzt?</em>
                 <br>
             <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 <br>
-            <a href="xx">
-                xxx
-            </a>
-            </small></p>
+        <a href="https://djcordhose.github.io/ai/2018_ml_conceptpeople_2.html">
+            https://djcordhose.github.io/ai/2018_ml_conceptpeople_2.html</a>
+    
+            </p>
         </section>
 
 
@@ -231,6 +444,7 @@ Vortragssprache Deutsch
         progress: true,
         history: true,
         center: true,
+        width: 1100,
 
         transition: 'fade', // none/fade/slide/convex/concave/zoom
 
