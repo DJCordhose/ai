@@ -64,9 +64,10 @@
                       .reveal h3,
                       .reveal h4 {
                           letter-spacing: 2px;
-                          font-family: 'Amiri', serif;
+                          font-family: 'Calibri', sans-serif;
                           /* font-family: 'Times New Roman', Times, serif; */
                           font-weight: bold;
+                          color: black;
                           font-style: italic;
                           letter-spacing: -2px;
                           text-transform: none !important;
@@ -171,52 +172,6 @@ In diesem Vortrag beschäftigen wir uns mit diesen Fragen und betrachten dabei S
 40 Minuten
  -->
 
- 
- <section data-markdown class="todo">
-        <textarea data-template>
-[]Wrap Up
-[]Material from Evernote
-[]Video gucken: https://www.tensorflow.org/tfx/
-[]Preparations richtig überlegen
-[]Video auf basis der Folien von Null
-[] Aus course_production Zurück kopieren in
-[]prod Talk (hier)
-[]mcubed tf
-[]Prod Talk letzter Teil
-* von MACH übernehmen
-* aus m3 Vortrag
-- https://developers.google.com/machine-learning/fairness-overview/
-* Asserts einbauen: alles was man für gegeben in der Verarbeitung hält (wie geht das mit Python am besten?)
-* Server bietet complexere Schnittstelle?
-* Logging Download, Train, Retrain, Score Schnittstelle, Save Model, Download Model
-
-
-    </textarea>
-    </section>
-
-    <section data-markdown class="todo">
-            <textarea data-template>
-TensorFlow (@TensorFlow) tweeted at 7:04 PM on Fri, Sep 07, 2018:
-Use the TensorFlow library tf.Transform to help keep pre-processing steps consistent during training and serving. @FsMatt describes using the library on @googlecloud Dataflow in this post. 
-
-Read it here ↓ https://t.co/FzY1VMopu8
-(https://twitter.com/TensorFlow/status/1038110751301324800?s=03)                </textarea>
-            </section>
-
-    <section data-markdown class="todo">
-            <textarea data-template>
-* Introducing TensorFlow Data Validation: Data Understanding, Validation, and Monitoring At Scale
-  * https://medium.com/tensorflow/introducing-tensorflow-data-validation-data-understanding-validation-and-monitoring-at-scale-d38e3952c2f0
-  *TensorFlow (@TensorFlow) tweeted at 10:09 PM on Mon, Sep 10, 2018:
-  Excited to announce the release of another TFX component: @TensorFlow Data Validation -- an open-source library that helps developers understand, validate, and monitor their ML data at scale.
-  
-  Learn more ↓ https://t.co/seFj1dMkvu
-  (https://twitter.com/TensorFlow/status/1039244472050180096?s=03)
-     
-</textarea>
-            </section>
-            
-
 <section>
             <h2>Wie bringe ich ein Machine-Learning-Modell in Produktion?</h2>
             <p><a target="_blank" href="https://www.data2day.de/veranstaltung-7306-wie-bringe-ich-ein-machine-learning-modell-in-produktion.html">
@@ -225,8 +180,8 @@ Read it here ↓ https://t.co/FzY1VMopu8
             <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </h4>
             <small>
-            <a href="https://djcordhose.github.io/ai/2018_data2day_production.html">
-                https://djcordhose.github.io/ai/2018_data2day_production.html</a>
+            <a href="http://bit.ly/d2d-ml-prod">
+                http://bit.ly/d2d-ml-prod</a>
             </small>
         </section>
 
@@ -238,12 +193,30 @@ Read it here ↓ https://t.co/FzY1VMopu8
 
 1. Specialized TensorFlow Serving
 
-1. Custom Implementations
+1. Custom implementations
 
 1. Once you are in production evertyhing changes
         </textarea>
     </section>
 
+    <section data-markdown>
+        <textarea data-template>
+### Do machine learning like the great engineer you are 
+
+_not like the great machine learning expert you aren’t_
+
+1. Make sure your pipeline is solid end to end.
+1. Start with a reasonable objective.
+1. Add common­-sense features in a simple way.
+1. Make sure that your pipeline stays solid.
+
+<small>
+https://developers.google.com/machine-learning/guides/rules-of-ml/
+</small>
+    </textarea>
+    </section>
+
+    
     <section>
             <h3>Our Example: Car Insurance Customers</h3>
             <img src="img/manning/all.png" height="400px">
@@ -254,10 +227,10 @@ Read it here ↓ https://t.co/FzY1VMopu8
 
     <section data-markdown>
             <textarea data-template>
-### Our Complete Model
+### A complete TensorFlow model
 <div>
 
-<img src='img/manning/nn-reg.png'>
+<img src='img/manning/nn-reg.png' height="500">
 
 <p><small>up to 80% predictions correct on previously unknown data possible</small></p>
 </div>        
@@ -277,6 +250,9 @@ Read it here ↓ https://t.co/FzY1VMopu8
 _Caution: Be very sure you have the same pipeline of steps when serving as you had for training and evaluation!_
 
 <small>It might make sense to use: http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html</small>
+
+<small>Same goes for TensorFlow: https://github.com/tensorflow/transform / https://beam.apache.org/</small>
+
             </textarea>
         </section>
 
@@ -324,7 +300,9 @@ def do_predict():
     speed = request.json['speed']
     age = request.json['age']
     miles = request.json['miles']
+</code></pre>
 
+<pre><code contenteditable data-trim class="fragment">
     predicted_category, probabilities, classes = predict(speed, age, miles)
     return jsonify({
         'category': predicted_category,
@@ -333,16 +311,26 @@ def do_predict():
     })
 </code></pre>
 
+<p><small><a href='http://flask.pocoo.org/'>http://flask.pocoo.org/</a></small></p>
+
+    </section>
+
+        <section>
+<h3>A Sample Call to the Flask Server</h3>
+
 <pre><code contenteditable data-trim class="python fragment">
 curl http://localhost:8889/predict -X POST \
 -d '{"speed": 100, "age": 47, "miles": 10}'
+</code></pre>
+
+<pre><code contenteditable data-trim class="python fragment">
 # {
 #    'category': 'GREEN',
 #    'prediction': [0.0, 0.87, 0.13],
 #    'classes': ['RED', 'GREEN', 'YELLOW']
 # }</code></pre>
 
-<p><small><a href='http://flask.pocoo.org/'>http://flask.pocoo.org/</a></small></p>
+<p><small><a href='https://curl.haxx.se/'>https://curl.haxx.se//</a></small></p>
 
     </section>
 
@@ -350,7 +338,7 @@ curl http://localhost:8889/predict -X POST \
         <section>
 <h3>Prediction Code</h3>
 
-<pre><code contenteditable data-trim class="fragment">
+<pre><code contenteditable data-trim class="python fragment">
 # loading models only once on startup
 model = pickle.load(open('models/dt.model', 'rb'))
 
@@ -360,19 +348,21 @@ age_std_scale = pickle.load(open('models/age_std_scale.model', 'rb'))
 miles_std_scale = pickle.load(open('models/miles_std_scale.model', 'rb'))
     </code></pre>
 
-<pre><code contenteditable data-trim class="fragment">
+<pre><code contenteditable data-trim class="python fragment">
 # using models for prediction
 def predict(speed, age, miles):
     sample = [[speed_std_scale.transform([speed])[0],
                age_std_scale.transform([age])[0],
                miles_std_scale.transform([miles])[0]]
-
+    </code></pre>
+<pre><code contenteditable data-trim class="python fragment">
     result = model.predict(sample)
     result_group = y_le.inverse_transform(result)[0]
     prediction = model.predict_proba(sample)[0].tolist()
     
     return result_group, prediction, y_le.classes_.tolist()
     </code></pre>
+
 
     <p><small><a href='https://docs.python.org/3/library/pickle.html'>https://docs.python.org/3/library/pickle.html</a></small></p>
     
@@ -386,7 +376,7 @@ def predict(speed, age, miles):
 
 <section data-markdown>
         <textarea data-template>
-### You could also use the flask approach
+### You could also use the Flask approach
 
 * In principal you can bring TensorFlow and Keras models into production like described before
 * This might be ok for a test installation
@@ -427,7 +417,7 @@ signature = saved_model.signature_def_utils.build_signature_def(
 <p>Creating the builder and save model</p>
 
 <pre><code contenteditable data-trim class="python">
-builder = saved_model.builder.SavedModelBuilder(export_path)
+builder = saved_model.builder.SavedModelBuilder("path_to_model")
 builder.add_meta_graph_and_variables(
     sess, [saved_model.tag_constants.SERVING],
     signature_def_map={
@@ -535,7 +525,7 @@ gcloud ml-engine versions describe "v1" --model "ml_insurance"
 <h3>Making Predictions</h3>
 
 <div class="fragment">
-    <p>Input Format is a bit special</p>
+    <p>Input format is a bit special</p>
 <pre><code contenteditable data-trim class="python">
 # sample_insurance.json    
 {"inputs": [ 160,  18,  100]}
@@ -657,6 +647,22 @@ http://localhost:8501/v1/models/manning_insurance_1:predict  \
 
     </section>
 
+        <section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+### Docker Container
+
+* often the runtime environment is pretty complex and needs to scale
+* at least we want something that has all the dependencies resolved and just works
+* automatically starting a Flask Server or TensorFlow serving is also nice
+*  if we need a GPU installed on a server
+   * https://github.com/NVIDIA/nvidia-docker
+   * https://devblogs.nvidia.com/gpu-containers-runtime/
+* but
+  * only works with NVIDIA GPU
+  * be careful, if your software requires a GPU make sure the server you run it on has a matching one
+        </textarea>
+    </section>
+
         <section>
 <h3>Deploying to the Browser</h3>
 
@@ -708,22 +714,6 @@ console.log(await prediction.data());
 </textarea>
     </section>
 
-        <section data-markdown style="font-size: xx-large">
-            <textarea data-template>
-### Docker Container
-
-* often the runtime environment is pretty complex and needs to scale
-* at least we want something that has all the dependencies resolved and just works
-* automatically starting a Flask Server or TensorFlow serving is also nice
-*  if we need a GPU installed on a server
-   * https://github.com/NVIDIA/nvidia-docker
-   * https://devblogs.nvidia.com/gpu-containers-runtime/
-* but
-  * only works with NVIDIA GPU
-  * be careful, if your software requires a GPU make sure the server you run it on has a matching one
-        </textarea>
-    </section>
-
     <section data-markdown>
             <textarea data-template>
 # Part III: Custom Implementations
@@ -750,37 +740,52 @@ if you need native Java access, consider
     </textarea>
 </section>
         
-
-    <section data-markdown class="todo">
+    <section data-markdown>
             <textarea data-template>
 # Part IV: Once you are in production evertyhing changes
-* make sure your model works on real data
-* what do you do with new incoming data?
-* how to version?
-* how to roll back?
-* how to monitor the quality of your model?
-
-* Material from m3 quality
         </textarea>
     </section>
 
-
     <section data-markdown>
         <textarea data-template>
-### Do machine learning like the great engineer you are 
+### New challenge
 
-_not like the great machine learning expert you aren’t_
+_make sure your model works on real data_
 
-1. Make sure your pipeline is solid end to end.
-1. Start with a reasonable objective.
-1. Add common­-sense features in a simple way.
-1. Make sure that your pipeline stays solid.
+* what do you do with new incoming data?
+* how to monitor the quality of your model?
+* users get used to what you have, good or bad
 
-<small>
-https://developers.google.com/machine-learning/guides/rules-of-ml/
-</small>
     </textarea>
-    </section>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Check for bias / unfairness
+
+* Your model might perform well for a few users, but badly for others
+* Accuracy and loss only show the average
+
+https://developers.google.com/machine-learning/fairness-overview/
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### How to detect bias?
+
+* log real requests
+* log matching user behavior
+* evaluate those requests (Elastic)
+* if you recommend, do users follow your advice?
+* if there is probabilty, how good is it?
+* do you see bias/unfairness?
+* put more emphasis on data that suffers from bias
+
+Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
+</textarea>
+</section>
+
 
     <section data-markdown>
         <textarea data-template>
@@ -794,15 +799,14 @@ https://developers.google.com/machine-learning/guides/rules-of-ml/
 
     <section data-markdown>
         <textarea data-template>
-### The Hedgehog Effect
+### The Turtle Effect
 
 If the user expects a certain pattern to be in the model, they expect it to persist
 
-<img src="img/production/turtle.png" height="400px">
+<img src="img/applications/turtle.png" height="400px">
 
     </textarea>
 </section>
-
 
 <section data-markdown>
         <textarea data-template>
@@ -817,12 +821,43 @@ https://www.fastcompany.com/90221403/netflixs-recommendations-suck-but-its-not-t
 </textarea>
 </section>
 
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### More resources
 
-<section data-markdown class="todo">
+* Oliver Zeigermann, M3, 2018: http://bit.ly/m3-ml-quality
+
+* What’s your ML Test Score? A rubric for ML production systems
+  * <a href='https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf'>PDF</a>
+  * https://nips.cc/Conferences/2016/Schedule?showEvent=6255
+</textarea>
+</section>
+
+<section data-markdown>
         <textarea data-template>
 ### Wrapping Up
-    
-    </textarea>
+
+* It is possible to bring Sklearn in production
+* TensorFlow feels much more mature in production
+* Docker might be an option
+* Even the browser can be a production environment 
+* Going in production changes evertyhing
+
+<p>
+    <small>
+        Wie bringe ich ein Machine-Learning-Modell in Produktion?
+        <br>
+        data2day, September 2018
+        <br>
+        <a href="http://zeigermann.eu">Oliver Zeigermann</a> /
+        <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        <br>
+        <a href="http://bit.ly/d2d-ml-prod">
+            http://bit.ly/d2d-ml-prod
+        </a>
+    </small>
+    </p>
+</textarea>
     </section>
     
     </div>
@@ -864,11 +899,9 @@ https://www.fastcompany.com/90221403/netflixs-recommendations-suck-but-its-not-t
         // make all links open in new tab
         $('a').attr('target', '_blank')
 
-        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
-        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
         // $('section').attr('data-background-image', "backgrounds/white.jpg");
-        $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
-    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+        $('section').attr('data-background-image', "backgrounds/white-transparent.jpg");
+        // $('section').attr('data-background-image', "backgrounds/woods.jpg");
     </script>
     
 <script>
@@ -880,6 +913,7 @@ https://www.fastcompany.com/90221403/netflixs-recommendations-suck-but-its-not-t
         progress: true,
         history: true,
         center: true,
+        width: 1100,
 
         transition: 'fade', // none/fade/slide/convex/concave/zoom
 
