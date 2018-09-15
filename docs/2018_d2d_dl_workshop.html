@@ -1187,8 +1187,6 @@ _Watch where training and validation accuracy diverge and stop training there_
 
 <p class="fragment"><em>Bonus:</em> Lets Model train faster by fighting vanishing gradients</p>
 
-    
-    
                 </textarea>
                 </section>
 <section data-markdown>
@@ -1540,90 +1538,274 @@ _Install the Risk Calculator locally and change it to use your data_
     <section data-markdown>
         <textarea data-template>
 ### PART IV
-## Advanced Topics
+## Other types of neural networks
         </textarea>
     </section>
 
-    <section data-markdown class="todo">
+<section data-markdown>
         <textarea data-template>
-### RNN Approach
-<img src='img/approach-rnn.jpg'>
+### deep learning is straight up magic
 
-            </textarea>
-            </section>
+<img src='img/state-of-dl.png' height="500">
 
-<section data-markdown class="todo">
-        <textarea data-template>
-### Part IV
-
-Jonas Kubilius (@qbilius) tweeted at 6:59 PM on Wed, Sep 05, 2018:
-Ever wondered which deep nets were most brain-like? (spoiler: not the best ImageNet models) Check out https://t.co/DOMEA5rjvq and our latest paper https://t.co/NH5248OwIM! Winners: DenseNet-169, ResNet-101 and... CORnet-S - read on... https://t.co/z23WouiBN7
-(https://twitter.com/qbilius/status/1037384681480773633?s=03)            
+<small>
+https://twitter.com/Smerity/status/947278008385028096
+</small>
 </textarea>
 </section>
 
-<section data-markdown class="todo">
-        <textarea data-template>
-### Part IV
 
-Sean Pedersen (@SeanPedersen96) tweeted at 0:07 AM on Wed, Aug 15, 2018:
-Python Colab notebook comparing tf-idf log.-reg., embeddings and LSTM for sentiment analysis done with Scikit-learn & Keras. Feedback is welcome!
-
-https://t.co/gQhNz27kY3
-
-#python #keras #NLP
-(https://twitter.com/SeanPedersen96/status/1029489757955534849?s=03)
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
-Optimizer finding its way through the parameter space
-- https://twitter.com/zzznah/status/1022233456791703558
-- https://colab.research.google.com/github/tensorflow/lucid/blob/master/notebooks/differentiable-parameterizations/xy2rgb.ipynb#scrollTo=Opq53mH1v8TF
-- https://distill.pub/2018/differentiable-parameterizations/
-    </textarea>
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
-### Part IV
-
-[]https://twitter.com/Smerity/status/947278008385028096?s=03
-	* 
-Smerity (@Smerity) tweeted at 2:27 AM on Sun, Dec 31, 2017:
-
-
-Q: Does anyone have a clue how any of this all really works?
-A: Nope! It’s like the Wright brothers + Haskell era of flight.
-Something’s obviously working but mostly we’re just bolting bigger engines and wings onto our plane and seeing if it works ^_^
-(https://twitter.com/Smerity/status/947278008385028096?s=03)
-	* 
-Smerity (@Smerity) tweeted at 2:27 AM on Sun, Dec 31, 2017:
-
-
-I sat down with my parents in Australia over a cup of tea and biscuits and they asked what I actually do. During my explanation I became thoroughly convinced: deep learning is straight up magic. I knew this before but if you actually have to explain it you feel light headed. https://t.co/FUCCYBoC99
-(https://twitter.com/Smerity/status/947277980287483905?s=03)
-</textarea>
-</section>
+    <section>
+            <img src='img/applications/decisions/data.png'>
+    </section>
 
     <section data-markdown>
         <textarea data-template>
-## CNNs
+## CNN - Convolutional neural networks
+### Let the GPU burn
         </textarea>
     </section>
 
-    <section data-markdown style="font-size: large">
+        <section>
+            <h3>Neural Networks are best for non symbolic data</h3>
+            <p>Like classifying images</p>
+            <p>Reference:
+                    <a href="http://cs231n.github.io/convolutional-networks/" target="_blank">
+                         http://cs231n.github.io/convolutional-networks/</a>
+            </p>
+             
+        </section>
+
+        <section>
+            <h3>Use of GPU for non symbolic data</h3>
+            <img src="albon-gpu-gaming.png">
+            <p>
+                <small>
+                    <a href="https://twitter.com/chrisalbon/status/907028933693947904?s=03" target="_blank">
+                        https://twitter.com/chrisalbon/status/907028933693947904?s=03</a>
+                </small>
+            </p>
+        </section>
+        
+        <section>
+            <h3>Why the recent break throughs?</h3>
+            <div class="fragment" style="float: left">
+                <img src="img/cray2.png" height="250">
+                <p>
+                    <small>Cray X-MP
+                        <br> Supercomputer (1982)</small>
+                </p>
+            </div>
+            <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+                x 100.000 =
+            </div>
+            <div class="fragment" style="float: left">
+                <img src="img/titan5.jpg" height="250" style="float: right">
+                <p>
+                    <small>
+                        <br>Titan 5 im Gamer PC (2017)</small>
+                </p>
+            </div>
+        </section>
+
+                <section>
+                    <h3>... but we also have</h3>
+                    <ol>
+                        <li>Smarter Learning Strategies (more hidden layers = Deep Learning, Convolutional Layers)
+                        <li>Big Data
+                    </ol>
+                </section>
+
+<section>
+    <h3>Architectures of Convolutional Neural Networks: VGG</h3>
+        <img src="img/sketch/vgg.png" height="350px">
+        <p>
+            <small>There are a number of specialized neural network layers</small>
+        </p>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Classic VGG like Architecture
+* we use a VGG like architecture
+* based on https://arxiv.org/abs/1409.1556
+* basic idea: sequential, deep, small convolutional filters, use dropouts to reduce overfitting
+* 16/19 layers are typical
+* many architectures are based on that
+</textarea>
+</section> -->
+
+<section data-markdown>
+    <textarea data-template>
+### Convolutional Blocks: Cascading many Convolutional Layers having down sampling in between
+
+![Applying filters](http://cs231n.github.io/assets/cnn/cnn.jpeg)
+
+http://cs231n.github.io/convolutional-networks/#conv
+</textarea>
+</section>
+
+<section data-markdown style="font-size: x-large">
+    <textarea data-template>
+### Example of a Convolution
+![Dog](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog.png)
+#### Many convolutional filters applied over all channels
+![Dog after Convolutional Filters applied](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog-conv1.png)
+http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
+</textarea>
+</section>
+
+
+<section>
+        <h3>How do Convolutions work - Image Kernels</h3>
+        <p><small>You might know from Photoshop etc., used in Convolutional Neural Networks</small></p>
+        <a href="http://setosa.io/ev/image-kernels/" target="_blank">
+            <img src="img/browser/setosa_io_image-kernels.png" height="300px">
+        </a>
+        <p>
+            <small>
+                <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
+            </small>
+        </p>
+    </section>
+
+<section>
+    <h3>Experiment with Image Kernels</h3>
+    <ol>
+        <li class="fragment">How can a matrix of numbers can represent an image? How could you encode color?</li>
+        <li class="fragment">Explain the effect the filter kernels Sharpen and Blur have on the sample image - explain the effect of the specific values to the result</li>
+        <li class="fragment">Starting from the identity kernel - how can you create a filter that highlights edges on the top of shown digits? What about the bottom?</li>
+    </ol>
+    <p>
+            <small>
+                <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
+                <br>
+                Sample image: <a 
+                href="https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg" target="_blank">
+                https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg</a>
+                
+            </small>
+        </p>
+</section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Downlsampling Layer: Reduces data sizes and risk of overfitting
+![Pooling](http://cs231n.github.io/assets/cnn/pool.jpeg)
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Max Pooling
+![Max Pooling](http://cs231n.github.io/assets/cnn/maxpool.jpeg)
+http://cs231n.github.io/convolutional-networks/#pool
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Standard CNN Architecture
+
+![Performance of CNN Architectures](https://cdn-images-1.medium.com/max/1600/1*kBpEOy4fzLiFxRLjpxAX6A.png)
+
+<small>
+https://medium.com/towards-data-science/neural-network-architectures-156e5bad51ba
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
         <textarea data-template>
-<img src='img/cnn/object-detection.png' height="500px">
+    ### Typical Architecture of a CNN 
+![VGG architecture](img/sketch/vgg.png)
 
-https://twitter.com/TensorFlow/status/1039219454398418946    
-https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1
-https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb
-        </textarea>
+_The classifier more or less is what we used for our previous example_    
+    </textarea>
+    </section>
+
+    <section>
+            <h3>MNIST - Using a model <em>already trained</em></h3>
+            <p>Exploring the different types layers together</p>
+            <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
+                <img src="img/browser/keras-browser.png" height="350px">
+            </a>
+            <p><small>
+                <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">https://transcranial.github.io/keras-js/#/mnist-cnn</a>
+            </small></p>
+        </section>
+
+    <section>
+            <h3>Keras layers</h3>
+
+            <p><small>Convolution</small></p>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    model.add(Conv2D(filters=32, padding='same', activation='relu'))
+                </code></pre>
+
+                <p><small>Max Pooling</small></p>
+                <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(MaxPooling2D())
+                </code></pre>
+                                    
+                <p><small>Flatten 2d to make it accessible to Dense layers</small></p>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(Flatten())
+            </code></pre>
+        <p>
+            <small>
+                    <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                        https://www.tensorflow.org/api_docs/python/tf/keras/layers
+                    </a>
+            </small>
+        </p>
     </section>
     
     
+        
+        <section>
+            <h3>More complex architecture: Google Inception V3</h3>
+            <img src="img/inception_v3_architecture.png" height="400px">
+            <p>
+                <small>
+                    Paper: <a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a>
+                    <br>
+                    <a href="https://stackoverflow.com/questions/39352108/does-the-inception-model-have-two-softmax-outputs" target="_blank">
+                    Why two classifiers?</a>
+                </small>
+            </p>
+        </section>
+
+                </section>
+        <section data-markdown>
+                <textarea data-template>
+### Fashion MNINST example
+
+28x28 grayscale images of fashion Items
+
+<img src="img/fashion-mnist-sprite.png" height="300px">
+
+<small>
+Tutorial: https://medium.com/tensorflow/hello-deep-learning-fashion-mnist-with-keras-50fcff8cd74a
+<br><br>
+Colab Notebook: https://colab.research.google.com/github/margaretmz/deep-learning/blob/master/fashion_mnist_keras.ipynb
+</small>
+        </textarea>
+        </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Exercise
+
+_Can you improve the model for Fashion MNINST notebook?_
+
+* other/more/less layers
+* different Sequence, less/more filters
+* prevent overfitting even better 
+</textarea>
+</section>
+
 
     <section data-markdown>
         <textarea data-template>
@@ -1631,6 +1813,14 @@ https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/col
         </textarea>
     </section>
 
+    <section data-markdown>
+            <textarea data-template>
+    ### RNN Approach
+    <img src='img/approach-rnn.jpg' height="500">
+    
+                </textarea>
+                </section>
+    
     </div>
 
 </div>
