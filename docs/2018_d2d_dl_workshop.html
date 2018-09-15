@@ -1243,10 +1243,300 @@ https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-n
 <section data-markdown>
         <textarea data-template>
 ### PART III
-## Bringing our Modell into Production
+## Bringing our Model in Production
         </textarea>
     </section>
 
+<section data-markdown>
+    <textarea data-template>
+## Preparing our Keras model for serving
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M4-tf-prep.ipynb
+    </textarea>
+</section>
+
+
+<section>
+<h3>Creating the Signature</h3>
+
+<div class="fragment">
+<pre><code contenteditable data-trim class="python">
+signature = saved_model.signature_def_utils.build_signature_def(
+    inputs={'inputs': build_tensor_info(model.input)},
+    outputs={'scores': build_tensor_info(model.output)},
+    method_name=saved_model.signature_constants.PREDICT_METHOD_NAME)
+</code></pre>
+<p><small><a href='https://www.tensorflow.org/serving/signature_defs'>https://www.tensorflow.org/serving/signature_defs</a></small></p>
+</div>
+
+</section>
+
+<section>
+<h3>Creating the builder and save model</h3>
+
+<pre><code contenteditable data-trim class="fragment python">
+builder = saved_model.builder.SavedModelBuilder("tf/1") # path to model
+</code></pre>
+<pre><code contenteditable data-trim class="fragment python">
+builder.add_meta_graph_and_variables(
+    sess, [saved_model.tag_constants.SERVING],
+    signature_def_map={
+    saved_model.signature_constants.
+        DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature
+    })
+</code></pre>
+<pre><code contenteditable data-trim class="fragment python">
+builder.save()
+</code></pre>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+## Checking our TensorFlow (.pb) model
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M5-tf-check.ipynb
+    </textarea>
+</section>
+
+        <section>
+<h3>Using saved_model_cli</h3>
+
+<div class="fragment">
+<pre><code contenteditable data-trim class="python">
+saved_model_cli show --dir tf/1 \
+  --tag_set serve --signature_def serving_default
+</code></pre>
+<pre><code contenteditable data-trim class="fragment python">
+The given SavedModel SignatureDef contains the following input(s)
+  inputs['inputs'] tensor_info:
+      dtype: DT_FLOAT
+      shape: (-1, 3)
+      name: hidden1_input:0
+The given SavedModel SignatureDef contains the following output(s)
+  outputs['scores'] tensor_info:
+      dtype: DT_FLOAT
+      shape: (-1, 3)
+      name: softmax/Softmax:0
+Method name is: tensorflow/serving/predict
+</code></pre>
+</div>
+
+<div class="fragment">
+<pre><code contenteditable data-trim class="python">
+saved_model_cli run --dir tf/1 --signature_def serving_default \
+--tag_set serve --input_exprs inputs=[[100.0,47.0,10.0]]
+</code></pre>
+<pre><code contenteditable data-trim class="fragment python">
+Result for output key scores: [[0.0027608  0.8720881  0.12515119]]
+</code></pre>
+</div>
+<p><small><a href='https://www.tensorflow.org/guide/saved_model#cli_to_inspect_and_execute_savedmodel'>https://www.tensorflow.org/guide/saved_model#cli_to_inspect_and_execute_savedmodel</a></small></p>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Hosting your model on Google Cloud ML
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M6-cloud.ipynb
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Deploying to Google Cloud ML
+
+* Takes away the scaling and installation burden
+* Requires to convert your Keras model to a TensorFlow model
+* You need to define Signatures for input and output
+* The generated serving model also works for your local model servers (more on that later)
+* Can use CPU or GPU
+
+        </textarea>
+    </section>
+                
+        <section>
+<h3>Deploying to Google Clound ML</h3>
+
+<div class="fragment">
+    <p>Copy your model to a Cloud Bucket</p>
+<pre><code contenteditable data-trim class="python">
+gsutil mb gs://my_bucket
+gsutil cp -R tf/1 gs://my_bucket
+</code></pre>
+<p><small>
+Needs Google Cloud SDK:         
+    <a href='https://cloud.google.com/sdk/install'>https://cloud.google.com/sdk/install</a></small></p>
+</div>
+<div class="fragment">
+    <p>Deploy from this bucket</p>
+<pre><code contenteditable data-trim class="python">
+gcloud ml-engine models create "ml_insurance" --enable-logging
+gcloud ml-engine versions create "v1" --model "ml_insurance" \
+ --origin "gs://my_bucket/1"
+gcloud ml-engine versions describe "v1" --model "ml_insurance"
+</code></pre>
+<p><small>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/deploying-models'>
+    https://cloud.google.com/ml-engine/docs/tensorflow/deploying-models</a>
+<br>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/prediction-overview#prediction_logging'>
+    https://cloud.google.com/ml-engine/docs/tensorflow/prediction-overview#prediction_logging</a></small></p>
+</div>
+
+    </section>
+
+        <section>
+<h3>Making Predictions</h3>
+
+<div class="fragment">
+    <p>Input format is a bit special</p>
+<pre><code contenteditable data-trim class="python">
+# sample_insurance.json    
+{"inputs": [ 160,  18,  100]}
+{"inputs": [ 100,  47,  10]}
+{"inputs": [ 90,  20,  20]}    
+</code></pre>
+</div>
+<div class="fragment">
+    <p>Call from Google Cloud Console</p>
+<pre><code contenteditable data-trim class="python fragment">
+gcloud ml-engine predict --model "ml_insurance" --version "v1" \
+ --json-instances ./sample_insurance.json
+</code></pre>
+<pre><code contenteditable data-trim class="python fragment">
+SCORES
+[0.8658562898635864, 7.318668918511809e-14, 0.13414366543293]
+[0.002760800765827298, 0.8720880746841431, 0.12515118718147278]
+[5.452934419736266e-05, 0.005952719133347273, 0.9939927458763123]    
+</code></pre>
+</div>
+
+<p><small>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/online-predict'>https://cloud.google.com/ml-engine/docs/tensorflow/online-predict</a>
+</small></p>
+
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Running on a dedicated Linux server
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M7-local.ipynb
+    </textarea>
+</section>
+
+        <section>
+<h3>TensorFlow Serving REST API</h3>
+
+<div class="fragment">
+<p>Starting the Model Server in Rest Mode (needs Linux)</p>
+
+<pre><code contenteditable data-trim>
+tensorflow_model_server --rest_api_port=8501 \
+--model_name=manning_insurance_1 \
+--model_base_path=$(pwd)/tf
+</code></pre>
+<p><small><a href='https://www.tensorflow.org/serving/api_rest'>https://www.tensorflow.org/serving/api_rest</a></small></p>
+</div>
+<div class="fragment">
+<p>Curling to it</p>
+
+<pre><code contenteditable data-trim class="python">
+curl -X POST \
+http://localhost:8501/v1/models/manning_insurance_1:predict  \
+-d '{ "instances": [{"inputs": [ 100.0,  47.0,  10.0]}]}' 
+# {
+#     "predictions": [[0.0027608, 0.872088, 0.125151]]
+# }</code></pre>
+</div>
+
+    </section>
+
+        <section data-markdown>
+            <textarea data-template>
+## Deploying to the browser
+
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M3-tensorflowjs.ipynb
+            </textarea>
+        </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="400">
+</a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+https://djcordhose.github.io/deep-learning-crash-course-notebooks/</a></small>
+</small></p>
+</textarea>
+    </section>
+
+        <section>
+            <img src="img/tensorflowjs.png" height="500">
+            <p><small><a href="https://js.tensorflow.org/" target="_blank">https://js.tensorflow.org/</a></small></p>
+        </section>
+    
+        <section>
+<h3>Converting our Keras Model to tensorflow.js</h3>
+
+<div class="fragment">
+
+<pre><code contenteditable data-trim class="python">
+tensorflowjs_converter --input_format keras \
+./model/insurance.hdf5 \
+./tfjs    
+</code></pre>
+<p><small><a href='https://js.tensorflow.org/tutorials/import-keras.html'>
+    https://js.tensorflow.org/tutorials/import-keras.html</a></small></p>
+
+</div>
+
+    </section>
+
+        <section>
+<h3>Loading and using directly from the Browser</h3>
+
+<div class="fragment">
+
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const model = await tf.loadModel('tfjs/model.json');
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// max speed, age, thousand miles per year
+const example = tf.tensor([[100, 47, 10]]);
+const prediction = model.predict(example);
+console.log(await prediction.data());
+//[0.00334801129065454, 0.8710343241691589, 0.12561771273612976]
+    </code></pre>
+
+<p><small>
+            <a href='js/tensorflow-sandbox/load_manning_model.html' target="_blank">
+                https://djcordhose.github.io/deep-learning-crash-course-notebooks/load_model.html</a></small>
+        </small></p>
+    </div>   
+    </section>
+
+        <section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+## Exercise
+
+_Install the Risk Calculator locally and change it to use your data_
+
+- clone or download https://github.com/DJCordhose/deep-learning-crash-course-notebooks
+- in the _docs_ folder you find the complete Risk Calculator in _index.html_
+- run a local web server in that directory
+  - if you do not have one you can use https://www.npmjs.com/package/http-server
+- in your favorite editor or IDE open _index.html_
+- find the line where I entered my own personal data
+- change it to yours and try it in the browser
+
+</textarea>
+</section>
+
+    
     <section data-markdown>
         <textarea data-template>
 ### PART IV
