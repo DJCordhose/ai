@@ -162,447 +162,304 @@
 <div class="reveal">
     <div class="slides">
 
-                <section data-markdown>
+        <section data-markdown>
             <textarea data-template>
-# U3-M1-intro
+### All scripts (talking heads, console sessions etc.) can be found in a single google doc
+
+https://docs.google.com/document/d/1r4imjXeFWAjbGt1jKdwsOzFEzgLnWobnL2wlW1giDT8/edit?usp=sharing
+
+Link should allow for editing / commenting
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+# U4-M1-intro
 
 ## Talking Head
             </textarea>
         </section>
 
-        <section data-markdown style="font-size: xx-large">
-                <textarea data-template>
-### Overview of this unit
-
-* In this unit we will train a TensorFlow model from the data we have
-* We will use the high level Keras API for this
-* You will 
-  * set up a suitable network architecture 
-  * learn how to encode the data to make it accessible for our neural network
-  * and make sure our model generalizes well to unknown data
-* The result will be a TensorFlow model saved on persistent storage ready to go into production
-
-## 
-
-                </textarea>
-            </section>
-    
-                <section data-markdown>
-            <textarea data-template>
-### Introduction to working with Notebooks
-
-* Notebooks allow to mix text with code
-* They are like an executable story
-* And are ideal for experiments and tutorials
-* Colab, a zero installation notebook service by Google, is recommended
-* But if you really want a local installation or already have one, it will also work if you know what you are doing
-* However, you will be on your own with this
-            </textarea>
-        </section>
-
-
         <section data-markdown>
             <textarea data-template>
-# U3-M2-colab                
+# U4-M2: Deploying to the browser
             </textarea>
         </section>
-    
-        <section data-markdown>
-            <textarea data-template>
-### Working with Colab Notebooks
 
-https://colab.research.google.com
-            </textarea>
-        </section>
-    
-<section data-markdown>
-    <textarea data-template>
-### Hands-On
-_Run your first Colab Notebook_
-
-* go to https://colab.research.google.com 
-* sign into your Google account or register a new one 
-* switch on GPU support
-* execute some code cells
-
-https://colab.research.google.com
-
-</textarea>
-</section>
-    
-<section data-markdown>
-        <textarea data-template>
-# U3-M3-data                
-        </textarea>
-    </section>
-
-<section data-markdown>
-        <textarea data-template>
-## Notebook            
-### Getting to know our data
-
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M3-data.ipynb
-
-    </textarea>
-    </section>
-
-<section data-markdown>
-    <textarea data-template>
-### Exercise
-_Change our pairplot to_
-
-* plot more samples 
-* reduce the number of variables to the first three (leave out the group) 
-* make the plot a bit larger
-
-Use the built in help function by typing
-
-<em>sns.pairplot?</em>
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-# U3-M4-encoding                
-        </textarea>
-    </section>
-
-<section data-markdown>
-        <textarea data-template>
-## Encoding our data
-        </textarea>
-    </section>
- 
     <section data-markdown>
-            <textarea data-template>
-### Data Encoding in Deep Learning
-* in classic machine learning selecting and pre-processing is crucial
-* Deep Neural Networks often allow to just stick in our data as is
-* the rest is done by the first layers of our deep neural network   
-* Deep Learning can still benefit from preprocessing and normalizing your data 
-* often you can compensate with more training data
-
-</textarea>
-</section>
-
-<section data-markdown>
         <textarea data-template>
-### Animated Powerpoint 
+### ML Car Insurance Risk Calculator
 
-<a href="data-encoding.pptx">
-<img src='img/data-encoding.png' height="500">
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="400">
 </a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+https://djcordhose.github.io/deep-learning-crash-course-notebooks/</a></small>
+</small></p>
 </textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-# U3-M5-nn-intro                
-        </textarea>
     </section>
 
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-## Notebook            
-### Setting up our neural network
-
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M5-nn-intro
-
-    </textarea>
-    </section>
-
-<section>
-    <h3>Exercise</h3>
-    <p>Run through the notebook</p>
-    <p><em>Can you explain the number of parameters for each layer?</em></p>
-    <pre><code contenteditable data-trim class="line-numbers python">
-Layer (type)                 Output Shape              Param #   
-=================================================================
-hidden1 (Dense)              (None, 50)                200       
-_________________________________________________________________
-softmax (Dense)              (None, 3)                 153       
-=================================================================
-Total params: 353
-Trainable params: 353
-Non-trainable params: 0</code></pre>
-<p><small><em>Add a second layer and increase the number of neurons:<br> do the numbers of parameters still make sense to you?</em></small></p>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-# U3-M6-generalization                
-        </textarea>
-    </section>
-
-<section data-markdown>
-        <textarea data-template>
-### Generalization
-
-_We do not have any idea how well our model performs, yet_
-
-</textarea>
-</section>
-
-<section data-markdown style="font-size: xx-large">
-        <textarea data-template>
-### Evaluating our model
-
-* The most important property of a model is if it generalizes well to unknown data
-* A machine learning model is of no use if it only works well on the data it has been trained on
-  * If it was, the easiest way to achieve this would be a dictionary translating from a set of inputs to the known output
-* Conceptually it is a little bit hard to optimize for something you do not know
-* So, we introduce a little trick here
-
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## Notebook            
-### Understand Generalization
-
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M7-nn-training.ipynb
-
-_Stop at exercise_
-</textarea>
-</section>
-
-<section>
-    <h2>Exercise</h2>
-    <p><em>Understanding Generalization</em></p>
-    <p>Manually cluster areas of different customer types </p>
-    <ol>
-        <li>
-            <em>dark (green)</em>: good customer</li>
-        <li><em>light (yellow)</em>: mediocre customers</li>
-        <li>
-            <em>middle (red)</em>: red customers</li>
-    </ol>
-    <p>Follow the description in the notebook</p>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-# U3-M7-nn-training                
-        </textarea>
-    </section>
-
-<section data-markdown>
-        <textarea data-template>
-## Notebook            
-### Train the neural network
-
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M7-nn-training.ipynb
-
-    </textarea>
-    </section>
-
-
-<section data-markdown  style="font-size: xx-large">
-        <textarea data-template>
-## Exercise
-
-_Train the model_
-
-* Run the notebook as is
-* Adapt the model to your parameters from the previous exercise (or any other model)
-* How well does it perform?
-* Do you see overfitting?
-* Any idea why it performs the way it does?
-* Experiment with the parameters you know
-    </textarea>
-    </section>
-
-    <section data-markdown>
-        <textarea data-template>
-# U3-M8-regularization                
-        </textarea>
-    </section>
-
-<section data-markdown>
-    <textarea data-template>
-## Regularization
-    </textarea>
-</section>
-
-<section id='overfitting'>
-        <h3>The Issue: Overfitting</h2>
-    <div>
-    <div style="float: left">
-        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
-        <p>
-            <small><em>Training Score</em></small>
-        </p>
-    </div>
-    <div style="float: left" class="fragment" data-fragment-index='5'>
-        <img src="img/scans/elements/down.jpg" height="200">
-    </div>
-    <div style="float: left" class="fragment" data-fragment-index='4'>
-        <img src="img/scans/elements/up.jpg" height="200">
-    </div>
-    <div style="float: left">
-            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
-            <p>
-                <small><em>Test Score</em></small>
-            </p>
-    </div>
-    </div>
-    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and test scores clearly divert</em></p>
-
-    </section>
-
-    <section data-markdown>
-        <textarea data-template>
-### Regularization
-
-_Process to counter overfitting_
-            </textarea>
-            </section>
+        <section>
+            <img src="img/tensorflowjs.png" height="500">
+            <p><small><a href="https://js.tensorflow.org/" target="_blank">https://js.tensorflow.org/</a></small></p>
+        </section>
     
-    <section data-markdown>
-        <textarea data-template>
-### First approach: Train for fewer epochs
-
-<img src='img/accuracy.png'>
-
-_Watch where training and validation accuracy diverge and stop training there_
-
-
-            </textarea>
-            </section>
-    
-<section id='overfitting-capacity'>
-        <h3>Second approach: Reduce capacity of model</h2>
-    <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
-        <img src="img/scans/elements/model-large.jpg" height="200">
-        <p>
-            <small><em>Original model</em></small>
-        </p>
-    </div>
-    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
-        <br>
-        <img src="img/scans/elements/right.jpg">
-        <br>
-    </div>
-    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
-            <br>
-            <img src="img/scans/elements/model-small.jpg" height="100">
-            <br>
-            <br>
-            <p>
-                <small><em>Smaller model</em><br>less hidden layers, less neurons per layer</small>
-            </p>
-    </div>
-    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Give model less capacity to simply memorize data</em></p>
-    </section>
-
-<section id='overfitting-dropout'>
-        <h3>Third approach: Use Dropout</h2>
-            <p><em>Dropouts only train a certain percentage of neurons per batch</em></p>
-    <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
-        <img src="img/scans/elements/model-large.jpg" height="225">
-        <p>
-            <small><em>Original model</em></small>
-        </p>
-    </div>
-    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
-        <br>
-        <img src="img/scans/elements/right.jpg">
-        <br>
-    </div>
-    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
-            <br>
-            <img src="img/scans/elements/model-emsemble.jpg" height="100">
-            <br>
-            <br>
-            <p>
-                <small><em>Ensemble of small models</em> (each one overfits on its specific batch)<br></small>
-            </p>
-    </div>
-    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Combination of models makes result more robust</em></p>
-    </section>
-
-    <section data-markdown id='overfitting-bn'>
+        <section data-markdown>
             <textarea data-template>
-### Fourth approach: Batch Normalization
+## U4-M3: Converting our Keras model for tensorflow.js 
 
-<ul>
-    <li class="fragment">Subtracts batch mean
-    <li class="fragment">multiplies by standard deviation     
-</ul>
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M3-tensorflowjs.ipynb
+            </textarea>
+        </section>
 
-<img src='img/scans/elements/sigmoid.jpg' class="fragment" height="200">
-    
-<p class="fragment"><em>Intuition: Makes model robust by adding noise</em></p>
 
-<p class="fragment"><small><em>Bonus:</em> Lets model train faster by fighting vanishing gradients</small></p>
+        <section>
+<h3>Converting our Keras Model to tensorflow.js</h3>
 
-    
-    
-                </textarea>
-                </section>
-<section data-markdown style="font-size: xx-large">
+<div class="fragment">
+
+<pre><code contenteditable data-trim class="python">
+tensorflowjs_converter --input_format keras \
+./model/insurance.hdf5 \
+./tfjs    
+</code></pre>
+<p><small><a href='https://js.tensorflow.org/tutorials/import-keras.html'>
+    https://js.tensorflow.org/tutorials/import-keras.html</a></small></p>
+
+</div>
+
+    </section>
+
+        <section>
+<h3>Loading and using directly from the Browser</h3>
+
+<div class="fragment">
+
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const model = await tf.loadModel('tfjs/model.json');
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// max speed, age, thousand miles per year
+const example = tf.tensor([[100, 47, 10]]);
+const prediction = model.predict(example);
+console.log(await prediction.data());
+//[0.00334801129065454, 0.8710343241691589, 0.12561771273612976]
+    </code></pre>
+
+<p><small>
+            <a href='js/tensorflow-sandbox/load_manning_model.html' target="_blank">
+                https://djcordhose.github.io/deep-learning-crash-course-notebooks/load_model.html</a></small>
+        </small></p>
+    </div>   
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+# U4-M3: JavaScript glue code for final application 
+
+## Code in IDE
+        </textarea>
+    </section>
+
+        <section data-markdown style="font-size: xx-large">
     <textarea data-template>
-### Links Batch Normalization
+## Exercise
 
-https://www.quora.com/Is-there-a-theory-for-why-batch-normalization-has-a-regularizing-effect
+_Install the Risk Calculator locally and change it to use your data_
 
-https://www.quora.com/Why-does-Batch-Normalization-for-deep-Neural-Networks-fix-the-vanishing-gradient-problem
+- clone or download https://github.com/DJCordhose/deep-learning-crash-course-notebooks
+- in the _docs_ folder you find the complete Risk Calculator
+- run a local web server in that directory
+  - if you do not have one you can use https://www.npmjs.com/package/http-server
+- in your favorite editor or IDE open _index.html_
+- find the line where I entered my own personal data
+- change it to yours and try it in the browser
 
-https://stats.stackexchange.com/questions/227114/are-there-any-ways-to-deal-with-the-vanishing-gradient-for-saturating-non-linear
+</textarea>
+</section>
 
-https://stackoverflow.com/questions/34716454/where-do-i-call-the-batchnormalization-function-in-keras
+<section data-markdown>
+    <textarea data-template>
+## U4-M4: Preparation for serving
 
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M4-tf-prep.ipynb
     </textarea>
 </section>
 
 <section data-markdown>
-        <textarea data-template>
-# U3-M9-regularization                
+    <textarea data-template>
+### Deploying to Google Cloud ML
+
+* Takes away the scaling and installation burden
+* Requires to convert your Keras model to a TensorFlow model
+* You need to define Signatures for input and output
+* The generated serving model also works for your local model servers (more on that later)
+* Can use CPU or GPU
+
+####  TALKING HEAD
         </textarea>
     </section>
+                
+
+<section>
+<h3>Creating the Signature</h3>
+
+<div class="fragment">
+<pre><code contenteditable data-trim class="python">
+signature = saved_model.signature_def_utils.build_signature_def(
+    inputs={'inputs': build_tensor_info(model.input)},
+    outputs={'scores': build_tensor_info(model.output)},
+    method_name=saved_model.signature_constants.PREDICT_METHOD_NAME)
+</code></pre>
+<p><small><a href='https://www.tensorflow.org/serving/signature_defs'>https://www.tensorflow.org/serving/signature_defs</a></small></p>
+</div>
+
+</section>
+
+<section>
+<h3>Creating the builder and save model</h3>
+
+<pre><code contenteditable data-trim class="fragment python">
+builder = saved_model.builder.SavedModelBuilder("tf/1") # path to model
+</code></pre>
+<pre><code contenteditable data-trim class="fragment python">
+builder.add_meta_graph_and_variables(
+    sess, [saved_model.tag_constants.SERVING],
+    signature_def_map={
+    saved_model.signature_constants.
+        DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature
+    })
+</code></pre>
+<pre><code contenteditable data-trim class="fragment python">
+builder.save()
+</code></pre>
+</section>
 
 <section data-markdown>
     <textarea data-template>
-## Notebook            
-### Regularize your neural network
+# U4-M5: Checking our tf model
 
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M9-regularization.ipynb
-
-</textarea>
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M5-tf-check.ipynb
+## Console Session (already recorded)
+    </textarea>
 </section>
-
 
 <section data-markdown>
     <textarea data-template>
-## Exercise
+## U4-M6: Hosting your model on Google Cloud ML
 
-_Apply regularizations to your model_
-
-- keep adding regularization to make test and train scores come closer to each other
-- this will come at the cost of train scores going down
-- if both values start going down you have gone too far
-- each experiment takes some time
-</textarea>
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M6-cloud.ipynb
+    </textarea>
 </section>
 
-<section data-markdown>
-        <textarea data-template>
-# U3-M10-final-model                
-        </textarea>
+        <section>
+<h3>Deploying to Google Clound ML</h3>
+
+<div class="fragment">
+    <p>Copy your model to a Cloud Bucket</p>
+<pre><code contenteditable data-trim class="python">
+gsutil mb gs://my_bucket
+gsutil cp -R tf/1 gs://my_bucket
+</code></pre>
+<p><small>
+Needs Google Cloud SDK:         
+    <a href='https://cloud.google.com/sdk/install'>https://cloud.google.com/sdk/install</a></small></p>
+</div>
+<div class="fragment">
+    <p>Deploy from this bucket</p>
+<pre><code contenteditable data-trim class="python">
+gcloud ml-engine models create "ml_insurance" --enable-logging
+gcloud ml-engine versions create "v1" --model "ml_insurance" \
+ --origin "gs://my_bucket/1"
+gcloud ml-engine versions describe "v1" --model "ml_insurance"
+</code></pre>
+<p><small>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/deploying-models'>
+    https://cloud.google.com/ml-engine/docs/tensorflow/deploying-models</a>
+<br>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/prediction-overview#prediction_logging'>
+    https://cloud.google.com/ml-engine/docs/tensorflow/prediction-overview#prediction_logging</a></small></p>
+</div>
+
     </section>
 
+        <section>
+<h3>Making Predictions</h3>
+
+<div class="fragment">
+    <p>Input format is a bit special</p>
+<pre><code contenteditable data-trim class="python">
+# sample_insurance.json    
+{"inputs": [ 160,  18,  100]}
+{"inputs": [ 100,  47,  10]}
+{"inputs": [ 90,  20,  20]}    
+</code></pre>
+</div>
+<div class="fragment">
+    <p>Call from Google Cloud Console</p>
+<pre><code contenteditable data-trim class="python fragment">
+gcloud ml-engine predict --model "ml_insurance" --version "v1" \
+ --json-instances ./sample_insurance.json
+</code></pre>
+<pre><code contenteditable data-trim class="python fragment">
+SCORES
+[0.8658562898635864, 7.318668918511809e-14, 0.13414366543293]
+[0.002760800765827298, 0.8720880746841431, 0.12515118718147278]
+[5.452934419736266e-05, 0.005952719133347273, 0.9939927458763123]    
+</code></pre>
+</div>
+
+<p><small>
+<a href='https://cloud.google.com/ml-engine/docs/tensorflow/online-predict'>https://cloud.google.com/ml-engine/docs/tensorflow/online-predict</a>
+</small></p>
+
+    </section>
+
+
 <section data-markdown>
     <textarea data-template>
-## Notebook            
-### Our final model ready for production
+## U4-M7: Running on a dedicated Linux server
 
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M10-final-model.ipynb.ipynb
+https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U4-M7-local.ipynb
+    </textarea>
+</section>
 
-</textarea>
+        <section>
+<h3>TensorFlow Serving REST API</h3>
+
+<div class="fragment">
+<p>Starting the Model Server in Rest Mode (needs Linux)</p>
+
+<pre><code contenteditable data-trim>
+tensorflow_model_server --rest_api_port=8501 \
+--model_name=manning_insurance_1 \
+--model_base_path=$(pwd)/tf
+</code></pre>
+<p><small><a href='https://www.tensorflow.org/serving/api_rest'>https://www.tensorflow.org/serving/api_rest</a></small></p>
+</div>
+<div class="fragment">
+<p>Curling to it</p>
+
+<pre><code contenteditable data-trim class="python">
+curl -X POST \
+http://localhost:8501/v1/models/manning_insurance_1:predict  \
+-d '{ "instances": [{"inputs": [ 100.0,  47.0,  10.0]}]}' 
+# {
+#     "predictions": [[0.0027608, 0.872088, 0.125151]]
+# }</code></pre>
+</div>
+
+    </section>
+
+
+
+<section data-markdown>
+    <textarea data-template>
+# U4-M8: Outro / Summary
+
+## Talking Head
+    </textarea>
 </section>
 
     </div>
