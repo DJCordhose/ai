@@ -169,6 +169,21 @@
 https://docs.google.com/document/d/1r4imjXeFWAjbGt1jKdwsOzFEzgLnWobnL2wlW1giDT8/edit?usp=sharing
 
 Link should allow for editing / commenting
+
+Slides:
+
+https://djcordhose.github.io/ai/course_u4.html
+
+Slides ready for PDF Printing
+
+https://djcordhose.github.io/ai/course_u4.html?print-pdf
+
+PDF:
+
+https://djcordhose.github.io/ai/Manning_U4.pdf
+
+
+
             </textarea>
         </section>
 
@@ -471,7 +486,10 @@ http://localhost:8501/v1/models/manning_insurance_1:predict  \
 <script src="lib/jquery-2.2.4.js"></script>
 
 <script>
-        if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
+    // only applies to public version
+    $('.fragment').removeClass('fragment');
+
+    if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
         } else {
             // only applies to public version
             $('.todo').remove();
