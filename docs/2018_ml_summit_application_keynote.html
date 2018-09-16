@@ -154,36 +154,7 @@ du vielleicht sogar auf einer Goldgrube, ohne es zu ahnen?
 
  
 
- <section data-markdown class="todo">
-        <textarea data-template>
-
-1. Teil Intro
-
-2. Teil Fancy Anwendung
-
-3. Teil echte Use Cases
-
-* Drivers Licence
-* Customers Churn
-* Was im Artikel stand
-* Mach Anwendungen, Hegehog Plot
-* https://www.egovernment-computing.de/oeffentliche-verwaltung-im-zentrum-der-ki-a-734734/
-
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-<textarea data-template>
-### Teil 3: Und was macht man wenn man gar keine Anwendung hat
-
-Dann sucht man sich eine
-
-Google released a search engine for datasets: https://t.co/HSFhz8RyYL. Launch blog post: https://t.co/dkFseCu3mB
-(https://twitter.com/domoritz/status/1037419117504999424?s=03)
-
-</textarea>
-</section>
-
+ 
 <section data-markdown class="preparation">
         <textarea data-template>
 ### Preparation
@@ -203,16 +174,16 @@ Google released a search engine for datasets: https://t.co/HSFhz8RyYL. Launch bl
                 <a href="https://www.embarc.de/ ">embarc GmbH</a>
 
             </h4>
-            <p><small><a href="https://djcordhose.github.io/ai/2018_ml_summit_application_keynote.html">
-                https://djcordhose.github.io/ai/2018_ml_summit_application_keynote.html
+            <p><small><a href="http://bit.ly/ml-summit">
+                http://bit.ly/ml-summit
             </a></small></p>
         </section>
 <!-- 
 -----------------------------
-        TEIL I: INTRO
+        TEIL I: MOTIVATION
 -----------------------------
  -->
-        <section data-markdown>
+        <!-- <section data-markdown>
                 <textarea data-template>
 ### Artificial intelligence will wipe out half the banking jobs in a decade, experts say
 
@@ -226,7 +197,36 @@ matter if we as a bank will participate in these changes or not, it is going to 
 https://www.mercurynews.com/2018/04/20/artificial-intelligence-will-wipe-out-half-the-banking-jobs-in-a-decade-experts-say/
 </small>
             </textarea>
-            </section>
+            </section> -->
+
+            <section data-markdown>
+                    <textarea data-template>
+### Eckpunkte „Strategie Künstliche Intelligenz“ der Bundesregierung       
+
+* Deutschland „weltweit führenden Standort für KI“
+* neue Anwendungen z. B. in der Öffentlichen Verwaltung sollen erschlossen werden
+* „europäische Antwort auf datenbasierte Geschäftsmodelle“
+
+<small>https://www.egovernment-computing.de/oeffentliche-verwaltung-im-zentrum-der-ki-a-734734/
+<br>
+http://www.taz.de/Foerderung-neuer-Technologie/!5518286/
+</small>
+    </textarea>
+    </section>
+    
+    
+
+        <section>
+            <h4>AI (Artificial Intelligence)/ ML (Machine Learning) is Opportunity</h4>
+            <img src="opportunity.png" height="450">
+            <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
+        </section>
+
+<!-- 
+-----------------------------
+        TEIL II: INTRO
+-----------------------------
+ -->
 
         <section data-markdown style="font-size: xx-large">
             <textarea data-template>
@@ -237,7 +237,17 @@ https://www.mercurynews.com/2018/04/20/artificial-intelligence-will-wipe-out-hal
         </textarea>
         </section>
 
+        <section data-markdown>
+                <textarea data-template>
+<img src='img/twitter-trump.png' height="550">
 
+<small>
+https://twitter.com/KeatonPatti/status/1006961202998726665
+<small>
+
+            </textarea>
+        </section>
+    
         <section data-markdown>
             <textarea data-template>
 ### Axiom
@@ -267,7 +277,6 @@ http://plus.faz.net/faz-plus/feuilleton/2018-08-24/ca68d51b488df28c55c47fa28c911
         </textarea>
         </section>
         
-
         <section data-markdown>
             <textarea data-template>
 ### Daher: KI hat kein Weltwissen
@@ -283,21 +292,39 @@ http://plus.faz.net/faz-plus/feuilleton/2018-08-24/ca68d51b488df28c55c47fa28c911
         </section>
 
         <section data-markdown>
-        <textarea data-template>
-### Do machine learning like the great engineer you are 
+            <textarea data-template>
+### Generalisierung
 
-_not like the great machine learning expert you aren’t_
+* Von euch trainierte Systeme "wissen" nur was ihr ihnen einfüttert
+* Allgemeine Zusammenhänge sind eurer KI nicht bekannt
+* Was nicht in euren Daten steckt kann auch die KI nicht wissen
+* Für eine sinnvolle Generalisierung braucht ihr viele Daten
+* Was viel bedeutet hängt von vielen Faktoren ab
+* Pro "Konzept" 5000 Beispiele ist ein guter Richtwert 
 
-1. Make sure your pipeline is solid end to end.
-1. Start with a reasonable objective.
-1. Add common­-sense features in a simple way.
-1. Make sure that your pipeline stays solid.
+        </textarea>
+        </section>
 
-<small>
-https://developers.google.com/machine-learning/guides/rules-of-ml/
-</small>
-    </textarea>
-    </section>
+        <section data-markdown>
+                <textarea data-template>
+        
+<img src="img/twitter-dog-generalization.jpg" height="550">
+    
+<small>https://twitter.com/Kyle_Byers/status/1040913435423395840</small>
+</textarea>
+</section>
+
+
+        <section data-markdown>
+                <textarea data-template>
+        
+### Naive Computer Vision model that hasn't been trained on both states of a glass door :)
+<video controls src="video/dog-window.mp4" 
+type="video/mp4" height="400"></video>
+    
+<small>https://twitter.com/Reza_Zadeh/status/1041184293559533568</small>
+</textarea>
+</section>
 
 
 <section data-markdown>
@@ -329,38 +356,28 @@ https://twitter.com/fchollet/status/1035951190276681728
                 </textarea>
                 </section>
 
-    <section data-markdown>
+    <!-- <section data-markdown>
             <textarea data-template>
 <img src='img/twitter-cholett-self-driving-year.png'>
 
 https://twitter.com/fchollet/status/1035272806466904065
                 </textarea>
-                </section>
-    
-                <section data-markdown class="todo">
-                        <textarea data-template>
-
-Christopher Mims 🎆 (@mims) tweeted at 4:43 PM on Tue, Aug 28, 2018:
-Amazing thread.
-
-This is the best self-driving technology in the world, in the easiest to navigate environment, managed by the best self driving engineers with the most experience in the field.
-
-And it does not work. https://t.co/IAUUlOZ2Zy
-(https://twitter.com/mims/status/1034451464675119110?s=03)
-                </textarea>
-                </section>
-
-
-<section data-markdown class="todo">
-        <textarea data-template>
-### ML ist längst in unserem Leben
-
-Sheet completion
-Text Vervollständigung Handy
-</textarea>
-</section>
-
-<section>
+                </section> -->
+                <section>
+                        <h2>Gretchenfrage</h2>
+                        <h3 class="fragment">Was für Daten hast du oder kannst du besorgen?</h3>
+                        <h4 class="fragment">Die Antwort auf die Frage bestimmt, wie sehr du von Machine Learning profitieren kannst</h4>
+                    </section>
+            
+                    <section>
+                            <h3>Eine Analogie</h3>
+                            <p class="fragment">Die Machine Learning Technologie ist der Motor</p>
+                            <p class="fragment">Eure Daten sind der Treibstoff</p>
+                            <p class="fragment"><em>Nur wenn beides da ist läuft die Maschine</em></p>
+                    </section>
+            
+                
+<!-- <section>
         <h3>
             3 Arten von Machine Learning
         </h3>
@@ -394,7 +411,7 @@ http://www.decisionproblem.com/paperclips
 ### Alpha(Go) Zero
 
 <a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<!-- <img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px"> -->
+<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px">
 <img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="400px">
 </a>
 
@@ -402,13 +419,13 @@ http://www.decisionproblem.com/paperclips
 * Zielfunktion ist Sieg
 * schlagen jeden Menschen und Maschine ohne menschliche Expertise (in perfect information game)
 
-<!-- <small>
+<small>
 Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
 <br>
 Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
 <br>
 Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
-</small> -->
+</small>
 </textarea>
 </section>
 
@@ -428,17 +445,86 @@ Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-mo
 Code: https://github.com/AppliedDataSciencePartners/WorldModels
 </small>
 </textarea>
-</section>
+</section> -->
 
 <!-- 
 -----------------------------
-        TEIL II: FANCY ANWENDUNGEN
+        TEIL III: AI ist bereits da
 -----------------------------
  -->
 
+ 
+ <section data-markdown>
+        <textarea data-template>
+## KI ist längst in unserem Leben
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Wenn man sich daran gewöhnt hat, wird sie aber ganz selbstverständlich
+</textarea>
+</section>
+
+<section>
+        <h3>Real World AI is booming</h3>
+        <img src="chollet-twitter-applications.png">
+        <p><small><a href="https://twitter.com/fchollet/status/906582914829246464?s=03" target="_blank">
+            https://twitter.com/fchollet/status/906582914829246464?s=03</a></small></p>
+    </section>
+
+
+<section>
+        <h4>Maschinen verstehen Sprache und können sich dazu verhalten</h4>
+        <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
+    </section>
+
+        <section>
+            <h3>Machine Learning in Google Sheets</h3>
+            <div style="transform: scale(1.2); margin-left: 100px">
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_depArrDelay.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_distance_airtime.png">
+                </div>
+                <div style="height: 250px; float: left">
+                    <img src="img/google_sheets/screenshot_depDelay_outliers.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_histogram_distance.png">
+                </div>
+            </div>
+            <p><br><br><br><br><br><br><br>
+                <em>Explore</em> finds Correlations, Outliers, etc.
+            </p>
+        </section>
+
+
+    <section>
+            <h4>Ganz normal: Textvervollständigung</h4>
+            <img src="img/text-completion.jpg" height="600px">
+        </section>
+    
+<section data-markdown>
+        <textarea data-template>
+### Siri uses a deep neural network
+
+_Just to detect if someone said 'Hey, Siri'_
+
+<img src='img/TrainingDNN-1.png' height="400px">
+
+<small>
+https://machinelearning.apple.com/2017/10/01/hey-siri.html
+</small>    
+        </textarea>
+    </section>
 
  <section data-markdown style="font-size: large">
         <textarea data-template>
+### Object detection / identification
+
 <img src='img/cnn/object-detection.png' height="500px">
 
 https://twitter.com/TensorFlow/status/1039219454398418946    
@@ -446,7 +532,6 @@ https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1
 https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb
         </textarea>
     </section>
-    
 
 <section data-markdown>
     <textarea data-template>
@@ -467,13 +552,13 @@ https://youtu.be/PCBTZh41Ris
 </textarea>
 </section>
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
         <textarea data-template>
 Tweet ist weg
 
 - Predicting military action using the number of cars in a Pentagon parking lot: https://twitter.com/chrisalbon/status/984586200986959872
 </textarea>
-</section>
+</section> -->
 
 
  <section>
@@ -484,10 +569,14 @@ Tweet ist weg
         </small></p>
     </section>
 
+
     <section>
-        <h4>Maschinen verstehen Sprache und können sich dazu verhalten</h4>
-        <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
-    </section>
+            <h3>Face Detection</h3>
+            <img src="img/facial-recognition.png">
+            <p><small><a href="https://aws.amazon.com/rekognition/" target="_blank">
+                https://aws.amazon.com/rekognition/</a></small></p>
+<!--https://us-west-2.console.aws.amazon.com/rekognition/home?region=us-west-2#/face-comparison-->
+        </section>
 
     <section>
         <h4>Nur zwei dieser Bilder sind echte Fotos</h4>
@@ -550,7 +639,7 @@ Tweet ist weg
 
  <section>
         <h3>schnelleres Arbeiten, höherer Durchsatz</h3>
-        <img src="img/classification/driving-license.jpg">    
+        <img src="img/classification/driving-license.jpg" height="450px">    
         <p>Welche Dokumente hat der Kunde eingericht?</p>
     </section>
 
@@ -579,11 +668,22 @@ Tweet ist weg
             <textarea data-template>
 ### Automatisches Scannen von Rechnungen und Überweisungsträgern
 
-<img src='img/sparkasse-rechnung-scanner.jpg'>
+<img src='img/sparkasse-rechnung-scanner.jpg' height="500px">
             </textarea>
         </section>
 
-
+        <section data-markdown>
+                <textarea data-template>
+    
+<img src='img/tierversuche-ki.png' height="500px">
+<small>
+https://twitter.com/SAS_DACH/status/1026449057554857986
+<br>
+https://www.futurezone.de/science/article214958825/Wie-kuenstliche-Intelligenz-Tierversuche-obsolet-macht.html        
+    </small>
+                </textarea>
+            </section>
+    
         <section>
             <h4>Weitere Anwendungsgebiete</h4>
             <!-- <small> -->
@@ -597,6 +697,25 @@ Tweet ist weg
         <!-- </small> -->
     </section>
 
+    <section>
+            <h3>Zusammenfassung</h3>
+            <ul>
+                <li class="fragment">Wenn du strukturierte Daten herumliegen hast, sind diese möglicherweise ein großer Schatz
+                <li class="fragment">Machine Learning kann bei bestehenden Daten von diesen abstrahieren und generalisieren
+                <li class="fragment">Durchdringen der Domäne nur für die Datenanalyse erforderlich
+                <li class="fragment">Machine Learning ist die Fortsetzung der Digitalisierung
+            </ul>
+            <p><small>
+                Machine Learning auch für dein Projekt
+                <br>
+            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>
+            <a href="http://bit.ly/ml-summit">
+                http://bit.ly/ml-summit
+            </a>
+            </small></p>
+        </section>
+
 
 <!-- 
 -----------------------------
@@ -604,24 +723,20 @@ MATERIAL
 -----------------------------
  -->
 
-    <section data-markdown class="todo">
-        <textarea data-template>
-                https://twitter.com/Smerity/status/947278008385028096
-                </textarea>
-    </section>
-
-
-    <section data-markdown class="todo">
+    <!-- <section data-markdown class="todo">
             <textarea data-template>
-Marketing
-- Buch
-- Artikel
-- Video-Kurs
-- Embarc
-        </textarea>
-        </section>
 
-<section data-markdown class="todo">
+Christopher Mims 🎆 (@mims) tweeted at 4:43 PM on Tue, Aug 28, 2018:
+Amazing thread.
+
+This is the best self-driving technology in the world, in the easiest to navigate environment, managed by the best self driving engineers with the most experience in the field.
+
+And it does not work. https://t.co/IAUUlOZ2Zy
+(https://twitter.com/mims/status/1034451464675119110?s=03)
+    </textarea>
+    </section> -->
+
+<!-- <section data-markdown class="todo">
         <textarea data-template>
 ### Area: Medicine
 
@@ -631,7 +746,12 @@ Marketing
 
 </textarea>
     </section>
-
+    <section data-markdown class="todo">
+            <textarea data-template>
+    
+    []Deep Learning im Aktienhandel › Friedrich-Alexander-Universität Erlangen-Nürnberg:  https://www.fau.de/2017/02/news/wissenschaft/deep-learning-im-aktienhandel/
+</textarea>
+</section>
 
     <section data-markdown class="todo">
         <textarea data-template>
@@ -676,7 +796,6 @@ This is likely the cleanest, nicest implementation of Neural Style Transfer with
     []https://twitter.com/mrtz/status/1019628022897373184
     []http://fairmlbook.org/
 
-- http://www.taz.de/Foerderung-neuer-Technologie/!5518286/
 
 - https://medium.com/@kozyrkov/why-businesses-fail-at-machine-learning-fbff41c4d5db 
 
@@ -690,49 +809,19 @@ This is likely the cleanest, nicest implementation of Neural Style Transfer with
   - https://developers.google.com/machine-learning/crash-course/real-world-guidelines
             </textarea>
         </section>
-        
+
         <section data-markdown class="todo">
-            <textarea data-template>
-- Comparing different 
-  - learning strategies
-    - http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
-  - clustering strategies
-    - http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
-    - http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html
-
-- Post einbauen wie im Scipy Talk/Poster
-- Vorher Folien wie in Scipy Talk Concept: Decision Boundary
-    - https://dash-svm-dev.herokuapp.com/
-- What do the colored areas mean?
-- Auch Folien mit Aufspaltung in Train/Test/Validation
-    - In neue Version des Posters aufnehmen
-    - Eine Lernstrategie weniger? KNN?
-
-      
-</textarea>
-</section>
-
-
-        <section class="todo">
-            <h3>Zusammenfassung</h3>
-            <ul>
-                <li class="fragment">Machine Learning kann bei bestehenden Daten von diesen abstrahieren und generalisieren
-                <li class="fragment">Durchdringen der Domäne nur für die Datenanalyse erforderlich
-                <li class="fragment">Oft reichen einfache Strategien
-                <li class="fragment">Machine Learning ist die Fortsetzung der Digitalisierung
-            </ul>
-            <p><small>
-                Machine Learning auch für dein Projekt
-                <br>
-            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                <br>
-            <a href="http://bit.ly/ml-intro-workshop">
-                http://bit.ly/ml-intro-workshop
-            </a>
-            </small></p>
-            <p><small>Mehr: <a href="https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html">https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html</a></small></p>
-        </section>
-
+        <textarea data-template>
+        ### Teil 3: Und was macht man wenn man gar keine Anwendung hat
+        
+        Dann sucht man sich eine
+        
+        Google released a search engine for datasets: https://t.co/HSFhz8RyYL. Launch blog post: https://t.co/dkFseCu3mB
+        (https://twitter.com/domoritz/status/1037419117504999424?s=03)
+        
+        </textarea>
+        </section> -->
+        
 
     </div>
 
