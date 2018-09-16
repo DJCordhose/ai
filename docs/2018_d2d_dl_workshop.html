@@ -316,6 +316,20 @@ _ca. 17.00 Uhr: Ende_
 
 <section data-markdown>
         <textarea data-template>
+### Why Keras High Level API?
+
+<img src='img/why-keras.png' height="450">
+
+<small>
+https://twitter.com/karpathy/status/1013244313327681536    
+https://twitter.com/martin_wicke/status/1013550466125328384    
+</small>
+        </textarea>
+    </section>
+
+
+<section data-markdown>
+        <textarea data-template>
 ### Colab Notebooks
 
 https://colab.research.google.com
@@ -735,6 +749,21 @@ https://en.wikipedia.org/wiki/Mean_squared_error
 </textarea>
 </section>
 
+<section data-markdown>
+    <textarea data-template>
+### Backpropagation
+
+_Propagating the error from output layer backward_
+
+<img src="img/backprop.png" height="400px">
+
+<small>
+https://twitter.com/dsmilkov/status/1011974815811596288
+<br>
+https://google-developers.appspot.com/machine-learning/crash-course/backprop-scroll/    
+</small>
+</textarea>
+</section>
 
 <section data-markdown>
     <textarea data-template>
@@ -1826,6 +1855,7 @@ _Can you improve the model for Fashion MNINST notebook?_
     <section data-markdown>
         <textarea data-template>
 ## RNNs
+### Recurrent Neural Networks
         </textarea>
     </section>
 
@@ -1837,6 +1867,359 @@ _Can you improve the model for Fashion MNINST notebook?_
                 </textarea>
                 </section>
     
+    <section>
+            <h3>Text and sequences are special</h3>
+            <img src='img/applications/decisions/data.png'>
+        </section>
+    
+        <section data-markdown>
+        <textarea data-template>
+### Challenge for traditional neural networks
+
+How would you solve sequence to sequence translation?
+
+Simple and theoretical example: addition digit by digit
+
+```
+216
++648
+===
+864
+```
+
+
+What is the challenge?
+        </textarea>
+    </section>
+                        
+
+    <section>
+        <h3>Motivation</h3>
+        <p>Traditional Networks have no memory of previous events</p>
+        <p>Number to Number enconding needs to factor in carry</p>
+    </section>
+
+        
+    <section data-markdown>
+        <textarea data-template>
+### Solution: RNNs - Networks with Loops
+<img src='img/nlp/colah/RNN-rolled.png' height="450px">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Unrolling the loop
+<img src='img/nlp/colah/RNN-unrolled.png'>
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Simple RNN
+
+<img src='img/nlp/fchollet_rnn.png'>
+
+<script type="math/tex; mode=display">
+output_t = \tanh(W input_t + U output_{t-1} + b)
+</script>
+
+<small>
+<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/129">
+Deep Learning with Python, Chapter 6, François Chollet, Manning            
+</a>
+
+</small>
+
+</textarea>
+</section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Generating musical sequences        
+
+Training a latent space and generating a new sequences
+
+<img src='img/nsynth-ae.png'>
+
+<small>
+https://magenta.tensorflow.org/music-vae
+</small>
+</textarea>
+</section>
+    
+    <section data-markdown>
+            <textarea data-template>
+### Also perfect for natural language Sequence to Sequence translations
+
+<img src='img/nlp/encdec.jpg'>
+
+<small>
+https://www.tensorflow.org/tutorials/seq2seq
+</small>
+</textarea>
+</section>
+    <section data-markdown>
+            <textarea data-template>
+### Encoding addition as seq2seq
+
+<img src='img/nlp/rnn-adder-input.png' height="500px">
+                </textarea>
+                </section>
+    
+    <section data-markdown>
+            <textarea data-template>
+### Each time step generates a digit of the result
+
+<img src='img/nlp/rnn-adder-output.png' height="500px">
+                </textarea>
+                </section>
+
+    <section data-markdown>
+    <textarea data-template>
+### Seeing the network at work in a notebook
+
+
+```
+Input: "216+648"
+Output: "864"
+```
+
+Padding is handled by using a repeated sentinel character (space)
+
+<small>
+Notebook: https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/nlp/rnn-add-example.ipynb
+<br>
+https://machinelearningmastery.com/learn-add-numbers-seq2seq-recurrent-neural-networks/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise
+
+_Run the notebook and make experiments_
+
+* Reverse the sequence of time stamps (there is a flag for it) - why might this be beneficial?
+* Change the encoding of the input, maybe just a single character per time stamp
+
+Can you improve on the results?
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/nlp/rnn-add-example.ipynb
+</small>        
+    </textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Example Application: Using sequences of events
+<img src='img/magenta-rnn-duck.png' height="400px">
+
+<small>
+https://twitter.com/random_forests/status/987394050914385927
+<br>
+https://magenta.tensorflow.org/assets/sketch_rnn_demo/index.html
+</small>
+        </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Main issues with RNNs
+
+_Vanishing or exploding gradient problem:_
+* Each step in training applies the same weights to the output, also in back-propagation  
+* The further we move backwards, the bigger (explodes) or smaller (vanishes) the gradient becomes
+
+<small>
+https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Intution of effect
+
+_Effectively long term memory does not work:_
+
+* RNNs experiences difficulty in memorising words from far away in the sequence
+* Predictions based on most recent words only
+
+<small>
+    https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### GRU (Gated Recurrent Unit) / LSTMS (Long short-term memory)
+
+_allow past information
+to be reinjected at a later time, thus fighting the vanishing-gradient problem_
+
+<small>
+https://en.wikipedia.org/wiki/Long_short-term_memory
+<br>            
+<a href="https://www.manning.com/books/deep-learning-with-python">
+    Deep Learning with Python, Chapter 6.2.2, François Chollet, Manning            
+</a>            
+https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
+<br>
+<br>
+https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
+<br>
+<br>
+https://arxiv.org/ftp/arxiv/papers/1701/1701.05923.pdf
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Motivation: What makes text and sequences so different?
+<img src="img/tf/audio-image-text.png">
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+        </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### One Hot Encoding
+<img src="img/nlp/acolyer/word2vec-one-hot.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Limitations of One Hot Encoding / Bag of Words
+
+* Positions and context of words get lost
+* No notion of semantics to words
+
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src="img/nlp/word_embeddings.png" height="550px">
+
+<small>
+<a href="https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/6.1-using-word-embeddings.ipynb">
+Deep Learning with Python
+</a>
+</small>
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Visualizing Embeddings
+
+<a href='https://projector.tensorflow.org'>
+<img src="img/nlp/embedding-projector.png" height="500px">
+</a>
+
+<small>
+https://projector.tensorflow.org
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise: Get an intuition for Word Embeddings
+
+* Switch to T-SNE projections
+* Zoom into a cluster
+* Have a look at the words in the cluster
+* Are they semantically related?
+
+<small>
+https://projector.tensorflow.org
+</small>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+## Creating our very own sentiment analysis
+### Using embeddings to train recurrent networks
+
+Notebooks:
+<small>
+* https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/nlp/2-rnn.ipynb
+* https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/nlp/2-lstm.ipynb
+* https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/nlp/3-gru-dropout.ipynb (final version avoiding overfitting)
+
+</small>
+   
+        </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise
+
+* Tweak Regularisation
+* Make the RNN bidirectional
+
+Can you improve on the results?
+
+https://keras.io/layers/wrappers/#bidirectional
+
+    </textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### What's next?
+
+<img src='img/colah-next.png'>
+
+<small>
+https://distill.pub/2016/augmented-rnns/
+<br>
+Attention is all you need: https://arxiv.org/pdf/1706.03762.pdf
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Neural Machine Translation with Attention
+
+_Using TensorFlow and Keras_
+
+<img src='img/nmt-attention-twitter.png' height="400">
+
+<small>
+https://twitter.com/dennybritz/status/1011464747877838848/
+</small>
+</textarea>
+</section>
+
+
     </div>
 
 </div>
