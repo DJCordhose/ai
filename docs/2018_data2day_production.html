@@ -768,9 +768,9 @@ if you need native Java access, consider
 
 _make sure your model works on real data_
 
-* what do you do with new incoming data?
-* how to monitor the quality of your model?
-* users get used to what you have, good or bad
+* What do you do with new incoming data?
+* How to monitor the quality of your model?
+* Users get used to what you have, good or bad
 
     </textarea>
 </section>
@@ -781,6 +781,8 @@ _make sure your model works on real data_
 
 * Your model might perform well for a few users, but badly for others
 * Accuracy and loss only show the average
+* Some areas might not have properly covered with data samples (including test)
+* Curse of High Dimensions
 
 https://developers.google.com/machine-learning/fairness-overview/
 </textarea>
@@ -788,7 +790,7 @@ https://developers.google.com/machine-learning/fairness-overview/
 
 <section data-markdown>
     <textarea data-template>
-### How to detect bias?
+### Dealing with Bias / Unfairness
 
 * log real requests
 * log matching user behavior
@@ -802,6 +804,35 @@ Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
 </textarea>
 </section>
 
+<section data-markdown>
+    <textarea data-template>
+#### Pair plots to find blank data spots
+
+<img src='img/pair-plot.png' height="600">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### What about people driving more than 90k miles / year?
+
+<img src='img/histogram-miles.png' height="600">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### How to deal with blank spots?
+
+* Relying on ambiguous prediction scores is not enough
+* Either restrict range of input
+* Or warn user / log request when blank spot is hit
+
+Try to get more data, even incrementally
+    </textarea>
+</section>
 
     <section data-markdown>
         <textarea data-template>
@@ -810,6 +841,7 @@ Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
 * People who use your model regularly will expect most things to stay the way they know it
 * Even if it not totally accurate
 * That might mean you can not train a model from scratch even if you have better data or a better model architecture
+* Consider mixing more than one model
         </textarea>
     </section>
 
