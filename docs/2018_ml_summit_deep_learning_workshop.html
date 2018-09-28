@@ -213,7 +213,7 @@ https://trends.google.com/trends/explore?cat=1299&date=today%205-y&q=tensorflow,
 </textarea>
 </section>
 
-<section data-markdown style="font-size: large">
+<section data-markdown>
         <textarea data-template>
 ### Agenda
 
@@ -221,12 +221,11 @@ https://trends.google.com/trends/explore?cat=1299&date=today%205-y&q=tensorflow,
 _14:00 Uhr: Mittagspause_
 
 * Training eines Neuronalen Netzwerks mit TensorFlow und Keras
-* Optimierung und unseres Netzwerks, um Overfitting zu verhindern
 
 _15.30 - 15.45 Uhr: Kaffeepause_
 
-* Neuronale Netzwerke (CNNs) für Bildverarbeitung (Grundlagen)
-* Recurrente Neuronale Netzwerke (RNNs) für Sequenzen und Textverarbeitung (Grundlagen)
+* Neuronale Netzwerke (CNNs) für Bildverarbeitung
+* Recurrente Neuronale Netzwerke (RNNs) für Sequenzen und Textverarbeitung
 
 _ca. 17.30 Uhr: Ende_
 </textarea>
@@ -234,26 +233,12 @@ _ca. 17.30 Uhr: Ende_
 
 <section data-markdown>
         <textarea data-template>
-## Introduce Yourself, Please
+### PART I
+## Deep Neural Networks using TensorFlow and Keras
         </textarea>
     </section>
 
     <section data-markdown>
-            <textarea data-template>
-## Questions are welcome at any time
-
-### First question wins a book
-        </textarea>
-    </section>
-    
-    <section data-markdown>
-            <textarea data-template>
-### PART 0
-## Overview of Tools
-            </textarea>
-        </section>
-
-<section data-markdown>
         <textarea data-template>
 ### TensorFlow and Keras
 
@@ -261,43 +246,6 @@ _ca. 17.30 Uhr: Ende_
 * https://www.tensorflow.org/guide/low_level_intro 
 * https://www.tensorflow.org/guide/keras 
 
-        </textarea>
-    </section>
-
-<section data-markdown>
-        <textarea data-template>
-### Why Keras High Level API?
-
-<img src='img/why-keras.png' height="450">
-
-<small>
-https://twitter.com/karpathy/status/1013244313327681536    
-https://twitter.com/martin_wicke/status/1013550466125328384    
-</small>
-        </textarea>
-    </section>
-
-
-<section data-markdown>
-        <textarea data-template>
-### Colab Notebooks
-
-https://colab.research.google.com
-        </textarea>
-    </section>
-
-    <section data-markdown>
-            <textarea data-template>
-### TensorFlow Playground
-
-https://playground.tensorflow.org
-            </textarea>
-        </section>
-
-<section data-markdown>
-        <textarea data-template>
-### PART I
-## Deep Neural Networks using TensorFlow and Keras
         </textarea>
     </section>
 
@@ -332,16 +280,6 @@ https://colab.research.google.com
 </textarea>
 </section>
     
-<section data-markdown>
-        <textarea data-template>
-## Notebook            
-### Getting to know our data
-
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M3-data.ipynb
-
-    </textarea>
-    </section>
-
     <section data-markdown>
         <textarea data-template>
 ## How does an artificial neuron work?
@@ -383,18 +321,7 @@ https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-n
         </textarea>
     </section>
  
-    <section data-markdown>
-            <textarea data-template>
-### Data Encoding in Deep Learning
-* in Classic Machine Learning selecting and pre-processing is crucial
-* Deep Neural Networks often allow to just stick in our data as is
-* the rest is done by the first layers of our deep neural network   
-* Deep Learning can still benefit from preprocessing and normalizing your data 
-* Often you can compensate with more training data
-
-</textarea>
-</section>
-
+ 
 <section data-markdown>
         <textarea data-template>
 ### What goes in?
@@ -422,20 +349,50 @@ https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-n
 </textarea>
 </section>
 
-<section data-markdown>
-        <textarea data-template>
-## Notebook            
-### Setting Up Our neural Network
+<section>
+    <h3>Keras Layers</h3>
 
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M5-nn-intro.ipynb
-    </textarea>
-    </section>
+    <p><small>Sequential Model</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model = keras.Sequential()
+        </code></pre>
+
+    <p><small>Fully Connected Hidden Layer</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(Dense(units=50, input_dim=3))
+</code></pre>
+
+        <p><small>Softmax Output Layer</small></p>
+        <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(Dense(units=3, activation='softmax'))
+        </code></pre>
+                            
+    <small>
+            <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                https://www.tensorflow.org/api_docs/python/tf/keras/layers
+            </a>
+    </small>
+</p>
+</section>
 
 <section>
-    <h3>Exercise</h3>
-    <p>Run through the notebook and make sure it makes sense to you</p>
-    <p><em>Can you explain the number of parameters for each layer?</em></p>
-    <pre><code contenteditable data-trim class="line-numbers python">
+    <h3>How does learning work?</h3>
+    <p class="fragment">This boils down to an optimization problem</p>
+    <p class="fragment">The loss to be minimized is calculated from the difference between the softmax output and the known true category</p>
+            <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.compile(loss='sparse_categorical_crossentropy',
+             optimizer='adam',
+             metrics=['accuracy'])
+            </code></pre>
+</section>
+
+<section>
+<h3>What does the neural network learn?</h3>
+<p class="fragment">All the weights of a the neurons</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+model.summary()</code></pre>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+_________________________________________________________________
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
@@ -447,7 +404,13 @@ Total params: 353
 Trainable params: 353
 Non-trainable params: 0
 _________________________________________________________________</code></pre>
-<p><em>Add a second layer and increase the number of neurons: do the numbers of parameters still make sense to you?</em></p>
+</section>
+
+
+<section>
+        <h3>Exercise</h3>
+        <p><em>Can you explain the number of parameters for each layer for the model described in the previous slide?</em></p>
+    
 </section>
 
     
@@ -492,24 +455,13 @@ _We do not have any idea how well our model performs, yet_
 </section>
 
 <section data-markdown>
-    <textarea data-template>
-## Notebook            
-### Understand Generalization
-
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M7-nn-training.ipynb
-
-_Stop at exercise_
-</textarea>
-</section>
-
-
-<section data-markdown>
         <textarea data-template>
 ## Notebook            
 ### Train the neural network
 
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M7-nn-training.ipynb
-
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
+</small>
     </textarea>
     </section>
 
@@ -521,11 +473,11 @@ https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-n
 _Train the model_
 
 * Run the notebook as is
-* Adapt the model to your parameters from the previous exercise (or any other model)
+* Try to improve the model
 * How well does it perform?
-* Do you see overfitting?
 * Any idea why it performs the way it does?
-* Experiment with the parameters you know
+
+Best known models can reach up to 80% of accuracy
     </textarea>
     </section>
 
@@ -535,192 +487,9 @@ _Train the model_
 
 <img src='img/manning/nn-reg.png' height="500">
 
-<p><small>up to 77% predictions correct on previously unknown data possible</small></p>
+<p><small>up to 73% predictions correct on previously unknown data possible</small></p>
 </textarea>
     </section>
-
-
-
-<section data-markdown>
-    <textarea data-template>
-## Regularization
-    </textarea>
-</section>
-
-<section id='overfitting'>
-        <h3>The Issue: Overfitting</h2>
-    <div>
-    <div style="float: left">
-        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
-        <p>
-            <small><em>Training Score</em></small>
-        </p>
-    </div>
-    <div style="float: left" class="fragment" data-fragment-index='5'>
-        <img src="img/scans/elements/down.jpg" height="200">
-    </div>
-    <div style="float: left" class="fragment" data-fragment-index='4'>
-        <img src="img/scans/elements/up.jpg" height="200">
-    </div>
-    <div style="float: left">
-            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
-            <p>
-                <small><em>Test Score</em></small>
-            </p>
-    </div>
-    </div>
-    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and Test scores clearly divert</em></p>
-
-    </section>
-
-    <section data-markdown>
-        <textarea data-template>
-### Regularization
-
-_Process to counter Overfitting_
-            </textarea>
-            </section>
-    
-    <section data-markdown>
-        <textarea data-template>
-### First approach: Train for less epochs
-
-<img src='img/accuracy.png'>
-
-_Watch where training and validation accuracy diverge and stop training there_
-
-
-            </textarea>
-            </section>
-    
-<section id='overfitting-capacity'>
-        <h3>Second approach: Reduce Capacity of model</h2>
-    <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
-        <img src="img/scans/elements/model-large.jpg" height="200">
-        <p>
-            <small><em>Original Model</em></small>
-        </p>
-    </div>
-    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
-        <br>
-        <img src="img/scans/elements/right.jpg">
-        <br>
-    </div>
-    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
-            <br>
-            <img src="img/scans/elements/model-small.jpg" height="100">
-            <br>
-            <br>
-            <p>
-                <small><em>Smaller Model</em><br>less Hidden Layers, less Neurons per Layer</small>
-            </p>
-    </div>
-    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Give model less capacity to simply memorize data</em></p>
-    </section>
-
-<section id='overfitting-dropout'>
-        <h3>Third approach: Use Dropout to only train a certain percentage of neurons per Batch</h2>
-    <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
-        <img src="img/scans/elements/model-large.jpg" height="225">
-        <p>
-            <small><em>Original Model</em></small>
-        </p>
-    </div>
-    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
-        <br>
-        <img src="img/scans/elements/right.jpg">
-        <br>
-    </div>
-    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
-            <br>
-            <img src="img/scans/elements/model-emsemble.jpg" height="100">
-            <br>
-            <br>
-            <p>
-                <small><em>Ensemble of Small Models</em> (each one overfits on its specific batch)<br></small>
-            </p>
-    </div>
-    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Combination of models makes result more robust</em></p>
-    </section>
-
-    <section data-markdown id='overfitting-bn'>
-            <textarea data-template>
-### Fourth approach: Batch Normalization
-
-<ul>
-    <li class="fragment">Subtracts Batch Mean
-    <li class="fragment">Multiplies by Standard Deviation     
-</ul>
-
-<img src='img/scans/elements/sigmoid.jpg' class="fragment" height="200">
-    
-<p class="fragment"><em>Intuition: Makes Model robust by adding noise</em></p>
-
-<p class="fragment"><em>Bonus:</em> Lets Model train faster by fighting vanishing gradients</p>
-
-                </textarea>
-                </section>
-<section data-markdown>
-    <textarea data-template>
-### Links Batch Normalization
-
-https://www.quora.com/Is-there-a-theory-for-why-batch-normalization-has-a-regularizing-effect
-
-https://www.quora.com/Why-does-Batch-Normalization-for-deep-Neural-Networks-fix-the-vanishing-gradient-problem
-
-https://stats.stackexchange.com/questions/227114/are-there-any-ways-to-deal-with-the-vanishing-gradient-for-saturating-non-linear
-
-https://stackoverflow.com/questions/34716454/where-do-i-call-the-batchnormalization-function-in-keras
-
-    </textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## Notebook            
-### Regularize your neural network
-
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M9-regularization.ipynb
-
-</textarea>
-</section>
-
-
-<section data-markdown>
-    <textarea data-template>
-## Exercise
-
-_Apply regularizations to your model_
-
-- keep adding regularization to make test and train scores come closer to each other
-- this will come at the cost of train scores going down
-- if both values start going down you have gone too far
-- each experiment takes some time
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## Notebook            
-### Our final model
-
-https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M10-final-model.ipynb
-
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## Exercise
-
-_Make some predictions and download your model_
-
-- Check how you would be assessed by our model
-- Prediction for my data would look like: ```model.predict(np.array([[100, 47, 10]]))```
-- Upload your model to transfer.sh where you can download it from for 14 days
-- ```!curl --upload-file insurance.h5 https://transfer.sh```
-</textarea>
-</section>
 
     <section data-markdown>
         <textarea data-template>
@@ -729,79 +498,10 @@ _Make some predictions and download your model_
         </textarea>
     </section>
 
-<section data-markdown>
-        <textarea data-template>
-### deep learning is straight up magic
-
-<img src='img/state-of-dl.png' height="500">
-
-<small>
-https://twitter.com/Smerity/status/947278008385028096
-</small>
-</textarea>
-</section>
-
 
     <section>
             <img src='img/applications/decisions/data.png'>
     </section>
-
-    <section data-markdown>
-        <textarea data-template>
-## CNN - Convolutional neural networks
-### Let the GPU burn
-        </textarea>
-    </section>
-
-        <section>
-            <h3>Neural Networks are best for non symbolic data</h3>
-            <p>Like classifying images</p>
-            <p>Reference:
-                    <a href="http://cs231n.github.io/convolutional-networks/" target="_blank">
-                         http://cs231n.github.io/convolutional-networks/</a>
-            </p>
-             
-        </section>
-
-        <section>
-            <h3>Use of GPU for non symbolic data</h3>
-            <img src="albon-gpu-gaming.png">
-            <p>
-                <small>
-                    <a href="https://twitter.com/chrisalbon/status/907028933693947904?s=03" target="_blank">
-                        https://twitter.com/chrisalbon/status/907028933693947904?s=03</a>
-                </small>
-            </p>
-        </section>
-        
-        <section>
-            <h3>Why the recent break throughs?</h3>
-            <div class="fragment" style="float: left">
-                <img src="img/cray2.png" height="250">
-                <p>
-                    <small>Cray X-MP
-                        <br> Supercomputer (1982)</small>
-                </p>
-            </div>
-            <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
-                x 100.000 =
-            </div>
-            <div class="fragment" style="float: left">
-                <img src="img/titan5.jpg" height="250" style="float: right">
-                <p>
-                    <small>
-                        <br>Titan 5 im Gamer PC (2017)</small>
-                </p>
-            </div>
-        </section>
-
-                <section>
-                    <h3>... but we also have</h3>
-                    <ol>
-                        <li>Smarter Learning Strategies (more hidden layers = Deep Learning, Convolutional Layers)
-                        <li>Big Data
-                    </ol>
-                </section>
 
         <section>
             <h3>GPUs work in parallel</h3>
@@ -859,38 +559,6 @@ http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
 </section>
 
 
-<section>
-        <h3>How do Convolutions work - Image Kernels</h3>
-        <p><small>You might know from Photoshop etc., used in Convolutional Neural Networks</small></p>
-        <a href="http://setosa.io/ev/image-kernels/" target="_blank">
-            <img src="img/browser/setosa_io_image-kernels.png" height="300px">
-        </a>
-        <p>
-            <small>
-                <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
-            </small>
-        </p>
-    </section>
-
-<section>
-    <h3>Experiment with Image Kernels</h3>
-    <ol>
-        <li class="fragment">How can a matrix of numbers can represent an image? How could you encode color?</li>
-        <li class="fragment">Explain the effect the filter kernels Sharpen and Blur have on the sample image - explain the effect of the specific values to the result</li>
-        <li class="fragment">Starting from the identity kernel - how can you create a filter that highlights edges on the top of shown digits? What about the bottom?</li>
-    </ol>
-    <p>
-            <small>
-                <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
-                <br>
-                Sample image: <a 
-                href="https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg" target="_blank">
-                https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg</a>
-                
-            </small>
-        </p>
-</section>
-    
 <section data-markdown>
     <textarea data-template>
 ### Downlsampling Layer: Reduces data sizes and risk of overfitting
@@ -992,7 +660,9 @@ model.add(Flatten())
 <small>
 Tutorial: https://medium.com/tensorflow/hello-deep-learning-fashion-mnist-with-keras-50fcff8cd74a
 <br><br>
-Colab Notebook: https://colab.research.google.com/github/margaretmz/deep-learning/blob/master/fashion_mnist_keras.ipynb
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
+</small>        
 </small>
         </textarea>
         </section>
@@ -1004,7 +674,7 @@ Colab Notebook: https://colab.research.google.com/github/margaretmz/deep-learnin
 _Can you improve the model for Fashion MNINST notebook?_
 
 * other/more/less layers
-* different Sequence, less/more filters
+* different sequence, less/more filters
 * prevent overfitting even better 
 </textarea>
 </section>
@@ -1017,11 +687,6 @@ _Can you improve the model for Fashion MNINST notebook?_
         </textarea>
     </section>
 
-    <section>
-            <h3>Text and sequences are special</h3>
-            <img src='img/applications/decisions/data.png'>
-        </section>
-    
         <section data-markdown>
         <textarea data-template>
 ### Challenge for traditional neural networks
