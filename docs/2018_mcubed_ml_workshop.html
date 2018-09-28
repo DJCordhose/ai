@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>ML Workshop</title>
+    <title>MCubed ML Workshop</title>
 
     <meta name="description" content="Manning Course Material">
     <meta name="author" content="Oliver Zeigermann">
@@ -164,7 +164,8 @@
 
 <!-- 
 
-This workshop introduces you to the basics of machine learning. In the first part we begin with the fundamental concepts and train classic machine learning models using sklearn.
+This workshop introduces you to the basics of machine learning. In the first part we begin with the fundamental
+concepts and train classic machine learning models using sklearn.
 
 In the second part you will learn what neural networks and deep learning is all about. We will start with simple models
 and then turn to the idea of convolutional neural networks for image recognition. This will be done using TensorFlow.
@@ -258,44 +259,533 @@ Code: https://t.co/hdJrp7WTBy https://t.co/tnebZMZpkL
         </a></small></p>
     </section>
 
-            
+    <section data-markdown class="todo">
+1. Part I: Align with German Version
+1. Part II: Code from scipy notebook indlucing GridSearch and RandomSearch Hyperparameter (overview.ipynb)
+            <textarea data-template>
+                </textarea>
+            </section>
+
+    <section data-markdown>
+            <textarea data-template>
+    ## Introduce yourself, please
+            </textarea>
+        </section>
+    
+        <section data-markdown>
+                <textarea data-template>
+    ## Questions are welcome at any time
+            </textarea>
+        </section>
+                
 <section data-markdown>
         <textarea data-template>
-### Our Plan for Toady
+### Our plan for toady
 
-1. Introduction to Machine Learning
+1. Idea of Machine Learning
+1. Classic Machine Learning with Scikit-Learn
 1. Deep Neural Networks using TensorFlow and Keras
-1. CNNs
+1. Advaced types of Neural Networks
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### PART I
+## Idea of Machine Learning
+        </textarea>
+    </section>
+
+
+    <section data-markdown>
+            <textarea data-template>
+## Our Use Case / Why Machine Learning
+            </textarea>
+        </section>
+
+<section data-markdown>
+<textarea data-template>
+### Objective for this Course
+
+_Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
+
+<img src='img/pixabay/accident-151668_1280.png'>
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<!-- <p><small>
+<a href='html/calculator.html' target="_blank">
+https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p> -->
+</textarea>
+</section>
+
+<section>
+    <h3>Example: Customer Data - Risk of Accidents</h3>
+    <img src="img/manning/all.png" height="400px" class="fragment">
+    <p class="fragment">
+        <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
+    </p>
+</section>
+
+            <section>
+                <h3>Paper Exercise #1 - Understanding the Supervised Learning Approach</h2>
+                    <p>Manually cluster areas of different customer types on the
+                        <em>upper part</em> of the handout</p>
+                    <ol>
+                        <li>
+                            <em>dark (green)</em>: good customer</li>
+                        <li>
+                            <em>light (yellow)</em>: mediocre customers</li>
+                        <li>
+                            <em>middle (red)</em>: red customers</li>
+                    </ol>
+                    <p>Make sure you draw with pressure</p>
+            </section>
+            
+            <section>
+                <h3>Plot Twist</h3>
+                <p>Generalisation, not perfect reproduction is the objective</p>
+                <ol>
+                    <li class="fragment">We split existing data into two sets</li>
+                    <li class="fragment">The larger set (60 or 80%) we use to build our model</li>
+                    <li class="fragment">The smaller set we use to validate the model</li>
+                </ol>
+            </section>
+            
+                <section>
+                        <img src='img/scans/generalization.jpg' height="600">
+                    </section>
+
+            <section>
+                <h2>Exercise #1, Part2 - How well did you generalize?</h2>
+                <p>Turn the page and redraw the lines you printed through from the first page</p>
+                <p>Get an estimate of the misclassified samples on both diagrams</p>
+                <p>What do you think, is this result worse?</p>
+                <p>What would you have done differently if you had been given this information before (that it is all about generalisation)?</p>
+            </section>
+
+            <section>
+                <h3>Sample Solution: Fine</h3>
+                <div class="fragment" style="float: left">
+                    <img src="img/insurance/manual_predictions/train_fine.jpg" height="250">
+                    <p>
+                        <small>Train</small>
+                    </p>
+                </div>
+                <div class="fragment" style="float: left">
+                    <img src="img/insurance/manual_predictions/test_fine.jpg" height="250">
+                    <p>
+                        <small>Test</small>
+                    </p>
+                </div>
+                </section>
+            
+            <section>
+                <h3>Sample Solution: Coarse</h3>
+                <div class="fragment" style="float: left">
+                    <img src="img/insurance/manual_predictions/train_coarse.jpg" height="250">
+                    <p>
+                        <small>Train</small>
+                    </p>
+                </div>
+                <div class="fragment" style="float: left">
+                    <img src="img/insurance/manual_predictions/test_coarse.jpg" height="250">
+                    <p>
+                        <small>Test</small>
+                    </p>
+                </div>
+            </section>
+
+
+            <section data-markdown>
+                    <textarea data-template>
+                    <img src='img/sketch/classic-development.jpg'>
+                    </textarea>
+                    </section>
+                    
+                    
+
+<section>
+        <h3>Programmer's approach: Code Rules by Hand</h3>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if age < 25:
+if speed > 140:
+return red # young people, fast cars: high risk
+else:
+return yellow # young people: medium risk
+            </code></pre>
+        </div>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if age > 75:
+return red # old people: high risk
+            </code></pre>
+        </div>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if miles_per_year > 30:
+return red # a lot of driving: high risk
+if miles_per_year > 20:
+return yellow #  a bit of driving: medium risk
+            </code></pre>
+        </div>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+return green # otherwise: low risk
+            </code></pre>
+        </div>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Plotting the predictions as a background
+<img src='img/manning/manual.png' class="fragment" height="450px">
+
+<div class="fragment">
+<p><small>approx. 43% predictions correct</small></p>
+</div>        
+</textarea>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### How good is this?
+
+<!-- <p class="fragment"><em>How well have we mastered the domain?</em></p> -->
+
+* Is it better than guessing?
+* Are all the rules correct?
+* Are some missing?
+* How would we even know?
+
+</textarea>
+</section>                    
+
+<section data-markdown>
+    <textarea data-template>
+### Programming Exercise Get familiar with the Python Notebook
+
+_Improve score starting from existing code_
+
+* change rules?
+* add some?
+* remove some?
+
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/classic-code.ipynb
+</small>
+
+</textarea>
+</section>                    
+
+<section>
+<h2>Different Approach: Machine Learning</h2>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+<img src='img/sketch/supervised-ml.jpg' height="650px">
+</textarea>
+</section>
+
+<section>
+    <h2>
+        <small>There are different types of machine learning</small>
+    </h2>
+    <div style="margin-top: -30px">
+        <img src="img/sketch/types-of-ml.png" height="500px">
+    </div>
+</section>
+
+<section>
+    <h3>Supervised Machine Learning</h3>
+<ul>
+    <li class="fragment">What we just did</li>
+    <li class="fragment">Train a system using known data</li>
+    <li class="fragment">There are different strategies to train a system</li>
+    <li class="fragment">For our problem a simple strategy will do</li>
+</ul>
+</section>
+
+<section>
+        <h3>Typical application: Classification</h3>
+        <div class="fragment">
+            <img src="img/sketch/classification.jpg" height="450px">
+        </div>
+        <p class="fragment">We have to deal with a classification problem</p>
+    </section>
+
+    <section>
+            <h3>Data: Quantity</h3>
+            <img src='img/applications/decisions/classic.png' height="500px">
+            <p>We have 300 data sets, this is small</p>
+        </section>
+
+    <section>
+        <h3>KNN: k Nearest Neighbors</h3>
+        <p>A simple classic</p>
+    </section>
+
+    <section>
+        <img src="img//insurance/knn.png">
+    </section>
+    <section>
+        <h3>Algorithm</h3>
+        <p>For a case to predict</p>
+        <ol>
+            <li>Plot the case together with the known samples
+            <li>Look at a number (k) of nearest data points
+            <li>Choose k in such a way that you can get a majority
+            <li>Your prediction is the color of the majority
+        </ol>
+    </section>
+
+    
+    <section data-markdown>
+            <textarea data-template>
+    ### PART II
+    ## Classic Machine Learning with Scikit-Learn
+            </textarea>
+        </section>
+    
+
+    <section>
+        <h3>Computed results for k = 1</h3>
+        <div class="fragment">
+    
+            <img src="img/insurance/knn-1.png" height="400px">
+            <p>
+                <small>approx. 98% accuracy on train data, but only 65% on test data</small>
+            </p>
+        </div>
+    </section>
+    <section>
+            <h3>This is what we call Overfitting</h3>
+        </section>
+    
+        <section>
+            <img src="img/flashcards/Overfit_Vs_Underfit_print.png">
+        </section>
+
+
+    <section>
+        <h3>Computed results for k = 13</h3>
+        <div class="fragment">
+    
+            <img src="img/insurance/knn-13.png" height="400px">
+            <p>
+                <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
+            </p>
+        </div>
+        <p class="fragment">Notice the smooth boundaries</p>
+    </section>
+
+    <section>
+<h3>Decision Trees</h3>
+<p>Another simple classic</p>
+</section>
+
+<section>
+<img src="img/flashcards/Decision_Trees_print.png">
+</section>
+
+<!-- <section>
+<h3>Paper Exercise #2</h3>
+<ol>
+    <li>Create a binary decision tree and draw it on paper</li>
+    <li>Apply the decision tree to our problem in the lower part of our sample sheet</li>
+    <li>How do the decision boundaries look like?</li>
+    <li>Check the test set see how well this worked</li>
+</ol>
+</section>
+
+<section>
+<h3>The computer is actually better at doing repetative work</h3>
+</section> -->
+
+<section>
+<h3>Decision Boundaries for our problem</h3>
+<img src="img/dt/dt-boundaries-full.png">
+<p>Generated by Decision Tree ML</p>
+</section>
+
+<section>
+<img src="img/dt/dt-underfit.png">
+<p><small>Simplified decision tree</small></p>
+</section>
+
+<section>
+<h3>Looking at the complete tree</h3>
+</section>
+
+<section>
+<img src="img/dt/dt-all.png">
+</section>
+
+<section>
+<h3>Overfitting</h3>
+<img src="img/dt/dt-boundaries-full.png">
+<p>
+    <small>approx. 98% accuracy on train data, but only 61% on test data</small>
+</p>
+</section>
+
+<section>
+<img src="img/flashcards/Avoid_Overfitting_print.png">
+</section>
+
+<section>
+<img src="img/flashcards/Regularization_print.png">
+</section>
+
+<section>
+<h3>Regularisation: How to reduce Overfitting</h3>
+<p>Intuition: How would you make the decision boundaries more smooth</p>
+<ul>
+    <li class="fragment">Limit Depth of Tree (unlimited is default)</li>
+    <li class="fragment">Increase Number of Samples for Leaf Node (1 is default)</li>
+    <li class="fragment">Increase Number of Samples that justify a split (2 is default)</li>
+</ul>
+</section>
+
+<section>
+<h3>An example for regularization</h3> 
+<pre><code data-trim>
+max_depth=3,
+min_samples_leaf=20,
+min_samples_split=20
+    </code></pre>
+    <p>How will this perform?</p>
+</section>
+<section>
+<p>Underfitting</p>
+<img src="img/dt/dt-boundaries-underfit.png">
+    <p>
+        <small>only approx. 65% accuracy on train data, and only 59% on test data</small>
+    </p>
+</section>
+
+<section>
+<h3>Shared Programming Exercise #2 - Find the Sweet Spot</h3>
+<p>Get rid of overfitting, but avoid underfitting as much as possible</p>
+<ul>
+    <li>Can you do better than the hand coded classifier?</li>
+    <li>Which parameters give the best results?</li>
+    <!-- <li>How do you explain the different results for training and test data?</li>
+    <li>What is the value you should optimize for?</li> -->
+    <li>How do the decision boundaries for the different results look like? Do you see a pattern?</li>
+</ul>
+<p>Do your work in on Jupyter Notebook
+    <em>3-sklearn-decision-trees</em>
+</p>
+</section>
+
+<section>
+<h3>Finding the sweet spot always is a compromise</h3>
+<pre><code data-trim>
+clf = DecisionTreeClassifier(max_depth=6,
+                    min_samples_leaf=10,
+                    min_samples_split=10)
+    </code></pre>
+</section>
+
+<section>
+<img src="img/dt/dt-boundaries-sweet.png">
+<p>
+    <small>only approx. 77% accuracy on train data, but also 68% on test data</small>
+</p>
+<p class="fragment">Sweet Spot, notice the similarity to our hand crafted tree?</p>
+</section>
+
+    <section data-markdown>
+<textarea data-template>
+### How is the Decision Tree being Constructed?
+
+We are using the CART algorithm:
+* top-down split the set of examples into two new sets
+* choose a variable and a value at each step that best splits our customer example
+* terminal node when no further gain possible or regularization kicks in
+
+http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart
+
+</textarea>
+</section>
+
+<section>
+<img src="img/dt/cart.png" height="650px">
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### What is the best split?
+
+* assign a category to each node containing a certain set of samples
+* use a metric (Gini or Entropy) to decide how good a node would be based on that category
+* sum up weighted metric for both child nodes
+* optimize the split for that summed metric
+
+https://machinelearningmastery.com/classification-and-regression-trees-for-machine-learning/
+</textarea>
+</section>
+
+<section>
+<img src="img/flashcards/Gini_Index_print.png">
+</section>
+
+<section style="font-size: xx-large">
+<h3>Gini Impurity used by CART</h3>
+<p>Gini impurity is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly
+labeled according to the distribution of labels in the subset.</p>
+<script type="math/tex; mode=display">
+Gini = \sum_{i=1}^J (p_i \sum_{i \neq k} p_k)
+</script>
+<p>The smaller the impurity, the purer (=better) is the node, 0 is perfect</p>
+
+<p><small><a target="_blank" href="https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity">https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity</a></small></p>
+ 
+</section>
+
+<section>
+<h3>What's next?</h3>
+</section>
+
+<section>
+<img src="img/flashcards/Random_Forest_print.png">
+</section>
+
+<section>
+<img src="img/flashcards/The_Random_In_Random_Forest_print.png">
+</section>
+<section>
+<img src="img/flashcards/AdaBoost_print.png">
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Exercise
+1. Extend the notebook to for the Random Forest Strategy
+2. Optional: Find out about AdaBoost Ensemble Learning and add it as well
 </textarea>
 </section>
 
 <section data-markdown>
         <textarea data-template>
-## Introduce Yourself, Please
+### PART III
+## Deep Neural Networks using TensorFlow and Keras
         </textarea>
     </section>
 
     <section data-markdown>
-            <textarea data-template>
-## Questions are welcome at any time
-        </textarea>
-    </section>
-    
-    <section data-markdown>
-            <textarea data-template>
-### PART 0
-## Overview of Tools
-            </textarea>
-        </section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
-### Sklearn
-
-        </textarea>
-    </section>
-
-<section data-markdown>
         <textarea data-template>
 ### TensorFlow and Keras
 
@@ -306,21 +796,665 @@ Code: https://t.co/hdJrp7WTBy https://t.co/tnebZMZpkL
         </textarea>
     </section>
 
+    <section>
+        <h3>Example: Customer Data - Risk of Accidents</h3>
+        <img src="img/manning/all.png" height="400px" class="fragment">
+        <p class="fragment">
+            <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
+        </p>
+    </section>
+
 <section data-markdown>
-        <textarea data-template>
-### Colab Notebooks
+            <textarea data-template>
+### Working with Colab Notebooks
 
 https://colab.research.google.com
+            </textarea>
+        </section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Hands-On
+_Run your first Colab Notbook_
+
+* Go to https://colab.research.google.com 
+* Sign into your Google account or register a new one 
+* Switch on GPU support
+* Execute some code cells
+
+https://colab.research.google.com
+
+</textarea>
+</section>
+    
+    <section data-markdown>
+        <textarea data-template>
+## How does an artificial neuron work?
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src='img/scans/neuron21.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src='img/scans/neuron211.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src='img/scans/neuron212.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Step
+
+<img src="img/cnn/step.png" height="450">
+
+<small>switching from zero to one,
+    original version simulating transition from passive to active</small>
+</textarea>
+    </section>
+
+            <section data-markdown>
+        <textarea data-template>
+### Sigmoid
+
+<img src="img/cnn/sigmoid.png" height="450">
+
+<small>compressing between 0 and 1,
+        continuously differentiable version of step function</small>
+</textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Hyperbolic Tangent
+
+<img src="img/tanh-activation.png" height="450">
+
+<small>floating from -1 to 1,
+        like Sigmoid, but can also be negative</small>
+</textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Relu: Rectified Linear Unit
+
+<img src="img/cnn/relu.png" height="450">
+
+<small>negative values zeroed out, positive linear,
+        fights vanishing gradient</small>
+</textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Complete Example
+
+<img src='img/scans/neuron213.jpg'>
+
+</textarea>
+</section>
+
+
+
+<section data-markdown>
+        <textarea data-template>
+## Setting up a complete network from neurons
         </textarea>
+    </section>
+ 
+ 
+<section data-markdown>
+        <textarea data-template>
+### What goes in?
+
+<img src='img/scans/data_encoding.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### What comes out?
+
+<img src='img/scans/encoding2.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Role of the Hidden Layer(s)
+
+<img src='img/scans/encoding3.jpg'>
+
+</textarea>
+</section>
+
+<section>
+    <h3>Keras Layers</h3>
+
+    <p><small>Sequential Model</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model = keras.Sequential()
+        </code></pre>
+
+    <p><small>Fully Connected Hidden Layer</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(Dense(units=50, input_dim=3))
+</code></pre>
+
+        <p><small>Softmax Output Layer</small></p>
+        <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(Dense(units=3, activation='softmax'))
+        </code></pre>
+                            
+    <small>
+            <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                https://www.tensorflow.org/api_docs/python/tf/keras/layers
+            </a>
+    </small>
+</p>
+</section>
+
+<section>
+    <h3>How does learning work?</h3>
+    <p class="fragment">This boils down to an optimization problem</p>
+    <p class="fragment">The loss to be minimized is calculated from the difference between the softmax output and the known true category</p>
+            <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.compile(loss='sparse_categorical_crossentropy',
+             optimizer='adam',
+             metrics=['accuracy'])
+            </code></pre>
+</section>
+
+<section>
+<h3>What does the neural network learn?</h3>
+<p class="fragment">All the weights of a the neurons</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+model.summary()</code></pre>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+_________________________________________________________________
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+hidden1 (Dense)              (None, 50)                200       
+_________________________________________________________________
+softmax (Dense)              (None, 3)                 153       
+=================================================================
+Total params: 353
+Trainable params: 353
+Non-trainable params: 0
+_________________________________________________________________</code></pre>
+</section>
+
+
+<section>
+        <h3>Exercise</h3>
+        <p><em>Can you explain the number of parameters for each layer for the model described in the previous slide?</em></p>
+    
+</section>
+
+    
+<section data-markdown>
+        <textarea data-template>
+### Generalization
+
+_We do not have any idea how well our model performs, yet_
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Evaluating our model
+
+* The most important property of a model is if it generalizes well to unknown data
+* A machine learning model is of no use if it only works well on the data it has been trained on
+  * If it was, the easiest way to achieve this would be a dictionary translating from a set of inputs to the known output
+* Conceptually it is a little bit hard to optimize for something you do not know
+* So, we introduce a little trick here
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Split known data into training and test
+
+<img class='fragment' src='img/scans/generalization.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Use some training data for validation
+
+<img class='fragment' src='img/scans/generalization1.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Notebook            
+### Train the neural network
+
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
+</small>
+    </textarea>
+    </section>
+
+
+<section data-markdown>
+        <textarea data-template>
+## Exercise
+
+_Train the model_
+
+* Run the notebook as is
+* Try to improve the model
+* How well does it perform?
+* Any idea why it performs the way it does?
+
+Best known models can reach up to 80% of accuracy
+    </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Best known model using 2 dimensions
+
+<img src='img/manning/nn-reg.png' height="500">
+
+<p><small>up to 73% predictions correct on previously unknown data possible</small></p>
+</textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### PART IV
+## Other types of neural networks
+        </textarea>
+    </section>
+
+
+    <section>
+            <img src='img/applications/decisions/data.png'>
     </section>
 
     <section data-markdown>
             <textarea data-template>
-### TensorFlow Playground
-
-https://playground.tensorflow.org
+    ## CNN - Convolutional neural networks
+    ### Let the GPU burn
             </textarea>
         </section>
+    
+    
+        <section>
+            <h3>Use of GPU for non symbolic data</h3>
+            <img src="albon-gpu-gaming.png">
+            <p>
+                <small>
+                    <a href="https://twitter.com/chrisalbon/status/907028933693947904?s=03" target="_blank">
+                        https://twitter.com/chrisalbon/status/907028933693947904?s=03</a>
+                </small>
+            </p>
+        </section>
+        
+        <section>
+            <h3>Why the recent break throughs?</h3>
+            <div class="fragment" style="float: left">
+                <img src="img/cray2.png" height="250">
+                <p>
+                    <small>Cray X-MP
+                        <br> Supercomputer (1982)</small>
+                </p>
+            </div>
+            <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+                x 100.000 =
+            </div>
+            <div class="fragment" style="float: left">
+                <img src="img/titan5.jpg" height="250" style="float: right">
+                <p>
+                    <small>
+                        <br>Titan 5 im Gamer PC (2017)</small>
+                </p>
+            </div>
+        </section>
+
+                <section>
+                    <h3>... but we also have</h3>
+                    <ol>
+                        <li>Smarter Learning Strategies (more hidden layers = Deep Learning, Convolutional Layers)
+                        <li>Big Data
+                    </ol>
+                </section>
+
+
+        <section>
+            <h3>GPUs work in parallel</h3>
+            <div class="fragment" style="float: left; padding-left: 100px">
+                <img src="img/sequential-knive.jpg" height="400">
+                <p><small><em>sequential</em>, <br>slow but flexible</small>
+                </p>
+            </div>
+            <div class="fragment" style="float: right; padding-right: 100px">
+                <img src="img/parallel-knive.jpg" height="400">
+                <p><small><em>parallel</em>, <br>fast but same operation for all data
+                        </small>
+                </p>
+            </div>
+        </section>
+
+
+<section>
+    <h3>Architectures of Convolutional Neural Networks: VGG</h3>
+        <img src="img/sketch/vgg.png" height="350px">
+        <p>
+            <small>There are a number of specialized neural network layers</small>
+        </p>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Convolutional Blocks: Cascading many Convolutional Layers having down sampling in between
+
+![Applying filters](http://cs231n.github.io/assets/cnn/cnn.jpeg)
+
+http://cs231n.github.io/convolutional-networks/#conv
+</textarea>
+</section>
+
+<section data-markdown style="font-size: x-large">
+    <textarea data-template>
+### Example of a Convolution
+![Dog](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog.png)
+#### Many convolutional filters applied over all channels
+![Dog after Convolutional Filters applied](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog-conv1.png)
+http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Downlsampling Layer: Reduces data sizes and risk of overfitting
+![Pooling](http://cs231n.github.io/assets/cnn/pool.jpeg)
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Max Pooling
+![Max Pooling](http://cs231n.github.io/assets/cnn/maxpool.jpeg)
+http://cs231n.github.io/convolutional-networks/#pool
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Standard CNN Architecture
+
+![Performance of CNN Architectures](https://cdn-images-1.medium.com/max/1600/1*kBpEOy4fzLiFxRLjpxAX6A.png)
+
+<small>
+https://medium.com/towards-data-science/neural-network-architectures-156e5bad51ba
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+    ### Typical Architecture of a CNN 
+![VGG architecture](img/sketch/vgg.png)
+
+_The classifier more or less is what we used for our previous example_    
+    </textarea>
+    </section>
+
+    <section>
+            <h3>MNIST - Using a model <em>already trained</em></h3>
+            <p>Exploring the different types layers together</p>
+            <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
+                <img src="img/browser/keras-browser.png" height="350px">
+            </a>
+            <p><small>
+                <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">https://transcranial.github.io/keras-js/#/mnist-cnn</a>
+            </small></p>
+        </section>
+
+    <section>
+            <h3>Keras layers</h3>
+
+            <p><small>Convolution</small></p>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    model.add(Conv2D(filters=32, padding='same', activation='relu'))
+                </code></pre>
+
+                <p><small>Max Pooling</small></p>
+                <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(MaxPooling2D())
+                </code></pre>
+                                    
+                <p><small>Flatten 2d to make it accessible to Dense layers</small></p>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(Flatten())
+            </code></pre>
+        <p>
+            <small>
+                    <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                        https://www.tensorflow.org/api_docs/python/tf/keras/layers
+                    </a>
+            </small>
+        </p>
+    </section>
+    
+    
+        
+        <section>
+            <h3>More complex architecture: Google Inception V3</h3>
+            <img src="img/inception_v3_architecture.png" height="400px">
+            <p>
+                <small>
+                    Paper: <a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a>
+                    <br>
+                    <a href="https://stackoverflow.com/questions/39352108/does-the-inception-model-have-two-softmax-outputs" target="_blank">
+                    Why two classifiers?</a>
+                </small>
+            </p>
+        </section>
+
+                </section>
+        <section data-markdown>
+                <textarea data-template>
+### Fashion MNINST example
+
+28x28 grayscale images of fashion Items
+
+<img src="img/fashion-mnist-sprite.png" height="300px">
+
+<small>
+Tutorial: https://medium.com/tensorflow/hello-deep-learning-fashion-mnist-with-keras-50fcff8cd74a
+<br><br>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
+</small>
+        </textarea>
+        </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Exercise
+
+_Can you improve the model for Fashion MNINST notebook?_
+
+* other/more/less layers
+* different sequence, less/more filters
+* prevent overfitting even better 
+</textarea>
+</section>
+
+
+    <section data-markdown>
+        <textarea data-template>
+## RNNs
+### Recurrent Neural Networks
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Classic Application: Sentiment Analysis in Written Texts
+
+<small>
+https://en.wikipedia.org/wiki/Sentiment_analysis
+</small>
+
+Generally speaking, sentiment analysis aims to determine the attitude of a speaker, writer, or other subject with respect
+to some topic or the overall contextual polarity or emotional reaction to a document, interaction, or event.
+
+_Example: Does a Tweet mention something negative about my company?_
+
+        </textarea>
+    </section>
+
+            <section>
+                <h3>Cloud Natural Language: Google's ML API for Speech</h3>
+                <img src="img/screenshot_sentiment_analysis.png">
+                <p><small><a target="_blank" href="https://cloud.google.com/natural-language/">
+                    https://cloud.google.com/natural-language/
+                </a></small></p>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+## First Challenge
+
+### How to turn words into numbers?
+                        </textarea>
+                        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Word Embeddings
+
+<a href='https://projector.tensorflow.org'>
+<img src="img/nlp/embedding-projector.png" height="500px">
+</a>
+
+<small>
+https://projector.tensorflow.org
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise: Get an intuition for Word Embeddings
+
+* Switch to T-SNE projections
+* Zoom into a cluster
+* Have a look at the words in the cluster
+* Are they semantically related?
+
+<small>
+https://projector.tensorflow.org
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Second Challenge
+
+### Traditional Networks have no memory of previous events
+
+Which is required to "understand" text
+            </textarea>
+            </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Solution: RNNs - Networks with Loops
+<img src='img/nlp/colah/RNN-rolled.png' height="450px">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Unrolling the loop
+<img src='img/nlp/colah/RNN-unrolled.png'>
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+## Creating our very own sentiment analyzis
+### Using embeddings to train recurrent networks
+
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb
+</small>
+   
+        </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise
+
+* Tweak number of neurons
+* Advanced: Make the RNN bidirectional
+
+Can you improve on the results?
+
+https://keras.io/layers/wrappers/#bidirectional
+
+    </textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+## What's next?
+
+### Finding data sets to play with
+    
+* Google released a search engine for datasets
+  * Search: https://toolbox.google.com/datasetsearch
+  * Launch blog post: https://www.blog.google/products/search/making-it-easier-discover-datasets/
+* Kaggle Datasets: https://www.kaggle.com/datasets    
+    </textarea>
+    </section>
+    </div>
+
+</div>
 
     </div>
 
