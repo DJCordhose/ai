@@ -179,61 +179,11 @@ Exercises will be on paper and in prepared Python notebooks, no need for any ins
     </textarea>
 </section>
 
-            <section data-markdown class="todo">
+<section data-markdown class="todo">
         <textarea data-template>
-Für Classic ML Sklearn
-
-* http://scikit-learn.org/0.20/
-* From Pandas to Scikit-Learn — A new exciting workflow: https://medium.com/dunder-data/from-pandas-to-scikit-learn-a-new-exciting-workflow-e88e2271ef62
-* Andreas Mueller (@amuellerml) tweeted at 6:07 PM on Sat, Sep 01, 2018:
-Possibly the biggest / most important change is the addition of ColumnTransformer to handle heterogeneous pandas dataframes. Right now you need to provide a callable (or list) to say what columns are, say, categorical. Next up: providing robust mechanisms in sklearn. https://t.co/RCJ5tvOVvi
-(https://twitter.com/amuellerml/status/1035922092443754496?s=03)
 
             </textarea>
-            </section>
-
-
-        <section data-markdown class="todo">
-                <textarea data-template>
-### Strategien Visualisieren
-
-#### KNN
-- KNN Observable Notebook übernehmen auch aus 2018_deep_learning_workshop
-  - Datenpunkte mehr vermischen, um den Einfluss von k klarer zu zeigen
-  - Eigenen Fork des Notebooks machen 
-
-#### SVM 
-Reza Zadeh (@Reza_Zadeh) tweeted at 8:50 AM on Thu, Aug 09, 2018:
-A nice visualizer for Support Vector Machines, from the good old days of the 2000s.
-Live: https://t.co/5F6RezYB4x
-Code: https://t.co/hdJrp7WTBy https://t.co/tnebZMZpkL
-(https://twitter.com/Reza_Zadeh/status/1027447075552735232?s=03)
-
-#### NN: Playground
-                    </textarea>
-                    </section>
-
-        <section data-markdown class="todo">
-            <textarea data-template>
-- Comparing different 
-  - learning strategies
-    - http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
-  - clustering strategies
-    - http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
-    - http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html
-
-- Post einbauen wie im Scipy Talk/Poster
-- Vorher Folien wie in Scipy Talk Concept: Decision Boundary
-    - https://dash-svm-dev.herokuapp.com/
-- What do the colored areas mean?
-- Auch Folien mit Aufspaltung in Train/Test/Validation
-    - In neue Version des Posters aufnehmen
-    - Eine Lernstrategie weniger? KNN?
-- Optional: https://www.quora.com/What-is-Bayesian-machine-learning
-
-      
-</textarea>
-</section>
+        </section>
 
         <section>
                 <h2>Introduction to Machine Learning</h2>
@@ -247,16 +197,6 @@ Code: https://t.co/hdJrp7WTBy https://t.co/tnebZMZpkL
             https://djcordhose.github.io/ai/2018_mcubed_ml_workshop.html
         </a></small></p>
     </section>
-
-    <section data-markdown class="todo">
-            <textarea data-template>
-                    1. Part I: Align with German Version
-1. Part II: Code from scipy notebook indlucing GridSearch and RandomSearch Hyperparameter (overview.ipynb)
-
-http://scikit-learn.org/stable/modules/calibration.html
-http://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html
-                </textarea>
-            </section>
 
     <section data-markdown>
             <textarea data-template>
@@ -465,10 +405,12 @@ return green # otherwise: low risk
 
 <section data-markdown>
     <textarea data-template>
-### Programming Exercise Get familiar with the Python Notebook
+### Programming Exercise: Get familiar with the Python Notebook
+
+_Run your first Colab Notbook_
+* Sign into your Google account or register a new one 
 
 _Improve score starting from existing code_
-
 * change rules?
 * add some?
 * remove some?
@@ -542,14 +484,16 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
         </ol>
     </section>
 
-    
     <section data-markdown>
             <textarea data-template>
-    ### PART II
-    ## Classic Machine Learning with Scikit-Learn
-            </textarea>
-        </section>
-    
+### Experiment with different numbers (k) of neighbors
+
+<img src='img/knn-sample.png' height="400px">
+<small>
+https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset
+</small>
+    </textarea>
+    </section>
 
     <section>
         <h3>Computed results for k = 1</h3>
@@ -564,12 +508,6 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
     <section>
             <h3>This is what we call Overfitting</h3>
         </section>
-    
-        <section>
-            <img src="img/flashcards/Overfit_Vs_Underfit_print.png">
-        </section>
-
-
     <section>
         <h3>Computed results for k = 13</h3>
         <div class="fragment">
@@ -582,194 +520,19 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
         <p class="fragment">Notice the smooth boundaries</p>
     </section>
 
-    <section>
-<h3>Decision Trees</h3>
-<p>Another simple classic</p>
-</section>
-
-<section>
-<img src="img/flashcards/Decision_Trees_print.png">
-</section>
-
-<!-- <section>
-<h3>Paper Exercise #2</h3>
-<ol>
-    <li>Create a binary decision tree and draw it on paper</li>
-    <li>Apply the decision tree to our problem in the lower part of our sample sheet</li>
-    <li>How do the decision boundaries look like?</li>
-    <li>Check the test set see how well this worked</li>
-</ol>
-</section>
-
-<section>
-<h3>The computer is actually better at doing repetative work</h3>
-</section> -->
-
-<section>
-<h3>Decision Boundaries for our problem</h3>
-<img src="img/dt/dt-boundaries-full.png">
-<p>Generated by Decision Tree ML</p>
-</section>
-
-<section>
-<img src="img/dt/dt-underfit.png">
-<p><small>Simplified decision tree</small></p>
-</section>
-
-<section>
-<h3>Looking at the complete tree</h3>
-</section>
-
-<section>
-<img src="img/dt/dt-all.png">
-</section>
-
-<section>
-<h3>Overfitting</h3>
-<img src="img/dt/dt-boundaries-full.png">
-<p>
-    <small>approx. 98% accuracy on train data, but only 61% on test data</small>
-</p>
-</section>
-
-<section>
-<img src="img/flashcards/Avoid_Overfitting_print.png">
-</section>
-
-<section>
-<img src="img/flashcards/Regularization_print.png">
-</section>
-
-<section>
-<h3>Regularisation: How to reduce Overfitting</h3>
-<p>Intuition: How would you make the decision boundaries more smooth</p>
-<ul>
-    <li class="fragment">Limit Depth of Tree (unlimited is default)</li>
-    <li class="fragment">Increase Number of Samples for Leaf Node (1 is default)</li>
-    <li class="fragment">Increase Number of Samples that justify a split (2 is default)</li>
-</ul>
-</section>
-
-<section>
-<h3>An example for regularization</h3> 
-<pre><code data-trim>
-max_depth=3,
-min_samples_leaf=20,
-min_samples_split=20
-    </code></pre>
-    <p>How will this perform?</p>
-</section>
-<section>
-<p>Underfitting</p>
-<img src="img/dt/dt-boundaries-underfit.png">
-    <p>
-        <small>only approx. 65% accuracy on train data, and only 59% on test data</small>
-    </p>
-</section>
-
-<section>
-<h3>Shared Programming Exercise #2 - Find the Sweet Spot</h3>
-<p>Get rid of overfitting, but avoid underfitting as much as possible</p>
-<ul>
-    <li>Can you do better than the hand coded classifier?</li>
-    <li>Which parameters give the best results?</li>
-    <!-- <li>How do you explain the different results for training and test data?</li>
-    <li>What is the value you should optimize for?</li> -->
-    <li>How do the decision boundaries for the different results look like? Do you see a pattern?</li>
-</ul>
-<p>Do your work in on Jupyter Notebook
-    <em>3-sklearn-decision-trees</em>
-</p>
-</section>
-
-<section>
-<h3>Finding the sweet spot always is a compromise</h3>
-<pre><code data-trim>
-clf = DecisionTreeClassifier(max_depth=6,
-                    min_samples_leaf=10,
-                    min_samples_split=10)
-    </code></pre>
-</section>
-
-<section>
-<img src="img/dt/dt-boundaries-sweet.png">
-<p>
-    <small>only approx. 77% accuracy on train data, but also 68% on test data</small>
-</p>
-<p class="fragment">Sweet Spot, notice the similarity to our hand crafted tree?</p>
-</section>
-
+    
     <section data-markdown>
-<textarea data-template>
-### How is the Decision Tree being Constructed?
+            <textarea data-template>
+    ### PART II
+    ## Classic Machine Learning with Scikit-Learn
 
-We are using the CART algorithm:
-* top-down split the set of examples into two new sets
-* choose a variable and a value at each step that best splits our customer example
-* terminal node when no further gain possible or regularization kicks in
-
-http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart
-
-</textarea>
-</section>
-
-<section>
-<img src="img/dt/cart.png" height="650px">
-</section>
-
-<section data-markdown>
-<textarea data-template>
-### What is the best split?
-
-* assign a category to each node containing a certain set of samples
-* use a metric (Gini or Entropy) to decide how good a node would be based on that category
-* sum up weighted metric for both child nodes
-* optimize the split for that summed metric
-
-https://machinelearningmastery.com/classification-and-regression-trees-for-machine-learning/
-</textarea>
-</section>
-
-<section>
-<img src="img/flashcards/Gini_Index_print.png">
-</section>
-
-<section style="font-size: xx-large">
-<h3>Gini Impurity used by CART</h3>
-<p>Gini impurity is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly
-labeled according to the distribution of labels in the subset.</p>
-<script type="math/tex; mode=display">
-Gini = \sum_{i=1}^J (p_i \sum_{i \neq k} p_k)
-</script>
-<p>The smaller the impurity, the purer (=better) is the node, 0 is perfect</p>
-
-<p><small><a target="_blank" href="https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity">https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity</a></small></p>
- 
-</section>
-
-<section>
-<h3>What's next?</h3>
-</section>
-
-<section>
-<img src="img/flashcards/Random_Forest_print.png">
-</section>
-
-<section>
-<img src="img/flashcards/The_Random_In_Random_Forest_print.png">
-</section>
-<section>
-<img src="img/flashcards/AdaBoost_print.png">
-</section>
-
-<section data-markdown>
-<textarea data-template>
-### Exercise
-1. Extend the notebook to for the Random Forest Strategy
-2. Optional: Find out about AdaBoost Ensemble Learning and add it as well
-</textarea>
-</section>
-
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb
+</small>
+            
+            </textarea>
+        </section>
+    
 <section data-markdown>
         <textarea data-template>
 ### PART III
@@ -788,37 +551,6 @@ Gini = \sum_{i=1}^J (p_i \sum_{i \neq k} p_k)
         </textarea>
     </section>
 
-    <section>
-        <h3>Example: Customer Data - Risk of Accidents</h3>
-        <img src="img/manning/all.png" height="400px" class="fragment">
-        <p class="fragment">
-            <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
-        </p>
-    </section>
-
-<section data-markdown>
-            <textarea data-template>
-### Working with Colab Notebooks
-
-https://colab.research.google.com
-            </textarea>
-        </section>
-    
-<section data-markdown>
-    <textarea data-template>
-### Hands-On
-_Run your first Colab Notbook_
-
-* Go to https://colab.research.google.com 
-* Sign into your Google account or register a new one 
-* Switch on GPU support
-* Execute some code cells
-
-https://colab.research.google.com
-
-</textarea>
-</section>
-    
     <section data-markdown>
         <textarea data-template>
 ## How does an artificial neuron work?
