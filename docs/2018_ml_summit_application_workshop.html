@@ -43,6 +43,18 @@
               .todo {
                   color: red !important;
               }
+              .beginning:before {
+                  content: 'BEGINNING';
+              }
+              .beginning {
+                color: red !important;
+              }
+              .end:before {
+                  content: 'END';
+              }
+              .end {
+                color: red !important;
+              }
               code span.line-number {
                   color: lightcoral;
               }
@@ -64,9 +76,10 @@
                       .reveal h3,
                       .reveal h4 {
                           letter-spacing: 2px;
-                          font-family: 'Amiri', serif;
+                          font-family: 'Calibri', sans-serif;
                           /* font-family: 'Times New Roman', Times, serif; */
                           font-weight: bold;
+                          color: black;
                           font-style: italic;
                           letter-spacing: -2px;
                           text-transform: none !important;
@@ -295,7 +308,21 @@ Je nach Größe der Gruppe
             <section>
                 <h2>Wie automatisiert man das?</h3>
             </section>
-    
+
+<section data-markdown>
+        <textarea data-template>
+### Explorative Analyse
+<img src='img/sns-pairplot.png' height="550px">
+
+    </textarea>
+    </section>
+    <section data-markdown>
+            <textarea data-template>
+    <img src='img/sketch/classic-development.jpg'>
+        </textarea>
+        </section>
+        
+        
             <section>
                 <h3>Ansatz: Von Hand kodierte Regeln</h3>
                 <div class="fragment">
@@ -336,17 +363,17 @@ return green # otherwise: low risk
             </div>        
         </section>
     
-        <section data-markdown>
-                <textarea data-template>
-        <img src='img/sketch/classic-development.jpg'>
-            </textarea>
-            </section>
-            
                 <section>
                         <h2>Supervised Machine Learning</h2>
                     </section>
                      
-                    
+                    <section data-markdown>
+                            <textarea data-template>
+    <img src='img/sketch/supervised-ml.jpg'>
+                        </textarea>
+                    </section>
+    
+                        
 <section data-markdown>
         <textarea data-template>
 ### ML ist eher Forschung als Software Entwicklung
@@ -356,17 +383,20 @@ return green # otherwise: low risk
 
     <section data-markdown>
             <textarea data-template>
-<img src='img/MELLI.jpg'>
+<img src='img/MELLI.jpg' height="650px">
                 </textarea>
                 </section>
 
+    <section data-markdown>
+            <textarea data-template>
+### Machine Learning eignet sich am besten wenn
 
-
-                    <section data-markdown>
-                        <textarea data-template>
-<img src='img/sketch/supervised-ml.jpg'>
-                    </textarea>
+* man viele Beispieldaten hat
+* man mit Unsicherheit in der Vorhersage oder mit Fehlern leben kann
+* die Aufgabe nicht klar oder nur abstrakt formuliert werden kann (_Wer ist ein guter Kunde?_)
+                </textarea>
                 </section>
+
 
 
     <!-- <section>
