@@ -235,22 +235,68 @@ http://www.taz.de/Foerderung-neuer-Technologie/!5518286/
             <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
         </section>
 
+        <section>
+            <h2>Was macht Machine Learning aus?</h2>
+        </section>
+
+        <section data-markdown data-background="img/sketch/classic-development.jpg">
+            <textarea data-template>
+    <!-- <img src='img/sketch/classic-development.jpg'> -->
+        </textarea>
+        </section>
+
+        <section data-markdown data-background="img/sketch/supervised-ml.jpg">
+            <textarea data-template>
+<!-- <img src='img/sketch/supervised-ml.jpg'> -->
+        </textarea>
+    </section>
+
+        
+<section data-markdown>
+<textarea data-template>
+### ML ist eher Forschung als Software Entwicklung
+<img src='img/ml_is_not_programming.jpg' height="550px">
+</textarea>
+</section>
+
+<section data-markdown data-background="img/MELLI.jpg">
+<textarea data-template>
+<!-- <img src='img/MELLI.jpg' height="650px"> -->
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Machine Learning eignet sich am besten wenn
+
+* man viele Beispieldaten hat
+* man mit Unsicherheit in der Vorhersage oder mit Fehlern leben kann
+* die Aufgabe nicht klar oder nur abstrakt formuliert werden kann (_Wer ist ein guter Kunde?_)
+</textarea>
+</section>
+
+
 <!-- 
 -----------------------------
         TEIL II: INTRO
 -----------------------------
  -->
 
-        <section data-markdown style="font-size: xx-large">
-            <textarea data-template>
-<img src='img/e9262c3d9263ee9b1243f1b0cf58a857.jpg' height="550px">
+ <section data-markdown>
+    <textarea data-template>
+### Axiom
+## Allgemeine Künstliche Intelligenz existiert nicht
+
+<img src='img/e9262c3d9263ee9b1243f1b0cf58a857.jpg' height="200px">
+
+Und wird auch in absehbarer Zeit nicht existieren
 
 <small>Photo by PenMac at Morguefile.com</small>
 
-        </textarea>
-        </section>
+</textarea>
+</section>
 
-        <section data-markdown>
+        <!-- <section data-markdown>
                 <textarea data-template>
 <img src='img/twitter-trump.png' height="550">
 
@@ -259,16 +305,8 @@ https://twitter.com/KeatonPatti/status/1006961202998726665
 <small>
 
             </textarea>
-        </section>
+        </section> -->
     
-        <section data-markdown>
-            <textarea data-template>
-### Axiom
-## Allgemeine Künstliche Intelligenz existiert nicht
-
-Und wird auch in absehbarer Zeit nicht existieren
-        </textarea>
-        </section>
 
         <section data-markdown>
             <textarea data-template>
@@ -304,28 +342,14 @@ http://plus.faz.net/faz-plus/feuilleton/2018-08-24/ca68d51b488df28c55c47fa28c911
         </textarea>
         </section>
 
-        <section data-markdown>
-            <textarea data-template>
-### Generalisierung
-
-* Von euch trainierte Systeme "wissen" nur was ihr ihnen einfüttert
-* Allgemeine Zusammenhänge sind eurer KI nicht bekannt
-* Was nicht in euren Daten steckt kann auch die KI nicht wissen
-* Für eine sinnvolle Generalisierung braucht ihr viele Daten
-* Was viel bedeutet hängt von vielen Faktoren ab
-* Pro "Konzept" 5000 Beispiele ist ein guter Richtwert 
-
-        </textarea>
-        </section>
-
-        <section data-markdown>
+        <!-- <section data-markdown>
                 <textarea data-template>
         
 <img src="img/twitter-dog-generalization.jpg" height="550">
     
 <small>https://twitter.com/Kyle_Byers/status/1040913435423395840</small>
 </textarea>
-</section>
+</section> -->
 
 
         <section data-markdown>
@@ -471,9 +495,16 @@ Code: https://github.com/AppliedDataSciencePartners/WorldModels
  
  <section data-markdown>
         <textarea data-template>
-## KI ist längst in unserem Leben
+# KI ist längst in unserem Leben
 
 </textarea>
+</section>
+
+<section>
+    <h3>Real World AI is booming</h3>
+    <img src="chollet-twitter-applications.png">
+    <p><small><a href="https://twitter.com/fchollet/status/906582914829246464?s=03" target="_blank">
+        https://twitter.com/fchollet/status/906582914829246464?s=03</a></small></p>
 </section>
 
 <section data-markdown>
@@ -483,12 +514,19 @@ Code: https://github.com/AppliedDataSciencePartners/WorldModels
 </section>
 
 <section>
-        <h3>Real World AI is booming</h3>
-        <img src="chollet-twitter-applications.png">
-        <p><small><a href="https://twitter.com/fchollet/status/906582914829246464?s=03" target="_blank">
-            https://twitter.com/fchollet/status/906582914829246464?s=03</a></small></p>
-    </section>
-
+    <p>Schachprogramme haben Menschen überwunden weil</p>
+    <div class="fragment" style="float: left">
+        <img src="img/cray2.png" height="250">
+        <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
+    </div>
+    <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+    x 100.000 =
+    </div>
+    <div class="fragment" style="float: left">
+      <img src="img/titan5.jpg" height="250" style="float: right">
+        <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
+    </div>
+</section>
 
 <section>
         <h4>Maschinen verstehen Sprache und können sich dazu verhalten</h4>
@@ -536,46 +574,6 @@ https://machinelearning.apple.com/2017/10/01/hey-siri.html
         </textarea>
     </section>
 
- <section data-markdown style="font-size: large">
-        <textarea data-template>
-### Object detection / identification
-
-<img src='img/cnn/object-detection.png' height="500px">
-
-https://twitter.com/TensorFlow/status/1039219454398418946    
-https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1
-https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb
-        </textarea>
-    </section>
-
-<section data-markdown>
-    <textarea data-template>
-### Everybody Dance Now!
-
-Conditional video synthesis from Berkeley
-
-<video controls src="video/hardmaru on Twitter Everybody Dance Now! Exciting new work o.mp4" 
-    type="video/mp4" height="400"></video>
-
-<small>
-https://twitter.com/hardmaru/status/1032762806796312576
-<br>
-https://arxiv.org/abs/1808.07371
-<br>
-https://youtu.be/PCBTZh41Ris
-</small>
-</textarea>
-</section>
-
-<!-- <section data-markdown class="todo">
-        <textarea data-template>
-Tweet ist weg
-
-- Predicting military action using the number of cars in a Pentagon parking lot: https://twitter.com/chrisalbon/status/984586200986959872
-</textarea>
-</section> -->
-
-
  <section>
         <h3>Die Post testet 2018 selbstfahrende Lieferfahrzeuge</h3>
         <p class="fragment"><em>"Sie werden in der Lage sein, dem Zusteller autonom zu folgen - sodass er nicht vor jedem Hauseingang aus- und wieder einsteigen und wenige Meter fahren muss."</em></p>
@@ -584,9 +582,9 @@ Tweet ist weg
         </small></p>
     </section>
 
-
     <section>
             <h3>Face Detection</h3>
+            <p>Entsperrt mein Laptop und mein Handy</p>
             <img src="img/facial-recognition.png">
             <p><small><a href="https://aws.amazon.com/rekognition/" target="_blank">
                 https://aws.amazon.com/rekognition/</a></small></p>
@@ -621,30 +619,7 @@ Tweet ist weg
         </textarea>
     </section> -->
     
-    
         
-
-<!-- 
------------------------------
-        TEIL III: REALISTISCHE USE CASES
------------------------------
- -->
-
-
- <section>
-        <p>Schachprogramme haben Menschen überwunden weil</p>
-        <div class="fragment" style="float: left">
-            <img src="img/cray2.png" height="250">
-            <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
-        </div>
-        <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
-        x 100.000 =
-        </div>
-        <div class="fragment" style="float: left">
-          <img src="img/titan5.jpg" height="250" style="float: right">
-            <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
-        </div>
-   </section>
 
  <section>
         <h4>Minimale Information reicht, um ein gutes Angebot zu machen</h4>
@@ -687,20 +662,8 @@ Tweet ist weg
             </textarea>
         </section>
 
-        <section data-markdown>
-                <textarea data-template>
-    
-<img src='img/tierversuche-ki.png' height="500px">
-<small>
-https://twitter.com/SAS_DACH/status/1026449057554857986
-<br>
-https://www.futurezone.de/science/article214958825/Wie-kuenstliche-Intelligenz-Tierversuche-obsolet-macht.html        
-    </small>
-                </textarea>
-            </section>
-    
         <section>
-            <h3>Weitere Anwendungsgebiete</h3>
+            <h3>Weitere realistische Anwendungsgebiete</h3>
             <!-- <small> -->
             <ul>
                 <li class="fragment"><strong>Recommendation Systems</strong>: Spotify und Netflix kennen mich besser als ich mich selbst
@@ -711,6 +674,143 @@ https://www.futurezone.de/science/article214958825/Wie-kuenstliche-Intelligenz-T
             </ul>
         <!-- </small> -->
     </section>
+
+    <section data-markdown>
+        <textarea data-template>
+
+## Wollt ihr den Hype? 
+
+Was ist aufregend und/oder wird es erst in der Zukunft geben
+</textarea>
+</section>
+        <section data-markdown>
+                <textarea data-template>
+### Wavenet: Machines can synthesize human language
+
+<small>
+Google launches more realistic text-to-speech service powered by DeepMind’s AI    
+</small>
+<img src='img/nlp/wavenet/wavenet_progress.gif' height="250px">
+
+<small>
+Industry-leading: <audio
+  src="img/nlp/wavenet/Hol_before.wav"
+  controls></audio> WaveNet: <audio
+  src="img/nlp/wavenet/Hol_before.wav"
+  controls></audio>
+<br>
+<br>
+https://www.theverge.com/2018/3/27/17167200/google-ai-speech-tts-cloud-deepmind-wavenet
+</small>
+                    </textarea>
+                    </section>
+
+<section data-markdown style="font-size: large">
+    <textarea data-template>
+### Object detection / identification
+
+<img src='img/cnn/object-detection.png' height="500px">
+
+https://twitter.com/TensorFlow/status/1039219454398418946    
+https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1
+https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### PoseNet: Real-time pose estimation
+
+<img src='img/posenet_camera.gif'>
+
+<small>
+https://twitter.com/random_forests/status/993639149780459520
+<br>
+https://twitter.com/teropa/status/1001151524351959041
+</small>    
+
+    </textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Everybody Dance Now!
+
+Conditional video synthesis from Berkeley
+
+<video controls src="video/hardmaru on Twitter Everybody Dance Now! Exciting new work o.mp4" 
+type="video/mp4" height="400"></video>
+
+<small>
+https://twitter.com/hardmaru/status/1032762806796312576
+<br>
+https://arxiv.org/abs/1808.07371
+<br>
+https://youtu.be/PCBTZh41Ris
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+
+<img src='img/tierversuche-ki.png' height="500px">
+<small>
+https://twitter.com/SAS_DACH/status/1026449057554857986
+<br>
+https://www.futurezone.de/science/article214958825/Wie-kuenstliche-Intelligenz-Tierversuche-obsolet-macht.html        
+</small>
+    </textarea>
+</section>
+
+
+<section data-markdown style="font-size: xx-large">
+<textarea data-template>
+### Alpha(Go) Zero
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px">
+<!-- <img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="400px"> -->
+</a>
+
+* Monte Carlo Tree Search und Deep Convolutional Neural Networks
+* Zielfunktion ist Sieg
+* schlagen jeden Menschen und Maschine ohne menschliche Expertise (in perfect information game)
+
+<!-- <small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
+<br>
+Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
+<br>
+Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
+</small> -->
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Realistic controlled motions
+
+<img src='img/wolf-motion.png' height="450px">
+
+<small>
+https://twitter.com/blacksquirrel__/status/1002768915133394945
+https://www.fxguide.com/quicktakes/siggraph-2018-tech-papers-preview
+</small>
+        </textarea>
+    </section>
+    
+
+
+<section data-markdown>
+    <textarea data-template>
+### Ein gelöschter Tweet
+
+Predicting military action using the number of cars in a Pentagon parking lot
+
+https://twitter.com/chrisalbon/status/984586200986959872
+</textarea>
+</section>
 
     <section>
             <h3>Zusammenfassung</h3>
