@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>AI.js tensorflow.js</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+Talk: Machine Learning - wie mache das denn jetzt?
+
+Vielleicht hast du schon eine Idee davon, dass die Daten, die bei dir im Keller schlummern Gold wert sein könnten. Aber was
+kannst du konkret tun, um damit Machine Learning zu betreiben?
+
+Ohne Folien anhand von einem konkreten Datensatz werden wir uns dazu exemplarisch durch alle Phasen eines Projekts bewegen
+und dabei von der Analyse der Daten bis zur Produktivsetzung gehen.
+
+Wir werden dazu die typischen Bibliotheken aus dem Python Umfeld verwenden. Mit dabei sind Pandas, Numpy, Matplotlib, Sklearn
+und TensorFlow. Das alles wird auf dem von Google bereitgestellten Colab Service laufen und am Ende des Talks kannst du den
+komplett lauffähigen Code mit nach Hause nehmen und schon am nächsten Tag an deinem eigenen Daten ausprobieren.
+
+Vortragssprache Deutsch
+60 Minuten mit Spiel
+-->
+
+        <section>
+            <h2>Bringing a risk calculator into production using tensorflow.js</h2>
+
+            <p><a target="_blank" href="todo">
+                AI.js London Meetup, October 2018
+            </a></p>
+        
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+
+            <small>
+            <a href="https://djcordhose.github.io/ai/2018_ai_js.html">
+                https://djcordhose.github.io/ai/2018_ai_js.html</a>
+            </small>
+        
+        </section>
+
+
+        
+    <section data-markdown>
+        <textarea data-template>
+### Objective
+
+_Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
+
+<img src='img/pixabay/accident-151668_1280.png'>
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p>
+</textarea>
+    </section>
+
+    <section>
+        <h3>Customer Data - Risk of Accidents</h3>
+        <img src="img/manning/all.png" height="500px" class="fragment">
+        <p class="fragment">
+            <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
+        </p>
+    </section>
+
+
+
+    <section data-markdown>
+        <textarea data-template>
+## Our Approach            
+
+1. Train on a beefy machine using TensorFlow and GPUs
+2. Bring into production in Browser and use local GPU
+
+    </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+## Train on a beefy machine using TensorFlow and GPUs using Keras API
+
+Best tools, best compute performance
+
+This can even be a free TPU or K80 GPU on Google Colab
+        </textarea>
+        </section>
+
+<section>
+    <h3>TensorFlow using Keras API</h3>
+
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+# Sequential Model
+model = keras.Sequential()
+        </code></pre>
+
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+# Fully Connected Hidden Layers (just showing one of two identical ones)
+model.add(Dense(units=100, name='hidden1', input_dim=3))
+model.add(BatchNormalization())
+model.add(Activation('relu'))
+model.add(Dropout(dropout))</code></pre>
+
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
+# Softmax Output Layer
+model.add(Dense(units=3, name='softmax', activation='softmax'))
+</code></pre>
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
+# Train for just 2000 epochs to avoid overfitting
+model.compile(loss='sparse_categorical_crossentropy',
+             optimizer='adam',
+             metrics=['accuracy'])
+model.fit(X, y, epochs=2000, batch_size=1000, validation_split=0.2)            
+            
+            </code></pre>
+                            
+    <small>
+            Layers: <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                https://www.tensorflow.org/api_docs/python/tf/keras/layers
+            </a>
+            <br>
+            Notebook on Colab: <a href="https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M10-final-model.ipynb">
+                https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-notebooks/blob/master/U3-M10-final-model.ipynb
+            </a>
+
+    </small>
+</p>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Decision Boundaries plotted on 2d
+
+<img src='img/manning/nn-reg.png' height="500">
+
+<p><small>up to 80% predictions correct on previously unknown data possible</small></p>
+</textarea>
+    </section>
+
+            <section data-markdown>
+            <textarea data-template>
+## Bring into production in Browser and use local GPU with tensorflow.js
+
+Scales great, easy deployment
+        </textarea>
+        </section>
+
+        <section>
+<h3>Deploying to the Browser</h3>
+
+<div class="fragment">
+<p>Converting our Keras Model to TensorFlow.js</p>
+
+<pre><code contenteditable data-trim class="python">
+tensorflowjs_converter --input_format keras \
+./model/insurance.hdf5 \
+./tfjs    
+</code></pre>
+<p><small><a href='https://js.tensorflow.org/tutorials/import-keras.html'>
+    https://js.tensorflow.org/tutorials/import-keras.html</a></small></p>
+
+</div>
+
+<div class="fragment">
+<p>Loading and using directly from the Browser</p>
+
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const model = await tf.loadModel('tfjs/model.json');
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// max speed, age, thousand miles per year
+const example = tf.tensor([[100, 47, 10]]);
+const prediction = model.predict(example);
+console.log(await prediction.data());
+//[0.00334801129065454, 0.8710343241691589, 0.12561771273612976]
+    </code></pre>
+
+<p><small>
+            <a href='js/tensorflow-sandbox/load_manning_model.html' target="_blank">
+                https://djcordhose.github.io/ai/js/tensorflow-sandbox/load_manning_model.html</a></small>
+        </small></p>
+    </div>   
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p>
+</textarea>
+    </section>
+
+        <section style="font-size: xx-large">
+            <h2>Wrap Up</h2>
+            <p><em>Training on beefy machine - deploy to browser</em></p>
+            <ul>
+                <li class="fragment">TensorFlow allows for very powerful neural networks
+                <li class="fragment">can even be trained on a free TPU or K80 GPU on Google Colab
+                <li class="fragment">Keras API is very close to tensorflow.js
+                <li class="fragment">Converting Keras models to tensorflow.js often works flawlessly
+                <li class="fragment">You can combine tensorflow.js with any JavaScript code
+
+                            </ul>
+            <p>
+                    <em>Bringing a risk calculator into production using tensorflow.js</em>
+                <br>
+                <br>
+            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>
+        <a href="https://djcordhose.github.io/ai/2018_ai_js.html">
+            https://djcordhose.github.io/ai/2018_ai_js.html</a>
+    
+            </p>
+        </section>
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.preparation').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1100,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
