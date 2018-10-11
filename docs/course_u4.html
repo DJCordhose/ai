@@ -277,18 +277,20 @@ console.log(await prediction.data());
         </textarea>
     </section>
 
-        <section data-markdown style="font-size: xx-large">
+        <section data-markdown style="font-size: x-large">
     <textarea data-template>
 ## Exercise
 
 _Install the Risk Calculator locally and change it to use your data_
 
 - clone or download https://github.com/DJCordhose/deep-learning-crash-course-notebooks
+- if you do not know how to do this go to https://help.github.com/articles/cloning-a-repository/
 - in the _docs_ folder you find the complete Risk Calculator in _index.html_
 - run a local web server in that directory
   - if you do not have one you can use https://www.npmjs.com/package/http-server
+  - it will require https://nodejs.org to be installed
 - in your favorite editor or IDE open _index.html_
-- find the line where I entered my own personal data
+- find the line where I entered my own personal data as the default
 - change it to yours and try it in the browser
 
 </textarea>
@@ -444,25 +446,22 @@ https://colab.research.google.com/github/djcordhose/deep-learning-crash-course-n
 <h3>TensorFlow Serving REST API</h3>
 
 <div class="fragment">
-<p>Starting the Model Server in Rest Mode (needs Linux)</p>
+<p>Starting the model server in REST mode (needs Linux)</p>
 
 <pre><code contenteditable data-trim>
 tensorflow_model_server --rest_api_port=8501 \
 --model_name=manning_insurance_1 \
 --model_base_path=$(pwd)/tf
 </code></pre>
-<p><small><a href='https://www.tensorflow.org/serving/api_rest'>https://www.tensorflow.org/serving/api_rest</a></small></p>
 </div>
 <div class="fragment">
 <p>Curling to it</p>
 
 <pre><code contenteditable data-trim class="python">
-curl -X POST \
-http://localhost:8501/v1/models/manning_insurance_1:predict  \
+curl -X POST http://localhost:8501/v1/models/manning_insurance_1:predict  \
 -d '{ "instances": [{"inputs": [ 100.0,  47.0,  10.0]}]}' 
-# {
-#     "predictions": [[0.0027608, 0.872088, 0.125151]]
-# }</code></pre>
+# { "predictions": [[0.0027608, 0.872088, 0.125151]] }</code></pre>
+<p><small><a href='https://www.tensorflow.org/serving/api_rest'>https://www.tensorflow.org/serving/api_rest</a></small></p>
 </div>
 
     </section>
@@ -484,9 +483,6 @@ http://localhost:8501/v1/models/manning_insurance_1:predict  \
 <script src="lib/jquery-2.2.4.js"></script>
 
 <script>
-    // only applies to public version
-    $('.fragment').removeClass('fragment');
-
     if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
         } else {
             // only applies to public version
@@ -503,7 +499,7 @@ http://localhost:8501/v1/models/manning_insurance_1:predict  \
                 Reveal.configure({ controls: false });
             } else {
                 // only applies to public version
-                // $('.fragment').removeClass('fragment');
+                $('.fragment').removeClass('fragment');
             }
             // applies to all versions
             $('code').addClass('line-numbers');

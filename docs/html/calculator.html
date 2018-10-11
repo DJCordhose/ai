@@ -14,9 +14,15 @@
 
 <body>
     <main role="main">
-
         <div class="jumbotron">
             <div class="container">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <h1 class="display-3">ML Car Insurance Risk Check</h1>
                 <p>You can check the risk group for a propspective customer by just supplying three inputs </p>
                 <div>
@@ -47,18 +53,11 @@
                 <br>
                 <br>
                 <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
             </div>
         </div>
     </main>
     <script src="tfjs@0.12.0"> </script>
     <script>
-        const calcBtn = document.querySelector('#calc-btn');
         const resultField = document.querySelector('#result');
 
         const inSpeed = document.querySelector('#speed');
@@ -71,7 +70,8 @@
             console.log(buttons);
         }
 
-        document.getElementById('calc-btn').addEventListener('click', async () => {
+        const calcBtn = document.querySelector('#calc-btn');
+        calcBtn.addEventListener('click', async () => {
             const speed = parseFloat(inSpeed.value);
             const age = parseFloat(inAge.value);
             const miles = parseFloat(inMiles.value);
@@ -100,21 +100,6 @@
             return value;
         }
 
-        (async () => {
-            const model = await tf.loadModel('ml_insurance/model.json');
-
-            // max speed, age, thousand miles per year
-            const example = tf.tensor([[100, 47, 10]]);
-            const prediction = model.predict(example);
-
-            const value = await prediction.data();
-            // softmax 
-            // # 0: red
-            // # 1: green
-            // # 2: yellow        
-            console.log(value);
-            // [0.0937359631061554, 0.7274655699729919, 0.17879831790924072]
-        })();
     </script>
 
 </body>
