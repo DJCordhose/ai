@@ -181,14 +181,12 @@ Exercises will be on paper and in prepared Python notebooks, no need for any ins
 
 <section data-markdown class="todo">
         <textarea data-template>
-- Resnet Modell Keras 
-- Plot jenseits aller vernünftigen Werte auch für Idea to Prod und Tf.js Prod
+            - Plot jenseits aller vernünftigen Werte auch für Idea to Prod und Tf.js Prod
+
+            - Resnet Modell Keras 
 - Auch Transfer Learning mit imagenet vortrainiert
 - Precision Recall f1 für Sentiment Analyse
 - Folie RNNs und Embeddings
-- Umstellen auf dieses Notebook und auch TPU nutzen
-  - https://colab.research.google.com/github/tensorflow/tpu/blob/master/tools/colab/fashion_mnist.ipynb
-  - Vorsicht, default ist Python 2
 - Hyperparameter Search: https://github.com/autonomio/talos/blob/master/README.md  
 - Gradient Descent: https://twitter.com/_brohrer_/status/1050013482693926913
             </textarea>
@@ -958,27 +956,15 @@ http://cs231n.github.io/convolutional-networks/#pool
 </textarea>
 </section>
 
-
 <section data-markdown>
     <textarea data-template>
-### Standard CNN Architecture
-
-![Performance of CNN Architectures](https://cdn-images-1.medium.com/max/1600/1*kBpEOy4fzLiFxRLjpxAX6A.png)
-
-<small>
-https://medium.com/towards-data-science/neural-network-architectures-156e5bad51ba
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-    ### Typical Architecture of a CNN 
+### Typical Architecture of a CNN 
 ![VGG architecture](img/sketch/vgg.png)
 
 _The classifier more or less is what we used for our previous example_    
-    </textarea>
-    </section>
+</textarea>
+</section>
+
 
     <section>
             <h3>MNIST - Using a model <em>already trained</em></h3>
@@ -1017,8 +1003,6 @@ model.add(Flatten())
         </p>
     </section>
     
-    
-        
         <section>
             <h3>More complex architecture: Google Inception V3</h3>
             <img src="img/inception_v3_architecture.png" height="400px">
@@ -1048,6 +1032,126 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ten
 </small>
         </textarea>
         </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Regularization
+    </textarea>
+</section>
+
+<section id='overfitting'>
+        <h3>The Issue: Overfitting</h2>
+    <div>
+    <div style="float: left">
+        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
+        <p>
+            <small><em>Training Score</em></small>
+        </p>
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='5'>
+        <img src="img/scans/elements/down.jpg" height="200">
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='4'>
+        <img src="img/scans/elements/up.jpg" height="200">
+    </div>
+    <div style="float: left">
+            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
+            <p>
+                <small><em>Test Score</em></small>
+            </p>
+    </div>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and test scores clearly divert</em></p>
+
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Regularization
+
+_Process to counter overfitting_
+            </textarea>
+            </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+### First approach: Train for fewer epochs
+
+<img src='img/accuracy.png'>
+
+_Watch where training and validation accuracy diverge and stop training there_
+
+            </textarea>
+            </section>
+    
+<section id='overfitting-capacity'>
+        <h3>Second approach: Reduce capacity of model</h2>
+    <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
+        <img src="img/scans/elements/model-large.jpg" height="200">
+        <p>
+            <small><em>Original model</em></small>
+        </p>
+    </div>
+    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
+        <br>
+        <img src="img/scans/elements/right.jpg">
+        <br>
+    </div>
+    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
+            <br>
+            <img src="img/scans/elements/model-small.jpg" height="100">
+            <br>
+            <br>
+            <p>
+                <small><em>Smaller model</em><br>less hidden layers, less neurons per layer</small>
+            </p>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Give model less capacity to simply memorize data</em></p>
+    </section>
+
+<section id='overfitting-dropout'>
+        <h3>Third approach: Use Dropout</h2>
+            <p><em>Dropouts only train a certain percentage of neurons per batch</em></p>
+    <div style="float: left; width: 400px" class="fragment" data-fragment-index='1'>
+        <img src="img/scans/elements/model-large.jpg" height="225">
+        <p>
+            <small><em>Original model</em></small>
+        </p>
+    </div>
+    <div style="float: left; width: 200px" class="fragment" data-fragment-index='2'>
+        <br>
+        <img src="img/scans/elements/right.jpg">
+        <br>
+    </div>
+    <div style="float: left; width: 500px"   class="fragment" data-fragment-index='3'>
+            <br>
+            <img src="img/scans/elements/model-emsemble.jpg" height="100">
+            <br>
+            <br>
+            <p>
+                <small><em>Ensemble of small models</em> (each one overfits on its specific batch)<br></small>
+            </p>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='4'><em>Intuition: Combination of models makes result more robust</em></p>
+    </section>
+
+    <section data-markdown id='overfitting-bn'>
+            <textarea data-template>
+### Fourth approach: Batch Normalization
+
+<ul>
+    <li class="fragment">Subtracts batch mean
+    <li class="fragment">Multiplies by standard deviation     
+</ul>
+
+<!-- <img src='img/scans/elements/sigmoid.jpg' class="fragment" height="200"> -->
+    
+<p class="fragment"><em>Intuition: Makes model robust by adding noise</em></p>
+
+<p class="fragment"><small><em>Bonus:</em> Lets model train faster by fighting vanishing gradients</small></p>
+    
+                </textarea>
+                </section>
         
         <section data-markdown>
                 <textarea data-template>
@@ -1058,6 +1162,42 @@ _Can you improve the model for Fashion MNINST notebook?_
 * other/more/less layers
 * different sequence, less/more filters
 * prevent overfitting even better 
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Next Level Fashion MNINST
+
+* trained on powerful TPU (Tensor Processing Unit)
+* using better regularization 
+* using <a href='https://sefiks.com/2018/01/02/elu-as-a-neural-networks-activation-function/'>ELU activation</a> instead of RELU 
+
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/fashion_mnist_tpu.ipynb
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Standard CNN Architecture
+
+![Performance of CNN Architectures](https://cdn-images-1.medium.com/max/1600/1*kBpEOy4fzLiFxRLjpxAX6A.png)
+
+<small>
+https://medium.com/towards-data-science/neural-network-architectures-156e5bad51ba
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Experiment: Fashion MNINST using Resnet
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/fashion_mnist_resnet.ipynb
+</small>
 </textarea>
 </section>
 
