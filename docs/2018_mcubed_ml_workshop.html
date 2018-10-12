@@ -181,7 +181,6 @@ Exercises will be on paper and in prepared Python notebooks, no need for any ins
 
 <section data-markdown class="todo">
         <textarea data-template>
-- Updates von ML Summit Talk
 - Resnet Modell Keras 
 - Plot jenseits aller vernünftigen Werte auch für Idea to Prod und Tf.js Prod
 - Auch Transfer Learning mit imagenet vortrainiert
@@ -476,7 +475,7 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
     <section>
             <h3>Data: Quantity</h3>
             <img src='img/applications/decisions/classic.png' height="500px">
-            <p>We have 300 data sets, this is small</p>
+            <p><small>We have 300 data sets, this is small</small></p>
         </section>
 
     <section>
@@ -502,7 +501,9 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
             <textarea data-template>
 ### Experiment with different numbers (k) of neighbors
 
+<a href='https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset'>
 <img src='img/knn-sample.png' height="400px">
+</a>
 <small>
 https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset
 </small>
@@ -646,6 +647,17 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
 </textarea>
 </section>
 
+<section data-markdown>
+    <textarea data-template>
+### Understanding the Neuron 
+
+<img src='img/tf-plaground.png' height="500px">
+
+<small>
+https://playground.tensorflow.org
+</small>
+</textarea>
+</section>
 
 
 <section data-markdown>
@@ -686,17 +698,17 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
     <h3>Keras Layers</h3>
 
     <p><small>Sequential Model</small></p>
-    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
 model = keras.Sequential()
         </code></pre>
 
     <p><small>Fully Connected Hidden Layer</small></p>
-    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
 model.add(Dense(units=50, input_dim=3))
 </code></pre>
 
         <p><small>Softmax Output Layer</small></p>
-        <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
 model.add(Dense(units=3, activation='softmax'))
         </code></pre>
                             
@@ -1032,7 +1044,7 @@ model.add(Flatten())
 <small>
 Tutorial: https://medium.com/tensorflow/hello-deep-learning-fashion-mnist-with-keras-50fcff8cd74a
 <br><br>
-https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/fashion-mnist-keras.ipynb
 </small>
         </textarea>
         </section>
@@ -1164,6 +1176,30 @@ http://colah.github.io/posts/2015-08-Understanding-LSTMs/
         </textarea>
     </section>
 
+    <section data-markdown>
+        <textarea data-template>
+### GRU (Gated Recurrent Unit) / LSTMS (Long short-term memory)
+
+_allow past information
+to be reinjected at a later time, thus fighting the vanishing-gradient problem_
+
+<small>
+https://en.wikipedia.org/wiki/Long_short-term_memory
+<br>            
+<a href="https://www.manning.com/books/deep-learning-with-python">
+    Deep Learning with Python, Chapter 6.2.2, François Chollet, Manning            
+</a>            
+https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
+<br>
+<br>
+https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
+<br>
+<br>
+https://arxiv.org/ftp/arxiv/papers/1701/1701.05923.pdf
+</small>
+</textarea>
+</section>
+
 <section data-markdown>
         <textarea data-template>
 ## Creating our very own sentiment analyzis
@@ -1203,10 +1239,6 @@ https://keras.io/layers/wrappers/#bidirectional
 * Kaggle Datasets: https://www.kaggle.com/datasets    
     </textarea>
     </section>
-    </div>
-
-</div>
-
     </div>
 
 </div>
