@@ -165,9 +165,11 @@ Vortragssprache Deutsch
 -->
 
         <section>
-            <h2>Bringing a risk calculator into production using tensorflow.js</h2>
+            <h3>Going to production</h3>
+            <h3>using</h3>
+            <h2>tensorflow.js</h2>
 
-            <p><a target="_blank" href="todo">
+            <p><a target="_blank" href="https://www.meetup.com/AI-JavaScript-London/events/255200826/">
                 AI.js London Meetup, October 2018
             </a></p>
         
@@ -175,8 +177,8 @@ Vortragssprache Deutsch
             </h4>
 
             <small>
-            <a href="https://djcordhose.github.io/ai/2018_ai_js.html">
-                https://djcordhose.github.io/ai/2018_ai_js.html</a>
+            <a href="http://bit.ly/ai-js-prod">
+                http://bit.ly/ai-js-prod</a>
             </small>
         
         </section>
@@ -189,7 +191,12 @@ Vortragssprache Deutsch
         </textarea>
     </section>
 
-        
+    <section>
+        <img src="img/tensorflowjs.png">
+        <p><small><a href="https://js.tensorflow.org/" target="_blank">https://js.tensorflow.org/</a></small></p>
+    </section>
+
+    
     <section data-markdown>
         <textarea data-template>
 ### Objective
@@ -352,6 +359,49 @@ console.log(await prediction.data());
 </textarea>
     </section>
 
+<section data-markdown>
+        <textarea data-template>
+### Great results
+
+<img src='img/manning/nn-reg.png' height="450">
+
+<p class="fragment"><em>BUT ARE THEY?</em></p>
+</textarea>
+    </section>
+
+
+    <section data-markdown>
+        <textarea data-template>
+### Going to production changes everything
+
+<div class="fragment">
+<img src='img/decision-boundaries/decision-boundaries-production.png' height="450">
+
+<small>
+    True for classic software as well as machine learning models
+    </small>
+</div>
+</textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Be careful with predictions outside of the area covered by training data
+
+<p class="fragment"><em>First: Be aware of the reasonable range of values</em></p>
+
+<p class="fragment">Options</p>
+* Add a warning
+* Reject requests in extended area
+* Scores in exteded area often like very biased towards one category (1.0 score)
+* Add likelihoods to scores
+
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb#scrollTo=hZp_oYJqBeOK    
+</small>
+</textarea>
+    </section>
+
         <section style="font-size: xx-large">
             <h2>Wrap Up</h2>
             <p><em>Training on beefy machine - deploy to browser</em></p>
@@ -361,6 +411,7 @@ console.log(await prediction.data());
                 <li class="fragment">Keras API is very close to tensorflow.js
                 <li class="fragment">Converting Keras models to tensorflow.js often works flawlessly
                 <li class="fragment">You can combine tensorflow.js with any JavaScript code
+                <li class="fragment">Going to production changes everything
 
                             </ul>
             <p>
@@ -369,8 +420,8 @@ console.log(await prediction.data());
                 <br>
             <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 <br>
-        <a href="https://djcordhose.github.io/ai/2018_ai_js.html">
-            https://djcordhose.github.io/ai/2018_ai_js.html</a>
+        <a href="http://bit.ly/ai-js-prod">
+            http://bit.ly/ai-js-prod</a>
     
             </p>
         </section>
@@ -391,6 +442,9 @@ console.log(await prediction.data());
             $('.preparation').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
+            // do we want this???
+            $('li').addClass('fragment')
+
             if (window.location.hostname.indexOf('localhost') !== -1) {
                 // only applies to presentation version
                 Reveal.configure({ controls: false });
