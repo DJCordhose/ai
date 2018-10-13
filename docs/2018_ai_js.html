@@ -384,17 +384,20 @@ console.log(await prediction.data());
 </textarea>
     </section>
 
-    <section data-markdown>
+    <section data-markdown style='font-size: xx-large'>
         <textarea data-template>
 ### Be careful with predictions outside of the area covered by training data
 
 <p class="fragment"><em>First: Be aware of the reasonable range of values</em></p>
 
 <p class="fragment">Options</p>
-* Add a warning
-* Reject requests in extended area
-* Scores in exteded area often like very biased towards one category (1.0 score)
+* For requests in extended area
+  * add a warning
+  * reject request
+* Identify suspicious scores
+  * in exteded area scores often are very biased towards one category (1.0 score)
 * Add likelihoods to scores
+  * Bayesian approaches are the new hype  
 
 <small>
 https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb#scrollTo=hZp_oYJqBeOK    
