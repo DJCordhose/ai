@@ -84,6 +84,8 @@ prediction or transfer learning.
 This might not sound like a big deal, but tight integration of Machine Learning with all the things that make the web
 great opens up a whole new world of applications in the areas of education, deployment, visualization, gaming,
 development, and overall UX. You will also learn how to do your own experiments.
+
+45 Minutes
 -->
 
 
@@ -242,11 +244,10 @@ https://t.co/TXuXNcemSJ https://t.co/SXLQw1UBek
 ### Preparation
 
 Load in advance and rehearse demos
+1. https://storage.googleapis.com/tfjs-vis/mnist/dist/index.html
 1. https://poloclub.github.io/ganlab/
-1. https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html
-1. https://aijs.rocks/
-1. https://storage.googleapis.com/tfjs-vis/mnist_internals/dist/index.html
-1. https://ml5js.org/docs/quick-start
+1. https://ml5js.org/docs/lstm-interactive-example
+1. https://ml5js.org/docs/style-transfer-webcam-example
             </script>
         </section>
 
@@ -286,7 +287,6 @@ Load in advance and rehearse demos
 
             </textarea>
         </section>
-    
 
             <section>
                 <h1>(I) Educate</h1>
@@ -318,7 +318,42 @@ Load in advance and rehearse demos
                 </a>
                 <p><small><a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a></small></p>
             </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Introduction using tfjs-vis
+
+<a href='https://storage.googleapis.com/tfjs-vis/mnist/dist/index.html'>
+    <img src='img/tfjs-vis.png' height="500px">
+</a>
+
+<small>
+https://github.com/tensorflow/tfjs-vis    
+</small>
+            </textarea>
+        </section>
     
+    <section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+### Projecting high dimensional data to 2d (t-SNE)
+
+Fast, tensorflow.js powered data projection in the browser 
+
+<a href='https://nicola17.github.io/tfjs-tsne-demo/'>
+<img src='img/t-sne-tensorflow.png' height="350px">
+</a>
+
+<small>
+https://nicola17.github.io/tfjs-tsne-demo/
+<br>
+https://ai.googleblog.com/2018/06/realtime-tsne-visualizations-with.html
+</small>
+</a>
+    </textarea>
+    </section>
+
+
+            
     <section data-markdown>
             <textarea data-template>
 ### Understanding binary Classifier using Logistic Regression
@@ -347,6 +382,34 @@ https://minsuk.com/research/papers/kahng-ganlab-vast2018.pdf
 </small>
 </textarea>
 </section>
+
+<section>
+<h3>Generating Celebreties - From Keras to tensorflow.js</h3>
+<p>Trained for two weeks on a single high-end GPU on CelebA-HQ data set (images of celebreties)</p>
+<div class="fragment" style="float: left">
+    <img src="img/unsupervised/gan-model-male2.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female2.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female1.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-male.png" height="200">
+</div>
+<p style="clear: both">
+<small>
+<a href="https://alantian.net/ganshowcase/" target="_blank">https://alantian.net/ganshowcase/</a>
+<br>
+<a href="https://github.com/alantian/ganshowcase" target="_blank">https://github.com/alantian/ganshowcase</a>
+<br>
+<a href="https://twitter.com/alanyttian/status/988242167998148608" target="_blank">https://twitter.com/alanyttian/status/988242167998148608</a>
+</small>
+                   
+</p>
+</section>                                
+    
 
             <section>
                 <h1>(II) Develop</h1>
@@ -436,7 +499,7 @@ https://minsuk.com/research/papers/kahng-ganlab-vast2018.pdf
     </textarea>
     </section>
             
-            <section>
+            <!-- <section>
                 <h1>(III) Play</h1>
                 <p class="fragment">Browser games can benefit from Machine Learning</p>
             </section>
@@ -485,62 +548,10 @@ http://web.sfc.keio.ac.jp/~t15704yn/falling/
     https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
     
     </textarea>
-    </section>
+    </section> -->
     
             <section>
-                <h1>(IV) Apps powered by AI</h1>
-                <p>AI-powered browser apps using ready made models</p>
-            </section>
-
-            <section data-markdown>
-                <textarea data-template>
-### Real-time pose estimation
-
-<img src='img/posenet_camera.gif' height="400px">
-
-<small>
-Demo: https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html
-<br>
-Links: https://twitter.com/random_forests/status/993639149780459520
-<br>
-Application: https://twitter.com/teropa/status/1001151524351959041
-</small>    
-            
-                </textarea>
-            </section>
-
-            <section data-markdown>
-                <textarea data-template>
-### Face Detection
-
-<img src='img/tfjs/bbt-face-recognition.gif' height="400px">
-
-<small>
-Demo: https://justadudewhohacks.github.io/face-api.js
-<br>
-Project: https://github.com/justadudewhohacks/face-api.js
-</small>    
-            
-                </textarea>
-            </section>
-
-            <section data-markdown>
-                <textarea data-template>
-### More
-
-<img src='img/tfjs/aijs-rocks.png' height="400px">
-
-<small>
-https://aijs.rocks/
-<br>
-https://twitter.com/EleanorHaproff/status/1035068222087811072    
-</small>    
-            
-                </textarea>
-            </section>
-
-            <section>
-                <h1>(V) Deploy</h1>
+                <h1>(III) Deploy</h1>
             </section>
 
             <section data-markdown>
@@ -563,25 +574,6 @@ https://twitter.com/EleanorHaproff/status/1035068222087811072
     
             </section>
 
-            
-    <section data-markdown>
-        <textarea data-template>
-    ### Going over WebGL to reach the GPU
-    
-    _We use fragment shaders to parallelize the tensor operations and use 2D color textures to store data. Operations trigger shader programs that run over textures and generate new textures (tensors)._
-    
-    @nsthorat via https://news.ycombinator.com/item?id=15856647
-    </textarea>
-    </section>
-        
-    <section data-markdown>
-            <textarea data-template>
-    <img src="img/tfjs/gtx_1060.png" height="500px">
-    
-    GPU usage when re-training for Pacman
-        </textarea>
-        </section>
-        
     
     <section>
         <h3>Scenario: Train using beefey machine using raw TensorFlow, deploy to browser</h3>
@@ -592,7 +584,7 @@ https://twitter.com/EleanorHaproff/status/1035068222087811072
 ### ML Car Insurance Risk Calculator
 
 <a href='html/calculator.html'>
-<img src='img/manning/calculator.png' height="450">
+<img src='img/manning/calculator.png' height="400">
 </a>
 <p><small>
     <a href='html/calculator.html' target="_blank">
@@ -639,34 +631,7 @@ https://twitter.com/EleanorHaproff/status/1035068222087811072
     </small></p>
     </section>
     
-<section>
-<h3>Generating Celebreties - From Keras to tensorflow.js</h3>
-<p>Trained for two weeks on a single high-end GPU on CelebA-HQ data set (images of celebreties)</p>
-<div class="fragment" style="float: left">
-    <img src="img/unsupervised/gan-model-male2.png" height="200">
-</div>
-<div class="fragment" style="float: left; padding-left: 25px">
-        <img src="img/unsupervised/gan-model-female2.png" height="200">
-</div>
-<div class="fragment" style="float: left; padding-left: 25px">
-        <img src="img/unsupervised/gan-model-female1.png" height="200">
-</div>
-<div class="fragment" style="float: left; padding-left: 25px">
-        <img src="img/unsupervised/gan-model-male.png" height="200">
-</div>
-<p style="clear: both">
-<small>
-<a href="https://alantian.net/ganshowcase/" target="_blank">https://alantian.net/ganshowcase/</a>
-<br>
-<a href="https://github.com/alantian/ganshowcase" target="_blank">https://github.com/alantian/ganshowcase</a>
-<br>
-<a href="https://twitter.com/alanyttian/status/988242167998148608" target="_blank">https://twitter.com/alanyttian/status/988242167998148608</a>
-</small>
-                   
-</p>
-</section>                                
-    
-    <section data-markdown>
+    <!-- <section data-markdown>
             <textarea data-template>
     ### Deployment to observablehq
     
@@ -675,7 +640,27 @@ https://twitter.com/EleanorHaproff/status/1035068222087811072
     https://beta.observablehq.com/@nsthorat/introduction-to-deeplearn-js
     </textarea>
     </section>
-            
+             -->
+
+                         
+    <section data-markdown>
+        <textarea data-template>
+    ### Going over WebGL to reach the GPU
+    
+    _We use fragment shaders to parallelize the tensor operations and use 2D color textures to store data. Operations trigger shader programs that run over textures and generate new textures (tensors)._
+    
+    @nsthorat via https://news.ycombinator.com/item?id=15856647
+    </textarea>
+    </section>
+        
+    <section data-markdown>
+            <textarea data-template>
+    <img src="img/tfjs/gtx_1060.png" height="500px">
+    
+    GPU usage when re-training for Pacman
+        </textarea>
+        </section>
+        
     <section data-markdown>
             <textarea data-template>
 ### Performance TensorFlow
@@ -725,30 +710,45 @@ From: <a target="_blank" href="https://docs.google.com/presentation/d/1QsaLOsl82
     </textarea>
     </section>
 
-    <section data-markdown>
-            <textarea data-template>
-# (VI) Visualize Interactively
-
-</textarea>
+    <section>
+            <h1>(IV) Apps powered by AI</h1>
+            <p>AI-powered browser apps using ready made models</p>
         </section>
-
-<section data-markdown>
-        <textarea data-template>
-### Introduction using tfjs-vis
-
-<a href='https://storage.googleapis.com/tfjs-vis/mnist/dist/index.html'>
-    <img src='img/tfjs-vis.png' height="500px">
-</a>
-
-<small>
-https://github.com/tensorflow/tfjs-vis    
-</small>
-            </textarea>
-        </section>
-    
 
         <section data-markdown>
-                <textarea data-template>
+            <textarea data-template>
+### Real-time pose estimation
+
+<img src='img/posenet_camera.gif' height="400px">
+
+<small>
+Demo: https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html
+<br>
+Links: https://twitter.com/random_forests/status/993639149780459520
+<br>
+Application: https://twitter.com/teropa/status/1001151524351959041
+</small>    
+        
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Face Detection
+
+<img src='img/tfjs/bbt-face-recognition.gif' height="400px">
+
+<small>
+Demo: https://justadudewhohacks.github.io/face-api.js
+<br>
+Project: https://github.com/justadudewhohacks/face-api.js
+</small>    
+        
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
 ### Machine Learning accessible for artists based on tensorflow.js
 
 <img src='img/ml5js.png'>
@@ -760,25 +760,24 @@ https://github.com/ml5js
 <br>
 https://itp.nyu.edu/adjacent/issue-3/ml5-friendly-open-source-machine-learning-library-for-the-web/
 </small>
-    </textarea>
+</textarea>
 </section>
 
-    <section data-markdown style="font-size: xx-large">
+        <section data-markdown>
             <textarea data-template>
-### Projecting high dimensional data to 2d (t-SNE)
+### More
 
-Fast, tensorflow.js powered data projection in the browser 
-
-<img src='img/t-sne-tensorflow.png' height="350px">
+<img src='img/tfjs/aijs-rocks.png' height="400px">
 
 <small>
-https://nicola17.github.io/tfjs-tsne-demo/
+https://aijs.rocks/
 <br>
-https://ai.googleblog.com/2018/06/realtime-tsne-visualizations-with.html
-</small>
-</a>
-    </textarea>
-    </section>
+https://twitter.com/EleanorHaproff/status/1035068222087811072    
+</small>    
+        
+            </textarea>
+        </section>
+
 
 
         <section>
