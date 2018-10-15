@@ -92,9 +92,14 @@
             }
         });
 
-        async function calculate(speed, age, miles) {
-            const model = await tf.loadModel('ml_insurance/model.json');
+        // init
+        let model = null;
+        (async () => {
+            model = await tf.loadModel('ml_insurance/model.json');
+        })();
 
+
+        async function calculate(speed, age, miles) {
             const prediction = model.predict(tf.tensor([[speed, age, miles]]));
             const value = await prediction.data();
             return value;
