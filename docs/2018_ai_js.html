@@ -148,25 +148,27 @@
     <div class="slides">
 
 <!--
-Talk: Machine Learning - wie mache das denn jetzt?
+Oliver’s talk will discuss how TensorFlow.js can solve real business problems, and he will demo how to build a small calculator for car insurance.
 
-Vielleicht hast du schon eine Idee davon, dass die Daten, die bei dir im Keller schlummern Gold wert sein könnten. Aber was
-kannst du konkret tun, um damit Machine Learning zu betreiben?
-
-Ohne Folien anhand von einem konkreten Datensatz werden wir uns dazu exemplarisch durch alle Phasen eines Projekts bewegen
-und dabei von der Analyse der Daten bis zur Produktivsetzung gehen.
-
-Wir werden dazu die typischen Bibliotheken aus dem Python Umfeld verwenden. Mit dabei sind Pandas, Numpy, Matplotlib, Sklearn
-und TensorFlow. Das alles wird auf dem von Google bereitgestellten Colab Service laufen und am Ende des Talks kannst du den
-komplett lauffähigen Code mit nach Hause nehmen und schon am nächsten Tag an deinem eigenen Daten ausprobieren.
-
-Vortragssprache Deutsch
-60 Minuten mit Spiel
+25 Minutes
 -->
 
+<section data-markdown class="local">
+        <textarea data-template>
+### Everyday TensorFlow.js
+
+@aijavascript
+
+Wifi: Reactor
+
+Password: Open123!
+
+Restrooms: Behind you on the right
+</textarea>
+</section>
+
         <section>
-            <h3>Going to production</h3>
-            <h3>using</h3>
+            <h3>Going to production with</h3>
             <h2>tensorflow.js</h2>
 
             <p><a target="_blank" href="https://www.meetup.com/AI-JavaScript-London/events/255200826/">
@@ -183,7 +185,16 @@ Vortragssprache Deutsch
         
         </section>
 
-    <section data-markdown>
+        <section data-markdown class="local">
+            <textarea data-template>
+### First question wins a free ticket to 
+## Serverless Computing London
+    
+https://serverlesscomputing.london/#tile_registration
+    </textarea>
+</section>
+
+<section data-markdown>
         <textarea data-template>
 <img src='img/fchollet-future-deployment.png'>
 
@@ -464,6 +475,7 @@ https://twitter.com/SeanPedersen96/status/1051452719997837313
         } else {
             // only applies to public version
             $('.preparation').remove();
+            $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
             // do we want this???
