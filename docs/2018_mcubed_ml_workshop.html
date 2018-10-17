@@ -173,24 +173,20 @@ and then turn to the idea of convolutional neural networks for image recognition
 Exercises will be on paper and in prepared Python notebooks, no need for any installation.    
  -->
 
-<section data-markdown class="preparation">
+<!-- <section data-markdown class="preparation">
         <textarea data-template>
 ### Preparation
     </textarea>
-</section>
+</section> -->
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
         <textarea data-template>
-            - Plot jenseits aller vernünftigen Werte auch für Idea to Prod und Tf.js Prod
-
-            - Resnet Modell Keras 
 - Auch Transfer Learning mit imagenet vortrainiert
 - Precision Recall f1 für Sentiment Analyse
-- Folie RNNs und Embeddings
 - Hyperparameter Search: https://github.com/autonomio/talos/blob/master/README.md  
 - Gradient Descent: https://twitter.com/_brohrer_/status/1050013482693926913
             </textarea>
-        </section>
+        </section> -->
 
         <section>
                 <h2>Introduction to Machine Learning</h2>
@@ -473,7 +469,7 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
     <section>
             <h3>Data: Quantity</h3>
             <img src='img/applications/decisions/classic.png' height="500px">
-            <p><small>We have 300 data sets, this is small</small></p>
+            <p><small>We have 1500 data sets, this is small</small></p>
         </section>
 
     <section>
@@ -942,6 +938,37 @@ http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
 </textarea>
 </section>
 
+<section>
+    <h3>How do Convolutions work - Image Kernels</h3>
+    <p><small>You might know from Photoshop etc., used in Convolutional Neural Networks</small></p>
+    <a href="http://setosa.io/ev/image-kernels/" target="_blank">
+        <img src="img/browser/setosa_io_image-kernels.png" height="300px">
+    </a>
+    <p>
+        <small>
+            <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
+        </small>
+    </p>
+</section>
+
+<!-- <section>
+<h3>Experiment with Image Kernels</h3>
+<ol>
+    <li class="fragment">How can a matrix of numbers represent an image? How could you encode color?</li>
+    <li class="fragment">Explain the effect the filter kernels Sharpen and Blur have on the sample image - explain the effect of the specific values to the result</li>
+    <li class="fragment">Starting from the identity kernel - how can you create a filter that highlights edges on the top of shown digits? What about the bottom?</li>
+</ol>
+<p>
+        <small>
+            <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
+            <br>
+            Sample image: <a 
+            href="https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg" target="_blank">
+            https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg</a>
+            
+        </small>
+    </p>
+</section> -->
 
 <section data-markdown>
     <textarea data-template>
