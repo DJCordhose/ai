@@ -201,19 +201,15 @@ Exercises will be on paper and in prepared Python notebooks, no need for any ins
         </a></small></p>
     </section>
 
+<section data-markdown class="local">
+    <textarea data-template>
+### Schedule
+
+<img src='img/mcubed-times.jpg' height="700">
+</textarea>
+</section>
+
     <section data-markdown>
-            <textarea data-template>
-    ## Introduce yourself, please
-            </textarea>
-        </section>
-    
-        <section data-markdown>
-                <textarea data-template>
-    ## Questions are welcome at any time
-            </textarea>
-        </section>
-                
-<section data-markdown>
         <textarea data-template>
 ### Our plan for toady
 
@@ -224,7 +220,20 @@ Exercises will be on paper and in prepared Python notebooks, no need for any ins
 </textarea>
 </section>
 
+<section data-markdown class="local">
+    <textarea data-template>
+## Questions, comments, critique are welcome at any time
+</textarea>
+</section>
+    
 
+
+    <section data-markdown class="local">
+            <textarea data-template>
+    ## Introduce yourself, please
+            </textarea>
+        </section>
+    
 <section data-markdown>
         <textarea data-template>
 ### PART I
@@ -342,24 +351,24 @@ Exercises will be on paper and in prepared Python notebooks, no need for any ins
         <div class="fragment">
         <pre><code contenteditable data-trim class="line-numbers python">
 if age < 25:
-if speed > 140:
-return red # young people, fast cars: high risk
-else:
-return yellow # young people: medium risk
+    if speed > 140:
+        return red # young people, fast cars: high risk
+    else:
+        return yellow # young people: medium risk
             </code></pre>
         </div>
         <div class="fragment">
         <pre><code contenteditable data-trim class="line-numbers python">
 if age > 75:
-return red # old people: high risk
+    return red # old people: high risk
             </code></pre>
         </div>
         <div class="fragment">
         <pre><code contenteditable data-trim class="line-numbers python">
 if miles_per_year > 30:
-return red # a lot of driving: high risk
+    return red # a lot of driving: high risk
 if miles_per_year > 20:
-return yellow #  a bit of driving: medium risk
+    return yellow #  a bit of driving: medium risk
             </code></pre>
         </div>
         <div class="fragment">
@@ -726,6 +735,68 @@ model.compile(loss='sparse_categorical_crossentropy',
              metrics=['accuracy'])
             </code></pre>
 </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Job of the optimizer
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/optimizer.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Backpropagation
+
+_Propagating the error from output layer backward_
+
+<img src="img/backprop.png" height="400px">
+
+<small>
+https://twitter.com/dsmilkov/status/1011974815811596288
+<br>
+https://google-developers.appspot.com/machine-learning/crash-course/backprop-scroll/    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Overfitting
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/overfit.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Underfitting
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/underfit.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Sweet Spot
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/sweet-spot.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+
 
 <section>
 <h3>What does the neural network learn?</h3>
