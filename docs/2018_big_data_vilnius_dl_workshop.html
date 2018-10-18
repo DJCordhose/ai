@@ -183,7 +183,14 @@ but you do not need any knowledge of it. Knowledge of any Object oriented langua
 
 <section data-markdown class="todo">
         <textarea data-template>
+- RNN reg as additional notebook  
+  - Create: https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru-reg.ipynb
 - Auch Transfer Learning mit imagenet vortrainiert
+  - https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
+- Embeddings
+  - Embeddings: Maths with Word2vec in Python
+  - load Word2vec? from rnn notebook
+- Deep Learning show images of more and more abstract feature abstraction and link  to viz
 - Precision Recall f1 für Sentiment Analyse
 - Hyperparameter Search: https://github.com/autonomio/talos/blob/master/README.md  
 - Gradient Descent: https://twitter.com/_brohrer_/status/1050013482693926913
@@ -193,7 +200,7 @@ but you do not need any knowledge of it. Knowledge of any Object oriented langua
         <section>
                 <h2>Introduction to Deep Learning with TensorFlow</h2>
         <p><a target="_blank" href="https://www.bigdataconference.lt/introduction-to-deep-learning/">
-            MCubed, London, October 2018
+            Big Data Conference Vilnius, November 2018
         </a></p>
         <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
         </h4>
@@ -1341,6 +1348,21 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ten
 </textarea>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+### If you are more interested in the details
+
+Here is a great presentation on a deep dive by @_brohrer_
+
+https://twitter.com/_brohrer_/status/1052516390593318912?s=03
+
+https://docs.google.com/presentation/d/1R-DnrghbU36jO8X4scbrrlx6gFyJHgSL3bD274sutng/edit
+
+https://www.youtube.com/watch?v=JB8T_zN7ZC0
+
+        </textarea>
+    </section>
+
     <section data-markdown>
         <textarea data-template>
 ## PART IV
@@ -1401,6 +1423,7 @@ https://projector.tensorflow.org
 * Switch to T-SNE projections
 * Zoom into a cluster
 * Have a look at the words in the cluster
+* What words do you find?
 * Are they semantically related?
 
 <small>
@@ -1495,14 +1518,16 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ten
 
 <section data-markdown>
         <textarea data-template>
-### Exercise
+### Exercise - Improve on the results and apply Regularization
 
+* Use the prepared notebook  
+* Execute the notebook and make sure you understand at least the part where the network is defined
 * Tweak number of neurons
-* Advanced: Make the RNN bidirectional
+* Make the RNN bidirectional (https://keras.io/layers/wrappers/#bidirectional)
 
-Can you improve on the results?
-
-https://keras.io/layers/wrappers/#bidirectional
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru-reg.ipynb
+</small>
 
     </textarea>
 </section>
