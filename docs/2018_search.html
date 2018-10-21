@@ -147,29 +147,27 @@
 <div class="reveal">
     <div class="slides">
 
-<!-- All the AI hype these days is around deep learning and that machines eventually are getting rid of us humans. However, the
-ground work of AI without which no self driving car and no AlphaGo Zero would work is search algorithms. In this talk we
-will use a simple game of exiting a maze to illustrate the differences between depth first and breadth first search. We will
-also solve the mystery around A* and what makes it such a powerful approach. In the next step we will look at how to compete
-against other players using adversarial search like the one used in the leading chess engine stockfish. You will understand
-Monte Carlo Tree Search which was used in Alpha(Go) Zero to beat the world's best Go players. -->
+<!-- 
+    
+All the AI hype these days is around deep learning and that machines eventually are getting rid of us humans. However,
+the ground work of AI without which no self driving car and no AlphaGo Zero would work is search algorithms.
 
-        <section>
-            <h2>Graph Search: The Silver Bullet of Symbolic AI and the Secret of AlphaGo Zero</h2>
-            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-            </h4>
-            <!-- <p><small><a href="xxx">
-                xxx
-            </a></small></p> -->
-        </section>
-        <section data-markdown class="todo">
-                <textarea data-template>
-        https://code.fb.com/web/rapid-release-at-massive-scale/
-    </textarea>
+In this talk we will use a simple game of exiting a maze to illustrate the differences between depth first and breadth
+first search. We will also solve the mystery around A* and what makes it such a powerful approach.
+
+In the next step we will look at how to compete against other players using adversarial search like the one used in the
+leading chess engine stockfish. You will understand Monte Carlo Tree Search which was used in Alpha(Go) Zero to beat
+the world’s best Go players.
+-->
+
+<section data-markdown class="todo">
+        <textarea data-template>
+https://code.fb.com/web/rapid-release-at-massive-scale/
+</textarea>
 </section>
 
-    <section data-markdown class="todo">
-        <textarea data-template>
+<section data-markdown class="todo">
+<textarea data-template>
 ### High level look at Search
 
 <img src='img/j2bryson-search.jpg'>
@@ -182,46 +180,191 @@ Monte Carlo Tree Search which was used in Alpha(Go) Zero to beat the world's bes
 <small>
 https://www.dur.ac.uk/research/directory/staff/?mode=pdetail&id=12916&sid=12916&pdetail=93713
 </small>
-    </textarea>
+</textarea>
 </section>
 
-    <section data-markdown class="todo">
-        <textarea data-template>
+<section data-markdown class="todo">
+<textarea data-template>
 - https://qiao.github.io/PathFinding.js/visual/
-  - man kann auch zeichnen die Hinternisse
-  - Kann auch zeigen, dass Manhatten Distance als Heuristic nicht admissible ist wenn man auch quer gehen kann
+- man kann auch zeichnen die Hinternisse
+- Kann auch zeigen, dass Manhatten Distance als Heuristic nicht admissible ist wenn man auch quer gehen kann
 - Applications of MCTS: https://twitter.com/DJCordhose/status/1017886304384831488  
 
 - MCTS per Hand als Grafik
 
 - http://theory.stanford.edu/~amitp/GameProgramming/
 
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+<textarea data-template>
+How did @DeepMindAI's #AlphaGo Zero manage to beat the best Go player in the world? It used a powerful combination of a specialized tree search and deep learning. I explain how in this video! https://t.co/CSf9rrpo1J
+(https://twitter.com/sirajraval/status/1029264425373450240?s=03)        
     </textarea>
 </section>
 
-<section data-markdown class="todo">
-    <textarea data-template>
-How did @DeepMindAI's #AlphaGo Zero manage to beat the best Go player in the world? It used a powerful combination of a specialized tree search and deep learning. I explain how in this video! https://t.co/CSf9rrpo1J
-(https://twitter.com/sirajraval/status/1029264425373450240?s=03)        
-            </textarea>
-        </section>
-        
+
+
+<!-- <section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation
+    </textarea>
+</section> -->
+
 <section>
-    <h2>Search</h2>
+        <h2>Graph Search:</h2>
+        <h3>The Silver Bullet of Symbolic AI and the Secret of AlphaGo Zero</h3>
+<p><a target="_blank" href="https://mlconference.ai/machine-learning-advanced-development/search-the-silver-bullet-of-symbolic-ai-and-the-secret-of-alphago-zero/">
+    ML Conference, December 2018
+</a></p>
+<h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+</h4>
+<p><small><a href="http://bit.ly/mlconf-search">
+    http://bit.ly/mlconf-search
+</a></small></p>
 </section>
 
 <section data-markdown class="todo">
+<textarea data-template>
+* Story:
+  * from path Finding
+  * to game search
+  * to monte carlo game search to
+  * monte carlo tree search
+  * to AlphaZero 
+
+* add more theory from Michaels lecture
+    </textarea>
+</section>
+        
+
+<section>
+    <h2>Path Finding</h2>
+</section>
+
+        <section data-markdown>
     <textarea data-template>
-### Example: 3 in a row
+### A simple Example - Robot Run
+<img src="img/search/robot_run.jpg" alt="Alpha Beta" height="450px">
 
-A game the ancient Vikings played as well
+Robot needs to find Portal/Goal
 
-<img src='img/3-in-a-row.jpg'>
+</textarea>
+</section>
 
-TODO: Tackle with alpha beta or min max
-        </textarea>
-        </section>
+<section>
+        <h2>Step 1: Knowledge Representation</h2>
+<p class="fragment">Find a way to encode the maze to make it accesible for a search algorithm</p>
 
+<pre><code contenteditable data-trim class="line-numbers python fragment">
+terrain = [
+    ["_", "R", "_", "_"],
+    ["B", "_", "B", "_"],
+    ["_", "_", "B", "_"],
+    ["B", "_", "G", "_"]
+]
+</code></pre>
+<p class="fragment"><small><a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Search.ipynb'>
+    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Search.ipynb</a></small></p>
+</section>
+        
+
+<section data-markdown>
+    <textarea data-template>
+### How to find a path
+
+<img src="img/search/search.jpg" height="500px">
+
+<small>By incrementally expanding possibilities</small>
+</textarea>
+</section>
+    
+<section data-markdown>
+        <textarea data-template>
+### Depth First
+
+* traverses exapnded tree in a depth first notion
+* simple: can even be implemented usign a stack and recursion
+* not guarenteed to find the best route
+* probably not very efficient
+    
+https://en.wikipedia.org/wiki/Depth-first_search
+    </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Breadth First
+
+* traverses exapnded tree level by level
+* typically implemented using open/closed-list
+* guranteed to find the best path
+* needs much more memory (to store nodes yet to be expanded in open list)
+* might still expand too many nodes
+                
+https://en.wikipedia.org/wiki/Breadth-first_search
+    </textarea>
+    </section>
+    
+<section data-markdown>
+        <textarea data-template>
+### A*
+Why do we blindly wander around, don't we know in which direction to walk?    
+            
+* traverses exapnded tree level by level
+* typically implemented using open/closed-list
+* guranteed to find the best path
+* needs much more memory (to store nodes yet to be expanded in open list)
+* might still expand too many nodes
+                
+https://en.wikipedia.org/wiki/Breadth-first_search
+    </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Comparing Algorithms
+
+<img src='img/breadth-first-search.png'>
+                
+https://qiao.github.io/PathFinding.js/visual/
+    </textarea>
+    </section>
+
+    
+<section>
+    <h2>Adverserial Search</h2>
+</section>
+
+<section>
+    <p>Chess Computers have defeated humans because</p>
+    <div class="fragment" style="float: left">
+        <img src="img/cray2.png" height="250">
+        <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
+    </div>
+    <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+    x 100.000 =
+    </div>
+    <div class="fragment" style="float: left">
+      <img src="img/titan5.jpg" height="250" style="float: right">
+        <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
+    </div>
+</section>
+
+
+<section data-markdown class="todo">
+        <textarea data-template>
+    ### Example: 3 in a row
+    
+    A game the ancient Vikings played as well
+    
+    <img src='img/3-in-a-row.jpg'>
+    
+    TODO: Tackle with alpha beta or min max
+            </textarea>
+            </section>
+    
 
 <section data-markdown class="todo">
         <textarea data-template>
@@ -293,25 +436,6 @@ Mittlere Züge bis zum Spielende: aus WP.opd, Seite 20
         </textarea>
         </section>
     
-        <section data-markdown>
-    <textarea data-template>
-### A simple Example - Robot Run
-<img src="img/search/robot_run.jpg" alt="Alpha Beta" height="450px">
-
-Robot needs to find Portal/Goal
-</textarea>
-</section>
-        
-<section data-markdown>
-    <textarea data-template>
-### How to find a path
-
-<img src="img/search/search.jpg" height="450px">
-
-By expanding possibilities
-</textarea>
-</section>
-
 <section>
     <h2>Game Play</h2>
 </section>
@@ -434,6 +558,9 @@ https://en.wikipedia.org/wiki/Stockfish_(chess)
             $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
+                // do we want this???
+                $('li').addClass('fragment')
+
             if (window.location.hostname.indexOf('localhost') !== -1) {
                 // only applies to presentation version
                 Reveal.configure({ controls: false });
@@ -443,6 +570,10 @@ https://en.wikipedia.org/wiki/Stockfish_(chess)
             }
             // applies to all versions
             $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
