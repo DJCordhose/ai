@@ -160,13 +160,13 @@ leading chess engine stockfish. You will understand Monte Carlo Tree Search whic
 the world’s best Go players.
 -->
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
         <textarea data-template>
 https://code.fb.com/web/rapid-release-at-massive-scale/
 </textarea>
-</section>
+</section> -->
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
 <textarea data-template>
 ### High level look at Search
 
@@ -181,36 +181,15 @@ https://code.fb.com/web/rapid-release-at-massive-scale/
 https://www.dur.ac.uk/research/directory/staff/?mode=pdetail&id=12916&sid=12916&pdetail=93713
 </small>
 </textarea>
-</section>
+</section> -->
 
-<section data-markdown class="todo">
-<textarea data-template>
-- https://qiao.github.io/PathFinding.js/visual/
-- man kann auch zeichnen die Hinternisse
-- Kann auch zeigen, dass Manhatten Distance als Heuristic nicht admissible ist wenn man auch quer gehen kann
-- Applications of MCTS: https://twitter.com/DJCordhose/status/1017886304384831488  
-
-- MCTS per Hand als Grafik
-
-- http://theory.stanford.edu/~amitp/GameProgramming/
-
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-<textarea data-template>
-How did @DeepMindAI's #AlphaGo Zero manage to beat the best Go player in the world? It used a powerful combination of a specialized tree search and deep learning. I explain how in this video! https://t.co/CSf9rrpo1J
-(https://twitter.com/sirajraval/status/1029264425373450240?s=03)        
-    </textarea>
-</section>
-
-
-
-<!-- <section data-markdown class="preparation">
+<section data-markdown class="preparation">
         <textarea data-template>
 ### Preparation
+
+1. Go through MCTS phases
     </textarea>
-</section> -->
+</section>
 
 <section>
         <h2>Graph Search:</h2>
@@ -225,22 +204,50 @@ How did @DeepMindAI's #AlphaGo Zero manage to beat the best Go player in the wor
 </a></small></p>
 </section>
 
-<section data-markdown class="todo">
-<textarea data-template>
-* Story:
-  * from path Finding
-  * to game search
-  * to monte carlo game search to
-  * monte carlo tree search
-  * to AlphaZero 
+<section data-markdown>
+        <textarea data-template>
+### Our Story
 
-* add more theory from Michaels lecture
+1. from path Finding
+1. to game search
+1. to monte carlo game search and tree search to
+1. to Alpha(Go) Zero
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### AlphaGo Zero
+
+* Two algorithms
+  * Reinforcement Learning
+  * Monte Carlo Tree Search
+
+* One ML Approach: deep-learning function approx
     </textarea>
 </section>
-        
 
 <section>
-    <h2>Path Finding</h2>
+        <h3>Machine Learning and AI</h3>
+        <p>Why I like the term artificial intelligence: I think it's good to have an umbrella term for the field that encompasses a
+        range of techniques – ML, knowledge rep, planning, heuristic search, goal formation, behavior modeling, etc. – and it's the
+        one we have.</p>
+        <p><small><a target="_blank" href="https://twitter.com/mjntendency/status/970091564864286726">https://twitter.com/mjntendency/status/970091564864286726</a></small></p>
+    </section>
+
+        
+
+        <section data-markdown>
+    <textarea data-template>
+## Part I
+### Path Finding
+
+* Games
+* Route Planing
+
+http://theory.stanford.edu/~amitp/GameProgramming/Applications.html
+</textarea>
 </section>
 
         <section data-markdown>
@@ -307,138 +314,84 @@ https://en.wikipedia.org/wiki/Breadth-first_search
     </textarea>
     </section>
     
+
+<section data-markdown>
+        <textarea data-template>
+### Understanding Breadth First Search
+
+<img src='img/breadth-first-search.png' height="500px">
+                
+<small>
+https://qiao.github.io/PathFinding.js/visual/
+</small>
+    </textarea>
+    </section>
+
+
 <section data-markdown>
         <textarea data-template>
 ### A*
 Why do we blindly wander around, don't we know in which direction to walk?    
             
-* traverses exapnded tree level by level
-* typically implemented using open/closed-list
-* guranteed to find the best path
-* needs much more memory (to store nodes yet to be expanded in open list)
-* might still expand too many nodes
-                
-https://en.wikipedia.org/wiki/Breadth-first_search
-    </textarea>
+* informed search, expands much less nodes than breadth first
+* cost spent + estimated rest cost defines path to try
+* guranteed to find the best path when heuristic underestimates rest cost
+* variations used for games or route planing
+
+<small>
+https://en.wikipedia.org/wiki/A*_search_algorithm
+<br>
+https://en.wikipedia.org/wiki/Admissible_heuristic
+http://theory.stanford.edu/~amitp/GameProgramming/
+</small>
+</textarea>
     </section>
+
+<section>
+<h3>Admissible Search Heuristics</h3>
+<div class="fragment" style="float: left">
+    <img src="img/search/search-problem.png" height="300">
+    <p><small>Search, diagonal allowed</small></p>
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/search/non-admissible-manhattan.png" height="300">
+        <p><small>Manhattan (non-admissible):<br> length 16.24</small></p>
+    </div>
+<div class="fragment" style="float: left; padding-left: 25px">
+    <img src="img/search/admissible-euclidean.png" height="300">
+    <p><small>Euclidean (admissible):<br> length 15.07</small></p>
+</div>
+<p style="clear: both">
+        <br>
+        <small><em>
+<a href='https://qiao.github.io/PathFinding.js/visual/'>
+        https://qiao.github.io/PathFinding.js/visual/
+    </a>
+</em>
+</small>
+</p>
+</section>                                
+
+        <section data-markdown>
+    <textarea data-template>
+## Part II
+### Adverserial Search
+### Applying Search to Games    
+</textarea>
+</section>
 
 <section data-markdown>
-        <textarea data-template>
-### Comparing Algorithms
+    <textarea data-template>
+### Example: 3 in a row
 
-<img src='img/breadth-first-search.png'>
-                
-https://qiao.github.io/PathFinding.js/visual/
-    </textarea>
-    </section>
+<img src='img/3-in-a-row.jpg' height="500px">
 
-    
-<section>
-    <h2>Adverserial Search</h2>
-</section>
-
-<section>
-    <p>Chess Computers have defeated humans because</p>
-    <div class="fragment" style="float: left">
-        <img src="img/cray2.png" height="250">
-        <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
-    </div>
-    <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
-    x 100.000 =
-    </div>
-    <div class="fragment" style="float: left">
-      <img src="img/titan5.jpg" height="250" style="float: right">
-        <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
-    </div>
-</section>
-
-
-<section data-markdown class="todo">
-        <textarea data-template>
-    ### Example: 3 in a row
-    
-    A game the ancient Vikings played as well
-    
-    <img src='img/3-in-a-row.jpg'>
-    
-    TODO: Tackle with alpha beta or min max
-            </textarea>
-            </section>
-    
-
-<section data-markdown class="todo">
-        <textarea data-template>
-### Alpha-Beta Pruning
-
-<img src='img/haw/alpha_beta_pruning.jpg'>
-            </textarea>
-            </section>
-<section data-markdown class="todo">
-        <textarea data-template>
-### Game Search
-
-Full Search often not feasible (Zahlen von Michael klauen aus den Folien, WP.odp, Seite 16)
-* Limit in Depth: Mini Max / Alpha Beta Pruning
-* Limit in Breadth: Monte-Carlo Tree Search
-* Do we have a evaluation heuristic? No? MCTS
-    </textarea>
-    </section>
-    
-    <section data-markdown class="todo">
-            <textarea data-template>
-### Reasonable Heuristic is cruical
-
-* Good solutions available for chess
-* No good solutions for Go
-    * Only a win as a state is a reliable indication
-    * Need to search to the end
-    * Branching Factor Higher than Chess as well
-
+<small>
+A game the ancient Vikings played as well
+</small>
+<!-- TODO: Tackle with alpha beta or min max -->
         </textarea>
         </section>
-        
-        <section data-markdown class="todo">
-                <textarea data-template>
-### Monte Carlo Game Search
-
-* Start from a next move beginning from an initial state
-* For each next move
-    * Play a game to the _end_ using a random set of moves
-    * Repeat for a number of times
-    * Count number of times for win, loose, draw
-* Choose the move with the best probability for a win
-
-Choose number of random experiment wisely based on branching factor
-
-https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Pure_Monte_Carlo_game_search
-            </textarea>
-            </section>
-        
-            <section data-markdown class="todo">
-                    <textarea data-template>
-### Monte Carlo Game Search
-
-<img src='img/haw/monte_carlo_game_search.jpg'>
-                        </textarea>
-                        </section>
-                <section data-markdown class="todo">
-                    <textarea data-template>
-Mittlere Züge bis zum Spielende: aus WP.opd, Seite 20
-                </textarea>
-                </section>
-
-        <section data-markdown class="todo">
-            <textarea data-template>
-### Monte Carlo Tree Search
-
-* https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/
-* https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
-        </textarea>
-        </section>
-    
-<section>
-    <h2>Game Play</h2>
-</section>
 
 <!-- http://www.dokchess.de/_downloads/szoerner_majug2012_architekturentwurf_schach_deploy.pdf -->
 <section data-markdown >
@@ -510,6 +463,117 @@ Bad local evaluation
 But this means Stalemate and a Draw
 </textarea>
 </section>
+
+
+<section>
+    <p>Chess Computers have defeated humans because</p>
+    <div class="fragment" style="float: left">
+        <img src="img/cray2.png" height="250">
+        <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
+    </div>
+    <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+    x 100.000 =
+    </div>
+    <div class="fragment" style="float: left">
+      <img src="img/titan5.jpg" height="250" style="float: right">
+        <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
+    </div>
+</section>
+
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Size of complete Search Tree
+
+* _Tic Tac Toe_: 10<sup>5</sup>
+* _Connect Four_: 10<sup>21</sup>
+* _Chess_: 10<sup>123</sup>
+* _Backgammon_: 10<sup>144</sup>
+* _Go_: 10<sup>360</sup>
+
+To compare
+* _Number of Atoms in Human Body_: 10<sup>27</sup>
+* _Atoms in Earth_: 10<sup>49</sup>
+* _Atoms in Milky Way_: 10<sup>68</sup>
+* _Atoms in Universe_: 10<sup>78</sup>
+
+    </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Average number of moves
+
+* _Connect Four_: 18
+* _Backgammon_: 28
+* _Chess_: 40
+* _Go_: 75
+
+        </textarea>
+        </section>
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+### Alpha-Beta Pruning
+
+<img src='img/haw/alpha_beta_pruning.jpg'>
+            </textarea>
+            </section> -->
+<section data-markdown>
+        <textarea data-template>
+### Game Search
+
+Full search mostly just not feasible
+* Limit in Depth: Mini Max / Alpha Beta Pruning
+* Limit in Breadth: Monte-Carlo Tree Search
+  * Do we have a evaluation heuristic? No? MCTS
+    </textarea>
+    </section>
+    
+    <section data-markdown>
+            <textarea data-template>
+### Reasonable Heuristic is cruical
+
+* Good solutions available for chess
+* No good solutions for Go
+    * Only a win as a state is a reliable indication
+    * Need to search to the end
+    * Branching Factor Higher than Chess as well
+
+        </textarea>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Mini Max
+
+<img src='img/search/Minimax.png'>
+
+<small>
+https://en.wikipedia.org/wiki/Minimax    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Alpha–beta pruning
+
+* maintains two values, alpha and beta
+* alpha: minimum score of the maximizing player in a branch
+* beta: maximum score of the minimizing player in a branch
+* branch can be pruned if
+  * beta ≤ alpha
+  * as this will never happen if players play well
+* can reach approx. twice the depth of minimax in the same amount of time  
+
+<small>
+https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning    
+</small>
+</textarea>
+</section>
+
+
 <section data-markdown>
     <textarea data-template>
 ### Intuition for Alpha Beta Pruning
@@ -524,7 +588,10 @@ No matter what Min does, Max can always win in leftmost branch, no need to check
 ### Complete Search Tree for Robot Run
 <img src="img/search/mini-max-tree.jpg" alt="Alpha Beta" height="450px">
 
+<small>
 Top Right Branch can be pruned completely
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Play.ipynb
+</small>
 </textarea>
 </section>
 
@@ -541,6 +608,250 @@ https://en.wikipedia.org/wiki/Stockfish_(chess)
 
 </textarea>
 </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Part III
+### Monte Carlo Methods
+</textarea>
+</section>
+
+        
+        <section data-markdown>
+                <textarea data-template>
+### Monte Carlo Game Search
+
+* Start from a next move beginning from an initial state
+* For each next move
+    * Play a game to the _end_ using a random set of moves
+    * Repeat for a number of times
+    * Count number of times for win, loose, draw
+* Choose the move with the best probability for a win
+
+<small>
+Choose number of random experiment wisely based on branching factor
+https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Pure_Monte_Carlo_game_search
+</small>
+            </textarea>
+            </section>
+        
+            <section data-markdown>
+                    <textarea data-template>
+### Example: Monte Carlo Game Search
+
+<img src='img/search/monte_carlo_game_search.jpg' height="550px">
+                        </textarea>
+                        </section>
+
+                        
+        <section data-markdown>
+            <textarea data-template>
+### Monte Carlo Tree Search
+
+Loops in four phases
+1. Selection
+2. Expansion
+3. Simulation
+4. Back-Propagation
+
+<small>
+https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/
+</small>
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Selection
+
+Choose a node to expand next 
+
+<img src='img/search/mcts_selection.png'>
+
+<small>
+<code>wins / number of times played</code>
+</small>
+        </textarea>
+        </section>
+
+        <section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+### Exploration vs Exploitation
+
+_Rather improve on states known as good or have a look at unknown moves?_
+
+* wi: number of wins for the node considered after the i-th move
+* ni: number of simulations for the node considered after the i-th move
+* Ni: total number of simulations after the i-th move
+* c: exploration parameter - theoretically equal to 2; in practice usually chosen empirically
+
+<script type="math/tex; mode=display">
+{\displaystyle {\frac {w_{i}}{n_{i}}}+{\sqrt (c {\frac {\ln N_{i}}{n_{i}})}}}    
+            </script>
+
+* first component: exploitation; it is high for moves with high average win ratio
+* second component: exploration; it is high for moves with few simulations            
+            
+<small>
+https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
+</small>
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Expansion
+
+Expand node, add a random child
+
+<img src='img/search/mcts_expansion.png'>
+
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Simulation
+
+Play a Monte Carlo Simulation
+
+<img src='img/search/mcts_simulation.png'>
+
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Back-Propagation
+
+Update Scores
+
+<img src='img/search/mcts_backprop.png'>
+
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### More Applications of MCTS
+
+<img src='img/search/mcts-molecules.jpg' height="450px">
+
+<small>
+    make molecules tailored to a specific problem            
+    https://twitter.com/DJCordhose/status/1017886304384831488  
+</small>     
+            </textarea>
+            </section>
+            
+<section data-markdown>
+    <textarea data-template>
+## Part IV
+### MCTS and Alpha(Go) Zero
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Alpha(Go) Zero
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="400px">
+</a>
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
+<br>
+Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
+<br>
+Explanation: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
+</small>
+</textarea>
+</section>
+        
+        <section data-markdown>
+            <textarea data-template>
+<img src='img/TrainingTime-Graph-171019-r01.gif'>
+
+<small>
+https://deepmind.com/blog/alphago-zero-learning-scratch/    
+</small>
+            </textarea>
+        </section>
+        
+        <section data-markdown>
+            <textarea data-template>
+### MCTS in AlphaGo Zero
+
+* choose child to expand using heuristic of game state
+* determined by Convolutional Neural Network
+* CNN trained by which state leads to a win
+* CNN also gives estimation of which player is going to win
+* on other information went into training
+
+<small>
+https://deepmind.com/blog/alphago-zero-learning-scratch/    
+</small>
+            </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Alpha Zero
+    
+* generalized version of AlphaGo Zero
+* can learn to play any deterministic full information game
+* actually trained to play chess and shogi
+* beat a version of chess world champion Stockfish
+
+<small>
+https://en.wikipedia.org/wiki/AlphaZero
+<br>
+https://deepmind.com/research/alphago/alphazero-resources/
+</small>
+                </textarea>
+            </section>
+    
+    
+
+        <section data-markdown>
+            <textarea data-template>
+### Links for AlphaGo Zero
+
+* https://deepmind.com/blog/alphago-zero-learning-scratch/
+* https://web.stanford.edu/~surag/posts/alphazero.html
+* https://hackernoon.com/the-3-tricks-that-made-alphago-zero-work-f3d47b6686ef
+            </textarea>
+        </section>
+
+
+<section style="font-size: xx-large">
+    <h2>Wrap Up</h2>
+    <p><em>Search is omnipresent in AI</em></p>
+    <ul>
+        <li class="fragment">Path finding is dominated by variants of A*
+        <li class="fragment">Chess can be solved using tweaked Alpha-Beta-Search
+        <li class="fragment">For a high branching factor and/or no good heuristic use Monte Carlo Methods 
+        <li class="fragment">Monte Carlo is an advanced Monte Carlo Method 
+        <li class="fragment">Alpha(Go) Zero uses MCTS together with Supervised Deep Learning and CNNs 
+        <li class="fragment">AlphaGo Zero beats all known Go players 
+
+    </ul>
+    <p>
+            <em>Graph Search: The Silver Bullet of Symbolic AI and the Secret of AlphaGo Zero</em>
+        <br>
+        <br>
+        <small>
+    <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        <br>
+<a href="http://bit.ly/mlconf-search">
+    http://bit.ly/mlconf-search</a>
+</small>
+    </p>
+</section>
+
+        
+
     </div>
 
 </div>
@@ -590,6 +901,8 @@ https://en.wikipedia.org/wiki/Stockfish_(chess)
         progress: true,
         history: true,
         center: true,
+        width: 1100,
+
 
         transition: 'fade', // none/fade/slide/convex/concave/zoom
 
