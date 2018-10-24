@@ -194,6 +194,36 @@ We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflo
             </a></small></p>
         </section>
 
+        <section data-markdown>
+    <textarea data-template>
+### Structure 
+1. Data Preparation
+1. Training
+1. Evaluation
+1. Production
+1. Post-Production
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Part I: 
+## Data Preparation
+
+* Collection
+* Analysis
+* Clearning
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-pearl-datascience.png' height="600px">
+<small>
+https://twitter.com/yudapearl/status/1055014100613427200    
+</small>
+    </textarea>
+    </section>
 
                 <section data-markdown class="todo">
             <textarea data-template>
@@ -335,6 +365,52 @@ https://twitter.com/fchollet/status/1039676179970584576
 </textarea>
 </section>
 
+<section data-markdown>
+    <textarea data-template>
+### Part IV: 
+## Production
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Going to production changes everything
+
+Every deployment of a newly trained model is like a major release in software development
+* needs to be tested like this
+* or you need to make sure it rather is like a minor or bugfix release
+  * make incremental changes
+  * combine models
+
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+
+Take over parts from:
+- d2d Talk
+  * Schildkröte
+- ai.js
+
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Predictions outside of the trained range 
+
+    A neural network deployed in the wild may be asked to make predictions for inputs
+that were drawn from a different distribution than that of the training data. A
+plethora of work has demonstrated that it is easy to find or synthesize inputs for
+which a neural network is highly confident yet wrong.
+
+<small>
+https://arxiv.org/abs/1810.09136
+</small>
+</textarea>
+</section>
 
 
 <section data-markdown>
