@@ -176,28 +176,132 @@ Vorausgesetzt wird dabei kein Wissen über Machine Learning.
         </textarea>
         </section>
 
-        <section data-markdown>
-            <textarea data-template>
-### Eckpunkte „Strategie Künstliche Intelligenz“ der Bundesregierung       
 
-* Deutschland „weltweit führenden Standort für KI“
-* neue Anwendungen z. B. in der Öffentlichen Verwaltung sollen erschlossen werden
-* „europäische Antwort auf datenbasierte Geschäftsmodelle“
+    <section data-markdown>
+        <textarea data-template>
+### Unser Szenario
 
-<small>https://www.egovernment-computing.de/oeffentliche-verwaltung-im-zentrum-der-ki-a-734734/
-<br>
-http://www.taz.de/Foerderung-neuer-Technologie/!5518286/
-</small>
+* Wir sind CTO in einem innovativen Versicherungsunternehmen für Kraftfahrzeuge
+* Anders als herkömmliche Versicherer bestimmen wir die Beitragsklasse anhand tatsächlich auftretender Schadensfälle
+
+<img src='img/pixabay/accident-151668_1280.png' height="300px">
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Wir sollen einen "Car Insurance Risk Calculator" für Neukunden bauen
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<!-- <p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p> -->
+</textarea>
+    </section>
+    
+
+<section data-markdown>
+    <textarea data-template>
+### Wie baut man so etwas?
+
+* Es gibt Informationen über bestehende Kunden
+* Warum nicht ein bisschen Analyse und Business-Logik?
 </textarea>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+<img src='img/sketch/classic-development.jpg'>
+    </textarea>
+    </section>
+    
 
+<section data-markdown>
+    <textarea data-template>
+### Explorative Analyse
+<img src='img/sns-pairplot.png' height="550px">
 
-<section>
-    <h4>AI (Artificial Intelligence) / ML (Machine Learning) is Opportunity</h4>
-    <img src="opportunity.png" height="450">
-    <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
+</textarea>
 </section>
+    
+        <section>
+            <h3>Ansatz: Von Hand kodierte Regeln</h3>
+            <div class="fragment">
+            <pre><code contenteditable data-trim class="line-numbers python">
+if age < 25:
+    if speed > 140:
+        return red # young people, fast cars: high risk
+    else:
+        return yellow # young people: medium risk
+                </code></pre>
+            </div>
+            <div class="fragment">
+            <pre><code contenteditable data-trim class="line-numbers python">
+if age > 75:
+    return red # old people: high risk
+                </code></pre>
+            </div>
+            <div class="fragment">
+            <pre><code contenteditable data-trim class="line-numbers python">
+if miles_per_year > 30:
+    return red # a lot of driving: high risk
+if miles_per_year > 20:
+    return yellow #  a bit of driving: medium risk
+                </code></pre>
+            </div>
+            <div class="fragment">
+            <pre><code contenteditable data-trim class="line-numbers python">
+return green # otherwise: low risk
+                </code></pre>
+            </div>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+## Fertig!
+            </textarea>
+            </section>
+            
+        <section data-markdown>
+                <textarea data-template>
+## Fertig?
+
+* Was meint ihr?
+* Können wir das so lassen?
+* Taugt der Ansatz überhaupt?
+            </textarea>
+            </section>
+        <section data-markdown>
+                <textarea data-template>
+## Jede Story braucht einen Wolf
+
+<img src='img/gorner-wolf.png'>
+
+<small>https://twitter.com/martin_gorner/status/1055265426442088448</small>
+            </textarea>
+            </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Bewertung klassische Business-Logik
+
+* Sind die Regeln "richtig"?
+* Sind das alle Regeln?
+* ca. 43% korrekte Vorhersagen auf Kundendaten
+* raten wäre 33%
+* Wie komplex müssten sie sein, um bessere Vorhersagen zu machen?
+* Wie komplex dürften die Regeln sein, damit sie generell genug sind?
+* Wie hält man wachsende Regelmengen wartbar?
+            </textarea>
+            </section>
+
+            <section>
+                <h3>Alternative</h3>
+                    <h2>Supervised Machine Learning</h2>
+                </section>
 
 <section data-markdown>
         <textarea data-template>
@@ -210,12 +314,21 @@ Now is the perfect time to get involved in the deep learning community, just as 
 https://jaxenter.com/deep-learning-essential-tool-developers-147773.html
 </textarea>
 </section>
+                
+                <section data-markdown>
+                        <textarea data-template>
+<img src='img/sketch/supervised-ml.jpg' height="600px">
+                    </textarea>
+                </section>
+<section data-markdown>
+        <textarea data-template>
+### Machine Learning eignet sich am besten wenn
 
-<section>
-    <h4>AI (Artificial Intelligence) / ML (Machine Learning) is Opportunity</h4>
-    <img src="opportunity.png" height="450">
-    <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
-</section>
+* man viele Beispieldaten hat
+* man mit Unsicherheit in der Vorhersage oder mit Fehlern leben kann
+* die Aufgabe nicht klar oder nur abstrakt formuliert werden kann (_Wer ist ein guter Kunde?_)
+            </textarea>
+            </section>
 
 <section data-markdown>
         <textarea data-template>
@@ -231,7 +344,7 @@ https://developers.google.com/machine-learning/crash-course/ml-intro
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
 <textarea data-template>
 
 <img src='img/twitter-norvig-ml.png' height="500px">
@@ -241,85 +354,56 @@ https://twitter.com/DynamicWebPaige/status/1053805631377879040
 https://developers.google.com/machine-learning/crash-course/ml-intro
 </small>
 </textarea>
-</section>
-
-            <section>
-                    <h3>Ein Fallbeispiel</h3>
-                    <p>Kunden-Ranking für KfZ-Versicherung</p>
-                    <img src="img/insurance/automobile-insurance.png" height="400px">
-                    <p><small>Wie würde ich (47) mit einem 56-PS-Auto abschneiden?</small></p>
-                </section>
+</section> -->
 
 
-                <section>
-                    <h2>Wie automatisiert man das?</h3>
-                </section>
-    
-    <section data-markdown>
-            <textarea data-template>
-    ### Explorative Analyse
-    <img src='img/sns-pairplot.png' height="550px">
-    
-        </textarea>
-        </section>
         <section data-markdown>
                 <textarea data-template>
-        <img src='img/sketch/classic-development.jpg'>
-            </textarea>
-            </section>
-            
-            
+    <img src='img/MELLI.jpg' height="650px">
+                    </textarea>
+                    </section>
+
                 <section>
-                    <h3>Ansatz: Von Hand kodierte Regeln</h3>
-                    <div class="fragment">
-                    <pre><code contenteditable data-trim class="line-numbers python">
-    if age < 25:
-        if speed > 140:
-            return red # young people, fast cars: high risk
-        else:
-            return yellow # young people: medium risk
-                        </code></pre>
-                    </div>
-                    <div class="fragment">
-                    <pre><code contenteditable data-trim class="line-numbers python">
-    if age > 75:
-        return red # old people: high risk
-                        </code></pre>
-                    </div>
-                    <div class="fragment">
-                    <pre><code contenteditable data-trim class="line-numbers python">
-    if miles_per_year > 30:
-        return red # a lot of driving: high risk
-    if miles_per_year > 20:
-        return yellow #  a bit of driving: medium risk
-                        </code></pre>
-                    </div>
-                    <div class="fragment">
-                    <pre><code contenteditable data-trim class="line-numbers python">
-    return green # otherwise: low risk
-                        </code></pre>
-                    </div>
-                </section>            
-            <section>
-                <h3>Keine tollen Ergebnisse</h3>
-                <p>Sind das alle Regeln? Sind die richtig?</p>
-                <div class="fragment">
-                        <img src="img/insurance/manual.png" height="400px">
-                        <p><small>ca. 43% korrekte Vorhersagen auf unbekannten Daten (raten wäre 33%)</small></p>
-                </div>        
-            </section>
+                        <h3>Wir gucken also von der Datenseite</h3>
+                        <img src="img/insurance/automobile-insurance.png" height="450px">
+                        <p>Wie würde ich (47) mit meinem 56-PS-Auto abschneiden?</p>
+                    </section>
+            
         
-                    <section>
-                            <h2>Supervised Machine Learning</h2>
-                        </section>
-                         
-                        <section data-markdown>
-                                <textarea data-template>
-        <img src='img/sketch/supervised-ml.jpg' height="600px">
-                            </textarea>
-                        </section>
+        <!-- <section>
+            <h3>Keine tollen Ergebnisse</h3>
+            <p>Sind das alle Regeln? Sind die richtig?</p>
+            <div class="fragment">
+                    <img src="img/insurance/manual.png" height="400px">
+                    <p><small>ca. 43% korrekte Vorhersagen auf unbekannten Daten (raten wäre 33%)</small></p>
+            </div>        
+        </section>
 
             <section data-markdown>
+                <textarea data-template>
+    ### Eckpunkte „Strategie Künstliche Intelligenz“ der Bundesregierung       
+
+    * Deutschland „weltweit führenden Standort für KI“
+    * neue Anwendungen z. B. in der Öffentlichen Verwaltung sollen erschlossen werden
+    * „europäische Antwort auf datenbasierte Geschäftsmodelle“
+
+    <small>https://www.egovernment-computing.de/oeffentliche-verwaltung-im-zentrum-der-ki-a-734734/
+    <br>
+    http://www.taz.de/Foerderung-neuer-Technologie/!5518286/
+    </small>
+    </textarea>
+    </section> -->
+
+
+
+<!-- <section>
+    <h4>AI (Artificial Intelligence) / ML (Machine Learning) is Opportunity</h4>
+    <img src="opportunity.png" height="450">
+    <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
+</section> -->
+
+
+            <!-- <section data-markdown>
         <textarea data-template>
 <img src='img/twitter-rohrer-roles.png' height="600px">
 <small>
@@ -333,26 +417,11 @@ https://twitter.com/_brohrer_/status/1054490122580881408
     ### ML ist eher Forschung als Software Entwicklung
     <img src='img/ml_is_not_programming.jpg' height="550px">
         </textarea>
-        </section>
+        </section> -->
     
-        <section data-markdown>
-                <textarea data-template>
-    <img src='img/MELLI.jpg' height="650px">
-                    </textarea>
-                    </section>
-    
-        <section data-markdown>
-                <textarea data-template>
-    ### Machine Learning eignet sich am besten wenn
-    
-    * man viele Beispieldaten hat
-    * man mit Unsicherheit in der Vorhersage oder mit Fehlern leben kann
-    * die Aufgabe nicht klar oder nur abstrakt formuliert werden kann (_Wer ist ein guter Kunde?_)
-                    </textarea>
-                    </section>
     
 
-<section data-markdown>
+<!-- <section data-markdown>
     <textarea data-template>
 ### Validierung</h3>
 
@@ -362,7 +431,7 @@ Generalisierung, nicht perfekte Reproduktion ist unser Ziel</p>
 
 </textarea>
 </section>
-                    
+                     -->
 <section>
     <h3>Strategien</h3>
     <img src='img/applications/decisions/classic.png' height="500px">
@@ -408,6 +477,15 @@ https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-
 </div>        
 </textarea>
     </section>
+
+<section>
+            <h3>Zum Vergleich: Ergebnisse unserer Business-Logik</h3>
+            <div class="fragment">
+                    <img src="img/insurance/manual.png" height="400px">
+                    <p><small>ca. 43% korrekte Vorhersagen auf unbekannten Daten (raten wäre 33%)</small></p>
+            </div>        
+        </section>
+
 
 <section data-markdown>
     <textarea data-template>
@@ -761,10 +839,11 @@ https://twitter.com/teropa/status/1001151524351959041
 <!-- </small> -->
 </section>
 
-<section>
+<section style="font-size: xx-large">
     <h3>Zusammenfassung</h3>
     <ul>
         <li class="fragment">Machine Learning kann bei bestehenden Daten von diesen abstrahieren und generalisieren
+        <li class="fragment">Machine Learning kann eine Alternative zu expliziter Business-Logik sein
         <li class="fragment">Allgemeines Weltwissen exisitert aber nicht
         <li class="fragment">Auch ohne Daten kann über Reinforcement Learning gelernt werden
         <li class="fragment">KI/ML Anwendungen sind längst in unserem Leben
@@ -811,6 +890,10 @@ https://twitter.com/teropa/status/1001151524351959041
             }
             // applies to all versions
             $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
