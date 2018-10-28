@@ -167,11 +167,18 @@ go to production quickly. These steps include checking / cleaning the data, gett
 plotting it, creating a base line for your model to see if it really performs well, feature selection, validate the
 model for over- and underfitting, and fine tuning the parameters of your model.
 
-We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflow for this. -->
+We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflow for this.
 
- 
+45 Minutes
 
- 
+-->
+
+<section data-markdown class="todo">
+        <textarea data-template>
+* too long? Good flow?
+</textarea>
+</section>
+
 <section data-markdown class="preparation">
         <textarea data-template>
 ### Preparation
@@ -179,10 +186,9 @@ We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflo
     </textarea>
 </section>
 
-
         <section>
             <h2>Machine Learning from Idea to Production</h2>
-            <h2>or Machine Learning is the new punk</h2>
+            <!-- <h2>or Machine Learning is the new punk</h2> -->
             <p><a target="_blank" href="https://www.bigdataconference.lt/Oliver-Zeigermann/">
                 Keynote, Big Data Conference Vilnius, November 2018
             </a></p>
@@ -193,6 +199,38 @@ We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflo
                 http://bit.ly/steps-keynote
             </a></small></p>
         </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Objective
+
+_Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
+
+<img src='img/pixabay/accident-151668_1280.png'>
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p>
+</textarea>
+    </section>
+
+    <section>
+        <h3>Customer Data - Risk of Accidents</h3>
+        <img src="img/manning/all.png" height="500px" class="fragment">
+        <p class="fragment">
+            <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
+        </p>
+    </section>
 
         <section data-markdown>
     <textarea data-template>
@@ -220,14 +258,26 @@ https://developers.google.com/machine-learning/guides/text-classification/
 
 <section data-markdown>
     <textarea data-template>
-### Part I: 
+### Part I
 ## Data Preparation
 
 * Collection
+* Cleaning
 * Analysis
-* Clearning
 </textarea>
 </section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-trask-engineering.png' height="550px">
+<small>
+https://twitter.com/iamtrask/status/1045620902367514625
+<br>
+http://martin.zinkevich.org/rules_of_ml/rules_of_ml.pdf
+</small>
+    </textarea>
+    </section>
+
 
 <section data-markdown>
         <textarea data-template>
@@ -237,14 +287,54 @@ https://twitter.com/yudapearl/status/1055014100613427200
 </small>
     </textarea>
     </section>
+<section data-markdown>
+        <textarea data-template>
+### Data is King
 
-    <section>
-        <h3>Example: Customer Data - Risk of Accidents</h3>
-        <img src="img/manning/all.png" height="500px" class="fragment">
-        <p class="fragment">
-            <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
-        </p>
+_collecting data might be the hardest part of the job_
+
+* but also the most important
+* no data, no supervised machine learning
+* if you have a simulator, reinforcement learning might be an option
+    
+    </textarea>
     </section>
+    
+
+    <section data-markdown>
+    <textarea data-template>
+### Basic Check on Collected Data
+
+<img src='img/df_describe.png' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Clean Data and Select Features
+
+<img src='img/applications/data.png' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Experiment 2: Data Cleaning und Feature Selection
+
+_Data Cleaning_
+* Typos: Califorina
+* Outliers: Delete line or replace with decent value
+* Doubles: Delete
+* Missing Value: Delete line or replace with imputed value
+
+_Feature Selection_
+* Make sure which value to predict
+* Row missig more than 50% of values: do not use
+* Explore dependencies to decide what use for training input
+            </textarea>
+            </section>
 
     <section data-markdown>
         <textarea data-template>
@@ -254,7 +344,7 @@ https://twitter.com/yudapearl/status/1055014100613427200
     </textarea>
     </section>
 
-    <section data-markdown>
+    <!-- <section data-markdown>
         <textarea data-template>
 ### Correlations
 <img src='img/correlation.png' height="500px">
@@ -281,96 +371,82 @@ https://twitter.com/yudapearl/status/1055014100613427200
             </a>
             <p><small>correlation coefficient (r) above each figure</small></p>
             <p>Notice: figures at the bottom row obviously are correlated, just not linearly </p>
-            </section>
+            </section> -->
 
 <section data-markdown>
     <textarea data-template>
-### Part II: 
+### Part II 
 ## Training
-</textarea>
-</section>
-    
-
-                <section data-markdown class="todo">
-            <textarea data-template>
-### Explaining your models
-
-- LIME: https://github.com/marcotcr/lime/blob/master/README.md
-- Anchor: https://github.com/marcotcr/anchor/blob/master/README.md
-- Google Score (slide exists, position correctly)
-- This deserves some serious consideration #datascience #MachineLearning https://t.co/63BzEjHBuy
-(https://twitter.com/rupertthomas/status/1052690824629288960?s=03)
 </textarea>
 </section>
 
 <section data-markdown>
         <textarea data-template>
-### What’s your ML Test Score? A rubric for ML production systems
+### Baselines
+
+* we must be careful not to fool ourselves
+* we can never be quite sure what is the highest possible score
+* but we can provide a baseline of a prediction with very little effort
+* every model must be matched to this baseline
 
 <small>
-https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf
+https://blog.insightdatascience.com/always-start-with-a-stupid-model-no-exceptions-3a22314b9aaa
+<br>
+https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-c8d82ce642b0    
 </small>
-
-Presented at NIPS 2016
-
-https://nips.cc/Conferences/2016/Schedule?showEvent=6255
 </textarea>
 </section>
-
-
-
-        <section data-markdown class="todo">
-            <textarea data-template>
-### Sanity Checks / Biases
-
-your model contains all biases and truths of the training data
-
-* https://www.blog.google/technology/ai/new-course-teach-people-about-fairness-machine-learning/amp/
-  * https://developers.google.com/machine-learning/crash-course/fairness/video-lecture
-  * https://twitter.com/JeffDean/status/1053512817083465729
-* https://twitter.com/tdietterich/status/1052680788389507073  
-
-</textarea>
-</section>
-
-
-
-        <section data-markdown class="todo">
-            <textarea data-template>
-- Prod 
-  - erst tf.js, dann wenn Call von anderen Servern oder offline: Cloud ML                
-  - aus ai.js Talk übernehmen
-  - Aus d2d Prod Talk hineren Teil übernehmen
-- Das hier als Grundlage für WJAX
-</textarea>
-</section>
-
-    <section data-markdown class="todo">
-            <textarea data-template>
-- Demokratisierung von ML, Colab = Hardware, TensorFlow, Sklearn = Software, aber Wissen müssen wir mehr tun
-- steps
-Schritt 1: Daten erheben und so schnell wie möglich mit plotly/matplotlib visualisieren
- - Bewertung: was ist da, macht ML Sinn? 
--  No: Interactive Viz for Domain Expert?
-- yes: what is the value proposition?
-- Start small: 
-  - To eat humble pie 
-  - Tweet von fchollet
-- ML better than gut feeling: 
-  - Usually, "I have a social radar" means "I make categorical, discriminatory judgments about strangers after 30s of interaction, based on subjective personal preferences, including whether I like your face, and I am extremely confident about it"
-  (https://twitter.com/fchollet/status/1050233453801689088?s=03)  
-</textarea>
-    </section>
     
-    <section data-markdown class="todo">
-            <textarea data-template>
--  https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-c8d82ce642b0
-- Real Life
-  - https://twitter.com/iamtrask/status/1045620902367514625?s=03
-  - http://martin.zinkevich.org/rules_of_ml/rules_of_ml.pdf
+<section data-markdown>
+    <textarea data-template>
+### Baseline 1: Random
+
+<img class="fragment" src='img/decision-boundaries/random.png' height="500px">
+
+<p class="fragment"><small>It still gets 33% percents right</small></p>
+</textarea>
+</section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Baseline 2: KNN, n=39
+
+<img class="fragment" src='img/insurance/knn_39.png' height="500px">
+
+<p class="fragment"><small>Already 70% accuracy on test data, found using grid search with cross validation</small></p>
+</textarea>
+</section>
+    
+<section data-markdown>
+        <textarea data-template>
+### Generalization
+
+* The most important property of a model is if it generalizes well to unknown data
+* A machine learning model is of no use if it only works well on the data it has been trained on
+  * If it was, the easiest way to achieve this would be a dictionary translating from a set of inputs to the known output
+* Conceptually it is a little bit hard to optimize for something you do not know
+* So, we introduce a little trick here
+
 </textarea>
 </section>
 
+<section data-markdown>
+    <textarea data-template>
+### Split known data into training and test
+
+<img class='fragment' src='img/scans/generalization.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Use some training data for validation
+
+<img class='fragment' src='img/scans/generalization1.jpg'>
+
+</textarea>
+</section>
 
 <section data-markdown>
     <textarea data-template>
@@ -385,49 +461,197 @@ https://twitter.com/Reza_Zadeh/status/1051194782448402432
         </textarea>
 </section>
 
-<!-- <section data-markdown>
-        <textarea data-template>
-### Naive Computer Vision model that hasn't been trained on both states of a glass door :)
-<video controls src="video/dog-window.mp4" 
-type="video/mp4" height="400"></video>
 
-<small>https://twitter.com/Reza_Zadeh/status/1041184293559533568</small>
+
+<section id='overfitting'>
+        <h3>The Issue: Overfitting</h2>
+    <div>
+    <div style="float: left">
+        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
+        <p>
+            <small><em>Training Score</em></small>
+        </p>
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='5'>
+        <img src="img/scans/elements/down.jpg" height="200">
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='4'>
+        <img src="img/scans/elements/up.jpg" height="200">
+    </div>
+    <div style="float: left">
+            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
+            <p>
+                <small><em>Test Score</em></small>
+            </p>
+    </div>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and test scores clearly divert</em></p>
+
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Regularization
+
+_Process to counter overfitting_
+
+Each ML strategy has its own means of Regularization, e.g.
+* KNN: more neighbors
+* Decision Trees: reduce depth, use ensenbles
+* SVM: gamma and cost
+* NN: Dropout, Batch Normalization, Reduced Capacity, Reduced Training Time
+            </textarea>
+            </section>
+    
+
+<section data-markdown>
+        <textarea data-template>
+### Great results
+
+<img src='img/manning/nn-reg.png' height="450">
+
+<p class="fragment"><small>Up to 80% accuracy on test data using a regularized neural networks</small></p>
+</textarea>
+    </section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Part III 
+## Evaluation
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Great results
+
+<img src='img/manning/nn-reg.png' height="450">
+
+<p class="fragment"><em>BUT ARE THEY?</em></p>
+</textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Predictions outside of the trained range 
+
+A neural network deployed in the wild may be asked to make predictions for inputs
+that were drawn from a different distribution than that of the training data. 
+
+A
+plethora of work has demonstrated that it is easy to find or synthesize inputs for
+which a neural network is highly confident yet wrong.
+
+<small>
+https://arxiv.org/abs/1810.09136
+</small>
+</textarea>
+</section>
+
+
+    <section data-markdown>
+        <textarea data-template>
+### Looking at areas not covered by training data
+
+<div class="fragment">
+<img src='img/decision-boundaries/decision-boundaries-production.png' height="450">
+
+<small>
+        https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb#scrollTo=hZp_oYJqBeOK    
+        </small>
+        
+</div>
+</textarea>
+    </section>
+
+<section data-markdown style='font-size: xx-large'>
+        <textarea data-template>
+### How to deal with those blank spots?
+
+<p class="fragment"><em>First: Be aware of the reasonable range of values</em></p>
+
+* For requests in extended area
+  * add a warning
+  * reject request
+* Identify suspicious scores
+  * in exteded area scores often are very biased towards one category (1.0 score)
+* Add likelihoods to scores
+  * Bayesian approaches are the new hype  
+* Try to get more data, even incrementally
+  * Use user feedback, give it lower training score
+  
+</textarea>
+    </section>
+
+<!-- <section data-markdown>
+            <textarea data-template>
+### Sanity Checks / Biases
+
+your model contains all biases and truths of the training data
+
+* https://www.blog.google/technology/ai/new-course-teach-people-about-fairness-machine-learning/amp/
+  * https://developers.google.com/machine-learning/crash-course/fairness/video-lecture
+  * https://twitter.com/JeffDean/status/1053512817083465729
+* https://twitter.com/tdietterich/status/1052680788389507073  
+
 </textarea>
 </section> -->
 
 
-
 <section data-markdown>
-<textarea data-template>
-### Machine Learning is Lab Work
-<img src='img/ml_is_not_programming.jpg' height="550px">
+    <textarea data-template>
+### Check for bias / unfairness
+
+your model contains all biases and truths of the training data
+
+* Your model might perform well for a few users, but badly for others
+* Accuracy and loss only show the average
+* Some areas might not have properly covered with data samples (including test)
+* Curse of High Dimensions
+
+https://developers.google.com/machine-learning/fairness-overview/
 </textarea>
 </section>
 
 <section data-markdown>
-        <textarea data-template>
-<img src='img/fchollet-model-bias.png' height="550">
+    <textarea data-template>
+### Dealing with Bias / Unfairness
 
-<small>
-https://twitter.com/fchollet/status/1039676179970584576
-<small>
+* log real requests
+* log matching user behavior
+* evaluate those requests (Elastic)
+* if you recommend, do users follow your advice?
+* if there is probabilty, how good is it?
+* do you see bias/unfairness?
+* put more emphasis on data that suffers from bias
 
-        </textarea>
-    </section>
-
-<section data-markdown data-background="img/MELLI.jpg">
-<textarea data-template>
-<!-- <img src='img/MELLI.jpg' height="650px"> -->
+Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
 </textarea>
 </section>
 
-<section data-markdown>
-<textarea data-template>
-### Machine Learning works best when
+        <section data-markdown>
+            <textarea data-template>
+### Explaining your models
 
-* you have a lot of sample data
-* you can deal with uncertainty or errors
-* the task is unclear or hard to defined clearly (Who is a good customer?)
+LIME: 
+
+https://github.com/marcotcr/lime/blob/master/README.md
+Anchor: 
+
+https://github.com/marcotcr/anchor/blob/master/README.md
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### More resources
+
+* Oliver Zeigermann, M3, 2018: http://bit.ly/m3-ml-quality
+
+* What’s your ML Test Score? A rubric for ML production systems
+  * <a href='https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf'>PDF</a>
+  * https://nips.cc/Conferences/2016/Schedule?showEvent=6255
 </textarea>
 </section>
 
@@ -439,8 +663,60 @@ https://twitter.com/fchollet/status/1039676179970584576
 </section>
 
 <section data-markdown>
+        <textarea data-template>
+### Serving Models
+
+* Be very sure you have the same pipeline of steps when serving as you had for training and evaluation
+* Log real world predictions (if ok with <a href='https://gdpr-info.eu/'>GDPR</a>)
+
+
+<small>It might make sense to use: http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html</small>
+
+<small>Same goes for TensorFlow: https://github.com/tensorflow/transform / https://beam.apache.org/</small>
+
+        </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Version together
+
+1. Code for Cleaning and Trained Model
+1. Trained Model
+1. Serving Code
+1. Training data might not be feasible because of size or <a href='https://gdpr-info.eu/'>GDPR</a>
+            </textarea>
+        </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Possible Deployment Enviroments
+
+* Google Cloud ML
+  * Can serve TensorFlow and Sklearn
+  * your model and calls are in Google's control
+  * Takes away the scaling and installation burden
+
+* Local Server
+  * TensorFlow Serving
+  * Flask Server  
+
+* Browser: https://js.tensorflow.org
+                </textarea>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Part V: 
+## Post-Production
+    </textarea>
+    </section>
+
+<section data-markdown>
     <textarea data-template>
 ### Going to production changes everything
+
+True for classic software as well as machine learning models
 
 Every deployment of a newly trained model is like a major release in software development
 * needs to be tested like this
@@ -451,805 +727,50 @@ Every deployment of a newly trained model is like a major release in software de
 </textarea>
 </section>
 
-<section data-markdown class="todo">
-    <textarea data-template>
-
-Take over parts from:
-- d2d Talk
-  * Schildkröte
-- ai.js
-
-
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Predictions outside of the trained range 
-
-    A neural network deployed in the wild may be asked to make predictions for inputs
-that were drawn from a different distribution than that of the training data. A
-plethora of work has demonstrated that it is easy to find or synthesize inputs for
-which a neural network is highly confident yet wrong.
-
-<small>
-https://arxiv.org/abs/1810.09136
-</small>
-</textarea>
-</section>
-
-
 <section data-markdown>
         <textarea data-template>
-# From here material only
-</textarea>
-</section>
+### Continuity in model predictions
 
-
-        <section>
-            <h4>AI (Artificial Intelligence) / ML (Machine Learning) is Opportunity</h4>
-            <img src="opportunity.png" height="450">
-            <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
-        </section>
-
-<section data-markdown>
-        <textarea data-template>
-### Wir Entwickler von KI tragen Verantwortung
-
-<img src='img/ml-responsibilty.png' height="450px">
-<small>
-https://twitter.com/Smerity/status/1004487181879005184
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Google und Verantwortung
-
-<img src='img/google-ai-principles.png' height="450px">
-<small>
-https://twitter.com/algorithmwatch/status/1004957404193271808
-<br>
-https://www.blog.google/topics/ai/ai-principles/
-</small>
-</textarea>
-</section>
-
-        <section>
-            <h2>Was macht Machine Learning aus?</h2>
-        </section>
-
-        <section data-markdown data-background="img/sketch/classic-development.jpg">
-            <textarea data-template>
-    <!-- <img src='img/sketch/classic-development.jpg'> -->
+* People who use your model regularly will expect most things to stay the way they know it
+* Even if it not totally accurate
+* That might mean you can not train a model from scratch even if you have better data or a better model architecture
+* Consider mixing more than one model
         </textarea>
-        </section>
-
-        <section data-markdown data-background="img/sketch/supervised-ml.jpg">
-            <textarea data-template>
-<!-- <img src='img/sketch/supervised-ml.jpg'> -->
-        </textarea>
-    </section>
-
-        
-
-        <section data-markdown>
-            <textarea data-template>
-### Daher: KI hat kein Weltwissen
-
-* Von euch trainierte Systeme "wissen" nur was ihr ihnen einfüttert
-* Allgemeine Zusammenhänge sind eurer KI nicht bekannt
-* Was nicht in euren Daten steckt kann auch die KI nicht wissen
-* Für eine sinnvolle Generalisierung braucht ihr viele Daten
-* Was viel bedeutet hängt von vielen Faktoren ab
-* Pro "Konzept" 5000 Beispiele ist ein guter Richtwert 
-
-        </textarea>
-        </section>
-
-        <!-- <section data-markdown>
-                <textarea data-template>
-        
-<img src="img/twitter-dog-generalization.jpg" height="550">
-    
-<small>https://twitter.com/Kyle_Byers/status/1040913435423395840</small>
-</textarea>
-</section> -->
-
-
-<!-- <section data-markdown>
-        <textarea data-template>
-### ML ist eher Forschung als Software Entwicklung
-<img src='img/ml_is_not_programming.jpg' height="550px">
-    </textarea>
-    </section>
- -->
-    <section data-markdown>
-        <textarea data-template>
-### Was bedeutet das für ein kommerziellen Einsatz
-
-* Erfolg kann nicht garantiert werden
-* Experimente in Time-Boxes ratsam
-* Ein paar Prozente mehr oder weniger machen in der Regel keinen Unterschied
-* Fehlschläge erwarten und einkalkulieren
-* Fehlschläge ehrlich dokumentieren und kommunizieren
-
-In der Regel entscheiden die Daten über Erfolg oder Misserfolg
-    </textarea>
-    </section>
-
-    <section data-markdown>
-            <textarea data-template>
-<img src='img/twitter-cholett-applications.png' height="570px">
-
-<small>
-https://twitter.com/fchollet/status/1035951190276681728
-</small>
-                </textarea>
-                </section>
-
-    <!-- <section data-markdown>
-            <textarea data-template>
-<img src='img/twitter-cholett-self-driving-year.png'>
-
-https://twitter.com/fchollet/status/1035272806466904065
-                </textarea>
-                </section> -->
-                <!-- <section>
-                        <h2>Gretchenfrage</h2>
-                        <h3 class="fragment">Was für Daten hast du oder kannst du besorgen?</h3>
-                        <h4 class="fragment">Die Antwort auf die Frage bestimmt, wie sehr du von Machine Learning profitieren kannst</h4>
-                    </section>
-            
-                    <section>
-                            <h3>Eine Analogie</h3>
-                            <p class="fragment">Die Machine Learning Technologie ist der Motor</p>
-                            <p class="fragment">Eure Daten sind der Treibstoff</p>
-                            <p class="fragment"><em>Nur wenn beides da ist läuft die Maschine</em></p>
-                    </section>
-             -->
-                
-<!-- <section>
-        <h3>
-            3 Arten von Machine Learning
-        </h3>
-        <img src="img/sketch/types-of-ml.png" height="550px">
-    </section>
-
-<section>
-        <h2>Reinforcement Learning</h2>
-        <h3>Am ehesten die Roboter, die uns Menschen ausrotten</h3>
-    </section>
-
-<section data-markdown>
-<textarea data-template>
-### Paper Clips
-
-_AI verwandelt die Welt ratzfatz in Büroklammern_
-
-<img src='img/applications/paper-clip.png' height="400">
-
-<small>
-https://en.wikipedia.org/wiki/Universal_Paperclips
-<br>
-http://www.decisionproblem.com/paperclips
-</small>
-</textarea>
-</section>
-            
-
-<section data-markdown style="font-size: x-large">
-<textarea data-template>
-### Alpha(Go) Zero
-
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px">
-<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="400px">
-</a>
-
-* Monte Carlo Tree Search und Deep Convolutional Neural Networks
-* Zielfunktion ist Sieg
-* schlagen jeden Menschen und Maschine ohne menschliche Expertise (in perfect information game)
-
-<small>
-Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
-<br>
-Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
-<br>
-Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-<textarea data-template>
-### World Model
-
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<img src='img/rf/world-models.gif' height="300px">
-</a>
-
-Lernen wie man Auto fährt ohne menschliche Expertise mit LSTMs
-
-<small>
-Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-model-using-python-and-keras-64fb388ba459
-<br>
-Code: https://github.com/AppliedDataSciencePartners/WorldModels
-</small>
-</textarea>
-</section> -->
-
-<!-- 
------------------------------
-        TEIL III: AI ist bereits da
------------------------------
- -->
-
- 
- <section data-markdown>
-        <textarea data-template>
-# KI ist längst in unserem Leben
-
-</textarea>
-</section>
-
-<section>
-    <h3>Real World AI is booming</h3>
-    <img src="chollet-twitter-applications.png">
-    <p><small><a href="https://twitter.com/fchollet/status/906582914829246464?s=03" target="_blank">
-        https://twitter.com/fchollet/status/906582914829246464?s=03</a></small></p>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-## Wenn man sich daran gewöhnt hat, wird sie aber ganz selbstverständlich
-</textarea>
-</section>
-
-<section>
-    <p>Schachprogramme haben Menschen überwunden weil</p>
-    <div class="fragment" style="float: left">
-        <img src="img/cray2.png" height="250">
-        <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
-    </div>
-    <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
-    x 100.000 =
-    </div>
-    <div class="fragment" style="float: left">
-      <img src="img/titan5.jpg" height="250" style="float: right">
-        <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
-    </div>
-</section>
-
-<section>
-        <h4>Maschinen verstehen Sprache und können sich dazu verhalten</h4>
-        <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
-    </section>
-
-        <section>
-            <h3>Machine Learning in Google Sheets</h3>
-            <div style="transform: scale(1.2); margin-left: 100px">
-                <div style="height: 250px; float: left;">
-                    <img src="img/google_sheets/screenshot_depArrDelay.png">
-                </div>
-                <div style="height: 250px; float: left;">
-                    <img src="img/google_sheets/screenshot_distance_airtime.png">
-                </div>
-                <div style="height: 250px; float: left">
-                    <img src="img/google_sheets/screenshot_depDelay_outliers.png">
-                </div>
-                <div style="height: 250px; float: left;">
-                    <img src="img/google_sheets/screenshot_histogram_distance.png">
-                </div>
-            </div>
-            <p><br><br><br><br><br><br><br>
-                <em>Explore</em> finds Correlations, Outliers, etc.
-            </p>
-        </section>
-
-
-    <section>
-            <h4>Ganz normal: Textvervollständigung</h4>
-            <img src="img/text-completion.jpg" height="600px">
-        </section>
-    
-<section data-markdown>
-        <textarea data-template>
-### Siri uses a deep neural network
-
-_Just to detect if someone said 'Hey, Siri'_
-
-<img src='img/TrainingDNN-1.png' height="400px">
-
-<small>
-https://machinelearning.apple.com/2017/10/01/hey-siri.html
-</small>    
-        </textarea>
-    </section>
-
- <section>
-        <h3>Die Post testet 2018 selbstfahrende Lieferfahrzeuge</h3>
-        <p class="fragment"><em>"Sie werden in der Lage sein, dem Zusteller autonom zu folgen - sodass er nicht vor jedem Hauseingang aus- und wieder einsteigen und wenige Meter fahren muss."</em></p>
-        <img src="img/post_dhl_truck.jpg" height="200">
-        <p><small><a href="http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html" target="_blank">http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html</a>
-        </small></p>
-    </section>
-
-    <section>
-            <h3>Face Detection</h3>
-            <p>Entsperrt mein Laptop und mein Handy</p>
-            <img src="img/facial-recognition.png">
-            <p><small><a href="https://aws.amazon.com/rekognition/" target="_blank">
-                https://aws.amazon.com/rekognition/</a></small></p>
-<!--https://us-west-2.console.aws.amazon.com/rekognition/home?region=us-west-2#/face-comparison-->
-        </section>
-
-    <section>
-        <h4>Nur zwei dieser Bilder sind echte Fotos</h4>
-        <img src="img/applications/gan.jpg" height="500px">
-        <p><small><a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
-            https://twitter.com/goodfellow_ian/status/918900712901197824</a></small></p>
-    </section>
-
-    <section>
-        <h4>Die anderen sind mit Neuronalen Netzwerken generiert</h4>
-        <img src="img/applications/gan-real-images.jpg" height="500px">
-        <p><small><a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a></small></p>
-    </section>
-
-    <section>
-            <h4>Aber so ganz kriegt man den Kunden noch nicht angekleidet</h4>
-            <img src="img/unsupervised/gan-clothes.jpg" height="500px">
-            <p><small><a href="https://arxiv.org/abs/1711.02231" target="_blank">Visually-Aware Fashion Recommendation and Design with Generative Image Models</a></small></p>
-        </section>
-
-    <!-- <section data-markdown class="todo">
-            <textarea data-template>
-    Optimizer finding its way through the parameter space
-    - https://twitter.com/zzznah/status/1022233456791703558
-    - https://colab.research.google.com/github/tensorflow/lucid/blob/master/notebooks/differentiable-parameterizations/xy2rgb.ipynb#scrollTo=Opq53mH1v8TF
-    - https://distill.pub/2018/differentiable-parameterizations/
-        </textarea>
-    </section> -->
-    
-        
-
- <!-- <section>
-        <h4>Minimale Information reicht, um ein gutes Angebot zu machen</h4>
-        <img src="img/applications/style-prediction.jpg" height="500px">
-        <p><small><a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a></small></p>
-    </section> -->
-
- <section>
-        <h3>schnelleres Arbeiten, höherer Durchsatz</h3>
-        <img src="img/classification/driving-license.jpg" height="450px">    
-        <p>Welche Dokumente hat der Kunde eingericht?</p>
-    </section>
-
-    <section>
-            <h3>Customer Churn / Conversion</h3>
-            <div class="fragment" style="float: left">
-                    <img src="img/churn/log7335277f@example.com.png" height="350">
-                    <p>
-                        <small>Kunde vor und nach Abschluss</small>
-                    </p>
-                </div>
-                <div class="fragment" style="float: left; padding-left: 20px; padding-right: 20px; padding-top: 50px; font-weight: bold">
-                        <img src="img/scans/elements/right.jpg" height="200">
-                </div>
-                <div class="fragment" style="float: right">
-                    <img src="img/glaskugel.jpg" height="350">
-                    <p>
-                        <small>Glaskugel</small>
-                    </p>
-                </div>
-            <p style="clear: both">Wie verhält sich jemand, der später Kunde wird / kündigt?</p>
-        </section>
-
-
-        <section data-markdown>
-            <textarea data-template>
-### Automatisches Scannen von Rechnungen und Überweisungsträgern
-
-<img src='img/sparkasse-rechnung-scanner.jpg' height="500px">
-            </textarea>
-        </section>
-
-        <section>
-            <h3>Weitere realistische Anwendungsgebiete</h3>
-            <!-- <small> -->
-            <ul>
-                <li class="fragment"><strong>Recommendation Systems</strong>: Spotify und Netflix kennen mich besser als ich mich selbst
-                <li class="fragment"><strong>Making decisions</strong>: Sollte jemand einen Kredit bekommen oder versichert werden?
-                <li class="fragment"><strong>Fraud Detection</strong>: Sieht eine Kredit-Karten-Transaktion oder eine Steuererklärung ungewöhnlich aus?
-                <li class="fragment"><strong>Predictive Maintenance</strong>: KI Systeme sagen wann man ein Wasserrohr ersetzen soll bevor es bricht
-                <li class="fragment"><strong>Expert System</strong>: Zuordnung von Krankheit und Maßnahmen</li>
-            </ul>
-        <!-- </small> -->
     </section>
 
     <section data-markdown>
         <textarea data-template>
+### The Turtle Effect
 
-## Was ist aufregend und/oder wird es erst in der Zukunft geben?
-</textarea>
-</section>
-        <section data-markdown>
-                <textarea data-template>
-### Wavenet: Machines can synthesize human language
+If the user expects a certain pattern to be in the model, they expect it to persist
 
-<small>
-Google launches more realistic text-to-speech service powered by DeepMind’s AI    
-</small>
-<img src='img/nlp/wavenet/wavenet_progress.gif' height="250px">
-
-<small>
-Industry-leading: <audio
-  src="img/nlp/wavenet/Hol_before.wav"
-  controls></audio> WaveNet: <audio
-  src="img/nlp/wavenet/Hol_before.wav"
-  controls></audio>
-<br>
-<br>
-https://www.theverge.com/2018/3/27/17167200/google-ai-speech-tts-cloud-deepmind-wavenet
-</small>
-                    </textarea>
-                    </section>
-
-        <section data-markdown>
-                <textarea data-template>
-### Wavenet passes turing test?
-
-System can call people and make appointments (without people noticing it is a machine)
-
-<img src='img/rnn_big.png' height="350px">
-
-<small>
-https://ai.googleblog.com/2018/05/duplex-ai-system-for-natural-conversation.html
-</small>
-                    </textarea>
-                    </section>
-        <section data-markdown>
-                <textarea data-template>
-<img src='img/kun_turing_twitter.png'>
-
-<small>
-https://twitter.com/jeremyjkun/status/994020061437345792
-</small>
-                    </textarea>
-                    </section>
-
-        <section data-markdown style="font-size: xx-large">
-                <textarea data-template>
-### Ehtics 
-* We should make AI sound different from humans for the same reason we put a smelly additive in normally odorless natural gas. (https://twitter.com/traviskorte/status/993954759932612608)
-* The synthetic voice of synthetic intelligence should sound synthetic. Successful spoofing of any kind destroys trust. When trust is gone, what remains becomes vicious fast. (https://twitter.com/stewartbrand/status/994046632428752896)
-                    </textarea>
-                    </section>
-
-
-
-<section data-markdown>
-        <textarea data-template>
-### California plans law forcing AI bots to identify themselves
-
-<small>
-https://twitter.com/TheRegister/status/999456537314775040
-</small>
-</textarea>
-</section>
-
-    <section data-markdown>
-            <textarea data-template>
-### Menschen an ihrem Gang erkennen
-
-_Es reicht, über eine Matte mit Sensoren zu gehen_
-
-* Grenzkontrolle (anstatt andere Biometrischer Daten)
-* Kann Veränderungen im Gang feststellen (medizinische Diagnose)
-
-<small>
-https://www.heise.de/newsticker/meldung/Maschinenlernen-KI-erkennt-Personen-an-ihrem-Gang-4063356.html
-http://www.manchester.ac.uk/discover/news/ai-footstep-recognition-system-could-be-used-for-airport-security/
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Scanning von Arm-Nerven
-
-<img src='img/twtter-nerve-scanner.png' height="450px">
-
-<small>
-https://twitter.com/ben_ferns/status/1002167116215214080
-<br>
-http://www.ctrl-labs.com/ctrl-kit/
-</small>
-</textarea>
-</section>
-
-
-<section data-markdown style="font-size: large">
-    <textarea data-template>
-### Object detection / identification
-
-<img src='img/cnn/object-detection.png' height="500px">
-
-https://twitter.com/TensorFlow/status/1039219454398418946    
-https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1
-https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb
-    </textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### PoseNet: Real-time pose estimation
-
-<img src='img/posenet_camera.gif'>
-
-<small>
-https://twitter.com/random_forests/status/993639149780459520
-<br>
-https://twitter.com/teropa/status/1001151524351959041
-</small>    
+<img src="img/applications/turtle.png" height="400px">
 
     </textarea>
-</section>
-
-<section data-markdown>
-<textarea data-template>
-### Everybody Dance Now!
-
-Conditional video synthesis from Berkeley
-
-<video controls src="video/hardmaru on Twitter Everybody Dance Now! Exciting new work o.mp4" 
-type="video/mp4" height="400"></video>
-
-<small>
-https://twitter.com/hardmaru/status/1032762806796312576
-<br>
-https://arxiv.org/abs/1808.07371
-<br>
-https://youtu.be/PCBTZh41Ris
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-
-<img src='img/tierversuche-ki.png' height="500px">
-<small>
-https://twitter.com/SAS_DACH/status/1026449057554857986
-<br>
-https://www.futurezone.de/science/article214958825/Wie-kuenstliche-Intelligenz-Tierversuche-obsolet-macht.html        
-</small>
-    </textarea>
-</section>
-
-
-<section data-markdown style="font-size: xx-large">
-<textarea data-template>
-### Alpha(Go) Zero
-
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px">
-<!-- <img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="400px"> -->
-</a>
-
-* Monte Carlo Tree Search und Deep Convolutional Neural Networks
-* Zielfunktion ist Sieg
-* schlagen jeden Menschen und Maschine ohne menschliche Expertise (in perfect information game)
-
-<!-- <small>
-Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
-<br>
-Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
-<br>
-Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
-</small> -->
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Realistic controlled motions
-
-<img src='img/wolf-motion.png' height="450px">
-
-<small>
-https://twitter.com/blacksquirrel__/status/1002768915133394945
-https://www.fxguide.com/quicktakes/siggraph-2018-tech-papers-preview
-</small>
-        </textarea>
-    </section>
-
-<!-- <section data-markdown>
-    <textarea data-template>
-### Ein gelöschter Tweet
-
-Predicting military action using the number of cars in a Pentagon parking lot
-
-https://twitter.com/chrisalbon/status/984586200986959872
-</textarea>
-</section> -->
-
-<!-- <section data-markdown>
-        <textarea data-template>
-## Maschinen als Künstler
-</textarea>
-</section>
- -->
-<section data-markdown>
-        <textarea data-template>
-### Generation High-quality Anime Characters 
-
-<img src="img/anime_gan.png">
-
-<small>
-https://make.girls.moe
-<br>
-https://alantian.net/
-</small>
-</textarea>
 </section>
 
 <section>
-    <h3>Selbstfahrende Autos</h3>
-    <p>Was passiert in Situation in denen ein tötlicher Unfall nicht zu vermeiden ist?</p>
-    <p>Wen soll ein selbstfahrendes Fahrzeug opfern?</p>
-    <p><em> Ethik-Kommission zum autonomen Fahren lehnt eine Abwägung zum Wert von Menschen ab</em> (
-        <a target="_blank" href="http://www.taz.de/Autonomes-Fahren-und-seine-Hindernisse/!5470265/">http://www.taz.de/Autonomes-Fahren-und-seine-Hindernisse/!5470265/</a>)</p>
-    <p>Aber würdet ihr ein Auto fahren, dass euch selbst opfern würde? Halten Hersteller das ein?</p>
-</section>
-
-<section>
-    <h3>Moral Machine</h3>
-    <p><small>Muss man wieder Kant lesen? <a target="_blank" href="https://de.wikipedia.org/wiki/Kritik_der_praktischen_Vernunft">https://de.wikipedia.org/wiki/Kritik_der_praktischen_Vernunft</a></small></p>
-    <p><a target="_blank" href="http://moralmachine.mit.edu/hl/de">http://moralmachine.mit.edu/hl/de</a></p>
-</section>
-
-<!-- <section data-markdown>
-        <textarea data-template>
-### Generating Music
-
-* Could Artificial Intelligence Replace Musicians and Songwriters?: https://groups.google.com/a/tensorflow.org/forum/#!topic/magenta-discuss/EcT6lATirjE
-* Thoughts on Ownership and Copyrights of AI Generated Music?: https://groups.google.com/a/tensorflow.org/forum/#!topic/magenta-discuss/uYDysfC7AP8
-
-<small>
-https://magenta.tensorflow.org/demos
-</small>
-</textarea>
-</section>
- -->
-
-    <section>
-            <h3>Zusammenfassung</h3>
-            <ul>
-                <li class="fragment">Wenn du strukturierte Daten herumliegen hast, sind diese möglicherweise ein großer Schatz
-                <li class="fragment">Machine Learning kann bei bestehenden Daten von diesen abstrahieren und generalisieren
-                <li class="fragment">Durchdringen der Domäne nur für die Datenanalyse erforderlich
-                <li class="fragment">Machine Learning ist die Fortsetzung der Digitalisierung
-            </ul>
-            <p><small>
-                Machine Learning auch für dein Projekt
-                <br>
-            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                <br>
-            <a href="http://bit.ly/ml-summit">
-                http://bit.ly/ml-summit
-            </a>
-            </small></p>
-        </section>
-
-
-<!-- 
------------------------------
-MATERIAL
------------------------------
- -->
-
-    <!-- <section data-markdown class="todo">
-            <textarea data-template>
-
-Christopher Mims 🎆 (@mims) tweeted at 4:43 PM on Tue, Aug 28, 2018:
-Amazing thread.
-
-This is the best self-driving technology in the world, in the easiest to navigate environment, managed by the best self driving engineers with the most experience in the field.
-
-And it does not work. https://t.co/IAUUlOZ2Zy
-(https://twitter.com/mims/status/1034451464675119110?s=03)
-    </textarea>
-    </section> -->
-
-<!-- <section data-markdown class="todo">
-        <textarea data-template>
-### Area: Medicine
-
-* DeepMind AI is as good as the best human eye doctors
-  * https://futuretimeline.net/blog/2018/08/22.htm
-  * https://www.youtube.com/watch?v=2MxtZ5XFquE
-
-</textarea>
+        <h2>Wrap Up</h2>
+        <p><em>Training a model is the least part</em></p>
+        <ul>
+            <li class="fragment">having reasonable data is the most important part
+            <li class="fragment">evaluation is more than accuracy: blank spots, bias 
+            <li class="fragment">going to production changes everyhing 
+            <li class="fragment">people expect continuity 
+        </ul>
+        <p>
+                <em>Machine Learning from Idea to Production</em>
+            <br>
+            <br>
+            <small>
+        <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            <br>
+    <a href="http://bit.ly/steps-keynote">
+        http://bit.ly/steps-keynote</a>
+    </small>
+        </p>
     </section>
-    <section data-markdown class="todo">
-            <textarea data-template>
     
-    []Deep Learning im Aktienhandel › Friedrich-Alexander-Universität Erlangen-Nürnberg:  https://www.fau.de/2017/02/news/wissenschaft/deep-learning-im-aktienhandel/
-</textarea>
-</section>
-
-    <section data-markdown class="todo">
-        <textarea data-template>
-    https://play.google.com/store/apps/details?id=com.floraincognita.app.floraincognita
-    </textarea>
-    </section>
-            
-        
-    <section data-markdown class="todo">
-            <textarea data-template>
-- Für Keynote eher unterhalten und ein bisschen informieren
-  - best of des Workshops
-  - "A lion’s share of the competitive advantages & rewards of #AI are going to be captured by its early adopters, so time is short."
-    "Early adopters will share a global profit pool valued at $1 trillion."
-  https://t.co/bCjR25EYHM
-  (https://twitter.com/Nisalahe/status/1024871116332969984)
-  - The Coca-Cola Company using TensorFlow for digital marketing campaigns: https://www.youtube.com/watch?v=hZMmH5yHvIk&feature=push-u&attr_tag=7GVaZqyVIAY0-P_L%3A6
-- https://twitter.com/SAS_DACH/status/1026449057554857986
-- Check out this Neural Style Transfer tutorial based on tf.keras and eager execution: https://t.co/fM0NR1ZINX
-
-This is likely the cleanest, nicest implementation of Neural Style Transfer with dynamic graphs that you'll find anywhere. https://t.co/eMjt8tBWat
-(https://twitter.com/fchollet/status/1025439850059554817?s=03)
-
-- When you are worried about robots taking your job https://t.co/baLftOC8GU
-  (https://twitter.com/farbodsaraf/status/1023044185086218241?s=03)
-  - als Abschluss einen Ausblick geben auf abgefahrenes
-    - https://twitter.com/henripal/status/1022707303953432577: Fun: Inference on MNIST with a neural net at the speed of light using 3d printed optical lenses (via @mmsltn)
-    https://arxiv.org/abs/1804.08711 
-    - Anwendungen in Chemie: 
-        - https://twitter.com/DJCordhose/status/1017886304384831488
-        - https://twitter.com/mmsltn/status/1010706708065280000
-        - Learn how deep learning techniques can expose patterns for faster Drug Discovery #AI #Healthcare #Digitalhealth
-        https://t.co/EZPCQd5Tk0 https://t.co/SYviAgDmuX
-        (https://twitter.com/SAPHealth/status/1022557169995206656?s=03)
-  
-- Services Google: https://cloud.google.com/automl
-  - https://cloud.google.com/natural-language
-  - https://cloud.google.com/translate
-  - https://cloud.google.com/vision/
-
-[]Fair ML
-    []https://twitter.com/mrtz/status/1019628022897373184
-    []http://fairmlbook.org/
-
-
-- https://medium.com/@kozyrkov/why-businesses-fail-at-machine-learning-fbff41c4d5db 
-
-- What do machine learning practitioners actually do?
-  - https://twitter.com/math_rachel/status/1017488895821242368
-  - http://www.fast.ai/2018/07/12/auto-ml-1/
-
-- Anwendungsgebiete
-  - https://www.egovernment-computing.de/intelligente-algorithmen-revolutionieren-sachbearbeitung-a-729212/
-  - https://www.sap.com/germany/products/leonardo/machine-learning.html
-  - https://developers.google.com/machine-learning/crash-course/real-world-guidelines
-            </textarea>
-        </section>
-
-        <section data-markdown class="todo">
-        <textarea data-template>
-        ### Teil 3: Und was macht man wenn man gar keine Anwendung hat
-        
-        Dann sucht man sich eine
-        
-        Google released a search engine for datasets: https://t.co/HSFhz8RyYL. Launch blog post: https://t.co/dkFseCu3mB
-        (https://twitter.com/domoritz/status/1037419117504999424?s=03)
-        
-        </textarea>
-        </section> -->
-        
 
     </div>
 
