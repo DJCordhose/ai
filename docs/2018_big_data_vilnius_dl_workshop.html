@@ -1370,7 +1370,7 @@ https://www.youtube.com/watch?v=JB8T_zN7ZC0
     <section data-markdown>
             <textarea data-template>
 
-<img src='img/twitter-tf-debugging.png'>
+<img src='img/twitter-tf-debugging.png' height="600px">
 <small>
 https://twitter.com/lak_gcp/status/1055578516748591105
 </small>    
@@ -1413,8 +1413,92 @@ _Example: Does a Tweet mention something negative about my company?_
 ## First Challenge
 
 ### How to turn words into numbers?
+
+Only numerical values can be processed by neural networks
+
                         </textarea>
                         </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Label Encoding    
+
+Normalize words such that they contain only values between 0 and number_of_words_in_vocab-1.
+
+<pre><code>text = ["paris", "paris", "tokyo", "amsterdam"]
+paris = 0
+tokyo = 1
+amsterdam = 2
+encoded_text = [0, 0, 1, 2]</code></pre>
+
+<small>
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html
+</small>
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Numbers close to each other suggest a relation, but there might actually be none
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Bag of Words - One Hot Encoding
+<img src="img/nlp/acolyer/word2vec-one-hot.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+            <section data-markdown>
+                    <textarea data-template>
+### Issues with One-Hot-Encoding
+
+* high dimensionalty 
+* sparse representation
+* neighborhood does not mean anything
+
+                        </textarea>
+                        </section>
+
+                                <section data-markdown>
+            <textarea data-template>
+<img src="img/nlp/word_embeddings.png" height="550px">
+
+<small>
+<a href="https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/6.1-using-word-embeddings.ipynb">
+Deep Learning with Python
+</a>
+</small>
+            </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Assumption: words in similar contexts have similar meaning 
+
+* Why not have a few semantic dimensions and embed words into them?
+* You defined what is context and thus gives meaning
+* For random texts this might be just the words that surround others
+                    </textarea>
+                </section>
+    
+
+    <section data-markdown>
+            <textarea data-template>
+### Word Embeddings can carry semantics 
+<img src="img/nlp/acolyer/word2vec-distributed-representation.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+            </textarea>
+    </section>
+
+
 
 <section data-markdown>
         <textarea data-template>
