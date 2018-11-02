@@ -652,6 +652,7 @@ https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
         <section>
                 <h2>Andere Arten von Machine Learning</h2>
             </section>
+
             <!-- <section>
                     <h3>
                         3 Arten von Machine Learning
@@ -659,14 +660,14 @@ https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
                     <img src="img/sketch/types-of-ml.png" height="550px">
                 </section> -->
     
-        <section>
+        <!-- <section>
                 <h3>Daten: Zentraler Punkt</h3>
                 <img src='img/applications/decisions/type.png'>
-            </section>
+            </section> -->
                         
         <section>
             <h3>Unsupervised Learning</h3>
-            <img src='img/applications/decisions/question.png'>
+            <img class='fragment' src='img/applications/decisions/question.png'>
         </section>
     
             <!-- <section data-markdown>
@@ -680,21 +681,50 @@ https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
         
         <section data-markdown>
                 <textarea data-template>
-    <img src="img/unsupervised/blobs.png" height="500px">
+### Cluster und Ausreißer mit DBSCAN
+<img src="img/unsupervised/dbscan-demo.png" height="550px">
     
-    Wie würde man das clustern, ohne Labels zu haben?
-                </textarea>
+    
+    </textarea>
     </section>
+    
+            <!-- <section data-markdown>
+                    <textarea data-template>
+        <img src="img/unsupervised/blobs.png" height="500px">
+        
+        Wie würde man das clustern, ohne Labels zu haben?
+                    </textarea>
+        </section> -->
             <!-- <section>
                 <img src="img/flashcards/K-Means_Clustering_print.png" height="550px">
                 <p>Grundlegendster Algorithmus</p>
             </section> -->
-            <section>
+            <!-- <section>
                     <h3>K-Means Clustering: Grundlegendster Algorithmus</h3>
                     <img src="img/unsupervised/blobs_kmeans_3.png" height="400px">
                     <p>Hätten wir auch nicht besser hinbekommen</p>
+            </section> -->
+
+<section data-markdown>
+        <textarea data-template>
+### Was kann man damit machen?
+
+<img src='img/outlier-credit-card.jpg'>
+
+<p class="fragment">_Außreißer: Innerhalb weniger Tage, Zahlungen in vier unterschiedlichen Ländern auf zwei Kontinenten_</p>
+            </textarea>
             </section>
-    
+
+<section>
+<h3>PCA: Dimensionality Reduction</h3>
+<div style="float: left">
+        <img src="img/unsupervised/pca-example.png" height="500px">
+    </div>
+    <div style="float: right" class="fragment">
+            <img src="img/unsupervised/pca-example-pcs.jpg" height="500px">
+    </div>
+        </section>
+            
             <section>
                     <h2>Reinforcement Learning</h2>
                     <h3>Am ehesten die Roboter, die uns Menschen ausrotten</h3>
@@ -723,7 +753,7 @@ Ein Software Agent führt
 2. _Umgebung (Environment)_ aus, die zu einer positiven oder negativen 
 3. _Belohung (Reward)_ führen.
 
-Diese Belohnung wird durch Lern-Experimente maxmimiert.
+Diese Belohnung wird durch Lern-Experimente maximiert.
 
 </textarea>
         </section>
@@ -734,8 +764,8 @@ Diese Belohnung wird durch Lern-Experimente maxmimiert.
 
 1. Wenn du keine passenden Daten hast
 1. Du die Umgebung angemessen simulieren kannst
+1. _Wie zum Beispiel bei einem Spiel_
 
-Wie zum Beispiel bei einem Spiel
 </textarea>
         </section>
 
