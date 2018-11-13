@@ -225,7 +225,7 @@ MAP-Elites: https://medium.com/@devonfulcher3/the-map-elites-algorithm-finding-o
 1. from path Finding
 1. to game search
 1. to monte carlo game search and tree search to
-1. to Alpha(Go) Zero
+1. to Alpha(Go) (Zero)
 
 </textarea>
 </section>
@@ -533,7 +533,7 @@ To compare
 * _Go_: 75
 
         </textarea>
-        </section>
+        </section>        
 
 <!-- <section data-markdown class="todo">
         <textarea data-template>
@@ -546,7 +546,7 @@ To compare
         <textarea data-template>
 ### Game Search
 
-Full search mostly just not feasible
+_Full, exhaustive search is mostly just not feasible_
 * Limit in Depth: Mini Max / Alpha Beta Pruning
 * Limit in Breadth: Monte-Carlo Tree Search
   * Do we have a evaluation heuristic? No? MCTS
@@ -622,10 +622,13 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/
     <textarea data-template>
 ### How does Stockfish Play
 
+_It heavily relies on human knowledge put into heuristics_
+
 * Alpha-Beta Search Pruning: https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_search
 * Bitboards: https://en.wikipedia.org/wiki/Bitboard
 * Transposition Tables: https://en.wikipedia.org/wiki/Transposition_table
 * Late Move Reductions:: https://en.wikipedia.org/wiki/Late_Move_Reductions 
+* and many more
 
 https://en.wikipedia.org/wiki/Stockfish_(chess)
 
@@ -770,9 +773,23 @@ Update Scores
 <section data-markdown>
     <textarea data-template>
 ## Part IV
-### MCTS and Alpha(Go) Zero
+### MCTS and Alpha(Go) (Zero)
 </textarea>
 </section>
+
+<section data-markdown>
+        <textarea data-template>
+#### Go has a branching factor of around 200 and 75 moves per game
+
+<img src='img/go-branching-viz.png' height="500px">
+
+<small>
+Mastering Games Without Human Knowledge - https://youtu.be/Wujy7OzvdJk?t=92    
+</small>
+        
+    </textarea>
+    </section>
+
 
 <section data-markdown>
 <textarea data-template>
@@ -806,11 +823,11 @@ https://deepmind.com/blog/alphago-zero-learning-scratch/
             <textarea data-template>
 ### MCTS in AlphaGo Zero
 
-* choose child to expand using heuristic of game state
-* determined by Convolutional Neural Network
+* choose child to expand using heuristic of game state (no expansion phase)
+* determined by Convolutional Neural Network (Resnet)
 * CNN trained by which state leads to a win
 * CNN also gives estimation of which player is going to win
-* on other information went into training
+* no other information went into training
 
 <small>
 https://deepmind.com/blog/alphago-zero-learning-scratch/    
@@ -831,6 +848,18 @@ https://deepmind.com/blog/alphago-zero-learning-scratch/
 https://en.wikipedia.org/wiki/AlphaZero
 <br>
 https://deepmind.com/research/alphago/alphazero-resources/
+</small>
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+### Alpha Zero Performance
+
+<img src='img/alpha-zero-performance.png' height="450px">
+
+<small>
+2017 NIPS Keynote - Deepmind AlphaZero: Mastering Games Without Human Knowledge
+https://youtu.be/Wujy7OzvdJk?t=1893    
 </small>
                 </textarea>
             </section>
