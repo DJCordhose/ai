@@ -222,7 +222,7 @@ _40 % discount code ctwbigdatavil18_
 
 _Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
 
-<img src='img/pixabay/accident-151668_1280.png'>
+<!-- <img src='img/pixabay/accident-151668_1280.png'> -->
         </textarea>
     </section>
 
@@ -450,7 +450,7 @@ https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-
     <textarea data-template>
 ### Split known data into training and test
 
-<img class='fragment' src='img/scans/generalization.jpg'>
+<img class='fragment' src='img/insurance/generalization.jpg' height="550px">
 
 </textarea>
 </section>
@@ -459,7 +459,7 @@ https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-
     <textarea data-template>
 ### Use some training data for validation
 
-<img class='fragment' src='img/scans/generalization1.jpg'>
+<img class='fragment' src='img/insurance/generalization1.jpg' height="550px">
 
 </textarea>
 </section>
@@ -658,7 +658,7 @@ https://github.com/marcotcr/anchor/blob/master/README.md
 </textarea>
 </section>
 
-<section data-markdown style="font-size: xx-large">
+<section data-markdown class="local" style="font-size: xx-large">
     <textarea data-template>
 ### More resources
 
@@ -717,9 +717,9 @@ https://github.com/marcotcr/anchor/blob/master/README.md
             </textarea>
         </section>
 
-    <section data-markdown>
+    <section data-markdown style='font-size: xx-large'>
             <textarea data-template>
-### Possible Deployment Enviroments
+### Possible Deployment Environments
 
 * Google Cloud ML
   * Can serve TensorFlow and Sklearn
@@ -731,6 +731,7 @@ https://github.com/marcotcr/anchor/blob/master/README.md
   * Flask Server  
 
 * Browser: https://js.tensorflow.org
+
                 </textarea>
             </section>
 
@@ -823,7 +824,8 @@ If the user expects a certain pattern to be in the model, they expect it to pers
 <script src="lib/jquery-2.2.4.js"></script>
 
 <script>
-        if (window.location.hostname.indexOf('localhost') !== -1) {
+    const local = window.location.hostname.indexOf('localhost') !== -1 && !window.location.search.match(/print-pdf/gi);
+        if (local) {
         } else {
             // only applies to public version
             $('.todo').remove();
@@ -831,12 +833,12 @@ If the user expects a certain pattern to be in the model, they expect it to pers
             $('.local').remove();
         }
         Reveal.addEventListener( 'ready', function( event ) {
-            // do we want this???
-            $('li').addClass('fragment')
-
-            if (window.location.hostname.indexOf('localhost') !== -1) {
+            if (local) {
                 // only applies to presentation version
                 Reveal.configure({ controls: false });
+                // do we want this???
+                $('li').addClass('fragment')
+
             } else {
                 // only applies to public version
                 $('.fragment').removeClass('fragment');
