@@ -207,8 +207,9 @@ but you do not need any knowledge of it. Knowledge of any Object oriented langua
 ### Our Plan
 1. Introduction to Machine Learning
 1. Understanding the Artificial Neuron and Neural Networks 
-1. Convolutional Neural Networks
-1. Recurrent Neural Networks
+1. Special types of Neural Networks (very shortly)
+    1. Convolutional Neural Networks
+    1. Recurrent Neural Networks
 </textarea>
 </section>
 
@@ -363,6 +364,16 @@ return green # otherwise: low risk
         </textarea>
     </section>
 
+    <section data-markdown>
+        <textarea data-template>
+<img src='img/ng_supervised.png' height="570px">
+
+<small>
+https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
+</small>
+            </textarea>
+            </section>
+
 <section data-markdown>
         <textarea data-template>
 ### PART II
@@ -472,7 +483,7 @@ model.compile(loss='sparse_categorical_crossentropy',
 ### Job of the optimizer
 
 <a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
-<img src="img/manning/optimizer.png" height="400px">
+<img src="img/manning/optimizer.png" height="550px">
 </a>
 
 </textarea>
@@ -500,6 +511,23 @@ _________________________________________________________________</code></pre>
 
 <section data-markdown>
     <textarea data-template>
+#### How would you run that?
+### Short Demo of Jupyter notebooks on Colab
+
+<a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb'>
+<img src='img/colab-demo.png' height="400px">
+</a>
+
+<small>
+    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
+</small>
+
+    </textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
 ### Best known model using 2 dimensions
 
 <img src='img/manning/nn-reg.png' height="500">
@@ -507,6 +535,7 @@ _________________________________________________________________</code></pre>
 <p><small>up to 73% predictions correct on previously unknown data possible</small></p>
 </textarea>
 </section>
+
 
     <section data-markdown>
         <textarea data-template>
@@ -568,7 +597,7 @@ http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
         </section>
 
     <section>
-            <h3>Keras layers</h3>
+            <h3>Keras CNN Layers</h3>
 
             <p><small>Convolution</small></p>
             <pre><code contenteditable data-trim class="fragment line-numbers javascript">
@@ -639,10 +668,6 @@ https://en.wikipedia.org/wiki/Sentiment_analysis
 </small>
 
 _Example: Does a Tweet mention something negative about my company?_
-<small>
-    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb
-    </small>
-    
         </textarea>
     </section>
 
@@ -700,21 +725,33 @@ http://colah.github.io/posts/2015-08-Understanding-LSTMs/
         </textarea>
     </section>
 
-    <section data-markdown>
-        <textarea data-template>
-#### Optional, if time permits
-### Short Demo of Jupyter notebooks on Colab
+<section>
+    <h3>Keras RNN Layers</h3>
 
-<a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb'>
-<img src='img/colab-demo.png' height="400px">
-</a>
+    <p><small>Embedding - turning Words into numbers</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(Embedding(input_dim=vocab_size, 
+                    input_length=text_length, 
+                    output_dim=latent_dimension))
+        </code></pre>
 
-<small>
-    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb
+    <p><small>Optimized RNN Nodes</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(GRU(units=32))
+</code></pre>
+
+        <p>
+    <small>
+            <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                https://www.tensorflow.org/api_docs/python/tf/keras/layers
+            </a>
+            <a href="https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb">
+                https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb
+            </a>
     </small>
-    
-        </textarea>
-    </section>
+</p>
+</section>
+
 
 <section>
     <h3>Instead of a Wrap Up: What's next?</h3>
