@@ -366,6 +366,8 @@ return green # otherwise: low risk
 
     <section data-markdown>
         <textarea data-template>
+<!-- ### Andrew Ng: Supervised Machine Learning -->
+
 <img src='img/ng_supervised.png' height="570px">
 
 <small>
@@ -473,8 +475,7 @@ model.add(Dense(units=3, activation='softmax'))
     <p class="fragment">The loss to be minimized is calculated from the difference between the softmax output and the known true category</p>
             <pre><code contenteditable data-trim class="fragment line-numbers python">
 model.compile(loss='sparse_categorical_crossentropy',
-             optimizer='adam',
-             metrics=['accuracy'])
+             optimizer='adam')
             </code></pre>
 </section>
 
@@ -528,13 +529,20 @@ _________________________________________________________________</code></pre>
 
 <section data-markdown>
     <textarea data-template>
-### Best known model using 2 dimensions
+### Model using only 2 dimensions
 
 <img src='img/manning/nn-reg.png' height="500">
-
-<p><small>up to 73% predictions correct on previously unknown data possible</small></p>
+<small class="fragment">up to 73% predictions correct on previously unknown data possible</small>
 </textarea>
 </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Manual solution using all 3 dimensions 
+<img src='img/manning/manual.png' height="500">
+<small>approx. 43% predictions correct</small>
+</textarea>
+    </section>
 
 
     <section data-markdown>
