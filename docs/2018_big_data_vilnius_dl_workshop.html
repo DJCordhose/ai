@@ -183,22 +183,26 @@ but you do not need any knowledge of it. Knowledge of any Object oriented langua
 
 <section data-markdown class="todo">
         <textarea data-template>
-- RNN reg as additional notebook  
-  - Create: https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru-reg.ipynb
+Madatory            
+- Do this notebooks work on Colab?
+  - https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru-reg.ipynb
+  - https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/embeddings.ipynb
+- Embeddings Viz von Sean
+
+Optional:  
+- Embeddings: Maths with Word2vec in Python
+
 - Auch Transfer Learning mit imagenet vortrainiert
   - https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
-- Embeddings
-  - Embeddings: Maths with Word2vec in Python
-  - load Word2vec? from rnn notebook
-- Deep Learning show images of more and more abstract feature abstraction and link  to viz
+
+
+Später  
+- Deep Learning show images of more and more abstract feature abstraction and link to viz
 - Precision Recall f1 für Sentiment Analyse
   - http://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html
 - Hyperparameter Search: https://github.com/autonomio/talos/blob/master/README.md  
 - Gradient Descent: https://twitter.com/_brohrer_/status/1050013482693926913
 - Optional image segmentation: https://github.com/bonlime/keras-deeplab-v3-plus/blob/master/README.md
-- Text Classification Guides:
-  - https://twitter.com/fchollet/status/1055240643314823168
-  - https://developers.google.com/machine-learning/guides/text-classification/
             </textarea>
         </section>
 
@@ -263,6 +267,22 @@ but you do not need any knowledge of it. Knowledge of any Object oriented langua
 ## Questions, comments, critique are welcome at any time
 </textarea>
 </section>
+
+<section data-markdown class="local">
+        <textarea data-template>
+### First question wins a free copy
+
+<a href='https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf'>
+    <img src='img/livevideo-deep-learning-crash-course-meap.png' height="400px">
+</a>
+
+<small>
+https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf
+</small>
+<br>
+_40 % discount code ctwbigdatavil18_
+        </textarea>
+    </section>
 
     <section data-markdown class="local">
             <textarea data-template>
@@ -1356,7 +1376,7 @@ _Can you improve the model for Fashion MNINST notebook?_
 </textarea>
 </section>
 
-<!-- <section data-markdown>
+<section data-markdown>
     <textarea data-template>
 ### Next Level Fashion MNINST
 
@@ -1368,7 +1388,7 @@ _Can you improve the model for Fashion MNINST notebook?_
 https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/fashion_mnist_tpu.ipynb
 </small>
 </textarea>
-</section> -->
+</section>
 
 <section data-markdown>
     <textarea data-template>
@@ -1598,6 +1618,26 @@ https://twitter.com/jeremyphoward/status/997264148655259648
         </textarea>
         </section>
 
+<section>
+    <h3>Embeddings in Keras</h3>
+
+    <p><small>Embedding - turning Words into numbers</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(Embedding(input_dim=vocab_size, 
+                    input_length=text_length, 
+                    output_dim=latent_dimension))
+        </code></pre>
+
+    <small>
+            <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                https://www.tensorflow.org/api_docs/python/tf/keras/layers
+            </a>
+            <a href="https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/embeddings.ipynb">
+                https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/embeddings.ipynb
+            </a>
+    </small>
+</p>
+</section>
 
 <section data-markdown>
         <textarea data-template>
@@ -1657,26 +1697,58 @@ https://www.dlology.com/blog/how-to-deal-with-vanishingexploding-gradients-in-ke
 </textarea>
 </section>
 
-<section data-markdown>
-        <textarea data-template>
-## Creating our very own sentiment analyzis
-### Using embeddings to train recurrent networks
+<section>
+    <h3>Keras RNN Layers</h3>
 
-<small>
-https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb
-</small>
-   
-        </textarea>
-        </section>
+    <p><small>RNN Nodes</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(SimpleRNN(units=32))
+</code></pre>
+        <p>
 
-<section data-markdown>
+    <p><small>Optimized RNN Nodes</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(GRU(units=32))
+</code></pre>
+        <p>
+
+<p><small>Passes all outputs of all timesteps (not only the last one) to the next layer</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(GRU(units=32, return_sequences=True))
+        </code></pre>
+        <p>
+
+<p><small>Adds Dropout inside feedback loop</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(GRU(units=32, return_sequences=True, recurrent_dropout=0.2))
+        </code></pre>
+        <p>
+
+    <small>
+            <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                https://www.tensorflow.org/api_docs/python/tf/keras/layers
+            </a>
+            <a href="https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb">
+                https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb
+            </a>
+    </small>
+</p>
+</section>
+
+<section data-markdown style='font-size: xx-large'>
         <textarea data-template>
 ### Exercise - Improve on the results and apply Regularization
 
+_Can you at all beat our baseline of embeddings plus classifier?_
+
 * Use the prepared notebook  
 * Execute the notebook and make sure you understand at least the part where the network is defined
-* Tweak number of neurons
+* Tweak number of units
+* Change number of layers
+* Play with dropout percentages
 * Make the RNN bidirectional (https://keras.io/layers/wrappers/#bidirectional)
+* Training might take some time, even on Colab
+* Choose experiments wisely
 
 <small>
 https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru-reg.ipynb
@@ -1685,6 +1757,14 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ten
     </textarea>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+### Guides: Text Classification with TensorFlow and Keras
+
+* https://twitter.com/fchollet/status/1055240643314823168
+* https://developers.google.com/machine-learning/guides/text-classification/
+</textarea>
+</section>
 
 <section data-markdown>
         <textarea data-template>
@@ -1696,8 +1776,19 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ten
   * Search: https://toolbox.google.com/datasetsearch
   * Launch blog post: https://www.blog.google/products/search/making-it-easier-discover-datasets/
 * Kaggle Datasets: https://www.kaggle.com/datasets    
-    </textarea>
-    </section>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Stay in Contact
+
+<a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+
+
+</textarea>
+</section>
+
     </div>
 
 </div>
