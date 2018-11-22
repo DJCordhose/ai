@@ -31,7 +31,6 @@
                   /*background: #FFFFFF !important;*/
                   /*color: #000000 !important;*/
               /*}*/
-      
               .right-img {
                   margin-left: 10px !important;
                   float: right;
@@ -139,6 +138,12 @@
                   .reveal ul.fa-ul li {
                       list-style-type: none;
                   }
+
+            .reveal {
+                color: black !important;
+             }       
+
+
           </style>
       
     <!-- Printing and PDF exports -->
@@ -173,18 +178,17 @@ We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflo
 
 -->
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
         <textarea data-template>
-* too long? Good flow?
 </textarea>
-</section>
+</section> -->
 
-<section data-markdown class="preparation">
+<!-- <section data-markdown class="preparation">
         <textarea data-template>
 ### Preparation
 
     </textarea>
-</section>
+</section> -->
 
         <section>
             <h2>Machine Learning from Idea to Production</h2>
@@ -205,16 +209,27 @@ We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflo
 ### First question wins a free copy
 
 <a href='https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf'>
-    <img src='img/livevideo-deep-learning-crash-course-meap.png' height="500px">
+    <img src='img/livevideo-deep-learning-crash-course-meap.png' height="400px">
 </a>
 
 <small>
 https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf
-
-_40 % discount code ctwbigdatavil18_
 </small>
+<br>
+_40 % discount code ctwbigdatavil18_
         </textarea>
     </section>
+
+<section data-markdown>
+    <textarea data-template>
+
+<img src="img/hickey-production.png">
+
+<small>
+https://twitter.com/richhickey/status/1063086406980026370
+</small>
+</textarea>
+</section>
 
     <section data-markdown>
         <textarea data-template>
@@ -418,18 +433,24 @@ https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-
 ### Baseline 1: Random
 
 <img class="fragment" src='img/decision-boundaries/random.png' height="500px">
-
-<p class="fragment"><small>It still gets 33% percents right</small></p>
+<small class="fragment">It still gets 33% percents right</small>
 </textarea>
 </section>
-    
+
+<section data-markdown>
+        <textarea data-template>
+### Baseline 3: Very simple rule based 
+<img class="fragment" src='img/manning/manual.png' height="500">
+<small class="fragment" >approx. 43% predictions correct</small>
+</textarea>
+    </section>
+
 <section data-markdown>
     <textarea data-template>
-### Baseline 2: KNN, n=39
+### Baseline 3: KNN, n=39
 
 <img class="fragment" src='img/insurance/knn_39.png' height="500px">
-
-<p class="fragment"><small>Already 70% accuracy on test data, found using grid search with cross validation</small></p>
+<small class="fragment">Already 70% accuracy on test data, found using grid search with cross validation</small>
 </textarea>
 </section>
     
@@ -513,7 +534,7 @@ _Process to counter overfitting_
 Each ML strategy has its own means of Regularization, e.g.
 * KNN: more neighbors
 * Decision Trees: reduce depth, use ensenbles
-* SVM: gamma and cost
+* SVM: gamma (how many points to use) and cost (of misclassified data)
 * NN: Dropout, Batch Normalization, Reduced Capacity, Reduced Training Time
             </textarea>
             </section>
@@ -587,8 +608,8 @@ https://arxiv.org/abs/1810.09136
 <p class="fragment"><em>First: Be aware of the reasonable range of values</em></p>
 
 * For requests in extended area
-  * add a warning
-  * reject request
+  * at least add a warning or 
+  * refuse to make a prediction
 * Identify suspicious scores
   * in exteded area scores often are very biased towards one category (1.0 score)
 * Add likelihoods to scores
@@ -618,14 +639,16 @@ your model contains all biases and truths of the training data
     <textarea data-template>
 ### Check for bias / unfairness
 
-your model contains all biases and truths of the training data
+_your model contains all biases and truths of the training data_
 
 * Your model might perform well for a few users, but badly for others
 * Accuracy and loss only show the average
-* Some areas might not have properly covered with data samples (including test)
+* Some areas might not have been properly covered with data samples (including test)
 * Curse of High Dimensions
 
+<small>
 https://developers.google.com/machine-learning/fairness-overview/
+</small>
 </textarea>
 </section>
 
@@ -648,6 +671,8 @@ Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
         <section data-markdown>
             <textarea data-template>
 ### Explaining your models
+
+_by making slighly varying input data, find out which dimensions contribute most to a prediciton_
 
 LIME: 
 
@@ -691,17 +716,14 @@ https://github.com/marcotcr/anchor/blob/master/README.md
 </textarea>
 </section>
 
-<section data-markdown>
+<section data-markdown style="font-size: xx-large">
         <textarea data-template>
 ### Serving Models
 
 * Be very sure you have the same pipeline of steps when serving as you had for training and evaluation
 * Log real world predictions (if ok with <a href='https://gdpr-info.eu/'>GDPR</a>)
-
-
-<small>It might make sense to use: http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html</small>
-
-<small>Same goes for TensorFlow: https://github.com/tensorflow/transform / https://beam.apache.org/</small>
+* It might make sense to use: http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html
+* Same goes for TensorFlow: https://github.com/tensorflow/transform / https://beam.apache.org/
 
         </textarea>
     </section>
@@ -728,6 +750,7 @@ https://github.com/marcotcr/anchor/blob/master/README.md
 
 * Local Server
   * TensorFlow Serving
+  * Docker Containers (support for NVIDIA GPUs: https://github.com/NVIDIA/nvidia-docker) 
   * Flask Server  
 
 * Browser: https://js.tensorflow.org
@@ -744,24 +767,10 @@ https://github.com/marcotcr/anchor/blob/master/README.md
 
 <section data-markdown>
     <textarea data-template>
-
-<img src="img/hickey-production.png">
-
-<small>
-https://twitter.com/richhickey/status/1063086406980026370
-</small>
-</textarea>
-</section>
-
-
-
-<section data-markdown>
-    <textarea data-template>
 ### Going to production changes everything
 
-True for classic software as well as machine learning models
-
-Every deployment of a newly trained model is like a major release in software development
+* True for classic software as well as machine learning models
+* Every deployment of a newly trained model is like a major release in software development
 * needs to be tested like this
 * or you need to make sure it rather is like a minor or bugfix release
   * make incremental changes
@@ -772,17 +781,6 @@ Every deployment of a newly trained model is like a major release in software de
 
 <section data-markdown>
         <textarea data-template>
-### Continuity in model predictions
-
-* People who use your model regularly will expect most things to stay the way they know it
-* Even if it not totally accurate
-* That might mean you can not train a model from scratch even if you have better data or a better model architecture
-* Consider mixing more than one model
-        </textarea>
-    </section>
-
-    <section data-markdown>
-        <textarea data-template>
 ### The Turtle Effect
 
 If the user expects a certain pattern to be in the model, they expect it to persist
@@ -791,6 +789,17 @@ If the user expects a certain pattern to be in the model, they expect it to pers
 
     </textarea>
 </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Continuity in model predictions
+
+* People who use your model regularly will expect most things to stay the way they know it
+* Even if not totally accurate
+* That might mean you can not train a model from scratch even if you have better data or a better model architecture
+* Consider mixing more than one model
+        </textarea>
+    </section>
 
 <section>
         <h2>Wrap Up</h2>
