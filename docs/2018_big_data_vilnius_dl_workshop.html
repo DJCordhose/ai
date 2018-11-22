@@ -452,16 +452,6 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
                 </textarea>
                 </section>
 
-    <section data-markdown>
-            <textarea data-template>
-### Machine Learning fits best when
-
-* the problem at hand is hard to specify (_Who is a good customer?_)
-* you have a lot of examples
-* solving the problem can tolerate some error or uncertainty
-                </textarea>
-                </section>
-
 <section>
     <h2>
         <small>There are different types of machine learning</small>
@@ -471,7 +461,7 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
     </div>
 </section>
 
-<section>
+<!-- <section>
     <h3>Supervised Machine Learning</h3>
 <ul>
     <li class="fragment">What we just did</li>
@@ -479,7 +469,39 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/skl
     <li class="fragment">There are different strategies to train a system</li>
     <li class="fragment">For our problem a simple strategy will do</li>
 </ul>
+</section> -->
+
+<section data-markdown>
+        <textarea data-template>
+### Deep Supervised Learning fits best when
+
+* the problem at hand is hard to specify (_Who is a good customer?_)
+* you have a lot of examples
+* solving the problem can tolerate some error or uncertainty
+* there is a clear, simple input and output
+                                </textarea>
+            </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Remember, we are not Facebook or Google
+
+<img src='img/dl-research-vs-application.png' height="500px">
+<small>https://twitter.com/casarock/status/1064438008756256768</small>
+    </textarea>
 </section>
+
+<section data-markdown>
+    <textarea data-template>
+<!-- ### Andrew Ng: Supervised Machine Learning -->
+
+<img src='img/ng_supervised.png' height="570px">
+
+<small>
+https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
+</small>
+        </textarea>
+        </section>
 
 <section>
         <h3>Typical application: Classification</h3>
@@ -574,7 +596,7 @@ https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-
     <textarea data-template>
 ### Three Years of TensorFlow
 
-<img src='img/tf-history.jpg' height="500">
+<img src='img/tf-history.jpg'>
 <small>https://twitter.com/TensorFlow/status/1060972928077053952</small>
 </textarea>
 </section>
@@ -588,21 +610,21 @@ https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-
 
 <section data-markdown>
     <textarea data-template>
-<img src='img/scans/neuron21.jpg'>
+<img src='img/insurance/neuron21.jpg'>
 
 </textarea>
 </section>
 
 <section data-markdown>
     <textarea data-template>
-<img src='img/scans/neuron211.jpg'>
+<img src='img/insurance/neuron211.jpg'>
 
 </textarea>
 </section>
 
 <section data-markdown>
     <textarea data-template>
-<img src='img/scans/neuron212.jpg'>
+<img src='img/insurance/neuron212.jpg'>
 
 </textarea>
 </section>
@@ -655,7 +677,7 @@ https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-
         <textarea data-template>
 ### Complete Example
 
-<img src='img/scans/neuron213.jpg'>
+<img src='img/insurance/neuron213.jpg'>
 
 </textarea>
 </section>
@@ -698,7 +720,7 @@ Key to architecture: What do we want to predict and what do we have as  input
         <textarea data-template>
 ### What goes in?
 
-<img src='img/scans/data_encoding.jpg'>
+<img src='img/insurance/data_encoding.jpg'>
 
 </textarea>
 </section>
@@ -707,7 +729,7 @@ Key to architecture: What do we want to predict and what do we have as  input
         <textarea data-template>
 ### What comes out?
 
-<img src='img/scans/encoding2.jpg'>
+<img src='img/insurance/encoding2.jpg'>
 
 </textarea>
 </section>
@@ -716,7 +738,7 @@ Key to architecture: What do we want to predict and what do we have as  input
         <textarea data-template>
 ### Role of the Hidden Layer(s)
 
-<img src='img/scans/encoding3.jpg'>
+<img src='img/insurance/encoding3.jpg'>
 
 </textarea>
 </section>
@@ -725,7 +747,7 @@ Key to architecture: What do we want to predict and what do we have as  input
     <textarea data-template>
 ### Next step: Encode this with Keras
 
-<img src='img/scans/encoding3.jpg'>
+<img src='img/insurance/encoding3.jpg'>
 
 </textarea>
 </section>
@@ -781,6 +803,19 @@ model.compile(loss='sparse_categorical_crossentropy',
 
 <section data-markdown>
     <textarea data-template>
+### What really matters 
+
+<img src='img/sean-data.png'>
+
+<small>
+https://twitter.com/SeanPedersen96/status/1063272488489099264
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
 ### Backpropagation
 
 _Propagating the error from output layer backward_
@@ -827,8 +862,6 @@ https://google-developers.appspot.com/machine-learning/crash-course/backprop-scr
 
 </textarea>
 </section>
-
-
 
 <section>
 <h3>What does the neural network learn?</h3>
@@ -884,7 +917,7 @@ _We do not have any idea how well our model performs, yet_
     <textarea data-template>
 ### Split known data into training and test
 
-<img class='fragment' src='img/scans/generalization.jpg'>
+<img class='fragment' src='img/insurance/generalization.jpg'>
 
 </textarea>
 </section>
@@ -893,7 +926,7 @@ _We do not have any idea how well our model performs, yet_
     <textarea data-template>
 ### Use some training data for validation
 
-<img class='fragment' src='img/scans/generalization1.jpg'>
+<img class='fragment' src='img/insurance/generalization1.jpg'>
 
 </textarea>
 </section>
@@ -1493,7 +1526,7 @@ Deep Learning with Python
 ### Assumption: words in similar contexts have similar meaning 
 
 * Why not have a few semantic dimensions and embed words into them?
-* You defined what is context and thus gives meaning
+* You define what is context and thus gives meaning
 * For random texts this might be just the words that surround others
                     </textarea>
                 </section>
