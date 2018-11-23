@@ -183,19 +183,17 @@ but you do not need any knowledge of it. Knowledge of any Object oriented langua
 
 <section data-markdown class="todo">
         <textarea data-template>
-Madatory            
-- Do this notebooks work on Colab?
-  - https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru-reg.ipynb
-  - https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/embeddings.ipynb
 - Embeddings: Maths with Word2vec in Python
   - https://towardsdatascience.com/machine-learning-word-embedding-sentiment-classification-using-keras-b83c28087456
   - Gensym
+            </textarea>
+        </section>
 
-Optional:  
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+Später  
 - Auch Transfer Learning mit imagenet vortrainiert
   - https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
-
-Später  
 - Deep Learning show images of more and more abstract feature abstraction and link to viz
 - Precision Recall f1 für Sentiment Analyse
   - http://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html
@@ -203,7 +201,8 @@ Später
 - Gradient Descent: https://twitter.com/_brohrer_/status/1050013482693926913
 - Optional image segmentation: https://github.com/bonlime/keras-deeplab-v3-plus/blob/master/README.md
             </textarea>
-        </section>
+        </section> -->
+
 
         <section>
                 <h2>Introduction to Deep Learning with TensorFlow</h2>
@@ -1640,6 +1639,19 @@ model.add(Embedding(input_dim=vocab_size,
 
 <section data-markdown>
         <textarea data-template>
+### Visualizing Embeddings
+
+<img src='img/embeddings/word_embeddings.png' height="500px">
+
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/embeddings.ipynb
+</small>
+            </textarea>
+            </section>
+
+
+<section data-markdown>
+        <textarea data-template>
 ## Second Challenge
 
 ### Traditional Networks have no memory of previous events
@@ -1734,20 +1746,17 @@ model.add(GRU(units=32, return_sequences=True, recurrent_dropout=0.2))
 </p>
 </section>
 
-<section data-markdown style='font-size: xx-large'>
+<section data-markdown style="font-size: xx-large">
         <textarea data-template>
-### Exercise - Improve on the results and apply Regularization
+### Exercise - How well does this really work?
 
-_Can you at all beat our baseline of embeddings plus classifier?_
+_Make experiments on the generalized model to find out how well this generalizes_
 
 * Use the prepared notebook  
 * Execute the notebook and make sure you understand at least the part where the network is defined
-* Tweak number of units
-* Change number of layers
-* Play with dropout percentages
-* Make the RNN bidirectional (https://keras.io/layers/wrappers/#bidirectional)
-* Training might take some time, even on Colab
-* Choose experiments wisely
+* Training might take around 15 minutes, so be sure to kick it off before investigating details
+* Check the given examples at the end of the notebook - what do you think?
+* Come up with your own sample reviews and see how well the model does
 
 <small>
 https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru-reg.ipynb
