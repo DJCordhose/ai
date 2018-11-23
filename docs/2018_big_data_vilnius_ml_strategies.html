@@ -240,6 +240,30 @@ Their best is found using Grid- or RandomSearch
 </small>
         </textarea>
     </section>
+
+    <section>
+<h3>Code in Scikit-learn</h3>
+
+<p>Training</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+            </code></pre>
+        
+<p>Prediction</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+y_pred = clf.predict(input)
+        </code></pre>
+
+<small>
+    <a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb'>
+        https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb</a>
+</small>
+        </section>
+        
+        
+
     <section>
             <h3>Random - A Baseline</h3>
             <div class="fragment">
@@ -249,10 +273,10 @@ Their best is found using Grid- or RandomSearch
             </div>
     </section>
     <section>
-            <h3>Rule based approach</h3>
+            <h3>Rule based approach - Another Baseline</h3>
             <div class="fragment">
                     <img src="img/decision-boundaries/5-prog.png">
-        <<small>Blocks</small>
+        <small>Blocks</small>
         </div>
     </section>
 
@@ -260,20 +284,20 @@ Their best is found using Grid- or RandomSearch
             <textarea data-template>
 ### Decision Trees can learn such rules
 
+<img src="img/dt/dt-all.png" height="500px">
+        </textarea>
+        </section>
+            
+    <section data-markdown>
+            <textarea data-template>
+### How do they learn?
+
 <img src="img/dt/cart.png" height="500px">
 
 <small>
 http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart
 </small>
         
-        </textarea>
-        </section>
-            
-    <section data-markdown>
-            <textarea data-template>
-### Complete Tree
-
-<img src="img/dt/dt-all.png" height="500px">
         
         </textarea>
         </section>
@@ -281,21 +305,76 @@ http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-a
 
     <section>
             <h3>Decision Trees</h3>
-            <div class="fragment">
+            <div>
 
         <img src="img/decision-boundaries/dt-sweet-test.png">
         <small>Still Rules - but this time learned from data</small>
         </div>
     </section>
+
+    <section>
+<h3>Code</h3>
+
+<p>Grid-Search</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+param_grid = {
+    'max_depth': list(range(2, 25)),
+    'min_samples_split': list(range(2, 11)),
+    'min_samples_leaf': list(range(1, 11))
+}
+clf = GridSearchCV(DecisionTreeClassifier(), param_grid)
+clf.fit(X_train, y_train)
+clf.best_params_
+            </code></pre>
+        
+<p>Best Parameters</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+clf = DecisionTreeClassifier(max_depth=6,
+                              min_samples_leaf=3,
+                              min_samples_split=2)
+</code></pre>
+
+        </section>
+
+    
     <section>
             <h3>Ensemble - Random Forest</h3>
-            <div class="fragment">
+            <div>
 
         <img src="img/decision-boundaries/11-rf-sweet-test.png">
         <small>Averaging over many decision trees</small>
         </div>
     </section>
 
+    <section>
+<h3>Code</h3>
+
+<p>Random Search (Grid-Search is too slow)</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+from sklearn.model_selection import RandomizedSearchCV
+from scipy.stats import randint
+
+param_dist = {
+    'n_estimators': randint(3, 20),
+    "max_depth": randint(2, 25),
+    "min_samples_split": randint(2, 11),
+    "min_samples_leaf": randint(1, 11)
+}
+
+clf = RandomizedSearchCV(RandomForestClassifier(), param_dist, n_iter=1000)
+</code></pre>
+        
+<p>Best Parameters</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+clf = RandomForestClassifier(max_depth=5, 
+                            min_samples_leaf=3, 
+                            min_samples_split=7, 
+                            n_estimators=12)
+</code></pre>
+
+        </section>
+        
+        
     <section>
             <h3>KNN</h3>
             <p>For a case to predict</p>
