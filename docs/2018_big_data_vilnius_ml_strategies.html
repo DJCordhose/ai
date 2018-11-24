@@ -235,9 +235,10 @@ _40 % discount code ctwbigdatavil18_
 
 How do different _Supervised_ Machine Learning strategies draw those boundaries if they do their best?
 
-<small>
-Their best is found using Grid- or RandomSearch
-</small>
+* This is not about which strategy is the best
+* Their best is found using Grid- or RandomSearch on CPU for Scikit-learn
+* Best for TensorFlow is found using manual experiment
+* Best means best scores for test data (generalization counts)
         </textarea>
     </section>
 
@@ -257,6 +258,8 @@ y_pred = clf.predict(input)
         </code></pre>
 
 <small>
+    <a href='https://scikit-learn.org/stable/modules/classes.html'>https://scikit-learn.org/stable/modules/classes.html</a>
+    <br>
     <a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb'>
         https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb</a>
 </small>
@@ -409,6 +412,27 @@ https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-
         </div>
     </section>
 
+        <section>
+<h3>Code</h3>
+
+<p>Grid-Search</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+from sklearn.model_selection import GridSearchCV
+param_grid = {
+    'n_neighbors': list(range(1, 50)),
+    # are points that are nearer more important?    
+    'weights': ['uniform', 'distance']
+    }
+clf = GridSearchCV(KNeighborsClassifier(), param_grid)
+</code></pre>
+        
+<p>Best Parameters</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+clf = KNeighborsClassifier(n_neighbors=39, weights='uniform')
+</code></pre>
+
+        </section>
+
     <section data-markdown>
             <textarea data-template>
 
@@ -445,9 +469,29 @@ http://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html
         </div>
     </section>
 
-    <section>
+        <section>
+<h3>Code</h3>
+
+<p>Grid-Search</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+param_grid = {
+    'C': list(np.append(np.arange(0.1, 1.0, 0.1), np.arange(2, 10, 1))),
+    'gamma': list(np.append(np.arange(0.001, 0.1, 0.0005), 
+                            np.arange(.02, 1.0, 0.1))),
+}
+clf = GridSearchCV(SVC(), param_grid)
+</code></pre>
+        
+<p>Best Parameters</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+clf = SVC(C=9, gamma=0.001)
+    </code></pre>
+
+        </section>
+
+    <!-- <section>
             <img src='img/applications/decisions/classic.png'>
-    </section>
+    </section> -->
 
     <section data-markdown>
             <textarea data-template>
@@ -479,9 +523,42 @@ http://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html
         </div>
     </section>
 
-    <section>
+<section data-markdown>
+    <textarea data-template>
+### Keras is TensorFlow's high level API
+
+* https://www.tensorflow.org 
+* https://www.tensorflow.org/guide/low_level_intro 
+* https://www.tensorflow.org/guide/keras 
+
+    </textarea>
+</section>
+
+        <section>
+<h3>Code using Keras High Level API</h3>
+
+<p>Network Setup</p>
+<pre><code contenteditable data-trim class="line-numbers python">
+model = keras.Sequential()
+
+model.add(Dense(100, name='hidden1', input_dim=2))
+model.add(BatchNormalization())
+model.add(Activation('relu'))
+model.add(Dropout(0.6))
+
+model.add(Dense(100, name='hidden2'))
+model.add(BatchNormalization())
+model.add(Activation('relu'))
+model.add(Dropout(0.6))
+
+model.add(Dense(3, name='softmax', activation='softmax'))
+</code></pre>
+        
+        </section>
+
+    <!-- <section>
             <img src='img/applications/decisions/data.png'>
-    </section>
+    </section> -->
 
 
     <section data-markdown>
