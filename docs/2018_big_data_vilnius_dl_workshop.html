@@ -202,26 +202,6 @@ but you do not need any knowledge of it. Knowledge of any Object oriented langua
             </textarea>
         </section> -->
 
-
-        <section>
-                <h2>Introduction to Deep Learning with TensorFlow</h2>
-        <p><a target="_blank" href="https://www.bigdataconference.lt/introduction-to-deep-learning/">
-            Big Data Conference Vilnius, November 2018
-        </a></p>
-        <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-        </h4>
-        <p><small><a href="http://bit.ly/bdv-dl-workshop">
-            http://bit.ly/bdv-dl-workshop
-        </a></small></p>
-    </section>
-
-<!-- <section data-markdown class="local">
-    <textarea data-template>
-### Schedule
-
-<img src='img/mcubed-times.jpg' height="700">
-</textarea>
-</section> -->
 <section data-markdown style="font-size: xx-large" class="local">
     <textarea data-template>
 ### If you are bored
@@ -242,6 +222,27 @@ _Ask your neighbors for help when needed_
 </textarea>
 </section>
 
+
+
+        <section>
+                <h2>Introduction to Deep Learning with TensorFlow</h2>
+        <p><a target="_blank" href="https://www.bigdataconference.lt/introduction-to-deep-learning/">
+            Big Data Conference Vilnius, November 2018
+        </a></p>
+        <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        </h4>
+        <p><small><a href="http://bit.ly/bdv-dl-workshop">
+            http://bit.ly/bdv-dl-workshop
+        </a></small></p>
+    </section>
+
+<!-- <section data-markdown class="local">
+    <textarea data-template>
+### Schedule
+
+<img src='img/mcubed-times.jpg' height="700">
+</textarea>
+</section> -->
 
     <section data-markdown style="font-size: xx-large">
         <textarea data-template>
@@ -746,6 +747,7 @@ _Sketch the Architecture of our model_
 * How does the input look like?
 * And the output?
 * How to to connect them?
+* How to encode our data to match the network structure?
 
 Key to architecture: What do we want to predict and what do we have as  input
     </textarea>
@@ -1268,7 +1270,7 @@ http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
     </p>
 </section>
 
-<!-- <section>
+<section>
 <h3>Experiment with Image Kernels</h3>
 <ol>
     <li class="fragment">How can a matrix of numbers represent an image? How could you encode color?</li>
@@ -1285,7 +1287,7 @@ http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
             
         </small>
     </p>
-</section> -->
+</section>
 
 <section data-markdown>
     <textarea data-template>
@@ -1418,12 +1420,16 @@ https://medium.com/towards-data-science/neural-network-architectures-156e5bad51b
 </section>
 
 
-<section data-markdown>
+<section data-markdown style="font-size: xx-large">
     <textarea data-template>
 ### Fashion MNINST using Resnet / Mobilnet
 
+<small>Reset</small>
+<br>
 <img src='img/resnet-history.png' height="200px">
 
+<small>Mobilnet</small>
+<br>
 <img src='img/mobilnet-historie.png' height="200px">
 <small>
 https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/fashion_mnist_resnet.ipynb
@@ -1446,7 +1452,7 @@ https://www.youtube.com/watch?v=JB8T_zN7ZC0
         </textarea>
     </section>
 
-    <section data-markdown>
+    <!-- <section data-markdown>
             <textarea data-template>
 
 <img src='img/twitter-tf-debugging.png' height="600px">
@@ -1454,7 +1460,7 @@ https://www.youtube.com/watch?v=JB8T_zN7ZC0
 https://twitter.com/lak_gcp/status/1055578516748591105
 </small>    
             </textarea>
-        </section>
+        </section> -->
 
     <section data-markdown>
         <textarea data-template>
@@ -1578,7 +1584,7 @@ Deep Learning with Python
                 </section>
     
 
-    <section data-markdown>
+    <!-- <section data-markdown>
             <textarea data-template>
 ### Word Embeddings can carry semantics 
 <img src="img/nlp/acolyer/word2vec-distributed-representation.png">
@@ -1588,7 +1594,7 @@ https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
             </textarea>
     </section>
 
-
+ -->
 
 <section data-markdown>
         <textarea data-template>
@@ -1621,7 +1627,7 @@ https://projector.tensorflow.org
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
     <textarea data-template>
 ### Suprising Application of Embeddings
 
@@ -1631,7 +1637,7 @@ https://projector.tensorflow.org
 https://twitter.com/jeremyphoward/status/997264148655259648    
 </small>
         </textarea>
-        </section>
+        </section> -->
 
 <section>
     <h3>Embeddings in Keras</h3>
@@ -1658,10 +1664,11 @@ model.add(Embedding(input_dim=vocab_size,
         <textarea data-template>
 ### Visualizing Embeddings
 
-<img src='img/embeddings/word_embeddings.png' height="500px">
+<img src='img/embeddings/word_embeddings.png' height="450px">
 
 <small>
 https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/embeddings.ipynb
+Inspired by https://colab.research.google.com/drive/12uq1dCjN1tJy8OsnBnNGQ7Fjog9Z9vZL @SeanPedersen96
 </small>
             </textarea>
             </section>
@@ -1772,6 +1779,7 @@ _Make experiments on the generalized model to find out how well this generalizes
 * Use the prepared notebook  
 * Execute the notebook and make sure you understand at least the part where the network is defined
 * Training might take around 15 minutes, so be sure to kick it off before investigating details
+* Or train for less epochs
 * Check the given examples at the end of the notebook - what do you think?
 * Come up with your own sample reviews and see how well the model does
 
@@ -1807,6 +1815,9 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ten
 <section data-markdown>
         <textarea data-template>
 ### Stay in Contact
+
+* questions are free
+* you can also hire me to investigate what to do with ML in you company
 
 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
 

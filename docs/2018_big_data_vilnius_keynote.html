@@ -204,6 +204,32 @@ We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflo
             </a></small></p>
         </section>
 
+        <section data-markdown>
+    <textarea data-template>
+### Plan for this talk
+
+_A repitation of what you might have seen here_
+* Data Preparation
+* Training
+
+_Something more Scary_
+* Evaluation
+* Production
+* Post-Production
+</textarea>
+</section>
+
+        <section data-markdown>
+                <textarea data-template>
+## Core Statement of this talk                    
+<h3 class="fragment">For practical applications our models are not done when they are trained and successfully generalize</h3>
+
+<h3 class="fragment">They are not even done when in production</h3>
+            
+            </textarea>
+            </section>
+            
+            
 <section data-markdown>
     <textarea data-template>
 
@@ -247,16 +273,7 @@ _Imagine we are in the car insurance business and want a system that predicts th
         </p>
     </section>
 
-        <section data-markdown>
-    <textarea data-template>
-### Our Process 
-1. Data Preparation
-1. Training
-1. Evaluation
-1. Production
-1. Post-Production
-</textarea>
-</section>
+
 
 <!-- <section data-markdown>
     <textarea data-template>
@@ -309,12 +326,11 @@ https://twitter.com/yudapearl/status/1055014100613427200
 _collecting data might be the hardest part of the job_
 
 * but also the most important
-* no data, no supervised machine learning
-* if you have a simulator, reinforcement learning might be an option
+* no data, not good quality or quantity => no supervised machine learning
+* if we have a simulator, reinforcement learning might be an option
     
     </textarea>
     </section>
-    
 
     <section data-markdown>
     <textarea data-template>
@@ -351,13 +367,13 @@ _Feature Selection_
             </textarea>
             </section>
 
-    <section data-markdown>
+    <!-- <section data-markdown>
         <textarea data-template>
 ### Exploration
 <img src='img/sns-pairplot.png' height="550px">
 
     </textarea>
-    </section>
+    </section> -->
 
     <!-- <section data-markdown>
         <textarea data-template>
@@ -399,7 +415,7 @@ _Feature Selection_
         <textarea data-template>
 ### Baselines
 
-* we must be careful not to fool ourselves
+* we must be careful to not fool ourselves
 * we can never be quite sure what is the highest possible score
 * but we can provide a baseline of a prediction with very little effort
 * every model must be matched to this baseline
@@ -423,7 +439,7 @@ https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-
 
 <section data-markdown>
         <textarea data-template>
-### Baseline 3: Very simple rule based 
+### Baseline 2: Very simple rule based 
 <img class="fragment" src='img/manning/manual.png' height="500">
 <small class="fragment" >approx. 43% predictions correct</small>
 </textarea>
@@ -445,7 +461,7 @@ https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-
 * The most important property of a model is if it generalizes well to unknown data
 * A machine learning model is of no use if it only works well on the data it has been trained on
   * If it was, the easiest way to achieve this would be a dictionary translating from a set of inputs to the known output
-* Conceptually it is a little bit hard to optimize for something you do not know
+* Conceptually it is a little bit hard to optimize for something we do not know
 * So, we introduce a little trick here
 
 </textarea>
@@ -460,14 +476,14 @@ https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
     <textarea data-template>
 ### Use some training data for validation
 
 <img class='fragment' src='img/insurance/generalization1.jpg' height="550px">
 
 </textarea>
-</section>
+</section> -->
 
 <!-- <section data-markdown>
     <textarea data-template>
@@ -580,8 +596,18 @@ Each ML strategy has its own means of Regularization, e.g.
 </textarea>
     </section>
 
+    <section data-markdown>
+            <textarea data-template>
+### But we had a lot of data for training
 
-<section data-markdown>
+_At the end of the day_
+* it does not matter how much data we had
+* it matters if our data matches the real world 
+* not numbers, but diversity matters
+                </textarea>
+            </section>
+                    
+<!-- <section data-markdown>
     <textarea data-template>
 ### Predictions outside of the trained range 
 
@@ -596,7 +622,7 @@ which a neural network is highly confident yet wrong.
 https://arxiv.org/abs/1810.09136
 </small>
 </textarea>
-</section>
+</section> -->
 
 
 <section data-markdown style='font-size: xx-large'>
@@ -637,9 +663,9 @@ your model contains all biases and truths of the training data
     <textarea data-template>
 ### Check for bias / unfairness
 
-_your model contains all biases and truths of the training data_
+_our models contain all biases and truths of the training data_
 
-* Your model might perform well for a few users, but badly for others
+* Our model might perform well for a few users, but badly for others
 * Accuracy and loss only show the average
 * Some areas might not have been properly covered with data samples (including test)
 * Curse of High Dimensions
@@ -650,25 +676,9 @@ https://developers.google.com/machine-learning/fairness-overview/
 </textarea>
 </section>
 
-<section data-markdown>
-    <textarea data-template>
-### Dealing with Bias / Unfairness
-
-* log real requests
-* log matching user behavior
-* evaluate those requests (Elastic)
-* if you recommend, do users follow your advice?
-* if there is probabilty, how good is it?
-* do you see bias/unfairness?
-* put more emphasis on data that suffers from bias
-
-Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
-</textarea>
-</section>
-
         <section data-markdown>
             <textarea data-template>
-### Explaining your models
+### Explaining our models
 
 _by making slighly varying input data, find out which dimensions contribute most to a prediciton_
 
@@ -681,15 +691,51 @@ https://github.com/marcotcr/anchor/blob/master/README.md
 </textarea>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+### What do we do for images?
+
+* images need even more and more diverse data
+* lime tests do not apply
+* it is very likely we are having bias in our images
+* our training data will most likely overfit the real world
+* ML can not tell if we are gay or criminals by looking at our picture
+* Or our IQ, character traits and violent tendencies? https://twitter.com/jbensnyder/status/1064759174574280704
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Which parts trigger an activation?
+
+<img src='img/fchollet/fchollet-elephantness.png' height="500px">
+
+<small>Deep Learning with Python, François Chollet, Manning</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Does facial hair make us hetero?
+
+<img src='img/gay-or-not.jpeg' height="450px">
+<br>
+Same person, left classified as hetero, right as gay
+<br>
+<small>https://medium.com/@blaisea/do-algorithms-reveal-sexual-orientation-or-just-expose-our-stereotypes-d998fafdf477</small>
+</textarea>
+</section>
+
 <section data-markdown class="local" style="font-size: xx-large">
     <textarea data-template>
-### More resources
+### There is a complete test if we are ready to go in production
 
-* Oliver Zeigermann, M3, 2018: http://bit.ly/m3-ml-quality
+_What’s your ML Test Score? A rubric for ML production systems_
+* <a href='https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf'>PDF</a>
+* https://nips.cc/Conferences/2016/Schedule?showEvent=6255
 
-* What’s your ML Test Score? A rubric for ML production systems
-  * <a href='https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf'>PDF</a>
-  * https://nips.cc/Conferences/2016/Schedule?showEvent=6255
+I did this for one of my projects and the results can be scary
 </textarea>
 </section>
 
@@ -718,7 +764,7 @@ https://github.com/marcotcr/anchor/blob/master/README.md
         <textarea data-template>
 ### Serving Models
 
-* Be very sure you have the same pipeline of steps when serving as you had for training and evaluation
+* Be very sure we have the same pipeline of steps when serving as we had for training and evaluation
 * Log real world predictions (if ok with <a href='https://gdpr-info.eu/'>GDPR</a>)
 * It might make sense to use: http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html
 * Same goes for TensorFlow: https://github.com/tensorflow/transform / https://beam.apache.org/
@@ -743,7 +789,7 @@ https://github.com/marcotcr/anchor/blob/master/README.md
 
 * Google Cloud ML
   * Can serve TensorFlow and Sklearn
-  * your model and calls are in Google's control
+  * our model and calls are in Google's control
   * Takes away the scaling and installation burden
 
 * Local Server
@@ -765,12 +811,29 @@ https://github.com/marcotcr/anchor/blob/master/README.md
 
 <section data-markdown>
     <textarea data-template>
+### Dealing with Bias / Unfairness
+
+* log real requests
+* log matching user behavior
+* evaluate those requests (Elastic)
+* if we recommend, do users follow our advice?
+* if there is probabilty, how good is it?
+* do we see bias/unfairness?
+* put more emphasis on data that suffers from bias
+
+Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
 ### Going to production changes everything
 
 * True for classic software as well as machine learning models
 * Every deployment of a newly trained model is like a major release in software development
 * needs to be tested like this
-* or you need to make sure it rather is like a minor or bugfix release
+* or we need to make sure it rather is like a minor or bugfix release
   * make incremental changes
   * combine models
 
@@ -792,9 +855,9 @@ If the user expects a certain pattern to be in the model, they expect it to pers
         <textarea data-template>
 ### Continuity in model predictions
 
-* People who use your model regularly will expect most things to stay the way they know it
+* People who use our model regularly will expect most things to stay the way they know it
 * Even if not totally accurate
-* That might mean you can not train a model from scratch even if you have better data or a better model architecture
+* That might mean we can not train a model from scratch even if we have better data or a better model architecture
 * Consider mixing more than one model
         </textarea>
     </section>
