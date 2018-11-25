@@ -215,14 +215,12 @@ but you do not need any knowledge of it. Knowledge of any Object oriented langua
 (3) Open Notebook, run "Run All" under "Runtime" Menu, allow execution of notebook and create Google login when prompted to do so or log in
 
 <small>
-    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/classic-code.ipynb
-    </small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
+</small>
 <br>
 _Ask your neighbors for help when needed_    
 </textarea>
 </section>
-
-
 
         <section>
                 <h2>Introduction to Deep Learning with TensorFlow</h2>
@@ -246,35 +244,15 @@ _Ask your neighbors for help when needed_
 
     <section data-markdown style="font-size: xx-large">
         <textarea data-template>
-### Part I – Basics (Morning)
-1. Introduction to Machine Learning
+### Basics
+* Part 0 Tools
+* Part I Introduction to Deep Supervised Machine Learning
+* Part II Understanding the Artificial Neuron and Neural Networks
+* Part III Deep Neural Networks using TensorFlow and Keras 
 
-    1. Introduction of our case study
-    1. Generalization: The aim of Supervised Learning
-    1. Different types of Machine Learning
-
-1. Understanding the Artificial Neuron and Neural Networks 
-    1. How does an Artificial Neuron work?
-    1. Activation functions
-    1. Applying to our problem using TensorFlow, Keras on Colab
-    1. Loss, Back Propagation and Optimizers
-</textarea>
-</section>
-
-<section data-markdown style="font-size: xx-large">
-    <textarea data-template>
-### Specialized Networks (Afternoon)
-
-1. Convolutional Neural Networks
-    1. Applying Neural Networks to images
-    1. How do convolutions work?
-    1. Architectures for Convolutional Networks
-    1. Case Study: Classifying Images using TensorFlow, Keras on Colab
-
-1. Recurrent Neural Networks
-    1. Idea of RNNs and their advanced versions LSTMs and GRUs
-    1. Embeddings for Natural Language Processing
-    1. Case Study: Sentiment Analysis using TensorFlow, Keras on Colab
+### Specialized Networks
+* Part IV Convolutional Neural Networks
+* Part V Recurrent Neural Networks
 </textarea>
 </section>
 
@@ -306,14 +284,85 @@ _40 % discount code ctwbigdatavil18_
     ## Introduce yourself, please
             </textarea>
         </section>
-    
+
+        <section data-markdown>
+            <textarea data-template>
+### PART 0
+## Overview of Tools
+            </textarea>
+        </section>
+
 <section data-markdown>
         <textarea data-template>
-### PART I
-## Introduction to Machine Learning
+
+<img src='img/twitter-fchollet-trend.png' height="500px">            
+
+<small>
+https://twitter.com/fchollet/status/1029477656876613632
+<br>
+https://trends.google.com/trends/explore?cat=1299&date=today%205-y&q=tensorflow,keras,pytorch,caffe,theano
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Three Years of TensorFlow
+
+<img src='img/tf-history.jpg'>
+<small>https://twitter.com/TensorFlow/status/1060972928077053952</small>
+</textarea>
+</section>
+
+
+    <section data-markdown>
+        <textarea data-template>
+### TensorFlow and Keras
+
+* https://www.tensorflow.org 
+* https://www.tensorflow.org/guide/low_level_intro 
+* https://www.tensorflow.org/guide/keras 
+
         </textarea>
     </section>
 
+<section data-markdown>
+        <textarea data-template>
+### Why Keras High Level API?
+
+<img src='img/why-keras.png' height="450">
+
+<small>
+https://twitter.com/karpathy/status/1013244313327681536    
+https://twitter.com/martin_wicke/status/1013550466125328384    
+</small>
+        </textarea>
+    </section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Colab Notebooks
+
+https://colab.research.google.com
+        </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### TensorFlow Playground
+
+https://playground.tensorflow.org
+            </textarea>
+        </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+### PART I
+## Introduction to Deep Supervised Machine Learning
+                    </textarea>
+                </section>
 
 <section>
     <h3>Example: Customer Data - Risk of Accidents</h3>
@@ -323,159 +372,6 @@ _40 % discount code ctwbigdatavil18_
     </p>
 </section>
 
-            <!-- <section>
-                <h3>Paper Exercise #1 - Understanding the Supervised Learning Approach</h2>
-                    <p>Manually cluster areas of different customer types on the
-                        <em>upper part</em> of the handout</p>
-                    <ol>
-                        <li>
-                            <em>dark (green)</em>: good customer</li>
-                        <li>
-                            <em>light (yellow)</em>: mediocre customers</li>
-                        <li>
-                            <em>middle (red)</em>: red customers</li>
-                    </ol>
-                    <p>Make sure you draw with pressure</p>
-            </section>
-            
-            <section>
-                <h3>Plot Twist</h3>
-                <p>Generalisation, not perfect reproduction is the objective</p>
-                <ol>
-                    <li class="fragment">We split existing data into two sets</li>
-                    <li class="fragment">The larger set (60 or 80%) we use to build our model</li>
-                    <li class="fragment">The smaller set we use to validate the model</li>
-                </ol>
-            </section>
-            
-                <section>
-                        <img src='img/scans/generalization.jpg' height="600">
-                    </section>
-
-            <section>
-                <h2>Exercise #1, Part2 - How well did you generalize?</h2>
-                <p>Turn the page and redraw the lines you printed through from the first page</p>
-                <p>Get an estimate of the misclassified samples on both diagrams</p>
-                <p>What do you think, is this result worse?</p>
-                <p>What would you have done differently if you had been given this information before (that it is all about generalisation)?</p>
-            </section>
-
-            <section>
-                <h3>Sample Solution</h3>
-                <div class="fragment" style="float: left">
-                    <img src="img/train-sample.jpg" height="300">
-                    <p>
-                        <small>Train</small>
-                    </p>
-                </div>
-                <div class="fragment" style="float: left">
-                    <img src="img/test-sample.jpg" height="300">
-                    <p>
-                        <small>Test</small>
-                    </p>
-                </div>
-                </section>
-             -->
-            <section data-markdown>
-                    <textarea data-template>
-## How to solve this programmatically?
-                        </textarea>
-                        </section>
-
-
-            <section data-markdown>
-                    <textarea data-template>
-### Exploration
-<img src='img/sns-pairplot.png' height="550px">
-            
-                </textarea>
-                </section>
-            
-            <section data-markdown>
-                    <textarea data-template>
-                    <img src='img/sketch/classic-development.jpg'>
-                    </textarea>
-                    </section>
-                    
-<section>
-        <h3>Programmer's approach: Code Rules by Hand</h3>
-        <div class="fragment">
-        <pre><code contenteditable data-trim class="line-numbers python">
-if age < 25:
-    if speed > 140:
-        return red # young people, fast cars: high risk
-    else:
-        return yellow # young people: medium risk
-            </code></pre>
-        </div>
-        <div class="fragment">
-        <pre><code contenteditable data-trim class="line-numbers python">
-if age > 75:
-    return red # old people: high risk
-            </code></pre>
-        </div>
-        <div class="fragment">
-        <pre><code contenteditable data-trim class="line-numbers python">
-if miles_per_year > 30:
-    return red # a lot of driving: high risk
-if miles_per_year > 20:
-    return yellow #  a bit of driving: medium risk
-            </code></pre>
-        </div>
-        <div class="fragment">
-        <pre><code contenteditable data-trim class="line-numbers python">
-return green # otherwise: low risk
-            </code></pre>
-        </div>
-    </section>
-
-    <section data-markdown>
-            <textarea data-template>
-### Plotting the predictions as a background
-<img src='img/manning/manual.png' class="fragment" height="450px">
-
-<div class="fragment">
-<p><small>approx. 43% predictions correct</small></p>
-</div>        
-</textarea>
-        </section>
-
-<section data-markdown>
-    <textarea data-template>
-### How good is this?
-
-<!-- <p class="fragment"><em>How well have we mastered the domain?</em></p> -->
-
-* Is it better than guessing?
-* Are all the rules correct?
-* Are some missing?
-* How would we even know?
-
-</textarea>
-</section>                    
-
-<section data-markdown>
-    <textarea data-template>
-### Programming Exercise: Get familiar with the Python Notebook
-
-_Run your first Colab Notbook_
-* Sign into your Google account or register a new one 
-
-_Improve score starting from existing code_
-* change rules?
-* add some?
-* remove some?
-
-<small>
-https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/classic-code.ipynb
-</small>
-
-</textarea>
-</section>                    
-
-<section>
-<h2>Different Approach: Machine Learning</h2>
-</section>
 
 <section data-markdown>
 <textarea data-template>
@@ -540,76 +436,26 @@ https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
         </textarea>
         </section>
 
-<section>
-        <h3>Typical application: Classification</h3>
-        <div class="fragment">
-            <img src="img/sketch/classification.jpg" height="450px">
-        </div>
-        <p class="fragment">We have to deal with a classification problem</p>
-    </section>
-
-    <section>
-            <h3>Data: Quantity</h3>
-            <img src='img/applications/decisions/classic.png' height="500px">
-            <p><small>We have 1500 data sets, this is small</small></p>
-        </section>
-
-    <section>
-        <h3>KNN: k Nearest Neighbors</h3>
-        <p>A simple classic</p>
-    </section>
-
-    <section>
-        <img src="img//insurance/knn.png">
-    </section>
-    <section>
-        <h3>Algorithm</h3>
-        <p>For a case to predict</p>
-        <ol>
-            <li>Plot the case together with the known samples
-            <li>Look at a number (k) of nearest data points
-            <li>Choose k in such a way that you can get a majority
-            <li>Your prediction is the color of the majority
-        </ol>
-    </section>
-
     <section data-markdown>
-            <textarea data-template>
-### Experiment with different numbers (k) of neighbors
-
-<a href='https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset'>
-<img src='img/knn-sample.png' height="400px">
-</a>
-<small>
-https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset
-</small>
+        <textarea data-template>
+<!-- ### ML rather is research and a bit of engineering than a craft -->
+### Machine Learning = Lab Work
+<img src='img/ml_is_not_programming.jpg' height="450px">
     </textarea>
     </section>
 
-    <section>
-        <h3>Computed results for k = 1</h3>
-        <div class="fragment">
-    
-            <img src="img/insurance/knn-1.png" height="400px">
-            <p>
-                <small>approx. 98% accuracy on train data, but only 65% on test data</small>
-            </p>
-        </div>
-    </section>
-    <section>
-            <h3>This is what we call Overfitting</h3>
+
+    <section data-markdown>
+            <textarea data-template>
+### The model we will create in this course
+
+<img src='img/manning/nn-reg.png' class="fragment" height="450px">
+
+<div class="fragment">
+<p><small>up to 80% predictions correct on previously unknown data possible</small></p>
+</div>        
+</textarea>
         </section>
-    <section>
-        <h3>Computed results for k = 13</h3>
-        <div class="fragment">
-    
-            <img src="img/insurance/knn-13.png" height="400px">
-            <p>
-                <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
-            </p>
-        </div>
-        <p class="fragment">Notice the smooth boundaries</p>
-    </section>
 
 <section data-markdown>
         <textarea data-template>
@@ -620,116 +466,356 @@ https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-
 
     <section data-markdown>
         <textarea data-template>
-### TensorFlow and Keras
-
-* https://www.tensorflow.org 
-* https://www.tensorflow.org/guide/low_level_intro 
-* https://www.tensorflow.org/guide/keras 
-
-        </textarea>
-    </section>
-
-<section data-markdown>
-    <textarea data-template>
-### Three Years of TensorFlow
-
-<img src='img/tf-history.jpg'>
-<small>https://twitter.com/TensorFlow/status/1060972928077053952</small>
-</textarea>
-</section>
-
-    <section data-markdown>
-        <textarea data-template>
 ## How does an artificial neuron work?
 
 </textarea>
 </section>
 
+
+
 <section data-markdown>
     <textarea data-template>
-<img src='img/insurance/neuron21.jpg'>
+### Affine Function
+
+<img src='img/scans/neuron21.jpg'>
 
 </textarea>
 </section>
 
 <section data-markdown>
     <textarea data-template>
-<img src='img/insurance/neuron211.jpg'>
+### Example
+
+<img src='img/scans/neuron211.jpg'>
 
 </textarea>
 </section>
 
 <section data-markdown>
     <textarea data-template>
-<img src='img/insurance/neuron212.jpg'>
+### Hand crafting a classification with a single neuron
+
+<a href="https://playground.tensorflow.org/#activation=linear&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.05973&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=true&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;discretize_hide=true&amp;resetButton_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;playButton_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true">
+<img src="img/manning/nn.png" height="400px">
+</a>
 
 </textarea>
 </section>
 
 <section data-markdown>
-        <textarea data-template>
+<textarea data-template>
+### Exercise 1 (of 2)
+### What kind of decision boundary can a single neuron represent?
+
+* Experiment with the different weights and the bias of our neuron to separate the two classes ‘high risk’ / ‘low risk’.
+* Are there limitations to the decision boundaries you can create?
+
+<a href="https://playground.tensorflow.org/#activation=linear&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.05973&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=true&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;discretize_hide=true&amp;resetButton_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;playButton_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true">
+https://playground.tensorflow.org
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Exercise 2 (of 2)
+### Why does an artificial neuron need a bias?
+
+* Experiment with the Playground
+* How does changing the Bias influence the decision boundary? 
+* You can change the Bias of the neuron by clicking on the small box on the bottom left corner of the neuron.
+
+<a href="https://playground.tensorflow.org/#activation=linear&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.05973&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=true&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;discretize_hide=true&amp;resetButton_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;playButton_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true">
+https://playground.tensorflow.org
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+## Activation Functions
+
+Activation functions take a single numerical input and perform a certain mathematical operation on it
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Activation Function
+
+<img src='img/scans/neuron212.jpg'>
+
+</textarea>
+</section>
+
+
+    <section data-markdown>
+    <textarea data-template>
 ### Step
 
 <img src="img/cnn/step.png" height="450">
 
 <small>switching from zero to one,
-    original version simulating transition from passive to active</small>
+original version simulating transition from passive to active</small>
 </textarea>
-    </section>
+</section>
 
-            <section data-markdown>
-        <textarea data-template>
+        <section data-markdown>
+    <textarea data-template>
 ### Sigmoid
 
 <img src="img/cnn/sigmoid.png" height="450">
 
 <small>compressing between 0 and 1,
-        continuously differentiable version of step function</small>
+    continuously differentiable version of step function</small>
 </textarea>
-    </section>
+</section>
 
 <section data-markdown>
-        <textarea data-template>
+    <textarea data-template>
 ### Hyperbolic Tangent
 
 <img src="img/tanh-activation.png" height="450">
 
 <small>floating from -1 to 1,
-        like Sigmoid, but can also be negative</small>
+    like Sigmoid, but can also be negative</small>
 </textarea>
-    </section>
+</section>
 
 <section data-markdown>
-        <textarea data-template>
+    <textarea data-template>
 ### Relu: Rectified Linear Unit
 
 <img src="img/cnn/relu.png" height="450">
 
 <small>negative values zeroed out, positive linear,
-        fights vanishing gradient</small>
+    fights vanishing gradient</small>
 </textarea>
-    </section>
+</section>
 
 <section data-markdown>
-        <textarea data-template>
+    <textarea data-template>
 ### Complete Example
 
-<img src='img/insurance/neuron213.jpg'>
+<img src='img/scans/neuron213.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+## Fully Connected Feed Forward Networks
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### A more complex example
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=false&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/classification4.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Training with 2 neurons
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=2&amp;seed=0.90689&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=false&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/2nn.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Exercise
+_How many neurons do you need to decently separate the two classes from each other?_
+
+* You might have noticed that two neurons do not give good results. 
+* Can you figure out a minimal number of neurons to get a good result? 
+* As weights and biases are initialized randomly, training results are not deterministic. You might have to train several times.
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=2&amp;seed=0.90689&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=false&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+https://playground.tensorflow.org
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+## How does a network learn?
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Determining Error is the key to learning
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=2&amp;seed=0.90689&amp;showTestData=false&amp;discretize=true&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;stepButton_hide=false&amp;activation_hide=true&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/error.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown id='mse'>
+<textarea data-template>
+### Mean Squared Error
+
+<script type="math/tex; mode=display">
+MSE = {\frac {1}{n}}\sum _{i=1}^{n}(Y_{i}-{\hat {Y_{i}}})^{2}
+</script>
+
+https://en.wikipedia.org/wiki/Mean_squared_error
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### From error to optimal parameters
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/bias-to-loss.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Job of the optimizer
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/optimizer.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Backpropagation
+
+_Propagating the error from output layer backward_
+
+<img src="img/backprop.png" height="400px">
+
+<small>
+https://twitter.com/dsmilkov/status/1011974815811596288
+<br>
+https://google-developers.appspot.com/machine-learning/crash-course/backprop-scroll/    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Overfitting
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/overfit.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Underfitting
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/underfit.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Sweet Spot
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/sweet-spot.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Sweet Spot shown by Error
+
+<a class="hide-controls-link" href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/test-sweet-spot.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Overfitting shown by Error
+
+<a class="hide-controls-link" href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/test-overfit.png" height="400px">
+</a>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Exercise
+_Train a network on a complex shape_
+
+* Choose the most complex data set (spiral) from the playground (link below) 
+* Play with the learning rate, activation function, ratio of training, noise, the number of neurons and also the number of hidden layers. 
+* Experiments have shown that 2-3 hidden layers are good rule of thumb. Are you able to create a model that overfits heavily?
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=spiral&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=40&amp;networkShape=4,2&amp;seed=0.31018&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;problem_hide=true&amp;regularization_hide=true&amp;batchSize_hide=true&amp;regularizationRate_hide=true">
+https://playground.tensorflow.org
+</a>
 
 </textarea>
 </section>
 
 <section data-markdown>
     <textarea data-template>
-### Understanding the Neural Networks
+### PART III
+## Deep Neural Networks using TensorFlow and Keras
+    </textarea>
+</section>
 
-<img src='img/tf-plaground.png' height="500px">
+<section data-markdown>
+        <textarea data-template>
+### Working with Colab Notebooks
 
-<small>
-https://playground.tensorflow.org
-</small>
+https://colab.research.google.com
+        </textarea>
+    </section>
+
+<section data-markdown>
+<textarea data-template>
+### Hands-On
+_Run your first Colab Notbook_
+
+* Go to https://colab.research.google.com 
+* Sign into your Google account or register a new one 
+* Switch on GPU support
+* Execute some code cells
+
+https://colab.research.google.com
+
 </textarea>
 </section>
+
 
 
 <section data-markdown>
@@ -738,6 +824,18 @@ https://playground.tensorflow.org
         </textarea>
     </section>
  
+    <section data-markdown>
+        <textarea data-template>
+### Data Encoding in Deep Learning
+* in Classic Machine Learning selecting and pre-processing is crucial
+* Deep Neural Networks often allow to just stick in our data as is
+* the rest is done by the first layers of our deep neural network   
+* Deep Learning can still benefit from preprocessing and normalizing your data 
+* Often you can compensate with more training data
+
+</textarea>
+</section>
+
     <section data-markdown>
         <textarea data-template>
 ## Shared Exercise
@@ -982,7 +1080,7 @@ _We do not have any idea how well our model performs, yet_
 <section data-markdown>
         <textarea data-template>
 ## Notebook            
-### Train the neural network
+### Split data sets, train the neural network and evaluate results
 
 <small>
 https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
@@ -1160,7 +1258,7 @@ Up to 80% of accuracy
 
     <section data-markdown>
         <textarea data-template>
-### PART III
+### PART IV
 ## Convolutional Neural Networks
         </textarea>
     </section>
@@ -1464,7 +1562,7 @@ https://twitter.com/lak_gcp/status/1055578516748591105
 
     <section data-markdown>
         <textarea data-template>
-## PART IV
+## PART V
 ### RNNs - Recurrent Neural Networks
         </textarea>
     </section>
@@ -1800,9 +1898,35 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ten
 </section>
 
 <section data-markdown>
-        <textarea data-template>
-## What's next?
+    <textarea data-template>
+### What's next?
 
+<img src='img/colah-next.png'>
+
+<small>
+https://distill.pub/2016/augmented-rnns/
+<br>
+Attention is all you need: https://arxiv.org/pdf/1706.03762.pdf
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Neural Machine Translation with Attention
+
+_Using TensorFlow and Keras_
+
+<img src='img/nmt-attention-twitter.png' height="400">
+
+<small>
+https://twitter.com/dennybritz/status/1011464747877838848/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
 ### Finding data sets to play with
     
 * Google released a search engine for datasets
