@@ -232,13 +232,13 @@ _Ask your neighbors for help when needed_
         </a></small></p>
     </section>
 
-<!-- <section data-markdown class="local">
+<section data-markdown class="local">
     <textarea data-template>
 ### Schedule
 
-<img src='img/mcubed-times.jpg' height="700">
+<img src='img/schedule-workshop-vilnius.jpg' height="550">
 </textarea>
-</section> -->
+</section>
 
     <section data-markdown style="font-size: xx-large">
         <textarea data-template>
@@ -1837,6 +1837,36 @@ http://colah.github.io/posts/2015-08-Understanding-LSTMs/
 </small>
         </textarea>
     </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Main issues with RNNs
+
+_Vanishing or exploding gradient problem:_
+* Each step in training applies the same weights to the output, also in back-propagation  
+* The further we move backwards, the bigger (explodes) or smaller (vanishes) the gradient becomes
+
+<small>
+https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Intution of effect
+
+_Effectively long term memory does not work:_
+
+* RNNs experiences difficulty in memorising words from far away in the sequence
+* Predictions based on most recent words only
+
+<small>
+    https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
 
     <section data-markdown>
         <textarea data-template>
