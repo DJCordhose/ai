@@ -191,8 +191,6 @@ but you do not need any knowledge of it. Knowledge of any Object oriented langua
 
 <!-- <section data-markdown class="todo">
         <textarea data-template>
-- Auch Transfer Learning mit imagenet vortrainiert
-  - https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
 - Deep Learning show images of more and more abstract feature abstraction and link to viz
 - Precision Recall f1 für Sentiment Analyse
   - http://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html
@@ -1268,6 +1266,17 @@ Up to 80% of accuracy
             <img src='img/applications/decisions/data.png'>
     </section>
 
+
+ <section>
+    <h3>Neural Networks are best for non symbolic data</h3>
+    <p>Like classifying images</p>
+    <p>Reference:
+            <a href="http://cs231n.github.io/convolutional-networks/" target="_blank">
+                 http://cs231n.github.io/convolutional-networks/</a>
+    </p>
+     
+</section>
+
 <!--     
         <section>
             <h3>Use of GPU for non symbolic data</h3>
@@ -1389,7 +1398,7 @@ http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
 
 <section data-markdown>
     <textarea data-template>
-### Downlsampling Layer: Reduces data sizes and risk of overfitting
+### Downsampling Layer: Reduces data sizes and risk of overfitting
 ![Pooling](http://cs231n.github.io/assets/cnn/pool.jpeg)
 </textarea>
 </section>
@@ -1534,6 +1543,31 @@ https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ten
 </small>
 </textarea>
 </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Transfer Learning
+
+* Keras provides a lot of pre-defined network architectures for image classification (like Restnet and Mobilnet)
+* You can get each of them pre-trained on a generic image data set
+* You can either use them as is
+* Or retrain with your own images
+* https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
+* Might be helpful if you do not have a lot of data
+
+<small>
+https://keras.io/applications/
+</small>
+    </textarea>
+</section>
+
+<section>
+    <h4>ImageNet dataset to classify images</h4>
+    <img src="img/deep-dream/imagenet.png" height="500px">
+    <p><small><a href="http://image-net.org/" target="_blank">http://image-net.org/</a></small></p>
+</section>
+
+
 
 <section data-markdown>
         <textarea data-template>
