@@ -720,7 +720,7 @@ _Train a network on a complex shape_
 
 * Choose the most complex data set (spiral) from the playground (link below) 
 * Play with the learning rate, activation function, ratio of training, noise, the number of neurons and also the number of hidden layers. 
-* Experiments have shown that 2-3 hidden layers are good rule of thumb. Are you able to create a model that overfits heavily?
+* Experiments have shown that 2-3 hidden layers are good rule of thumb.
 
 <a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=spiral&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=40&amp;networkShape=4,2&amp;seed=0.31018&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;problem_hide=true&amp;regularization_hide=true&amp;batchSize_hide=true&amp;regularizationRate_hide=true">
 https://playground.tensorflow.org
@@ -778,6 +778,17 @@ https://colab.research.google.com
 
 </textarea>
 </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Checking our available data
+
+<img src='img/df_describe.png' height="500">
+
+</textarea>
+</section>
+
+
 
     <section data-markdown>
         <textarea data-template>
@@ -1409,21 +1420,18 @@ model.add(Flatten())
             </small>
         </p>
     </section>
-    
-        <section>
-            <h3>More complex architecture: Google Inception V3</h3>
-            <img src="img/inception_v3_architecture.png" height="400px">
-            <p>
-                <small>
-                    Paper: <a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a>
-                    <br>
-                    <a href="https://stackoverflow.com/questions/39352108/does-the-inception-model-have-two-softmax-outputs" target="_blank">
-                    Why two classifiers?</a>
-                </small>
-            </p>
-        </section>
 
-                </section>
+<section data-markdown>
+    <textarea data-template>
+### Complete VGG in Code
+
+<img src='img/vgg-keras.jpg' height="500">
+<small>
+https://colab.research.google.com/github/Machine-Learning-Tokyo/DL-workshop-series/blob/master/ConvNets.ipynb
+</small>
+</textarea>
+</section>
+
         <section data-markdown>
                 <textarea data-template>
 ### Fashion MNINST example
@@ -1479,15 +1487,18 @@ https://medium.com/towards-data-science/neural-network-architectures-156e5bad51b
 </textarea>
 </section>
 
-<section data-markdown>
-    <textarea data-template>
-### Standard CNN Architectures in Code
-
-<img src='img/vgg-keras.jpg' height="500">
-<small>
-https://colab.research.google.com/github/Machine-Learning-Tokyo/DL-workshop-series/blob/master/ConvNets.ipynb
-</small>
-</textarea>
+    
+<section>
+    <h3>One Example: Google Inception V3</h3>
+    <img src="img/inception_v3_architecture.png" height="400px">
+    <p>
+        <small>
+            Paper: <a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a>
+            <br>
+            <a href="https://stackoverflow.com/questions/39352108/does-the-inception-model-have-two-softmax-outputs" target="_blank">
+            Why two classifiers?</a>
+        </small>
+    </p>
 </section>
 
 <section data-markdown style="font-size: xx-large">
@@ -1967,10 +1978,10 @@ https://twitter.com/dennybritz/status/1011464747877838848/
     <textarea data-template>
 ### If you liked this
 
-_there are two more talks from me_
+_there are two more talks by me_
 
 * _Comparing Machine Learning Strategies using Scikit-learn and TensorFlow_: How does what you saw today relate to "classic" machine learning and why would you care?
-* _Machine Learning from Idea to Production_: How do go on from here? Was this even the easy part?
+* _Machine Learning from Idea to Production_: How do you go on from here? Was this even the easy part?
 
 
 </textarea>
@@ -1981,7 +1992,7 @@ _there are two more talks from me_
 ### Stay in Contact
 
 * questions are free
-* you can also hire me to investigate what to do with ML in you company
+* you can also hire me to investigate what to do with ML in your company
 
 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
 
