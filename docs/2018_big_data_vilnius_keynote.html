@@ -191,9 +191,10 @@ We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflo
 </section> -->
 
         <section>
-            <h2>Machine Learning from Idea to Production</h2>
+                <br>
+                <br>
+                <h2>Machine Learning from Idea to Production</h2>
             <!-- <h2>or Machine Learning is the new punk</h2> -->
-            <br>
             <br>
             <br>
             <p><a target="_blank" href="https://www.bigdataconference.lt/Oliver-Zeigermann/">
@@ -207,50 +208,13 @@ We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflo
             </a></small></p>
         </section>
 
-        <section data-markdown>
-    <textarea data-template>
-### Plan for this talk
-
-_A repitation of what you might have seen here_
-* Data Preparation
-* Training
-
-_Something to keep you thinking, maybe for next conference_
-* Evaluation
-* Production
-* Post-Production
-</textarea>
-</section>
-
-        <section data-markdown>
-                <textarea data-template>
-## Core Statement of this talk                    
-<h3 class="fragment">For practical applications our models are not done when they are trained and successfully generalize</h3>
-
-<h3 class="fragment">They are not even done when in production</h3>
-            
-            </textarea>
-            </section>
-            
-            
-<section data-markdown>
-    <textarea data-template>
-
-<img src="img/hickey-production.png">
-
-<small>
-https://twitter.com/richhickey/status/1063086406980026370
-</small>
-</textarea>
-</section>
-
     <section data-markdown>
         <textarea data-template>
 ### Objective
 
 _Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
 
-<!-- <img src='img/pixabay/accident-151668_1280.png'> -->
+<img src='img/pixabay/accident-151668_1280.png'>
         </textarea>
     </section>
 
@@ -268,15 +232,51 @@ _Imagine we are in the car insurance business and want a system that predicts th
 </textarea>
     </section>
 
+    <section data-markdown>
+            <textarea data-template>
+## Core Statement of this talk                    
+<h3 class="fragment">For practical applications our models are not done when they are trained and successfully generalize</h3>
+
+<h3 class="fragment">They are not even done when in production</h3>
+        
+        </textarea>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Analogy from Classic Software Development
+
+<img src="img/hickey-production.png">
+
+<br>
+<small>
+https://twitter.com/richhickey/status/1063086406980026370
+</small>
+</textarea>
+</section>
+
+        <section data-markdown>
+    <textarea data-template>
+### Plan for this talk
+
+_A repitation of what you might have seen here_
+* Data Preparation
+* Training
+
+_Something to keep you thinking, maybe for next conference_
+* Evaluation
+* Production
+* Post-Production
+</textarea>
+</section>
+
     <section>
-        <h3>Customer Data - Risk of Accidents</h3>
+        <h3>Supervised Learning from known data</h3>
         <img src="img/manning/all.png" height="500px" class="fragment">
-        <p class="fragment">
+        <!-- <p class="fragment">
             <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
-        </p>
+        </p> -->
     </section>
-
-
 
 <!-- <section data-markdown>
     <textarea data-template>
@@ -353,7 +353,7 @@ _collecting data might be the hardest part of the job_
 </textarea>
 </section>
 
-<section data-markdown style="font-size: xx-large">
+<!-- <section data-markdown style="font-size: xx-large">
         <textarea data-template>
 ### Results: Data Cleaning und Feature Selection
 
@@ -368,7 +368,7 @@ _Feature Selection_
 * Row missig more than 50% of values: do not use
 * Explore dependencies to decide what to use for training input
             </textarea>
-            </section>
+            </section> -->
 
     <!-- <section data-markdown>
         <textarea data-template>
@@ -459,6 +459,15 @@ https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-
     
 <section data-markdown>
         <textarea data-template>
+### Machine Learning is all about Generalization
+
+<img src='img/MELLI.jpg' height="500px">
+            </textarea>
+            </section>
+
+
+<!-- <section data-markdown>
+        <textarea data-template>
 ### Generalization
 
 * The most important property of a model is if it generalizes well to unknown data
@@ -468,7 +477,7 @@ https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-
 * So, we introduce a little trick here
 
 </textarea>
-</section>
+</section> -->
 
 <section data-markdown>
     <textarea data-template>
@@ -583,6 +592,26 @@ Each ML strategy has its own means of Regularization, e.g.
         </textarea>
         </section>
 
+        <section data-markdown>
+                <textarea data-template>
+# Issue 1: Bias in Training Data
+</textarea>
+        </section>
+        
+
+<section data-markdown>
+        <textarea data-template>
+### Revisiting the Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<!-- <p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p> -->
+</textarea>
+    </section>
 
             <section data-markdown>
         <textarea data-template>
@@ -651,7 +680,7 @@ https://arxiv.org/abs/1810.09136
         <textarea data-template>
 ### Making Your Neural Network Say "I am not sure"
 
-<img src='img/tf_proba.jpg'>
+<img src='img/tf_proba.jpg' class="fragment">
 
 <small>
 https://www.tensorflow.org/probability/
@@ -689,11 +718,17 @@ _our models contain all biases and truths of the training data_
 * Our model might perform well for a few users, but badly for others
 * Accuracy and loss only show the average
 * Some areas might not have been properly covered with data samples (including test)
-* Curse of High Dimensions
+<!-- * Curse of High Dimensions -->
 
 <small>
 https://developers.google.com/machine-learning/fairness-overview/
 </small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# Issue 2: Are we fitting on the right features?
 </textarea>
 </section>
 
@@ -748,6 +783,13 @@ Same person, left classified as hetero, right as gay
 </textarea>
 </section>
 
+<section data-markdown>
+    <textarea data-template>
+### Part IV: 
+## Production
+</textarea>
+</section>
+
 <section data-markdown class="local" style="font-size: xx-large">
     <textarea data-template>
 ### There is a complete test if we are ready to go in production
@@ -760,14 +802,8 @@ I did this for one of my projects and the results can be scary
 </textarea>
 </section>
 
-<section data-markdown>
-    <textarea data-template>
-### Part IV: 
-## Production
-</textarea>
-</section>
 
-<section data-markdown>
+<!-- <section data-markdown>
     <textarea data-template>
 ### ML Car Insurance Risk Calculator
 
@@ -780,7 +816,7 @@ I did this for one of my projects and the results can be scary
 </small></p>
 </textarea>
 </section>
-
+ -->
 <section data-markdown style="font-size: xx-large">
         <textarea data-template>
 ### Serving Models
@@ -845,7 +881,7 @@ Kudos to @kein_mark for pointing me to this
     </textarea>
     </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
     <textarea data-template>
 ### Dealing with Bias / Unfairness
 
@@ -860,7 +896,7 @@ Kudos to @kein_mark for pointing me to this
 Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
 </textarea>
 </section>
-
+ -->
 
 <section data-markdown>
     <textarea data-template>
@@ -878,17 +914,6 @@ Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
 
 <section data-markdown>
         <textarea data-template>
-### The Turtle Effect
-
-If the user expects a certain pattern to be in the model, they expect it to persist
-
-<img src="img/applications/turtle.png" height="400px">
-
-    </textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
 ### Continuity in model predictions
 
 * People who use our model regularly will expect most things to stay the way they know it
@@ -899,15 +924,28 @@ If the user expects a certain pattern to be in the model, they expect it to pers
         </textarea>
     </section>
 
+<section data-markdown>
+        <textarea data-template>
+### The Turtle Effect
+
+If the user expects a certain pattern to be in the model, they expect it to persist
+
+<img src="img/applications/turtle.png" height="400px">
+
+    </textarea>
+</section>
+
+
 <section>
         <h2>Wrap Up</h2>
-        <p><em>Training a model is the least part</em></p>
+        <p><em>It does not end with training the model</em></p>
         <ul>
             <li class="fragment">having reasonable data is the most important part
             <li class="fragment">evaluation is more than accuracy: blank spots, bias 
             <li class="fragment">going to production changes everyhing 
             <li class="fragment">people expect continuity 
         </ul>
+        <br>
         <p>
                 <em>Machine Learning from Idea to Production</em>
             <br>
