@@ -63,10 +63,11 @@
                       .reveal h2,
                       .reveal h3,
                       .reveal h4 {
-                          letter-spacing: 2px;
-                          font-family: 'Amiri', serif;
+                        letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
                           /* font-family: 'Times New Roman', Times, serif; */
                           font-weight: bold;
+                          color: black;
                           font-style: italic;
                           letter-spacing: -2px;
                           text-transform: none !important;
@@ -126,6 +127,11 @@
                   .reveal ul.fa-ul li {
                       list-style-type: none;
                   }
+
+            .reveal {
+                color: black !important;
+             }       
+
           </style>
       
     <!-- Printing and PDF exports -->
@@ -260,7 +266,9 @@ MAP-Elites: https://medium.com/@devonfulcher3/the-map-elites-algorithm-finding-o
 * Games
 * Route Planing
 
+<small>
 http://theory.stanford.edu/~amitp/GameProgramming/Applications.html
+</small>
 </textarea>
 </section>
 
@@ -274,8 +282,14 @@ Robot needs to find Portal/Goal
 </textarea>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+### Step 1: Knowledge Representation
+</textarea>
+</section>
+
 <section>
-        <h2>Step 1: Knowledge Representation</h2>
+        <h2>Knowledge Representation</h2>
 <p class="fragment">Find a way to encode the maze to make it accesible for a search algorithm</p>
 
 <pre><code contenteditable data-trim class="line-numbers python fragment">
@@ -301,6 +315,12 @@ terrain = [
 </textarea>
 </section>
     
+<section data-markdown>
+        <textarea data-template>
+### Step 2: Search on that graph
+</textarea>
+</section>
+
 <section data-markdown>
         <textarea data-template>
 ### Depth First
@@ -940,7 +960,9 @@ https://youtu.be/Wujy7OzvdJk?t=1893
         } );
         // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
         // $('section').attr('data-background-image', "backgrounds/pink.jpg");
-        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/sky.jpg");
+
     //    $('section').attr('data-background-image', "backgrounds/code.jpg");
     </script>
     
