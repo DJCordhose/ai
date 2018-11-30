@@ -200,11 +200,13 @@ Diese Talk eignet sich für jeden, der sich mit Software-Entwicklung beschäftig
 
     <section data-markdown>
         <textarea data-template>
-### Objective
+### Our Scenerio for today
 
-_Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
-
-<img src='img/pixabay/accident-151668_1280.png'>
+* We are CTO of a highly innovative Car Insurance Company
+* Different from other insurance companies we determine the rate by the actual number of accidents per customer
+* _Objective: how many accidents will prospective customers have?_ 
+ 
+<img src='img/pixabay/accident-151668_1280.png' height="300px">
         </textarea>
     </section>
 
@@ -375,10 +377,22 @@ return green # otherwise: low risk
 * you have a lot of examples
 * solving the problem can tolerate some error or uncertainty
 * there is a clear, simple input and output
+* you want to replace a gut feeling
                 </textarea>
                 </section>
 
-    <section data-markdown>
+<section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-fcholett-bias.png' height="580px">
+
+<small>
+https://twitter.com/fchollet/status/1050227462162894848
+</small>
+            </textarea>
+            </section>
+
+
+    <!-- <section data-markdown>
         <textarea data-template>
 ### Remember, you are not Facebook or Google
 
@@ -386,7 +400,7 @@ return green # otherwise: low risk
 <small>https://twitter.com/casarock/status/1064438008756256768</small>
         </textarea>
     </section>
-
+ -->
     <section data-markdown>
         <textarea data-template>
 <!-- ### Andrew Ng: Supervised Machine Learning -->
@@ -484,7 +498,30 @@ _Feature Selection_
 <img src="img/dt/dt-all.png" height="500px">
         </textarea>
         </section>
-            
+
+    <section>
+<h3>Code in Scikit-learn</h3>
+
+<p>Training</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+            </code></pre>
+        
+<p>Prediction</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+y_pred = clf.predict(input)
+        </code></pre>
+
+<small>
+    <a href='https://scikit-learn.org/stable/modules/classes.html'>https://scikit-learn.org/stable/modules/classes.html</a>
+    <br>
+    <a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb'>
+        https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb</a>
+</small>
+        </section>
+        
     <section data-markdown>
             <textarea data-template>
 ### How do they learn?
@@ -545,102 +582,146 @@ http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-a
         </div>
     </section>
 
-
-
-
-
-<!-- 
 <section data-markdown>
-        <textarea data-template>
-### Generalization
+    <textarea data-template>
+### Keras is TensorFlow's high level API
 
-* The most important property of a model is if it generalizes well to unknown data
-* A machine learning model is of no use if it only works well on the data it has been trained on
-  * If it was, the easiest way to achieve this would be a dictionary translating from a set of inputs to the known output
-* Conceptually it is a little bit hard to optimize for something we do not know
-* So, we introduce a little trick here
+* https://www.tensorflow.org 
+* https://www.tensorflow.org/guide/low_level_intro 
+* https://www.tensorflow.org/guide/keras 
+
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Next step: Encode this with Keras
+
+<img src='img/insurance/encoding3.jpg'>
+
+</textarea>
+</section>
+
+        <section>
+<h3>Code using Keras High Level API</h3>
+
+<p>Network Setup</p>
+<pre><code contenteditable data-trim class="line-numbers python">
+model = keras.Sequential()
+
+model.add(Dense(100, name='hidden1', activation='relu', input_dim=2))
+model.add(Dense(100, name='hidden2', activation='relu'))
+model.add(Dense(3, name='softmax', activation='softmax'))
+</code></pre>
+        
+        </section>
+
+
+            <section>
+                    <h3>
+                        Three types of machine learning
+                    </h3>
+                    <img src="img/sketch/types-of-ml.png" height="550px">
+                </section>
+    
+        <section>
+                <h3>What to use depends on your data</h3>
+                <img src='img/applications/decisions/type.png'>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+                
+## What does not work?             
+            
+            </textarea>
+            </section>
+
+        <section>
+            <h3>There is no general AI</h3>
+            <div class='fragment' style="float: left; padding-left: 50px">
+                    <img src='img/no_brain_robo.jpg' height="300">
+                    <p><small><em>Consciousness or autonomous lernen<br>
+                        does not exit in machines</em></small>
+                    </p>
+                </div>
+            <div class='fragment' style="float: right; padding-left: 50px; padding-right: 50px">
+                    <img src='img/human_neq_robot_shadow.jpg' height="300">
+                    <p><small><em>AI and machine learning is not like super-humans<br>
+</em></small></p>
+            </div>
+        </section>
+
+    <section data-markdown>
+            <textarea data-template>
+<h4 class="fragment"> NY Times in 1958 after perceptrons were invented</h4>
+<img src='img/ny-times-1958.jpg' height="500px">
+
+<small>https://twitter.com/genekogan/status/1055839216280588289</small>
+                </textarea>
+            </section>
+
+<section data-markdown>
+    <textarea data-template>
+### What does this mean for you?
+
+If you want to adopt Machine Learning in your Company
+* Success can not guranteed
+* Rather experiment within time boxes
+* Expect and clearly communicate failures
+* Bring models into production as quickly as possible
+* Do not optimize for the last few percentages
+* Quality of the data matters more than your approach
 
 </textarea>
 </section>
 
 <section data-markdown>
     <textarea data-template>
-### Split known data into training and test
+### What really matters 
 
-<img class='fragment' src='img/insurance/generalization.jpg' height="550px">
+<img src='img/sean-data.png'>
 
+<small>
+https://twitter.com/SeanPedersen96/status/1063272488489099264
+</small>
 </textarea>
 </section>
 
-
-<section id='overfitting'>
-        <h3>The Issue: Overfitting</h2>
-    <div>
-    <div style="float: left">
-        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
-        <p>
-            <small><em>Training Score</em></small>
-        </p>
-    </div>
-    <div style="float: left" class="fragment" data-fragment-index='5'>
-        <img src="img/scans/elements/down.jpg" height="200">
-    </div>
-    <div style="float: left" class="fragment" data-fragment-index='4'>
-        <img src="img/scans/elements/up.jpg" height="200">
-    </div>
-    <div style="float: left">
-            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
-            <p>
-                <small><em>Test Score</em></small>
-            </p>
-    </div>
-    </div>
-    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and test scores clearly divert</em></p>
-
-    </section>
-
-    <section data-markdown>
+            <section data-markdown>
         <textarea data-template>
-### Regularization
+<img src='img/twitter-cholett-applications.png' height="570px">
 
-_Process to counter overfitting_
-
-Each ML strategy has its own means of Regularization, e.g.
-* KNN: more neighbors
-* Decision Trees: reduce depth, use ensenbles
-* SVM: gamma (how many points to use) and cost (of misclassified data)
-* NN: Dropout, Batch Normalization, Reduced Capacity, Reduced Training Time
+<small>
+https://twitter.com/fchollet/status/1035951190276681728
+</small>
             </textarea>
             </section>
-    
 
-<section data-markdown>
-        <textarea data-template>
-### Great results
 
-<img src='img/manning/nn-reg.png' height="450">
-
-<p class="fragment"><small>Up to 80% accuracy on test data using a regularized neural networks</small></p>
-</textarea>
-    </section> -->
-
-<section data-markdown>
-        <textarea data-template>
-    
-# From here on just material            
-
-</textarea>
+<section>
+    <h3>Wrap-Up</h3>
+    <ul>
+        <li class="fragment">Machine Learning can learn from existing data and generalize from it
+        <li class="fragment">It can be an alternative to explicit, classic business logic
+        <li class="fragment">No machine has common knowledge of the world, though
+    </ul>
+    <br>
+    <p>
+            <em>Machine Learning: Das Ende der Businesslogik?</em>
+        <br>
+        <br>
+    <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a> / <a href="https://www.embarc.de/ ">embarc GmbH</a>
+        <br>
+    <a href="http://bit.ly/wien-architectur">
+        http://bit.ly/wien-architectur
+    </a>
+    </p>
 </section>
 
 <!-- <section data-markdown class="todo">
         <textarea data-template>
-Für die nächste Version (JAX?):
-- Letzter Teil weg oder 
-- Tipps zur Auswahl der Daten erweitern
-- Colab erwähnen
 - Unsupervised Länger
-  - 3 Arten des ML (bessere Grafik?)
-  - Intro Folie wann was label oder nicht wieder rein
   - Clustering erst mal mit K means (wie vorher)
 - Für jede ML Art Konkret Tools und Lib zeigen
 - Semi Supervised ML: https://twitter.com/colinraffel/status/1059941035651010561
@@ -655,1000 +736,6 @@ Für die nächste Version (JAX?):
 </textarea>
 </section> -->
 
-<section data-markdown class="todo">
-        <textarea data-template>
-    
-Difference between machine learning and AI:
-
-If it is written in Python, it's probably machine learning
-
-If it is written in PowerPoint, it's probably AI
-(https://twitter.com/matvelloso/status/1065778379612282885?s=03)
-
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
-Aus JAX Feedback    
-
-* Mauerhintergrund wie Big Data
-* Short Colab Demo
-* vielleicht etwas zu wenig technisches Hintergrundwissen vermittelt
-* zu wenig technisch. was an die Hand geben wenn man mit sowas anhängt
-
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-    <textarea data-template>
-
-JoyOfCoding (@JoyOfCoding) tweeted at 8:57 AM on Tue, Sep 25, 2018:
-The fourth presentation can now be found online: Teaching a Machine to Code by @SamirTalwar: https://t.co/rckzb81PR9
-(https://twitter.com/JoyOfCoding/status/1044480903874060288?s=03)
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-    <textarea data-template>
-
-Shreya Shankar (@sh_reya) tweeted at 11:54 PM on Tue, Nov 13, 2018:
-I remember when @douglas_eck demo’ed an RNN that improvised a melody based off “Twinkle Twinkle” a couple of years ago. It was cool but not good enough (yet).
-
-It then hit me that AI was going to fundamentally change the way we consume media in the future. (1/5) https://t.co/w4qxhKZOCr
-(https://twitter.com/sh_reya/status/1062478854273421312?s=03)
-</textarea>
-</section>
-
-
-
-<section data-markdown class="todo">
-    <textarea data-template>
-
-Johnnie (@iamlukesky) tweeted at 0:05 AM on Tue, Nov 13, 2018:
-Just because you can doesn't mean you should. https://t.co/hyDuXtzmBy
-(https://twitter.com/iamlukesky/status/1062119194949509121?s=03)
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-    <textarea data-template>
-Zeichnung mit Hand, später evtl. roter Faden für Video
-
-
-### Explaining ML Types with a rule based system (which of course is both wrong and incomplete, in an unfixable way, but the best I have for you)
-
-Stil:
-
-Do you have data
-Yes / Not Sure = Supervised Machine Learning
-
-Do you have Image data?
-
-Do you have text / sequence data?
-
-
-Do you have a lot of data?
-    </textarea>
-</section>
-
-<section data-markdown class="todo">
-        <textarea data-template>
-### Code-Completion
-
-<img src='img/autocomplete.png'>
-        </textarea>
-    </section>
-
-    <section data-markdown class="todo">
-        <textarea data-template>
-### Remember, you are not Facebook or Google
-
-<img src='img/dl-research-vs-application.png' height="500px">
-<small>https://twitter.com/casarock/status/1064438008756256768</small>
-        </textarea>
-    </section>
-
-
-
-
-    <section data-markdown>
-        <textarea data-template>
-### Unser Szenario
-
-* Wir sind CTO in einem innovativen Versicherungsunternehmen für Kraftfahrzeuge
-* Anders als herkömmliche Versicherer bestimmen wir die Beitragsklasse anhand tatsächlich auftretender Schadensfälle
-
-<img src='img/pixabay/accident-151668_1280.png' height="300px">
-        </textarea>
-    </section>
-
-<section data-markdown>
-        <textarea data-template>
-### Wir sollen einen "Car Insurance Risk Calculator" für Neukunden bauen
-
-<a href='html/calculator.html'>
-<img src='img/manning/calculator.png' height="450">
-</a>
-<!-- <p><small>
-    <a href='html/calculator.html' target="_blank">
-        https://djcordhose.github.io/ai/html/calculator.html</a></small>
-</small></p> -->
-</textarea>
-    </section>
-    
-
-<section data-markdown>
-    <textarea data-template>
-### Wie baut man so etwas?
-
-* Es gibt Informationen über bestehende Kunden
-* Warum nicht ein bisschen Analyse und Business-Logik?
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-<img src='img/sketch/classic-development.jpg'>
-    </textarea>
-    </section>
-    
-
-<section data-markdown>
-    <textarea data-template>
-### Explorative Analyse
-<img src='img/sns-pairplot.png' height="550px">
-
-</textarea>
-</section>
-    
-        <section>
-            <h3>Ansatz: Von Hand kodierte Regeln</h3>
-            <div class="fragment">
-            <pre><code contenteditable data-trim class="line-numbers python">
-if age < 25:
-    if speed > 140:
-        return red # young people, fast cars: high risk
-    else:
-        return yellow # young people: medium risk
-                </code></pre>
-            </div>
-            <div class="fragment">
-            <pre><code contenteditable data-trim class="line-numbers python">
-if age > 75:
-    return red # old people: high risk
-                </code></pre>
-            </div>
-            <div class="fragment">
-            <pre><code contenteditable data-trim class="line-numbers python">
-if miles_per_year > 30:
-    return red # a lot of driving: high risk
-if miles_per_year > 20:
-    return yellow #  a bit of driving: medium risk
-                </code></pre>
-            </div>
-            <div class="fragment">
-            <pre><code contenteditable data-trim class="line-numbers python">
-return green # otherwise: low risk
-                </code></pre>
-            </div>
-        </section>
-
-        <section data-markdown>
-                <textarea data-template>
-## Fertig!
-            </textarea>
-            </section>
-            
-        <section data-markdown>
-                <textarea data-template>
-## Fertig?
-
-* Was meint ihr?
-* Können wir das so lassen?
-* Taugt der Ansatz überhaupt?
-            </textarea>
-            </section>
-        <section data-markdown>
-                <textarea data-template>
-## Jede Story braucht einen Wolf
-
-
-<img src='img/chk_wolf.jpg' height="450px" style="float: left">
-
-<img src='img/chk_rot.jpg' height="450px" style="float: right">
-
-
-<small>https://twitter.com/martin_gorner/status/1055265426442088448</small>
-            </textarea>
-            </section>
-
-        <section data-markdown>
-                <textarea data-template>
-### Bewertung klassische Business-Logik
-
-* Sind die Regeln "richtig"?
-* Sind das alle Regeln?
-* ca. 43% korrekte Vorhersagen auf Kundendaten
-* raten wäre 33%
-* Wie komplex müssten sie sein, um bessere Vorhersagen zu machen?
-* Wie komplex dürften die Regeln sein, damit sie generell genug sind?
-* Wie hält man wachsende Regelmengen wartbar?
-            </textarea>
-            </section>
-
-            <section>
-                <h3>Alternative</h3>
-                    <h2>Supervised Machine Learning</h2>
-                </section>
-
-                <section data-markdown>
-                        <textarea data-template>
-<img src='img/sketch/supervised-ml.jpg' height="600px">
-                    </textarea>
-                </section>
-
-<section data-markdown>
-        <textarea data-template>
-### Software 2.0
-
-Within the next five to ten years, deep learning will be another essential skill in a developer’s toolkit. 
-
-Now is the perfect time to get involved in the deep learning community, just as the new era in software begins.
-
-https://jaxenter.com/deep-learning-essential-tool-developers-147773.html
-</textarea>
-</section>
-                
-
-<section data-markdown>
-        <textarea data-template>
-### Machine Learning eignet sich am besten wenn
-
-* man viele Beispieldaten hat
-* man mit Unsicherheit in der Vorhersage oder mit Fehlern leben kann
-* die Aufgabe nicht klar oder nur abstrakt formuliert werden kann (_Wer ist ein guter Kunde?_)
-* (bei Supervised Machine Learning) die Eingabe und die Ausgabe klar formuliert werden können 
-* besser als Bauchgefühl
-
-            </textarea>
-            </section>
-
-<section data-markdown>
-        <textarea data-template>
-<img src='img/twitter-fcholett-bias.png' height="580px">
-
-<small>
-https://twitter.com/fchollet/status/1050227462162894848
-</small>
-            </textarea>
-            </section>
-
-
-            <section data-markdown>
-                    <textarea data-template>
-        <img src='img/MELLI.jpg' height="650px">
-                        </textarea>
-                        </section>
-        
-<!-- <section data-markdown>
-        <textarea data-template>
-### Peter Norvig - Head of AI @Google
-
-Machine Learning kann 
-
-1. die Entwicklung beschleunigen
-1. gut auf unterschiedliche Varianten angepasst werden
-1. Aufgaben lösen, die man gar nicht analysieren könnten
-
-https://developers.google.com/machine-learning/crash-course/ml-intro
-</textarea>
-</section> -->
-
-<!-- <section data-markdown>
-<textarea data-template>
-
-<img src='img/twitter-norvig-ml.png' height="500px">
-
-<small>
-https://twitter.com/DynamicWebPaige/status/1053805631377879040
-https://developers.google.com/machine-learning/crash-course/ml-intro
-</small>
-</textarea>
-</section> -->
-
-
-                <section>
-                        <h3>Wir gucken also von der Datenseite</h3>
-                        <img src="img/insurance/automobile-insurance.png" height="450px">
-                        <p>Wie würde ich (47) mit meinem 56-PS-Auto abschneiden?</p>
-                    </section>
-            
-        
-        <!-- <section>
-            <h3>Keine tollen Ergebnisse</h3>
-            <p>Sind das alle Regeln? Sind die richtig?</p>
-            <div class="fragment">
-                    <img src="img/insurance/manual.png" height="400px">
-                    <p><small>ca. 43% korrekte Vorhersagen auf unbekannten Daten (raten wäre 33%)</small></p>
-            </div>        
-        </section>
-
-            <section data-markdown>
-                <textarea data-template>
-    ### Eckpunkte „Strategie Künstliche Intelligenz“ der Bundesregierung       
-
-    * Deutschland „weltweit führenden Standort für KI“
-    * neue Anwendungen z. B. in der Öffentlichen Verwaltung sollen erschlossen werden
-    * „europäische Antwort auf datenbasierte Geschäftsmodelle“
-
-    <small>https://www.egovernment-computing.de/oeffentliche-verwaltung-im-zentrum-der-ki-a-734734/
-    <br>
-    http://www.taz.de/Foerderung-neuer-Technologie/!5518286/
-    </small>
-    </textarea>
-    </section> -->
-
-
-
-<!-- <section>
-    <h4>AI (Artificial Intelligence) / ML (Machine Learning) is Opportunity</h4>
-    <img src="opportunity.png" height="450">
-    <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
-</section> -->
-
-
-            <!-- <section data-markdown>
-        <textarea data-template>
-<img src='img/twitter-rohrer-roles.png' height="600px">
-<small>
-https://twitter.com/_brohrer_/status/1054490122580881408    
-</small>
-    </textarea>
-    </section>
-                            
-    <section data-markdown>
-            <textarea data-template>
-    ### ML ist eher Forschung als Software Entwicklung
-    <img src='img/ml_is_not_programming.jpg' height="550px">
-        </textarea>
-        </section> -->
-    
-    
-
-<!-- <section data-markdown>
-    <textarea data-template>
-### Validierung</h3>
-
-Generalisierung, nicht perfekte Reproduktion ist unser Ziel</p>
-
-<img src='img/scans/generalization.jpg' height="600">
-
-</textarea>
-</section>
-                     -->
-<!-- <section>
-    <h3>Strategien</h3>
-    <img src='img/applications/decisions/classic.png' height="500px">
-</section> -->
-
-    <section>
-        <h3>Klassische Lernstrategien</h3>
-
-        <ul>
-            <li>Für unser Problem reicht schon eine der einfachsten Strategien: KNN</li>
-            <li>Logistische Regression: Trennung von Klassen per Logistischer Funktion (Sigmoid)
-            <li>Decision Trees: Entscheidungsbaum bei dem die Ebenen und Unterscheidungsegeln erlernt werden
-        </ul>
-        <p><em>Neural Networks (Deep Learning): Zusammenschaltung vieler Logistischer Regressionen</em></p>
-    </section>
-
-    <!-- <section>
-        <h3>KNN: k Nearest Neighbors</h3>
-        <p>Ein einfacher Klassiker</p>
-    </section>
-
-    <section data-markdown>
-            <textarea data-template>
-### Wie funktioniert KNN?
-
-<a href='https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset'>
-<img src='img/knn-sample.png' height="400px">
-</a>
-<small>
-https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset
-</small>
-    </textarea>
-    </section> -->
-
-<section data-markdown>
-        <textarea data-template>
-### Beste Lösung mit Deep Learning
-
-<img src='img/manning/nn-reg.png' class="fragment" height="450px">
-
-<div class="fragment">
-<p><small>bis zu 80% der Vorhersagen auf unbekannten Daten korrekt</small></p>
-</div>        
-</textarea>
-    </section>
-
-<section>
-            <h3>Zum Vergleich: Ergebnisse unserer Business-Logik</h3>
-            <div class="fragment">
-                    <img src="img/insurance/manual.png" height="400px">
-                    <p><small>ca. 43% korrekte Vorhersagen auf unbekannten Daten (raten wäre 33%)</small></p>
-            </div>        
-        </section>
-
-
-<section data-markdown>
-    <textarea data-template>
-### Wie funktionieren Deep Neural Networks? 
-
-<img src='img/tf-plaground.png' height="500px">
-
-<small>
-https://playground.tensorflow.org
-</small>
-</textarea>
-</section>
-
-
-<section data-markdown>
-        <textarea data-template>
-## Was geht nicht?
-
-_wir dürfen nichts verkaufen oder anpreisen was nicht geht_
-            </textarea>
-    </section>
-    
-    
-        <section>
-            <h3>Es gibt keine allgemeine KI</h3>
-            <div class='fragment' style="float: left; padding-left: 50px">
-                    <img src='img/no_brain_robo.jpg' height="300">
-                    <p><small><em>Bewusstsein oder selbständiges Lernen<br> exisitert nicht in Machinen</em></small>
-                    </p>
-                </div>
-            <div class='fragment' style="float: right; padding-left: 50px; padding-right: 50px">
-                    <img src='img/human_neq_robot_shadow.jpg' height="300">
-                    <p><small><em>KI und Machine Learning sind nicht wie Menschen, <br>
-                        die niemals schlafen müssen und keine
-                        <br>
-                         Gehaltsforderungen haben</em></small></p>
-            </div>
-        </section>
-
-<section data-markdown>
-        <textarea data-template>
-### Aber die Presse sagt doch etwas anderes
-<div class="fragment">
-        <span style="color: red">_"Wenn wir Roboter wie Sklaven behandeln, werden sie rebellieren"_</span>
-        http://www.spiegel.de/lebenundlernen/uni/kuenstliche-intelligenz-das-lernt-man-im-studiengang-humanoide-robotik-in-berlin-a-1217860.html    
-        </div>
-        
-<br>
-<div class="fragment">
-        <span style="color: red">_"Chinese AI will develop Chinese artificial consciousness"_</span>
-        http://www.atimes.com/chinese-ai-will-develop-chinese-artificial-consciousness
-        
-        </div>
-        
-                    </textarea>
-    </section>
-
-    <section data-markdown>
-            <textarea data-template>
-<h4 class="fragment"> NY Times in 1958 after perceptrons were invented</h4>
-<img src='img/ny-times-1958.jpg' height="500px">
-
-<small>https://twitter.com/genekogan/status/1055839216280588289</small>
-                </textarea>
-            </section>
-            
-<section data-markdown style="font-size: xx-large">
-        <textarea data-template>
-### Machine Learning Modelle haben kein Weltwissen
-
-* Von euch trainierte Systeme "wissen" nur was ihr ihnen einfüttert
-* Allgemeine Zusammenhänge sind eurer KI nicht bekannt
-* Was nicht in euren Daten steckt kann auch die KI nicht wissen
-* Für eine sinnvolle Generalisierung braucht ihr viele Daten
-* Was viel bedeutet hängt von vielen Faktoren ab
-* Pro "Konzept" 5000 Beispiele ist ein guter Richtwert 
-
-    </textarea>
-    </section>
-
-<!-- <section data-markdown>
-    <textarea data-template>
-### Aber es gibt zumindest komplett autonome Fahrzeuge auf öffentlichen Straßen
-
-* nicht wirklich
-* Waymo (Ex Google führend) https://medium.com/waymo/a-green-light-for-waymos-driverless-testing-in-california-a87ec336d657
-* Testerlaubnis unter besonderen Bedingungen in ausgewählten ländlichen Gegenden
-* Nur in Begleitung vom Waymo-Team
-* Nothalte an der Tagesordnung
-
-        </textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Modelle lernen keine abstrakten Ideen
-
-<video controls src="img/dog-overfit.mp4"  muted
-type="video/mp4" height="400"></video>
-
-<small>
-https://twitter.com/Reza_Zadeh/status/1051194782448402432
-</small>
-        </textarea>
-</section>
- -->
-<section data-markdown>
-    <textarea data-template>
-### Was bedeutet das für ein kommerziellen Einsatz
-
-* Erfolg kann nicht garantiert werden
-* Experimente in Time-Boxes ratsam
-* Ein paar Prozente mehr oder weniger machen in der Regel keinen Unterschied
-* Fehlschläge erwarten und einkalkulieren
-* Fehlschläge ehrlich dokumentieren und kommunizieren
-
-In der Regel entscheiden die Daten über Erfolg oder Misserfolg
-</textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-<img src='img/twitter-cholett-applications.png' height="570px">
-
-<small>
-https://twitter.com/fchollet/status/1035951190276681728
-</small>
-            </textarea>
-            </section>
-
-<section data-markdown>
-        <textarea data-template>
-<img src='img/rachel_talent.png'>
-
-<small>
-https://twitter.com/math_rachel/status/1061442028318257152
-</small>
-            </textarea>
-            </section>
-
-
-        <section>
-            <h3>Andrew Ng: Supervised Machine Learning</h3>
-            <p><em>Surprisingly, despite AI’s breadth of impact, the types of it being deployed are still extremely limited. Almost all of AI’s recent progress is through one type, in which some input data (A) is used to quickly generate some simple response (B)</em></p>
-            <p><small><a href="https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now" target="_blank">https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now</a>
-            </small></p>
-        </section>
-
-<section data-markdown>
-        <textarea data-template>
-<img src='img/ng_supervised.png' height="570px">
-
-<small>
-https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
-</small>
-            </textarea>
-            </section>
-
-
-        <section>
-                <h2>Andere Arten von Machine Learning</h2>
-            </section>
-
-            <!-- <section>
-                    <h3>
-                        3 Arten von Machine Learning
-                    </h3>
-                    <img src="img/sketch/types-of-ml.png" height="550px">
-                </section> -->
-    
-        <!-- <section>
-                <h3>Daten: Zentraler Punkt</h3>
-                <img src='img/applications/decisions/type.png'>
-            </section> -->
-                        
-        <section>
-            <h3>Unsupervised Learning</h3>
-            <img class='fragment' src='img/applications/decisions/question.png'>
-        </section>
-    
-            <!-- <section data-markdown>
-                    <textarea data-template>
-    _Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
-    similar (in some sense) to each other than to those in other groups (clusters)._
-    
-    https://en.wikipedia.org/wiki/Cluster_analysis
-                    </textarea>
-        </section> -->
-        
-        <section data-markdown>
-                <textarea data-template>
-### Cluster und Ausreißer mit DBSCAN
-<img src="img/unsupervised/dbscan-demo.png" height="550px">
-    
-    
-    </textarea>
-    </section>
-    
-            <!-- <section data-markdown>
-                    <textarea data-template>
-        <img src="img/unsupervised/blobs.png" height="500px">
-        
-        Wie würde man das clustern, ohne Labels zu haben?
-                    </textarea>
-        </section> -->
-            <!-- <section>
-                <img src="img/flashcards/K-Means_Clustering_print.png" height="550px">
-                <p>Grundlegendster Algorithmus</p>
-            </section> -->
-            <!-- <section>
-                    <h3>K-Means Clustering: Grundlegendster Algorithmus</h3>
-                    <img src="img/unsupervised/blobs_kmeans_3.png" height="400px">
-                    <p>Hätten wir auch nicht besser hinbekommen</p>
-            </section> -->
-
-<section data-markdown>
-        <textarea data-template>
-### Was kann man damit machen?
-
-<img src='img/outlier-credit-card.jpg'>
-
-<p class="fragment">_Außreißer: Innerhalb weniger Tage, Zahlungen in vier unterschiedlichen Ländern auf zwei Kontinenten_</p>
-            </textarea>
-            </section>
-
-<section>
-<h3>PCA: Dimensionality Reduction</h3>
-<div style="float: left">
-        <img src="img/unsupervised/pca-example.png" height="500px">
-    </div>
-    <div style="float: right" class="fragment">
-            <img src="img/unsupervised/pca-example-pcs.jpg" height="500px">
-    </div>
-        </section>
-            
-            <section>
-                    <h2>Reinforcement Learning</h2>
-                </section>
-
-        <section data-markdown>
-            <textarea data-template>
-### Idee von Verstärkendem Lernen (Reinforcement Learning)
-
-<div  style="max-width: 45%; float: left">
-    <br>
-<img src="img/rl.png">
-</div>
-<div style="max-width: 50%; float: right">
-
-Ein Software Agent führt 
-
-<ol>
-<li>_Aktionen (Actions)_ innerhalb einer  
-<li>_Umgebung (Environment)_ aus, die zu einer positiven oder negativen 
-<li>_Belohung (Reward)_ führen.
-<li>Belohnung wird durch Lern-Experimente maximiert
-</ol>
-</div>
-</textarea>
-        </section>
-
-        <section data-markdown>
-            <textarea data-template>
-<img src='img/robot-fun.jpg' height="500px">
-
-<p class="fragment">Reinforcement Learning: am ehesten die Basis für Roboter, die uns Menschen ausrotten</p>
-</textarea>
-        </section>
-
-                <section data-markdown>
-                    <textarea data-template>
-### Aber erstmal machen wir die Roboter fertig!
-<video controls src="video/knocked-over-stand-up.mp4"  muted type="video/mp4" height="500"></video>
-                            
-<small>
-                https://blog.openai.com/openai-baselines-ppo/
-            </small>
-            </textarea>
-        </section>
-        <section data-markdown>
-                <textarea data-template>
-### Und dann müssen die vorher auch noch ihren Pulli ankriegen
-<a href='https://youtu.be/ixmE5nt2o88?t=49'>
-<img src='img/rl-pulli.png'>
-</a>
-
-<small>
-https://twitter.com/evolvingstuff/status/1058220030045827072    
-</small>
-    </textarea>
-</section>
-
-                <section data-markdown>
-                    <textarea data-template>
-### Aber Forbes meint:
-## Reinforcement Learning Will Be 2019's Biggest Trend In Data Science
-
-<small>
-https://www.forbes.com/sites/quora/2018/10/26/reinforcement-learning-will-be-2019s-biggest-trend-in-data-science/#56470a067de2
-<br>
-https://www.quora.com/What-will-be-the-next-thing-to-revolutionize-data-science-in-2019    
-</small>
-</textarea>
-</section>
-
-        <section data-markdown>
-            <textarea data-template>
-### Reinforcement Learning passt am besten
-
-1. Wenn du keine passenden Daten hast
-1. Du die Umgebung angemessen simulieren kannst
-1. _Wie zum Beispiel bei einem Spiel_
-
-</textarea>
-        </section>
-
-        <!-- <section data-markdown>
-            <textarea data-template>
-### When to do RL
-
-1. When you don't have suitable data
-1. You can accurately simulate an environment
-1. Maybe express your problem as a game                
-
-<small>
-TensorFlow based tool: https://github.com/deepmind/trfl/blob/master/docs/index.md
-</small>
-</textarea>
-        </section>
- -->
-
-
-<!-- <section data-markdown style="font-size: xx-large">
-<textarea data-template>
-### Alpha(Go) Zero
-
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px">
-</a>
-
-* Monte Carlo Tree Search und Deep Convolutional Neural Networks
-* Zielfunktion ist Sieg
-* schlagen jeden Menschen und Maschine ohne menschliche Expertise (in perfect information game)
-
-<small>
-Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
-<br>
-Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
-<br>
-Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
-</small>
-</textarea>
-</section> -->
-<!-- 
-<section data-markdown>
-<textarea data-template>
-### World Model
-
-<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
-<img src='img/rf/world-models.gif' height="400px">
-</a>
-
-Lernen wie man Auto fährt ohne menschliche Expertise
-
-<small>
-https://gym.openai.com/envs/CarRacing-v0/
-Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-model-using-python-and-keras-64fb388ba459
-<br>
-Code: https://github.com/AppliedDataSciencePartners/WorldModels
-</small>
-</textarea>
-</section>
- -->
-
-<section data-markdown>
-    <textarea data-template>
-### AutoML mit TensorFlow AdaNet Estimator
-
-<img src='img/adanet.gif' height="450px">
-
-<small>
-_AdaNet lernt eine Netzwerk Architektur mit Reinforcement Learning_
-<br>
-https://twitter.com/m4rkmc/status/1057485545708929024
-</small>
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## KI/ML Anwendungen sind längst in unserem Leben
-</textarea>
-</section>
-
-<section>
-<h3>Real World AI is booming</h3>
-<img src="chollet-twitter-applications.png">
-<p><small><a href="https://twitter.com/fchollet/status/906582914829246464?s=03" target="_blank">
-    https://twitter.com/fchollet/status/906582914829246464?s=03</a></small></p>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-## Wenn man sich daran gewöhnt hat, wird sie aber ganz selbstverständlich
-</textarea>
-</section>
-
-<!-- <section>
-<p>Schachprogramme haben Menschen überwunden weil</p>
-<div class="fragment" style="float: left">
-    <img src="img/cray2.png" height="250">
-    <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
-</div>
-<div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
-x 100.000 =
-</div>
-<div class="fragment" style="float: left">
-  <img src="img/titan5.jpg" height="250" style="float: right">
-    <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
-</div>
-</section> -->
-
-<!-- <section>
-    <h4>Maschinen verstehen Sprache und können sich dazu verhalten</h4>
-    <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
-</section> -->
-
-    <section>
-        <h3>Machine Learning in Google Sheets</h3>
-        <div style="transform: scale(1.2); margin-left: 100px">
-            <div style="height: 250px; float: left;">
-                <img src="img/google_sheets/screenshot_depArrDelay.png">
-            </div>
-            <div style="height: 250px; float: left;">
-                <img src="img/google_sheets/screenshot_distance_airtime.png">
-            </div>
-            <div style="height: 250px; float: left">
-                <img src="img/google_sheets/screenshot_depDelay_outliers.png">
-            </div>
-            <div style="height: 250px; float: left;">
-                <img src="img/google_sheets/screenshot_histogram_distance.png">
-            </div>
-        </div>
-        <p><br><br><br><br><br><br><br>
-            <em>Explore</em> finds Correlations, Outliers, etc.
-        </p>
-    </section>
-
-
-<section>
-        <h4>Ganz normal: Textvervollständigung</h4>
-        <img src="img/text-completion.jpg" height="600px">
-    </section>
-
-<section data-markdown>
-    <textarea data-template>
-### Siri uses a deep neural network
-
-_Just to detect if someone said 'Hey, Siri'_
-
-<img src='img/TrainingDNN-1.png' height="400px">
-
-<small>
-https://machinelearning.apple.com/2017/10/01/hey-siri.html
-</small>    
-    </textarea>
-</section>
-
-<!-- <section>
-    <h3>Die Post testet 2018 selbstfahrende Lieferfahrzeuge</h3>
-    <p class="fragment"><em>"Sie werden in der Lage sein, dem Zusteller autonom zu folgen - sodass er nicht vor jedem Hauseingang aus- und wieder einsteigen und wenige Meter fahren muss."</em></p>
-    <img src="img/post_dhl_truck.jpg" height="200">
-    <p><small><a href="http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html" target="_blank">http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html</a>
-    </small></p>
-</section> -->
-
-<section>
-        <h3>Face Detection</h3>
-        <p>Entsperrt mein Laptop und mein Handy</p>
-        <img src="img/facial-recognition.png">
-        <p><small><a href="https://aws.amazon.com/rekognition/" target="_blank">
-            https://aws.amazon.com/rekognition/</a></small></p>
-<!--https://us-west-2.console.aws.amazon.com/rekognition/home?region=us-west-2#/face-comparison-->
-    </section>
-
-<!-- <section>
-    <h4>Nur zwei dieser Bilder sind echte Fotos</h4>
-    <img src="img/applications/gan.jpg" height="500px">
-    <p><small><a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
-        https://twitter.com/goodfellow_ian/status/918900712901197824</a></small></p>
-</section>
-
-<section>
-    <h4>Die anderen sind mit Neuronalen Netzwerken generiert</h4>
-    <img src="img/applications/gan-real-images.jpg" height="500px">
-    <p><small><a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a></small></p>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Automatisches Scannen von Rechnungen und Überweisungsträgern
-
-<img src='img/sparkasse-rechnung-scanner.jpg' height="500px">
-    </textarea>
-</section>
- -->
-<section data-markdown>
-    <textarea data-template>
-### Object detection / identification
-
-<img src='img/cnn/object-detection.png' height="550px">
-
-<!-- https://twitter.com/TensorFlow/status/1039219454398418946    
-https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1
-https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb -->
-    </textarea>
-</section>
-
-<section data-markdown>
-        <textarea data-template>
-### Real-time pose estimation
-
-<a href='https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html'>
-<img src='img/posenet_camera.gif' height="400px">
-</a>
-
-<small>
-Demo: https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html
-<br>
-Links: https://twitter.com/random_forests/status/993639149780459520
-<br>
-Application: https://twitter.com/teropa/status/1001151524351959041
-</small>    
-    
-        </textarea>
-    </section>
-
-
-<!-- <section>
-    <h3>Weitere realistische Anwendungsgebiete</h3>
-    <ul>
-        <li class="fragment"><strong>Recommendation Systems</strong>: Spotify und Netflix kennen mich besser als ich mich selbst
-        <li class="fragment"><strong>Making decisions</strong>: Sollte jemand einen Kredit bekommen oder versichert werden?
-        <li class="fragment"><strong>Fraud Detection</strong>: Sieht eine Kredit-Karten-Transaktion oder eine Steuererklärung ungewöhnlich aus?
-        <li class="fragment"><strong>Predictive Maintenance</strong>: KI Systeme sagen wann man ein Wasserrohr ersetzen soll bevor es bricht
-        <li class="fragment"><strong>Expert System</strong>: Zuordnung von Krankheit und Maßnahmen</li>
-    </ul>
-</section> -->
-
-<section style="font-size: xx-large">
-    <h3>Zusammenfassung</h3>
-    <ul>
-        <li class="fragment">Machine Learning kann bei bestehenden Daten von diesen abstrahieren und generalisieren
-        <li class="fragment">Machine Learning kann eine Alternative zu expliziter Business-Logik sein
-        <li class="fragment">Allgemeines Weltwissen exisitert aber nicht
-        <li class="fragment">Auch ohne Daten kann über Reinforcement Learning gelernt werden
-        <li class="fragment">KI/ML Anwendungen sind längst in unserem Leben
-        <li class="fragment">Wenn man sich daran gewöhnt hat, wird sie aber ganz selbstverständlich
-    </ul>
-    <p><small>
-        Machine Learning für Software-Entwickler
-        <br>
-    <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-        <br>
-    <a href="http://bit.ly/wjax-ml-intro">
-        http://bit.ly/wjax-ml-intro
-    </a>
-    </small></p>
-</section>
 
 
     </div>
