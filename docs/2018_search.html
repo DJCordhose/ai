@@ -194,6 +194,7 @@ https://www.dur.ac.uk/research/directory/staff/?mode=pdetail&id=12916&sid=12916&
 ### Preparation
 
 1. Go through MCTS phases
+1. Play through minimax example
     </textarea>
 </section>
 
@@ -210,6 +211,40 @@ https://www.dur.ac.uk/research/directory/staff/?mode=pdetail&id=12916&sid=12916&
 </a></small></p>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+### Funny, but isn't there more to AI than ML?
+
+<img src='img/ai_vs_ml.jpg' height="500">
+<small>
+https://twitter.com/matvelloso/status/1065778379612282885
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### What is possible with search?
+<img src='img/smart-robots.gif' height="500px">
+
+<small>
+https://twitter.com/DuleFR/status/976784458022928384
+<br>
+MAP-Elites: https://medium.com/@devonfulcher3/the-map-elites-algorithm-finding-optimality-through-diversity-def6dcbc0f5b
+</small>
+</textarea>
+    </section>
+<section data-markdown class="local">
+    <textarea data-template>
+### Please ask questions using slido
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
+    
 <section data-markdown class="local">
     <textarea data-template>
 ### First question wins a free copy
@@ -226,37 +261,7 @@ https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_
 </section>
 
 
-<section data-markdown style="font-size: xx-large">
-        <textarea data-template>
-### Motivation: What is possible with search?
-<img src='img/smart-robots.gif' height="500px">
 
-<small>
-https://twitter.com/DuleFR/status/976784458022928384
-<br>
-MAP-Elites: https://medium.com/@devonfulcher3/the-map-elites-algorithm-finding-optimality-through-diversity-def6dcbc0f5b
-</small>
-</textarea>
-    </section>
-    <section data-markdown>
-            <textarea data-template>
-### Funny, but isn't there more to AI than ML?
-
-<img src='img/ai_vs_ml.jpg' height="500">
-<small>
-    https://twitter.com/matvelloso/status/1065778379612282885
-</small>
-</textarea>
-</section>
-
-<section class="local">
-    <h3>Questions</h3>
-    
-    <p>slido.com</p>
-    <p>#bigdata2018</p>
-    <p>Hall 6</p>
-        </section>
-    
 <section data-markdown>
         <textarea data-template>
 ### Our Story
@@ -269,7 +274,7 @@ MAP-Elites: https://medium.com/@devonfulcher3/the-map-elites-algorithm-finding-o
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
 <textarea data-template>
 ### AlphaGo Zero
 
@@ -279,7 +284,7 @@ MAP-Elites: https://medium.com/@devonfulcher3/the-map-elites-algorithm-finding-o
 
 * One ML Approach: deep-learning function approx
     </textarea>
-</section>
+</section> -->
 
 <!-- <section>
         <h3>Machine Learning and AI</h3>
@@ -351,6 +356,10 @@ terrain = [
 <section data-markdown>
         <textarea data-template>
 ### Step 2: Search on that graph
+
+* different strategies differ on which possibily they expand first
+* this makes a huge difference
+* there are informed and uninformed strategies
 </textarea>
 </section>
 
@@ -358,14 +367,36 @@ terrain = [
         <textarea data-template>
 ### Depth First
 
+* uninformed
 * traverses exapnded tree in a depth first notion
-* simple: can even be implemented usign a stack and recursion
+* simple: can even be implemented using a stack and recursion
 * not guarenteed to find the best route
 * probably not very efficient
     
 https://en.wikipedia.org/wiki/Depth-first_search
     </textarea>
     </section>
+
+<section>
+        <h3>Simple, stack based implementation</h3>
+<pre><code contenteditable data-trim class="line-numbers python fragment">
+def depth_first_search(state, closed_list=[], path=[]):
+    if state in closed_list:
+        return None
+    closed_list = closed_list + [state]
+    
+    if is_robot_win(state):
+        return path
+        
+    for move, next_state in expand_robot(state):
+        new_path = path + [move]
+        res = depth_first_search(next_state, closed_list, new_path)
+        if res:
+            return res
+</code></pre>
+<p><small><a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Play.ipynb'>
+    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Play.ipynb</a></small></p>
+</section>
 
 <section data-markdown>
         <textarea data-template>
@@ -381,6 +412,33 @@ https://en.wikipedia.org/wiki/Breadth-first_search
     </textarea>
     </section>
     
+
+    <section>
+        <h3>Generic implementation</h3>
+
+<pre><code contenteditable data-trim class="line-numbers python fragment">
+def breadth_first_search(root):
+  closed_list = set()
+  open_list = [root]
+    
+  while open_list:
+    state = open_list.pop(0)
+    closed_list.add(state)
+        
+    # simplfied, needs a bit more information
+    if is_robot_win(state):
+      return construct_path(state)
+
+    to_visit = [x for x in expand(state) \
+                if x not in closed_list and \
+                   x not in open_list]
+
+    # accounts for breadth first style
+    open_list = open_list + to_visit
+</code></pre>
+<p><small><a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Search.ipynb'>
+    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Search.ipynb</a></small></p>
+</section>
 
 <section data-markdown>
         <textarea data-template>
@@ -401,7 +459,7 @@ https://qiao.github.io/PathFinding.js/visual/
 Why do we blindly wander around, don't we know in which direction to walk?    
             
 * informed search, expands much less nodes than breadth first
-* cost spent + estimated rest cost defines path to try
+* cost spent + estimated rest cost determines next state to try
 * guranteed to find the best path when heuristic underestimates rest cost
 * variations used for games or route planing
 
@@ -441,12 +499,38 @@ http://theory.stanford.edu/~amitp/GameProgramming/
 
 <section data-markdown>
     <textarea data-template>
-<img src='img/best-first.png'>
+### Revisiting different strategies
+
+<img src="img/search/search.jpg" height="500px">
+
+<small>By incrementally expanding possibilities</small>
+</textarea>
+</section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Bi-directional searche: Will they ever meet?
+
+<video controls src="video/bidirectional-search.mp4"  muted autoplay
+type="video/mp4" height="500"></video>
+
 <small>
 https://twitter.com/mbostock/status/1055484629090631685
 </small>
 </textarea>
 </section>
+
+
+
+<section data-markdown class="local">
+    <textarea data-template>
+### Questions so far?
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
 
         <section data-markdown>
     <textarea data-template>
@@ -456,7 +540,7 @@ https://twitter.com/mbostock/status/1055484629090631685
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
     <textarea data-template>
 ### Example: 3 in a row
 
@@ -465,84 +549,12 @@ https://twitter.com/mbostock/status/1055484629090631685
 <small>
 A game the ancient Vikings played as well
 </small>
-<!-- TODO: Tackle with alpha beta or min max -->
+TODO: Tackle with alpha beta or min max
         </textarea>
-        </section>
-
-<!-- http://www.dokchess.de/_downloads/szoerner_majug2012_architekturentwurf_schach_deploy.pdf -->
-<section data-markdown >
-    <textarea data-template>
-### On the importance of looking ahead
-
-Why looking ahead? Isn't a heuristic evaluation good enough?
-
-Kudos for position to https://twitter.com/StefanZoerner
-
-https://www.embarc.de/schachbegriffe-auf-englisch/
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Checkmate unavoidable?
-
-<img src="img/search/pos1.jpg" height="450px">
-
-FEN: 2R5/8/p7/7p/6pP/5pP1/5P1K/k4q2 w - - 0 1
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Using a heuristic to avoid loss of a piece
-
-<img src="img/search/pos2_no_loss.jpg" height="450px">
-
-Random move of Rook, but no loss
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### But Checkmate in next move
-
-<img src="img/search/pos3_mate.jpg" height="450px">
-
-Rook saved, but not effectively used
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Rewind to initial position
-
-<img src="img/search/pos1.jpg" height="450px">
-
-This time we look ahead
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Certain loss of Rook
-
-<img src="img/search/pos2_check.jpg" height="450px">
-
-Bad local evaluation
-</textarea>
-</section>
-<section data-markdown>
-    <textarea data-template>
-### Of course Queen has to capture Rook
-
-<img src="img/search/pos3_stalemate.jpg" height="450px">
-
-But this means Stalemate and a Draw
-</textarea>
-</section>
-
+        </section> -->
 
 <section>
-    <p>Chess Computers have defeated humans because</p>
+    <h3>Chess Computers have defeated humans because</h3>
     <div class="fragment" style="float: left">
         <img src="img/cray2.png" height="250">
         <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
@@ -556,6 +568,11 @@ But this means Stalemate and a Draw
     </div>
 </section>
 
+<section data-markdown>
+        <textarea data-template>
+## But how?
+</textarea>
+</section>
 
 <section data-markdown style="font-size: xx-large">
         <textarea data-template>
@@ -606,22 +623,11 @@ _Full, exhaustive search is mostly just not feasible_
     </textarea>
     </section>
     
-    <section data-markdown>
-            <textarea data-template>
-### Reasonable Heuristic is cruical
-
-* Good solutions available for chess
-* No good solutions for Go
-    * Only a win as a state is a reliable indication
-    * Need to search to the end
-    * Branching Factor Higher than Chess as well
-
-        </textarea>
-        </section>
-
 <section data-markdown>
     <textarea data-template>
-### Mini Max
+### Mini Max, lookahead of 4 halfmoves
+
+_Computer maximixes and it is its move (squares)_
 
 <img src='img/search/Minimax.png'>
 
@@ -631,7 +637,7 @@ https://en.wikipedia.org/wiki/Minimax
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
     <textarea data-template>
 ### Alpha–beta pruning
 
@@ -647,19 +653,22 @@ https://en.wikipedia.org/wiki/Minimax
 https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning    
 </small>
 </textarea>
-</section>
+</section> -->
 
 
 <section data-markdown>
     <textarea data-template>
-### Intuition for Alpha Beta Pruning
-<img src="img/search/alpha-beta-intuition.png" alt="Alpha Beta Intuition" height="400px">
+### Alpha Beta Pruning
 
+_can reach up to twice the depth of minimax_
+
+<img src="img/search/alpha-beta-intuition.png" alt="Alpha Beta Intuition" height="350px">
+<br>
 No matter what Min does, Max can always win in leftmost branch, no need to check for the others
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
     <textarea data-template>
 ### Complete Search Tree for Robot Run
 <img src="img/search/mini-max-tree.jpg" alt="Alpha Beta" height="450px">
@@ -669,7 +678,80 @@ Top Right Branch can be pruned completely
 https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Play.ipynb
 </small>
 </textarea>
+</section> -->
+
+<section data-markdown >
+    <textarea data-template>
+### Why don't we just take the next move with the best evaluation?
+
+Why looking far ahead? Isn't a heuristic evaluation good enough?
+
+Kudos for position to https://twitter.com/StefanZoerner
+
+https://www.embarc.de/schachbegriffe-auf-englisch/
+</textarea>
 </section>
+<!-- http://www.dokchess.de/_downloads/szoerner_majug2012_architekturentwurf_schach_deploy.pdf -->
+
+
+<section data-markdown>
+    <textarea data-template>
+### Checkmate unavoidable?
+
+<img src="img/search/pos1.jpg" height="450px">
+
+FEN: 2R5/8/p7/7p/6pP/5pP1/5P1K/k4q2 w - - 0 1
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Using a heuristic to avoid loss of a piece
+
+<img src="img/search/pos2_no_loss.jpg" height="450px">
+
+Random move of Rook, but no loss
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### But Checkmate in next move
+
+<img src="img/search/pos3_mate.jpg" height="450px">
+
+Rook saved, but not effectively used
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Rewind to initial position
+
+<img src="img/search/pos1.jpg" height="450px">
+
+This time we look ahead
+</textarea>
+</section>
+<section data-markdown>
+    <textarea data-template>
+### Certain loss of Rook
+
+<img src="img/search/pos2_check.jpg" height="450px">
+
+Bad local evaluation, Queen will take Rook
+</textarea>
+</section>
+<section data-markdown>
+    <textarea data-template>
+### Of course Queen has to capture Rook
+
+<img src="img/search/pos3_stalemate.jpg" height="450px">
+
+But this means Stalemate and a Draw
+</textarea>
+</section>
+
 
 <section data-markdown style="font-size: xx-large">
     <textarea data-template>
@@ -688,12 +770,51 @@ https://en.wikipedia.org/wiki/Stockfish_(chess)
 </textarea>
 </section>
 
+<section data-markdown class="local">
+    <textarea data-template>
+### Everthing clear?
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
+
 <section data-markdown>
     <textarea data-template>
 ## Part III
 ### Monte Carlo Methods
 </textarea>
 </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Reasonable Heuristic for evaluation of position is cruical
+
+* Good solutions available for chess
+* No good solutions for Go
+    * Only a win as a state is a reliable indication
+    * Need to search to the end
+    * Branching Factor Higher than Chess as well
+
+        </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Monte Carlo Experiments
+
+_approximating results by repeated random sampling_
+
+<img src='img/Pi_30K.gif' height="400px">
+
+<small>
+https://en.wikipedia.org/wiki/Monte_Carlo_method
+<br>
+https://en.wikipedia.org/wiki/Monte_Carlo_method#/media/File:Pi_30K.gif
+</small>
+    </textarea>
+    </section>
 
         
         <section data-markdown>
@@ -768,6 +889,7 @@ _Rather improve on states known as good or have a look at unknown moves?_
 {\displaystyle {\frac {w_{i}}{n_{i}}}+{\sqrt (c {\frac {\ln N_{i}}{n_{i}})}}}    
             </script>
 
+
 * first component: exploitation; it is high for moves with high average win ratio
 * second component: exploration; it is high for moves with few simulations            
             
@@ -810,7 +932,7 @@ Update Scores
         </textarea>
         </section>
 
-        <section data-markdown>
+        <!-- <section data-markdown>
             <textarea data-template>
 ### More Applications of MCTS
 
@@ -821,8 +943,18 @@ Update Scores
     https://twitter.com/DJCordhose/status/1017886304384831488  
 </small>     
             </textarea>
-            </section>
+            </section> -->
             
+<section data-markdown class="local">
+    <textarea data-template>
+### Before we take the final hop
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
+
 <section data-markdown>
     <textarea data-template>
 ## Part IV
@@ -834,7 +966,9 @@ Update Scores
         <textarea data-template>
 #### Go has a branching factor of around 200 and 75 moves per game
 
-<img src='img/go-branching-viz.png' height="500px">
+<img src='img/go-branching-viz.png' height="450px">
+
+Can not even be mastered with MCTS alone
 
 <small>
 Mastering Games Without Human Knowledge - https://youtu.be/Wujy7OzvdJk?t=92    
@@ -844,7 +978,7 @@ Mastering Games Without Human Knowledge - https://youtu.be/Wujy7OzvdJk?t=92
     </section>
 
 
-<section data-markdown>
+<!-- <section data-markdown>
 <textarea data-template>
 ### Alpha(Go) Zero
 
@@ -860,21 +994,12 @@ Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
 Explanation: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
 </small>
 </textarea>
-</section>
-        
-        <section data-markdown>
-            <textarea data-template>
-<img src='img/TrainingTime-Graph-171019-r01.gif'>
+</section> -->
+<section data-markdown>
+        <textarea data-template>
+### AlphaGo Zero adapting MCTS
 
-<small>
-https://deepmind.com/blog/alphago-zero-learning-scratch/    
-</small>
-            </textarea>
-        </section>
-        
-        <section data-markdown>
-            <textarea data-template>
-### MCTS in AlphaGo Zero
+_core difference, now we are having a heuristic_ 
 
 * choose child to expand using heuristic of game state (no expansion phase)
 * determined by Convolutional Neural Network (Resnet)
@@ -885,9 +1010,21 @@ https://deepmind.com/blog/alphago-zero-learning-scratch/
 <small>
 https://deepmind.com/blog/alphago-zero-learning-scratch/    
 </small>
+        </textarea>
+    </section>
+
+    
+
+        <section data-markdown>
+            <textarea data-template>
+<img src='img/TrainingTime-Graph-171019-r01.gif'>
+
+<small>
+https://deepmind.com/blog/alphago-zero-learning-scratch/    
+</small>
             </textarea>
         </section>
-
+        
         <section data-markdown>
                 <textarea data-template>
 ### Alpha Zero
@@ -961,8 +1098,8 @@ _A chess engine was hard-core AI In the 90s_
         <li class="fragment">Path finding is dominated by variants of A*
         <li class="fragment">Chess can be solved using tweaked Alpha-Beta-Search
         <li class="fragment">For a high branching factor and/or no good heuristic use Monte Carlo Methods 
-        <li class="fragment">Monte Carlo is an advanced Monte Carlo Method 
-        <li class="fragment">Alpha(Go) Zero uses MCTS together with Supervised Deep Learning and CNNs 
+        <li class="fragment">Monte Carlo Tree Search is an advanced Monte Carlo Method 
+        <li class="fragment">Alpha(Go) Zero uses a variant of MCTS together with Supervised Deep Learning and CNNs 
         <li class="fragment">AlphaGo Zero beats all known Go players 
 
     </ul>
@@ -978,6 +1115,16 @@ _A chess engine was hard-core AI In the 90s_
 </small>
     </p>
 </section>
+
+<section data-markdown class="local">
+    <textarea data-template>
+### Questions
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
 
         
 
