@@ -1000,8 +1000,9 @@ Explanation: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
 
 _core difference, now we are having a heuristic_ 
 
-* choose child to expand using heuristic of game state (no expansion phase)
+* choose child to expand using heuristic of game state (instead of random expansion phase)
 * determined by Convolutional Neural Network (Resnet)
+* simulation phase by playing against best known heuristic
 * CNN trained by which state leads to a win
 * CNN also gives estimation of which player is going to win
 * no other information went into training
@@ -1011,8 +1012,7 @@ https://deepmind.com/blog/alphago-zero-learning-scratch/
 </small>
         </textarea>
     </section>
-
-    
+        
 
         <section data-markdown>
             <textarea data-template>
