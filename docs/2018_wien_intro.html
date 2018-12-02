@@ -490,14 +490,6 @@ _Feature Selection_
 </textarea>
 </section>
 
-<section data-markdown>
-        <textarea data-template>
-### Machine Learning is all about Generalization
-
-<img src='img/MELLI.jpg' height="550px">
-            </textarea>
-            </section>
-
     <section>
             <h3>Revisiting our Rule based approach</h3>
             <div class="fragment">
@@ -550,7 +542,6 @@ http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-a
         
         </textarea>
         </section>
-
 
     <section>
             <h3>Decision Trees</h3>
@@ -631,18 +622,152 @@ model.add(Dense(3, name='softmax', activation='softmax'))
         
         </section>
 
+<section data-markdown>
+    <textarea data-template>
+### Step III
+## Evaluation
+</textarea>
+</section>
 
-            <section>
-                    <h3>
-                        Three types of machine learning
-                    </h3>
-                    <img src="img/sketch/types-of-ml.png" height="550px">
-                </section>
-    
-        <section>
-                <h3>What to use depends on your data</h3>
-                <img src='img/applications/decisions/type.png'>
+<section data-markdown>
+        <textarea data-template>
+### Machine Learning is all about Generalization
+
+<img src='img/MELLI.jpg' height="500px">
+            </textarea>
             </section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Split known data into training and test
+
+<img class='fragment' src='img/insurance/generalization.jpg' height="550px">
+
+</textarea>
+</section>
+
+<section id='overfitting'>
+        <h3>The Issue: Overfitting</h2>
+    <div>
+    <div style="float: left">
+        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
+        <p>
+            <small><em>Training Score</em></small>
+        </p>
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='5'>
+        <img src="img/scans/elements/down.jpg" height="200">
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='4'>
+        <img src="img/scans/elements/up.jpg" height="200">
+    </div>
+    <div style="float: left">
+            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
+            <p>
+                <small><em>Test Score</em></small>
+            </p>
+    </div>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and test scores clearly divert</em></p>
+
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Regularization
+
+_Process to counter overfitting_
+
+Each ML strategy has its own means of Regularization, e.g.
+* KNN: more neighbors
+* Decision Trees: reduce depth, use ensenbles
+* SVM: gamma (how many points to use) and cost (of misclassified data)
+* NN: Dropout, Batch Normalization, Reduced Capacity, Reduced Training Time
+            </textarea>
+            </section>
+    
+
+<section data-markdown>
+        <textarea data-template>
+### Great results
+
+<img src='img/manning/nn-reg.png' height="450">
+
+<p class="fragment"><small>Up to 80% accuracy on test data using a regularized neural networks</small></p>
+</textarea>
+    </section>
+
+
+
+<section data-markdown>
+    <textarea data-template>
+### How does this behave in the real world?
+
+<img src='img/test-vs-real-life.jpg' height="500px">
+<small>
+https://twitter.com/brenankeller/status/1068615953989087232    
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Revisiting the Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+What about really fast cars?    
+</small></p>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Areas not covered by training data
+
+<img src='img/extended_coc.png' height="550px">
+
+</textarea>
+</section>
+
+<section data-markdown style='font-size: xx-large'>
+        <textarea data-template>
+### How to deal with those blank spots?
+
+<p class="fragment"><em>First: Be aware of the reasonable range of values</em></p>
+
+* For requests in extended area
+  * at least add a warning or 
+  * refuse to make a prediction
+* Identify suspicious scores
+  * in exteded area scores often are very biased towards one category (1.0 score)
+* Try to get more data, even incrementally
+  * Use user feedback, give it lower training score
+* Add likelihoods to scores
+  * Bayesian approaches are the new hype
+  
+</textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Making Your Neural Network Say "I am not sure"
+
+<img src='img/tf_proba.jpg' class="fragment">
+
+<small>
+https://www.tensorflow.org/probability/
+<br>
+https://towardsdatascience.com/making-your-neural-network-say-i-dont-know-bayesian-nns-using-pyro-and-pytorch-b1c24e6ab8cd
+<br>
+
+</small>
+</textarea>
+    </section>
 
             <section data-markdown>
                     <textarea data-template>
@@ -712,6 +837,27 @@ https://twitter.com/fchollet/status/1035951190276681728
 </small>
             </textarea>
             </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Is Supervised Machine Learning all there is?
+</textarea>
+</section>
+
+
+
+            <section>
+                    <h3>
+                        Three types of machine learning
+                    </h3>
+                    <img src="img/sketch/types-of-ml.png" height="550px">
+                </section>
+    
+        <section>
+                <h3>What to use depends on your data</h3>
+                <img src='img/applications/decisions/type.png'>
+            </section>
+
 
 
 <section>
