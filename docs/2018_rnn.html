@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>RNNs</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+            <section data-markdown class="preparation" style="font-size: xx-large">
+                    <textarea data-template>
+### Preparation
+
+45 Minuten
+
+RNNs mit sequence to sequence mit Notebook Addierer mit RNNs
+
+Notebook noch mal ansehen:
+1. rnn-add-example
+                        </textarea>
+                        </section>
+        
+
+        <section>
+            <h2>Recurrent Neural Networks: Simple RNNs</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <small>
+                    <a href="https://djcordhose.github.io/ai/2018_rnn.html">
+                        https://djcordhose.github.io/ai/2018_rnn.html</a>
+                        </small>
+
+        </section>
+
+        <!-- <section class="todo">
+            <pre>
+            </pre>
+        </section> -->
+
+    <section>
+            <h3>Text and sequences are special</h3>
+            <img src='img/applications/decisions/data.png'>
+        </section>
+
+
+        <section>
+            <h2>Simple RNNs</h2>
+            <h3>Recurrent Neural Networks</h3>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Challenge for traditional neural networks
+
+How would you solve sequence to sequence translation?
+
+Simple and theoretical example: addition digit by digit
+
+```
+ 216
++648
+ ===
+ 864
+```
+
+
+What is the challenge?
+            </textarea>
+        </section>
+                            
+    
+        <section>
+            <h3>Motivation</h3>
+            <p>Traditional Networks have no memory of previous events</p>
+            <p>Number to Number enconding needs to factor in carry</p>
+        </section>
+
+            
+        <section data-markdown>
+            <textarea data-template>
+### Solution: RNNs - Networks with Loops
+<img src='img/nlp/colah/RNN-rolled.png' height="450px">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+            </textarea>
+        </section>
+            
+        <section data-markdown>
+            <textarea data-template>
+### Unrolling the loop
+<img src='img/nlp/colah/RNN-unrolled.png'>
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Simple RNN
+
+<img src='img/nlp/fchollet_rnn.png'>
+
+<script type="math/tex; mode=display">
+output_t = \tanh(W input_t + U output_{t-1} + b)
+</script>
+    
+<small>
+<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/129">
+    Deep Learning with Python, Chapter 6, François Chollet, Manning            
+</a>
+
+</small>
+
+</textarea>
+</section>
+
+<section>
+    <h3>Repetition Activation Functions</h3>
+    <div style="float: left">
+            <img src="img/sigmoid-activation.png" height="300px">
+            <p>
+                <small>Sigmoid, floating from 0 to 1</small>
+            </p>
+        </div>
+        <div style="float: right">
+                <img src="img/tanh-activation.png" height="300px">
+                <p>
+                <small>Tangens Hyperbolicus, floating from -1 to 1</small>
+            </p>
+        </div>
+    <small>
+        <a href="https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb">
+            https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb
+    </a>
+    </small>    
+</section>
+
+<section>
+            <h2>Perfect for sequences, lists, sentences</h2>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Generating musical sequences        
+
+Training a latent space and generating a new sequences
+
+<img src='img/nsynth-ae.png'>
+
+<small>
+https://magenta.tensorflow.org/music-vae
+</small>
+</textarea>
+</section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Also perfect for natural language Sequence to Sequence translations
+
+<img src='img/nlp/encdec.jpg'>
+
+<small>
+https://www.tensorflow.org/tutorials/seq2seq
+</small>
+</textarea>
+</section>
+        <section data-markdown>
+                <textarea data-template>
+### Encoding addition as a Sequence to Sequence translation
+
+<img src='img/nlp/rnn-adder-input.png' height="500px">
+                    </textarea>
+                    </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Each time step generates a digit of the result
+
+<img src='img/nlp/rnn-adder-output.png' height="500px">
+                    </textarea>
+                    </section>
+
+        <section data-markdown>
+        <textarea data-template>
+### Seeing the network at work in a notebook
+
+
+```
+Input: "216+648"
+Output: "864"
+```
+
+Padding is handled by using a repeated sentinel character (space)
+
+<small>
+Notebook: https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/rnn-add-example.ipynb
+<br>
+https://machinelearningmastery.com/learn-add-numbers-seq2seq-recurrent-neural-networks/
+</small>
+    </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Example Application: Using sequences of events
+<img src='img/magenta-rnn-duck.png' height="400px">
+
+<small>
+https://twitter.com/random_forests/status/987394050914385927
+<br>
+https://magenta.tensorflow.org/assets/sketch_rnn_demo/index.html
+</small>
+            </textarea>
+        </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Exercise: Think about more applications of Sequence to Sequence translations (or RNNs in general)
+
+* Discuss with your neighbors
+* 5 Minutes
+* Share your ideas
+            </textarea>
+        </section>
+        
+
+<section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+## More Applications
+* _Speech Recognition_: https://medium.com/@ageitgey/machine-learning-is-fun-part-6-how-to-do-speech-recognition-with-deep-learning-28293c162f7a
+* _Neural Machine Translation (seq2seq)_: https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html
+* _Sentiment Analysis_: https://medium.com/@alyafey22/sentiment-classification-from-keras-to-the-browser-7eda0d87cdc6
+* _Text / Source Code Generators_: http://karpathy.github.io/2015/05/21/rnn-effectiveness/
+    </textarea>
+    </section>
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/leafes.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

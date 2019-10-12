@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Big Data Vilnius ML Strategies</title>
+
+    <meta name="description" content="Manning Course Material">
+    <meta name="author" content="Oliver Zeigermann">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              .beginning:before {
+                  content: 'BEGINNING';
+              }
+              .beginning {
+                color: red !important;
+              }
+              .end:before {
+                  content: 'END';
+              }
+              .end {
+                color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+                  .reveal {
+                color: black !important;
+             }       
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        var printMode = window.location.search.match(/print-pdf/gi);
+        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+<div class="reveal">
+    <div class="slides">
+<!-- 
+Title: Comparing Machine Learning Strategies using Scikit-learn and TensorFlow
+
+Abstract: Machine Learning remains complex even if you already understand its basic idea. Among the challenges are which machine learning strategy to choose. 
+
+In this talk we will look at different machine learning strategies and visualize how they make predictions by plotting their decision boundaries.
+We will look at KNN, Decision Trees, Support Vector Machines, and Neural Networks. The objective is to give you a first overview of the different strategies.
+
+This talk is for beginners in the area of machine learning and we require no prior knowledge.
+
+Tags: Scikit-learn, TensorFlow, Keras, KNN, Decision Tree, SVM
+ -->
+
+ <section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation
+
+Load while there is internet
+* https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset
+* https://dash-gallery.plotly.host/dash-svm
+* https://playground.tensorflow.org
+    </textarea>
+</section>
+
+        <section>
+                <h2>Comparing Machine Learning Strategies</h2>
+                <h3>using Scikit-learn and TensorFlow</h3>
+        <p><a target="_blank" href="https://www.bigdataconference.lt/oliver-zeigermann/">
+            Big Data Conference, Vilnius, November 2018
+        </a></p>
+        <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        </h4>
+        <p><small><a href="http://bit.ly/vilnius-strategies">
+            http://bit.ly/vilnius-strategies
+        </a></small></p>
+    </section>
+
+    <!-- <section data-markdown class="local">
+        <textarea data-template>
+### First question wins a free copy
+
+<a href='https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf'>
+    <img src='img/livevideo-deep-learning-crash-course-meap.png' height="400px">
+</a>
+
+<small>
+https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf
+</small>
+<br>
+_40 % discount code ctwbigdatavil18_
+        </textarea>
+    </section> -->
+
+    <section class="local">
+<h3>Questions</h3>
+
+<p>slido.com</p>
+<p>#bigdata2018</p>
+<p>Hall 6</p>
+    </section>
+
+        <section>
+        <h3>Data Set Insurance</h3>
+        <img src="img/insurance/automobile-insurance.png">
+    </section>
+
+    <section>
+            <h3>Manual Classification - red</h3>
+            <img src="img/decision-boundaries/decision-boundaries-1.jpg">
+    </section>
+    
+    <section>
+            <h3>Manual Classification - yellow</h3>
+        <img src="img/decision-boundaries/decision-boundaries-2.jpg">
+    </section>
+
+    <section>
+            <h3>Manual Classification - green</h3>
+        <img src="img/decision-boundaries/decision-boundaries-3.jpg">
+    </section>
+
+    <section>
+            <h3>Decision Bounaries</h3>
+        <img src="img/decision-boundaries/decision-boundaries-4.jpg">
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+## Core Question
+
+How do different _Supervised_ Machine Learning strategies draw those boundaries if they do their best?
+
+* This is not about which strategy is the best
+* Their best is found using Grid- or RandomSearch on CPU for Scikit-learn
+* Best for TensorFlow is found using manual experiment
+        </textarea>
+    </section>
+
+
+    <section data-markdown>
+        <textarea data-template>
+### Best Model means best Generalization
+
+<img src='img/MELLI.jpg' height="600px">
+            </textarea>
+            </section>
+
+    <section>
+<h3>Code in Scikit-learn</h3>
+
+<p>Training</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+            </code></pre>
+        
+<p>Prediction</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+y_pred = clf.predict(input)
+        </code></pre>
+
+<small>
+    <a href='https://scikit-learn.org/stable/modules/classes.html'>https://scikit-learn.org/stable/modules/classes.html</a>
+    <br>
+    <a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb'>
+        https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb</a>
+</small>
+        </section>
+        
+        
+
+    <section>
+            <h3>Random - A Baseline</h3>
+            <div class="fragment">
+                    <img src="img/decision-boundaries/random.png">
+                    <small>It still gets 33% percents right</small>
+            
+            </div>
+    </section>
+    <section>
+            <h3>Rule based approach - Another Baseline</h3>
+            <div class="fragment">
+                    <img src="img/decision-boundaries/5-prog.png">
+        <small>Blocks</small>
+        </div>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Decision Trees can learn such rules
+
+<img src="img/dt/dt-all.png" height="500px">
+        </textarea>
+        </section>
+            
+    <section data-markdown>
+            <textarea data-template>
+### How do they learn?
+
+<img src="img/dt/cart.png" height="500px">
+
+<small>
+http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart
+</small>
+        
+        
+        </textarea>
+        </section>
+
+
+    <section>
+            <h3>Decision Trees</h3>
+            <div>
+
+        <img src="img/decision-boundaries/dt-sweet-test.png">
+        <small>Still Rules - but this time learned from data</small>
+        </div>
+    </section>
+
+    <section>
+<h3>Code</h3>
+
+<p>Grid-Search</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+param_grid = {
+    'max_depth': list(range(2, 25)),
+    'min_samples_split': list(range(2, 11)),
+    'min_samples_leaf': list(range(1, 11))
+}
+clf = GridSearchCV(DecisionTreeClassifier(), param_grid)
+clf.fit(X_train, y_train)
+clf.best_params_
+            </code></pre>
+        
+<p>Best Parameters</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+clf = DecisionTreeClassifier(max_depth=6,
+                              min_samples_leaf=3,
+                              min_samples_split=2)
+</code></pre>
+
+        </section>
+
+    
+    <section>
+            <h3>Ensemble - Random Forest</h3>
+            <div>
+
+        <img src="img/decision-boundaries/11-rf-sweet-test.png">
+        <small>Averaging over many decision trees</small>
+        </div>
+    </section>
+
+    <section>
+<h3>Code</h3>
+
+<p>Random Search (Grid-Search is too slow)</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+from sklearn.model_selection import RandomizedSearchCV
+from scipy.stats import randint
+
+param_dist = {
+    'n_estimators': randint(3, 20),
+    "max_depth": randint(2, 25),
+    "min_samples_split": randint(2, 11),
+    "min_samples_leaf": randint(1, 11)
+}
+
+clf = RandomizedSearchCV(RandomForestClassifier(), param_dist, n_iter=1000)
+</code></pre>
+        
+<p>Best Parameters</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+clf = RandomForestClassifier(max_depth=5, 
+                            min_samples_leaf=3, 
+                            min_samples_split=7, 
+                            n_estimators=12)
+</code></pre>
+
+        </section>
+        
+        
+    <section>
+            <h3>KNN</h3>
+            <p>For a case to predict</p>
+            <ol>
+                <li>Plot the case together with the known samples
+                <li>Look at a number (k) of nearest data points
+                <li>Choose k in such a way that you can get a majority
+                <li>Your prediction is the color of the majority
+            </ol>
+        </section>
+    
+        <section data-markdown>
+                <textarea data-template>
+### Visual Experiment to understand KNN
+
+<a href='https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset'>
+<img src='img/knn-sample.png' height="400px">
+</a>
+<small>
+https://beta.observablehq.com/@djcordhose/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset
+</small>
+        </textarea>
+        </section>
+    
+    
+    <section>
+            <h3>K Nearest Neighbors</h3>
+            <div class="fragment">
+
+        <img src="img/decision-boundaries/9-knn23-test.png">
+        <small>Simple, but fractal</small>
+        </div>
+    </section>
+
+        <section>
+<h3>Code</h3>
+
+<p>Grid-Search</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+from sklearn.model_selection import GridSearchCV
+param_grid = {
+    'n_neighbors': list(range(1, 50)),
+    # are points that are nearer more important?    
+    'weights': ['uniform', 'distance']
+    }
+clf = GridSearchCV(KNeighborsClassifier(), param_grid)
+</code></pre>
+        
+<p>Best Parameters</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+clf = KNeighborsClassifier(n_neighbors=39, weights='uniform')
+</code></pre>
+
+        </section>
+
+    <section data-markdown>
+            <textarea data-template>
+
+### Support Vector Machines (SVM)
+* SVMs used to be the hot stuff before neural networks stole the show
+* SVMs choose a small number of data points to decide where to draw the decision boundary, they are called the *support vectors*
+</textarea>
+    </section>
+
+    <section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+### Tuneable Parameters
+    
+* Gamma
+  * reach of a single training sample - low values: far, high values: close
+  * the lower the more points remote from the support vectors influence where the decision boundaries go  
+* C (Cost)
+  * decides how expensive it is to misclassify one of our support vectors, the smaller the more tolerant to misclassified samples
+  * tradeof between smooth decision boundaries and classifying samples correctly
+  * high cost means rough, complex decision boundaries
+  * lower cost means more regularization
+
+</textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Interactively experiment with C and Gamma
+
+<img src='img/svm-tool.jpg' height="500px">
+<small>
+https://dash-gallery.plotly.host/dash-svm
+<br>
+http://scikit-learn.org/stable/auto_examples/svm/plot_rbf_parameters.html
+</small>
+            </textarea>
+                </section>
+            
+    <section>
+            <h3>Support Vector Machines</h3>
+            <div class="fragment">
+
+        <img src="img/decision-boundaries/13-svm-reg-test.png">
+        <small>Simple in a higher dimension</small>
+        </div>
+    </section>
+
+        <section>
+<h3>Code</h3>
+
+<p>Grid-Search</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+param_grid = {
+    'C': list(np.append(np.arange(0.1, 1.0, 0.1), np.arange(2, 10, 1))),
+    'gamma': list(np.append(np.arange(0.001, 0.1, 0.0005), 
+                            np.arange(.02, 1.0, 0.1))),
+}
+clf = GridSearchCV(SVC(), param_grid)
+</code></pre>
+        
+<p>Best Parameters</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+clf = SVC(C=9, gamma=0.001)
+    </code></pre>
+
+        </section>
+
+    <!-- <section>
+            <img src='img/applications/decisions/classic.png'>
+    </section> -->
+
+    <section data-markdown>
+            <textarea data-template>
+### Foundation of Deep Neural Networks
+    
+<img src='img/insurance/neuron213.jpg'>
+    
+    </textarea>
+    </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+    ### From Neuron to Network 
+<a href='https://playground.tensorflow.org'>    
+    <img src='img/tf-plaground.png' height="500px">
+</a>
+    <small>
+    https://playground.tensorflow.org
+    </small>
+    </textarea>
+    </section>
+    
+    <section>
+            <h3>Neural Networks</h3>
+            <div class="fragment">
+
+        <img src="img/decision-boundaries/15-nn-reg-test.png">
+        <small>Composed of many simple neurons</small>
+        </div>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Keras is TensorFlow's high level API
+
+* https://www.tensorflow.org 
+* https://www.tensorflow.org/guide/low_level_intro 
+* https://www.tensorflow.org/guide/keras 
+
+    </textarea>
+</section>
+
+        <section>
+<h3>Code using Keras High Level API</h3>
+
+<p>Network Setup</p>
+<pre><code contenteditable data-trim class="line-numbers python">
+model = keras.Sequential()
+
+model.add(Dense(100, name='hidden1', input_dim=2))
+model.add(BatchNormalization())
+model.add(Activation('relu'))
+model.add(Dropout(0.6))
+
+model.add(Dense(100, name='hidden2'))
+model.add(BatchNormalization())
+model.add(Activation('relu'))
+model.add(Dropout(0.6))
+
+model.add(Dense(3, name='softmax', activation='softmax'))
+</code></pre>
+        
+        </section>
+
+    <!-- <section>
+            <img src='img/applications/decisions/data.png'>
+    </section> -->
+
+
+    <section data-markdown>
+        <textarea data-template>
+### My "Poster" at Scipy 2018
+
+<img src='img/scipy-ml-viz-poster.jpg' height="550px" >
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Notebook
+
+<img src='img/scipy-ml-viz-notebook.png' height="450px" >
+
+<small>
+Link: https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb
+</small>
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+        <textarea data-template>
+## What's next?
+
+### Finding data sets to play with
+    
+* Google released a search engine for datasets
+  * Search: https://toolbox.google.com/datasetsearch
+  * Launch blog post: https://www.blog.google/products/search/making-it-easier-discover-datasets/
+* Kaggle Datasets: https://www.kaggle.com/datasets    
+</textarea>
+</section> -->
+
+<section>
+        <h2>Wrap Up</h2>
+        <ul>
+            <li class="fragment">Visualizing Decision Boundaries is great for your understanding
+            <li class="fragment">Different strategies tend to have different decision boundaries
+            <li class="fragment">Classic Machine Learning might be all you need
+            <li class="fragment">Deep Neural Network are what you want when you do images, texts or sequences
+        </ul>
+        <p>
+                <em>Comparing Machine Learning Strategies</em>
+            <br>
+            <br>
+            <small>
+        <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            <br>
+    <a href="http://bit.ly/vilnius-strategies">
+        http://bit.ly/vilnius-strategies</a>
+    </small>
+        </p>
+    </section>
+
+    </div>
+
+</div>
+
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            // do we want this???
+            $('li').addClass('fragment')
+
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/sky.jpg");
+        $('section').attr('data-background-image', "backgrounds/street.jpg");
+        // $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
+        // $('section').attr('data-background', "img/manning/background/m0.jpg");
+        // $('section').attr('data-background', "img/manning/background/m1.jpg");
+        // $('section:not([data-background])').attr('data-background', "img/manning/background/m1.jpg");
+        // $('section').attr('data-background-size', "1620px");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: false,
+        history: true,
+        center: true,
+        width: 1100,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Panel: KI – Utopie oder Dystopie?</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              .beginning:before {
+                  content: 'BEGINNING';
+              }
+              .beginning {
+                color: red !important;
+              }
+              .end:before {
+                  content: 'END';
+              }
+              .end {
+                color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!-- Insbesondere in der Boulevardpresse wird immer wieder auf die mögliche Machtübernahme der Roboter hingewiesen. Diese sollen
+dabei Bewusstsein entwickelt haben und zum Schluss gekommen sein, dass die Welt ohne Menschen ihrem Optimierungsziel noch
+näher kommt.
+
+Jenseits solcher reißerischer Meldungen sprechen wir in diesem Speaker-Panel über die Möglichkeiten, wie Machine Learning
+und KI eine positive Wirkung auf unsere Gesellschaft haben können, aber auch worauf wir achten müssen, um unerwünschte Effekte
+zu vermeiden. -->
+
+    <!-- <section data-markdown class="todo">
+        <textarea data-template>
+### Daten
+
+- Volkszählung als Beispiel
+- in den 80ern boykottiert
+- Verantwortung für Daten, wie leicht ist es an Daten zu kommen.
+- wen interessiert es nun?
+        </textarea>
+    </section>
+
+    <section data-markdown class="todo">
+        <textarea data-template>
+### Wandel der Berufe
+
+- Schriftsetzer -> Mediengestalter -> KI
+- Fernfahrer, Busfahrer -> Mediengestalter -> KI
+- Paketbote
+- Verkäufer
+- Sekratär
+- Sachbearbeiter
+
+        </textarea>
+    </section>
+
+    <section data-markdown class="todo">
+        <textarea data-template>
+### Wer sollte Verantwortung tragen?
+
+- Kunde, Nutzer?
+- Entwickler?
+- Konzerne, Hersteller?  
+- Staat?
+- Legislative
+- Judicative
+- Niemand?
+
+        </textarea>
+    </section>
+
+    <section data-markdown class="todo">
+        <textarea data-template>
+### Dystopie
+
+- Proprietäre KI
+- Datenmonopole 
+- Manipulierte Massen
+- Willkür
+- Autonome KI
+        </textarea>
+    </section>
+
+    <section data-markdown class="todo">
+        <textarea data-template>
+### Utopie
+
+- Offene KI
+- Dezentralisierte Daten 
+- Aufgeklärte und mündige Massen
+- Kein Zwang zu Arbeit
+- Unterstützung und Verstärkung des menschlichen Geists
+        </textarea>
+    </section>
+
+    <section data-markdown class="todo">
+        <textarea data-template>
+### Aktueller Zustand
+
+- KI Forschung
+- Offen
+- Daten und Besitz
+- Zentralisiert in wenigen Händen
+- Manipulationen
+- Anwendungen
+
+
+        </textarea>
+    </section>
+    <section data-markdown class="todo">
+        <textarea data-template>
+###  Vier KI-Prinzipien nach Yudkowsky und Bostrom 
+
+1) Die Funktionsweise einer KI sollte nachvollziehbar sein, 
+2) Ihre Handlungen sollen prinzipiell vorhersagbar sein, 
+3) KIs sollen sich nicht einfach manipulieren lassen, 
+4) die Verantwortlichkeiten sollen klar bestimmt sein.
+
+1) und 2) in einem Zeitfenster, das den Verantwortlichen im Falle einer möglichen Fehlfunktion genügend Raum zur Reaktion und Veto-Kontrolle bietet
+
+<small>
+https://nickbostrom.com/ethics/artificial-intelligence.pdf
+</small>
+</textarea>
+</section>
+
+    <section data-markdown class="todo">
+        <textarea data-template>
+### Verantwortung der Informatiker
+
+1. Ergänzen anstatt ersetzen
+2. Gefährdung von Menschen ausschließen
+3. Keine Angriffsfläche bieten
+1. Übernahem von Robotern
+1. Schutz von Daten
+
+TODO: vs Asimov
+        </textarea>
+    </section> -->
+
+    <section data-markdown class="preparation">
+            <textarea data-template>
+### Preparation
+
+* Themen mit Panelisten teilen
+* Ton für Audio und Video
+        </textarea>
+    </section>
+    
+    
+        <section>
+            <h2>Panel: KI – Utopie oder Dystopie?</h2>
+            <p><a target="_blank" href="https://ml-summit.de/specialized-topics/panel-ki-utopie-oder-dystopie/">
+                ML Summit, Berlin, October 2018
+            </a></p>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / 
+                <a href="http://twitter.com/djcordhose">@DJCordhose</a> /
+                <a href="https://www.embarc.de/ ">embarc GmbH</a>
+            </h4>
+            </h4>
+            <p><small><a href="https://djcordhose.github.io/ai/2018_ml_summit_utopie_dystopie.html">
+                https://djcordhose.github.io/ai/2018_ml_summit_utopie_dystopie.html
+            </a></small></p>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Google und Verantwortung
+
+<img src='img/google-ai-principles.png' height="450px">
+<small>
+https://twitter.com/algorithmwatch/status/1004957404193271808
+<br>
+https://www.blog.google/topics/ai/ai-principles/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Wir Entwickler von KI tragen Verantwortung
+
+<img src='img/ml-responsibilty.png' height="450px">
+<small>
+https://twitter.com/Smerity/status/1004487181879005184
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## 5 Themen
+
+### Chancen und Potentiale von Technologien
+
+* Was ist gefährlich?
+
+* Worauf sollten wir achten?
+
+* In welche Richtung sollten wir die Technik entwickeln?
+
+
+            </textarea>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Themen
+
+1. Computer generierte Bilder und Videos
+2. Erkennen und Scannen von Menschen
+3. Maschinen imitieren Menschen
+4. KI macht unsere Arbeit
+5. Entscheidung über Leben und Tot
+
+            </textarea>
+            </section>
+
+
+
+<section data-markdown>
+        <textarea data-template>
+# Thema 1
+## Wie weit sind Computer generierte Bilder und Videos?
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Detecting Fake Images
+
+Self trained to learn image splices (Klebestellen) (on unmanipulated images)
+
+<img src="img/splice_detection.png" height="350px">
+
+<small>
+... a step in the long quest for a truly general-purpose visual forensics tool
+<br>
+https://arxiv.org/abs/1805.04096
+</small>
+</textarea>
+</section>
+
+<section>
+<h3>Generating Celebreties</h3>
+<p>Trained for two weeks on a single high-end GPU on CelebA-HQ data set (images of celebreties)</p>
+<div class="fragment" style="float: left">
+    <img src="img/unsupervised/gan-model-male2.png" height="220">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female2.png" height="220">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female1.png" height="220">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-male.png" height="220">
+</div>
+<p style="clear: both">
+<small>
+<a href="https://alantian.net/ganshowcase/" target="_blank">https://alantian.net/ganshowcase/</a>
+<br>
+<a href="https://github.com/alantian/ganshowcase" target="_blank">https://github.com/alantian/ganshowcase</a>
+<br>
+<a href="https://twitter.com/alanyttian/status/988242167998148608" target="_blank">https://twitter.com/alanyttian/status/988242167998148608</a>
+</small>
+                   
+</p>
+</section>                                
+
+<section data-markdown>
+        <textarea data-template>
+### Faking Video
+
+Learning a model from a few minutes of video
+
+<img src="img/fake_obama.png">
+
+<small>
+https://s2018.siggraph.org/presentation/?id=papers_129&sess=sess146
+<br>
+https://youtu.be/qc5P2bvfl44?t=60
+<br>
+<a href="https://www.reddit.com/r/MachineLearning/comments/8kj06q/r_ai_tool_controls_people_in_videos_deep_video/">
+    Kommentare auf Reddit
+</a>
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+# Thema 2
+## Erkennen und Scannen von Menschen
+</textarea>
+</section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Menschen an ihrem Gang erkennen
+
+_Es reicht, über eine Matte mit Sensoren zu gehen_
+
+* Grenzkontrolle (anstatt andere Biometrischer Daten)
+* Kann Veränderungen im Gang feststellen (medizinische Diagnose)
+
+<small>
+https://www.heise.de/newsticker/meldung/Maschinenlernen-KI-erkennt-Personen-an-ihrem-Gang-4063356.html
+http://www.manchester.ac.uk/discover/news/ai-footstep-recognition-system-could-be-used-for-airport-security/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/facebook_face_recognition.jpg' height="550px">
+
+<small>
+https://www.theverge.com/2018/3/27/17165150/facebook-face-recognition-how-to-turn-off-disable
+</small>    
+    
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Scanning von Arm-Nerven
+
+<img src='img/twtter-nerve-scanner.png' height="450px">
+<small>
+https://twitter.com/ben_ferns/status/1002167116215214080
+<br>
+http://www.ctrl-labs.com/ctrl-kit/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# Thema 3
+## Maschinen imitieren Menschen
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Wavenet passes turing test?
+
+System can call people and make appointments (without people noticing it is a machine)
+
+<img src='img/rnn_big.png'>
+
+<small>
+https://ai.googleblog.com/2018/05/duplex-ai-system-for-natural-conversation.html
+</small>
+            </textarea>
+            </section>
+
+<!-- <section data-markdown>
+        <textarea data-template>
+<img src='img/kun_turing_twitter.png'>
+
+<small>
+https://twitter.com/jeremyjkun/status/994020061437345792
+</small>
+            </textarea>
+            </section> -->
+        <!-- <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Ehtics I
+* I am genuinely bothered and disturbed at how morally wrong it is for the Google Assistant voice to act like a human and deceive other humans on the other line of a phone call, using upspeek and other quirks of language. "Hi um, do you have anything available on uh May 3?" (https://twitter.com/BridgetCarey/status/993910061209702400)
+* We should make AI sound different from humans for the same reason we put a smelly additive in normally odorless natural gas. (https://twitter.com/traviskorte/status/993954759932612608)
+* The synthetic voice of synthetic intelligence should sound synthetic. Successful spoofing of any kind destroys trust. When trust is gone, what remains becomes vicious fast. (https://twitter.com/stewartbrand/status/994046632428752896)
+                    </textarea>
+                    </section>
+
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Ehtics II
+* Google Assistant making calls pretending to be human not only without disclosing that it's a bot, but adding "ummm" and "aaah" to deceive the human on the other end with the room cheering it... horrifying. Silicon Valley is ethically lost, rudderless and has not learned a thing. (https://twitter.com/zeynep/status/994233568359575552)
+* I have a related qualm with the new autocomplete in Gmail and earlier autoreply in Allo. These applications of AI aren’t just “convenience”; they subtly corrupt human communication by encouraging us to choose machined messages. (https://twitter.com/mbostock/status/994241566607790080)
+                    </textarea>
+                    </section> -->
+
+
+
+<section data-markdown>
+        <textarea data-template>
+### California plans law forcing AI bots to identify themselves
+
+<small>
+https://twitter.com/TheRegister/status/999456537314775040
+</small>
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+        <textarea data-template>
+# Thema 4
+## Maschinen als Künstler
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Generation High-quality Anime Characters 
+
+<img src="img/anime_gan.png">
+
+<small>
+https://make.girls.moe
+<br>
+https://alantian.net/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Generating Music
+
+* Could Artificial Intelligence Replace Musicians and Songwriters?: https://groups.google.com/a/tensorflow.org/forum/#!topic/magenta-discuss/EcT6lATirjE
+* Thoughts on Ownership and Copyrights of AI Generated Music?: https://groups.google.com/a/tensorflow.org/forum/#!topic/magenta-discuss/uYDysfC7AP8
+
+<small>
+https://magenta.tensorflow.org/demos
+</small>
+</textarea>
+</section>
+ -->
+<section data-markdown>
+        <textarea data-template>
+# Thema 4
+## KI macht unsere Arbeit
+</textarea>
+</section>
+
+<section>
+        <img src="img/new-yorker-robots.jpg" height="580px">
+        <p><small><a href="https://twitter.com/conorsen/status/920063253115531271" target="_blank">
+            https://twitter.com/conorsen/status/920063253115531271</a></small></p>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Artificial intelligence will wipe out half the banking jobs in a decade, experts say
+
+_Deutsche Bank, John Cryan_ 
+
+“In our bank we have people doing work like robots,” he said. “Tomorrow we will have robots behaving like people. It doesn’t
+matter if we as a bank will participate in these changes or not, it is going to happen.”
+
+
+<small>
+https://www.mercurynews.com/2018/04/20/artificial-intelligence-will-wipe-out-half-the-banking-jobs-in-a-decade-experts-say/
+</small>
+    </textarea>
+    </section>
+
+<section>
+    <h3>KI besser als die Marketingabteilung?</h3>
+        <p class="fragment"><em>Zalando streicht 250 Stellen in der Marketingabteilung am Unternehmensstandort Berlin. Werbe-E-Mails sollen in Zukunft verstärkt
+        von Algorithmen oder Künstlicher Intelligenz verschickt werden.</em></p>
+        <div class="fragment">
+
+        <p><em>"Wir gehen davon aus, dass Marketing in Zukunft noch datenbasierter sein muss. Dafür brauchen wir einen höheren Anteil an
+        Entwicklern und Datenanalysten", sagt Rubin Ritter, Co-Chef von Zalando, gegenüber der FAZ.</p>
+    </em> <p>
+            <small>
+        <a target="_blank" href="https://www.heise.de/newsticker/meldung/KI-gesteuertes-Marketing-Zalando-streicht-250-Arbeitsplaetze-3990425.html">
+            https://www.heise.de/newsticker/meldung/KI-gesteuertes-Marketing-Zalando-streicht-250-Arbeitsplaetze-3990425.html</a>
+            </small>
+        </p>
+
+    </div>    </section>
+
+    <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### In Summe Gewinn oder Verlust von Arbeitsplätzen?
+
+* Bitkom: bis zum Jahr 2022 fallen allein in Deutschland drei Millionen Arbeitsplätze weg
+* Mannheimer Zentrum für Europäische Wirtschaftsforschung (ZEW):
+  * Der Einsatz von Hightech hat viele Unternehmen wettbewerbsfähiger gemacht
+  * "Multiplikator-Effekt" Mitarbeiter und Anteilseigner der Firmen haben mehr Geld in der Tasche
+
+<small>
+http://www.spiegel.de/wirtschaft/unternehmen/arbeitsmarkt-regierungsgutachten-rechnet-mit-job-gewinnen-durch-roboter-a-1200538.html
+</small>
+        </textarea>
+    </section>
+    
+    <section>
+            <img src="img/unemployment-rate.png">
+            <p><small><a href="https://www.google.com/search?q=unemployment+rate+usa&rlz=1C1XYJR_enDE765GB766&oq=unemployment+rate+usa&aqs=chrome..69i57j0l5.5879j0j7&sourceid=chrome&ie=UTF-8" target="_blank">
+    Wie geht der Trend weiter?</a></small></p>
+        </section>
+
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+We've been working on a prototype microscope that we think is a great way to blend the expertise of automated machine learning systems with human expertise.  It projects augmented information from an ML model into the visual pathway in the microscope.
+
+https://twitter.com/JeffDean/status/985941149759299584
+</textarea>
+</section> -->
+
+
+        <!-- <section data-markdown>
+            <textarea data-template>
+
+Me: Let’s talk about AI in medicine. 
+
+Hospital CIO on record: “It’ll augment our radiologists” 
+
+Off record: “Once the algorithm beats my $600k a year radiologist, it’ll replace at least some. And sooner than you think.”
+
+<small>
+https://twitter.com/chrissyfarr/status/980940379607347200
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### AI: The next industrial revolution?
+            
+_If AI is a new industrial revolution shouldn't we be... incredibly concerned? The industrial revolution was a time of great chaos and misery for millions of people, and it occurred during a period with less extreme weather and a less connected world._
+
+<small>
+https://twitter.com/jackclarkSF/status/1001588352842457094
+</small>
+    </textarea>
+    </section> -->
+    
+    <section data-markdown>
+            <textarea data-template>
+# Thema 5
+## Wenn eine Maschine töten muss
+    </textarea>
+    </section>
+    
+        <section>
+            <h3>I, Robot: 11% Is More Than Enough: Save The Girl</h3>
+            <img src="img/ethics/I_robot_save_the_girl.png" height="400px">
+            <p>
+                <small>
+                    <a href="https://www.youtube.com/watch?v=4kuaikerPKs" target="_blank">
+                        https://www.youtube.com/watch?v=4kuaikerPKs
+                    </a>
+                </small>
+            </p>
+        
+        </section>
+
+        <section>
+            <h3>Selbstfahrende Autos</h3>
+            <p>Was passiert in Situation in denen ein tötlicher Unfall nicht zu vermeiden ist?</p>
+            <p>Wen soll ein selbstfahrendes Fahrzeug opfern?</p>
+            <p><em> Ethik-Kommission zum autonomen Fahren lehnt eine Abwägung zum Wert von Menschen ab</em> (
+                <a target="_blank" href="http://www.taz.de/Autonomes-Fahren-und-seine-Hindernisse/!5470265/">http://www.taz.de/Autonomes-Fahren-und-seine-Hindernisse/!5470265/</a>)</p>
+            <p>Aber würdet ihr ein Auto fahren, dass euch selbst opfern würde? Halten Hersteller das ein?</p>
+        </section>
+
+        <section>
+            <h3>Moral Machine</h3>
+            <p><small>Muss man wieder Kant lesen? <a target="_blank" href="https://de.wikipedia.org/wiki/Kritik_der_praktischen_Vernunft">https://de.wikipedia.org/wiki/Kritik_der_praktischen_Vernunft</a></small></p>
+            <p><a target="_blank" href="http://moralmachine.mit.edu/hl/de">http://moralmachine.mit.edu/hl/de</a></p>
+        </section>
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank');
+
+        } );
+        $('section').attr('data-background-image', "backgrounds/murmel1.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+        // $('section').attr('data-background-image', "backgrounds/murmel2.jpg")
+
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

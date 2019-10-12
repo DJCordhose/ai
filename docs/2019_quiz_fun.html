@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Quiz</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                        letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+
+            .reveal {
+                color: black !important;
+             }       
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+    <section data-markdown>
+        <textarea data-template>
+# Quiz
+
+<!-- Total chaotisch und ungerecht
+
+Aber mit Preisen! -->
+
+<!-- https://djcordhose.github.io/ai/2019_quiz.html -->
+
+<!-- ## Täuschungen aus Wissenschaft, Statistik und Wahrnehmung -->
+<!-- <br>
+<br>
+#### <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a> -->
+
+    </textarea>
+    </section>
+
+    <!-- <section data-markdown class="todo">
+            <textarea data-template>
+* Quellen erst später einblenden, damit keiner Googlen kann
+* Count Down Web Component bauen
+* Bildgrößen anpassen
+* Hintergrund Musik
+  * Bladerunner: https://www.youtube.com/watch?v=cuCqn07EOKk
+  * Darth Vader Breathing: https://www.youtube.com/watch?v=un8FAjXWOBY&t=30s
+  * C64 Music: 
+    * https://www.youtube.com/watch?v=huEUOPDPbgQ
+    * https://www.youtube.com/watch?v=AE77tYu5EA8
+    * https://www.youtube.com/watch?v=U9Racui9jJI
+    * Wizball: https://www.youtube.com/watch?v=6VYP5pLBnZ8
+                </textarea>
+            </section>
+                 -->
+
+    <section data-markdown class="fragments">
+    <textarea data-template>
+### Wie funktioniert es?
+
+* Zwei Teams spielen gegeneinander
+* Bei schwierigen Fragen gibt es eine Minute Bedenktzeit bevor Antworten angenommen werden
+* Diskutiert Antworten im Team
+* Bei schnellen Antworten zählt die schnellste richtige, mehrere Antworten möglich
+* Antworten per Reinrufen (was wir sowieso schon in der Schule machen wollten)
+    </textarea>
+    </section>
+
+        <section data-markdown class="embarc">
+    <textarea data-template>
+
+## Bildet jetzt Teams
+
+    </textarea>
+    </section>
+
+<section data-markdown  class="data-viz">
+        <textarea data-template>
+### Welche Stadt hatte als erste mehr als 10 Millionen Einwohner?
+
+https://twitter.com/i/status/1107595419557740549
+</textarea>
+</section>
+
+<section data-markdown class="perception">
+    <textarea data-template>
+### Wie viele 5en? (die schnellste richtige Antwort zählt)
+
+<img src='img/quiz/5s.png' class="fragment" height="320px">
+
+<img src='img/quiz/5s_bold.png' class="fragment" height="320px">
+
+<small>
+Theory of attention: https://static.googleusercontent.com/media/research.google.com/en//bigpicture/ML_Visualization_NeurIPS_Tutorial.pdf
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Was ist das besondere an diesen Fisch, der gegen den Strom schwimmt?
+
+<img src='img/quiz/dead-fish-swims.gif'>            
+
+<small>
+https://twitter.com/chubicki/status/1000457946734759936
+</small>
+</textarea>
+</section>
+
+    <section>
+<h3>Was ist ganz oben links (die schnellste richtige Antwort zählt)</h3>
+            <img src="img/ai/dog-vs-bread.jpg" height="500px" class="fragment">
+    </section>
+
+<section data-markdown  class="perception">
+    <textarea data-template>
+### Emergenz
+
+Was ist auf diesem Bild? schnellste richtige Antwort gewinnt
+
+<img src='img/quiz/emergence_03.jpg' height="400px" class="fragment">
+
+<small>
+https://eggbertsplace.github.io/principles-of-gestalt/#slide=4
+<br>
+P. Sinha & T. Adelson (1997)
+</small>
+</textarea>
+</section>
+
+<section data-markdown class="info">
+    <textarea data-template>
+### Info-Runde: Bias 1
+
+<img src='img/quiz/correlation-vs-causation-bias.jpg' height="450px">
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Trivia: Welche Farbpigmente enthalten die Federn des Blauhähers (Blue Jay)
+
+<img src='img/quiz/blue-jay.jfif' style="float: left;" height="400px">
+
+<img src='img/quiz/blue-jay-zoom.jfif' class="fragment" style="float: right;" height="400px">
+
+<div style="clear: both">
+</div>
+
+1. Blau
+1. Rot
+1. Gelb
+1. Keine
+
+
+<small>
+https://twitter.com/RyanFMandelbaum/status/1115777490134478850    
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Sequentielle Wahrnehmung #1
+
+Wie viele? Die schnellste richtige Antwort gewinnt
+
+<img src='img/quiz/franconeri_test_1.jpg' height="450px" class="fragment">
+<br>
+<small>
+https://twitter.com/SteveFranconeri/status/996309506425544705    
+</small>
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+    <textarea data-template>
+### Wissenschaft
+
+_Welcher dieser vermeintlichen Fakten ist wissenschaftlich nicht belegbar?_
+
+1. Alkohol tötet Gehirnzellen
+1. Glas ist eine sehr zähe Flüssigkeit
+1. Wir stammen vom Affen ab
+1. Wir nutzen nur 10% unserer Hirn-Kapazität
+
+<small>
+https://www.verywellmind.com/myths-about-the-brain-2794884    
+https://thebestschools.org/magazine/25-popular-science-myths-debunked/
+</small>
+</textarea>
+</section>
+
+<section>
+<h3>Was ist in 2. Reihe, 2. Spalte (die schnellste richtige Antwort zählt)</h3>
+
+        <img src="img/ai/dog-vs-muffin.jpg" class="fragment">
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Geografie: Wo ist das (Land)?
+
+<img src='img/quiz/embarc-wo-bratislava2.jpg' height="800px">
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Trivia: Was ist das?
+
+<img src='img/quiz/embarc-was.jpg'  height="800px">
+</textarea>
+</section> -->
+
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Trivia: Wer ist das?
+
+<img src='img/quiz/wer-dolly.jpg' class="fragment" style="float: left;" height="500px">
+<img src='img/quiz/dolly-parton---mini-biography.jpg' class="fragment" style="float: right;" height="500px">
+</textarea>
+</section> -->
+
+
+<section data-markdown class="fragments" style="font-size: xx-large">
+    <textarea data-template>
+### Welche Farben haben die großen Bälle?
+
+<img src='img/quiz/balls-color.jpg' height="500px">
+
+1. Blau und Grün
+1. Beide Cyan
+1. Gelb und Lila
+1. Beide Lila
+
+<small>
+https://twitter.com/NovickProf/status/1133211527367073792?s=03
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown class="data-viz">
+    <textarea data-template>
+### Welches ist das häufigste Element in der Erdkruste
+
+<img src='img/quiz/periodicTable.png' class="fragment" height="600px">
+
+<small>
+https://research.google.com/bigpicture/elements/
+</small>
+</textarea>
+</section>
+
+<section data-markdown  class="data-viz">
+    <textarea data-template>
+### Welche Land hat Stand 2016 den höchsten Ausstoß an Treibhausgasen?
+
+<!-- https://twitter.com/i/status/1114076320328290305 -->
+
+<small>
+https://twitter.com/RARohde/status/1114076320328290305
+</small>
+</textarea>
+</section>
+
+<section data-markdown  class="data-viz">
+    <textarea data-template>
+### Wie viele Punkte (die schnellste richtige Antwort zählt)
+
+<img src='img/quiz/dots.jfif' height="450px" class="fragment">
+
+https://twitter.com/_youhadonejob1/status/1116335796838125570
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Sequentielle Wahrnehmung #2
+
+Wie viele? Die schnellste richtige Antwort gewinnt
+
+<img src='img/quiz/franconeri_test_2.jpg' height="450px" class="fragment">
+<br>
+<small>
+https://twitter.com/SteveFranconeri/status/996309506425544705    
+</small>
+</textarea>
+</section>
+
+<!-- <section data-markdown class="fallacy">
+    <textarea data-template>
+### Rein Logisch betrachtet
+
+Ein Geschäftspartner kündigt an, mich überraschend nächste Woche an einem der Werktage um exakt 9 Uhr morgens anzurufen. 
+
+An welchem Tag wird er anrufen?
+
+</textarea>
+</section> -->
+
+
+
+<section data-markdown>
+    <textarea data-template>
+### Statistik
+
+Im zweiten Weltkriegt zeigten von der US Navy untersuchte Flugzeuge hier Treffer durch Beschuss
+
+<img src='img/quiz/ww2-damage.jpg' height="300px">
+
+_Wo würdest du die Panzerung verstärken?_
+
+<small>
+https://twitter.com/ricfulop/status/1101976862325174276    
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Wahrnehmung ist mehrdeutig
+
+Handtasche oder Dackel? schnellste richtige Antwort gewinnt
+
+<img src='img/quiz/purse_or_dachshund.jpg' height="400px" class="fragment">
+
+<small>
+https://twitter.com/dumb_hannah/status/891678558841708544
+</small>
+</textarea>
+</section>
+
+<section data-markdown class="statics">
+    <textarea data-template>
+### Statistik
+
+Nehmen wir an, 90% aller Statistiker sind schüchtern und nur 5% aller Verkäufer
+
+_Du triffst einen schüchternen Menschen, ist er eher Statistiker oder Verkäufer?_
+
+</textarea>
+</section>
+
+<section data-markdown class="info">
+    <textarea data-template>
+### Info-Runde: Bias 2
+
+<img src='img/quiz/outgroup-bias.jpg' height="450px">
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Bring die Zahlen in die richtige Reihenfolge
+
+1. Positionen im Schach <span class="fragment">~ 10<sup>50</sup></span>
+1. Positionen bei Go <span class="fragment">~ 10<sup>171</sup></span>
+1. Atome im Menschlichen Körper <span class="fragment">~ 10<sup>27</sup></span>
+1. Sandkörner auf der Erde <span class="fragment">~ 10<sup>19</sup></span>
+1. Atome im Universum <span class="fragment">~ 10<sup>78</sup></span>
+
+
+<!-- https://www.quora.com/How-many-grains-of-sand-are-there-on-Earth-and-how-many-stars-are-there-in-the-universe -->
+</textarea>
+</section>
+
+
+<!-- <section data-markdown class="m3 fragments">
+    <textarea data-template>
+### Psychologie
+
+_Welcher dieser vermeintlichen Fakten ist wissenschaftlich nicht belegbar?_
+
+1. Power Posing (TED Talk von Harvard Psychologin Amy Cuddy) ist effektiv
+1. Wir haben unterschiedliche Lernstile (Audio, Visuell, etc.)
+1. Man kann Menschen in linke/rechte Gehirnhälfe-Typen einteilen
+1. Männer kommen vom Mars, Frauen von der Venus
+
+<small style="font-size: large">
+https://www.scienceofpeople.com/myths-pop-psychology/
+<br>
+https://www.mindful.org/7-common-pop-psychology-myths-might-spreading/
+<br>
+https://www.verywellmind.com/myths-about-the-brain-2794884
+<br>
+https://hackspirit.com/scientist-debunks-10-popular-psychology-myths-people-believe/
+</small>
+
+</textarea>
+</section> -->
+
+<section data-markdown>
+    <textarea data-template>
+### Sequentielle Wahrnehmung #3
+
+Was und wie oft?
+
+<img src='img/quiz/abholauftrag.jpg' height="450px" class="fragment">
+<br>
+<small class="fragment">
+_4x Abholer_    
+</small>
+</textarea>
+</section>
+
+<section>
+    <h3>Was ist letzte Reihe, ganz links (die schnellste richtige Antwort zählt)</h3>
+                <img src="img/ai/dog-vs-chicken-wing.jpg" height="500px" class="fragment">
+        </section>
+    
+    
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        const isLocal = window.location.hostname.indexOf('localhost') !== -1 || 
+                    window.location.hostname.indexOf('127.0.0.1') !== -1;
+
+        $('.info').remove();
+
+        if (isLocal) {
+            // only applies to local version
+            $('.remote').remove();
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+                // do we want this???
+            $('.fragments li').addClass('fragment')
+
+            // hide link to solution until later
+            $('.solution').addClass('fragment')
+
+
+            if (isLocal) {
+                // only applies to presentation version
+                // Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                // $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/sky.jpg");
+        // $('section').attr('data-background-image', "backgrounds/sky-morning.jpg");
+        $('section').attr('data-background-image', "backgrounds/sky-winter.jpg");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: false,
+        progress: false,
+        history: true,
+        center: true,
+        width: "100%",
+        height: 1000,
+
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

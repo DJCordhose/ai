@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Topconf DL</title>
+
+    <meta name="description" content="Big Data Vilnius DL Workshop">
+    <meta name="author" content="Oliver Zeigermann">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              .beginning:before {
+                  content: 'BEGINNING';
+              }
+              .beginning {
+                color: red !important;
+              }
+              .end:before {
+                  content: 'END';
+              }
+              .end {
+                color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        var printMode = window.location.search.match(/print-pdf/gi);
+        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+<div class="reveal">
+    <div class="slides">
+
+<!-- 
+
+Deep Learning is a special and most promising variant of Supervised Machine Learning. Most recent break-throughs have
+been fueled by instead of programming a system, you instead use known data to train a system, like you do in deep
+learning. We will touch classic Neural Networks, Convolutional Neural Networks (CNNs) for image processing, and
+Recurrent Neural Networks (RNNs) for processing of texts and other sequences.
+
+We will use TensorFlow with Keras-style Layers and provide notebooks hosted on Google's Colab, that allow them to run
+on GPU. Thus there will be no need for any installation, all you need is a browser. We will use Python as our language,
+but you do not need any knowledge of it. Knowledge of any Object oriented language is sufficient.
+
+40 minutes
+
+-->
+
+<!-- <section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation
+    </textarea>
+</section> -->
+
+        <section>
+                <h2>Introduction to Deep Learning with TensorFlow</h2>
+        <p><a target="_blank" href="https://www.topconf.com/conference//topconf-tallinn-2018/talk/introduction-to-deep-learning-with-tensorflow/">
+            Topconf Tallinn 2018
+        </a></p>
+        <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        </h4>
+        <p><small><a href="http://bit.ly/topconf-dl">
+            http://bit.ly/topconf-dl
+        </a></small></p>
+    </section>
+
+    <!-- <section data-markdown class="todo">
+            <textarea data-template>
+* proben, was passt in 40 Minuten?
+            </textarea>
+    </section> -->
+    
+
+    <section data-markdown>
+        <textarea data-template>
+### Our Plan
+1. Introduction to Machine Learning
+1. Understanding the Artificial Neuron and Neural Networks 
+1. Special types of Neural Networks (very shortly)
+    1. Convolutional Neural Networks
+    1. Recurrent Neural Networks
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### First question wins a free copy
+
+<a href='https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf'>
+<img src='img/livevideo-deep-learning-crash-course-meap.png' height="500px">
+</a>
+
+<small>
+https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf
+</small>
+    </textarea>
+</section> -->
+
+
+    
+<section data-markdown>
+        <textarea data-template>
+### PART I
+## Introduction to Machine Learning
+        </textarea>
+    </section>
+
+
+<section>
+    <h3>Example: Customer Data - Risk of Accidents</h3>
+    <img src="img/manning/all.png" height="400px" class="fragment">
+    <p class="fragment">
+        <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
+    </p>
+</section>
+
+            <section data-markdown>
+                    <textarea data-template>
+## How to solve this programmatically?
+                        </textarea>
+                        </section>
+
+
+            
+            <!-- <section data-markdown>
+                    <textarea data-template>
+                    <img src='img/sketch/classic-development.jpg'>
+                    </textarea>
+                    </section>
+                    
+                    <section data-markdown>
+                        <textarea data-template>
+    ### Exploration
+    <img src='img/sns-pairplot.png' height="550px">
+                
+                    </textarea>
+                    </section> -->
+    <section>
+        <h3>Programmer's approach: Code Rules by Hand</h3>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if age < 25:
+    if speed > 140:
+        return red # young people, fast cars: high risk
+    else:
+        return yellow # young people: medium risk
+            </code></pre>
+        </div>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if age > 75:
+    return red # old people: high risk
+            </code></pre>
+        </div>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if miles_per_year > 30:
+    return red # a lot of driving: high risk
+if miles_per_year > 20:
+    return yellow #  a bit of driving: medium risk
+            </code></pre>
+        </div>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+return green # otherwise: low risk
+            </code></pre>
+        </div>
+<p><small>
+    <a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/classic-code.ipynb>'>https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/classic-code.ipynb</a>
+</small></p>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Plotting the predictions as a background
+<img src='img/manning/manual.png' class="fragment" height="450px">
+
+<div class="fragment">
+<p><small>approx. 43% predictions correct</small></p>
+</div>        
+</textarea>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### How good is this?
+
+<!-- <p class="fragment"><em>How well have we mastered the domain?</em></p> -->
+
+* Is it better than guessing?
+* Are all the rules correct?
+* Are some missing?
+* How would we even know?
+
+</textarea>
+</section>                    
+
+<section>
+<h2>Different Approach: Supervised Deep Learning</h2>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src='img/MELLI.jpg' height="650px">
+        </textarea>
+        </section>
+
+
+<section data-markdown>
+<textarea data-template>
+<img src='img/sketch/supervised-ml.jpg' height="650px">
+</textarea>
+</section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Deep Learning fits best when
+
+* the problem at hand is hard to specify (_Who is a good customer?_)
+* you have a lot of examples
+* solving the problem can tolerate some error or uncertainty
+* there is a clear, simple input and output
+                </textarea>
+                </section>
+
+
+    <section data-markdown>
+        <textarea data-template>
+### Remember, you are not Facebook or Google
+
+<img src='img/dl-research-vs-application.png' height="500px">
+<small>https://twitter.com/casarock/status/1064438008756256768</small>
+        </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+<!-- ### Andrew Ng: Supervised Machine Learning -->
+
+<img src='img/ng_supervised.png' height="570px">
+
+<small>
+https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
+</small>
+            </textarea>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+### PART II
+## Understanding the Artificial Neuron and Neural Networks
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### How does an artificial neuron work?
+
+<img src='img/insurance/neuron213.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### From Neuron to Network 
+
+<img src='img/tf-plaground.png' height="500px">
+
+<small>
+https://playground.tensorflow.org
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### What really matters 
+
+<img src='img/sean-data.png'>
+
+<small>
+https://twitter.com/SeanPedersen96/status/1063272488489099264
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Complete Network for our problem
+
+<img src='img/insurance/encoding3.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Next step: Encode this with Keras
+
+* https://www.tensorflow.org 
+* https://www.tensorflow.org/guide/low_level_intro 
+* https://www.tensorflow.org/guide/keras 
+
+    </textarea>
+</section>
+
+<section>
+    <h3>Keras Layers</h3>
+
+    <p><small>Sequential Model</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model = keras.Sequential()
+        </code></pre>
+
+    <p><small>Fully Connected Hidden Layer</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(Dense(units=50, input_dim=3))
+</code></pre>
+
+        <p><small>Softmax Output Layer</small></p>
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(Dense(units=3, activation='softmax'))
+        </code></pre>
+
+        <p>
+    <small>
+            <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                https://www.tensorflow.org/api_docs/python/tf/keras/layers
+            </a>
+            <a href="https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb">
+                https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
+            </a>
+                
+                
+    </small>
+</p>
+</section>
+
+<section>
+    <h3>How does learning work?</h3>
+    <p class="fragment">This boils down to an optimization problem</p>
+    <p class="fragment">The loss to be minimized is calculated from the difference between the softmax output and the known true category</p>
+            <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.compile(loss='sparse_categorical_crossentropy',
+             optimizer='adam')
+            </code></pre>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Job of the optimizer
+
+<a href="http://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=xor&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.90689&amp;showTestData=true&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=false&amp;stepButton_hide=false&amp;activation_hide=false&amp;problem_hide=true&amp;noise_hide=true&amp;regularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true&amp;learningRate_hide=false&amp;regularizationRate_hide=true&amp;percTrainData_hide=false&amp;numHiddenLayers_hide=true&amp;discretize_hide=true">
+<img src="img/manning/optimizer.png" height="550px">
+</a>
+
+</textarea>
+</section>
+
+<section>
+<h3>What does the neural network learn?</h3>
+<p class="fragment">All the weights of a the neurons</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+model.summary()</code></pre>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+_________________________________________________________________
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+hidden1 (Dense)              (None, 50)                200       
+_________________________________________________________________
+softmax (Dense)              (None, 3)                 153       
+=================================================================
+Total params: 353
+Trainable params: 353
+Non-trainable params: 0
+_________________________________________________________________</code></pre>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### How would you run that?
+### Short Demo of Jupyter notebooks on Colab
+
+<a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb'>
+<img src='img/colab-demo.png' height="400px">
+</a>
+
+<small>
+    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/nn-training.ipynb
+</small>
+
+    </textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Model using only 2 dimensions
+
+<img src='img/manning/nn-reg.png' height="500">
+<small class="fragment">up to 73% predictions correct on previously unknown data possible</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Manual solution using all 3 dimensions 
+<img src='img/manning/manual.png' height="500">
+<small>approx. 43% predictions correct</small>
+</textarea>
+    </section>
+
+
+    <section data-markdown>
+        <textarea data-template>
+### PART III
+## Convolutional Neural Networks
+        </textarea>
+    </section>
+
+    <section>
+            <img src='img/applications/decisions/data.png'>
+    </section>
+
+<section>
+    <h3>Architectures of Convolutional Neural Networks: VGG</h3>
+        <img src="img/sketch/vgg.png" height="350px">
+        <p>
+            <small>There are a number of specialized neural network layers</small>
+        </p>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Convolutional Blocks: Cascading many Convolutional Layers having down sampling in between
+
+![Applying filters](http://cs231n.github.io/assets/cnn/cnn.jpeg)
+
+http://cs231n.github.io/convolutional-networks/#conv
+</textarea>
+</section>
+
+<section data-markdown style="font-size: x-large">
+    <textarea data-template>
+### Example of a Convolution
+![Dog](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog.png)
+#### Many convolutional filters applied over all channels
+![Dog after Convolutional Filters applied](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog-conv1.png)
+http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Downlsampling Layer: Reduces data sizes and risk of overfitting
+![Pooling](http://cs231n.github.io/assets/cnn/pool.jpeg)
+</textarea>
+</section>
+
+
+    <section>
+            <h3>MNIST - Using a model <em>already trained</em></h3>
+            <p>Exploring the different types layers together</p>
+            <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
+                <img src="img/browser/keras-browser.png" height="350px">
+            </a>
+            <p><small>
+                <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">https://transcranial.github.io/keras-js/#/mnist-cnn</a>
+            </small></p>
+        </section>
+
+    <section>
+            <h3>Keras CNN Layers</h3>
+
+            <p><small>Convolution</small></p>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    model.add(Conv2D(filters=32, padding='same', activation='relu'))
+                </code></pre>
+
+                <p><small>Max Pooling</small></p>
+                <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(MaxPooling2D())
+                </code></pre>
+                                    
+                <p><small>Flatten 2d to make it accessible to Dense layers</small></p>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.add(Flatten())
+            </code></pre>
+        <p>
+            <small>
+                    <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                        https://www.tensorflow.org/api_docs/python/tf/keras/layers
+                    </a>
+                    <br>
+                    <a href="https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/fashion-mnist-keras.ipynb">
+                        https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/fashion-mnist-keras.ipynb
+                    </a>
+            </small>
+        </p>
+    </section>
+
+        <section>
+            <h3>More complex architecture: Google Inception V3</h3>
+            <img src="img/inception_v3_architecture.png" height="400px">
+            <p>
+                <small>
+                    Paper: <a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a>
+                    <br>
+                    <a href="https://stackoverflow.com/questions/39352108/does-the-inception-model-have-two-softmax-outputs" target="_blank">
+                    Why two classifiers?</a>
+                </small>
+            </p>
+        </section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Standard CNN Architectures
+
+![Performance of CNN Architectures](https://cdn-images-1.medium.com/max/1600/1*kBpEOy4fzLiFxRLjpxAX6A.png)
+
+<small>
+https://medium.com/towards-data-science/neural-network-architectures-156e5bad51ba
+</small>
+</textarea>
+</section> -->
+
+
+    <section data-markdown>
+        <textarea data-template>
+## PART IV
+### RNNs - Recurrent Neural Networks
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Classic Application: Sentiment Analysis in Written Texts
+
+<small>
+https://en.wikipedia.org/wiki/Sentiment_analysis
+</small>
+
+_Example: Does a Tweet mention something negative about my company?_
+        </textarea>
+    </section>
+
+            <!-- <section data-markdown>
+                    <textarea data-template>
+## First Challenge
+
+### How to turn words into numbers?
+                        </textarea>
+                        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Word Embeddings
+
+<a href='https://projector.tensorflow.org'>
+<img src="img/nlp/embedding-projector.png" height="500px">
+</a>
+
+<small>
+https://projector.tensorflow.org
+</small>
+</textarea>
+</section>
+ -->
+<section data-markdown>
+        <textarea data-template>
+## Challenge
+
+### Traditional Networks have no memory of previous events
+
+Which is required to "understand" text
+            </textarea>
+            </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Solution: RNNs - Networks with Loops
+<img src='img/nlp/colah/RNN-rolled.png' height="450px">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Unrolling the loop
+<img src='img/nlp/colah/RNN-unrolled.png'>
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+
+<section>
+    <h3>Keras RNN Layers</h3>
+
+    <p><small>Embedding - turning Words into numbers</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(Embedding(input_dim=vocab_size, 
+                    input_length=text_length, 
+                    output_dim=latent_dimension))
+        </code></pre>
+
+    <p><small>Optimized RNN Nodes</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(GRU(units=32))
+</code></pre>
+
+        <p>
+    <small>
+            <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                https://www.tensorflow.org/api_docs/python/tf/keras/layers
+            </a>
+            <a href="https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb">
+                https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru.ipynb
+            </a>
+    </small>
+</p>
+</section>
+
+
+<section>
+    <h3>Instead of a Wrap Up: What's next?</h3>
+    <p><em>Finding data sets to play with</em></p>
+    <ul>
+        <li class="fragment">Google released a search engine for datasets: <a href='https://toolbox.google.com/datasetsearch'>https://toolbox.google.com/datasetsearch</a>
+        <li class="fragment">Kaggle Datasets: <a href='https://www.kaggle.com/datasets'>https://www.kaggle.com/datasets</a>
+    </ul>
+
+    <p>
+        <em>Introduction to Deep Learning with TensorFlow</em>
+    <br>
+    <small>
+<a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+    <br>
+<a href="http://bit.ly/topconf-dl">
+    http://bit.ly/topconf-dl</a>
+</small>
+</p>
+</section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            // do we want this???
+            $('li').addClass('fragment')
+
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
+        // $('section').attr('data-background', "img/manning/background/m0.jpg");
+        // $('section').attr('data-background', "img/manning/background/m1.jpg");
+        // $('section:not([data-background])').attr('data-background', "img/manning/background/m1.jpg");
+        // $('section').attr('data-background-size', "1620px");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: false,
+        history: true,
+        center: true,
+        width: 1100,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

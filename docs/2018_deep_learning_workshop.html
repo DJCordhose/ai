@@ -1,0 +1,1702 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Deep Machine Learning</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        var printMode = window.location.search.match(/print-pdf/gi);
+        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+            <section data-markdown class="preparation">
+                    <textarea data-template>
+### Preparation
+                </textarea>
+            </section>
+    
+       <section>
+            <h2>Deep Learning Workshop</h2>
+            <h3>With TensorFlow</h3>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <small>
+            <a href="https://djcordhose.github.io/ai/2018_deep_learning_workshop.html">
+                https://djcordhose.github.io/ai/2018_deep_learning_workshop.html</a>
+            </small>
+        </section>
+
+        <section data-markdown class="local" style="font-size: xx-large">
+                <textarea data-template>
+### Schedule
+
+* 9-9:30: Breakfast @Udslopen
+* 9:30- 12:30: Introduction into Machine Learning with TensorFlow (incl. Breaks)
+* 12:30 - 13:00 Inspiration for Projects, Ideas / Team forming
+* 13 - 14: Lunch
+* 14 - 17:30: Work on Projects
+* 17:30 - 18:00 Presentation (if there is anything to present, no pressure, no winners, no loosers)
+* 18:00 - 20:00 Beer
+* 20:00 Football https://www.fussball-wm.pro/wm-2018/mannschaften-teams/deutschland/
+</textarea>
+</section>
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+            </textarea>
+        </section>
+                
+        <section data-markdown>
+            <textarea data-template>
+## Why is Machine Learning exciting?
+            </textarea>
+        </section>
+        
+<section data-markdown>
+        <textarea data-template>
+### Wavenet passes turing test?
+
+System can call people and make appointments (without people noticing it is a machine)
+
+<img src='img/rnn_big.png'>
+
+<small>
+https://ai.googleblog.com/2018/05/duplex-ai-system-for-natural-conversation.html
+</small>
+            </textarea>
+            </section>
+    <section data-markdown>
+            <textarea data-template>
+    ### Faking Video
+    
+    Learning a model from a few minutes of video
+    
+    <img src="img/fake_obama.png">
+    
+<small>
+https://s2018.siggraph.org/presentation/?id=papers_129&sess=sess146
+<br>
+https://youtu.be/qc5P2bvfl44?t=60
+<br>
+<a href="https://www.reddit.com/r/MachineLearning/comments/8kj06q/r_ai_tool_controls_people_in_videos_deep_video/">
+        Comments on Reddit
+</a>
+</small>
+    </textarea>
+    </section>
+    
+        <section data-markdown>
+            <textarea data-template>
+## Examples in the Browser using TensorFlow.js
+
+https://js.tensorflow.org/
+            </textarea>
+        </section>
+
+
+        <section data-markdown>
+                <textarea data-template>
+### Real-time pose estimation
+
+<img src='img/posenet_camera.gif' height="400px">
+
+<small>
+Demo: https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html
+<br>
+Links: https://twitter.com/random_forests/status/993639149780459520
+<br>
+Application: https://twitter.com/teropa/status/1001151524351959041
+</small>    
+            
+                </textarea>
+            </section>
+
+                <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+    ### Find Emojis in the real world
+    
+    Loads a MobileNet (Neural Network optimized for mobile devices) fully trained on all the Emojis
+    
+    <a href="https://emojiscavengerhunt.withgoogle.com/">
+    <img src="img/tfjs/scavenger_hunt.png" height="350px">
+    </a>
+    
+    https://github.com/google/emoji-scavenger-hunt
+    https://js.tensorflow.org/tutorials/mnist.html
+    
+    </textarea>
+    </section>
+
+    <section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+        ### Pacman using gesture control
+        
+        Loads a pretrained MobileNet and let's you refine it to your face (transfer learning) 
+        
+        <a href="https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html">
+        <img src="img/tfjs/pacman.png" height="350px">
+        </a>
+        
+        https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
+        
+        </textarea>
+        </section>
+
+<section>
+<h3>Generating Celebreties - From Keras to tensorflow.js</h3>
+<p>Trained for two weeks on a single high-end GPU on CelebA-HQ data set (images of celebreties)</p>
+<div class="fragment" style="float: left">
+    <img src="img/unsupervised/gan-model-male2.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female2.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female1.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-male.png" height="200">
+</div>
+<p style="clear: both">
+<small>
+<a href="https://alantian.net/ganshowcase/" target="_blank">https://alantian.net/ganshowcase/</a>
+<br>
+<a href="https://github.com/alantian/ganshowcase" target="_blank">https://github.com/alantian/ganshowcase</a>
+<br>
+<a href="https://twitter.com/alanyttian/status/988242167998148608" target="_blank">https://twitter.com/alanyttian/status/988242167998148608</a>
+</small>
+                   
+</p>
+</section>                                
+        
+ <section>
+        <h1>The Basics</h1>
+        <h2>How does Machine Learning work?</h2>
+        <p>Unfortunately: Without a certain basic knowledge it really is impossible to use any machine learning library</p>
+    </section>
+
+            <section>
+                <h3>Our Use Case: Customer Data - Car Insurance</h3>
+                <img src="img/insurance/automobile-insurance.png" height="400px">
+                <p>
+                    <small>How would you rank me (47) for a car with 160 km/h top speed?</small>
+                </p>
+            </section>
+                    
+            <section>
+                    <h3>Classic Approach: Code Rules by hand</h3>
+                    <div class="fragment">
+                        <pre><code contenteditable data-trim class="line-numbers python">
+                    if age < 25:
+                        if speed > 180:
+                            return red
+                        else:
+                            return yellow
+                    if age > 75:
+                        return red
+                    if km_per_year > 50:
+                        return red
+                    if km_per_year > 35:
+                        return yellow
+                    return green
+                                </code></pre>
+                    </div>
+                    </section>
+                    
+                        <section data-markdown>
+                    <textarea data-template>
+                    <img src='img/sketch/classic-development.jpg'>
+                    </textarea>
+                    </section>
+                    
+                    <section>
+                    <h3>No great results</h3>
+                            <p>
+                                approx. 43% correct predictions
+                            </p>
+                    </section>
+                    <section>
+                    <h3>Drawing Decision Boundaries to understand why this does not perform well</h3>
+                    </section>
+                    
+                    <section>
+                    <img src="img/flashcards/Decision_Boundary_print.png">
+                    </section>
+                    <section>
+                    <h3>Decision Boundaries for the Hand Coded Rules</h3>
+                    <div class="fragment">
+                        <img src="img/insurance/manual.png" height="400px">
+                            <p>
+                                <small>approx. 43% correct predictions (guessing would be 33%)</small>
+                            </p>
+                    </div>
+                    </section>
+                    
+                    <section>
+                    <h3>Do we have all the rules? Are they even correct?</h3>
+                    </section>
+                    
+                    <section>
+                            <h2>Different Approach: Machine Learning</h2>
+                        </section>
+                    
+                        <section data-markdown>
+                            <textarea data-template>
+                    <img src='img/sketch/supervised-ml.jpg'>
+                        </textarea>
+                    </section>
+                    
+                        <section>
+                                <img src="img/insurance/ml-phases.png" height="450px">
+                        </section>
+                        <section data-markdown>
+                            <textarea data-template>
+                    <img src='img/sketch/using-a-model.jpg'>
+                        </textarea>
+                    </section>
+                    
+                    <section>
+                            <h2>
+                                <small>There are different types of machine learning</small>
+                            </h2>
+                            <div style="margin-top: -30px">
+                                <img src="img/sketch/types-of-ml.png" height="500px">
+                            </div>
+                        </section>
+                    
+                        <section>
+                                <img src='img/applications/decisions/type.png'>
+                            </section>
+                            <section>
+                                    <h3>Supervised Machine Learning as an Experiment</h3>
+                                    <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                                        <img src="img/browser/teachable-machine.png" height="350px">
+                                    </a>
+                                    <p>
+                                        <small>
+                                            <a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+                                        </small>
+                                    </p>
+                                </section>
+                    
+
+                <section>
+                    <h3>Paper Exercise #1 - Understanding the Supervised Learning Approach</h2>
+                        <p>Manually cluster areas of different customer types on the
+                            <em>upper part</em> of the handout</p>
+                        <ol>
+                            <li>
+                                <em>dark (green)</em>: good customer</li>
+                            <li>
+                                <em>light (yellow)</em>: mediocre customers</li>
+                            <li>
+                                <em>middle (red)</em>: red customers</li>
+                        </ol>
+                        <p>Make sure you draw with pressure</p>
+                </section>
+                
+                <section>
+                        <h1>Plot Twist</h1>
+                    </section>
+    
+                    <section>
+                            <h3>Why predicting data that we already know?</h3>
+                        </section>
+    
+                    <section>
+                        <h3>Generalisation, not perfect reproduction is the objective</h3>
+                    </section>
+    
+    
+                    <section data-markdown>
+                        <textarea data-template>
+    ### All the data we have
+    <img src='img/supervised/generalization-all-data.png' height="450px">
+    
+    We split existing data into two sets
+                        </textarea>
+                    </section>
+    
+                    <section data-markdown>
+                            <textarea data-template>
+    ### Training data
+    <img src='img/supervised/generalization-train-data.png' height="450px">
+    
+    The larger set (60 or 80%) we use to build our model
+                        </textarea>
+                    </section>
+    
+                    <section data-markdown>
+                            <textarea data-template>
+    ### Validation data
+    
+    <img src='img/supervised/generalization-validation-data.png' height="450px">
+    
+    The smaller set is used to check how well we generalize
+                        </textarea>
+                    </section>
+    
+                <section>
+                    <h2>Exercise #1, Part2 - How well did you generalize?</h2>
+                    <p>Turn the page and redraw the lines you printed through from the first page</p>
+                    <p>Get an estimate of the misclassified samples on both diagrams</p>
+                    <p>What do you think, is this result worse?</p>
+                    <p>What would you have done differently if you had been given this information before (that it is all about generalisation)?</p>
+                </section>
+
+                    <section>
+                        <img src="img/flashcards/Test_Training_And_Validation_Sets_print.png">
+                    </section>
+
+                <section>
+                    <h3>Sample Solution: Fine</h3>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/train_fine.jpg" height="250">
+                        <p>
+                            <small>Train</small>
+                        </p>
+                    </div>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/test_fine.jpg" height="250">
+                        <p>
+                            <small>Test</small>
+                        </p>
+                    </div>
+                    <p class="fragment">Not ideal, especially in the middle where everything mixes</p>
+                </section>
+                
+                <section>
+                    <h3>Sample Solution: Coarse</h3>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/train_coarse.jpg" height="250">
+                        <p>
+                            <small>Train</small>
+                        </p>
+                    </div>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/test_coarse.jpg" height="250">
+                        <p>
+                            <small>Test</small>
+                        </p>
+                    </div>
+                    <p class="fragment">Not so bad - we humans are good at clustering in 2-d</p>
+                </section>
+
+                    <section>
+                        <h3>Supervised Machine Learning</h3>
+                    <ul>
+                        <li class="fragment">What we just did</li>
+                        <li class="fragment">Train a system using known data</li>
+                        <li class="fragment">There are different strategies to train a system</li>
+                        <li class="fragment">For our problem a simple strategy will do</li>
+                    </ul>
+                    </section>
+            
+                    <section>
+                            <h3>Typical application: Classification</h3>
+                            <div class="fragment">
+                                <img src="img/sketch/classification.jpg" height="450px">
+                            </div>
+                            <p class="fragment">We have to deal with a classification problem</p>
+                        </section>
+
+                        <section>
+                                <h3>Data: Quantity</h3>
+                                <img src='img/applications/decisions/classic.png' height="500px">
+                                <p>We have 300 data sets, this is small</p>
+                            </section>
+                    
+                        <section>
+                            <h3>KNN: k Nearest Neighbors</h3>
+                            <p>A simple classic</p>
+                            <p>This is also used in the Teachable Machine Example</p>
+                        </section>
+                    
+                        <section>
+                            <img src="img//insurance/knn.png">
+                        </section>
+                        <section>
+                            <h3>Algorithm</h3>
+                            <p>For a case to predict</p>
+                            <ol>
+                                <li>Plot the case together with the known samples
+                                <li>Look at a number (k) of nearest data points
+                                <li>Choose k in such a way that you can get a majority
+                                <li>Your prediction is the color of the majority
+                            </ol>
+                        </section>
+                    
+        <section data-markdown>
+                <textarea data-template>
+### Experiment with different numbers (k) of neighbors
+
+<img src='img/knn-sample.png' height="400px">
+<small>
+https://beta.observablehq.com/@nsthorat/how-to-build-a-teachable-machine-with-tensorflow-js#knndataset
+</small>
+        </textarea>
+        </section>
+
+
+                        <section>
+                                <h3>Computed results for k = 13</h3>
+                                <div class="fragment">
+                            
+                                    <img src="img/insurance/knn-13.png" height="400px">
+                                    <p>
+                                        <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
+                                    </p>
+                                </div>
+                                <p class="fragment">Notice the smooth boundaries</p>
+                            </section>
+    
+        <section data-markdown>
+                <textarea data-template>
+## What we will use for the rest of the Workshop
+* Supervised Machine Learning
+* Neural Networks
+* Deep Learning
+* TensorFlow
+                    </textarea>
+                    </section>
+
+    <section>
+            <h3>Results using Neural Networks and TensorFlow</h3>
+            <div class="fragment">
+        
+                <img src="img/insurance/cnn.png" height="400px">
+                <p>
+                    <small>only approx. 79% accuracy on train data, but also 77% on test data</small>
+                </p>
+            </div>
+        </section>
+                    
+        <!-- <section data-markdown>
+                <textarea data-template>
+<img src='img/dl_paper_2018.png' height="550px">
+
+<small>
+https://twitter.com/dennybritz/status/984972760039342082
+</small>        
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-ml1.png' height="550px">
+
+<small>
+https://twitter.com/colinraffel/status/988467433072726022
+</small>        
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-ml2.png' height="550px">
+
+<small>
+https://twitter.com/dunmireg/status/988480873296211968
+</small>        
+</textarea>
+</section> -->
+
+        <!-- <section data-markdown>
+                <textarea data-template>
+### Glossary
+
+There are quite a few terms already and many more to come
+
+https://developers.google.com/machine-learning/crash-course/glossary        
+</textarea>
+</section> -->
+
+<section>
+    <h2>The Artificial Neuron</h2>
+    <p>The basis of Neural Networks</p>
+</section>
+        <section>
+            <h3>How does an artificial neuron work?</h3>
+                <div class="fragment">
+                    <img src="img/sketch/neuron.jpg" height="550px">
+                </div>
+        </section>
+
+    <section data-markdown>
+    <textarea data-template>
+### Activation Functions
+
+An activation function (or non-linearity) takes a single number and performs a certain fixed mathematical operation on it.
+
+http://cs231n.github.io/neural-networks-1/#actfun
+</textarea>
+</section>
+
+        <section>
+            <p>There are several activation functions you may encounter in practice:</p>
+        </section>
+        <section>
+            <h3>Step, switching from zero to one</h3>
+            <img src="img/cnn/step.png" height="400px">
+            <p>original version simulating transition from passive to active</p>
+        </section>
+
+        <section>
+            <h3>Sigmoid, floating from 0 to 1</h3>
+            <img src="img/cnn/sigmoid.png" height="400px">
+            <p>continuously differentiable version of step function</p>
+        </section>
+
+        <section>
+                <h3>Tangens Hyperbolicus</h3>
+                <img src="img/tanh-activation.png" height="400px">
+                <p>floating from -1 to 1</p>
+            </section>
+            
+        <section>
+            <h3>Relu: Rectified Linear Unit</h3>
+            <img src="img/cnn/relu.png" height="400px">
+            <p>Mostly used for Convolutional Networks (more later)</p>
+        </section>
+
+        <section>
+            <h3>Artificial neuron to neural networks</h3>
+                <div class="fragment">
+                    <img src="img/sketch/neuron_to_layers.jpg" height="550px">
+                </div>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+<img src='img/flashcards/Basic_Parts_Of_Deep_Learning_print.png'>
+            </textarea>
+            </section>
+                            
+        <section>
+            <img src="img/flashcards/Architecture_Of_A_Neural_Network_print.png">
+        </section>
+
+        <section>
+            <h3>How many hidden layers?</h3>
+            <p>In Theory a single hidden can approximate any function</p>
+            <p>In practice 2-3 hidden layers seem optimal</p>
+            <p>Convolutional Networks often have more than 100 layers (more on that later)</p>
+                        <p>
+                            <small>
+                                <a href="http://cs231n.github.io/neural-networks-1/#power">
+                                     http://cs231n.github.io/neural-networks-1/#power
+                                </a>
+                                <br>
+                                <br>
+                                <a href="https://beta.observablehq.com/@nstrayer/exploring-the-universal-approximation-theorem">
+                                    https://beta.observablehq.com/@nstrayer/exploring-the-universal-approximation-theorem
+                                </a>
+                            </small>
+                        </p>
+
+         
+        </section>
+
+
+                <section>
+                    <h3>Tensorflow Playground</h3>
+                    <p>Understanding the Basics of Neural Networks</p>
+                    <a href="http://playground.tensorflow.org" target="_blank">
+                        <img src="img/browser/playground.png">
+                    </a>
+                    <p>
+                        <a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a>
+                    </p>
+                </section>
+                
+    <section>
+        <h3>Experiment</h3>
+        <p>Make some sense of artificial neurons and neural networks using the TensorFlow Playground</p>
+        <ol>
+            <li class="fragment">What can you do with a single neuron and why?</li>
+            <li class="fragment">Configure a minimal network to deliver a good result on the initial data set</li>
+            <li class="fragment">Get an intuition for the learning rate - can you change the learning rate in such a way the network no longer trains properly?</li>
+        </ol>
+        <p>
+            <a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a>
+        </p>
+    </section>
+
+    <section>
+            <h3>Applying Deep Neural Networks to our problem</h3>
+            <p>Using TensorFlow</p>
+            <img src='img/tf.png'>
+            <a href="https://www.tensorflow.org/" target="_blank">https://www.tensorflow.org/</a>
+        </section>
+
+        <section>
+                <img src="img/flashcards/Tensors_print.png" height="550px">
+                <p><small><a target="_blank" href="https://towardsdatascience.com/linear-algebra-for-deep-learning-f21d7e7d7f23">
+                    Tensors and Operations on them
+                </a></small></p>
+        </section>
+    
+        <section>
+                <h3>A sample architecture using 2 fully connected hidden layers</h3>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+inputs = tf.keras.Input(name='input', shape=(3, ))
+                </code></pre>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+x = tf.keras.layers.Dense(100, name='hidden1', activation='relu')(inputs)
+x = tf.keras.layers.Dense(100, name='hidden2', activation='relu')(x)
+                </code></pre>
+            </section>
+
+            <section>
+                    <h3>Softmax: Categories with likelyhoods</h3>
+                        <div class="fragment">
+                            <img src="img/sketch/fc_nn.jpg" height="450px">
+                        </div>
+                <pre><code contenteditable data-trim class="line-numbers python fragment">
+predictions = tf.keras.layers.Dense(3, name='softmax', 
+                                    activation='softmax')(x)
+                </code></pre>
+                </section>
+        
+                <section>
+                    <h3>Where is the cost / loss / error?</h3>
+                    <p class="fragment">The loss is calculated from the difference between the softmax output and the known true category</p>
+                    <p class="fragment"><code>categorical_crossentropy</code> is the algorithm to calculate this loss</p>
+                            <pre><code contenteditable data-trim class="fragment line-numbers python">
+model = tf.keras.models.Model(inputs=inputs, outputs=predictions)
+model.compile(optimizer='adam',
+            loss='categorical_crossentropy',
+            metrics=['accuracy'])
+                            </code></pre>
+                            <p><a target="_blank"
+                                href="http://cs231n.github.io/neural-networks-3/#ada">
+                                <code>adam</code> is one algorithm to minimize loss</a></p>
+                    <p><a target="_blank"
+                         href="https://en.wikipedia.org/wiki/Cross_entropy">https://en.wikipedia.org/wiki/Cross_entropy</a></p>
+                </section>
+                            
+    <section>
+        <h3>Bringing it all together</h3>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+# splitting test from training data
+X_train, X_test, y_train, y_test = 
+    train_test_split(X, y, test_size=0.4)
+                </code></pre>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+# convert the numerical encoding of category
+#  to one hot to match softmax
+y_train_categorical = to_categorical(y_train, 3)
+            </code></pre>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+# kick off training for 1000 iterations
+model.fit(X_train, y_train_categorical, epochs=1000)
+                </code></pre>
+<small>
+    <a href="https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/workshops/deep-learning/nn.ipynb" 
+    target="_blank">
+</a>
+</small>
+                        
+    </section>
+    
+            <section>
+                <h3>What does the neural network learn?</h3>
+                <p class="fragment">All the weights of a the neurons</p>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.summary()</code></pre>
+                <pre><code contenteditable data-trim class="fragment line-numbers python">
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input (InputLayer)           (None, 3)                 0         
+_________________________________________________________________
+hidden1 (Dense)              (None, 100)               400       
+_________________________________________________________________
+hidden2 (Dense)              (None, 100)               10100     
+_________________________________________________________________
+softmax (Dense)              (None, 3)                 303       
+=================================================================
+Total params: 10,803
+Trainable params: 10,803
+Non-trainable params: 0
+_________________________________________________________________</code></pre>
+            </section>
+
+            <!-- <section>
+                    <img src="img/flashcards/Learning_Rate_print.png">
+                </section>
+         -->
+            <section style="font-size: xx-large">
+                <h3>Visualizing the learning Process</h3>
+                <p>(Stochastic) Gradient Descent (SGD)</p>
+                <p><small>Minimizing the error by changing the trainable parameters</small></p>
+                <p><small>For just 2 parameters you can image a scenary with hills and you try to find the deepest valley</small></p>
+                <a href="http://www.benfrederickson.com/numerical-optimization/" target="_blank">
+                    <img src="img/browser/screenshot-numerical-optimizaion.png" height="250px">
+                </a>
+                <p>
+                    <small>
+                        <a href="http://www.benfrederickson.com/numerical-optimization/" target="_blank">http://www.benfrederickson.com/numerical-optimization/</a>
+                        <br>
+                        <a href="https://distill.pub/2017/momentum/" target="_blank">https://distill.pub/2017/momentum/</a>
+                        
+                    </small>
+                </p>
+                <p>
+                    <small>A too high learning rate might over-shoot the mimimum, a too low one might be too slow and never reach it
+                    </small>
+                </p>
+            </section>
+
+
+            <!-- <section data-markdown>
+                    <textarea data-template>
+### Which parameter to change?
+<img src='img/flashcards/Partial_Derivative_print.png' height="550px">
+                </textarea>
+                </section>
+                                
+
+            <section>
+                <h3>More on SGD</h3>
+                <img src="img/sgd.png">
+                <p>
+                    <small>
+                        <a href="https://towardsdatascience.com/improving-vanilla-gradient-descent-f9d91031ab1d">
+                         https://towardsdatascience.com/improving-vanilla-gradient-descent-f9d91031ab1d</a>
+
+                    </small>
+                </p>
+                 
+            </section>
+ -->
+    <section data-markdown>
+            <textarea data-template>
+<img src="img/flashcards/BackProp_print.png" height="550px">
+
+<small>
+http://cs231n.github.io/optimization-2
+<br>
+http://neuralnetworksanddeeplearning.com/chap2.html
+</small>
+        </textarea>
+        </section>
+
+        <section>
+            <img src="img/flashcards/Dropout_print.png">
+        </section>
+    
+        <section>
+            <img src="img/flashcards/The_Effect_Of_Dropout_On_Hidden_Units_print.png">
+        </section>
+    
+        <section>
+            <pre><code data-trim>
+    from keras.layers import Dropout
+    
+    x = Dense(100, name='hidden1', activation='relu')(inputs)
+    x = Dropout(0.15)(x)
+    x = Dense(100, name='hidden2', activation='relu')(x)
+    x = Dropout(0.15)(x)
+                </code></pre>
+        </section>
+    
+        <section>
+                <img src="img/flashcards/Overfit_Vs_Underfit_print.png">
+            </section>
+
+        <section>
+            <h1>Let the GPU burn</h1>
+            <h2>Convolutional neural networks</h2>
+        </section>
+
+        <section>
+            <h3>Neural Networks are best for non symbolic data</h3>
+            <p>Like classifying images</p>
+            <p>Reference:
+                    <a href="http://cs231n.github.io/convolutional-networks/" target="_blank">
+                         http://cs231n.github.io/convolutional-networks/</a>
+            </p>
+             
+        </section>
+
+        <!-- <section>
+                <img src='img/applications/decisions/data.png'>
+        </section> -->
+
+        <section>
+            <h3>Use of GPU for non symbolic data</h3>
+            <img src="albon-gpu-gaming.png">
+            <p>
+                <small>
+                    <a href="https://twitter.com/chrisalbon/status/907028933693947904?s=03" target="_blank">
+                        https://twitter.com/chrisalbon/status/907028933693947904?s=03</a>
+                </small>
+            </p>
+        </section>
+        
+        <section>
+            <h3>Why the recent break throughs?</h3>
+            <div class="fragment" style="float: left">
+                <img src="img/cray2.png" height="250">
+                <p>
+                    <small>Cray X-MP
+                        <br> Supercomputer (1982)</small>
+                </p>
+            </div>
+            <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+                x 100.000 =
+            </div>
+            <div class="fragment" style="float: left">
+                <img src="img/titan5.jpg" height="250" style="float: right">
+                <p>
+                    <small>
+                        <br>Titan 5 im Gamer PC (2017)</small>
+                </p>
+            </div>
+        </section>
+
+                <section>
+                    <h3>... but we also have</h3>
+                    <ol>
+                        <li>Smarter Learning Strategies (more hidden layers = Deep Learning, Convolutional Layers)
+                        <li>Big Data
+                    </ol>
+                </section>
+
+<section>
+    <h3>Architectures of Convolutional Neural Networks: VGG</h3>
+        <img src="img/sketch/vgg.png" height="350px">
+        <p>
+            <small>There are a number of specialized neural network layers</small>
+        </p>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Classic VGG like Architecture
+* we use a VGG like architecture
+* based on https://arxiv.org/abs/1409.1556
+* basic idea: sequential, deep, small convolutional filters, use dropouts to reduce overfitting
+* 16/19 layers are typical
+* many architectures are based on that
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Convolutional Blocks: Cascading many Convolutional Layers having down sampling in between
+
+![Applying filters](http://cs231n.github.io/assets/cnn/cnn.jpeg)
+
+http://cs231n.github.io/convolutional-networks/#conv
+</textarea>
+</section>
+
+<section data-markdown style="font-size: x-large">
+    <textarea data-template>
+### Example of a Convolution
+![Dog](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog.png)
+#### Many convolutional filters applied over all channels
+![Dog after Convolutional Filters applied](https://github.com/DJCordhose/speed-limit-signs/raw/master/img/conv/dog-conv1.png)
+http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html
+</textarea>
+</section>
+
+
+<section>
+        <h3>How do Convolutions work - Image Kernels</h3>
+        <p><small>You might know from Photoshop etc., used in Convolutional Neural Networks</small></p>
+        <a href="http://setosa.io/ev/image-kernels/" target="_blank">
+            <img src="img/browser/setosa_io_image-kernels.png" height="300px">
+        </a>
+        <p>
+            <small>
+                <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
+            </small>
+        </p>
+    </section>
+
+<section>
+    <h3>Experiment with Image Kernels</h3>
+    <ol>
+        <li class="fragment">How can a matrix of numbers can represent an image? How could you encode color?</li>
+        <li class="fragment">Explain the effect the filter kernels Sharpen and Blur have on the sample image - explain the effect of the specific values to the result</li>
+        <li class="fragment">Starting from the identity kernel - how can you create a filter that highlights edges on the top of shown digits? What about the bottom?</li>
+    </ol>
+    <p>
+            <small>
+                <a href="http://setosa.io/ev/image-kernels/" target="_blank">http://setosa.io/ev/image-kernels/</a>
+                <br>
+                Sample image: <a 
+                href="https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg" target="_blank">
+                https://github.com/DJCordhose/speed-limit-signs/raw/master/data/real-world/4/100-sky-cutoff-detail.jpg</a>
+                
+            </small>
+        </p>
+</section>
+    
+<section>
+        <h3>Relu: Rectified Linear Unit</h3>
+        <img src="img/cnn/relu.png" height="400px">
+        <p>Mostly used for Convolutional Networks</p>
+    </section>
+
+
+                <section data-markdown>
+    <textarea data-template>
+### Relu Activations for CNNs
+
+* Intuition: regions that are not matched by filter are taken out
+  * perfect for blacking out everyhing beyond threshold
+  * good for CNN to completely take out a feature channel
+  * high values from CNN indicate high match, will be passed through
+* seems to enable fast learning
+* this is just what most people actually use
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Downlsampling Layer: Reduces data sizes and risk of overfitting
+![Pooling](http://cs231n.github.io/assets/cnn/pool.jpeg)
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Max Pooling
+![Max Pooling](http://cs231n.github.io/assets/cnn/maxpool.jpeg)
+http://cs231n.github.io/convolutional-networks/#pool
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Standard CNN Architecture
+
+![Performance of CNN Architectures](https://cdn-images-1.medium.com/max/1600/1*kBpEOy4fzLiFxRLjpxAX6A.png)
+
+https://medium.com/towards-data-science/neural-network-architectures-156e5bad51ba
+</textarea>
+</section>
+
+        <section>
+            <h3>Sample Architecture: Google Inception V3</h3>
+            <img src="img/inception_v3_architecture.png" height="400px">
+            <p>
+                <small>
+                    Paper: <a href="https://arxiv.org/abs/1409.4842" target="_blank">Going Deeper with Convolutions</a>
+                    <br>
+                    <a href="https://stackoverflow.com/questions/39352108/does-the-inception-model-have-two-softmax-outputs" target="_blank">
+                    Why two classifiers?</a>
+                </small>
+            </p>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+#### VGG and many basic models start with a number of convolutional blocks for feature extraction and ends with a fully connected classifier 
+![VGG architecture](img/sketch/vgg.png)
+The classifier more or less is what we used for our previous example
+</textarea>
+</section>
+
+
+        <section>
+            <h3>MNIST - Using a model <em>already trained</em></h3>
+            <p>Exploring the different types layers together</p>
+            <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">
+                <img src="img/browser/keras-browser.png" height="350px">
+            </a>
+            <p><small>
+                <a href="https://transcranial.github.io/keras-js/#/mnist-cnn" target="_blank">https://transcranial.github.io/keras-js/#/mnist-cnn</a>
+            </small></p>
+        </section>
+
+                <section>
+                    <h2>Practical Deep Learning with TensorFlow</h2>
+                </section>
+
+                <section>
+                    <h3>Creating a convolutional model</h3>
+                <pre><code contenteditable data-trim class="fragment javascript">
+const model = tf.sequential();
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment javascript">
+model.add(tf.layers.conv2d({
+    inputShape: [28, 28, 1],
+    kernelSize: 5,
+    filters: 8,
+    activation: 'relu'
+}));
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment javascript">
+model.add(tf.layers.maxPooling2d({poolSize: [2, 2]}));
+</code></pre>
+<pre><code contenteditable data-trim class="fragment javascript">
+model.add(tf.layers.flatten());
+model.add(tf.layers.dense({units: 10, activation: 'softmax'}));
+</code></pre>
+<pre><code contenteditable data-trim class="fragment javascript">
+model.compile({
+    optimizer: 'sgd',
+    loss: 'categoricalCrossentropy',
+    metrics: ['accuracy'],
+});                                        
+</code></pre>
+</section>
+
+                <section style="font-size: xx-large">
+                    <h3>Exercise Option 1</h3>
+                    <p>Use tensorflow.js to experiment on the MNIST data set</p>
+                    <p>
+                                    <a href="js/mnist" target="_blank">
+                                        https://djcordhose.github.io/ai/code/mnist/</a>
+                        </p>
+                    <ol>
+                        <li>clone <em>https://github.com/DJCordhose/ai</em> and locate <em>docs/code/mnist</em></li>
+                        <li>run a local http server in this folder</li>
+                        <li>make your changes to <code>model.js</code></li>
+                        <li>Experiment with number of epochs (TRAIN_BATCHES), learning rate, and number of filters in convolutional layers</li>
+                        <li>Monitor GPU performance using the tools of your OS (try to reach 100% utilization)</li>
+                        <li>Advanced: add or remove layers</li>
+                    </ol>
+                    <p>
+                            Reference: 
+                                    <a href="https://js.tensorflow.org/api/0.11.2/" target="_blank">
+                                        https://js.tensorflow.org/api/0.11.2/</a>
+                        </p>
+                </section>
+        <section data-markdown>
+                <textarea data-template>
+### Using TensorFlow with Keras Layers
+
+28x28 grayscale images of fashion Items
+
+<img src="img/fashion-mnist-sprite.png" height="300px">
+
+<small>
+Tutorial: https://medium.com/tensorflow/hello-deep-learning-fashion-mnist-with-keras-50fcff8cd74a
+<br><br>
+Colab Notebook: https://colab.research.google.com/github/margaretmz/deep-learning/blob/master/fashion_mnist_keras.ipynb
+</small>
+        </textarea>
+        </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Exercise Option 2
+
+Use the Fashion MNINST Colab Notebook
+
+* Change Architecture (other/more/less Layers, different Sequence, less/more Filters`)
+* Prevent overfitting even better 
+<small>
+  * https://www.tensorflow.org/api_docs/python/tf/keras/layers/BatchNormalization
+  * https://stackoverflow.com/questions/34716454/where-do-i-call-the-batchnormalization-function-in-keras
+
+</small>
+</textarea>
+</section>
+
+
+    <section>
+        <h2>Simple RNNs</h2>
+        <h3>Recurrent Neural Networks</h3>
+    </section>
+
+    <section>
+            <h3>Text and sequences are special</h3>
+            <img src='img/applications/decisions/data.png'>
+        </section>
+    
+        <section data-markdown>
+        <textarea data-template>
+### Challenge for traditional neural networks
+
+How would you solve sequence to sequence translation?
+
+Simple and theoretical example: addition digit by digit
+
+```
+216
++648
+===
+864
+```
+
+
+What is the challenge?
+        </textarea>
+    </section>
+                        
+
+    <section>
+        <h3>Motivation</h3>
+        <p>Traditional Networks have no memory of previous events</p>
+        <p>Number to Number enconding needs to factor in carry</p>
+    </section>
+
+        
+    <section data-markdown>
+        <textarea data-template>
+### Solution: RNNs - Networks with Loops
+<img src='img/nlp/colah/RNN-rolled.png' height="450px">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Unrolling the loop
+<img src='img/nlp/colah/RNN-unrolled.png'>
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Simple RNN
+
+<img src='img/nlp/fchollet_rnn.png'>
+
+<script type="math/tex; mode=display">
+output_t = \tanh(W input_t + U output_{t-1} + b)
+</script>
+
+<small>
+<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/129">
+Deep Learning with Python, Chapter 6, François Chollet, Manning            
+</a>
+
+</small>
+
+</textarea>
+</section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Generating musical sequences        
+
+Training a latent space and generating a new sequences
+
+<img src='img/nsynth-ae.png'>
+
+<small>
+https://magenta.tensorflow.org/music-vae
+</small>
+</textarea>
+</section>
+    
+    <section data-markdown>
+            <textarea data-template>
+### Also perfect for natural language Sequence to Sequence translations
+
+<img src='img/nlp/encdec.jpg'>
+
+<small>
+https://www.tensorflow.org/tutorials/seq2seq
+</small>
+</textarea>
+</section>
+    <section data-markdown>
+            <textarea data-template>
+### Encoding addition as a Sequence to Sequence translation
+
+<img src='img/nlp/rnn-adder-input.png' height="500px">
+                </textarea>
+                </section>
+    
+    <section data-markdown>
+            <textarea data-template>
+### Each time step generates a digit of the result
+
+<img src='img/nlp/rnn-adder-output.png' height="500px">
+                </textarea>
+                </section>
+
+    <section data-markdown>
+    <textarea data-template>
+### Seeing the network at work in a notebook
+
+
+```
+Input: "216+648"
+Output: "864"
+```
+
+Padding is handled by using a repeated sentinel character (space)
+
+<small>
+Notebook: https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/rnn-add-example.ipynb
+<br>
+https://machinelearningmastery.com/learn-add-numbers-seq2seq-recurrent-neural-networks/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise
+
+* Reverse the sequence of time stamps (there is a flag for it) - why might this be beneficial?
+* Change the encoding of the input, maybe just a single character per time stamp
+
+Can you improve on the results?
+    </textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Example Application: Using sequences of events
+<img src='img/magenta-rnn-duck.png' height="400px">
+
+<small>
+https://twitter.com/random_forests/status/987394050914385927
+<br>
+https://magenta.tensorflow.org/assets/sketch_rnn_demo/index.html
+</small>
+        </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Main issues with RNNs
+
+_Vanishing or exploding gradient problem:_
+* Each step in training applies the same weights to the output, also in back-propagation  
+* The further we move backwards, the bigger (explodes) or smaller (vanishes) our signal becomes
+
+<small>
+https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Intution of effect
+
+_Effectively long term memory does not work:_
+
+* RNNs experiences difficulty in memorising words from far away in the sequence
+* Predictions based on most recent words only
+
+<small>
+    https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### GRU (Gated Recurrent Unit) / LSTMS (Long short-term memory)
+
+_allow past information
+to be reinjected at a later time, thus fighting the vanishing-gradient problem_
+
+<small>
+https://en.wikipedia.org/wiki/Long_short-term_memory
+<br>            
+<a href="https://www.manning.com/books/deep-learning-with-python">
+    Deep Learning with Python, Chapter 6.2.2, François Chollet, Manning            
+</a>            
+https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
+<br>
+<br>
+https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
+<br>
+<br>
+https://arxiv.org/ftp/arxiv/papers/1701/1701.05923.pdf
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+## Creating our very own sentiment analysis
+### Using embeddings to train recurrent networks
+
+Notebooks:
+<small>
+* https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/2-rnn.ipynb
+* https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/2-lstm.ipynb
+* https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/3-gru-dropout.ipynb (final version avoiding overfitting)
+
+</small>
+   
+        </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise
+
+* Tweak Regularisation
+* Make the RNN bidirectional
+
+Can you improve on the results?
+
+https://keras.io/layers/wrappers/#bidirectional
+
+    </textarea>
+</section>
+
+
+
+                <section data-markdown>
+                        <textarea data-template>
+# Inspiration and Starting Points for your project
+
+</textarea>
+                </section>
+            
+
+                <section data-markdown>
+                        <textarea data-template>
+### Inside Convolutional Neural Networks
+
+<img src='img/building-blocks.jpg' height="500px">
+
+<small>
+https://distill.pub/2018/building-blocks/
+</small>
+                </textarea>
+                </section>
+
+            <section>
+                    <h3>Start with TensorFlow.js Core Concepts</h3>
+                <p>It's all about matrix operations</p>
+                    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const a = tf.tensor1d([1, 2, 3]);
+    const b = tf.scalar(2);
+    
+    // a is not modified, result is a new tensor
+    const result = a.add(b);
+                    </code></pre>
+                                        
+                    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const data = await result.data(); 
+    console.log(data); // Float32Array([3, 4, 5]
+                    </code>
+                </pre>
+                <p>
+                    <small>
+                            <a href="js/tensorflow-sandbox/minimal.html" target="_blank">Minimal Example</a>
+                            <br>
+                            <a href="https://js.tensorflow.org/tutorials/core-concepts.html" target="_blank">
+                                https://js.tensorflow.org/tutorials/core-concepts.html</a>
+            
+                    </small>
+                </p>
+            </section>
+        
+            <section data-markdown>
+                    <textarea data-template>
+### Play with optimizers in a simple example
+<img src='img/curve-fitting.png'>
+<small>
+<a href="js/polynomial-regression-core/" target="_blank">Polynomial Regression Example</a>
+<br>
+https://js.tensorflow.org/api/0.11.6/#Training-Optimizers
+    </small>
+
+        </textarea>
+                </section>
+            
+                    <section data-markdown>
+            <textarea data-template>
+### Understanding binary Classifier using Logistic Regression
+
+<video controls autoplay loop src="https://video.twimg.com/tweet_video/DeAhZjGV0AIslot.mp4" type="video/mp4"></video>
+                
+<small>
+https://kaustubholpadkar.github.io/Logistic%20Regression%20Tensorflow.js/
+https://twitter.com/olpadkar/status/999837765289234432    
+</small>
+</textarea>
+</section>
+            
+                <section data-markdown>
+                        <textarea data-template>
+### Machine Learning accessible for artists based on tensorflow.js
+
+<img src='img/ml5js.png'>
+
+<small>
+https://ml5js.org/
+<br>
+https://github.com/ml5js
+<br>
+https://itp.nyu.edu/adjacent/issue-3/ml5-friendly-open-source-machine-learning-library-for-the-web/
+</small>
+            </textarea>
+        </section>
+        <!-- <section data-markdown>
+                <textarea data-template>
+### Real-time pose estimation
+
+<img src='img/posenet_camera.gif' height="400px">
+
+<small>
+Demo: https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html
+<br>
+Links: https://twitter.com/random_forests/status/993639149780459520
+<br>
+Application: https://twitter.com/teropa/status/1001151524351959041
+</small>    
+            
+                </textarea>
+            </section>
+            
+<section data-markdown>
+            <textarea data-template>
+### Deep Reinforcement learning (DQN)
+
+<img src='img/dqn.png' height="400px">
+
+<small>
+https://twitter.com/sqcai/status/994205618620850176
+<br>
+http://web.sfc.keio.ac.jp/~t15704yn/falling/
+</small>    
+        
+            </textarea>
+        </section> -->
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/murmel2.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

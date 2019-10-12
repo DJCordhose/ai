@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Workshop: Machine Learning auch für dein Projekt</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              .beginning:before {
+                  content: 'BEGINNING';
+              }
+              .beginning {
+                color: red !important;
+              }
+              .end:before {
+                  content: 'END';
+              }
+              .end {
+                color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        
+<!-- 
+Machine Learning auch für Dein Projekt!
+
+Machine Learning ist im Begriff, viele Bereiche des Arbeitslebens zu transformieren. Dabei gibt es viele unrealistische
+Versprechen und Befürchtungen, aber auch ebenso viele – zum Teil weniger offensichtliche und bahnbrechende –
+Anwendungen, in denen Machine Learning eine große Hilfe sein kann.
+
+Im ersten Teil des Workshops wird erklärt, welche Arten von Machine Learning es gibt und wie insbesondere Supervised
+Machine Learning funktioniert. Dabei wird schon klar, dass du ohne passende Daten kein Machine Learning betreiben
+kannst.
+
+Im zweiten Teil bekommst du Anregungen zu Anwendungsbereichen von Machine Learning und eine Anleitung, wie du eigene
+Anwendungsgebiete in deinem Arbeitsbereich finden kannst. Hier bekommst du auch die Möglichkeiten, eigene Ansätze zu
+entwickeln und daran zu arbeiten.
+ -->
+        <section>
+            <h2>Workshop: Machine Learning auch für Dein Projekt</h2>
+            <p><a target="_blank" href="https://ml-summit.de/applications-for-your-business/machine-learning-auch-fuer-dein-projekt/">
+                ML Summit, Berlin, October 2018
+            </a></p>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / 
+                <a href="http://twitter.com/djcordhose">@DJCordhose</a> /
+                <a href="https://www.embarc.de/ ">embarc GmbH</a>
+            </h4>
+            <p><small><a href="http://bit.ly/ml-summit-anwendungen">
+                http://bit.ly/ml-summit-anwendungen
+            </a></small></p>
+        </section>
+
+        <section data-markdown>
+<textarea data-template>
+### Agenda
+
+1. Idee und Arten von Machine Learning
+1. Wie finde ich ein Anwendungsgebiet
+
+</textarea>
+</section>
+
+        <section data-markdown>
+<textarea data-template>
+### Vorstellung
+
+_Was machst du und was willst du mit Machine Learning erreichen?_
+
+Stell dich deinem Nachbarn vor
+
+</textarea>
+</section>
+
+
+        <section>
+            <h1>Teil I</h1>
+            <h2>Idee und Arten von Machine Learning</h2>
+        </section>
+
+        <section>
+                <h3>Ein Fallbeispiel</h3>
+                <p>Kunden-Ranking für KfZ-Versicherung</p>
+                <img src="img/insurance/automobile-insurance.png" height="400px">
+                <p><small>Wie würde ich (47) mit einem 56-PS-Auto abschneiden?</small></p>
+            </section>
+
+            
+            <section>
+                    <h3>Experiment #1 - Wie funktioniert Supervised Learning?</h3>
+                        <p>Bildet Cluster der unterschiedlichen Kundenarten auf dem Handout</p>
+                        <ol>
+                            <li>
+                                <em>grün (dunkel)</em>: guter Kunde</li>
+                            <li>
+                                <em>gelb (hell)</em>: mittelguter Kunde</li>
+                            <li>
+                                <em>rot (mittel)</em>: schwacher Kunde</li>
+                        </ol>
+                        <p>Wichtig: Bitte die Cluster mit Kugelschreiber malen und ordentlich aufdrücken</p>
+                </section>
+                
+                <section>
+                    <h2>Plötzliche Wendung</h2>
+                    <h3>Verallgemeinerung und nicht perfekte Wiedergabe ist das Ziel</h3>
+                    <p>Es macht keinen Sinn, die Kundenqualität für Daten vorherzusagen, die man schon kennt.</p>
+                    <p>Unser Cluster müssen daher auch für Daten funktionieren, die wir noch nicht betrachtet haben</p>
+                </section>
+
+                <section data-markdown>
+    <textarea data-template>
+### Wie gut funktioniert die Vorhersage auf unbekannten Daten?
+
+<img src='img/scans/generalization.jpg' height="600">
+
+</textarea>
+</section>
+
+                <section>
+                    <h3>Experiment #1, Teil #2 - Wie gut hat die Verallgemeinerung funktioniert?</h3>
+                    <ul>
+                        <li>Bitte umblättern und die durchgedrückten Linien nachzeichnen</li>
+                        <li>Auf diesem Blatt seht ihr die Testdaten zur Überprüfung des Modells</li>
+                        <li>Passen eure Cluster immer noch genau so gut auf diese Daten?</li>
+                        <li>Hättet ihr die Cluster anders eingezeichnet wenn ihr gewusst hättet, dass es um eine Generalisierung geht?</li>
+                    </ul>
+                </section>
+
+                    <!-- <section>
+                        <img src="img/flashcards/Test_Training_And_Validation_Sets_print.png">
+                    </section> -->
+
+                <section>
+                    <h3>Beispiellösung: Fein</h3>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/train_fine.jpg" height="250">
+                        <p>
+                            <small>Train</small>
+                        </p>
+                    </div>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/test_fine.jpg" height="250">
+                        <p>
+                            <small>Test</small>
+                        </p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h3>Beispiellösung: Grob</h3>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/train_coarse.jpg" height="250">
+                        <p>
+                            <small>Train</small>
+                        </p>
+                    </div>
+                    <div class="fragment" style="float: left">
+                        <img src="img/insurance/manual_predictions/test_coarse.jpg" height="250">
+                        <p>
+                            <small>Test</small>
+                        </p>
+                    </div>
+                </section>
+
+            <section>
+                <h2>Wie automatisiert man das?</h3>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Explorative Analyse
+<img src='img/sns-pairplot.png' height="550px">
+
+    </textarea>
+    </section>
+    <section data-markdown>
+            <textarea data-template>
+    <img src='img/sketch/classic-development.jpg'>
+        </textarea>
+        </section>
+        
+        
+            <section>
+                <h3>Ansatz: Von Hand kodierte Regeln</h3>
+                <div class="fragment">
+                <pre><code contenteditable data-trim class="line-numbers python">
+if age < 25:
+    if speed > 140:
+        return red # young people, fast cars: high risk
+    else:
+        return yellow # young people: medium risk
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                <pre><code contenteditable data-trim class="line-numbers python">
+if age > 75:
+    return red # old people: high risk
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                <pre><code contenteditable data-trim class="line-numbers python">
+if miles_per_year > 30:
+    return red # a lot of driving: high risk
+if miles_per_year > 20:
+    return yellow #  a bit of driving: medium risk
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                <pre><code contenteditable data-trim class="line-numbers python">
+return green # otherwise: low risk
+                    </code></pre>
+                </div>
+            </section>            
+        <section>
+            <h3>Keine tollen Ergebnisse</h3>
+            <p>Sind das alle Regeln? Sind die richtig?</p>
+            <div class="fragment">
+                    <img src="img/insurance/manual.png" height="400px">
+                    <p><small>ca. 43% korrekte Vorhersagen auf unbekannten Daten (raten wäre 33%)</small></p>
+            </div>        
+        </section>
+    
+                <section>
+                        <h2>Supervised Machine Learning</h2>
+                    </section>
+                     
+                    <section data-markdown>
+                            <textarea data-template>
+    <img src='img/sketch/supervised-ml.jpg'>
+                        </textarea>
+                    </section>
+    
+                        
+<section data-markdown>
+        <textarea data-template>
+### ML ist eher Forschung als Software Entwicklung
+<img src='img/ml_is_not_programming.jpg' height="550px">
+    </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+<img src='img/MELLI.jpg' height="650px">
+                </textarea>
+                </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Machine Learning eignet sich am besten wenn
+
+* man viele Beispieldaten hat
+* man mit Unsicherheit in der Vorhersage oder mit Fehlern leben kann
+* die Aufgabe nicht klar oder nur abstrakt formuliert werden kann (_Wer ist ein guter Kunde?_)
+                </textarea>
+                </section>
+
+
+
+    <!-- <section>
+                            <h3>Typische Anwendung: Klassifikation</h3>
+                            <div class="fragment">
+                                <img src="img/sketch/classification.jpg" height="450px">
+                            </div>
+                        </section>
+
+        <section>
+            <h3>Machine Learning als Klassifikation: Ein Experiment</h3>
+            <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                <img src="img/browser/teachable-machine.png" height="350px">
+            </a>
+            <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+            </small></p>
+        </section> -->
+
+<section data-markdown>
+    <textarea data-template>
+### Daten sind König
+
+<img src='img/applications/data.png' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Experiment 2: Data Cleaning und Feature Selection
+
+_Data Cleaning_
+* Findest du Fehler? Markiere diese auf dem Zettel und beschreibe den Fehler
+* Wie würdest du mit diesen Fehlern umgehen?
+
+_Feature Selection_
+* Welche Spalte würdest du vorhergesagen wollen?
+* Und welche Spalten bieten sich als Trainings-Eingaben an?
+* Würdest du einige Spalten gar nicht nutzen? Wenn ja, warum?
+
+
+<!--
+- Übungszettel ai/exercise/exercise-ml-summit.docx
+- Datendopplung Zeile 4/5 => eine löschen
+- Fehlender Wert Zeile 16 => Zeile löschen oder Durchschnitt
+- Spalte 'state' mit mehr als 50% fehlenden Werten
+- Zeile 23 Ausreißer: Zeile löschen oder auf plausiblen Wert korrigieren 
+- Zeile 24: Califorina
+-->
+            </textarea>
+            </section>
+              
+                
+                    <!-- <section data-markdown>
+                        <textarea data-template>
+<img src='img/sketch/using-a-model.jpg'>
+                    </textarea>
+                </section> -->
+    
+    <section>
+        <h3>Strategien</h3>
+        <img src='img/applications/decisions/classic.png' height="500px">
+    </section>
+
+        <section>
+            <h3>Klassische Lernstrategien</h3>
+
+            <ul>
+                <li>Für unser Problem reicht eine der einfachsten Strategien: KNN</li>
+                <li>Logistische Regression: Trennung von Klassen per Logistischer Funktion (Sigmoid)
+                <li>Decision Trees: Entscheidungsbaum bei dem die Ebenen und Unterscheidungsegeln erlernt werden
+            </ul>
+            <p><em>Neural Networks (Deep Learning): Zusammenschaltung vieler Logistischer Regressionen</em></p>
+        </section>
+
+        <section>
+            <img src="img/flashcards/Supervised_Deep_Learning_Rule_Of_Thumb_print.png">
+        </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Beste Lösung mit Deep Learning
+
+<img src='img/manning/nn-reg.png' class="fragment" height="450px">
+
+<div class="fragment">
+<p><small>bis zu 80% der Vorhersagen auf unbekannten Daten korrekt</small></p>
+</div>        
+</textarea>
+        </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Vergleich Lernstrategien
+
+<img src='img/sphx_glr_plot_classifier_comparison_001.png'>
+<small>
+http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
+</small>
+</textarea>
+</section>    
+            
+    <section data-markdown>
+            <textarea data-template>
+### Regression anstatt Klassifikation
+Die andere Art des Supervised Machine Learnings
+<img src="img/linear_regression.png" height="400px">
+https://beta.observablehq.com/@tmcw/bring-your-own-doodles-linear-regression
+    </textarea>
+    </section>
+    <section>
+            <h2>Unsupervised Learning: Clustering</h2>
+        </section>
+        <section>
+                <h3>
+                    3 Arten von Machine Learning
+                </h3>
+                <img src="img/sketch/types-of-ml.png" height="550px">
+            </section>
+
+    <section>
+            <h3>Daten: Zentraler Punkt</h3>
+            <img src='img/applications/decisions/type.png'>
+        </section>
+                    
+    <section>
+        <h3>Unsupervised Learning</h3>
+        <img src='img/applications/decisions/question.png'>
+    </section>
+
+        <!-- <section data-markdown>
+                <textarea data-template>
+### Clustering
+
+_Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more
+similar (in some sense) to each other than to those in other groups (clusters)._
+
+https://en.wikipedia.org/wiki/Cluster_analysis
+                </textarea>
+    </section> -->
+    
+    <section data-markdown>
+            <textarea data-template>
+### Experiment 3: Cluster von Hand einzeichnen
+<img src='img/sketch/clustering.jpg' height="450px">
+<small>
+Bitte auch die Achsen beschriften und mit dem Nachbarn besprechen
+</small>
+        </textarea>
+    </section>
+    <section data-markdown  style="font-size: xx-large">
+            <textarea data-template>
+### Fragen
+
+1. Was ist bei diesen Daten grundsätzlich anders als bei der ersten Übung?
+1. Welche Formen haben die Cluster? Wie hast du diese als Cluster erkannt?
+1. Welche Formen hältst du für mehr oder weniger realistisch?
+1. Was könnte an den Achsen stehen? War das wichtig für das Clustering?
+1. Was könnte ein Cluster ausdrücken?
+1. Was passt nicht zu einem Cluster?
+1. Wie kann man diese Punkte interpretieren?
+        </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Vergleich Cluster-Strategien
+
+<img src='img/sphx_glr_plot_cluster_comparison_001.png' height="450">
+
+<small>
+http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
+<br>
+http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html
+    </small>
+</textarea>
+</section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Dimensionsreduzierung mit PCA
+
+<a href='https://youtu.be/4DpdpZkl8HI?t=65' target="_blank">
+<img src='img/unsupervised/perceptual-shift.png' height="500px">
+</a>
+
+<small>
+The Making of Perceptual Shift: https://youtu.be/4DpdpZkl8HI?t=65
+</small>
+</textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Intuition
+
+1. Manche Achsen tragen mehr und manche weniger Information
+1. So lange die Kamera bewegen, bis wir nur noch die Achsen mit viel Information sehen
+1. Die Achsen mit wenig Information weg lassen
+    </textarea>
+    </section>
+    
+<section data-markdown>
+        <textarea data-template>
+### Optionales Experiment: PCA auf deinem Handy
+
+<img src="img/unsupervised/pca_setosa_3d.png">
+
+http://setosa.io/ev/principal-component-analysis/
+    </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Aufgabe
+
+1. Bringe die Kamera von Hand in die besten Position
+1. Vergleiche deine Lösung mit der automatischen PCA Transformation
+1. Welche ist besser, gibt es überhaupt einen Unterschied?
+1. Welche Achse(n) würdest du weg lassen?
+    </textarea>
+    </section>
+
+        <section>
+                <h2>Reinforcement Learning</h2>
+                <h3>Am ehesten die Roboter, die uns Menschen ausrotten</h3>
+            </section>
+
+        <section data-markdown>
+                <textarea data-template>
+    <img src='img/applications/twtter-fchollet-rl.png' height="550">
+    
+    <small>
+https://twitter.com/fchollet/status/1020713281692917760
+     
+</small>
+</textarea>
+                    </section>
+
+        <section data-markdown>
+                <textarea data-template>
+    <img src='img/applications/twitter-reinforcement.png' height="550">
+    
+    <small>
+https://twitter.com/chrisalbon/status/919701254657290240
+     
+</small>
+</textarea>
+                    </section>
+
+
+        <section>
+            <h1>Teil II</h1>
+            <h2>Wie findet ihr eigene Anwendungsmöglichkeiten?</h2>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+    <img src='img/twitter-cholett-applications.png' height="550">
+    
+    <small>
+    https://twitter.com/fchollet/status/1035951190276681728
+     
+</small>
+</textarea>
+                    </section>
+    
+    
+        <section>
+                <h3>Eine Analogie</h3>
+                <p class="fragment">Die Machine Learning Technologie ist der Motor</p>
+                <p class="fragment">Eure Daten sind der Treibstoff</p>
+                <p class="fragment"><em>Nur wenn beides da ist läuft die Maschine</em></p>
+        </section>
+
+        <!-- <section data-markdown class="todo">
+                <textarea data-template>
+### Zentrale Hinweise
+
+https://machinelearningmastery.com/how-to-get-the-most-from-your-machine-learning-data/
+</textarea>
+</section>         -->
+        <section>
+                <h3>Ansatz nach Art der Daten</h3>
+                <img src='img/applications/decisions/data.png'>
+        </section>
+    
+        <section>
+            <h3>Fragestellungen</h3>
+            <ol>
+                <li>Was wollt ihr mit ML erreichen?</li>
+                <li>Habt ihr Daten und wenn ja was für welche?</li>
+            </ol>
+        </section>
+
+        <section>
+            <h3>Mögliche Ziele</h3>
+            <ul>
+                <!-- <li class="fragment">Marketing</li> -->
+                <li class="fragment">weniger Fehler</li>
+                <li class="fragment">intuitive Bauchentscheidungen los werden</li>
+                <li class="fragment">schnelleres Arbeiten, höherer Durchsatz</li>
+                <li class="fragment">bessere Qualität, zufriedenere Kunden</li>
+                <li class="fragment">Personal einsparen</li>
+                <!-- <li class="fragment">Dinge tun, die vorher gar nicht gingen</li> -->
+                <li class="fragment">Kreativität fördern oder erst ermöglichen</li>
+            </ul>
+        </section>
+
+<section>
+    <h2>Beispiele</h2>
+</section>
+
+<section>
+    <h3>Bessere Qualität, Personal einsparen</h3>
+        <p class="fragment"><em>Zalando streicht 250 Stellen in der Marketingabteilung am Unternehmensstandort Berlin. Werbe-E-Mails sollen in Zukunft verstärkt
+        von Algorithmen oder Künstlicher Intelligenz verschickt werden.</em></p>
+        <div class="fragment">
+
+        <p><em>"Wir gehen davon aus, dass Marketing in Zukunft noch datenbasierter sein muss. Dafür brauchen wir einen höheren Anteil an
+        Entwicklern und Datenanalysten", sagt Rubin Ritter, Co-Chef von Zalando, gegenüber der FAZ.</p>
+    </em> <p>
+            <small>
+        <a target="_blank" href="https://www.heise.de/newsticker/meldung/KI-gesteuertes-Marketing-Zalando-streicht-250-Arbeitsplaetze-3990425.html">
+            https://www.heise.de/newsticker/meldung/KI-gesteuertes-Marketing-Zalando-streicht-250-Arbeitsplaetze-3990425.html</a>
+            </small>
+        </p>
+
+    </div>    </section>
+
+        <section>
+            <h4>Minimale Information reicht, um ein gutes Angebot zu machen</h4>
+            <img src="img/applications/style-prediction.jpg" height="500px">
+            <p><small><a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a></small></p>
+        </section>
+
+        <section>
+            <h3>schnelleres Arbeiten, höherer Durchsatz</h3>
+            <img src="img/classification/driving-license.jpg">    
+            <p>Welche Dokumente hat der Kunde eingericht?</p>
+        </section>
+
+        <section>
+            <h3>... schwerer als man denken könnte</h3>
+            <div class="fragment" style="float: left">
+                    <img src="img/classification/10-euro-bill.jpg" height="250">
+                    <p>
+                        <small>sehr ähnliche Farbe</small>
+                    </p>
+                </div>
+                <div style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+                </div>
+                <div class="fragment" style="float: left">
+                    <img src="img/classification/season-ticket-zoo.jpg" height="250" style="float: right">
+                    <p>
+                        <small>dasselbe Format wie die<br> moderne Version der Führerscheins</small>
+                    </p>
+                </div>
+            <p style="clear: both">Einfache Regeln reichen oft nicht</p>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Kreativität
+
+<img src="img/beat_blender.png" height="400px">
+
+https://experiments.withgoogle.com/ai/beat-blender/view/
+                </textarea>
+        </section>
+                            
+
+        <section>
+                <h3>Customer Churn / Conversion</h3>
+                <div class="fragment" style="float: left">
+                        <img src="img/churn/log7335277f@example.com.png" height="350">
+                        <p>
+                            <small>Kunde vor und nach Abschluss</small>
+                        </p>
+                    </div>
+                    <div class="fragment" style="float: left; padding-left: 20px; padding-right: 20px; padding-top: 50px; font-weight: bold">
+                            <img src="img/scans/elements/right.jpg" height="200">
+                    </div>
+                    <div class="fragment" style="float: right">
+                        <img src="img/glaskugel.jpg" height="350">
+                        <p>
+                            <small>Glaskugel</small>
+                        </p>
+                    </div>
+                <p style="clear: both">Wie verhält sich jemand, der später Kunde wird / kündigt?</p>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+### Clustering in Zahlungsdaten
+
+<img src='img/applications/turtle.png' height="350">
+
+* Muster (violett und braun): Interpretation/Analyse möglich 
+* Ausreißer (schwarz): Fehleingabe oder Fraud
+                        </textarea>
+                        </section>
+    
+
+            <section>
+                <h4>Weitere Anwendungsgebiete</h4>
+                <!-- <small> -->
+                <ul>
+                    <li class="fragment"><strong>Recommendation Systems</strong>: Spotify und Netflix kennen mich besser als ich mich selbst
+                    <li class="fragment"><strong>Making decisions</strong>: Sollte jemand einen Kredit bekommen oder versichert werden?
+                    <li class="fragment"><strong>Fraud Detection</strong>: Sieht eine Kredit-Karten-Transaktion oder eine Steuererklärung ungewöhnlich aus?
+                    <li class="fragment"><strong>Predictive Maintenance</strong>: KI systems sagen wann man ein Wasserrohr ersetzen soll bevor es bricht
+                    <li class="fragment"><strong>Expert System</strong>: Zuordnung von Krankheit und Maßnahmen</li>
+                </ul>
+            <!-- </small> -->
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Abschluss-Thema: Genauigkeit
+
+_Wie gut muss ein Modell sein?_
+
+* was macht man mit 80% Genauigkeit? 
+* Und was mit 40%?
+* Ist das überhaupt gut?
+
+        </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Always know your Baseline
+
+_ob eine Genauigkeit gut oder schlecht ist schwer zu beantworten_
+
+* manchmal hat man eine Intuition was zu erwarten ist
+* besser ist eine _Baseline_
+  * ein einfaches, oft intuitives Modell
+  * raten ist oft eine gute Baseline 
+* jedes komplexe Modell muss sich an dieser Baseline messen lassen  
+
+        </textarea>
+        </section>
+
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Welche Genauigkeit?
+
+_Wie hoch die Genauigkeit sein muss hängt vom Anwendungsfall ab_
+
+* Fußgängererkennung bei selbstfahrenden Autos sollte 99.99999999999999%
+  * reicht das überhaupt?
+* 40% Genauigkeit kann ausreichend sein, es kommt an, was man damit tut
+* Oft kommen Vorhersagen mit einer Genauigkeit versehen
+* Diese ist oft nicht klar zu interpretieren
+* Eine Sortierung der Vorhersagen ist damit aber möglich
+* Je nach Anwendungsfall können auch die ersten 3 besten Treffer sinnvoll sein
+
+        </textarea>
+        </section>
+
+        <section>
+            <h3>Abschlussübung: Machine Learning in eurem Bereich</h3>
+            <em>Stelle deinen Arbeitsbereich deinem oder mehreren Nachbarn vor</em>
+            <ol>
+                <li>Sind Daten da? Könntne sie beschafft werden? Wie sehen die Daten aus?</li>
+                <li>Was soll erreicht werden?</li>
+                <li>Welche Genauigkeit müsste erreicht werden?</li>
+                <li>Ist diese Genauigkeit realistisch zu erreichen?</li>
+                <li>Welche Art(en) von Machine Learning würde sich hier eignen?</li>
+            </ol>
+            </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank');
+
+            // do we want this???
+            $('li').addClass('fragment')
+
+        } );
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/murmel2.jpg")
+
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1000,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>NLP Embeddings</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+
+                    <section data-markdown class="preparation" style="font-size: xx-large">
+                    <textarea data-template>
+### Preparation
+
+* Insgesamt 45 Minuten, steuerbar Übungen und Diskussion am Ende 
+
+Notebooks noch mal ansehen:
+1. embedding
+2. glove-embedding
+                        </textarea>
+                        </section>
+
+        <section>
+            <h2>Embeddings: Smart encoding of Word Vectors</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <small>
+                    <a href="https://djcordhose.github.io/ai/2018_nlp_embeddings.html">
+                        https://djcordhose.github.io/ai/2018_nlp_embeddings.html</a>
+                        </small>
+
+        </section>
+        
+        
+        <!-- <section data-markdown class="todo">
+                <textarea data-template>
+        </textarea>
+        </section> -->
+
+        <section data-markdown>
+                <textarea data-template>
+### Motivation: What makes text and sequences so different?
+<img src="img/tf/audio-image-text.png">
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+                </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### One Hot Encoding
+<img src="img/nlp/acolyer/word2vec-one-hot.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+                </textarea>
+        </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Limitations of One Hot Encoding / Bag of Words
+
+* Positions and context of words get lost
+* No notion of semantics to words
+
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+<img src="img/nlp/word_embeddings.png" height="550px">
+
+<small>
+<a href="https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/6.1-using-word-embeddings.ipynb">
+Deep Learning with Python
+</a>
+</small>
+            </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Word Embeddings can carry semantics 
+<img src="img/nlp/acolyer/word2vec-distributed-representation.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+            </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Using t-SNE to project from higher dimensions to 2d
+
+<img src='img/tf/linear-relationships.png'>
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+    </textarea>
+</section>
+
+<section>
+    <h3>Arithmetic on Vectors may express semantics</h3>
+    <div style="float: left">
+            <img src="img/nlp/acolyer/word2vec-king-queen-vectors.png" height="250px">
+            <p>
+                <small>Vectors for King, Man, Queen, & Woman</small>
+            </p>
+        </div>
+        <div style="float: right">
+                <img src="img/nlp/acolyer/word2vec-king-queen-composition.png" height="250px">
+                <p>
+                <small>King – Man + Woman = ?</small>
+            </p>
+        </div>
+    <small>
+        <a href="https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/">
+            https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+    </a>
+    </small>    
+</section>
+    
+<!-- <section data-markdown>
+        <textarea data-template>
+### Practical Example: 
+
+* vectors for Embedding per word
+* in other words: where in the vector space is a word located
+* similar words have similar vectors
+
+similarity is expressed by the context a word occurs in
+</textarea>
+</section>
+ -->
+<section data-markdown style="font-size: x-large">
+        <textarea data-template>
+### Fancy Example 
+
+* misspelled words in GloVe embedding are close to each other
+* there is a vector for the concept 'misspelled' that you can apply to any word to retrieve the correct spelling
+
+<img src='img/nlp/embed-misspelling.jpg'>
+
+<small>
+http://forums.fast.ai/t/nlp-any-libraries-dictionaries-out-there-for-fixing-common-spelling-errors/16411/7
+https://twitter.com/jeremyphoward/status/997264148655259648
+</small>
+</textarea>
+</section>
+
+<section>
+    <h2>Learning Word Vectors</h2>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Distributional Hypothesis
+
+__Words that appear in the same contexts share semantic meaning.__
+
+https://en.wikipedia.org/wiki/Distributional_semantics
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Sliding Word Window
+<img src="img/nlp/acolyer/word2vec-context-words.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+<!-- <section data-markdown>
+        <textarea data-template>
+### Two Categories of approaches
+
+1. _count-based methods_: compute the statistics of how often some word co-occurs with its neighbor words in a large text corpus, and then map these count-statistics down to a small, dense vector for each word
+1. _predictive methods_: directly try to predict a word from its neighbors in terms of learned small, dense embedding vectors
+
+</textarea>
+</section> -->
+
+<section data-markdown>
+        <textarea data-template>
+### Standard Predictive Method: word2vec
+
+Comes in two flavours
+
+1. _Continuous Bag-of-Words model (CBOW)_: predicts target words (e.g. 'mat') from source context words ('the cat sits on the') - _good for small data sets_
+1. _Skip-Gram model_: does the inverse and predicts source context-words from the target words - _good for larger datasets_. 
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Continuous Bag-of-Words
+
+<img src="img/nlp/acolyer/word2vec-cbow.png" height="500px">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Training objective
+
+_maximize the conditional probability of observing the actual output word (the focus word) given the input context words_
+</textarea>
+</section>
+<section data-markdown>
+        <textarea data-template>
+### Skip-Gram
+
+<img src="img/nlp/acolyer/word2vec-skip-gram.png" height="500px">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+<!-- <section data-markdown>
+        <textarea data-template>
+### Example using the Skip-Gram model
+
+_the quick brown fox jumped over the lazy dog_
+
+* Form a dataset of the context of each word
+* vanalla context for a word are the words left and right to it
+* each context is a pair of _(context, target)_ 
+
+_([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ..._
+
+</textarea>
+</section> -->
+
+<!-- <section data-markdown>
+        <textarea data-template>
+### Skip-Gram model inversion
+
+* Skip-Gram tries to infer *each* context word from its target words
+* each pair becomes _(input, output)_ 
+
+_([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ..._
+
+becomes
+
+_(quick, the), (quick, brown), (brown, quick), (brown, fox), ..._
+</textarea>
+</section>
+ -->
+<section data-markdown>
+        <textarea data-template>
+### How do we train for that objective?
+
+* objective is to learn to predict the output for the input
+* that means we have to have a loss function to minimize
+* minimization as in supervised learning using SGD
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Naive approach: Expensive
+<img src='img/tf/softmax-nplm.png' height="450px">
+
+Have a probability for all words (v)
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Inexpensive Approach 
+
+<img src='img/tf/nce-nplm.png' height="450px">
+
+Just choose k random words
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### The loss function
+
+* objective is maximized when the model assigns high probabilities to the real words, and low probabilities to noise words
+* this is called Negative Sampling
+* scales only with the number (k) of noise words that we select, not all words in the vocabulary (v)
+* makes it much faster to train
+
+This is called noise-contrastive estimation (NCE) loss
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### What are the actual parameters learned?
+
+* vectors for Embedding per word
+* in other words: where in the vector space is a word located
+* similar words have similar vectors
+
+similarity is expressed by the context a word occurs in
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Now what?
+
+You can either
+
+* use the results all by themselves to find out about similarities - visualize by projecting down to 2d using t-SNE as shown before
+* or use the vectors as representations for words - treat texts as sequences of words
+* use these representations to train a classifier etc.
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Visualizing Embeddings
+
+<img src="img/nlp/embedding-projector.png" height="500px">
+
+<small>
+https://projector.tensorflow.org
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Embeddings 300 d on Google News
+
+<img src='img/nlp/word2dev_google_news.jpg' height="500px">
+
+<small>
+https://twitter.com/pmbaumgartner/status/989512625934434309
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise: Get an intuition for Word Embeddings
+
+* Was bedeuten die Farben?
+* Hättest du dasselbe Vokabular verwendet?
+* Zoome in einen Bereich mit eher höhrer Dichte
+* Suche dir einen Cluster mit 5 Wörtern und überprüfe ob auch du die Wörter semantisch benachbart ansiedeln würdest
+
+<small>
+https://plot.ly/~pmbaumgartner/88/word2vec-google-news-2d-umap-embeddings/
+</small>
+
+Note:
+* Was bedeuten die Farben? (Magnitude, je heller desto mehr)
+* Hättest du dieselben Wörter verwendet? (Typische Stopwords raus)
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Creating our very own sentiment analysis
+### Part II: Encoding text as embedding
+
+<small>
+Notebook: https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/1-embeddings.ipynb
+</small>
+ 
+        </textarea>
+        </section>
+
+
+<section>
+        <h2>Discussion: What kind of learning is this?</h2>
+    </section>
+    
+    <section>
+        <img src="img/sketch/types-of-ml.png">
+    </section>
+
+<section>
+    <h3>Supervised vs Unsupervised</h3>
+    <ol>
+        <li class="fragment">there is no need manual labelling</li>
+        <li class="fragment">but labelling is implicit in sequence of words in training data</li>
+    </ol>
+    <p class="fragment">We would still call this Unsupervised</p>
+</section>
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/bark.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

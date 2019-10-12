@@ -1,0 +1,1523 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Reinforcement Learning with OpenAI</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                        letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+
+            .reveal {
+                color: black !important;
+             }       
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!-- <section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation
+
+    </textarea>
+</section> -->
+
+<section>
+        <h2>Introduction to Deep Reinforcement Learning</h2>
+        <h3>using the OpenAI platforms</h3>
+<!-- <p><a target="_blank" href="TODO">
+    TODO
+</a></p> -->
+<h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+</h4>
+<p><small><a href="https://djcordhose.github.io/ai/2019_tf_rl.html">
+https://djcordhose.github.io/ai/2019_tf_rl.html
+</a></small></p>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Who had this or at least knows what this is?
+
+<img src='img/rl/Atari-2600-Wood-4Sw-Set.jpg' height="500px">
+
+<small>
+https://en.wikipedia.org/wiki/Atari_2600    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+## Nice, but what does this have to do with reinforcement learning?
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Learning to play Pong
+
+<img src='img/rl/pong/pong-random.gif' height="500">
+<small>
+    https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/pg-from-scratch.ipynb
+    </small>
+    
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### How would you train a machine to play pong?
+
+* we do not have any static training data
+* but a clear objective: win the match
+
+</textarea>
+</section>
+
+
+<!-- <section data-markdown>
+        <textarea data-template>
+### Structure
+
+* What is Reinforcement Learning?
+* Introduction to Policy Gradients with OpenAI
+* How to model an environment
+* Optional Advanced Stuff
+  * Providing customer neural networks
+  * Disucussing Overfitting 
+* Identifying applications
+</textarea>
+</section> -->
+
+<section data-markdown>
+    <textarea data-template>
+## Types of Learning
+<img src='img/types-of-ml.jpg'>
+<small>
+https://www.facebook.com/nipsfoundation/posts/795861577420073/
+<br>
+https://ranzato.github.io/publications/tutorial_deep_unsup_learning_part1_NeurIPS2018.pdf
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### LeCun vs Brockman on RL
+
+<img src='img/rl/lecun-vs-brockman.jpg' height="500px">
+<small>
+https://twitter.com/ylecun/status/1091148826851840000
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Atari Reinforcement Learning
+
+<img src='img/rl/atari_rl.jpg'>
+<small>
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/intro_RL.pdf    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Elements Reinforcement Learning
+
+<div  style="max-width: 45%; float: left">
+<br>
+<img src="img/rl.png">
+</div>
+<div style="max-width: 50%; float: right">
+<br>
+<ol>
+    <li>Based on _Observations_ an _Agent_ executes </li>
+<li>_Actions_ within a given  
+<li>_Environment_ which lead to positive or negative 
+<li>_Rewards_.
+</ol>
+</div>
+
+<div style="clear: both;">
+    <br>
+    <p >The Agent’s job is to maximise the cumulative Reward</p>
+</div>
+
+<small>
+http://gym.openai.com/docs/    
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### OpenAI Platforms
+
+<img src='img/rl/openai.jpg' height="500px">
+
+<small>
+https://openai.com/systems/
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+## Finding a good Policy
+
+_select an action based on the observed state of our environment_
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Policy Gradient for Discrete Actions
+
+use a neural network to approximate action probabilities
+
+<img src='img/rl/hidber-policy-gradient.jpg'>
+<small>
+Image Courtesy of Christian Hidber
+<br>
+http://karpathy.github.io/2016/05/31/rl/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### How Policy Gradient learns
+
+_As we have no idea, try a bunch of stuff and see what happens. In the future do more of the stuff that worked well._
+
+* Network outputs probabilities for which action is best in which situation
+* what data to create: make experiments according to probabilities for actions
+* use eventual reward *at end of episode* as label for state
+* store tuples of state, action until reward becomes clear
+* use SGD analogous to supervised learning 
+    
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Loss objective in Policy Gradient
+
+<img src='img/rl/pg-loss.jpg' height="500">
+<small>
+Andrej Karpathy, Deep RL Bootcamp: https://youtu.be/tqrcjHuNdmQ?t=644    
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Policy Gradient Rollout
+
+<img src='img/rl/pg-rollout.jpg' height="500">
+<small>
+Andrej Karpathy, Deep RL Bootcamp: https://youtu.be/tqrcjHuNdmQ?t=571    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### But: Do actions at the beginning of the episode contribute to a win/loss as much as at the end?
+
+Introducing Discounting as a modulation of blame
+
+Assumption: Blame actions in an exponentially decreasing manner
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src='img/rl/pg-discounting.jpg' height="600">
+<small>
+Andrej Karpathy, Deep RL Bootcamp: https://www.youtube.com/watch?v=tqrcjHuNdmQ    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Weakly Trained Model
+
+<img src='img/rl/pong/pong-low.gif' height="500">
+
+<small>
+batch_size = 10, learning_rate = 1e-3, gamma = 0.99, 1000 episodes    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Medium Well Trained Model
+
+<img src='img/rl/pong/pong-medium.gif' height="500">
+
+<small>
+batch_size = 10, learning_rate = 1e-4, gamma = 0.99, 2500 episodes    
+</small>
+    
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## While the academic world plays Super Mario real world problems look very different
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Our Example: Berater
+
+Resource Plannung using the example of Consultant Travel
+
+* Visit each customer and return home
+* Reward per customer visited 1000
+* Each travel has a cost up to 1000
+* Three customers, thus theoretical optimum 3000 (given 0 penalty)
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Consultant Travel: Graph
+
+<img src='img/rl/berater/routes.jpg' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Consultant Travel: Cost
+
+<img src='img/rl/berater/routes-cost.jpg' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Modelling our problem
+
+<div  style="max-width: 45%; float: left">
+<br>
+<img src="img/rl.png">
+</div>
+<div style="max-width: 50%; float: right">
+<br>
+<ol>
+<li>how do _Observations_ look like</li>
+<li>what _Actions_ are possible  
+<li>what _Reward_ do you get for a certain action given a certain observation? 
+</ol>
+</div>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Prerequisite: Markovian Decision Processes
+
+_Model your observation in a way that how you came to a certain state does not matter any more_
+
+E.g. the position of the PacMan is not enough. Which path taken results in where the ghosts are and what pills have been eaten
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Modelling Observation
+
+agent needs an idea of how the world looks like
+
+* position of agent is just one information
+* but not enough, as it not self-sufficient according to Markovian Decision Processes
+* we also need to know that rewards go away once a customer has been visited
+* there are several ways of modelling this
+  * fully observed environment (e.g. Jump'n'Run Game)
+  * partially observed environment (e.g. Ego Shooter)
+
+<small>
+https://spinningup.openai.com/en/latest/spinningup/rl_intro.html    
+</small>
+        
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Generalizing Environment to subsets of of customers to be visited
+
+before we start modelling
+* solving a single graph is not very realistic
+* graph should be larger
+* and have variations
+* simulating that not all customers will be visited by a single consultant
+* with each episode randomly set reward for half the locations to 0
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Larger Graph
+
+<img src='img/rl/berater/graph-large.png' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Graph with costs
+
+<img src='img/rl/berater/graph-large-costs.png' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Graph with Selection of places to visit
+
+<img src='img/rl/berater/graph-large-zeros.jpg' height="500">
+
+<small>
+_for each consultant we will reset half of the rewards to zero_
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Hands-On: Create your model
+
+<img src="img/rl.png" height="250">
+
+* informally come up with a proposal for your model
+* use paper and pen as a tool
+* work in teams
+* present your proposal and discuss 
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Modelling actions
+
+<img src='img/rl/berater/graph-large-actions.png' height="500">
+
+<small>
+_invalid action gives -1000 reward and no change in observation_
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Observation Model
+
+_only show rewards for the routes agent can take from current position_
+
+<pre><code contenteditable data-trim class="line-numbers python">
+# Initial position and rewards
+[    0.   700.   900.   800. -1000.]    
+
+# Final position and rewards
+[    0.  -300.  -100.  -200. -1000.]
+
+</code></pre>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Experiment to see if model is sufficient
+
+* use yourself to simulate the agent
+* show yourself local observations and reward for each step and choose an action
+* would this be sufficent for a good reward?
+* if you play this through, what would be your accumulated reward?
+
+<small>
+Idea Courtesy of Christian Hidber    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### New experimental observation
+
+_append all rest rewards_
+
+<pre><code contenteditable data-trim class="line-numbers python">
+# Initial position and rewards
+[    0.   700.   900.   800. -1000.     0.  1000.  1000.  1000.     0.
+0.  1000.     0.     0.     0.  1000.  1000.     0.     0.]    
+
+# Final position and rewards
+[    0.  -300.  -100.  -200. -1000.     0.     0.     0.     0.     0.
+     0.     0.     0.     0.     0.     0.     0.     0.     0.]
+
+</code></pre>
+
+Cumulated Reward: 13000, penalty: 3500, normalized: 0.73
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Possible tweaks to reward functions
+
+* add reward for returning home once all other locations have been visited 
+* no penalties for illegal moves
+* shortcut to save time
+  * break if overall reward becomes too negative
+  * break if too many steps
+
+_Spoiler: none of the tweaks had any effect_  
+        </textarea>
+    </section>
+
+            <section data-markdown>
+        <textarea data-template>
+### Tweaking Observations
+
+* network can learn all costs and all connections as they are static
+* rewards are not, but are given in the observation
+* all information is there, but
+  * it is very convoluted, too hard for us as humans
+  * could we make this more accessible? Would this also help? 
+
+_Spoiler: none of the tweaks had any effect_  
+        </textarea>
+    </section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### OpenAI Environment interface
+
+* you can subclass `gym.Env`
+* `step`: let environment react to action
+* `action_space`: The Space object corresponding to valid actions
+* `observation_space`: The Space object corresponding to valid observations
+* `reward_range`: A tuple corresponding to the min and max possible rewards 
+
+<pre><code contenteditable data-trim class="line-numbers python">
+env = BeraterEnv()
+observation = env.reset()
+print(observation)
+
+for t in range(1000):
+    action = env.action_space.sample()
+    observation, reward, done, _ = env.step(action)
+    if done:
+        break
+env.close()        
+</code></pre>
+
+<small>
+https://github.com/openai/gym/blob/master/gym/core.py
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Our Environment
+
+<pre><code contenteditable data-trim class="line-numbers python">
+self.map = {
+    'S': [('A', 300), ('B', 100), ('C', 200 )],
+    'A': [('S', 300), ('B', 100), ('E', 100 ), ('D', 100 )],
+    'B': [('S', 100), ('A', 100), ('C', 50 ), ('K', 200 )],
+    'C': [('S', 200), ('B', 50), ('M', 100 ), ('L', 200 )],
+    'D': [('A', 100), ('F', 50)],
+    'E': [('A', 100), ('F', 100), ('H', 100)],
+    'F': [('D', 50), ('E', 100), ('G', 200)],
+    'G': [('F', 200), ('O', 300)],
+    'H': [('E', 100), ('K', 300)],
+    'K': [('B', 200), ('H', 300)],
+    'L': [('C', 200), ('M', 50)],
+    'M': [('C', 100), ('L', 50), ('N', 100)],
+    'N': [('M', 100), ('O', 100)],
+    'O': [('N', 100), ('G', 300)]
+}
+positions = len(self.map)
+</code></pre>
+
+<pre><code contenteditable data-trim class="line-numbers python">
+max_paths = 4
+self.action_space = spaces.Discrete(max_paths)
+# observations: position, reward of all 4 local paths, rest reward of all locations
+# non existing path is -1000 and no position change
+low = np.append(np.append([0], np.full(max_paths, -1000)), np.full(positions, 0))
+high = np.append(np.append([positions - 1], np.full(max_paths, 1000)), np.full(positions, 1000))
+self.observation_space = spaces.Box(low=low, high=high, dtype=np.float32)
+self.reward_range = (-1, 1)
+</code></pre>
+
+<small>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v9.ipynb
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### We also need to reconsider our learning strategy before we can move on
+
+* Vanilla Policy Gradient is nice, but has limitations
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Issues of Vanilla Policy Gradient  
+
+_advantage is total (discounted) return, need to wait till end of episode for update_
+
+* problem 1: high Variance / catastrophic failure
+  * Extreme episode can give large advantage and push policy over the cliff to a bad track
+* problem 2: police update late
+  * bad for long episodes
+  * sample efficiency bad
+</textarea>
+</section>
+
+
+<!-- <section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Algorithms: More general
+
+* RL as a learning problem best described using Markovian Decision Processes (MDPs)
+* MDPs describe states and probabilities for going from one sate to another
+* standard approach to ‘solve’ MDPs is to use dynamic programming
+* dynamic programming transforms the problem of finding a good controller into the problem of finding a good value function
+* apart from the simplest cases dynamic programming is infeasible
+* turning the infeasible dynamic programming methods into practical algorithms
+  * use powerful function approximation methods to compactly represent value functions
+  * allows dealing with large, high-dimensional state- and action-spaces
+</textarea>
+</section> -->
+
+<section data-markdown>
+    <textarea data-template>
+### Algorithm Overview
+
+<img src='img/rl/rl_algorithms_9_15.svg' height="500">
+
+<small>
+https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html    
+</small>
+
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+        <textarea data-template>
+### World Models
+
+_learn an abstract representation of the world and use it for reinforcement learning to achieve a simple policy_ 
+
+<img src='img/rl/world-models.gif' height="350">
+
+<small>
+https://worldmodels.github.io/
+<br>
+https://www.youtube.com/watch?v=HzA8LRqhujk    
+</small>
+
+</textarea>
+</section> -->
+
+<section data-markdown>
+    <textarea data-template>
+### A2C - Next step from Policy Gradient
+
+<img src='img/rl/a2c.jpg' height="450">
+
+<small>
+https://blog.openai.com/baselines-acktr-a2c/
+<br>
+https://arxiv.org/abs/1602.01783
+<br>
+https://www.youtube.com/watch?v=S_gwYj1Q-44
+</small>
+
+</textarea>
+</section>
+
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### A2C - Advantage Actor Critic
+
+_Action: policy network, Critic: value network_
+* problem 1
+  * estimate total return per state and subtract from from advantage
+  * how much better or worse is the action chosen than expected?
+  * normalizes return around 0
+  * uses value function also trained as MLP
+* problem 2
+  * update after each individual step
+  * reward is estimated by value function
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### State of the art Algorithm: PPO
+
+<img src='img/rl/ppo.jpg' height="450">
+
+<small>
+https://blog.openai.com/openai-baselines-ppo/
+<br>
+https://arxiv.org/abs/1707.06347
+<br>
+https://www.youtube.com/watch?v=5P7I-xPq8u8
+</small>
+
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### PPO Benefits
+
+1. simple to implement (and thus to understand)
+1. easy to tune
+1. sample efficiency
+
+<small>
+https://blog.openai.com/openai-baselines-ppo/
+</small>
+
+</textarea>
+</section> -->
+
+<section data-markdown>
+    <textarea data-template>
+### PPO Improvements over A2C
+
+* _stable and steady improvement_:  New policy will not change too much from step to step
+* Entropy parameter tunes Exploitation vs Exploration
+
+<small>
+https://blog.openai.com/openai-baselines-ppo/
+<br>
+https://stackoverflow.com/questions/46422845/what-is-the-way-to-understand-proximal-policy-optimization-algorithm-in-rl
+</small>
+
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### PPO Overview
+
+<img src='img/rl/ppo-overview.jpg' height="500px">
+
+<small>
+Arxiv Insights: https://www.youtube.com/watch?v=5P7I-xPq8u8
+</small>
+
+</textarea>
+</section> -->
+
+<!-- <section data-markdown>
+        <textarea data-template>
+### Minimum Objective for Practitioners
+
+- understand which parameters are important
+- have an intuition for their effect
+- know what not to touch
+
+Like with a car
+- know what are the important knobs and levers
+- you do not need to understand how the engine of your car works
+- Unless maybe you are a race driver. Are you?
+</textarea>
+</section> -->
+
+<section data-markdown style="font-size: x-large">
+    <textarea data-template>
+### OpenAPI PPO Parameters and their Defaults
+
+_Parameters you can tweak_
+* nsteps: batch size, 2048
+* lr: learning rate, 3e-4
+* gamma: discounting factor, 0.99 (often between 0.9 and 0.99)
+  * if horizon is large rather have 0.99 as gamma, if low rather 0.9
+* ent_coef: value policy entropy coefficient in the optimization objective (c2 in the paper), 0.0 
+
+_Parameters you probably do not touch_
+* cliprange: clipping range (epsilon in the paper), 0.2
+* lam: advantage estimation discounting factor (GAE parameter / lambda in the paper), 0.95
+* vf_coef: value function loss coefficient in the optimization objective (c1 in the paper), 0.5 
+* max_grad_norm: gradient norm clipping coefficient, 0.5
+
+<small>
+https://github.com/openai/baselines/blob/master/baselines/ppo2/ppo2.py
+<br>
+PPO: https://arxiv.org/abs/1707.06347
+<br>
+GAE (lambda): https://arxiv.org/abs/1506.02438
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Bringing it all together using PPO
+
+<pre><code contenteditable data-trim class="line-numbers python">
+model = ppo2.learn(
+    env=env,
+    network='mlp',
+    num_hidden=100,
+    num_layers=2,
+    lr=lr_range, # linearly from 1e-2 to 1e-4
+    gamma=1.0,
+    ent_coef=0,
+    total_timesteps=500000)
+</code></pre>
+
+<small>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v9.ipynb
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Rewards
+
+<img src='img/rl/berater/v9-learning-curve.png'>
+
+Average Reward at end of training: ~ .69
+<br>
+Average length of path: ~ 17
+
+<small>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v9.ipynb
+</small>
+            </textarea>
+        </section>
+
+<section style="font-size: xx-large">
+<h3>Sample Run</h3>
+<pre><code contenteditable data-trim class="line-numbers python">
+{'S': 0, 'A': 0, 'B': 1000, 'C': 1000, 'D': 1000, 'E': 1000, 
+ 'F': 0, 'G': 0, 'H': 0, 'K': 1000, 'L': 1000, 'M': 0, 'N': 0, 'O': 0}    
+</code></pre>
+
+<div style="float: left; width: 700px;">
+<pre><code contenteditable data-trim class="line-numbers python">
+S --2-> C R= 0.13 totalR= 0.13 cost= 200 customerR=1000
+C --1-> B R= 0.16 totalR= 0.29 cost=  50 customerR=1000
+B --3-> K R= 0.13 totalR= 0.42 cost= 200 customerR=1000
+K --0-> B R=-0.03 totalR= 0.39 cost= 200 customerR=   0
+B --2-> C R=-0.01 totalR= 0.38 cost=  50 customerR=   0
+C --2-> M R=-0.02 totalR= 0.37 cost= 100 customerR=   0
+M --1-> L R= 0.16 totalR= 0.52 cost=  50 customerR=1000
+L --0-> C R=-0.03 totalR= 0.49 cost= 200 customerR=   0
+C --1-> B R=-0.01 totalR= 0.48 cost=  50 customerR=   0
+B --1-> A R=-0.02 totalR= 0.47 cost= 100 customerR=   0
+A --2-> E R= 0.15 totalR= 0.62 cost= 100 customerR=1000
+E --1-> F R=-0.02 totalR= 0.60 cost= 100 customerR=   0
+F --0-> D R= 0.16 totalR= 0.76 cost=  50 customerR=1000
+D --0-> A R=-0.02 totalR= 0.74 cost= 100 customerR=   0
+A --1-> B R=-0.02 totalR= 0.72 cost= 100 customerR=   0
+B --0-> S R=-0.02 totalR= 0.71 cost= 100 customerR=   0
+</code></pre>
+</div>
+<div style="float: right;">
+    <img src='img/rl/berater/v9-sample-solution-zeros.jpg' height="350">
+</div>
+
+<div style="clear: both;">
+Optimum: 6000, penalty: 1750, normalized total reward: .71,    
+</div>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+## Is this even good?
+</textarea>
+        </section>
+            
+<section data-markdown>
+    <textarea data-template>
+### What is the optimum?
+
+* generally you just do not know
+* the more score the better
+* baselines can help in Reinforcement Learning as well
+* in our special case, there is a deterministic baseline
+  * best first search (https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+  * guarentees to find optimal solution
+  * exponential complexity
+  * but works fine for our size of the problem
+  * optimal score between .73 and .74 with very low variance
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Overfitting
+
+* a lot of academic research is done on arcade games
+* randomness all over: naturally adversive to overfitting?
+* experiments show: agents _do_ overfit to surprisingly large training sets
+* regularization is possible, though
+
+<small>
+https://arxiv.org/abs/1810.12282
+<br>
+https://arxiv.org/abs/1804.06893
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Fighting Overfitting
+
+1. L2 regularization
+1. Dropout
+1. Batch Normalization
+1. Encourage Exploration (increase entropy bonus)
+1. deeper networks (only shown for convolutions on video games)
+
+<small>
+https://arxiv.org/abs/1812.02341
+<br>
+https://blog.openai.com/quantifying-generalization-in-reinforcement-learning/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Regularized Model
+
+<pre><code contenteditable data-trim class="line-numbers python">
+model = ppo2.learn(
+    env=env,
+    network='mlp',
+    num_hidden=500, # more 
+    num_layers=3, # more 
+    layer_norm=True, # added 
+    activation=tf.nn.relu, # trains faster
+    lr=lr_range, # linearly from 1e-2 to 1e-4
+    gamma=1.0,
+    ent_coef=0.05, # from 0
+    # we on longer fear overfitting, dare to train longer
+    total_timesteps=1000000
+) 
+</code></pre>
+
+<small>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v11.ipynb
+</small>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Results at end of training
+
+<pre><code contenteditable data-trim class="line-numbers python">
+| eplenmean          | 14.5          |
+| eprewmean          | 0.73708344    |
+| policy_loss        | -0.001574069  |
+| total_timesteps    | 983040        |
+| value_loss         | 0.00053364615 |
+</code></pre>
+
+<small>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v11.ipynb
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Regularized Model: Rewards
+
+<img src='img/rl/berater/v11-learning-curve.png'>
+
+Average Reward at end of training: ~ .73 (from .69, optimum .73 - .74)
+<br>
+Average length of path: ~ 15 (from 17)
+
+<small>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v11.ipynb
+</small>
+            </textarea>
+        </section>
+        
+    <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Hands-On: How robust is this approach?
+
+1. increate the number of visits per consultant
+1. execute your notebook
+   * how long does the training take?
+   * just from intermediate results how long who are willing to let this train 
+   * find spot where total timesteps of training are specificed and adjust that
+   * consider running  experiments in parallel (open notebook many times)
+
+Questions:
+1. how does the optimum change? did you expect that?
+1. can the approach handle the change, does it still learn properly?
+1. what is my dark secret to success?
+
+<small>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v11.ipynb
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Results after lowering stops (4000 instead of 6000)
+
+<pre><code contenteditable data-trim class="line-numbers python">
+| eplenmean          | 13.3          |
+| eprewmean          | 0.66050005    |
+| policy_loss        | -0.0014504729 |
+| total_timesteps    | 983040        |
+| value_loss         | 0.00049987464 |
+</code></pre>
+
+Average Reward at end of training: ~ .67 (from .73, optimum .67 - .68)
+<br>
+Average length of path: ~ 13 (from 15)
+
+<small>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v11-lower.ipynb
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Results after upping stops (8000 instead of 6000)
+
+<pre><code contenteditable data-trim class="line-numbers python">
+| eplenmean          | 15.3          |
+| eprewmean          | 0.77743745    |
+| policy_loss        | -0.0028271498 |
+| total_timesteps    | 983040        |
+| value_loss         | 0.0003087244  |
+</code></pre>
+
+Average Reward at end of training: ~ .78 (from .73, optimum .78)
+<br>
+Average length of path: ~ 15 (from 15)
+
+<small>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v11-higher.ipynb
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Bottom Line, variation in stops
+
+* approach is robust to changes in stops in general
+  * lowering stops needed init seed changed (bad)  
+* total rewards go up when there are more stops (expected)
+* total rewards go down when there are less stops (expected)
+* length of path stays constant for more stops (did not quite expect that)
+* length of path goes down constant for less stops (also did not quite expect that)
+* _next step: train general model having random number of stops_
+</textarea>
+</section>
+
+<section data-markdown style="font-size: large">
+    <textarea data-template>
+### Histoty of all all Berater versions (the real story)
+
+first version with local observation, just position, not enough information to train properly: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater.ipynb
+
+complete graph as observation, now trains: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v2.ipynb
+
+dqn instead of PPO: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v3.ipynb
+
+plotting of learning history, return to ppo for better performance: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v4.ipynb
+
+as preparation for larger networks changed observation to position plus local paths, still trains well: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v5.ipynb
+
+larger and more complex customer graph: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v6.ipynb
+
+per episode set certain rewards to 0 to simulate different customers per consultant: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v7.ipynb
+
+added all rest rewards to observation: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v8.ipynb
+
+Best-first search as optimal baseline: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v9.ipynb
+
+Regularization, scoring code: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v10.ipynb
+
+Explicit NN, relu activation: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v11.ipynb
+
+A2C instead of PPO: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/berater-v12.ipynb
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Finding Applications
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Learning to Play Chess using Reinforcement Learning
+<a href='https://frpays.github.io/lc0-js/engine.html'>
+<img src='img/rl/lczero.jpg' height="400px">
+</a>
+<small>
+https://frpays.github.io/lc0-js/engine.html
+<br>
+https://twitter.com/frpays/status/1077672273673359361
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### AutoML with TensorFlow AdaNet Estimator
+
+<img src='img/adanet.gif' height="450px">
+
+<small>
+_AdaNet uses Reinforcement Learning to learn a suitable Network Architecture for given data_
+<br>
+https://twitter.com/m4rkmc/status/1057485545708929024
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### When to do Reinforcement Learning
+
+1. When you don't have suitable data
+1. You can accurately simulate an environment
+1. Maybe express your problem as a game
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Do you see applications?
+
+* typically, this is especially hard
+* requires a different way of thinking
+* can you model something like a game?
+* do you already have a simulator?
+* how would you model your environment?
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Alternatives to OpenAI
+
+* environments are without alternatives
+* code quality, comprehensiveness, and stability of baselines is questionable
+* rather academic approach
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Dopamine
+
+* works on OpenAI envs
+* alternative for trying out new strategies
+* research centered
+* only contains basic baselines
+
+<small>
+http://ai.googleblog.com/2018/08/introducing-new-framework-for-flexible.html
+<br>
+https://github.com/google/dopamine
+<br>
+https://github.com/google/dopamine/tree/master/baselines
+<br>
+https://google.github.io/dopamine/baselines/plots.html
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Deep Reinforcement Learning for Keras
+
+* works on OpenAI envs
+* code style much more approachable and consistent OO style
+* Keras models
+* does not contain A2C/A3C or PPO
+
+<small>
+https://github.com/keras-rl/keras-rl
+<br>
+https://keras-rl.readthedocs.io/en/latest/core/
+<br>
+https://github.com/keras-rl/keras-rl/blob/master/rl/agents/dqn.py
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Deep Reinforcement Learning with TensorFlow 2.0
+
+* works on OpenAI envs
+* just a single implementation for A2C
+* TF 2.0 Keras Style
+* Everything in one notebook
+* short and very obvious
+* very nice code style
+
+<small>
+http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/
+<br>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/actor-critic-agent-with-tensorflow2.ipynb
+</small>
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Text Books
+
+* Standard: Reinforcement Learning: An Introduction
+  * Main page (including Code): http://incompleteideas.net/book/the-book-2nd.html
+  * Free PDF: https://drive.google.com/file/d/1opPSz5AZ_kVa1uWOdOiveNiBFiEOHjkG/view
+
+* More concise, more mathematical: Algorithms for Reinforcement Learning
+  * Main page: https://sites.ualberta.ca/~szepesva/RLBook.html
+  * Free PDF: https://sites.ualberta.ca/~szepesva/papers/RLAlgsInMDPs.pdf
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Best Resource for further learning
+
+Deep RL Bootcamp 26-27 August 2017, Berkeley CA
+
+https://sites.google.com/view/deep-rl-bootcamp/lectures
+
+Especially:
+* Lecture 1: Motivation + Overview + Exact Solution Methods: https://www.youtube.com/watch?v=qaMdN6LS9rA
+* Lecture 4A: Policy Gradients and Actor Critic: https://www.youtube.com/watch?v=S_gwYj1Q-44
+* Lecture 4B: Pong from Pixels: https://www.youtube.com/watch?v=tqrcjHuNdmQ
+* Lecture 5: Natural Policy Gradients, TRPO, PPO: https://youtu.be/xvRrgxcpaHY
+            </textarea>
+        </section>
+
+
+
+<section data-markdown style="font-size: large">
+    <textarea data-template>
+### More Colab Notebooks
+
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/2019_tf/playground.ipynb
+
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/openai-gym-playground.ipynb
+
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/openai-colab.ipynb
+
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/baselines-colab.ipynb
+
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/dqn.ipynb
+
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/rl/pg-from-scratch.ipynb
+
+</textarea>
+</section>
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        $('.slido').remove();
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to local version
+            $('.remote').remove();
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+                // do we want this???
+            $('li').addClass('fragment')
+
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/sky.jpg");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1100,
+
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

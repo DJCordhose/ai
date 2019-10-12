@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Supvervised Machine Learning</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        var printMode = window.location.search.match(/print-pdf/gi);
+        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<section class="preparation">
+<pre>
+### Preparation
+</pre>
+</section>
+
+        <section>
+            <h2>Supervised Machine Learning</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <small>
+            <a href="https://djcordhose.github.io/ai/2018_haw_ml_classic.html">
+                https://djcordhose.github.io/ai/2018_haw_ml_classic.html</a>
+                </small>
+        </section>
+        
+        <!-- <section class="todo local">
+<pre>
+</pre>
+        </section> -->
+
+                <section>
+                        <h1>The Basics</h1>
+                        <h2>How does Machine Learning work?</h2>
+                    </section>
+            
+                            <section>
+                                <h3>Customer Data - Car Insurance</h3>
+                                <img src="img/insurance/automobile-insurance.png" height="400px">
+                                <p>
+                                    <small>How would you rank me (47) for a car with 160 km/h top speed?</small>
+                                </p>
+                            </section>
+            
+            
+                                <section>
+                                    <h3>Paper Exercise #1 - Understanding the Supervised Learning Approach</h2>
+                                        <p>Manually cluster areas of different customer types on the
+                                            <em>upper part</em> of the handout</p>
+                                        <ol>
+                                            <li>
+                                                <em>dark (green)</em>: good customer</li>
+                                            <li>
+                                                <em>light (yellow)</em>: mediocre customers</li>
+                                            <li>
+                                                <em>middle (red)</em>: red customers</li>
+                                        </ol>
+                                        <p>Make sure you draw with pressure</p>
+                                </section>
+                                
+                                <section>
+                                    <h3>Plot Twist</h3>
+                                    <p>Generalisation, not perfect reproduction is the objective</p>
+                                    <ol>
+                                        <li class="fragment">We split existing data into two sets</li>
+                                        <li class="fragment">The larger set (60 or 80%) we use to build our model</li>
+                                        <li class="fragment">The smaller set we use to validate the model</li>
+                                    </ol>
+                                </section>
+                                
+                                    <section>
+                                        <img src="img/flashcards/Genderalization_print.png">
+                                    </section>
+            
+                                <section>
+                                    <h2>Exercise #1, Part2 - How well did you generalize?</h2>
+                                    <p>Turn the page and redraw the lines you printed through from the first page</p>
+                                    <p>Get an estimate of the misclassified samples on both diagrams</p>
+                                    <p>What do you think, is this result worse?</p>
+                                    <p>What would you have done differently if you had been given this information before (that it is all about generalisation)?</p>
+                                </section>
+            
+                                    <section>
+                                        <img src="img/flashcards/Test_Training_And_Validation_Sets_print.png">
+                                    </section>
+            
+                                <section>
+                                    <h3>Sample Solution: Fine</h3>
+                                    <div class="fragment" style="float: left">
+                                        <img src="img/insurance/manual_predictions/train_fine.jpg" height="250">
+                                        <p>
+                                            <small>Train</small>
+                                        </p>
+                                    </div>
+                                    <div class="fragment" style="float: left">
+                                        <img src="img/insurance/manual_predictions/test_fine.jpg" height="250">
+                                        <p>
+                                            <small>Test</small>
+                                        </p>
+                                    </div>
+                                    <p class="fragment">Not ideal, especially in the middle where everything mixes</p>
+                                </section>
+                                
+                                <section>
+                                    <h3>Sample Solution: Coarse</h3>
+                                    <div class="fragment" style="float: left">
+                                        <img src="img/insurance/manual_predictions/train_coarse.jpg" height="250">
+                                        <p>
+                                            <small>Train</small>
+                                        </p>
+                                    </div>
+                                    <div class="fragment" style="float: left">
+                                        <img src="img/insurance/manual_predictions/test_coarse.jpg" height="250">
+                                        <p>
+                                            <small>Test</small>
+                                        </p>
+                                    </div>
+                                    <p class="fragment">Not so bad - we humans are good at clustering in 2-d</p>
+                                </section>
+            
+            <section>
+                <h2>How do we make an automatic, general prediction?</h3>
+            </section>
+            
+            <section>
+                <h3>Classic Approach: Code Rules by hand</h3>
+                <div class="fragment">
+                    <pre><code contenteditable data-trim class="line-numbers python">
+            if age < 25:
+                if speed > 180:
+                    return red
+                else:
+                    return yellow
+            if age > 75:
+                return red
+            if km_per_year > 50:
+                return red
+            if km_per_year > 35:
+                return yellow
+            return green
+                            </code></pre>
+                </div>
+            </section>
+
+                    <section data-markdown>
+        <textarea data-template>
+<img src='img/sketch/classic-development.jpg'>
+    </textarea>
+    </section>
+    
+            <section>
+                <h3>No great results</h3>
+                        <p>
+                            approx. 43% correct predictions
+                        </p>
+                </section>
+            <section>
+                <h3>Drawing Decision Boundaries to understand why this does not perform well</h3>
+            </section>
+            
+            <section>
+                <img src="img/flashcards/Decision_Boundary_print.png">
+            </section>
+            <section>
+                <h3>Decision Boundaries for the Hand Coded Rules</h3>
+                <div class="fragment">
+                    <img src="img/insurance/manual.png" height="400px">
+                        <p>
+                            <small>approx. 43% correct predictions (guessing would be 33%)</small>
+                        </p>
+                </div>
+            </section>
+            
+            <section>
+                <h3>Do we have all the rules? Are they even correct?</h3>
+            </section>
+            
+            <!-- <section>
+                <h3>Programming Exercise #1 - Get familiar with the Python Notebook</h3>
+                <p>Improve score starting from existing code</p>
+                <ul>
+                    <li>change rules?</li>
+                    <li>add some?</li>
+                    <li>remove some?</li>
+                </ul>   
+                <p>Do your work in on Jupyter Notebook <em>1-classic-code</em>
+            </p>
+            </section> -->
+            <section>
+                    <h3>Shared Programming Expriment #1 - Getting familiar with the Python Notebook</h3>
+                    <p>Improve score starting from existing code</p>
+                    <ul>
+                        <li>change rules?</li>
+                        <li>add some?</li>
+                        <li>remove some?</li>
+                    </ul>   
+                    <p></em>
+                </p>
+                </section>
+                <section data-markdown style="font-size: xx-large">
+                    <textarea data-template>
+            ## Install ML Software
+            ### Local Installation:
+            * https://www.anaconda.com/download/
+            * _Important_: Install verison 3.x
+            * git clone git@github.com:DJCordhose/haw.git
+            * cd haw/notebooks/ml
+            * jupyter notebook
+            
+            ### Or clone on Azure Notebooks:
+            * https://notebooks.azure.com/djcordhose/libraries/ml-haw
+            </textarea>
+            </section>
+            
+            <section data-markdown style="font-size: xx-large">
+                    <textarea data-template>
+We do our work in on Jupyter Notebook <em>1-classic-code</em>.
+
+We will explore Jupyter Notebooks and walk through the code together
+            </textarea>
+            </section>
+
+            <section>
+                <h2>Different Approach: Machine Learning</h2>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+<img src='img/sketch/supervised-ml.jpg'>
+            </textarea>
+        </section>
+    
+            <section>
+                    <img src="img/insurance/ml-phases.png" height="450px">
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+<img src='img/sketch/using-a-model.jpg'>
+            </textarea>
+        </section>
+    
+                        <section>
+                            <h3>Machine Learning and AI</h3>
+                            <p>Why I like the term artificial intelligence: I think it's good to have an umbrella term for the field that encompasses a
+                            range of techniques – ML, knowledge rep, planning, heuristic search, goal formation, behavior modeling, etc. – and it's the
+                            one we have.</p>
+                            <p><small><a target="_blank" href="https://twitter.com/mjntendency/status/970091564864286726">https://twitter.com/mjntendency/status/970091564864286726</a></small></p>
+                        </section>
+
+                        <section>
+                        <img src="img/AI-1.png">
+                    </section>
+                    
+                    <section>
+                        <img src="img/AI-2.png">
+                    </section>
+                    
+                    <section>
+                        <img src="img/AI-3.png">
+                    </section>
+                    
+                    <section>
+                        <img src="img/AI-4.png">
+                    </section>
+            
+                    <section>
+                        <h2>
+                            <small>There are different types of machine learning</small>
+                        </h2>
+                        <div style="margin-top: -30px">
+                            <img src="img/sketch/types-of-ml.png" height="500px">
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3>Most Exciting: Reinforcement Learning</h3>
+                    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### AlphaGo Zero
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px">
+</a>
+
+Beating all human players, using MCTS and Deep Convolutional Neural Networks
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
+<br>
+Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### World Model
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+    <img src='img/rf/world-models.gif' height="300px">
+</a>
+
+Learning to drive on a race track without any additional information
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-model-using-python-and-keras-64fb388ba459
+<br>
+Code: https://github.com/AppliedDataSciencePartners/WorldModels
+</small>
+</textarea>
+</section>
+
+
+
+            <section>
+                    <img src='img/applications/decisions/type.png'>
+                </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Unsupervised Machine Learning: Clustering
+<img src='img/sketch/clustering.jpg' height="500px">
+        </textarea>
+    </section>
+                            
+            <section>
+                <h3>Supervised Machine Learning as an Experiment</h3>
+                <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                    <img src="img/browser/teachable-machine.png" height="350px">
+                </a>
+                <p>
+                    <small>
+                        <a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+                    </small>
+                </p>
+            </section>
+                    <section>
+                        <h3>Supervised Machine Learning</h3>
+                    <ul>
+                        <li class="fragment">What we just did</li>
+                        <li class="fragment">Train a system using known data</li>
+                        <li class="fragment">There are different strategies to train a system</li>
+                        <li class="fragment">For our problem a simple strategy will do</li>
+                    </ul>
+                    </section>
+            
+                    <section>
+                            <h3>Typical application: Classification</h3>
+                            <div class="fragment">
+                                <img src="img/sketch/classification.jpg" height="450px">
+                            </div>
+                            <p class="fragment">We have to deal with a classification problem</p>
+                        </section>
+
+                        <section>
+                                <h3>Data: Quantity</h3>
+                                <img src='img/applications/decisions/classic.png' height="500px">
+                                <p>We have 300 data sets, this is small</p>
+                            </section>
+                    
+                        <section>
+                            <h3>KNN: k Nearest Neighbors</h3>
+                            <p>A simple classic</p>
+                        </section>
+                    
+                        <section>
+                            <img src="img//insurance/knn.png">
+                        </section>
+                        <section>
+                            <h3>Algorithm</h3>
+                            <p>For a case to predict</p>
+                            <ol>
+                                <li>Plot the case together with the known samples
+                                <li>Look at a number (k) of nearest data points
+                                <li>Choose k in such a way that you can get a majority
+                                <li>Your prediction is the color of the majority
+                            </ol>
+                        </section>
+                    
+                        <section>
+                            <h3>Computed results for k = 1</h3>
+                            <div class="fragment">
+                        
+                                <img src="img/insurance/knn-1.png" height="400px">
+                                <p>
+                                    <small>approx. 98% accuracy on train data, but only 65% on test data</small>
+                                </p>
+                            </div>
+                        </section>
+                        <section>
+                                <h3>This is what we call Overfitting</h3>
+                            </section>
+                        
+                            <section>
+                                <img src="img/flashcards/Overfit_Vs_Underfit_print.png">
+                            </section>
+            
+                    
+                        <section>
+                            <h3>Computed results for k = 13</h3>
+                            <div class="fragment">
+                        
+                                <img src="img/insurance/knn-13.png" height="400px">
+                                <p>
+                                    <small>only approx. 81% accuracy on train data, but also 75% on test data</small>
+                                </p>
+                            </div>
+                            <p class="fragment">Notice the smooth boundaries</p>
+                        </section>
+
+                        <section>
+                    <h3>Decision Trees</h3>
+                    <p>Another simple classic</p>
+                </section>
+            
+                <section>
+                    <img src="img/flashcards/Decision_Trees_print.png">
+                </section>
+            
+                <!-- <section>
+                    <h3>Paper Exercise #2</h3>
+                    <ol>
+                        <li>Create a binary decision tree and draw it on paper</li>
+                        <li>Apply the decision tree to our problem in the lower part of our sample sheet</li>
+                        <li>How do the decision boundaries look like?</li>
+                        <li>Check the test set see how well this worked</li>
+                    </ol>
+                </section>
+            
+                <section>
+                    <h3>The computer is actually better at doing repetative work</h3>
+                </section> -->
+            
+                <section>
+                    <h3>Decision Boundaries for our problem</h3>
+                    <img src="img/dt/dt-boundaries-full.png">
+                    <p>Generated by Decision Tree ML</p>
+                </section>
+            
+                <section>
+                    <img src="img/dt/dt-underfit.png">
+                    <p><small>Simplified decision tree</small></p>
+                </section>
+            
+                <section>
+                    <h3>Looking at the complete tree</h3>
+                </section>
+            
+                <section>
+                    <img src="img/dt/dt-all.png">
+                </section>
+            
+                <section>
+                    <h3>Overfitting</h3>
+                    <img src="img/dt/dt-boundaries-full.png">
+                    <p>
+                        <small>approx. 98% accuracy on train data, but only 61% on test data</small>
+                    </p>
+                </section>
+            
+                <section>
+                    <img src="img/flashcards/Avoid_Overfitting_print.png">
+                </section>
+            
+                <section>
+                    <img src="img/flashcards/Regularization_print.png">
+                </section>
+                
+                <section>
+                    <h3>Regularisation: How to reduce Overfitting</h3>
+                    <p>Intuition: How would you make the decision boundaries more smooth</p>
+                    <ul>
+                        <li class="fragment">Limit Depth of Tree (unlimited is default)</li>
+                        <li class="fragment">Increase Number of Samples for Leaf Node (1 is default)</li>
+                        <li class="fragment">Increase Number of Samples that justify a split (2 is default)</li>
+                    </ul>
+                </section>
+            
+                <section>
+                    <h3>An example for regularization</h3> 
+                    <pre><code data-trim>
+max_depth=3,
+min_samples_leaf=20,
+min_samples_split=20
+                        </code></pre>
+                        <p>How will this perform?</p>
+                </section>
+                <section>
+                    <p>Underfitting</p>
+                    <img src="img/dt/dt-boundaries-underfit.png">
+                        <p>
+                            <small>only approx. 65% accuracy on train data, and only 59% on test data</small>
+                        </p>
+                </section>
+            
+                <section>
+                    <h3>Shared Programming Exercise #2 - Find the Sweet Spot</h3>
+                    <p>Get rid of overfitting, but avoid underfitting as much as possible</p>
+                    <ul>
+                        <li>Can you do better than the hand coded classifier?</li>
+                        <li>Which parameters give the best results?</li>
+                        <!-- <li>How do you explain the different results for training and test data?</li>
+                        <li>What is the value you should optimize for?</li> -->
+                        <li>How do the decision boundaries for the different results look like? Do you see a pattern?</li>
+                    </ul>
+                    <p>Do your work in on Jupyter Notebook
+                        <em>3-sklearn-decision-trees</em>
+                    </p>
+                </section>
+            
+                <section>
+                    <h3>Finding the sweet spot always is a compromise</h3>
+                    <pre><code data-trim>
+            clf = DecisionTreeClassifier(max_depth=6,
+                                        min_samples_leaf=10,
+                                        min_samples_split=10)
+                        </code></pre>
+                </section>
+            
+                <section>
+                    <img src="img/dt/dt-boundaries-sweet.png">
+                    <p>
+                        <small>only approx. 77% accuracy on train data, but also 68% on test data</small>
+                    </p>
+                    <p class="fragment">Sweet Spot, notice the similarity to our hand crafted tree?</p>
+                </section>
+            
+                        <section data-markdown>
+                <textarea data-template>
+            ### How is the Decision Tree being Constructed?
+            
+            We are using the CART algorithm:
+            * top-down split the set of examples into two new sets
+            * choose a variable and a value at each step that best splits our customer example
+            * terminal node when no further gain possible or regularization kicks in
+            
+            http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart
+            
+            </textarea>
+            </section>
+                
+                <section>
+                    <img src="img/dt/cart.png" height="650px">
+                </section>
+            
+                    <section data-markdown>
+                <textarea data-template>
+            ### What is the best split?
+            
+            * assign a category to each node containing a certain set of samples
+            * use a metric (Gini or Entropy) to decide how good a node would be based on that category
+            * sum up weighted metric for both child nodes
+            * optimize the split for that summed metric
+            
+            https://machinelearningmastery.com/classification-and-regression-trees-for-machine-learning/
+            </textarea>
+            </section>
+            
+                <section>
+                    <img src="img/flashcards/Gini_Index_print.png">
+                </section>
+            
+                <section style="font-size: xx-large">
+                    <h3>Gini Impurity used by CART</h3>
+                    <p>Gini impurity is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly
+                    labeled according to the distribution of labels in the subset.</p>
+                    <script type="math/tex; mode=display">
+            Gini = \sum_{i=1}^J (p_i \sum_{i \neq k} p_k)
+                    </script>
+                    <p>The smaller the impurity, the purer (=better) is the node, 0 is perfect</p>
+            
+                    <p><small><a target="_blank" href="https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity">https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity</a></small></p>
+                     
+                </section>
+             
+                <section>
+                    <h3>What's next?</h3>
+                </section>
+
+                <section>
+                    <img src="img/flashcards/Random_Forest_print.png">
+                </section>
+              
+                <section>
+                    <img src="img/flashcards/The_Random_In_Random_Forest_print.png">
+                </section>
+                <section>
+                    <img src="img/flashcards/AdaBoost_print.png">
+                </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Exercise
+1. Extend the notebook to for the Random Forest Strategy
+2. Optional: Find out about AdaBoost Ensemble Learning and add it as well
+        </textarea>
+    </section>
+        </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

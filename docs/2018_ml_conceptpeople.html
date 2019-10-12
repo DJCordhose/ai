@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Machine Learning auch für dein Projekt</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+Vortragssprache Deutsch
+60 Minuten mit Spiel
+-->
+
+        <section>
+            <h2>Machine Learning auch für dein Projekt</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <p><small><a href="http://bit.ly/ml-dein-projekt">
+                http://bit.ly/ml-dein-projekt
+            </a></small></p>
+            <p><small>https://github.com/DJCordhose/ai/tree/master/notebooks/booster</small></p>
+            <p><small>https://notebooks.azure.com/djcordhose/libraries/scipy2018-viz</small></p>
+        </section>
+
+        <section>
+            <h2>Plan</h2>
+            <ol>
+                <li>Idee von Machine Learning</li>
+                <li>Beispiele für Anwendungsgebiete</li>
+            </ol>
+        </section>
+
+        <section>
+            <h1>Teil 1</h1>
+            <h2>Idee von Machine Learning</h2>
+        </section>
+<!-- 
+        <section class="todo">
+            <pre>
+            </pre>
+        </section>
+ -->
+        <section>
+            <h3>Ein Fallbeispiel</h3>
+            <p>Kunden-Ranking für KfZ-Versicherung</p>
+            <img src="img/insurance/automobile-insurance.png" height="400px">
+            <p><small>Wie würde ich (47) mit einem 56-PS-Auto abschneiden?</small></p>
+        </section>
+
+        <section>
+            <h2>Wie automatisiert man das?</h3>
+        </section>
+
+        <section>
+            <h3>Ansatz: Von Hand kodierte Regeln</h3>
+            <div class="fragment">
+            <pre><code contenteditable data-trim class="line-numbers python">
+if age < 25:
+    if speed > 180:
+        return red
+    else:
+        return yellow
+if age > 75:
+    return red
+if km_per_year > 50:
+    return red
+if km_per_year > 35:
+    return yellow
+return green
+                </code></pre>
+            </div>
+        </section>
+
+    <section>
+        <h3>Keine tollen Ergebnisse</h3>
+        <p>Sind das alle Regeln? Sind die richtig?</p>
+        <div class="fragment">
+                <img src="img/insurance/manual.png" height="400px">
+                <p><small>ca. 43% korrekte Vorhersagen (raten wäre 33%)</small></p>
+        </div>        
+    </section>
+
+    <section>
+        <h3>Ansatz: Stochastisches Modell</h3>        
+        <div class="fragment">
+
+        <img src="img/insurance/age.png" height="200px">
+        <img src="img/insurance/km.png" height="200px">
+        <img src="img/insurance/speed.png" height="200px">
+        </div>
+    </section>
+
+    <section>
+        <h3>Bessere Ergebnisse</h3>
+        <div class="fragment">
+
+        <p><small>ca. 53% korrekte Vorhersagen</small></p>
+        <img src="img/insurance/stats.png" height="200px">
+        </div>
+        <div class="fragment">
+
+        <p>Aber</p>        
+        <ul>
+            <li>Modellierung erfordert viel Domänenwissen</li>
+            <li>Modell passt sich nicht automatisch an</li>
+        </ul>
+        </div>
+    </section>
+    
+    <section>
+        <h3>Ansatz: Machine Learning</h3>
+        <div class="fragment">
+                <img src="img/insurance/ml-phases.png" height="450px">
+        </div>
+    </section>
+
+    <section>
+        <h3>Wie funktioniert Machine Learning: Ein Experiment</h3>
+        <!--<div>-->
+        <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+            <img src="img/browser/teachable-machine.png" height="350px">
+        </a>
+        <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+        </small></p>
+            <!--</div>-->
+    </section>
+    
+    <section>
+        <h3>Strategien</h3>
+        <ul>
+            <li class="fragment">Es gibt unterschiedliche Lernstrategien</li>
+            <li class="fragment">Im Beispiel davor war Deep Learning im Einsatz</li>
+            <li class="fragment">Für unser Problem reicht eines der einfachsten Strategien: KNN</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>KNN: k Nearest Neighbors</h3>
+        <img src="img//insurance/knn.png">
+    </section>
+
+    <section>
+        <h3>Ergebnisse mit 13 Nachbarn nicht so schlecht</h3>
+        <div class="fragment">
+
+        <img src="img/insurance/knn-13.png" height="400px">
+        <p><small>ca. 75% korrekte Vorhersagen (raten wäre 33%)</small></p>        
+        </div>
+    </section>
+    
+        <section>
+            <h1>Teil 2</h1>
+            <h2>Beispiele für Anwendungsgebiete</h2>
+        </section>
+
+        <section>
+                <h3>Die Zukunft ist bereits da, nur noch nicht gleichmäßig verteilt</h3>
+                <p>Wo haben KI Systeme Domänen besetzt, die bisher dem Menschen vorenthalten waren?</p>
+        </section>
+
+        <section>
+            <h3>Die Post testet 2018 selbstfahrende Lieferfahrzeuge</h3>
+            <p><em>"Sie werden in der Lage sein, dem Zusteller autonom zu folgen - sodass er nicht vor jedem Hauseingang aus- und wieder einsteigen und wenige Meter fahren muss."</em></p>
+            <img src="img/post_dhl_truck.jpg" height="200">
+            <p><small><a href="http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html" target="_blank">http://www.spiegel.de/auto/aktuell/post-testet-selbstfahrende-streetscooter-a-1172300.html</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h4>Maschinen verstehen Sprache und können sich dazu verhalten</h4>
+            <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
+        </section>
+
+        <section>
+            <h3>Gekritzelte Zeichnungen können erraten werden</h3>
+            <a href="https://quickdraw.withgoogle.com" target="_blank">
+                <img src="img/browser/quick-draw.png" height="350px">
+            </a>
+            <p><small><a href="https://quickdraw.withgoogle.com" target="_blank">https://quickdraw.withgoogle.com</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h3>Go</h3>
+            <p>Go kann nicht wie Schach gelöst werden, weil der Suchraum zu groß ist</p>
+
+            <p class="fragment">Seit 2016 Jahr hat AlphaGo jeden menschlichen Gegner (inkl. 1 und 2 der Weltrangliste geschlagen)</p>
+                <p class="fragment">AlphaGo (Zero) hat gegen sich selbst gespielt und dabei erlernt, wie man gewinnt</p>
+                <p class="fragment">Im Blindversuch konnten Menschen AlphaGo nicht von Menschen unterscheiden</p>
+            <p class="fragment">Ist das intelligent?</p>
+        </section>
+
+        <section>
+            <h3>Gesichtserkennung</h3>
+            <img src="img/facial-recognition.png">
+            <p><small><a href="https://aws.amazon.com/rekognition/" target="_blank">
+                https://aws.amazon.com/rekognition/</a></small></p>
+<!--https://us-west-2.console.aws.amazon.com/rekognition/home?region=us-west-2#/face-comparison-->
+        </section>
+
+        <section>
+            <h2>Werden auch Models arbeitlos?</h2>
+        </section>
+
+        <section>
+            <h4>Nur zwei dieser Bilder sind echte Fotos</h4>
+            <img src="img/applications/gan.jpg" height="500px">
+            <p><small><a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
+                https://twitter.com/goodfellow_ian/status/918900712901197824</a></small></p>
+        </section>
+
+        <section>
+            <h4>Die anderen sind mit Neuronalen Netzwerken generiert</h4>
+            <img src="img/applications/gan-real-images.jpg" height="500px">
+            <p><small><a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a></small></p>
+        </section>
+
+        <section>
+            <h4>Minimale Information reicht, um ein gutes Angebot zu machen</h4>
+            <img src="img/applications/style-prediction.jpg" height="500px">
+            <p><small><a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a></small></p>
+        </section>
+
+        <section>
+            <h3>Weitere Anwendungsgebiete</h3>
+            <ul>
+                <li class="fragment"><strong>Übersetzungen</strong>: Automatische Übersetzungen (z.B. bei Webseiten) durchaus brauchbar
+                <li class="fragment"><strong>Medizin</strong>: Viele KI Systeme können mit menschlichen Ärzten mithalten (z.B. Hautkrebs Screening per Handy)
+                <li class="fragment"><strong>Recommendation Systems</strong>: Spotify und Netflix kennen mich besser als ich mich selbst
+                <!--<li class="fragment"><strong>Making decisions</strong>: Should you be granted private health insurance or a loan-->
+                <!--<li class="fragment"><strong>Fraud Detection</strong>: AI can detect Credit Card Scams and other suspicious activities (tax declarations)-->
+                <li class="fragment"><strong>Predictive Maintenance</strong>: KI systems sagen wann man ein Wasserrohr ersetzen soll bevor es bricht
+            </ul>
+        </section>
+    
+        <section>
+            <h1>Sind wir demnächst alle arbeitslos?</h1>
+        </section>
+
+        <section>
+                <img src="img/new-yorker-robots.jpg" height="580px">
+                <p><small><a href="https://twitter.com/conorsen/status/920063253115531271" target="_blank">
+                    https://twitter.com/conorsen/status/920063253115531271</a></small></p>
+        </section>
+    
+        <section>
+            <h3>Was ist das?</h3>
+            <img src="img/squirrels/original/Black_New_York_stuy_town_squirrel_amanda_ernlund.jpeg" height="500px">
+        </section>
+
+        <section>
+            <h3>Kein Standard System erkennt eine solche Abweichung von der Norm</h3>
+            <p>Wir Menschen haben damit aber kein Problem</p>
+            <p>Maschinen können momentan nur reproduzieren</p>
+        </section>
+
+        <section>
+            <img src="img/kasparov-twitter.png">
+            <p><small><a href="https://twitter.com/Kasparov63/status/955524468192854016" target="_blank">
+    https://twitter.com/Kasparov63/status/955524468192854016</a></small></p>
+        </section>
+
+        <section>
+            <h4>Und obwohl bereits viele Jobs weggefallen sind</h4>
+            <div class="fragment">
+            <img src="img/unemployment-rate.png" height="500px">
+            <p><small><a href="https://www.google.com/search?q=unemployment+rate+usa&rlz=1C1XYJR_enDE765GB766&oq=unemployment+rate+usa&aqs=chrome..69i57j0l5.5879j0j7&sourceid=chrome&ie=UTF-8" target="_blank">
+    Google Search</a></small></p>
+</div>
+        </section>
+        <section>
+            <h3>Also?</h3>
+            <p class="fragment">Es ist immer leicht zu sehen, welche Jobs wegfallen werden</p>
+            <p class="fragment">Aber: Welche neuen Jobs wird es durch KI geben?</p>
+        </section>
+
+        <section>
+            <h3>Zusammenfassung</h3>
+            <ul>
+                <li class="fragment">Machine Learning kann bei bestehenden Daten von diesen abstrahieren und generalisieren
+                <li class="fragment">Durchdringen der Domäne nicht zwingend erforderlich
+                <li class="fragment">Oft reichen einfache Strategien
+                <li class="fragment">Machine Learning ist die Fortsetzung der Digitalisierung
+            </ul>
+            <p><small>
+                Machine Learning auch für dein Projekt
+                <br>
+            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>
+            <a href="http://bit.ly/ml-dein-projekt">
+                http://bit.ly/ml-dein-projekt
+            </a>
+            </small></p>
+            <p><small>Mehr: <a href="https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html">https://www.informatik-aktuell.de/entwicklung/methoden/machine-learning-im-unternehmen-nutzen-und-potentiale.html</a></small></p>
+        </section>
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.preparation').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>UX with Machine Learning</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        pre code {
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+            font-size: larger !important;
+        }
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            /*height: 500px;*/
+        }
+        .left-img {
+            margin-left: 10px !important;
+            float: left;
+            /*height: 500px;*/
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        var printMode = window.location.search.match(/print-pdf/gi);
+        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<section class="preparation">
+Brauchen wir, damit später das Format des Codes stimmt    
+<pre><code data-trim class="javascript">
+</code></pre>
+</small>    
+
+</section>
+
+        <section data-markdown class="preparation" style="font-size: x-large" >
+            <textarea data-template>
+
+### Preparation
+
+1. Start Chrome using "Run With Graphics Processor" (scheint viel langsamer, Problem zu klein?)
+1. lokal zum laufen bringen (Als Notlösung https://djcordhose.github.io/ux-by-tfjs/dist/)
+1. Create a bit of data for ux demo, so dass es trainiert
+
+1. Beide Zeichnungen öffnen
+  * <img src='img/sketch/classic-development.jpg' height="50px">
+  * <img src='img/sketch/supervised-ml.jpg' height="50px">
+1. Notebook für Training auf Server öffnen
+
+https://colab.research.google.com/github/DJCordhose/ux-by-tfjs/blob/master/notebooks/click-sequence-model.ipynb
+
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large" class="preparation">
+        <textarea data-template>
+### Story
+
+1. App oben zeigen
+1. Paar Daten sammeln
+1. Erst das Training zeigen
+1. Idee von ML anhand der 2 Zeichnungen aus 
+1. App zeigen
+1. Unbedienbar
+   - vergleich schlimmste App der Welt: https://userinyerface.com
+1. Shift-Reload   
+1. Help Modus
+1. ML vom Server
+1. Weitere Möglichkeit: Vorhersage Novice / Advanced, welcher User
+1. Ideen einsammeln
+    
+    </textarea>
+    </section>
+    
+    
+<!--         
+
+Improving UX with Machine Learning
+
+I will present 2 ways of helping users find the right buttons based on machine learning. I will share all code and a
+running application. We can then discuss how and where this could be useful.
+
+
+45 Minuten
+
+Sessions are generally split into two parts: 30 minutes of the speaker talking and 15 minutes of Q&A – but: You are the
+camp! We have also had workshops or sessions with conversation only, feel free to do whatever you like, as long as your
+attendees have their say in it.
+
+ -->
+
+ <section>
+        <h3>Improving UX with Machine Learning</h3>
+        <p><a target="_blank" href="https://uxcamphh.org/">
+            UX Camp Hamburg, July 2019
+        </a></p>
+        <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        </h4>
+        <p><small><a href="http://bit.ly/tfjs-enterjs">
+            xxx
+        </a></small></p>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Central Question
+## How can we help our users find the right buttons to click?
+
+</textarea>
+</section>
+<!-- 
+hatten bei Daniels Software mal etwas eingesetzt das heißt True Story
+da nehmen alle Events auf und anhand dessen kann man sehen, was die Benutzer wirklich auf der Seite mahchen
+also später abspielen
+kann man sich dann angucken
+aufgrund hoher emotionaler Belastung haben wir das nach ein paar Tagen abgestellt
+ist wirklich so wie bei den Typen
+ -->
+
+<section data-markdown>
+        <textarea data-template>
+            <a href='https://twitter.com/PPathole/status/1100406765156327427'>
+<img src='img/ux/ux-joke1.png' height="550px">
+</a>
+
+<small>
+https://twitter.com/PPathole/status/1100406765156327427    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<a href='https://twitter.com/page_eco/status/1082971149208772609'>
+<img src='img/ux/ux-joke2.png' height="550px">
+</a>
+
+<small>
+https://twitter.com/page_eco/status/1082971149208772609    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/ux/ux-joke3.png' height="550px">
+
+<small>
+https://twitter.com/dkhan/status/1129153536565104641    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Demo
+
+_Which button to click?_
+
+<img src='img/ux/bad_ux.png'>
+
+http://djcordhose.github.io/ux-by-tfjs/dist
+
+</textarea>
+</section>    
+
+<section data-markdown>
+        <textarea data-template>
+## How can machine learning help?            
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### First things first
+## What is the idea of machine learning?
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+        <img src='img/sketch/classic-development.jpg' height="600px">
+        </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+                <img src='img/sketch/supervised-ml.jpg' height="600px">
+                </textarea>
+                </section>
+            
+<section data-markdown>
+        <textarea data-template>
+### Supervised Machine Learning fits best when
+
+* the problem at hand is hard to specify
+* you have a lot of examples
+* solving the problem can tolerate some error or uncertainty
+* there is a clear, simple input and output
+            </textarea>
+            </section>
+
+<!-- <section data-markdown>
+<textarea data-template>
+### Learning from data samples
+
+* This is also called representation learning, or feature learning
+* We do not teach abstract concepts or rules of reasoning
+* We simply show data to the a machine
+* And teach the right answer, which we know
+
+<small>
+https://en.wikipedia.org/wiki/Feature_learning    
+</small>
+</textarea>
+</section> -->
+
+
+
+<!-- <section>
+<h4>Ready made models just provide powerful APIs</h4>
+
+<a href='https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html'>
+<img src='img/posenet_camera.gif' height="400px">
+</a>
+<pre><code data-trim class="javascript">
+const net = await posenet.load();
+// 0: nose ... 16: rightAnkle
+const poses = await net.estimatePoses(video);
+</code></pre>
+
+<small>
+<a href='https://github.com/tensorflow/tfjs-models/tree/master/posenet'>
+https://github.com/tensorflow/tfjs-models/tree/master/posenet
+</a>
+</small>    
+
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+## The real fun starts when training your own model
+
+<h3 class="fragment">But how?</h3>
+
+<h3 class="fragment">And when does it make sense to train a model in the browser</h3>
+                
+            </textarea>
+        </section> -->
+                    
+
+
+<section data-markdown>
+        <textarea data-template>
+### Training Data
+
+<pre><code contenteditable data-trim class="line-numbers javascript">
+[ "train-model", "save-model-to-local" ],
+[ "train-model", "show-eval", 
+  "train-model", "save-model-to-local" ],
+[ "load-local-model", "toggle-prediction" ]
+</code></pre>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Training Setup
+
+<a href='https://colab.research.google.com/github/DJCordhose/ux-by-tfjs/blob/master/notebooks/click-sequence-model.ipynb'>
+<img src='img/ux/click-model-setup.png' height="450">            
+</a>
+<small>
+https://colab.research.google.com/github/DJCordhose/ux-by-tfjs/blob/master/notebooks/click-sequence-model.ipynb
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Training
+
+<img src='img/ux/click_acc.png' style="background-color: azure">            
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Evaluation
+
+<img src='img/ux/click_cm.png' style="background-color: azure" height="550px">            
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Prediction
+
+<img src='img/ux/click_prediction.gif'>            
+
+http://djcordhose.github.io/ux-by-tfjs/dist
+
+</textarea>
+</section>
+
+
+
+<section data-markdown>
+        <textarea data-template>
+## Second example 
+
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+        <textarea data-template>
+### Step 1
+## What is our objective?
+
+</textarea>
+</section>
+ -->
+
+
+<section data-markdown>
+        <textarea data-template>
+### Standard UX trick: Highlight button user hovers over
+
+<img src='img/ux/app.gif'  class="fragment">
+
+</textarea>
+</section>
+
+    
+    <section data-markdown>
+            <textarea data-template>
+    ### But, could we highlight the button the user is going to click next?
+    
+    <img src='img/ux/simpleRNN.gif' class="fragment">
+    
+    </textarea>
+    </section>
+        
+<section data-markdown>
+    <textarea data-template>
+## Why would we do even this?
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+        <textarea data-template>
+#### Predicting properly which button the user is going to click next we can ...
+
+* Prepare Resources in Advance
+  * Serverless function pre-start
+  * Preload audio/video/AR media to be played next
+  * Prelaod lazyly loaded module 
+* UX
+  * (unnoticeably) highlight or zoom in/out button to make it easier/harder to access for user
+  * Marketing, Ads, https://www.darkpatterns.org/ (https://copenhagenletter.org/ would not like this, though)
+</textarea>
+</section>
+
+<section data-markdown style="font-size: x-large" class="fragments">
+        <textarea data-template>
+### Steps for machine learning
+
+1. Clarify: What is your objective?
+1. What data do you have or could you acquire?
+1. Create an architecture for your model matching your data
+1. Train your model
+1. Evaluate the model: Satisfied?
+* Satisfied
+    1. Deployment
+    1. Prediction
+    1. Monitoring
+        * collect more data
+        * check: is live data from the same distribution as training data
+* Not Satisfied
+    1. More or better data
+    1. Better architecture
+    1. Better training
+1. Rinse and Repeat
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Step 2
+## What data do we have or could we acquire?
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+
+<img src='img/ux/mouse-prediction.png'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Collecting Events for Mouse Movements
+
+<img src='img/ux/mouse-positions.png' class="fragment">
+
+    </textarea>
+</section>
+
+
+<section data-markdown class="fragments">
+        <textarea data-template>
+### Why this is a tricky case
+
+* Data
+  * very much depends on user and machine used
+  * might even be good enough to identify individual user
+  * sending it to our server seems suspicious
+* Training and Prediction
+  * low latency for prediction
+  * incremental and fast training
+  * small amounts of data, still needs to generalize
+  * actual data unknown upfront
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/ux/ux_latency.png' height="550px">
+
+<small>
+https://twitter.com/jaredpalmer/status/1145412000975065091    
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+<img src='img/tfjs/jsconfeu-why-ml-in-browser.jpg' height="550px">
+
+<small>
+@nsthorat @jsconfeu    
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### TensorFlow.js
+
+<img src='img/ux/tfjs.png'>
+
+<small>
+https://www.tensorflow.org/js/    
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src='img/tfjs/jsconfeu-tfjs-overview.jpg' height="550px">
+
+<small>
+@nsthorat @jsconfeu    
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Train and predict on the edge side
+
+_Train an individual model per user directly in the browser_
+
+* data does not leave the machine of the user
+* same goes for model
+* low-latency training and prediction
+            </textarea>
+        </section>
+        
+<section data-markdown>
+        <textarea data-template>
+### Step 3
+## Create an architecture for your model matching your data
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+#### Foundation of Neural Networks
+
+<img src='img/insurance/neuron213.jpg'  height="500px">
+
+<small>That's more of less the only thing TensorFlow.js supports</small>
+
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### From Neuron to Network 
+
+<a href='https://playground.tensorflow.org'><img src='img/tf-plaground.png' height="500px">
+</a>
+
+<small>
+https://playground.tensorflow.org
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Challenge: Such Networks have no memory of previous events
+
+They lack capability to deal with sequential data which our mouse movements really are
+            </textarea>
+            </section>
+
+<section data-markdown>
+    <textarea data-template>
+### RNNs - Networks with Loops
+<img src='img/nlp/colah/RNN-rolled.png' height="450px" style="background-color: aliceblue">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+    </textarea>
+</section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Unrolling the loop
+
+<img src='img/nlp/colah/RNN-unrolled.png' style="background-color: aliceblue">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+#### Options for Model architectures 
+
+<pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// trains fast, bad evaluation, 
+// but in real life does what we expect, 
+// only uses very recent history, 
+// generalizing great by proximity
+tf.layers.simpleRNN({
+    units: 50,
+    dropout: 0.1
+})
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// GRUs are great in learning history
+// learns complete paths, best evaluation in numbers
+tf.layers.gru({
+    units: 50,
+    dropout: 0.1
+})
+</code></pre>
+
+
+<pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// LSTMs are similar to GRUs, but more complex
+// slower to train and worse evaluation, 
+// but really good real world performance
+tf.layers.lstm({
+    units: 50,
+    dropout: 0.1
+})
+</code></pre>
+            
+        </textarea>
+    </section>
+    
+<section data-markdown>
+        <textarea data-template>
+
+<img src='img/xkcd-machine_learning_2x.png' height="550px">
+
+https://xkcd.com/1838/
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Step 4
+## Train your model
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### Training runs asynchronously in the background using WebGL on your GPU 
+<pre><code contenteditable data-trim class="fragment line-numbers javascript">
+model.compile({
+    loss: "sparseCategoricalCrossentropy",
+    optimizer: "adam",
+    metrics: ["accuracy"]
+});
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const history = await model.fit(X, y, {
+    epochs: 200,
+    validationSplit: 0.2
+});
+</code></pre>
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+
+<img src='img/xkcd-compiling.png' height="550px">
+
+https://xkcd.com/303/
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Demo: Training
+
+http://djcordhose.github.io/ux-by-tfjs/dist
+
+</textarea>
+</section>    
+
+
+<section data-markdown>
+        <textarea data-template>
+### Step 5
+## Evaluate the model
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Generalization
+
+* We need to find out if our model is good before going to production
+* Wow should we estimate the quality of our model?
+* We want to know how well it will perform on previously unknown data
+* How is that possible?
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### A standard Workflow
+
+<img src='img/flow-train.jpg'>
+
+    </textarea>
+    </section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Accuracy Training Curves
+
+<img src='img/ux/accuracy-reg.png' height="500px">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Confusion Matrix
+
+<img src='img/ux/confusion-right-for-middle.png' height="550px"
+style="background-color: aliceblue">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Accuracy per Class
+
+<img src='img/ux/acc-per-class.png' 
+style="background-color: aliceblue">
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Step 6
+## Deployment, Prediction
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Model is trained and used locally
+
+<pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// saving in IndexedDB
+await model.save("indexeddb://ux");
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// loading from IndexedDB
+model = 
+    await tf.loadLayersModel('indexeddb://ux');
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers javascript">
+// model could be served from remote without any change (except for online)
+const url = 
+    "https://raw.githubusercontent.com/DJCordhose/ux-by-tfjs/master/model/ux.json";
+model = await tf.loadLayersModel(url);
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers javascript">
+const prediction = 
+    await model.predict(X).data();
+</code></pre>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Results for Simple RNN
+
+<img src='img/ux/simpleRNN.gif' class="fragment">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Results for LSTM
+
+<img src='img/ux/lstm.gif' class="fragment" height="500px">
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Demo: Live Predictions
+
+http://djcordhose.github.io/ux-by-tfjs/dist
+
+</textarea>
+</section>    
+
+<section data-markdown>
+    <textarea data-template>
+### Why monitoring is important
+
+Staleness of model: the world changes, your model stays the same
+* you only find when monitoring performance
+* internal / external keyboard
+* mouse vs trackpad
+
+Measures
+* Save training statistics and compare to production or
+* Train binary classifier to separate training from production data. Possible? Different distributions
+
+Don't use model if applied on different data
+</textarea>
+</section>
+
+<section data-markdown class="fragments" style="font-size: xx-large">
+    <textarea data-template>
+### How to improve
+
+* Morph predicted buttons in the direction of the mouse
+* Transfer Learning: start with a more general model and retrain
+* Federated Learning: use experience from all users without sharing data or model (transfer gradients)
+  * https://github.com/PAIR-code/federated-learning
+  * https://github.com/tensorflow/federated 
+* Silent Test Phase: measure prediction vs reality internally still collect samples
+  * Evaluate with newer data without even without going into production
+* Train continuously
+* Switch on prediction as soon as model is good
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+    <textarea data-template>
+### More ideas
+
+1. Improve UX by highlighting parts that are likely to be clicked next (using click path instead of mouse events)
+1. Use mouse movements to predict: beginner or advanced?
+1. Detect user. Fraud? Robot?
+1. Talk to me about your ideas 
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### What else is cool?
+
+* more examples and a full demo for a chat bot using TensorFlow.js from Goolge IO 2019: https://www.youtube.com/watch?v=D7ZL45xS39I
+* Bob Ross pix2pix: https://twitter.com/jdwlbr/status/1131244682317484032
+* GAN Harp: https://twitter.com/ctpt_studio/status/1131975006173507585 
+* BodyPix: https://twitter.com/TensorFlow/status/1096519420816568322
+  * https://storage.googleapis.com/tfjs-models/demos/body-pix/index.html
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+    ### Wrap-Up
+    
+    _Feel free to say "Hello" after the talk_
+    
+    * TensorFlow.js (tfjs) allows for completely new ways of training and deploying neural networks
+    * tfjs allows to train and use models in the browser using WebGL on your GPU
+    * very interesting for GDPR and highly interactive predictions
+    <!-- * tfjs mimics TensorFlows Keras API  -->
+    * use can also convert standard TensorFlow models to use them with tfjs
+    * tfjs-vis provides us with powerful tools for visualizing training results
+    
+    _Machine Learning from Idea to Production with TensorFlow.js, enterjs 2019_
+    
+    <small>
+    <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+    <br>
+    Slides: http://bit.ly/tfjs-enterjs
+    </small>
+    
+    </textarea>
+    </section>
+    
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    // $('section').attr('data-background-image', "backgrounds/blue.jpg")
+    // $('section').attr('data-background-image', "backgrounds/blue-tile.jpg")
+    // $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-leaves.jpg")
+    // $('section').attr('data-background-image', "backgrounds/black.jpg")
+
+//    $('section').attr('data-background-image', "backgrounds/tiles-raw.jpg")
+//    $('section').attr('data-background-image', "backgrounds/white-transparent.jpg")
+</script>
+<script>
+    const isLocal = window.location.hostname.indexOf('localhost') !== -1 || 
+                window.location.hostname.indexOf('127.0.0.1') !== -1;
+
+    if (isLocal && !printMode) {
+    } else {
+        // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+    }
+
+    Reveal.addEventListener( 'ready', function( event ) {
+        // applies to all versions
+        $('code').addClass('line-numbers');
+
+        // do we want this???
+        $('.fragments li').addClass('fragment')
+
+        // make all links open in new tab
+        $('a').attr('target', '_blank')
+
+        if (isLocal && !printMode) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+
+
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

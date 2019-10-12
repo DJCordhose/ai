@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>ML for your project</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        pre code {
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+            font-size: larger !important;
+        }
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            /*height: 500px;*/
+        }
+        .left-img {
+            margin-left: 10px !important;
+            float: left;
+            /*height: 500px;*/
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+Dauer: 1 Stunde
+
+Talk: Machine Learning auch für dein Projekt
+
+Abstract: Na klar, die Internetgrößen wie Amazon, Google, Apple, Microsoft und Facebook wären ohne
+Machine Learning nicht denkbar.
+Aber wo kannst du Machine Learning jenseits des Hypes im eigenen Betrieb,
+in der eigenen Anwendung oder im Projekt nutzbringend und sinnvoll einsetzen?
+
+Wir beginnen mit einem kurzen Überblick, was Machine Learning ausmacht und wie es funktioniert.
+Dann untersuchen wir mögliche Anwendungsgebiete in unterschiedlichen Branchen und Projektarten.
+
+Bio:
+Oliver Zeigermann ist Entwickler, Architekt, Berater und Coach.
+Oliver hat über Jahrzehnte in vielen unterschiedlichen Sprachen und
+mit vielen Technologien Software entwickelt. In den letzten Jahren ist
+er tiefer in die Analyse großer Datenmengen mit Machine Learning
+eingestiegen. Er knüpft damit an sein Studium der Künstlichen Intelligenz in den 90er Jahren an.
+-->
+
+        <section>
+            <h2>Machine Learning for Your Project</h2>
+            <h3>Everyday Applications of Artificial Intelligence</h3>
+                <h3><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </h3>
+            <p><small><a href="http://bit.ly/ml-sipgate">
+                http://bit.ly/ml-sipgate
+            </a></small></p>
+        </section>
+
+        <section class="todo">
+<pre>
+- https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
+- https://www.bloomberg.com/news/articles/2017-10-19/google-wants-to-train-other-companies-to-use-its-ai-tools
+</pre>
+        </section>
+
+        <section>
+            <h4>AI (Artificial Intelligence)/ ML (Machine Learning) is Opportunity</h4>
+            <img src="opportunity.png" height="450">
+            <p><small><a href="https://twitter.com/fchollet/status/892824341217394688" target="_blank">https://twitter.com/fchollet/status/892824341217394688</a></small></p>
+        </section>
+
+        <section class="todo">
+            <h2>Who uses ML already?</h2>
+            <pre>
+https://techcrunch.com/2017/10/19/apple-makes-the-case-that-even-its-most-banal-features-require-a-proficiency-in-machine-learning/#ampshare=https://techcrunch.com/2017/10/19/apple-makes-the-case-that-even-its-most-banal-features-require-a-proficiency-in-machine-learning/
+https://www.theverge.com/2017/10/19/16503658/bbc-data-analytics-machine-learning-curation-tv
+            </pre>
+        </section>
+
+
+        <section>
+            <h2>Gretchenfrage</h2>
+            <h3 class="fragment">What kind of data do you have or what kind of data would you be able to collect?</h3>
+            <h4 class="fragment">Your answer determines how can you benefit from machine learning</h4>
+        </section>
+
+        <section>
+            <h2>Data is the fuel and machine learning is the engine</h2>
+            <h3 class="fragment">You need both</h3>
+        </section>
+
+        <section>
+            <h3>How does the engine look like</h3>
+            <p><em>Surprisingly, despite AI’s breadth of impact, the types of it being deployed are still extremely limited. Almost all of AI’s recent progress is through one type, in which some input data (A) is used to quickly generate some simple response (B)</em></p>
+            <p><small>Andrew Ng: <a href="https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now" target="_blank">https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now</a>
+            </small></p>
+        </section>
+
+        <!--<section>-->
+            <!--<h2>First a look at the different types of engines</h2>-->
+        <!--</section>-->
+
+        <section>
+            <h4>Different Types of Machine Learning</h4>
+            <div >
+            <img src="img/sketch/types-of-ml.png" height="500px">
+            </div>
+        </section>
+
+        <section>
+            <h3>AlphaGo #1 @Go using Reinforcement Learning</h3>
+            <p><small><em>(...) we had it play against different versions of itself thousands of times, each time learning from its mistakes and incrementally improving until it became immensely strong, through a process known as reinforcement learning.</em></small></p>
+            <a href="https://deepmind.com/research/alphago/" target="_blank">
+                <img src="img/applications/alphago-logo.png">
+            </a>
+            <p><small><a href="https://deepmind.com/research/alphago/" target="_blank">https://deepmind.com/research/alphago/</a>
+            </small></p>
+        </section>
+
+        <section>
+            <h3>However</h3>
+            <img src="img/applications/twitter-reinforcement.png" height="500px">
+            <p><small><a href="https://twitter.com/chrisalbon/status/919701254657290240">https://twitter.com/chrisalbon/status/919701254657290240</a></small></p>
+        </section>
+
+        <section>
+            <h3>Unsupervised Machine Learning in Google Sheets</h3>
+            <p>Correlations, Outliers, etc.</p>
+            <div style="transform: scale(1.2); margin-left: 25px">
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_depArrDelay.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_distance_airtime.png">
+                </div>
+                <div style="height: 250px; float: left">
+                    <img src="img/google_sheets/screenshot_depDelay_outliers.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="img/google_sheets/screenshot_histogram_distance.png">
+                </div>
+            </div>
+        </section>
+
+         <section>
+            <h3>Supervised Machine Learning by fun example</h3>
+            <div>
+            <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                <img src="img/browser/teachable-machine.png" height="350px">
+            </a>
+            <p><small><a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+            </small></p>
+                </div>
+        </section>
+
+        <section>
+            <h2>Now let's have a look at the different types of data</h2>
+            <h3 class="fragment">Some data is more valuable than other</h3>
+        </section>
+
+        <section>
+            <h2>In General: The more, the better</h2>
+            <h3 class="fragment">You can often compensate quantity with quality, though</h3>
+            <h3 class="fragment">And sometimes also the other way round</h3>
+        </section>
+
+        <section>
+            <h2>What kind of data</h2>
+            <ul>
+                <li>Log data
+                <li>Transaction data
+                <li>Structured, tabular data (like from an Excel Sheet)
+                <li>Speech
+                <li>Text
+                <li>Image data
+            </ul>
+        </section>
+
+        <section>
+            <h2>Is it labelled?</h2>
+            <h3 class="fragment">Only if it is labelled, it qualifies for supervised learning</h3>
+            <h3 class="fragment">If it is not labelled, would it be realistic to label it now?</h3>
+        </section>
+
+        <section>
+            <h2>What quality</h2>
+            <ul>
+                <li>unstructured (heterogeneous) / structured
+                <li>complete / incomplete
+                <li>without errors?
+            </ul>
+        </section>
+
+        <section>
+            <h2>Examples</h2>
+            <h3 class="fragment">We will mainly see Supervised and Unsupervised Learning, rarely Reinforcement Learning</h3>
+        </section>
+
+        <section>
+            <h2>A small amount (1000 - 5.000) of labelled images</h2>
+            <h3 class="fragment">Is that good data? <span class="fragment" style="color: yellow">MAYBE</span></h3>
+            <p class="fragment">It depends on how many categories (or is it continuous?) to predict and
+                on the variation and content (common / special) of the images</p>
+            <p class="fragment"><strong>Might qualify for supervised learning with Convolutional Neutral Networks</strong></p>
+        </section>
+
+        <section>
+            <h2>Huge amounts (TB) of unstructured (heterogeneous) log data</h2>
+            <h3 class="fragment">Is that good data? <span class="fragment" style="color: red">NO</span></h3>
+            <p class="fragment">If data is not even of the same category, how do you even tackle it. Hardest challenge, even with lots amounts of data</p>
+        </section>
+
+        <section>
+            <h2>A decent amount (> 10.000) of complete and labelled structured data</h2>
+            <h3 class="fragment">Is that good data? <span class="fragment" style="color: green">YES</span></h3>
+            <p class="fragment">The best you can possibly have. This is a real asset</p>
+            <p class="fragment"><strong>Qualifies for supervised learning with a variety of learning strategies</strong></p>
+        </section>
+
+        <section>
+            <h2>Medium size (GB) of structured time series data</h2>
+            <h3 class="fragment">Is that good data? <span class="fragment" style="color: greenyellow">Probably YES</span></h3>
+            <p class="fragment"><strong>Qualifies for Unsupervised Learning. Possibly there are a lot of insights hidden in the data</strong></p>
+        </section>
+
+        <section>
+            <h3>Actual Applications</h3>
+            <h2 class="fragment">For some more inspiration</h2>
+        </section>
+
+        <section>
+            <h3>Real World AI is booming</h3>
+            <img src="chollet-twitter-applications.png">
+            <p><small><a href="https://twitter.com/fchollet/status/906582914829246464?s=03" target="_blank">
+                https://twitter.com/fchollet/status/906582914829246464?s=03</a></small></p>
+        </section>
+
+        <section>
+            <img src="img/applications/2016-gartner-hypecycle.jpg">
+        </section>
+
+        <section>
+            <h4>First of all</h4>
+            <h2>What does not work, (yet)?</h2>
+            <h3 class="fragment">Might be surprising</h3>
+        </section>
+
+        <section>
+            <h2>(I) Autonomous Cars</h2>
+        </section>
+
+        <section>
+            <img src="img/self_driving_2x.png" height="550px">
+            <p><small><a href="https://xkcd.com/1897/" target="_blank">https://xkcd.com/1897/</a></small></p>
+        </section>
+
+        <section>
+            <img src="img/fchollet-self-driving-cars.png" height="500px">
+            <p><small><a href="https://twitter.com/fchollet/status/912413863168974848" target="_blank">https://twitter.com/fchollet/status/912413863168974848</a></small></p>
+        </section>
+
+        <section>
+            <h2>(II) Singularity</h2>
+        </section>
+
+        <section>
+            <p><em>The <strong>singularity</strong> is the hypothesis that the invention of <strong>artificial superintelligence</strong>
+                will abruptly trigger runaway technological growth, resulting in unfathomable changes to human civilization.
+                According to this hypothesis, an upgradable intelligent agent
+                (such as a computer running software-based artificial general intelligence)
+                would enter a "runaway reaction" of <strong>self-improvement</strong> cycles, with each new and more intelligent generation
+                appearing more and more rapidly, causing an intelligence explosion and resulting in a powerful
+                superintelligence that would, qualitatively, <strong>far surpass all human intelligence</strong>.</em></p>
+        </section>
+
+        <section>
+            <h2>Claimed Cause: exponential growth</h2>
+            <p><em>Many notable personalities, including Stephen Hawking and Elon Musk consider the uncontrolled rise of artificial intelligence as a matter of alarm and concern for humanity's future. The consequences of the singularity and its potential benefit or harm to the human race has been hotly debated by various intellectual circles.</em></p>
+            <p><small><a href="https://en.wikipedia.org/wiki/Technological_singularity" target="_blank">https://en.wikipedia.org/wiki/Technological_singularity</a></small></p>
+        </section>
+
+        <section>
+            <h2>Verdict</h2>
+            <h3 class="fragment">Factually, there just is no exponential growth</h3>
+            <h3 class="fragment">We are currently nowhere near such a singularity and there is no <em>existing</em> technology to make it happen</h3>
+            <p><small><a href="https://blog.keras.io/the-future-of-deep-learning.html" target="_blank">https://blog.keras.io/the-future-of-deep-learning.html</a></small></p>
+        </section>
+
+        <section>
+            <h2>What does work, however</h2>
+            <h3>Might also be surprising</h3>
+        </section>
+
+        <section>
+            <h2>(I) Image Recognition</h2>
+        </section>
+
+        <section>
+            <h3>Face Detection</h3>
+            <img src="img/facial-recognition.png">
+            <p><small><a href="https://aws.amazon.com/rekognition/" target="_blank">
+                https://aws.amazon.com/rekognition/</a></small></p>
+<!--https://us-west-2.console.aws.amazon.com/rekognition/home?region=us-west-2#/face-comparison-->
+        </section>
+
+        <section>
+            <h3>What also works in that area</h3>
+            <ul>
+                <li>Image moderation (what is in that picture)
+                <li>Facial analysis
+                <li>Celebrity recognition
+            </ul>
+        </section>
+
+        <section>
+            <h2>Models going unemployed?</h2>
+        </section>
+
+        <section>
+            <h4>Only two of these images are actual images</h4>
+            <img src="img/applications/gan.jpg" height="500px">
+            <p><small><a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
+                https://twitter.com/goodfellow_ian/status/918900712901197824</a></small></p>
+        </section>
+
+        <section>
+            <h4>All others generated by neural networks</h4>
+            <img src="img/applications/gan-real-images.jpg" height="500px">
+            <p><small><a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a></small></p>
+        </section>
+
+        <section>
+            <h2>Salesclerks going unemployed?</h2>
+        </section>
+
+        <section>
+            <h4>Minimal information sufficient for value prop</h4>
+            <img src="img/applications/style-prediction.jpg" height="500px">
+            <p><small><a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a></small></p>
+        </section>
+
+        <section>
+            <h3>More applications include</h3>
+            <ul>
+                <li class="fragment"><strong>Medicine</strong>: Many AI System are at the same level as human doctors (e.g. skin cancer screening)
+                <li class="fragment"><strong>Recommendation Systems</strong>: Spotify and Netflix know me better than I do
+                <li class="fragment"><strong>Making decisions</strong>: Should you be granted private health insurance or a loan
+                <li class="fragment"><strong>Fraud Detection</strong>: AI can detect Credit Card Scams and other suspicious activities (tax declarations)
+                <li class="fragment"><strong>Predictive Maintenance</strong>: AI systems tell you when to repair something before it is breaks
+            </ul>
+        </section>
+
+<!--
+
+        <section class="todo">
+            <h2>(II) Medicine / Healthcare</h2>
+- https://www.forbes.com/sites/tomdavenport/2017/11/05/revolutionizing-radiology-with-deep-learning-at-partners-healthcare-and-many-others/#1628bbe5e13d
+- https://concepttoclinic.drivendata.org/
+- http://www.ymer.org/papers/files/2017-London-ML-Meetup.pdf
+- https://twitter.com/fchollet/status/907650078759829504?s=03
+- http://pulsenews.co.kr/view.php?sc=30800019&year=2016&no=292907
+- https://www.microsoft.com/en-us/research/video/research-focus-project-innereye-assistive-ai-cancer-treatment/?utm_source=t.co&utm_medium=referral
+- https://twitter.com/fchollet/status/907650078759829504?s=03
+- https://medium.com/inside-machine-learning/top-10-machine-learning-use-cases-part-2-7708ec514c2
+- https://twitter.com/Reza_Zadeh/status/913965097608818689
+        </section>
+
+        <section class="todo">
+            <h2>(III) Recommendation Systems</h2>
+<pre>
+- https://www.wired.co.uk/article/how-do-netflixs-algorithms-work-machine-learning-helps-to-predict-what-viewers-will-like?imm_mid=0f5ddc&cmp=em-data-na-na-newsltr_20170906
+</pre>
+        </section>
+
+                <section class="todo">
+            <h2>(III) Fraud and Outlier Detection</h2>
+<pre>
+- https://blog.codecentric.de/en/2017/09/data-science-fraud-detection
+- https://www.data2day.de/veranstaltung-6008-skalierbares-machine-learning-mit-apache-spark-in-der-betrugserkennung.html?id=6008
+  - http://www.data2day.de/2017/material/Baier_Dragiev__Skalierbares_ML_mit_Apache_Spark.pdf
+    - Seite 5: GOAL
+    - Seite 7: Nicht Business Rules, sondern ML
+</pre>
+        </section>
+
+            <section class="todo">
+            <h2>(IV) Predictive Maintenance</h2>
+<pre>
+- https://notebooks.azure.com/Microsoft/libraries/PredictiveMaintenance
+</pre>
+        </section>
+
+                <section class="todo">
+            <h2>(V) Code Generation / Programming</h2>
+<pre>
+- https://twitter.com/fchollet/status/911250722095632384?s=03
+- https://twitter.com/mark_riedl/status/908058551486177280?s=03
+</pre>
+        </section>
+
+        <section class="todo">
+            <h2>Finding hidden structures and insights in flight data</h2>
+<pre>
+- My flight data example using Google Sheets
+</pre>
+        </section>
+
+-->
+        <section>
+            <h2>Wrap-Up</h2>
+            <ul>
+                <li class="fragment">If you have data lying around, possibly you have a great treasure
+                <li class="fragment">Data can be of different quality, though
+                <li class="fragment">Larger amounts of high quality data probably are valuable
+                <li class="fragment">You can not just throw your data at AI and hope to get something out
+                <li class="fragment">You also need to have knowledge of Machine Learning and how it works
+            </ul>
+                <p><small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>Slides: <a href="http://bit.ly/ml-sipgate">
+                http://bit.ly/ml-sipgate
+            </a></small></p>
+        </section>
+
+        <section>
+            <h2>The doctor is <span style="color: green">IN</span></h2>
+            <h3>Time for your questions and use cases</h3>
+                <p><small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>Slides: <a href="http://bit.ly/ml-sipgate">
+                http://bit.ly/ml-sipgate
+            </a></small></p>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+    //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
+    //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+//        $('.fragment').removeClass('fragment');
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

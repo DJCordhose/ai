@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>tensorflow.js</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        pre code {
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+            font-size: larger !important;
+        }
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            /*height: 500px;*/
+        }
+        .left-img {
+            margin-left: 10px !important;
+            float: left;
+            /*height: 500px;*/
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+tensorflow.js (https://js.tensorflow.org/) brings TensorFlow style machine learning to the browser. You define Machine
+Learning problems using JavaScript and push them over for fast computation to any GPU using WebGL. Or you train your
+model on a standard TensorFlow stack using high performance GPUs, convert the model and use it in the browser for
+prediction or transfer learning.
+
+This might not sound like a big deal, but tight integration of Machine Learning with all the things that make the web
+great opens up a whole new world of applications in the areas of education, deployment, visualization, gaming,
+development, and overall UX. You will also learn how to do your own experiments.
+
+45 Minutes
+-->
+
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+- The cart-pole control problem is like the hello world for reinforcement learning. In this example, we solve it in the browser using the policy-gradient method & #TensorFlowJS, w/ training- & test-time animation.
+
+Code: https://t.co/Repilh2YqG
+Live demo → https://t.co/cNPph3tAlo https://t.co/p02psOfLkb
+(https://twitter.com/sqcai/status/1024760019168976907?s=03)
+
+        </textarea>
+    </section> -->
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+### Education
+
+Andrej (@ScheferAndrej) tweeted at 2:38 PM on Sun, Aug 26, 2018:
+Hi Guys,
+my second little project with Tensorflow.js is done!
+This little project will show how word2vec works.
+
+https://t.co/Ua0jEGq4CT
+(https://twitter.com/ScheferAndrej/status/1033695086503227393?s=03)
+</textarea>
+</section> -->
+
+<!-- <section class="todo">
+        <pre>
+### Custom WebGL Kernels
+
+https://twitter.com/nsthorat/status/1031308764618661888
+</pre>
+</section>
+
+<section class="todo">
+        <pre>
+- Video Course TF.js bt the google people
+  - https://twitter.com/TensorFlow/status/1026907973778632705
+  - https://www.youtube.com/watch?v=oFvP-qev8bU&linkId=55362372
+  </pre>
+</section> -->
+
+<!-- <section class="todo">
+    <pre>
+https://snakes.ai/
+
+Brian Breiholz (@BrianBreiholz) tweeted at 9:47 PM on Sun, Aug 05, 2018:
+Finished (for now) my first bigger ML project! :)
+Using @p5xjs and @tensorflow.js. Online at:
+
+https://t.co/ezRuJZ1Max 
+
+Includes:
+-Solving the snake game using neuroevolution 
+-Being able to play the snake game with your webcam
+#MachineLearning #ArtificialIntelligence #ML #AI
+(https://twitter.com/BrianBreiholz/status/1026193114342608896?s=03)        
+</pre>
+</section> -->
+
+
+<!-- <section class="todo">
+    <pre>
+Nao Tokui (@naotokui_en) tweeted at 3:44 AM on Tue, Aug 07, 2018:
+Built with tensoflow.js, magenta.js and @p5xjs. Rhythm generation part was based on magenta’s DrumRNN and @teropa ’s Neural Drum Machine! https://t.co/bg4uBTY7SE
+(https://twitter.com/naotokui_en/status/1026645181993340929?s=03)
+</pre>
+</section> -->
+
+<!-- <section class="todo">
+    <pre>
+Nikhil Thorat (@nsthorat) tweeted at 9:01 PM on Mon, Aug 13, 2018:
+hyperparameters.js: hyperparameter search for TensorFlow.js by Martin Stoyanov and Atanas Stoyanov (based on hyperopt):
+
+Code: https://t.co/YDffSyujJh
+Website: https://t.co/ZjxiKJd4uf
+Blog post: https://t.co/2HGREGDjvg https://t.co/hWVycZV3IQ
+(https://twitter.com/nsthorat/status/1029080641495855104?s=03)
+</pre>
+</section> -->
+
+    <!-- <section class="todo">
+        <pre>
+
+- Beatbox: https://twitter.com/naotokui_en/status/1026467328592994305            
+- KNN auf Observable HQ für Educate
+- Add Insurance Example from docs/js/insurance
+    - Add a button to start and stop training
+    - Add a button to use stored model
+    - Display progress on page
+    - Erstes Layer hat nur 1 Neuron, ein Hidden weniger und dann erstes auch 100 
+- Add Ml5 example
+    - one from the web site, already started at docs/js/ml5
+                </pre>
+</section> -->
+
+        <!-- <section class="todo">
+            <pre>
+
+- https://github.com/tensorflow/tfjs/blob/master/GALLERY.md
+
+- Regression: https://twitter.com/nckofficial/status/1018127162728243206
+
+- LSTMs: https://twitter.com/sqcai/status/1017871907214057473?s=03
+
+- Intro Video: https://twitter.com/TensorFlow/status/1017153426558541824
+
+- sign language: https://twitter.com/shekitup/status/1017072947624857605
+
+- Deployment: https://twitter.com/TensorFlow/status/1015277977125433344?s=03
+
+- RL: https://twitter.com/sqcai/status/1024760019168976907
+
+- Animation with CPPNs & TensorFlow.js, an @observablehq notebook by @emilyrreif:
+https://twitter.com/nsthorat/status/1020039961226219520
+</pre>
+</section> -->
+<!-- <section class="todo">
+    <pre>
+
+- ml5
+  - Today's @thecodingtrain live stream (5pm ET, 9pm UTC) will focus on machine learning for beginners with @ml5js. https://t.co/HKH46ZwuZj https://t.co/yrTP6pjlwP
+  (https://twitter.com/shiffman/status/1022835071517110272?s=03) -->
+
+<!-- - Gesture Mirror
+  - https://experiments.withgoogle.com/collection/ai/move-mirror/view/mirror
+  - https://medium.com/tensorflow/move-mirror-an-ai-experiment-with-pose-estimation-in-the-browser-using-tensorflow-js-2f7b769f9b23?linkId=54484629
+  - https://twitter.com/TensorFlow/status/1019976058072981504 -->
+
+<!-- - Music Composition using magenta.js
+  - https://twitter.com/notwaldorf/status/1012409548483620865?s=03
+  - https://glitch.com/edit/#!/tenori-off?path=README.md:1:0 -->
+
+<!-- - Cris Valenzuela (@c_valenzuelab) tweeted at 7:55 PM on Mon, Jun 25, 2018:
+I just published a tutorial on how to train a LSTM network with @HelloPaperspace and sample the resulting model in @ml5js.  More tutorials soon! (hint: style transfer and pix2pix)
+
+https://t.co/PecQBb51EC
+(https://twitter.com/c_valenzuelab/status/1011306947344203776?s=03) -->
+
+<!-- </pre>
+</section> -->
+
+<!-- <section class="todo">
+    <pre>
+- Mattias P Johansson (@mpjme) tweeted at 10:02 AM on Mon, Jun 18, 2018:
+Let's code a neural network, from scratch, in plain JavaScript
+https://t.co/TXuXNcemSJ https://t.co/SXLQw1UBek
+(https://twitter.com/mpjme/status/1008621018833965057?s=03)
+            </pre>
+        </section> -->
+
+        <section data-markdown class="preparation">
+            <script type="text/template">
+### Preparation
+
+Load in advance and rehearse demos
+1. https://storage.googleapis.com/tfjs-vis/mnist/dist/index.html
+1. https://poloclub.github.io/ganlab/
+1. https://ml5js.org/docs/lstm-interactive-example
+1. https://ml5js.org/docs/style-transfer-webcam-example
+            </script>
+        </section>
+
+        <section>
+                <h2>tensorflow.js</h2>
+                <h3>Why the Browser and Machine Learning are a perfect match</h3>
+        <p><a target="_blank" href="https://www.mcubed.london/sessions/tensorflow-js-browser-machine-learning-perfect-match/">
+            MCubed, London, October 2018
+        </a></p>
+        <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        </h4>
+        <p><small><a href="http://bit.ly/mcubed-tensorflow-js">
+            http://bit.ly/mcubed-tensorflow-js
+        </a></small></p>
+    </section>
+
+        <section>
+            <img src="img/tensorflowjs.png">
+            <p><a href="https://js.tensorflow.org/" target="_blank">https://js.tensorflow.org/</a></p>
+        </section>
+
+        <section>
+                <h2>Wait, but why?</h2>
+                    <div class="fragment">
+                        <h3>Python is predominant in the area of Machine Learning</h3>
+                        <ul>
+                            <li>Has a large and mature set of libs
+                            <li>Is reasonably fast
+                            <li>Uses bindings to C/C++ or Fortran for speed and reuse
+                        </ul>
+                    </div>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+## This is the question this talk tries to answer
+
+            </textarea>
+        </section>
+
+            <section>
+                <h1>(I) Educate</h1>
+                <p class="fragment">Everyone can be educated, they just need a browser and internet</p>
+                <p class="fragment">Concepts are much easier to grok when you can play around with them</p>
+            </section>
+    
+            <section>
+                <h3>Experiment to explore how machine learning works</h3>
+                <p>
+                    <small>Built using deeplearn.js (predecessor of tensorflow.js)</small>
+                </p>
+                <div style="margin-top: -40px">
+                    <a href="https://teachablemachine.withgoogle.com/" target="_blank">
+                        <img src="img/browser/teachable-machine.png" height="350px">
+                    </a>
+                    <p>
+                        <small>
+                            <a href="https://teachablemachine.withgoogle.com/" target="_blank">https://teachablemachine.withgoogle.com/</a>
+                        </small>
+                    </p>
+            </section>
+            
+            <section>
+                <h3>Tensorflow Playground</h3>
+                <p>Where it all started - Playing with Neural Networks without any installation</p>
+                <a href="http://playground.tensorflow.org" target="_blank">
+                    <img src="img/browser/playground.png">
+                </a>
+                <p><small><a href="http://playground.tensorflow.org" target="_blank">http://playground.tensorflow.org</a></small></p>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Introduction using tfjs-vis
+
+<a href='https://storage.googleapis.com/tfjs-vis/mnist/dist/index.html'>
+    <img src='img/tfjs-vis.png' height="500px">
+</a>
+
+<small>
+https://github.com/tensorflow/tfjs-vis
+</small>
+            </textarea>
+        </section>
+    
+    <section data-markdown style="font-size: xx-large">
+            <textarea data-template>
+### Projecting high dimensional data to 2d (t-SNE)
+
+Fast, tensorflow.js powered data projection in the browser 
+
+<a href='https://nicola17.github.io/tfjs-tsne-demo/'>
+<img src='img/t-sne-tensorflow.png' height="350px">
+</a>
+
+<small>
+https://nicola17.github.io/tfjs-tsne-demo/
+<br>
+https://ai.googleblog.com/2018/06/realtime-tsne-visualizations-with.html
+</small>
+</a>
+    </textarea>
+    </section>
+
+
+            
+    <section data-markdown>
+            <textarea data-template>
+### Understanding binary Classifier using Logistic Regression
+
+<video controls autoplay loop src="https://video.twimg.com/tweet_video/DeAhZjGV0AIslot.mp4" type="video/mp4"></video>
+                
+<small>
+https://kaustubholpadkar.github.io/Logistic%20Regression%20Tensorflow.js/
+https://twitter.com/olpadkar/status/999837765289234432    
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### GANs in your browser
+
+<a href='https://poloclub.github.io/ganlab/'>
+<img src='img/tfjs/gan-lab.png'>
+</a>
+        
+<small>
+https://twitter.com/minsukkahng/status/1037016214575505409
+https://poloclub.github.io/ganlab/
+https://minsuk.com/research/papers/kahng-ganlab-vast2018.pdf
+</small>
+</textarea>
+</section>
+
+<section>
+<h3>Generating Celebreties - From Keras to tensorflow.js</h3>
+<p>Trained for two weeks on a single high-end GPU on CelebA-HQ data set (images of celebreties)</p>
+<div class="fragment" style="float: left">
+    <img src="img/unsupervised/gan-model-male2.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female2.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female1.png" height="200">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-male.png" height="200">
+</div>
+<p style="clear: both">
+<small>
+<a href="https://alantian.net/ganshowcase/" target="_blank">https://alantian.net/ganshowcase/</a>
+<br>
+<a href="https://github.com/alantian/ganshowcase" target="_blank">https://github.com/alantian/ganshowcase</a>
+<br>
+<a href="https://twitter.com/alanyttian/status/988242167998148608" target="_blank">https://twitter.com/alanyttian/status/988242167998148608</a>
+</small>
+                   
+</p>
+</section>                                
+    
+
+            <section>
+                <h1>(II) Develop</h1>
+                <p class="fragment">Most obvious reason: JavaScript is the language you are most comfortable with</p>
+                <p class="fragment">You just happen to develop for the browser</p>
+                <p class="fragment">You are intrigued by how JavaScript development works</p>
+                <p class="fragment">Combination with interactive visualizations and other browser features (like audio and video)</p>
+            </section>
+    
+            <section>
+                    <h3>Core Concepts</h3>
+                <p>It's all about asynchronous matrix operations</p>
+                    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const a = tf.tensor1d([1, 2, 3]);
+    const b = tf.scalar(2);
+    
+    // a is not modified, result is a new tensor
+    const result = a.add(b);
+                    </code></pre>
+                                        
+                    <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const data = await result.data(); 
+    console.log(data); // Float32Array([3, 4, 5]
+                    </code>
+                </pre>
+                <p>
+                    <small>
+                            <a href="js/tensorflow-sandbox/minimal.html" target="_blank">Minimal Example</a>
+                            <br>
+                            <a href="https://github.com/tensorflow/tfjs" target="_blank">https://github.com/tensorflow/tfjs</a>
+                            <br>
+                            <a href="https://js.tensorflow.org/tutorials/core-concepts.html" target="_blank">
+                                https://js.tensorflow.org/tutorials/core-concepts.html</a>
+            
+                    </small>
+                </p>
+            </section>
+        
+                <!-- <section>
+                <h3>Demo: Changing the Optimizer in a simple example</h3>
+                <img src='img/curve-fitting.png'>
+                <p>Getting an impression of how to code and how the turnaround cycle works</p>
+                <p><small><a href="js/polynomial-regression-core/" target="_blank">Polynomial Regression Example</a></small></p>
+            </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+    ### Steps
+    * Find API documentation about Optimizers: https://js.tensorflow.org/api/0.11.6/#Training-Optimizers
+    * Changing to first https://js.tensorflow.org/api/0.11.6/#train.momentum and then https://js.tensorflow.org/api/0.11.6/#train.adam 
+    </textarea>
+    </section> -->
+    
+    <section>
+            <h3>High Level Layer API</h3>
+        <p>If you have ever seen Keras, you will feel right at home</p>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const model = tf.sequential();
+              </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    model.add(tf.layers.dense({units: 10}));
+              </code></pre>
+                                
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    model.add(tf.layers.conv2d({
+      inputShape: [28, 28, 1],
+      kernelSize: 5,
+      filters: 8,
+      activation: 'relu'
+    }));
+            </code>
+        </pre>
+    </section>
+    <section data-markdown>
+        <textarea data-template>
+    ### Zero Installation
+    
+    <p>Experiments with state of the art neural networks with zero installation directly in JavaScript: <a href="js/mnist/model.js" target="_blank">
+        model.js</a></p>
+    
+    <a href="js/mnist" target="_blank">
+    <img src="img/tfjs/minst.png" height="350px">
+    </a>
+    <p><small><a href="js/mnist" target="_blank">
+        https://djcordhose.github.io/ai/js/mnist</a></small></p>
+    
+    </textarea>
+    </section>
+            
+            <!-- <section>
+                <h1>(III) Play</h1>
+                <p class="fragment">Browser games can benefit from Machine Learning</p>
+            </section>
+   
+        <section data-markdown>
+                <textarea data-template>
+### Deep Reinforcement learning (DQN)
+
+<img src='img/dqn.png' height="400px">
+
+<small>
+https://twitter.com/sqcai/status/994205618620850176
+<br>
+http://web.sfc.keio.ac.jp/~t15704yn/falling/
+</small>    
+            
+                </textarea>
+            </section>
+                
+                <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+    ### Find Emojis in the real world
+    
+    Loads a MobileNet (Neural Network optimized for mobile devices) fully trained on all the Emojis
+    
+    <a href="https://emojiscavengerhunt.withgoogle.com/">
+    <img src="img/tfjs/scavenger_hunt.png" height="350px">
+    </a>
+    
+    https://github.com/google/emoji-scavenger-hunt
+    https://js.tensorflow.org/tutorials/mnist.html
+    
+    </textarea>
+    </section>
+    
+                <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+    ### Pacman using gesture control
+    
+    Loads a pretrained MobileNet and let's you refine it to your face (transfer learning) 
+    
+    <a href="https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html">
+    <img src="img/tfjs/pacman.png" height="350px">
+    </a>
+    
+    https://js.tensorflow.org/tutorials/webcam-transfer-learning.html
+    
+    </textarea>
+    </section> -->
+    
+            <section>
+                <h1>(III) Deploy</h1>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+        <img src='img/fchollet-future-deployment.png'>
+        
+        <small>https://twitter.com/fchollet/status/1050097588978872320</small>
+                </textarea>
+            </section>
+        
+            <section>
+                <h3>JavaScript might be the only language around</h3>
+                <p class="fragment">because all you have is a browser</p>
+    
+                <ul class="fragment">
+                    <li>you on your mobile phone
+                    <li>AI in browser based game
+                    <li>use any GPU
+                </ul>
+    
+            </section>
+
+    
+    <section>
+        <h3>Scenario: Train using beefey machine using raw TensorFlow, deploy to browser</h3>
+    </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="400">
+</a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p>
+</textarea>
+    </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+    ### Approach
+    * Train Tensorflow / Keras Modell 
+    * Convert to tensorflow.js format
+    * Load into browser
+    * use in the same way as on server
+    
+    https://js.tensorflow.org/tutorials/import-keras.html
+    </textarea>
+    </section>
+    
+    <section>
+            <h3>Using the fully trained modell in JavaScript</h3>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const model = await tf.loadModel('model.json');
+            </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    // max speed, age, thousand kilometers per year
+    const example = tf.tensor([[150, 45, 10]]);
+    const prediction = model.predict(example);
+                    </code></pre>
+            <pre><code contenteditable data-trim class="fragment line-numbers javascript">
+    const value = await prediction.data();
+    // softmax 
+    // # 0: red
+    // # 1: green
+    // # 2: yellow        
+    console.log(value);
+    // [0.0937359631061554, 
+    //  0.7274655699729919, 
+    //  0.17879831790924072]
+    </code></pre>
+    <p><small>
+        <a href='js/tensorflow-sandbox/load_model.html' target="_blank">https://djcordhose.github.io/ai/js/tensorflow-sandbox/load_model.html</a></small>
+    </small></p>
+    </section>
+    
+    <!-- <section data-markdown>
+            <textarea data-template>
+    ### Deployment to observablehq
+    
+    <img src='img/tfjs/observablehq.png' height="400px">
+    
+    https://beta.observablehq.com/@nsthorat/introduction-to-deeplearn-js
+    </textarea>
+    </section>
+             -->
+
+                         
+    <section data-markdown>
+        <textarea data-template>
+    ### Going over WebGL to reach the GPU
+    
+    _We use fragment shaders to parallelize the tensor operations and use 2D color textures to store data. Operations trigger shader programs that run over textures and generate new textures (tensors)._
+    
+    @nsthorat via https://news.ycombinator.com/item?id=15856647
+    </textarea>
+    </section>
+        
+    <section data-markdown>
+            <textarea data-template>
+    <img src="img/tfjs/gtx_1060.png" height="500px">
+    
+    GPU usage when re-training for Pacman
+        </textarea>
+        </section>
+        
+    <section data-markdown>
+            <textarea data-template>
+### Performance TensorFlow
+
+<img src='img/tfjs/tf_cuda.png' height="400px">
+
+From: <a target="_blank" href="https://docs.google.com/presentation/d/1QsaLOsl82tQUDxkqbuVg3jS_NhFUkHnuagi8NpR66mM/edit#slide=id.g376d3e9012_0_725">
+    TensorFlow.js from the #tfdevsummit
+</a>
+    </textarea>
+    </section>
+            
+    <section data-markdown>
+            <textarea data-template>
+### Performance TensorFlow.js
+
+<img src='img/tfjs/tf_webgl.png' height="400px">
+
+From: <a target="_blank" href="https://docs.google.com/presentation/d/1QsaLOsl82tQUDxkqbuVg3jS_NhFUkHnuagi8NpR66mM/edit#slide=id.g376d3e9012_0_725">
+    TensorFlow.js from the #tfdevsummit
+</a>
+    </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### WebGPU is coming
+
+<img src='img/webgpu_intent.png' height="400px">
+
+<small>
+https://twitter.com/nsthorat/status/1003986237361934338
+https://groups.google.com/a/chromium.org/forum/m/#!topic/blink-dev/dxqWTSvyhDg
+</small>
+    </textarea>
+    </section>
+    
+    <section data-markdown>
+            <textarea data-template>
+### Overview
+
+<img src='img/tfjs/tf_js_overview.png' height="400px">
+
+From: <a target="_blank" href="https://docs.google.com/presentation/d/1QsaLOsl82tQUDxkqbuVg3jS_NhFUkHnuagi8NpR66mM/edit#slide=id.g376d3e9012_0_725">
+    TensorFlow.js from the #tfdevsummit
+</a>
+    </textarea>
+    </section>
+
+    <section>
+            <h1>(IV) Apps powered by AI</h1>
+            <p>AI-powered browser apps using ready made models</p>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Real-time pose estimation
+
+<img src='img/posenet_camera.gif' height="400px">
+
+<small>
+Demo: https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html
+<br>
+Links: https://twitter.com/random_forests/status/993639149780459520
+<br>
+Application: https://twitter.com/teropa/status/1001151524351959041
+</small>    
+        
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Face Detection
+
+<img src='img/tfjs/bbt-face-recognition.gif' height="400px">
+
+<small>
+Demo: https://justadudewhohacks.github.io/face-api.js
+<br>
+Project: https://github.com/justadudewhohacks/face-api.js
+</small>    
+        
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Machine Learning accessible for artists based on tensorflow.js
+
+<img src='img/ml5js.png'>
+
+<small>
+https://ml5js.org/
+<br>
+https://github.com/ml5js
+<br>
+https://itp.nyu.edu/adjacent/issue-3/ml5-friendly-open-source-machine-learning-library-for-the-web/
+</small>
+</textarea>
+</section>
+
+        <section data-markdown>
+            <textarea data-template>
+### More
+
+<img src='img/tfjs/aijs-rocks.png' height="400px">
+
+<small>
+https://aijs.rocks/
+<br>
+https://twitter.com/EleanorHaproff/status/1035068222087811072    
+</small>    
+        
+            </textarea>
+        </section>
+
+
+
+        <section>
+            <h3>Wrapping Up</h3>
+            <p>tensorflow.js browser apps</p>
+            <ul>
+                <li>can make use of any GPU (not only CUDA)
+                <li>have highest reach due to zero installation
+                <li>can be easily integrated into existing Web Apps
+                <li>allow for best visualization
+                <li>are ideal for interactive learning
+            </ul>
+            <p><small>
+                Why the Browser and Machine Learning are a perfect match, MCubed 2018
+                <br>
+            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <br>
+        <p><small><a href="http://bit.ly/mcubed-tensorflow-js">
+            http://bit.ly/mcubed-tensorflow-js
+        </a></small></p>
+            </small></p>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    // $('section').attr('data-background-image', "backgrounds/blue.jpg")
+    // $('section').attr('data-background-image', "backgrounds/blue-tile.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+    // $('section').attr('data-background-image', "backgrounds/black.jpg")
+
+//    $('section').attr('data-background-image', "backgrounds/tiles-raw.jpg")
+//    $('section').attr('data-background-image', "backgrounds/white-transparent.jpg")
+</script>
+<script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+    }
+
+    Reveal.addEventListener( 'ready', function( event ) {
+        // applies to all versions
+        $('code').addClass('line-numbers');
+
+        // do we want this???
+        $('li').addClass('fragment')
+
+        // make all links open in new tab
+        $('a').attr('target', '_blank')
+
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+
+
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

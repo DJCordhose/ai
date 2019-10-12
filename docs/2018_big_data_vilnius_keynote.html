@@ -1,0 +1,1052 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Big Data Vilnius Keynote</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              .beginning:before {
+                  content: 'BEGINNING';
+              }
+              .beginning {
+                color: red !important;
+              }
+              .end:before {
+                  content: 'END';
+              }
+              .end {
+                color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+
+            .reveal {
+                color: black !important;
+             }       
+
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+<!-- 
+Bringing a machine learning model to production is a complex task involving many steps and technologies.
+
+This talk proposes a sequence of steps you can use as a blueprint for your own project to give you maximum guidance to
+go to production quickly. These steps include checking / cleaning the data, getting an intuition for the data by
+plotting it, creating a base line for your model to see if it really performs well, feature selection, validate the
+model for over- and underfitting, and fine tuning the parameters of your model.
+
+We will use Jupyter Notebooks, Pandas, matplotlib, Sklearn, Keras, and Tensorflow for this.
+
+45 Minutes
+
+-->
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+</textarea>
+</section> -->
+
+<!-- <section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation
+
+    </textarea>
+</section> -->
+
+        <section>
+                <br>
+                <br>
+                <h2>Machine Learning from Idea to Production</h2>
+            <!-- <h2>or Machine Learning is the new punk</h2> -->
+            <br>
+            <br>
+            <p><a target="_blank" href="https://www.bigdataconference.lt/Oliver-Zeigermann/">
+                Keynote, Big Data Conference Vilnius, November 2018
+            </a></p>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / 
+                <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <p><small><a href="http://bit.ly/steps-keynote">
+                http://bit.ly/steps-keynote
+            </a></small></p>
+        </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Objective
+
+_Imagine we are in the car insurance business and want a system that predicts the risk of accidents for prospective customers_
+
+<img src='img/pixabay/accident-151668_1280.png'>
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p>
+</textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+## Core Statement of this talk                    
+<h3 class="fragment">For practical applications our models are not done when they are trained and successfully generalize</h3>
+
+<h3 class="fragment">They are not even done when in production</h3>
+        
+        </textarea>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Analogy from Classic Software Development
+
+<img src="img/hickey-production.png">
+
+<br>
+<small>
+https://twitter.com/richhickey/status/1063086406980026370
+</small>
+</textarea>
+</section>
+
+        <section data-markdown>
+    <textarea data-template>
+### Plan for this talk
+
+_A repitation of what you might have seen here_
+* Data Preparation
+* Training
+
+_Something to keep you thinking, maybe for next conference_
+* Evaluation
+* Production
+* Post-Production
+</textarea>
+</section>
+
+    <section>
+        <h3>Supervised Learning from known data</h3>
+        <img src="img/manning/all.png" height="500px" class="fragment">
+        <!-- <p class="fragment">
+            <small>How would you rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
+        </p> -->
+    </section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### An Alternative Workflow
+There can be more than one...
+
+<img src='img/Workflow.png'>
+
+<small>
+https://developers.google.com/machine-learning/guides/text-classification/    
+</small>
+</textarea>
+</section> -->
+
+<section data-markdown>
+    <textarea data-template>
+### Part I
+## Data Preparation
+
+* Collection
+* Cleaning
+* Analysis
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-trask-engineering.png'>
+<small>
+https://twitter.com/iamtrask/status/1045620902367514625
+<br>
+http://martin.zinkevich.org/rules_of_ml/rules_of_ml.pdf
+</small>
+    </textarea>
+    </section>
+ -->
+
+<!-- <section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-pearl-datascience.png' height="600px">
+<small>
+https://twitter.com/yudapearl/status/1055014100613427200    
+</small>
+    </textarea>
+    </section> -->
+<section data-markdown>
+        <textarea data-template>
+### Data is King
+
+_collecting data might be the hardest part of the job_
+
+* but also the most important
+* no data, not good quality or quantity => no supervised machine learning
+* if we have a simulator, reinforcement learning might be an option
+    
+    </textarea>
+    </section>
+
+    <section data-markdown>
+    <textarea data-template>
+### Basic Check on Collected Data
+
+<img src='img/df_describe.png' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Clean Data and Select Features
+
+<img src='img/applications/data.png' height="500">
+
+</textarea>
+</section>
+
+<!-- <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Results: Data Cleaning und Feature Selection
+
+_Data Cleaning_
+* Typos: Califorina
+* Outliers: Delete line or replace with decent value
+* Doubles: Delete
+* Missing Value: Delete line or replace with imputed value
+
+_Feature Selection_
+* Make sure which value to predict
+* Row missig more than 50% of values: do not use
+* Explore dependencies to decide what to use for training input
+            </textarea>
+            </section> -->
+
+    <!-- <section data-markdown>
+        <textarea data-template>
+### Exploration
+<img src='img/sns-pairplot.png' height="550px">
+
+    </textarea>
+    </section> -->
+
+    <!-- <section data-markdown>
+        <textarea data-template>
+### Correlations
+<img src='img/correlation.png' height="500px">
+<p><small>Darker Colours indicate higher correlation</small></p>
+
+    </textarea>
+    </section>
+
+        <section>
+            <h2><small>Pearson's r: Linear Correlation</small></h2>
+            <div style="margin-top: -40px">
+            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+            <img src="img/Correlation_coefficient.png">
+            </a>
+            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966</a></small></p>
+                </div>
+        </section>
+
+        <section>
+            <h3>This is just linear correlation</h3>
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+            <img src="img/Correlation_examples2.svg" height="350px">
+            </a>
+            <p><small>correlation coefficient (r) above each figure</small></p>
+            <p>Notice: figures at the bottom row obviously are correlated, just not linearly </p>
+            </section> -->
+
+<section data-markdown>
+    <textarea data-template>
+### Part II 
+## Training
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Baselines
+
+* we must be careful to not fool ourselves
+* we can never be quite sure what is the highest possible score
+* but we can provide a baseline of a prediction with very little effort
+* every model must be matched to this baseline
+
+<small>
+https://blog.insightdatascience.com/always-start-with-a-stupid-model-no-exceptions-3a22314b9aaa
+<br>
+https://blog.insightdatascience.com/how-to-deliver-on-machine-learning-projects-c8d82ce642b0    
+</small>
+</textarea>
+</section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Baseline 1: Random
+
+<img class="fragment" src='img/decision-boundaries/random.png' height="500px">
+<small class="fragment">It still gets 33% percents right</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Baseline 2: Very simple rule based 
+<img class="fragment" src='img/manning/manual.png' height="500">
+<small class="fragment" >approx. 43% predictions correct</small>
+</textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Baseline 3: KNN, n=39
+
+<img class="fragment" src='img/insurance/knn_39.png' height="500px">
+<small class="fragment">Already 70% accuracy on test data, found using grid search with cross validation</small>
+</textarea>
+</section>
+    
+<section data-markdown>
+        <textarea data-template>
+### Machine Learning is all about Generalization
+
+<img src='img/MELLI.jpg' height="500px">
+            </textarea>
+            </section>
+
+
+<!-- <section data-markdown>
+        <textarea data-template>
+### Generalization
+
+* The most important property of a model is if it generalizes well to unknown data
+* A machine learning model is of no use if it only works well on the data it has been trained on
+  * If it was, the easiest way to achieve this would be a dictionary translating from a set of inputs to the known output
+* Conceptually it is a little bit hard to optimize for something we do not know
+* So, we introduce a little trick here
+
+</textarea>
+</section> -->
+
+<section data-markdown>
+    <textarea data-template>
+### Split known data into training and test
+
+<img class='fragment' src='img/insurance/generalization.jpg' height="550px">
+
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Use some training data for validation
+
+<img class='fragment' src='img/insurance/generalization1.jpg' height="550px">
+
+</textarea>
+</section> -->
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### What is Overfitting
+
+<video controls src="img/dog-overfit.mp4" 
+type="video/mp4" height="400"></video>
+
+<small>
+https://twitter.com/Reza_Zadeh/status/1051194782448402432
+</small>
+        </textarea>
+</section> -->
+
+
+<section id='overfitting'>
+        <h3>The Issue: Overfitting</h2>
+    <div>
+    <div style="float: left">
+        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
+        <p>
+            <small><em>Training Score</em></small>
+        </p>
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='5'>
+        <img src="img/scans/elements/down.jpg" height="200">
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='4'>
+        <img src="img/scans/elements/up.jpg" height="200">
+    </div>
+    <div style="float: left">
+            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
+            <p>
+                <small><em>Test Score</em></small>
+            </p>
+    </div>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and test scores clearly divert</em></p>
+
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Regularization
+
+_Process to counter overfitting_
+
+Each ML strategy has its own means of Regularization, e.g.
+* KNN: more neighbors
+* Decision Trees: reduce depth, use ensenbles
+* SVM: gamma (how many points to use) and cost (of misclassified data)
+* NN: Dropout, Batch Normalization, Reduced Capacity, Reduced Training Time
+            </textarea>
+            </section>
+    
+
+<section data-markdown>
+        <textarea data-template>
+### Great results
+
+<img src='img/manning/nn-reg.png' height="450">
+
+<p class="fragment"><small>Up to 80% accuracy on test data using a regularized neural networks</small></p>
+</textarea>
+    </section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Part III 
+## Evaluation
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Great results
+
+<img src='img/manning/nn-reg.png' height="450">
+
+<p class="fragment"><em>BUT ARE THEY?</em></p>
+</textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+
+<img class='fragment' src='img/chk_wolf.jpg' height="500px" style="float: left">
+
+<img src='img/chk_rot.jpg' height="500px" style="float: right">
+
+
+<p class="fragment">_Every Story needs a Wolf_</p>
+        </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+# Issue 1: Bias in Training Data
+</textarea>
+        </section>
+        
+
+<section data-markdown>
+        <textarea data-template>
+### Revisiting the Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<!-- <p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p> -->
+</textarea>
+    </section>
+
+            <section data-markdown>
+        <textarea data-template>
+### Looking at areas not covered by training data
+
+<div class="fragment">
+<img src='img/decision-boundaries/decision-boundaries-production.png' height="450">
+
+<small>
+        https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb#scrollTo=hZp_oYJqBeOK    
+        </small>
+        
+</div>
+</textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### But we had a lot of data for training
+
+_At the end of the day_
+* it does not matter how much data we had
+* it matters if our data matches the real world 
+* not numbers, but diversity matters
+                </textarea>
+            </section>
+                    
+<!-- <section data-markdown>
+    <textarea data-template>
+### Predictions outside of the trained range 
+
+A neural network deployed in the wild may be asked to make predictions for inputs
+that were drawn from a different distribution than that of the training data. 
+
+A
+plethora of work has demonstrated that it is easy to find or synthesize inputs for
+which a neural network is highly confident yet wrong.
+
+<small>
+https://arxiv.org/abs/1810.09136
+</small>
+</textarea>
+</section> -->
+
+
+<section data-markdown style='font-size: xx-large'>
+        <textarea data-template>
+### How to deal with those blank spots?
+
+<p class="fragment"><em>First: Be aware of the reasonable range of values</em></p>
+
+* For requests in extended area
+  * at least add a warning or 
+  * refuse to make a prediction
+* Identify suspicious scores
+  * in exteded area scores often are very biased towards one category (1.0 score)
+* Try to get more data, even incrementally
+  * Use user feedback, give it lower training score
+* Add likelihoods to scores
+  * Bayesian approaches are the new hype
+  
+</textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Making Your Neural Network Say "I am not sure"
+
+<img src='img/tf_proba.jpg' class="fragment">
+
+<small>
+https://www.tensorflow.org/probability/
+<br>
+https://towardsdatascience.com/making-your-neural-network-say-i-dont-know-bayesian-nns-using-pyro-and-pytorch-b1c24e6ab8cd
+<br>
+
+</small>
+</textarea>
+    </section>
+
+
+
+<!-- <section data-markdown>
+            <textarea data-template>
+### Sanity Checks / Biases
+
+your model contains all biases and truths of the training data
+
+* https://www.blog.google/technology/ai/new-course-teach-people-about-fairness-machine-learning/amp/
+  * https://developers.google.com/machine-learning/crash-course/fairness/video-lecture
+  * https://twitter.com/JeffDean/status/1053512817083465729
+* https://twitter.com/tdietterich/status/1052680788389507073  
+
+</textarea>
+</section> -->
+
+
+<section data-markdown>
+    <textarea data-template>
+### Check for bias / unfairness
+
+_our models contain all biases and truths of the training data_
+
+* Our model might perform well for a few users, but badly for others
+* Accuracy and loss only show the average
+* Some areas might not have been properly covered with data samples (including test)
+<!-- * Curse of High Dimensions -->
+
+<small>
+https://developers.google.com/machine-learning/fairness-overview/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# Issue 2: Are we fitting on the right features?
+</textarea>
+</section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Explaining our models
+
+_by making slighly varying input data, find out which dimensions contribute most to a prediciton_
+
+LIME: 
+
+https://github.com/marcotcr/lime/blob/master/README.md
+Anchor: 
+
+https://github.com/marcotcr/anchor/blob/master/README.md
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### What do we do for images?
+
+* images need even more and more diverse data
+* lime tests do not apply
+* it is very likely we are having bias in our images
+* our training data will most likely overfit the real world
+* ML can not tell if we are gay or criminals by looking at our picture
+* Or our IQ, character traits and violent tendencies? https://twitter.com/jbensnyder/status/1064759174574280704
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Which parts trigger an activation?
+
+<img src='img/fchollet/fchollet-elephantness.png' height="500px">
+
+<small>Deep Learning with Python, François Chollet, Manning</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Does facial hair make someone hetero?
+
+<img src='img/gay-or-not.jpeg' height="450px">
+<br>
+Same person, left classified as hetero, right as gay
+<br>
+<small>https://medium.com/@blaisea/do-algorithms-reveal-sexual-orientation-or-just-expose-our-stereotypes-d998fafdf477</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Part IV: 
+## Production
+</textarea>
+</section>
+
+<section data-markdown class="local" style="font-size: xx-large">
+    <textarea data-template>
+### There is a complete test if we are ready to go in production
+
+_What’s your ML Test Score? A rubric for ML production systems_
+* <a href='https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf'>PDF</a>
+* https://nips.cc/Conferences/2016/Schedule?showEvent=6255
+
+I did this for one of my projects and the results can be scary
+</textarea>
+</section>
+
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+<a href='html/calculator.html' target="_blank">
+    https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p>
+</textarea>
+</section>
+ -->
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Serving Models
+
+* Be very sure we have the same pipeline of steps when serving as we had for training and evaluation
+* Log real world predictions (if ok with <a href='https://gdpr-info.eu/'>GDPR</a>)
+* It might make sense to use: http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html
+* Same goes for TensorFlow: https://github.com/tensorflow/transform / https://beam.apache.org/
+
+        </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Version together
+
+1. Code for Cleaning and Trained Model
+1. Trained Model (if size permits)
+1. Serving Code
+1. Training data might not be feasible because of size or <a href='https://gdpr-info.eu/'>GDPR</a>
+            </textarea>
+        </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Consider something that lets you version really large files
+
+<img src='img/dvc.jpg' height="400px">
+
+<small>
+https://dvc.org/
+<br>
+Kudos to @kein_mark for pointing me to this
+</small>
+            </textarea>
+        </section>
+
+
+    <section data-markdown style='font-size: xx-large'>
+            <textarea data-template>
+### Possible Deployment Environments
+
+* Google Cloud ML
+  * Can serve TensorFlow and Sklearn
+  * our model and calls are in Google's control
+  * Takes away the scaling and installation burden
+
+* Local Server
+  * TensorFlow Serving
+  * Docker Containers (support for NVIDIA GPUs: https://github.com/NVIDIA/nvidia-docker) 
+  * Flask Server  
+
+* Browser: https://js.tensorflow.org
+
+                </textarea>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Part V: 
+## Post-Production
+    </textarea>
+    </section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Dealing with Bias / Unfairness
+
+* log real requests
+* log matching user behavior
+* evaluate those requests (Elastic)
+* if we recommend, do users follow our advice?
+* if there is probabilty, how good is it?
+* do we see bias/unfairness?
+* put more emphasis on data that suffers from bias
+
+Always check with <a href='https://gdpr-info.eu/'>GDPR</a>
+</textarea>
+</section>
+ -->
+
+<section data-markdown>
+    <textarea data-template>
+### Going to production changes everything
+
+* True for classic software as well as machine learning models
+* Every deployment of a newly trained model is like a major release in software development
+* needs to be tested like this
+* or we need to make sure it rather is like a minor or bugfix release
+  * make incremental changes
+  * combine models
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Continuity in model predictions
+
+* People who use our model regularly will expect most things to stay the way they know it
+* Even if not totally accurate
+* That might mean we can not train a model from scratch even if we have better data or a better model architecture
+* Consider mixing more than one model
+* If using NNs add continuity term to the loss function
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### The Turtle Effect
+
+If the user expects a certain pattern to be in the model, they expect it to persist
+
+<img src="img/applications/turtle.png" height="400px">
+
+    </textarea>
+</section>
+
+
+<section>
+        <h2>Wrap Up</h2>
+        <p><em>It does not end with training the model</em></p>
+        <ul>
+            <li class="fragment">having reasonable data is the most important part
+            <li class="fragment">evaluation is more than accuracy: blank spots, bias 
+            <li class="fragment">going to production changes everyhing 
+            <li class="fragment">people expect continuity 
+        </ul>
+        <br>
+        <p>
+                <em>Machine Learning from Idea to Production</em>
+            <br>
+            <br>
+            <small>
+        <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            <br>
+    <a href="http://bit.ly/steps-keynote">
+        http://bit.ly/steps-keynote</a>
+    </small>
+        </p>
+    </section>
+    
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    const local = window.location.hostname.indexOf('localhost') !== -1 && !window.location.search.match(/print-pdf/gi);
+        if (local) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (local) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+                // do we want this???
+                $('li').addClass('fragment')
+
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        $('section').attr('data-background-image', "backgrounds/sky.jpg");
+
+        // $('section').attr('data-background-image', "backgrounds/wall-bright.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white-transparent.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: false,
+        history: true,
+        center: true,
+        width: 1100,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Sandbox</title>
+</head>
+
+<body>
+  <script>
+
+    // const sequence =     [[0,0,18424],[1,0,116],[0,0,69],[0,1,5725],[1,1,45],[0,1,1378],[0,0,34],[0,1,1184],[1,1,37],[0,1,986],[0,0,43],[0,1,940],[1,1,246],[0,0,456],[0,1,943],[1,1,201],[0,0,822],[1,0,766],[0,0,703],[0,1,927],[1,1,665],[0,1,110],[0,0,39],[0,1,848],[1,1,200],[0,0,679],[0,1,1134],[1,1,36],[0,1,42],[1,1,43],[0,1,41],[1,1,85],[0,0,357],[0,1,854],[0,0,843],[1,1,7724]];
+    const sequence =     [[0,0,18424],[1,0,116],[0,0,69],[0,1,5725],[1,1,45],[0,1,1378],[0,0,34],[0,1,1184],[1,1,37],[0,1,986],[0,0,43],[0,1,940],[1,1,246],[0,0,456],[0,1,943],[1,1,201],[0,0,822],[1,0,766],[0,0,703],[0,1,927],[1,1,665],[0,1,110],[0,0,39],[0,1,848],[1,1,200],[0,0,679],[0,1,1134],[1,1,36],[0,1,42],[1,1,43],[0,1,41],[1,1,85],[0,0,357],[0,1,854],[0,0,843]];
+    // const sequence =     [[1,1,45],[0,1,1378],[0,0,34],[0,1,1184],[1,1,37],[0,1,986],[0,0,43],[0,1,940],[1,1,246],[0,0,456],[0,1,943],[1,1,201],[0,0,822],[1,0,766],[0,0,703],[0,1,927],[1,1,665],[0,1,110],[0,0,39],[0,1,848],[1,1,200],[0,0,679],[0,1,1134],[1,1,36],[0,1,42],[1,1,43],[0,1,41],[1,1,85],[0,0,357],[0,1,854],[0,0,843]];
+
+    function deleteAllBeforePause(sequence) {
+      let i = sequence.length - 1;
+      for (; i >= 0; i--) {
+        const [b1, b2, t] = sequence[i];
+        if (t > 5000) {
+          return sequence.slice(i + 1)
+        }
+      }
+      return sequence;
+    }
+
+    // either from 00 to 11 or 00 to 00 etc.
+    function deleteMovement(sequence) {
+      const newSequence = [];
+      let i = sequence.length - 1;
+      for (; i >= 0; i--) {
+        const event = sequence[i];
+        const [b1, b2, t] = event;
+        if (t < 100) {
+          // skip previous event
+          i--;
+        } else {
+          newSequence.unshift(event);
+        }
+      }
+      return newSequence;
+    }
+
+    function debounce(sequence) {
+
+      sequence = deleteMovement(deleteAllBeforePause(sequence))
+      return sequence;
+    }
+
+    console.log(JSON.stringify(sequence));
+
+    console.log(JSON.stringify((debounce(sequence))));
+
+  </script>
+</body>
+
+</html>

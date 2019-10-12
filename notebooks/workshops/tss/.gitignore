@@ -1,0 +1,13 @@
+.ipynb_checkpoints
+generated
+augmented-signs
+augmented-signs.zip
+speed-limit-signs
+speed-limit-signs.zip
+real-world.zip
+real-world
+tmp
+tf_log
+tf
+*.hdf5
+nohup.out

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>enterjs demo</title>
+</head>
+
+<body>
+  <video class="videobox canvasbox" autoplay="autoplay" id="myvideo" width="500px" height="380px"></video>
+  <canvas id="canvas" width="500px" height="380px"></canvas>
+  <div>
+    <span id="updatenote"> loading model ..</span>
+    <span id="encoding">Encoding</span>
+    <span id="result">Tracking</span>
+  </div>
+  <div>
+    Hello, <span id='sequence'></span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/handtrackjs@latest/dist/handtrack.min.js"> </script>
+  <script>
+    const video = document.getElementById("myvideo");
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
+    let updateNote = document.getElementById("updatenote");
+
+    let isVideo = false;
+    let model = null;
+
+    // video.width = 500
+    // video.height = 400
+
+    const modelParams = {
+      flipHorizontal: true,   // flip e.g for video  
+      maxNumBoxes: 20,        // maximum number of boxes to detect
+      iouThreshold: 0.5,      // ioU threshold for non-max suppression
+      scoreThreshold: 0.6,    // confidence threshold for predictions.
+    }
+
+    function startVideo() {
+      handTrack.startVideo(video).then(function (status) {
+        console.log("video started", status);
+        if (status) {
+          updateNote.innerText = "Video started. Now tracking"
+          isVideo = true
+          runDetection()
+        } else {
+          updateNote.innerText = "Please enable video"
+        }
+      });
+    }
+    function clearResult() {
+      document.querySelector('#result').textContent = '';
+    }
+
+    function logResult(result, score) {
+      const old = document.querySelector('#result').textContent;
+      document.querySelector('#result').textContent = `${old} ${result}(${score})`;
+    }
+
+    let encoding = [-1, -1];
+    let sequence = [];
+    let timestamp = Date.now();
+
+    function debounce(sequence) {
+      return sequence;
+    }
+
+
+    function displaySequence(sequence) {
+      sequence = debounce(sequence)
+      document.querySelector('#sequence').textContent = sequence.join(", ")
+    }
+
+
+    function logNewEncoding(encoding) {
+      document.querySelector('#encoding').textContent = `${encoding[0]}${encoding[1]}`;
+      const now = Date.now();
+      const deltaT = now - timestamp;
+      sequence.push([...encoding, deltaT])
+      displaySequence(sequence)
+      timestamp = Date.now();
+    }
+
+    function detect(prediction) {
+      const { score, bbox } = prediction;
+      if (score >= .8) {
+        const [x, y, width, height] = bbox;
+        if (x < 200) {
+          if (height > 200) {
+            logResult('left open', score)
+            encoding[0] = 1;
+          } else {
+            logResult('left closed', score)
+            encoding[0] = 0;
+          }
+        }
+        if (x > 250) {
+          if (height > 200) {
+            logResult('right open', score)
+            encoding[1] = 1;
+          } else {
+            logResult('right closed', score)
+            encoding[1] = 0;
+          }
+        }
+      }
+    }
+
+    function reset() {
+      encoding = [-1, -1];
+      sequence = [];
+      timestamp = Date.now();
+    }
+
+    function runDetection() {
+
+      model.detect(video).then(predictions => {
+        clearResult();
+        if (predictions.length === 2) {
+          const previousState = [...encoding];
+          // console.log("Predictions: ", predictions);
+          detect(predictions[0]);
+          detect(predictions[1]);
+          const newState = encoding;
+          if (newState[0] !== previousState[0] || newState[1] !== previousState[1]) {
+            logNewEncoding(newState)
+          }
+        } else {
+          // reset()
+        }
+        model.renderPredictions(predictions, canvas, context, video);
+        if (isVideo) {
+          requestAnimationFrame(runDetection);
+        }
+      });
+    }
+    // Load the model.
+    handTrack.load(modelParams).then(lmodel => {
+      // detect objects in the image.
+      model = lmodel
+      updateNote.innerText = "Loaded Model!"
+      startVideo()
+    });
+
+  </script>
+</body>
+
+</html>

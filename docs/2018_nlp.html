@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>NLP</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+            <section data-markdown class="preparation" style="font-size: xx-large">
+                    <textarea data-template>
+### Preparation
+
+* Insgesamt 90 Minuten, steuerbar über die beiden Übungen? Nur eine machen? 
+
+Notebooks noch mal ansehen:
+1. spacy-sandbox
+1. text-vectorizer
+1. 0-imdb-parse (vorher starten und einmal durchlaufen lassen, parsing braucht lange)
+1. 1-embeddings
+
+Sentiment Analysis Story anhand der Notebooks nachvollziehen
+1. 0-imdb-parse
+1. 1-embeddings
+1. 2-rnn / 2-lstm (basic rnn)
+1. 3-gru-dropout (final version avoiding overfitting)
+
+                        </textarea>
+                        </section>
+        
+
+
+        <section>
+            <h2>Introduction to Natural Language Processing (NLP)</h2>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <small>
+                    <a href="https://djcordhose.github.io/ai/2018_nlp.html">
+                        https://djcordhose.github.io/ai/2018_nlp.html</a>
+                        </small>
+        </section>
+        
+        
+        <!-- <section data-markdown class="todo">
+                <textarea data-template>
+
+        </textarea>
+        </section> -->
+
+        <section data-markdown>
+                <textarea data-template>
+### What is Natural Language Processing (NLP)?
+
+Natural language processing (NLP) is the skill of a machine to understand and process human language within the context
+in which it is spoken.
+
+<small>
+https://www.smartdatacollective.com/natural-language-processing-essential-element-ai/    
+</small>
+                </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Structure
+
+1. _NLP without Machine Learning_: Basic Linguistic Processing
+1. _NLP with Machine Learning_: Word Embeddings
+1. _Neural Networks with Memory_: RNNs, LSTMs, GRUs
+                </textarea>
+        </section>
+
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Applications of NLP
+
+* _Machine Translation_: automatic translation of one human language into another
+* _Name Entity Recognition (NER)_: recognizing and identifying proper names and types (person, location or an organization) in text
+* _Optical Character Recognition (OCR)_: text from the image of the printed text
+* _Question-Answer Session_: determine the answer to a question asked in human language
+* _Topic Segmentation_: separate text into parts being related to a specific topic
+* _Speech Recognition_: convert spoken lanuage to its corresponding textual representation
+* _Sentiment Analysis_: judge emotions in texts
+
+https://www.smartdatacollective.com/natural-language-processing-essential-element-ai/    
+                </textarea>
+        </section>
+
+            <section>
+                <h3>Where are we in NLP today?</h3>
+            </section>
+            <section>
+                <h4>Maschines can properly react to written language</h4>
+                <img src="img/ai/gmail-understands-and-reacts-like-a-human.png" height="600px">
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+### It does not always do great, though
+<img src="img/text_linkedin.png">
+                        
+                        </textarea>
+                    </section>
+    
+        <section data-markdown>
+                <textarea data-template>
+### Wavenet: Machines can synthesize human language
+
+<small>
+Google launches more realistic text-to-speech service powered by DeepMind’s AI    
+</small>
+<img src='img/nlp/wavenet/wavenet_progress.gif' height="250px">
+
+<small>
+Industry-leading: <audio
+  src="img/nlp/wavenet/Hol_before.wav"
+  controls></audio> WaveNet: <audio
+  src="img/nlp/wavenet/Hol_before.wav"
+  controls></audio>
+<br>
+<br>
+https://www.theverge.com/2018/3/27/17167200/google-ai-speech-tts-cloud-deepmind-wavenet
+</small>
+                    </textarea>
+                    </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Wavenet passes turing test?
+
+System can call people and make appointments (without people noticing it is a machine)
+
+<img src='img/rnn_big.png'>
+
+<small>
+https://ai.googleblog.com/2018/05/duplex-ai-system-for-natural-conversation.html
+</small>
+                    </textarea>
+                    </section>
+        <section data-markdown>
+                <textarea data-template>
+<img src='img/kun_turing_twitter.png'>
+
+<small>
+https://twitter.com/jeremyjkun/status/994020061437345792
+</small>
+                    </textarea>
+                    </section>
+                    
+        <!-- <section class="todo">
+            <pre>
+- Come up with more state of the art examples
+            </pre>
+        </section> -->
+
+        <section data-markdown>
+                <textarea data-template>
+### Classic Application: Sentiment Analysis in Written Texts
+
+<small>
+https://en.wikipedia.org/wiki/Sentiment_analysis
+</small>
+
+Generally speaking, sentiment analysis aims to determine the attitude of a speaker, writer, or other subject with respect
+to some topic or the overall contextual polarity or emotional reaction to a document, interaction, or event.
+
+_Example: Does a Tweet mention something negative about my company?_
+    
+                </textarea>
+            </section>
+
+            <section>
+                <h3>Cloud Natural Language: Google's ML API for Speech</h3>
+                <img src="img/screenshot_sentiment_analysis.png">
+                <p><small><a target="_blank" href="https://cloud.google.com/natural-language/">
+                    https://cloud.google.com/natural-language/
+                </a></small></p>
+            </section>
+                    
+            <section>
+                <h3>Initial Exercise: How to build sentiment analysis?</h3>
+                <p>Imagine you have a number of texts labelled to categories of positive (1) or negative (0)</p>
+                <p><em>You are free to either use machine learning or not</em></p>
+                <p><em>Disucss in groups and come up with a solution</em></p>
+                <!-- <p><small>5 minutes Work and 5 minutes Discussion</small></p> -->
+            </section>
+            
+        <section>
+            <h3>NLP without Machine Learning</h3>
+            <p>Even when you do not use machine learning to process and analyse text, there is a couple of techniques that can be helpful</p>
+            <p>These techniques can also be applied to make text accessible to machine learning</p>
+        </section>
+
+        <section class="local">
+            <h2>DCGs</h2>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Basic Linguistic Processing
+
+* Tokenizing
+* Stemming
+* Stop-Words
+* Part-of-Speach (POS) Tagging
+* Bag of Words etc.
+
+De-facto standard Python library: https://spacy.io/
+https://spacy.io/usage/linguistic-features
+
+</textarea>
+        </section>
+
+        
+        <section>
+                <img src="img/flashcards/Tokenizing_Text_print.png">
+            </section>
+
+            <section>
+                <img src="img/flashcards/Stemming_Words_print.png">
+            </section>
+    
+            <section>
+                    <img src="img/flashcards/Stop_Words_print.png">
+                </section>
+        
+<section data-markdown>
+        <textarea data-template>
+### n-grams
+
+_n-grams are groups of N (or fewer) consecutive words that you can extract from a sentence_
+<pre>
+The cat sat on the mat.
+
+2-grams:
+
+{"The", "The cat", "cat", "cat sat", "sat",
+"sat on", "on", "on the", "the", "the mat", "mat"}
+</pre>
+
+
+Extracting n-grams is a powerful,
+unavoidable feature-engineering tool when using lightweight, shallow text-processing
+models such as logistic regression and random forests.
+
+<small>
+<a href="https://www.manning.com/books/deep-learning-with-python">
+Deep Learning with Python, Chapter 6.1, François Chollet, Manning            
+</a>
+</small>
+
+            </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Part-of-Speach (POS) Tagging 
+
+https://spacy.io/usage/linguistic-features
+
+Notebook: spacy-sandbox
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Example 
+
+_Apple is looking at buying U.K. startup for $1 billion_
+</textarea>
+</section>
+
+<section>
+    <h3>Terms for Example</h3>
+    <img src='img/nlp/spacy/pos_example.png' height="500px">
+    <p><small>Apple is looking at buying U.K. startup for $1 billion</small></p>
+</section>
+
+<section>
+        <h3>Terms</h3>
+        <img src='img/nlp/spacy/pos_terms.png'>
+</section>
+
+<section>
+        <h3>Bringing in Knowledge about the World</h3>
+        <img src='img/nlp/spacy/entity.PNG'>
+        <p>Name Entity Recognition (NER)</p>
+    </section>
+
+    <section>
+            <h4>POS and Dependencies</h4>
+            <img src='img/nlp/spacy/pos_example_1.png' height="250px">
+            <img src='img/nlp/spacy/pos_example_2.png' height="250px">
+            <small>Have a look at notebook spacy-sandbox for explanation of terms</small>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### How does POS work?
+
+* There are a number of different approaches, among them hidden Markov models
+* More recent approaches use Neural Networks
+
+https://en.wikipedia.org/wiki/Part-of-speech_tagging
+https://spacy.io/api/#nn-model
+            </textarea>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Transforming Text into Vectors of numerical values
+    
+Making it accessible to Machine Learning
+
+Only numerical values can be processed by most machine learning algorithms
+
+</textarea>
+</section>
+
+<section>
+        <h3>Exercise: How could you transform text into something accessible to machine learning?</h3>
+        <p>How to encode a word?</p>
+        <p>How to encode a sequence of words?</p>
+        <p><em>Disucss in groups and come up with a solution</em></p>
+        <!-- <p><small>5 minutes Work and 5 minutes Discussion</small></p> -->
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Label Encoding    
+
+Normalize words such that they contain only values between 0 and number_of_words_in_vocab-1.
+
+<pre><code>text = ["paris", "paris", "tokyo", "amsterdam"]
+paris = 0
+tokyo = 1
+amsterdam = 2
+encoded_text = [0, 0, 1, 2]</code></pre>
+
+<small>
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html
+</small>
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Do you see any problems with this encoding?
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Numbers close to each other suggest a relation, but there might actually be none
+
+Variation: Use index of frequency (frequent words get low numbers)
+
+This way similarity in index at least means something
+
+</textarea>
+</section>
+
+<section data-markdown>
+                <textarea data-template>
+### Bag of Words
+
+Classic approach to turn words into a vector representation accessible for machine learning. 
+
+https://en.wikipedia.org/wiki/Bag-of-words_model
+
+<small>
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
+<br>
+http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html
+<br>
+https://machinelearningmastery.com/prepare-text-data-machine-learning-scikit-learn/
+</small>
+            </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+<img src="img/flashcards/Bag_Of_Words_print.png">
+                    </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Bag of Words - One Hot Encoding
+<img src="img/nlp/acolyer/word2vec-one-hot.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+                </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Bag of Words - Count Encoding    
+
+Token counts where each token is identified by position in list
+
+<pre><code>text = ["paris", "paris", "tokyo", "amsterdam"]
+paris = [0, 0, 1]
+tokyo = [0, 1, 0]
+amsterdam = [1, 0, 0]
+encoded_text = [[0, 0, 1], [0, 0, 1], [0, 1, 0], [1, 0, 0]]
+frequency = [1, 1, 2]
+</code></pre>
+
+<small>
+http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html
+</small>
+    </textarea>
+</section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Limitations of Bag of Words
+
+* Positions and context of words get lost
+* No notion of semantics to words
+* _Common words, not specific to domain probably get highest frequencies_
+
+            </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### TF-IDF
+
+* approach to strip off common words from a measure
+* TF: term frequency
+* IDF: inverse document-frequency
+* TF-IDF: TF times IDF
+
+<small>
+http://scikit-learn.org/stable/modules/feature_extraction.html#tfidf-term-weighting
+http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html
+http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html
+https://en.wikipedia.org/wiki/Tf%E2%80%93idf
+</small>
+</textarea>
+        </section>
+
+            <section>
+                <img src="img/flashcards/TF-IDF_print.png">
+            </section>
+            <section data-markdown>
+                    <textarea data-template>
+### Let's do some calculations
+
+<img src='img/nerds.gif'>
+
+<small>        
+https://medium.com/@Alikayaspor/essential-mathematical-gifs-that-will-make-mathematics-finally-make-sense-4873573f5883
+</small>
+</textarea>
+</section>
+            <section style="font-size: xx-large">
+<h3>Exercise Bag of Words and TF-IDF</h3>
+
+
+<div style="float: left; width: 300px">
+        <p>Consider this text corpus:</p>
+
+<ol>
+    <li>"Ronaldo did the free kick, yes Ronaldo", 
+    <li>"Messi did the penalty", 
+    <li>"A striker did the penalty"
+</ol>
+
+
+
+            </div>
+    <div style="float: right">
+        <br>
+<img src="img/tf-idf-small.png" height="300px">
+        </div>
+<p style="clear: both"><em>Calculate TF-IDF for every term of the first sentence with <span style="color: red">natural logarithm</span></em></p>
+
+<p><small>Notebook: 
+<a href='https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/text-vectorizer.ipynb'>text-vectorizer.ipynb</a></small></p>
+</section>
+ 
+                
+            <section data-markdown>
+            <textarea data-template>
+## Creating our very own sentiment analysis
+### Part I: Encoding pure text data
+Notebook: 0-imdb-parse
+
+            </textarea>
+            </section>
+    
+        <section>
+            <h2>word2vec</h2>
+            <h3>Embeddings: Smart encoding of Word Vectors</h3>
+        </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Motivation: What makes text and sequences so different?
+<img src="img/tf/audio-image-text.png">
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+                </textarea>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Limitations of Bag of Words
+
+* _Positions and context of words get lost_
+* _No notion of semantics to words_
+* Common words, not specific to domain probably get highest frequencies
+
+            </textarea>
+        </section>
+
+
+        <section data-markdown>
+            <textarea data-template>
+<img src="img/nlp/word_embeddings.png" height="550px">
+
+<small>
+<a href="https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/6.1-using-word-embeddings.ipynb">
+Deep Learning with Python
+</a>
+</small>
+            </textarea>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Word Embeddings can carry semantics 
+<img src="img/nlp/acolyer/word2vec-distributed-representation.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+            </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Using t-SNE to project from higher dimensions to 2d
+
+<img src='img/tf/linear-relationships.png'>
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+    </textarea>
+</section>
+
+<section>
+    <h3>Arithmetic on Vectors may express semantics</h3>
+    <div style="float: left">
+            <img src="img/nlp/acolyer/word2vec-king-queen-vectors.png" height="250px">
+            <p>
+                <small>Vectors for King, Man, Queen, & Woman</small>
+            </p>
+        </div>
+        <div style="float: right">
+                <img src="img/nlp/acolyer/word2vec-king-queen-composition.png" height="250px">
+                <p>
+                <small>King – Man + Woman = ?</small>
+            </p>
+        </div>
+    <small>
+        <a href="https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/">
+            https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+    </a>
+    </small>    
+</section>
+    
+<section data-markdown style="font-size: x-large">
+        <textarea data-template>
+### Fancy Example 
+
+* misspelled words in GloVe embedding are close to each other
+* there is a vector for the concept 'misspelled' that you can apply to any word to retrieve the correct spelling
+
+<img src='img/nlp/embed-misspelling.jpg'>
+
+<small>
+http://forums.fast.ai/t/nlp-any-libraries-dictionaries-out-there-for-fixing-common-spelling-errors/16411/7
+https://twitter.com/jeremyphoward/status/997264148655259648
+</small>
+</textarea>
+</section>
+
+<section>
+    <h2>Learning Word Vectors</h2>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Distributional Hypothesis
+
+__Words that appear in the same contexts share semantic meaning.__
+
+https://en.wikipedia.org/wiki/Distributional_semantics
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Sliding Word Window
+<img src="img/nlp/acolyer/word2vec-context-words.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Standard Predictive Method: word2vec
+
+Comes in two flavours
+
+1. _Continuous Bag-of-Words model (CBOW)_: predicts target words (e.g. 'mat') from source context words ('the cat sits on the') - _good for small data sets_
+1. _Skip-Gram model_: does the inverse and predicts source context-words from the target words - _good for larger datasets_. 
+
+<small>
+https://www.tensorflow.org/tutorials/word2vec
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Continuous Bag-of-Words
+
+<img src="img/nlp/acolyer/word2vec-cbow.png" height="500px">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+        </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### What are the actual parameters learned?
+
+_parameters of a hidden fully connected layer_
+
+* vectors for Embedding per word
+* in other words: where in the vector space is a word located
+* similar words have similar vectors
+
+similarity is expressed by the context a word occurs in
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Now what?
+
+You can either
+
+* use the results all by themselves to find out about similarities - visualize by projecting down to 2d using t-SNE as shown before
+* or use the vectors as representations for words - treat texts as sequences of words
+* use these representations to train a classifier etc.
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Visualizing Embeddings
+
+<img src="img/nlp/embedding-projector.png" height="500px">
+
+<small>
+https://projector.tensorflow.org
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Embeddings 300 d on Google News
+
+<img src='img/nlp/word2dev_google_news.jpg' height="500px">
+
+<small>
+https://twitter.com/pmbaumgartner/status/989512625934434309
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Exercise: Get an intuition for Word Embeddings
+
+* Was bedeuten die Farben?
+* Hättest du dasselbe Vokabular verwendet?
+* Zoome in einen Bereich mit eher höhrer Dichte
+* Suche dir einen Cluster mit 5 Wörtern und überprüfe ob auch du die Wörter semantisch benachbart ansiedeln würdest
+
+<small>
+https://plot.ly/~pmbaumgartner/88/word2vec-google-news-2d-umap-embeddings/
+</small>
+
+Note:
+* Was bedeuten die Farben? (Magnitude, je heller desto mehr)
+* Hättest du dieselben Wörter verwendet? (Typische Stopwords raus)
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Creating our very own sentiment analysis
+### Part II: Encoding text as embedding
+
+<small>
+Notebook: https://colab.research.google.com/github/djcordhose/haw/blob/master/notebooks/nlp/1-embeddings.ipynb
+</small>
+ 
+        </textarea>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/bark.jpg");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+
+        ]
+    });
+
+</script>
+
+</body>
+</html>

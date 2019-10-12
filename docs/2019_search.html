@@ -1,0 +1,1384 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Search</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                        letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+
+            .reveal {
+                color: black !important;
+             }       
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!-- 
+    
+All the AI hype these days is around deep learning and that machines eventually are getting rid of us humans. However,
+the ground work of AI without which no self driving car and no AlphaGo Zero would work is search algorithms.
+
+In this talk we will use a simple game of exiting a maze to illustrate the differences between depth first and breadth
+first search. We will also solve the mystery around A* and what makes it such a powerful approach.
+
+In the next step we will look at how to compete against other players using adversarial search like the one used in the
+leading chess engine Stockfish. You will understand Monte Carlo Tree Search which was used in Alpha(Go) Zero to beat
+the world’s best Go players.
+-->
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+https://code.fb.com/web/rapid-release-at-massive-scale/
+</textarea>
+</section> -->
+
+<!-- <section data-markdown class="todo">
+<textarea data-template>
+### High level look at Search
+
+<img src='img/j2bryson-search.jpg'>
+
+<p><small>
+<a href='https://twitter.com/j2bryson'>@j2bryson</a> at 
+<a href='https://www.mcubed.london/sessions/human-minds-and-machine-intelligence/'>MCubded London 2018</a>
+</small>
+</p>
+<small>
+https://www.dur.ac.uk/research/directory/staff/?mode=pdetail&id=12916&sid=12916&pdetail=93713
+</small>
+</textarea>
+</section> -->
+
+<section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation
+
+1. Go through MCTS phases
+1. Play through minimax example
+    </textarea>
+</section>
+
+<section>
+        <h2>Graph Search:</h2>
+        <h3>The Silver Bullet of Symbolic AI and the Secret of AlphaGo Zero</h3>
+<p><a target="_blank" href="TODO">
+    TODO
+</a></p>
+<h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+</h4>
+<p><small><a href="TODO">
+    TODO
+</a></small></p>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Am Ende von M3 Talk dieses Match zwischen Leela Zero und Stockfish zeigen
+### ML Conf mehr darauf ausrichten
+
+Postion for Material
+
+https://www.youtube.com/watch?v=zzfYRxL2lXU
+
+Spiel ganz durchlaufen lassen in fast und bisschen herum labern
+
+https://www.chessworld.net/chessclubs/ltpgnviewer32/ltpgnboard.asp?GameID=5024214
+
+Move 31:
+- White builds up a very strong queen side and simply does not care too much for blacks small plan to steal a pawn
+
+Move 32:
+- Instead it makes its offensive position much stronger
+
+Move 36:
+- A surprising but very powerful move
+
+After that endgame: white wins
+
+
+AUCH
+[]
+[]https://www.youtube.com/watch?v=bLysJkk-RYg 
+
+Hier auch eine Beschreibung von Leela Zero
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+
+[]https://towardsdatascience.com/monte-carlo-tree-search-in-reinforcement-learning-b97d3e743d0f 
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Next level of chess
+            
+https://www.wired.co.uk/article/deepmind-ai-chess
+
+[]Weiß gibt freiwillig 4 Bauern auf, schiebt den König ein bisschen herum und gewinnt: https://youtu.be/pFtY7gNRVRI?t=328
+    []in Schachprogramm nachspielen als Folge von Zügen (StefanZ fragen wie das geht)
+    []mit Kai durchsprechen
+    []In den Talks zeigen und spannendes Stellen Analysieren
+[]AlphaStar vs AlphaGo: https://twitter.com/zookae/status/1090649057758834690
+[]https://en.wikipedia.org/wiki/Leela_Chess_Zero
+    []https://www.youtube.com/watch?v=_3n1iwetA2Y
+    []https://www.quora.com/Has-a-consensus-formed-that-the-AlphaZero-vs-Stockfish-chess-exhibition-was-a-fraud-since-Leela-isnt-catching-up-and-a-better-AlphaZero-hasnt-yet-beaten-a-current-well-configured-Stockfish
+    []http://blog.lczero.org/2019/01/leela-promotes-to-superfinal-of-tcec.html#more
+    []https://www.technologyreview.com/s/612923/how-alphazero-has-rewritten-the-rules-of-gameplay-on-its-own/    
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### AlphaZero Paper 
+
+* Demis Hassabis (@demishassabis) tweeted at 9:31 PM on Thu, Dec 06, 2018:
+The full peer-reviewed #AlphaZero paper published today in @sciencemagazine https://t.co/eThRIHaJyw
+along with more than 200 games which show off its beautiful style https://t.co/MaNhqlUpmr I hope you enjoy them!
+as a chess player, it feels like chess from another dimension :) https://t.co/CDDP5PqNsv
+(https://twitter.com/demishassabis/status/1070777817426739200?s=03)
+
+* Grafiken klauen: https://deepmind.com/blog/alphazero-shedding-new-light-grand-games-chess-shogi-and-go/
+
+* 20 beste Games: https://deepmind.com/research/alphago/alphazero-resources/ als pgn
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### AlphaZero vs Stockfish: 
+            
+1. https://www.chess.com/news/view/updated-alphazero-crushes-stockfish-in-new-1-000-game-match
+
+Analysis of a special game, 4 pawns lost and random king moves
+Mit 2xSpeed aufnehmen ohne Ton nur Board mit Snagit  
+
+* https://twitter.com/mat_kelcey/status/1071900500356870147
+  * https://www.youtube.com/watch?v=pFtY7gNRVRI
+
+
+More good games
+* https://twitter.com/DeepMindAI/status/1071812537434497024?s=03  
+
+Interesting to watch how readily AlphaZero exchanges material for position (in contrast to how a traditional chess engine plays). Makes you wonder what patterns the CNN "sees" on the board.
+* https://twitter.com/random_forests/status/1071613758945017856
+  * https://twitter.com/demishassabis/status/1071541859846107136
+
+</textarea>
+</section>
+
+
+<section data-markdown class="todo">
+        <textarea data-template>
+    
+1. Path Finding Example: WoW Troups
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+
+### Monte Carlo Methods
+
+* Aella (@Aella_Girl) tweeted at 1:55 AM on Wed, Dec 05, 2018:
+Imagine a circle, with a little spinner on it that you can flick. The circle is 80% red and 20% yellow, like a yellow pie slice.
+You flick the spinner. It spins, and slowwwly stops. 
+Where did it land?
+(https://twitter.com/Aella_Girl/status/1070119419353870336?s=03)
+  * Genau 80/20 https://twitter.com/ProGuacVice/status/1070152156408238081?s=03
+        
+* Massimo (@Rainmaker1973b) tweeted at 9:33 PM on Sun, Dec 09, 2018:
+Calculation of π, from rain falling on two wooden plate sensors, one circular and one square: the number of raindrops that landed on each plate during a storm was counted with an Arduino and π was calculated as the ratio [source & credits: https://t.co/XVMlK3X6CF] https://t.co/ra5rPvHTMw
+(https://twitter.com/Rainmaker1973b/status/1071865470901469189?s=03)        
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Our Story
+
+1. from path Finding
+1. to game search
+1. to monte carlo game search and tree search to
+1. to Alpha(Go) (Zero)
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Funny, but isn't there more to AI than ML?
+
+<img src='img/ai_vs_ml.jpg' height="500">
+<small>
+https://twitter.com/matvelloso/status/1065778379612282885
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### What is possible with search?
+<img src='img/smart-robots.gif' height="500px">
+
+<small>
+https://twitter.com/DuleFR/status/976784458022928384
+<br>
+MAP-Elites: https://medium.com/@devonfulcher3/the-map-elites-algorithm-finding-optimality-through-diversity-def6dcbc0f5b
+</small>
+</textarea>
+    </section>
+<section data-markdown class="slido">
+    <textarea data-template>
+### Please ask questions using slido
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
+    
+<!-- <section data-markdown class="local">
+    <textarea data-template>
+### First question wins a free copy
+
+<a href='https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf'>
+<img src='img/livevideo-deep-learning-crash-course-meap.png' height="400px">
+</a>
+
+<small>
+https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf
+</small>
+<br>
+    </textarea>
+</section>
+ -->
+
+<!-- <section data-markdown>
+<textarea data-template>
+### AlphaGo Zero
+
+* Two algorithms
+  * Reinforcement Learning
+  * Monte Carlo Tree Search
+
+* One ML Approach: deep-learning function approx
+    </textarea>
+</section> -->
+
+<!-- <section>
+        <h3>Machine Learning and AI</h3>
+        <p>Why I like the term artificial intelligence: I think it's good to have an umbrella term for the field that encompasses a
+        range of techniques – ML, knowledge rep, planning, heuristic search, goal formation, behavior modeling, etc. – and it's the
+        one we have.</p>
+        <p><small><a target="_blank" href="https://twitter.com/mjntendency/status/970091564864286726">https://twitter.com/mjntendency/status/970091564864286726</a></small></p>
+    </section> -->
+
+        
+
+        <section data-markdown>
+    <textarea data-template>
+## Part I
+### Path Finding
+
+* Games
+* Route Planing
+
+<small>
+http://theory.stanford.edu/~amitp/GameProgramming/Applications.html
+</small>
+</textarea>
+</section>
+
+        <section data-markdown>
+    <textarea data-template>
+### A simple Example - Robot Run
+<img src="img/search/robot_run.jpg" alt="Alpha Beta" height="450px">
+
+Robot needs to find Portal/Goal
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Step 1: Knowledge Representation
+</textarea>
+</section>
+
+<section>
+        <h2>Knowledge Representation</h2>
+<p class="fragment">Find a way to encode the maze to make it accesible for a search algorithm</p>
+
+<pre><code contenteditable data-trim class="line-numbers python fragment">
+terrain = [
+    ["_", "R", "_", "_"],
+    ["B", "_", "B", "_"],
+    ["_", "_", "B", "_"],
+    ["B", "_", "G", "_"]
+]
+</code></pre>
+<p class="fragment"><small><a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Search.ipynb'>
+    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Search.ipynb</a></small></p>
+</section>
+        
+
+<section data-markdown>
+    <textarea data-template>
+### How to find a path
+
+<img src="img/search/search.jpg" height="500px">
+
+<small>By incrementally expanding possibilities</small>
+</textarea>
+</section>
+    
+<section data-markdown>
+        <textarea data-template>
+### Step 2: Search on that graph
+
+* different strategies differ on which possibily they expand first
+* this makes a huge difference
+* there are informed and uninformed strategies
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Depth First
+
+* uninformed
+* traverses exapnded tree in a depth first notion
+* simple: can even be implemented using a stack and recursion
+* not guarenteed to find the best route
+* probably not very efficient
+    
+https://en.wikipedia.org/wiki/Depth-first_search
+    </textarea>
+    </section>
+
+<section>
+        <h3>Simple, stack based implementation</h3>
+<pre><code contenteditable data-trim class="line-numbers python fragment">
+def depth_first_search(state, closed_list=[], path=[]):
+    if state in closed_list:
+        return None
+    closed_list = closed_list + [state]
+    
+    if is_robot_win(state):
+        return path
+        
+    for move, next_state in expand_robot(state):
+        new_path = path + [move]
+        res = depth_first_search(next_state, closed_list, new_path)
+        if res:
+            return res
+</code></pre>
+<p><small><a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Play.ipynb'>
+    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Play.ipynb</a></small></p>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Breadth First
+
+* traverses exapnded tree level by level
+* typically implemented using open/closed-list
+* guranteed to find the best path
+* needs much more memory (to store nodes yet to be expanded in open list)
+* might still expand too many nodes
+                
+https://en.wikipedia.org/wiki/Breadth-first_search
+    </textarea>
+    </section>
+    
+
+    <section>
+        <h3>Generic implementation</h3>
+
+<pre><code contenteditable data-trim class="line-numbers python fragment">
+def breadth_first_search(root):
+  closed_list = set()
+  open_list = [root]
+    
+  while open_list:
+    state = open_list.pop(0)
+    closed_list.add(state)
+        
+    # simplfied, needs a bit more information
+    if is_robot_win(state):
+      return construct_path(state)
+
+    to_visit = [x for x in expand(state) \
+                if x not in closed_list and \
+                   x not in open_list]
+
+    # accounts for breadth first style
+    open_list = open_list + to_visit
+</code></pre>
+<p><small><a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Search.ipynb'>
+    https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Search.ipynb</a></small></p>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Understanding Breadth First Search
+
+<a href=''></a>
+<img src='img/breadth-first-search.png' height="500px">
+                
+<small>
+https://qiao.github.io/PathFinding.js/visual/
+</small>
+    </textarea>
+    </section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### A*
+Why do we blindly wander around, don't we know in which direction to walk?    
+            
+* informed search, expands much less nodes than breadth first
+* cost spent + estimated rest cost determines next state to try
+* guranteed to find the best path when heuristic underestimates rest cost
+* variations used for games or route planing
+
+<small>
+https://en.wikipedia.org/wiki/A*_search_algorithm
+<br>
+https://en.wikipedia.org/wiki/Admissible_heuristic
+http://theory.stanford.edu/~amitp/GameProgramming/
+</small>
+</textarea>
+    </section>
+
+<section>
+<h3>Admissible Search Heuristics</h3>
+<div class="fragment" style="float: left">
+    <img src="img/search/search-problem.png" height="300">
+    <p><small>Search, diagonal allowed</small></p>
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/search/non-admissible-manhattan.png" height="300">
+        <p><small>Manhattan (non-admissible):<br> length 16.24</small></p>
+    </div>
+<div class="fragment" style="float: left; padding-left: 25px">
+    <img src="img/search/admissible-euclidean.png" height="300">
+    <p><small>Euclidean (admissible):<br> length 15.07</small></p>
+</div>
+<p style="clear: both">
+        <br>
+        <small><em>
+<a href='https://qiao.github.io/PathFinding.js/visual/'>
+        https://qiao.github.io/PathFinding.js/visual/
+    </a>
+</em>
+</small>
+</p>
+</section>                                
+
+<section data-markdown>
+    <textarea data-template>
+### Revisiting different strategies
+
+<img src="img/search/search.jpg" height="500px">
+
+<small>By incrementally expanding possibilities</small>
+</textarea>
+</section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Bi-directional searche: Will they ever meet?
+
+<video controls src="video/bidirectional-search.mp4"  muted autoplay
+type="video/mp4" height="500"></video>
+
+<small>
+https://twitter.com/mbostock/status/1055484629090631685
+</small>
+</textarea>
+</section>
+
+
+
+<section data-markdown class="slido">
+    <textarea data-template>
+### Questions so far?
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
+
+        <section data-markdown>
+    <textarea data-template>
+## Part II
+### Adverserial Search
+### Applying Search to Games    
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Example: 3 in a row
+
+<img src='img/3-in-a-row.jpg' height="500px">
+
+<small>
+A game the ancient Vikings played as well
+</small>
+TODO: Tackle with alpha beta or min max
+        </textarea>
+        </section> -->
+
+<section>
+    <h3>Chess Computers have defeated humans because</h3>
+    <div class="fragment" style="float: left">
+        <img src="img/cray2.png" height="250">
+        <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
+    </div>
+    <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+    x 100.000 =
+    </div>
+    <div class="fragment" style="float: left">
+      <img src="img/titan5.jpg" height="250" style="float: right">
+        <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
+    </div>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## But how?
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Size of complete Search Tree
+
+* _Tic Tac Toe_: 10<sup>5</sup>
+* _Connect Four_: 10<sup>21</sup>
+* _Chess_: 10<sup>123</sup>
+* _Backgammon_: 10<sup>144</sup>
+* _Go_: 10<sup>360</sup>
+
+To compare
+* _Number of Atoms in Human Body_: 10<sup>27</sup>
+* _Atoms in Earth_: 10<sup>49</sup>
+* _Atoms in Milky Way_: 10<sup>68</sup>
+* _Atoms in Universe_: 10<sup>78</sup>
+
+    </textarea>
+    </section>
+
+    <!-- <section data-markdown>
+            <textarea data-template>
+### Average number of moves
+
+* _Connect Four_: 18
+* _Backgammon_: 28
+* _Chess_: 40
+* _Go_: 75
+
+        </textarea>
+        </section>         -->
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+### Alpha-Beta Pruning
+
+<img src='img/haw/alpha_beta_pruning.jpg'>
+            </textarea>
+            </section> -->
+<section data-markdown>
+        <textarea data-template>
+### Game Search
+
+_Full, exhaustive search is mostly just not feasible_
+* Limit in Depth: Mini Max / Alpha Beta Pruning
+* Limit in Breadth: Monte-Carlo Tree Search
+  * Do we have a evaluation heuristic? No? MCTS
+    </textarea>
+    </section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Mini Max, lookahead of 4 halfmoves
+
+_Computer maximixes and it is its move (circles)_
+
+<div class="fragment">
+
+<img src='img/search/Minimax.png'>
+</div>
+
+
+<small>
+https://en.wikipedia.org/wiki/Minimax    
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Alpha Beta Pruning
+
+_can reach up to twice the depth of minimax_
+
+<div class="fragment">
+
+<img src="img/search/alpha-beta-intuition.png" alt="Alpha Beta Intuition" height="350px">
+<br>
+</div>
+<div class="fragment">
+No matter what Min does, Max can always win in leftmost branch, no need to check for the others
+</div>
+</textarea>
+</section>
+
+<section data-markdown class="remote">
+    <textarea data-template>
+### How does Alpha–beta pruning work?
+
+* maintains two values, alpha and beta
+* alpha: minimum score of the maximizing player in a branch
+* beta: maximum score of the minimizing player in a branch
+* branch can be pruned if
+  * beta ≤ alpha
+  * as this will never happen if players play well
+* can reach approx. twice the depth of minimax in the same amount of time  
+
+<small>
+https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning    
+</small>
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Complete Search Tree for Robot Run
+<img src="img/search/mini-max-tree.jpg" alt="Alpha Beta" height="450px">
+
+<small>
+Top Right Branch can be pruned completely
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/ai/Play.ipynb
+</small>
+</textarea>
+</section> -->
+
+<section data-markdown >
+    <textarea data-template>
+### Why don't we just take the next move with the best evaluation?
+
+Why looking far ahead? Isn't a heuristic evaluation good enough?
+
+Kudos for position to https://twitter.com/StefanZoerner
+
+https://www.embarc.de/schachbegriffe-auf-englisch/
+</textarea>
+</section>
+<!-- http://www.dokchess.de/_downloads/szoerner_majug2012_architekturentwurf_schach_deploy.pdf -->
+
+
+<section data-markdown>
+    <textarea data-template>
+### Checkmate unavoidable?
+
+<img src="img/search/pos1.jpg" height="450px">
+
+FEN: 2R5/8/p7/7p/6pP/5pP1/5P1K/k4q2 w - - 0 1
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Using a heuristic to avoid loss of a piece
+
+<img src="img/search/pos2_no_loss.jpg" height="450px">
+
+Random move of Rook, but no loss
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### But Checkmate in next move
+
+<img src="img/search/pos3_mate.jpg" height="450px">
+
+Rook saved, but not effectively used
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Rewind to initial position
+
+<img src="img/search/pos1.jpg" height="450px">
+
+This time we look ahead
+</textarea>
+</section>
+<section data-markdown>
+    <textarea data-template>
+### Certain loss of Rook
+
+<img src="img/search/pos2_check.jpg" height="450px">
+
+Bad local evaluation, Queen will take Rook
+</textarea>
+</section>
+<section data-markdown>
+    <textarea data-template>
+### Of course Queen has to capture Rook
+
+<img src="img/search/pos3_stalemate.jpg" height="450px">
+
+But this means Stalemate and a Draw
+</textarea>
+</section>
+
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### How does Stockfish Play
+
+_It heavily relies on human knowledge put into heuristics_
+
+* Alpha-Beta Search Pruning: https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_search
+* Bitboards: https://en.wikipedia.org/wiki/Bitboard
+* Transposition Tables: https://en.wikipedia.org/wiki/Transposition_table
+* Late Move Reductions: https://en.wikipedia.org/wiki/Late_Move_Reductions (expand killer moves to full depth)
+* and many more
+
+https://en.wikipedia.org/wiki/Stockfish_(chess)
+
+</textarea>
+</section>
+
+<section data-markdown class="slido">
+    <textarea data-template>
+### Everything clear?
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Part III
+### Monte Carlo Methods
+</textarea>
+</section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Reasonable Heuristic for evaluation of position is cruical for deterministic search
+
+* Good solutions available for Chess
+* No good solutions for Go
+    * Only a win as a state is a reliable indication
+    * Need to search to the end
+    * Branching factor higher than Chess as well
+
+        </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Monte Carlo Experiments
+
+_approximating results by repeated random sampling_
+
+<img src='img/Pi_30K.gif' height="400px">
+
+<small>
+https://en.wikipedia.org/wiki/Monte_Carlo_method
+<br>
+https://en.wikipedia.org/wiki/Monte_Carlo_method#/media/File:Pi_30K.gif
+</small>
+    </textarea>
+    </section>
+
+        
+            <section data-markdown>
+                    <textarea data-template>
+### Monte Carlo Game Search
+
+<img src='img/search/monte_carlo_game_search.jpg' height="550px">
+                        </textarea>
+                        </section>
+
+
+        <section data-markdown class="remote">
+                <textarea data-template>
+### Algorithm Monte Carlo Game Search
+
+* Start from a next move beginning from an initial state
+* For each next move
+    * Play a game to the _end_ using a random set of moves
+    * Repeat for a number of times
+    * Count number of times for win, loose, draw
+* Choose the move with the best probability for a win
+
+<small>
+Choose number of random experiment wisely based on branching factor
+https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Pure_Monte_Carlo_game_search
+</small>
+            </textarea>
+            </section>
+        
+                        
+        <section data-markdown>
+            <textarea data-template>
+### Monte Carlo Tree Search
+
+Loops in four phases
+1. Selection
+2. Expansion
+3. Simulation
+4. Back-Propagation (do not confuse with the thing in Neural Networks)
+
+Images adapted from
+https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Selection
+
+Choose a node to expand next 
+
+<img src='img/search/mcts_selection.png'>
+
+<small>
+<code>wins / number of times played</code>
+</small>
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Exploration vs Exploitation
+
+_Rather improve on states known as good or have a look at unknown moves?_
+
+* exploitation: choose moves with high average win ratio
+* exploration: choose moves with few simulations
+
+Compare: How would you explore a new city?
+            
+<small>
+https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
+</small>
+        </textarea>
+        </section>
+
+        <section data-markdown style="font-size: xx-large" class="remote">
+            <textarea data-template>
+### Details: Exploration vs Exploitation
+
+* wi: number of wins for the node considered after the i-th move
+* ni: number of simulations for the node considered after the i-th move
+* Ni: total number of simulations after the i-th move
+* c: exploration parameter - theoretically equal to 2; in practice usually chosen empirically
+
+<br>
+
+<script type="math/tex; mode=display">
+{\displaystyle {\frac {w_{i}}{n_{i}}}+{\sqrt (c {\frac {\ln N_{i}}{n_{i}})}}}    
+</script>
+
+<br>            
+* first component: exploitation; it is high for moves with high average win ratio
+* second component: exploration; it is high for moves with few simulations            
+            
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Expansion
+
+Expand node, add a random child
+
+<img src='img/search/mcts_expansion.png'>
+
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Simulation
+
+Play a Monte Carlo Simulation
+
+<img src='img/search/mcts_simulation.png'>
+
+        </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Back-Propagation
+
+Update Scores
+
+<img src='img/search/mcts_backprop.png'>
+
+        </textarea>
+        </section>
+
+        <!-- <section data-markdown>
+            <textarea data-template>
+### More Applications of MCTS
+
+<img src='img/search/mcts-molecules.jpg' height="450px">
+
+<small>
+    make molecules tailored to a specific problem            
+    https://twitter.com/DJCordhose/status/1017886304384831488  
+</small>     
+            </textarea>
+            </section> -->
+            
+<section data-markdown class="slido">
+    <textarea data-template>
+### Before we take the final hop
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+## Part IV
+### MCTS and Alpha(Go) (Zero)
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src='img/go-board.jpg' height="600px">
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+#### Go has a branching factor of around 200 and 75 moves per game
+
+<img src='img/go-branching-viz.png' height="450px">
+
+Can not even be mastered with MCTS alone
+
+<small>
+Mastering Games Without Human Knowledge - https://youtu.be/Wujy7OzvdJk?t=92    
+</small>
+        
+    </textarea>
+    </section>
+
+
+<!-- <section data-markdown>
+<textarea data-template>
+### Alpha(Go) Zero
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="400px">
+</a>
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
+<br>
+Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
+<br>
+Explanation: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
+</small>
+</textarea>
+</section> -->
+<section data-markdown>
+        <textarea data-template>
+### AlphaGo Zero adapting MCTS
+
+_core difference: now we are have a heuristic_ 
+
+* choose child to expand using heuristic of game state (instead of random expansion phase)
+* determined by Convolutional Neural Network (ResNet)
+* simulation phase by playing against best known heuristic
+* CNN trained by which state leads to a win
+* CNN also gives estimation of which player is going to win
+* no other information goes into training
+
+<small>
+https://deepmind.com/blog/alphago-zero-learning-scratch/    
+</small>
+        </textarea>
+    </section>
+        
+
+        <section data-markdown>
+            <textarea data-template>
+<img src='img/TrainingTime-Graph-171019-r01.gif'>
+
+<small>
+https://deepmind.com/blog/alphago-zero-learning-scratch/    
+</small>
+            </textarea>
+        </section>
+        
+        <section data-markdown>
+                <textarea data-template>
+### Alpha Zero
+    
+* generalized version of AlphaGo Zero
+* can learn to play any deterministic full information game
+* actually trained to play chess and shogi
+* beat a version of chess world champion Stockfish
+
+<small>
+https://en.wikipedia.org/wiki/AlphaZero
+<br>
+https://deepmind.com/research/alphago/alphazero-resources/
+</small>
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+### Alpha Zero Performance
+
+<img src='img/alpha-zero-performance.png' height="450px">
+
+<small>
+2017 NIPS Keynote - Deepmind AlphaZero: Mastering Games Without Human Knowledge
+https://youtu.be/Wujy7OzvdJk?t=1893    
+</small>
+                </textarea>
+            </section>
+    
+    
+
+        <section data-markdown class="remote">
+            <textarea data-template>
+### Links for AlphaGo Zero
+
+* https://deepmind.com/blog/alphago-zero-learning-scratch/
+* https://web.stanford.edu/~surag/posts/alphazero.html
+* https://hackernoon.com/the-3-tricks-that-made-alphago-zero-work-f3d47b6686ef
+            </textarea>
+        </section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Is this really AI?
+
+<div class="fragment">
+_KI = Künftig Informatik?_
+</div>
+
+<div class="fragment">
+_AI = Computer Sciene in the future?_
+</div>
+
+<div class="fragment">
+_Like: Once we understand it we take it for granted?_
+</div>
+    
+<div class="fragment">
+_A chess engine was hard-core AI In the 90s_
+</div>
+    
+</textarea>
+</section>
+
+
+<section style="font-size: xx-large">
+    <h2>Wrap Up</h2>
+    <p><em>Search is omnipresent in AI</em></p>
+    <ul>
+        <li class="fragment">Path finding is dominated by variants of A*
+        <li class="fragment">Chess can be solved using tweaked Alpha-Beta-Search
+        <li class="fragment">For a high branching factor and/or no good heuristic use Monte Carlo Methods 
+        <li class="fragment">Monte Carlo Tree Search is an advanced Monte Carlo Method 
+        <li class="fragment">Alpha(Go) Zero uses a variant of MCTS together with Supervised Deep Learning and CNNs 
+        <li class="fragment">AlphaGo Zero beats all known Go players 
+
+    </ul>
+    <p>
+            <em>Graph Search: The Silver Bullet of Symbolic AI and the Secret of AlphaGo Zero</em>
+        <br>
+        <br>
+        <small>
+    <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        <br>
+<a href="http://bit.ly/mlconf-search">
+    http://bit.ly/mlconf-search</a>
+</small>
+    </p>
+</section>
+
+<section data-markdown class="slido">
+    <textarea data-template>
+### Questions
+
+<img src='img/slido.jpg' height="450">
+
+https://slido.com / DJCORDHOSE
+</textarea>
+        </section>
+
+        
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        $('.slido').remove();
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to local version
+            $('.remote').remove();
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+                // do we want this???
+                $('li').addClass('fragment')
+
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/sky.jpg");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1100,
+
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

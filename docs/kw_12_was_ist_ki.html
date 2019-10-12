@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Einführung in Künstliche Intelligenz</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+        .reveal pre code {
+            max-height: 1000px !important;
+        }
+
+        img {
+            border: 0 !important;
+            box-shadow:0 0 0 0 !important;
+        }
+
+        .reveal {
+            -ms-touch-action: auto !important;
+            touch-action: auto !important;
+				}
+
+				.reveal h2,
+                .reveal h3,
+				.reveal h4 {
+					letter-spacing: 2px;
+                    font-family: 'Amiri', serif;
+                    /* font-family: 'Times New Roman', Times, serif; */
+                    font-weight: bold;
+                    font-style: italic;
+                    letter-spacing: -2px;
+                    text-transform: none !important;
+                }
+
+                .reveal em {
+                    font-weight: bold;
+                }
+
+				.reveal .step-subtitle h1 {
+					letter-spacing: 1px;
+				}
+				.reveal .step-subtitle h2,
+				.reveal .step-subtitle h3 {
+					text-transform: none;
+					font-style: italic;
+					font-weight: normal;
+					/* font-weight: 400; */
+					/* font-family: 'Amiri', serif; */
+					font-family: 'Lobster', serif;
+					letter-spacing: 1px;
+					color: #2aa198;
+					text-decoration: underline;
+				}
+
+				.reveal .front-page h1,
+				.reveal .front-page h2 {
+					font-family: "League Gothic";
+					font-style: normal;
+					text-transform: uppercase !important;
+					letter-spacing: 1px;
+				}
+
+				.reveal .front-page h1 {
+					font-size: 2.5em !important;
+				}
+
+				.reveal .highlight {
+					background-color: #D3337B;
+					color: white;
+				}
+
+        .reveal section img {
+          background: none;
+        }
+
+				.reveal img.with-border {
+					border: 1px solid #586e75 !important;
+					box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+				}
+
+				.reveal li {
+					margin-bottom: 8px;
+				}
+
+				/* For li's that use FontAwesome icons as bullet-point */
+			.reveal ul.fa-ul li {
+				list-style-type: none;
+			}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+
+        <section>
+            <h2>Einführung in Künstliche Intelligenz</h2>
+            <!-- <div>
+                    <a href="http://zeigermann.eu">Oliver Zeigermann</a> /
+                    <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </div> -->
+        </section>
+
+        <section class="step-subtitle">
+            <h3>Teil 1</h3>
+            <h2>Was ist Intelligenz?</h2>
+        </section>
+
+        <section>
+            <h2>Wie definiert ihr eine intelligente Maschine?</h2>
+            <p>Was kann ein Kriterium sein, ob eine Maschine denken kann?</p>
+            <p><strong>Diskutiert in Gruppen und einigt euch auf eine gemeinsame Definition</strong></p>
+            <p><small>10 Minuten Zeit, dann Ergebnisse sammeln</small></p>
+        </section>
+
+        <section>
+            <h3>Ergebnisse</h3>
+            <pre contenteditable="true">
+- Team 1:
+  - Selbständige Entscheidung, z.B. selbstfahrendes Auto
+  - Bewusstsein
+  
+- Team 2:
+  - Lernfähig, über das initiale Training
+  - Selbständige Entscheidung
+  - Situationen oder Dinge bewerten (muss nicht moralisch sein)
+
+- Team 3:
+  - Nicht: stumpfes Regelwerk, wenn dann Regeln
+  - nicht deterministisch, nicht immer nachvollziehbar
+  - es wirkt intelligent
+  - lernen, reflektieren, flexibel, allgemein
+
+- Team 4:
+  - Abstraktionsfähigkeit von einem bekannten in einen unbekannten Bereich
+  - Erklärungsfähigkeit, strategisches Denken
+            </pre>
+        </section>
+
+        <section>
+                <h2>Possible Definition</h2>
+                <p><em>An artificial intelligence is a system that can learn how to learn, or in other words a series of instructions (an algorithm) that allows computers to write their own algorithms without being explicitly programmed for.</em></p>
+                <p><small><a target="_blank" href="https://medium.com/cyber-tales/artificial-intelligence-what-it-is-and-why-now-4e4431942623">https://medium.com/cyber-tales/artificial-intelligence-what-it-is-and-why-now-4e4431942623</a></small></p>
+            </section>
+<!--     
+            <section>
+                <h2>Shared Reading</h2>
+                <p>Very brief history of Artificial Intelligence (AI)</p>
+                <a href="http://www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html" target="_blank">http://www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html</a>
+            </section>
+     -->
+            <section>
+                <h3>Oder: Eine Maschine, die eine gerechte Gerichtsverhandlung führen kann</h3>
+            </section>
+
+            <section>
+                <h3>Oder: Maschine kann einen Menschen zu einem gesellschaftsfähigen Menschen erziehen</h3>
+            </section>
+
+            <section>
+                <h3>Oder: Ein System, das jedes Datumsformat versteht</h3>
+                <img src="img/date_formats.jpg">
+                <p><small><a target="_blank" href="https://twitter.com/brookLYNevery1/status/954368989181902848">https://twitter.com/brookLYNevery1/status/954368989181902848?s=03</a></small></p>
+            </section>
+
+            <section>
+                <h3>Oder: Ein selbstfahrendes Fahrzeug</h3>
+                <img src="img/how-is-my-programming.jpg" height="500">
+                <p><small>
+                    <a target="_blank" href="https://twitter.com/futurism">@futurism</a></small></p>
+            </section>
+
+
+        <section>
+            <h3>Ist ein Schachprogramm intelligent?</h3>
+            <p>Hier reicht stumpfes durchrechnen, um jeden Menschen zu besiegen</p>
+            <p>Das hat nichts mit dem zu tun, was Menschen machen</p>
+            <p>Aber vom Ergebnis ist die Maschine nicht als solche zu erkennen</p>
+            <p>Reicht das?</p>
+        </section>
+
+        <section>
+            <h3>Schwache KI (künstliche Intelligenz)</h3>
+            <p>Hypothese: es kommt darauf an, ob man das Ergebnis von dem eines Menschen unterscheiden kann</p>
+            <p>So ist auch der <strong>Turing Test</strong> definiert</p>
+        </section>
+
+        <section>
+            <p>Nach den Forderungen der schwachen KI wäre ein Schachprogramm intelligent,
+                obwohl das was es tut relativ stumpf ist</p>
+            <p class="fragment"> und
+                (sehr wahrscheinlich) <strong>nicht</strong> dem ähnelt was wir Menschen tun</p>
+        </section>
+
+        <section>
+            <p>Schachprogramme haben Menschen überwunden weil</p>
+            <div class="fragment" style="float: left">
+                <img src="img/cray2.png" height="250">
+                <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
+            </div>
+            <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+            x 100.000 =
+            </div>
+            <div class="fragment" style="float: left">
+              <img src="img/titan5.jpg" height="250" style="float: right">
+                <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
+            </div>
+       </section>
+
+        <section>
+            <p>Neuerdings haben wir allerdings auch</p>
+            <ol>
+                <li>Schlauere Strategien (Programme)
+                <li>Sehr große Datenmengen
+            </ol>
+        </section>
+
+                <section>
+                    <img src="img/applications/coding_style_to_programmer.png" height="600px">
+                    <!-- <p> -->
+                    <small>
+                        <a href="https://twitter.com/adriancolyer/status/974689295909957632" target="_blank">
+                            https://twitter.com/adriancolyer/status/974689295909957632
+                        </a>
+                    </small>
+                    <!-- </p> -->
+                
+                </section>
+                
+        <section>
+            <h3>Starke KI</h3>
+            <p>Hypothese: Maschinen sind nur dann intelligent, wenn sie etwas ähnliches macht wie ein Mensch</p>
+        </section>
+
+        <section>
+            <h2>Turing</h2>
+            <h3 class="fragment">Vater der modernen Informatik</h3>
+            <p class="fragment"><em>Wenn man eine intelligente Maschine sieht, stellt man diese Frage nicht mehr</em></p>
+            <p class="fragment"><em>Sie macht genau so viel Sinn, wie zu fragen, ob ein anderer Mensch auch intelligent ist</em></p>
+        </section>
+    <section>
+        <h3>Is a creative process just applying a certain style to reality?</h3>
+        <img src="img/ai/sigurd-original.jpg" height="400px" class="fragment">
+        <span class="fragment" style="position: relative; top: -205px; font-size: 60px">
+            <strong>=></strong>
+        </span>
+        <img src="img/ai/sigurd-stylized.png" height="400px" class="fragment">
+    </section>
+    
+    <section>
+        <img src="img/ai/image_translation.png" height="600px">
+        <small>
+            <a href="https://twitter.com/prostheticknowl/status/975507528170835968" target="_blank">
+                https://twitter.com/prostheticknowl/status/975507528170835968
+            </a>
+        </small>
+    </section>
+    
+    <section>
+        <h3>Might dreaming or hallucinating just be partial brain shut down?</h2>
+        <img src="img/ai/moster-squirrel.jpg" height="500px">
+    </section>
+
+            <section class="step-subtitle">
+                <h2>Teil 2</h2>
+                <h3>Gefahren und Chancen</h3>
+            </section>
+        
+            <section>
+                <h2>Jobs</h2>
+            </section>
+
+            <section>
+                <img src="img/new-yorker-robots.jpg" height="580px">
+                <p><small><a href="https://twitter.com/conorsen/status/920063253115531271" target="_blank">
+                    https://twitter.com/conorsen/status/920063253115531271</a></small></p>
+        </section>
+
+        <section>
+            <p><em>Zalando streicht 250 Stellen in der Marketingabteilung am Unternehmensstandort Berlin. Werbe-E-Mails sollen in Zukunft verstärkt
+            von Algorithmen oder Künstlicher Intelligenz verschickt werden.</em></p>
+            <p><em>"Wir gehen davon aus, dass Marketing in Zukunft noch datenbasierter sein muss. Dafür brauchen wir einen höheren Anteil an
+            Entwicklern und Datenanalysten", sagt Rubin Ritter, Co-Chef von Zalando, gegenüber der FAZ.</p>
+        </em> <p>
+                <small>
+            <a target="_blank" href="https://www.heise.de/newsticker/meldung/KI-gesteuertes-Marketing-Zalando-streicht-250-Arbeitsplaetze-3990425.html">
+                https://www.heise.de/newsticker/meldung/KI-gesteuertes-Marketing-Zalando-streicht-250-Arbeitsplaetze-3990425.html</a>
+                </small>
+            </p>
+        </section>
+
+        <section>
+            <h3>Hier haben wir sogar zwei Fragestellungen</h3>
+            <ol>
+                <li class="fragment">Wollen wir dieses Arbeitsplätze erhalten?</li>
+                <li class="fragment">Was sagt das 
+                    <a href="https://dsgvo-gesetz.de/" target="_blank">DSGVO</a>
+                     dazu?</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Werden auch Models arbeitlos?</h2>
+        </section>
+
+        <section>
+            <h4>Nur zwei dieser Bilder sind echte Fotos</h4>
+            <img src="img/applications/gan.jpg" height="500px">
+            <p><small><a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
+                https://twitter.com/goodfellow_ian/status/918900712901197824</a></small></p>
+        </section>
+
+        <section>
+            <h4>Die anderen sind mit Neuronalen Netzwerken generiert</h4>
+            <img src="img/applications/gan-real-images.jpg" height="500px">
+            <p><small><a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a></small></p>
+        </section>
+
+        <section>
+            <h2>Salesclerks going unemployed?</h2>
+        </section>
+
+        <section>
+            <h4>Minimal information sufficient for value prop</h4>
+            <img src="img/applications/style-prediction.jpg" height="500px">
+            <p><small><a href="http://algorithms-tour.stitchfix.com/" target="_blank">http://algorithms-tour.stitchfix.com/</a></small></p>
+        </section>
+
+        <section>
+            <h4>Und obwohl bereits viele Jobs weggefallen sind</h4>
+            <img src="img/unemployment-rate.png" height="500px">
+            <p><small><a href="https://www.google.com/search?q=unemployment+rate+usa&rlz=1C1XYJR_enDE765GB766&oq=unemployment+rate+usa&aqs=chrome..69i57j0l5.5879j0j7&sourceid=chrome&ie=UTF-8" target="_blank">
+    Google Search</a></small></p>
+        </section>
+
+        <section>
+            <h2>Dystopie</h2>
+        </section>
+
+        <section>
+            <h2>Machen wir alles nur weil es geht?</h2>
+        </section>
+    
+        <section>
+                <h3>Welche Arbeit wollen wir weiterhin machen?</h3>
+        </section>
+
+        <section>
+                <h3>Welche Information wollen wir nutzen? Wer bestimmt welche Information genutzt werden darf?</h3>
+        </section>
+        <section>
+                    <h3>Soll der Mensch das Maß der Dinge sein? Soll alles an seinem Nutzen ausgerichtet werden?</h3>
+        </section>
+        <section>
+            <h2>Müssen wir uns vor der Unterjochung durch Machinen fürchten?</h3>
+        </section>
+
+        <section>
+            <h3>Können Maschinen Gedanken lesen?</h3>
+            <p><em>Research team effectively reads minds by using AI techniques to reconstruct images seen by volunteers via fMRI scans of their brains.</em></p>
+            <img src="img/brain-machine.jpg">
+                <p><small><a href="https://twitter.com/Liv_Boeree/status/953014252708749317" target="_blank">
+                https://twitter.com/Liv_Boeree/status/953014252708749317
+            </a></small></p>
+        </section>
+
+        <section>
+            <h2>Ethik</h2>
+        </section>
+
+        <section>
+            <img src="img/ethics/nectome_twitter.png" height="500px">
+            <!-- <p> -->
+                <small>
+                    <a href="https://twitter.com/social_brains/status/974767536091774976" target="_blank">
+                         https://twitter.com/social_brains/status/974767536091774976
+                    </a>
+                    <br>
+                    <a href="https://www.technologyreview.com/s/610456/a-startup-is-pitching-a-mind-uploading-service-that-is-100-percent-fatal/" target="_blank">
+                         https://www.technologyreview.com/s/610456/a-startup-is-pitching-a-mind-uploading-service-that-is-100-percent-fatal/
+                    </a>
+                    <br>
+                    <a href="https://www.heise.de/newsticker/meldung/Gehirn-Backup-per-Sterbehilfe-Start-up-will-Hirnkonservierung-fuer-spaeteres-Wiederaufleben-anbieten-3996411.html" target="_blank">
+                         https://www.heise.de/newsticker/meldung/Gehirn-Backup-per-Sterbehilfe-Start-up-will-Hirnkonservierung-fuer-spaeteres-Wiederaufleben-anbieten-3996411.html
+                    </a>
+                </small>
+            <!-- </p> -->
+        </section>
+
+        <section>
+            <h3>I, Robot: 11% Is More Than Enough: Save The Girl</h3>
+            <img src="img/ethics/I_robot_save_the_girl.png" height="400px">
+            <p>
+                <small>
+                    <a href="https://www.youtube.com/watch?v=4kuaikerPKs" target="_blank">
+                        https://www.youtube.com/watch?v=4kuaikerPKs
+                    </a>
+                </small>
+            </p>
+        
+        </section>
+
+        <section>
+            <h3>Wenn eine Maschine töten muss</h3>
+            <p>Was passiert in Situation in denen ein tötlicher Unfall nicht zu vermeiden ist?</p>
+            <p>Wen soll ein selbstfahrendes Fahrzeug opfern?</p>
+            <p><em> Ethik-Kommission zum autonomen Fahren lehnt eine Abwägung zum Wert von Menschen ab</em> (
+                <a target="_blank" href="http://www.taz.de/Autonomes-Fahren-und-seine-Hindernisse/!5470265/">http://www.taz.de/Autonomes-Fahren-und-seine-Hindernisse/!5470265/</a>)</p>
+            <p>Aber würdet ihr ein Auto fahren, dass euch selbst opfern würde? Halten Hersteller das ein?</p>
+        </section>
+
+        <section>
+            <h3>Moral Machine</h3>
+            <p><small>Muss man wieder Kant lesen? <a target="_blank" href="https://de.wikipedia.org/wiki/Kritik_der_praktischen_Vernunft">https://de.wikipedia.org/wiki/Kritik_der_praktischen_Vernunft</a></small></p>
+            <p><a target="_blank" href="http://moralmachine.mit.edu/hl/de">http://moralmachine.mit.edu/hl/de</a></p>
+        </section>
+
+
+<!-- 30 Minuten insgesamt
+Stopuhr nutzen
+ausgewählte Visionen fotografieren und auf den Beamer -->
+        <section>
+            <h3>Übung: Visionen für KI</h3>
+            <p>Erstellt Visionen einer durch KI geprägten Zukunft</p>
+            <ul>
+                <li>Tut euch in Gruppen zusammen</li>
+                <li>Erstellt 3 positive und 3 negative Visionen an die ihr persönlich für möglich haltet</li>
+                <li>Haltet die Visionen als Skizzen fest</li>
+            </ul>
+            <p>Als Abschluss stellen wir Visionen zur Diskussion vor</p>
+            <p><small>15 Minuten</small></p>
+        </section>
+
+        <section>
+            <img src="img/ethics/team1.jpg" height="700px">
+        </section>
+
+        <section>
+            <img src="img/ethics/team2.jpg" height="700px">
+        </section>
+        <section>
+            <img src="img/ethics/team3.jpg" height="700px">
+        </section>
+        <section>
+            <img src="img/ethics/team4.jpg" height="700px">
+        </section>
+        <section>
+            <img src="img/ethics/team5.jpg" height="700px">
+        </section>
+        <section>
+            <h3>Beispielergebnis: Negative Vision #1</h3>
+            <img src="img/ethics/negative_olli.jpg">
+        </section>
+
+        <section>
+            <h3>Beispielergebnis: Negative Vision #2</h3>
+            <img src="img/ethics/negative.jpg" height="500px">
+        </section>
+
+        <section>
+            <h3>Beispielergebnis: Positive Vision #1</h3>
+            <img src="img/ethics/positive_olli.jpg">
+        </section>
+
+        <section>
+            <h3>Beispielergebnis: Positive Vision #2</h3>
+            <img src="img/ethics/positive.jpg" height="550px">
+        </section>
+        <!-- <section>
+                <h4>Welche Rolle soll KI in unserer Gestellschaft spielen?</h4>
+                <p class="fragment">Wie gehen wir damit um, auch intellektuell von Maschinen überflügelt zu werden?
+    
+                    <small>
+                    <a href="https://www.theverge.com/2017/10/11/16460118/alphago-deepmind-ai-documentary-go-lee-sedol-film-review">
+                        https://www.theverge.com/2017/10/11/16460118/alphago-deepmind-ai-documentary-go-lee-sedol-film-review
+                    </a></small>
+                </p>
+                <p class="fragment">Machine Learning wird Jobs zerstören: Welche wollen wir bewusst erhalten?</p>
+                <p class="fragment">Selbstfahrende Autos können vielleicht jedes Jahr 4000 Verkehrstote verhinden, aber wollen wir dadurch 1 Million Jobs verlieren?</p>
+                <p class="fragment">Welche neuen Jobs wird es durch KI geben?</p>
+            </section>
+     -->
+    
+        </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+<script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+    } );
+    // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+    // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+    $('section').attr('data-background-image', "backgrounds/white.jpg");
+//    $('section').attr('data-background-image', "backgrounds/code.jpg");
+</script>
+
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

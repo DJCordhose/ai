@@ -1,0 +1,1291 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>M3 Embeddings</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                        letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+
+            .reveal {
+                color: black !important;
+             }       
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!-- 
+NEURAL EMBEDDINGS IN PRODUKTION – WAS KANN SCHIEF GEHEN?
+
+Neural Embeddings bilden hochdimensionale Daten in weniger Dimensionen ab. Dabei ist es wünschenswert, Semantik in
+räumliche Nähe zu übersetzen. Das Potenzial dieser Technik ist groß, und erst nach und nach wird klar, welche
+Anwendungsfälle davon profitieren können.
+
+Dieser Talk wird interessante Anwendungsfälle aufzeigen und untersuchen, was für unerwartete Probleme dabei für
+Unternehmen entstehen können.
+
+Der erste Teil führt in die Grundlagen von Neural Embeddings anhand von Variational Auto-Encoders und word2vec ein.
+Diese haben ihre Anwendung vor allem im Bereich Bild und Text. Der zweite Teil beleuchtet die Herausforderung,
+Embeddings (Bild & Text) in Produktionsumgebung einzusetzen. Dabei berichtet der Referent über seine Erfahrungen im
+Umgang mit diesen Problemen.
+
+https://www.m3-konferenz.de/lecture.php?id=7724&source=0
+ -->
+
+<section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation
+
+Öffnen und schonmal durchgehen
+* http://bryanlohjy.gitlab.io/spacesheet/word2vec.html
+    </textarea>
+</section>
+
+ <section>
+        <h2>Neural Embeddings and Latent Representations</h2>
+        <h3>with TensorFlow</h3>
+        <p><a target="_blank" href="https://www.m3-konferenz.de/lecture.php?id=7724">
+            M3, Mannheim, Mai 2019
+        </a></p>
+<h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+</h4>
+<h4>In Abwesenheit: Sean Pedersen</h4>
+<p><small><a href="http://bit.ly/m3-embeddings">
+http://bit.ly/m3-embeddings
+</a></small></p>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+## Part I
+
+### Understanding Latent Representations and Embeddings
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### What is an embedding?
+
+* In mathematics, an embedding is one instance of some mathematical structure contained within another instance
+* Practically, we often refer to embeddings as mapping of a category to a vector of numbers
+* E.g. Word embedding is the collective name for techniques where words or phrases from the vocabulary are mapped to vectors of real numbers
+
+https://en.wikipedia.org/wiki/Embedding
+https://en.wikipedia.org/wiki/Word_embedding
+
+            </textarea>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Why turn categories into numbers?
+
+* neural networks can not deal with symbols, but numerical values only
+* even words and texts can be seen as categories / symbols
+* compression to a single number
+* that number might even carry semantics
+
+            </textarea>
+            </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Example: Encoding airlines in two dimensions
+
+<img src='img/embeddings/embedding-airlines.jpg' style="float: left" height="350px">
+<img src='img/embeddings/airline-embedding-empty.png' style="float: right" height="350px">
+
+<p style="clear: both">
+Do you already see a benefit of doing this?
+</p>
+
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### The brain might map out ideas like spaces
+
+<img src='img/brain-abstract-knowledge.jpg' height="450">
+
+<small>
+https://twitter.com/PhilosophyMttrs/status/1085242776688775169
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## How to turn categories into numbers?
+            </textarea>
+        </section>
+        
+        
+
+<section data-markdown>
+<textarea data-template>
+### Label Encoding    
+
+Normalize symbols such that they contain only values between 0 and number_of_symbols_in_vocab-1.
+
+<pre><code>text = ["paris", "paris", "tokyo", "amsterdam"]
+paris = 0
+tokyo = 1
+amsterdam = 2
+encoded_text = [0, 0, 1, 2]</code></pre>
+
+<small>
+http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Issues with turning symbols into integers
+
+* numbers close to each other suggest a relation, but there might actually be none
+* what would 7.5 mean?
+* and what -8457878574?
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Bag of Words - One/Multiple Hot Encoding
+<img src="img/nlp/acolyer/word2vec-one-hot.png">
+<small>
+https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Issues with One-Hot-Encoding
+
+* high dimensionalty 
+* sparse representation
+* neighborhood does not mean anything
+
+            </textarea>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+### Enter: Embeddings
+
+* Embedding: Transform a high dim. vector space to a lower one
+* word/symbol Embedding: Transform sparse one hot encodings into a dense lower dim. encoding 
+
+<small>https://en.wikipedia.org/wiki/Word_embedding</small>
+                        </textarea>
+                    </section>
+                
+                    <section data-markdown>
+<textarea data-template>
+<img src="img/nlp/word_embeddings.png" height="550px">
+
+<small>
+<a href="https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/6.1-using-word-embeddings.ipynb">
+Deep Learning with Python
+</a>
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Assumption: symbols/words in similar contexts have similar meaning
+
+* Why not have a few semantic dimensions and embed symbols/words into them?
+* You define what is context and thus gives meaning
+* For random texts this might be just the words that surround others
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Arithmetic on Embeddings
+
+_has been exaggerated recently, but still fun_
+
+<img src='img/embedding_arithmetic.jpg' height="400px">
+
+<small>
+http://bryanlohjy.gitlab.io/spacesheet/word2vec.html
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Suprising Application of Embeddings
+
+<img src='img/embedding-spell-checker.png' height="500px">
+
+<small>
+https://twitter.com/jeremyphoward/status/997264148655259648    
+</small>
+        </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Word Embeddings using word2vec
+
+_main assumption: words appearing in similar contexts have similar meaning_
+
+<a href='https://projector.tensorflow.org'>
+<img src="img/nlp/embedding-projector.png" height="350px">
+</a>
+
+<small>
+https://projector.tensorflow.org
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### What you can do with Embeddings: Clustering on concepts
+
+<img src='img/embeddings/airline-embedded-cluster.png'>
+
+<small>
+Only works if an embedding really encodes similarities    
+</small>
+
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### How to encode similarities into embeddings?
+
+<img src='img/embeddings/embedding-train.png'>
+
+
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### How to extract embeddings
+
+<img src='img/embeddings/embedding-predict.png'>
+
+        </textarea>
+    </section>
+
+<section>
+    <h3>Train embedding with TensorFlow</h3>
+
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+number_of_airlines = len(airlines) + 1
+embedding_dim = 1 # up to us
+sequence_length = 1
+
+model.add(Embedding(input_dim=number_of_airlines, 
+                    output_dim=embedding_dim, input_length=sequence_length))
+</code></pre>
+
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+# embedding will be n-dimensional, but Dense can only handle flat input
+model.add(Flatten())
+
+# random additional layers to at least make this train
+model.add(Dense(units=50, activation='relu'))
+# ...
+</code></pre>
+
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+# two airports in a route
+model.add(RepeatVector(2))
+model.add(SimpleRNN(units=50, return_sequences=True))
+
+# ca. 3500 airports in routes
+output_dim = len(routes_tokenizer.word_index) + 1
+model.add(Dense(units=output_dim, activation='softmax'))
+</code></pre>
+
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Make sure the model trains properly
+
+<div style="float: left">
+<img src='img/embeddings/airlines-2d-loss.png' height="300px"><br>
+Loss
+</div>
+<div style="float: right" >
+<img src='img/embeddings/airlines-2d-acc.png' height="300px"><br>
+Accuracy
+</div>
+
+<div style="clear: both">
+Curves for 2-d embedding (1-d accuracy closer to 10%)
+<small>        
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/tf2/embeddings.ipynb
+</small>
+</div>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### What are we after here?
+
+* Model should train, i.e. loss should go down
+* If it does not you might do things to hidden layers
+* Typically we do not get good accuracy
+* But this is not what we are after
+* All training needs to go through bottleneck of embedding
+* Thus we hope this will be packed with all the good semantics
+
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Extracting embedding
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+embedding_layer = model.get_layer('embedding')
+embedding_model = Model(inputs=model.input, outputs=embedding_layer.output)
+embeddings_2d = embedding_model.predict(samples).reshape(-1, 2)
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+latent_x = embeddings_2d[:, 0]
+latent_y = embeddings_2d[:, 1]
+
+plt.scatter(latent_x, latent_y)
+</code></pre>
+
+<small style="font-size: large">
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/tf2/embeddings.ipynb
+</small>
+
+</textarea>
+        </section>
+
+
+        
+<section data-markdown>
+    <textarea data-template>
+### Resulting Plot of Airline Embedding 
+
+<img src='img/embeddings/2d_embedding_airlines.png' class='with-border' style="float: left" height="350px">
+<img src='img/embeddings/1d_embedding_airlines.png' class='with-border' style="float: right" height="350px">
+
+    </textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+## Part II
+
+### Practical Challenges
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Returning to Example: Clustering on concepts
+
+<img src='img/embeddings/cluster-original.png' height="550px">
+
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+## Issue
+### You would not want the data points to move around
+
+* Might happen when model changes
+* Or new data comes in
+* or simply with each training run, even without changes
+* people do not want to see drastic changes in visualizations when just a few data points change
+
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### How to stabilize the embedding
+
+* for the same data we would ike to see the same output every time
+  * simple: use initialization with seed
+  * will not work when model or data changes
+* even with same initialization training might not be deterministic
+  * can change from GPU to GPU
+  * same amount of EPOCHS, same BATCH_SIZE, same ordering of data, same version of framework
+
+</textarea>
+</section>
+
+<section data-markdown transition='none'>
+    <textarea data-template>
+### Clustering original
+
+<img src='img/embeddings/cluster-original.png' height="550px">
+
+        </textarea>
+    </section>
+
+<section data-markdown transition='none'>
+    <textarea data-template>
+### Clustering same seed, same everthing
+
+<img src='img/embeddings/clsutering-same-seed.png' height="550px">
+
+        </textarea>
+    </section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Brainstorming: How to achieve stabilization when model architecture and/or data changes?
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Options: Stabilization
+
+1. Use initial model as starting point and _carefully_ retrain
+   * use small learning rate
+   * will work only if model architecture has not changed
+1. Train from scratch, but use difference to original latent representation as part of loss function
+   * Wow, sounds promising, as it should work under all circumstances
+   * but: How do we do this???
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Using second model head and loss
+
+1. use old model to encode new/augmented data into latent space
+1. remember those latent representations
+1. train from scratch with new/augmented data and/or new model architecture
+1. use difference to original latent representation as part of loss function
+1. calibrate how much change you desire
+
+</textarea>
+</section>
+
+<section data-markdown transition='none'>
+    <textarea data-template>
+### Adding a second model head
+
+<img src='img/embeddings/nn-airlines-extened.jpg'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Adding a second model head
+
+<img src='img/embeddings/nn-airlines-heads.jpg'>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Functional API allows for all kinds of wiring
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+# changed model
+
+x = Dense(units=50, ...)(x)
+# second dense layer
+x = Dense(units=50, ...)(x)
+# ...
+# less units (25 instead of 50)
+x = SimpleRNN(units=25, ...)(x)
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+# Head 1: main_output, Head 2: embedding
+model = Model(inputs=main_input, outputs=[main_output, embedding])
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+model.compile(loss={ 'main_output': 'categorical_crossentropy', 
+                     'embedding': 'mae' },
+              loss_weights={'main_output': .1, 'embedding': 1.})
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+model.fit(x=X, y={'main_output': Y, 'embedding': original_embeddings})
+</code></pre>
+
+<small>
+https://keras.io/getting-started/functional-api-guide/
+<br>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/tf2/embeddings-retrain.ipynb
+</small>
+</textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Model still trains well
+
+<div style="float: left">
+<img src='img/embeddings/multi-head-losses.png' height="350px"><br>
+Losses
+</div>
+<div style="float: right" >
+<img src='img/embeddings/main-output-accuracy.png' height="350px"><br>
+Accuracy on Main Head
+</div>
+
+</textarea>
+</section>
+
+
+<section data-markdown transition='none'>
+    <textarea data-template>
+### Clustering original
+
+<img src='img/embeddings/cluster-original.png' height="550px">
+
+        </textarea>
+    </section>
+
+<section data-markdown transition='none'>
+    <textarea data-template>
+### Clustering Stabilized
+
+<img src='img/embeddings/clustering-stabelized.png' height="550px">
+
+        </textarea>
+    </section>
+
+    <section data-markdown transition='none'>
+    <textarea data-template>
+### Clustering Unstabilized
+
+<img src='img/embeddings/clsutering-same-seed.png' height="550px">
+
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### How to deal with additional data?
+
+* create the additional embeddings on new/augmented/updated data using old model
+* use that on the old/new/updated model architecture
+</textarea>
+</section>
+
+
+<!-- Letzter Teil, Wohin noch? -->
+
+<section data-markdown>
+    <textarea data-template>
+## This works for all kinds of latent representations
+    </textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Like Autoencoders 
+
+<img src='img/autoencoder_schema.jpg'>
+
+<small style="font-size: large">
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/2019_tf/autoencoders_tabular.ipynb
+<br>
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/2019_tf/autoencoders_stabilize.ipynb
+
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+## But isn't that just a small fraction of all network architectures?
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### All all types of neural networks have a latent representation somewhere
+ 
+<img src='img/encoder-decoder-everywhere.png' height="530" class='fragment'>
+
+<small style="font-size: large">
+https://medium.com/tensorflow/mit-deep-learning-basics-introduction-and-overview-with-tensorflow-355bcd26baf0
+</small>
+    </textarea>
+</section>
+
+<section>
+        <h2>Wrap Up</h2>
+        <em>Neural Embeddings and Latent Representations can turn any category into semantic numbers</em>
+        <ul>
+            <li class="fragment">You will need training data carrying semantic information
+            <li class="fragment">You can extract embeddings or use as part of complete network
+
+            <li class="fragment">Using the idea of latent representations you can stabilize the result of any neural network
+        </ul>
+        <p>
+                <em>Neural Embeddings and Latent Representations with TensorFlow</em>
+            <br>
+            <br>
+            <small>
+        <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            <br>
+    <a href="http://bit.ly/m3-embeddings">
+        http://bit.ly/m3-embeddings</a>
+    </small>
+        </p>
+    </section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+## Part III
+
+### Advanced Challenges
+
+</textarea>
+</section>
+
+
+
+<section data-markdown>
+    <textarea data-template>
+### Using Autoencoders to create an embedding
+
+<img src='img/autoencoder_schema.jpg'>
+
+* reproduce an input while going through a bottleneck
+* latent representation is what you are interested in
+* works on all kinds of data, e.g. image, audio, and tabular
+* dimensionality reduction / clustering (for data visualization)
+* building an abstract representation for further use
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### You can even describe all networks as a combination of encoder / decoder
+
+<img src='img/encoder-decoder-everywhere.png' height="530">
+
+<small style="font-size: large">
+https://medium.com/tensorflow/mit-deep-learning-basics-introduction-and-overview-with-tensorflow-355bcd26baf0
+</small>
+    </textarea>
+</section>
+
+<section>
+<h3>Second Example: Predicting Crash Risk</h3>
+
+<div style="max-width: 50%; float: left;">
+    <img src='img/df_head.jpg' height="450">
+</div>
+<div style="max-width: 50%; float: right;">
+
+    <br>
+    <br>
+    <br>
+    <ul>
+        <li>0 - red: many accidents</li>
+        <li>1 - green: few or no accidents</li>
+        <li>2 - yellow: in the middle</li>
+    </ul>
+    </div>
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Interative Exercise: Sketch a network for an Autoencoder on Tabular Data
+
+<img src='img/sketch/sketch_idea_embedding.png' height="550px">
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Autoencoder Network using Functional API
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+# Encoder for Input
+
+# defines size (dimension) of latent space
+encoding_dim = ???
+
+# defines range of latent space
+encoding_activation = ???
+
+# https://keras.io/getting-started/functional-api-guide/
+input = Input(shape=(4,))
+encoded = Dense(units=encoding_dim, activation=encoding_activation,
+                name="decoder")(input)
+</code></pre>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+# Decoder for Output
+        
+# decoder can be extremely simple
+decoded = Dense(units=4, activation='linear', name="decoder")(encoded)
+
+autoencoder = Model(inputs=input, outputs=decoded)
+autoencoder.compile(optimizer='adam', loss='mse')
+</code></pre>
+
+<p style="font-size: large">
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/2019_tf/autoencoders_tabular.ipynb
+</p>
+        
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Extracting latent representation as embedding
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+encoder = Model(inputs=input, outputs=encoded)
+latent_representation = encoder.predict(X)
+latent_representation.shape
+# (1500, 2)
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+latent_x = latent_representation[:, 0]
+latent_y = latent_representation[:, 1]
+
+colors = X['group']
+plt.scatter(latent_x, latent_y, alpha=0.5, c=colors)        
+</code></pre>
+
+</textarea>
+        </section>
+            
+<section data-markdown>
+    <textarea data-template>
+### Compressing input forces similarities to be close to each other
+
+<img src='img/insurance_ae.png'>
+
+        
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Issues
+
+1. Should we not try to encode groups more reasonable?
+   * one-hot-encoding sounds more reasonable
+1. How to we stabilize model when new data comes in
+   * people do not want to see drastic changes in visualizations when just a few data points change
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+## First Issue
+### One hot encoding for risk category
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Challenge: How to deal with two different types of input/outputs?
+
+* What loss functions?
+* How to combine the loss? 
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Interative Exercise: Sketch a network for an advanced autoencoders
+
+_let's restrict ourselves to the first issue for now: one-hot-encoding_
+
+</textarea>
+</section>
+
+
+<section>
+    <h3>One-Hot-Encoding Groups</h3>
+
+    <pre><code contenteditable data-trim class="fragment python">
+# first multi in
+main_in = Input(shape=(3,), name='main_input')
+group_in = Input(shape=(3,), name='group_input')
+</code></pre>
+
+    <pre><code contenteditable data-trim class="fragment python">
+# slightly simplified latent encoding
+merged = concatenate([main_in, group_in])
+encoding_dim = 2
+encoded = Dense(units=encoding_dim, activation='relu', name="encoder")(merged)
+</code></pre>
+
+    <pre><code contenteditable data-trim class="fragment python">
+# then multi out
+main_out = Dense(units=3, activation='linear', name="main_output")(encoded)
+group_out = Dense(units=3, activation='softmax', name="group_output")(encoded)
+</code></pre>
+    <pre><code contenteditable data-trim class="fragment python">
+# separate loss for each output, scaled to same order of magnitude
+autoencoder = Model(inputs=[main_in, group_in], outputs=[main_out, group_out])
+autoencoder.compile(optimizer='adam',
+                    loss={'main_output': 'mae', 
+                          'group_output': 'categorical_crossentropy'},
+                    loss_weights={'main_output': 1., 'group_output': 50.})
+</code></pre>
+
+</p>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### Show losses
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Advanced Autoencoders 
+
+only look at first part for one-hot-encoding, stop before stabilization part 
+
+<img src='img/ae-groups.png'>
+
+<small style="font-size: large">
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/2019_tf/autoencoders_stabilize.ipynb
+</small>
+        
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Second Issue
+### Stabilize model when new data comes in
+                
+<img src='img/embeddings/airline-embedded-cluster.png' height="450px">
+
+You would not want the data points to move around with each new training
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Options to Stabilization
+
+* for the same data we would ike to see the same output every time
+  * simple: use initialization seed
+* people do not want to see drastic changes in visualizations when just a few data points change
+  * how to achievethat? 
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Brainstorming: How to achieve stabilization?
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Options: Stabilization
+
+1. Use initial model as starting point and _carefully_ retrain
+   * use small learning rate
+1. Train from scratch, but use difference to original latent representation as part of loss function
+   * Wow: How do we do this???
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### First Option
+
+* use old model as starting point
+* retrain with new data and small learning rate
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Loading and preparing old model 
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+autoencoder = load_model('autoencoder-v1.h5')
+main_input = autoencoder.get_layer('main_input').input
+group_input = autoencoder.get_layer('group_input').input
+encode = autoencoder.get_layer('encoder').output
+encoder = Model(inputs=[main_input, group_input], outputs=encode)
+</code></pre>
+</textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Network Setup 
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+#default lr
+# adam = keras.optimizers.Adam(lr=0.001)
+# we use just half of that
+adam = keras.optimizers.Adam(lr=0.0005)
+# even this high learning rate can not break it (moves it quite a bit, but still same overall shape)
+# adam = keras.optimizers.Adam(lr=0.1)
+
+autoencoder.compile(optimizer=adam,
+              loss={'main_output': 'mae', 'group_output': 'categorical_crossentropy'},
+              loss_weights={'main_output': 1., 'group_output': 50.})
+
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+history = autoencoder.fit(
+    x={'main_input': new_main, 'group_input': new_one_hot_groups},
+    y={'main_output': new_main, 'group_output': new_one_hot_groups})
+</code></pre>
+
+</textarea>
+        </section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+# Show training curce and result plot
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Second Option
+
+* use old model to encode new data into latent space
+* train from scratch with new data
+* use difference to original latent representation as part of loss function
+* calibrate how much change you desire
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Network Setup 
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+new_original_latent_representation = encoder.predict(x={'main_input': new_main, 'group_input': new_one_hot_groups})
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+stability_output = encoded # just the latent space as output
+
+autoencoder = Model(inputs=[main_input, group_input], outputs=[main_output, group_output, stability_output])
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+autoencoder.compile(optimizer=adam,
+              loss={'main_output': 'mae', 'group_output': 'categorical_crossentropy', 'encoder': 'mae' },
+              loss_weights={'main_output': 1., 'group_output': 100., 'encoder': 100.})
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+autoencoder.fit(
+        x={'main_input': new_main, 'group_input': new_one_hot_groups},
+        y={'main_output': new_main, 'group_output': new_one_hot_groups, 'encoder': new_original_latent_representation})    
+</code></pre>
+
+</textarea>
+        </section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### Show training curve, show final plot 
+
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### Advanced Autoencoders, stabilized for production 
+
+<small style="font-size: large">
+        https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/2019_tf/autoencoders_stabilize.ipynb#scrollTo=we2ONI5pBR8R
+</small>
+        
+</textarea>
+</section>
+ -->
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+    const isLocal = window.location.hostname.indexOf('localhost') !== -1 || 
+                    window.location.hostname.indexOf('127.0.0.1') !== -1;
+        if (isLocal) {
+            // only applies to local version
+            $('.remote').remove();
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+                // do we want this???
+            $('li').addClass('fragment')
+            $('.no-fragment li').removeClass('fragment')
+
+            if (isLocal) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/sky.jpg");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1100,
+
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

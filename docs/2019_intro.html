@@ -1,0 +1,1201 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Intro Machine Learning</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                        letter-spacing: 2px;
+                        font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+
+            .reveal {
+                color: black !important;
+             }       
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        var printMode = window.location.search.match(/print-pdf/gi);
+        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+        <!-- 
+Machine Learning Star Andrej Karpathy beschreibt Neuronale Netzwerke als Software 2.0. Also die neue Art zu Software zu entwickeln,
+die die klassische Art nicht ersetzen, sondern ergänzen wird.
+
+Passend dazu zeige ich in diesem Talk, wo uns als Software-Entwickler Machine Learning begegnet und wo sich der Ansatz von
+Machine Learning grundsätzlich von dem der Software-Entwicklung unterscheidet und wo es parallelen gibt. Wir werden dabei
+die unterschiedlichen Arten des Machine Learnings diskutieren, was diese auszeichnet, wie sie sich unterscheiden und welche
+Anwendungspotentiale in ihnen stecken.
+
+Vorausgesetzt wird dabei kein Wissen über Machine Learning.
+             -->
+        <!-- 
+
+JAX 2019
+
+Machine Learning: Das Ende der Businesslogik?
+
+Machine Learning Star Andrej Karpathy, Head of AI bei Tesla, beschreibt Neuronale Netzwerke als Software 2.0. 
+Also die neue Art zu Software zu entwickeln, die die klassische Art nicht ersetzen, sondern ergänzen wird.
+
+Passend dazu zeige ich in diesem Talk, wo uns als Software-Entwickler Machine Learning begegnet und wo sich der Ansatz von
+Machine Learning grundsätzlich von dem der Software-Entwicklung unterscheidet und wo es parallelen gibt. Wir werden dabei
+die unterschiedlichen Arten des Machine Learnings diskutieren, was diese auszeichnet, wie sie sich unterscheiden und welche
+Anwendungspotentiale in ihnen stecken. 
+
+Anhand einer praktischen Beispiels werden wir dabei Machine Learning als Alternative zu klassischer Business-Logik erleben 
+und auch bereits erste Werkzeuge kennen lernen, mit denen wir Machine Learning implementieren können.
+
+Diese Talk eignet sich für jeden, der sich mit Software-Entwicklung beschäftigt und setzt kein Wissen über Machine Learning voraus.
+             -->
+
+
+<!-- JFokus Hands-On
+
+3 hours
+
+https://www.jfokus.se/jfokus19/talks/2634
+
+
+Hands-on-lab: Machine Learning for Software Developers
+The idea of machine learning is to teach a system from given data rather than to program it from scratch. It is best
+suited when the problem at hand is hard to specify, but you have a lot of example solutions and solving the problem can
+tolerate some error or uncertainty. It can thus be a great addition to the skills of any software developer. Once you
+understand what machine learning can do you will see a lot of potential in the data you encounter every day.
+
+In this hands-on lab you will get a good understanding of how machine learning is different from classic software
+development and make first experiments using Scikit-learn and TensorFlow. There will be exercises on paper and in code
+using Python, but no previous knowledge of Python or machine learning is required.
+ -->
+
+<!-- JFokus Talk
+
+50 minutes
+
+https://www.jfokus.se/jfokus19/talks/2786
+
+Business Logic has always been very tedious to write and maintain at best and feels random and ad-hoc ad worst. Often
+we express large and growing sets of rules using nested if statements or similar constructs. Both form and content are
+often questionable, though. Could it be there are better solutions?
+
+In this talk we will discuss when Machine Learning might be the better option and which tools you would use. You will
+see actual code based on a real world example. -->
+
+<!-- embarc Hamburg Meetup
+
+90 Minuten
+
+Machine Learning: Das Ende der Businesslogik?
+
+Machine Learning Star Andrej Karpathy, Head of AI bei Tesla, beschreibt Neuronale Netzwerke als Software 2.0. 
+Also die neue Art zu Software zu entwickeln, die die klassische Art nicht ersetzen, sondern ergänzen wird.
+
+Passend dazu lernst du in diesem interaktiven Workshop, wo uns als Software-Architekten Machine Learning begegnet und wo sich der Ansatz von
+Machine Learning grundsätzlich von dem der Software-Entwicklung unterscheidet und wo es parallelen gibt. 
+
+Anhand eines praktischen Beispiels werden wir dabei Machine Learning als Alternative zu klassischer Business-Logik erleben. Dies wird durch einige Übungen auf Papier unterstützt.
+
+
+Dieser Workshop eignet sich für jeden, der sich mit Software-Entwicklung beschäftigt und setzt kein Wissen über Machine Learning voraus.
+
+-->
+
+
+<section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation Workshop
+
+* 2019-workshop-exercise.docx ausdrucken für alle Teilnehmer
+    </textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### jfokus
+
+* Übungen Decision Tree und NN
+</textarea>
+</section>
+
+        <section>
+            <br>
+            <br>
+            <h2>Machine Learning: Das Ende der Businesslogik?</h2>
+            <br>
+            <br>
+            <p><a target="_blank" href="TODO">
+                TODO
+            </a></p>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / 
+                <a href="http://twitter.com/djcordhose">@DJCordhose</a> /
+                <a href="https://www.embarc.de/ ">embarc GmbH</a>
+            </h4>
+            <p><small><a href="TODO">
+                TODO
+            </a></small></p>
+        </section>
+
+            <!-- <section data-markdown class="local">
+        <textarea data-template>
+### First question wins a free copy
+
+<a href='https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf'>
+    <img src='img/livevideo-deep-learning-crash-course-meap.png' height="400px">
+</a>
+
+<small>
+https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf
+</small>
+<br>
+        </textarea>
+    </section> -->
+
+    <section data-markdown>
+        <textarea data-template>
+### Our Scenario for today
+
+* We are CTO of a highly innovative Car Insurance Company
+* Different from other insurance companies we determine the rate by the actual number of accidents per customer
+* _Objective: how many accidents will prospective customers have?_ 
+ 
+<img src='img/pixabay/accident-151668_1280.png' height="300px">
+        </textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### ML Car Insurance Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+    <a href='html/calculator.html' target="_blank">
+        https://djcordhose.github.io/ai/html/calculator.html</a></small>
+</small></p>
+</textarea>
+    </section>
+
+            <section data-markdown>
+                    <textarea data-template>
+## How to solve this programmatically?
+                        </textarea>
+                        </section>
+            
+            <section data-markdown>
+                    <textarea data-template>
+                    <img src='img/sketch/classic-development.jpg'>
+                    </textarea>
+                    </section>
+                    
+                    <section data-markdown>
+                        <textarea data-template>
+    ### Exploration
+    <img src='img/sns-pairplot.png' height="550px">
+                
+                    </textarea>
+                    </section>
+    <section>
+        <h3>Programmer's approach: Code Rules by Hand</h3>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if age < 25:
+    if speed > 140:
+        return red # young people, fast cars: high risk
+    else:
+        return yellow # young people: medium risk
+            </code></pre>
+        </div>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if age > 75:
+    return red # old people: high risk
+            </code></pre>
+        </div>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+if miles_per_year > 30:
+    return red # a lot of driving: high risk
+if miles_per_year > 20:
+    return yellow #  a bit of driving: medium risk
+            </code></pre>
+        </div>
+        <div class="fragment">
+        <pre><code contenteditable data-trim class="line-numbers python">
+return green # otherwise: low risk
+            </code></pre>
+        </div>
+<p><small>
+    <a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/classic-code.ipynb>'>https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/classic-code.ipynb</a>
+</small></p>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### How good is this?
+
+<!-- <p class="fragment"><em>How well have we mastered the domain?</em></p> -->
+
+* Is it better than guessing?
+* Are all the rules correct?
+* Are some missing?
+* How would we even know?
+
+</textarea>
+</section>                    
+
+<section>
+<h3>Different Approach</h3>
+
+<div style="max-width: 50%; float: left;">
+    <img src='img/df_head.jpg' height="450">
+</div>
+<div style="max-width: 50%; float: right;">
+
+    <br>
+    <br>
+    <br>
+    <ul>
+        <li>0 - red: many accidents</li>
+        <li>1 - green: few or no accidents</li>
+        <li>2 - yellow: in the middle</li>
+    </ul>
+    </div>
+    
+    
+<p style="clear: both;">
+    <em>
+Looking at the problem from the perspective of our data
+</em>
+</p>
+        </section>
+
+<section>
+    <h3>Let's check: Is the data we have any good?</h3>
+    <img src="img/manning/all.png" height="500px" class="fragment">
+    <small  class="fragment">Would we able to rank me (47) for a car having 100 mph top speed, driving 10k miles per year?</small>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Would we be able to separate different classes by drawing a few lines?
+
+    </textarea>
+        </section>
+
+
+<section data-markdown class="workshop exercise">
+    <textarea data-template>
+### Paper Exercise #1 - Understanding the Supervised Learning Approach
+
+* Manually cluster areas of different customer types on the <em>upper part</em> of the handout
+* Be sure to use a ballpen and apply pressure when drawing
+
+    </textarea>
+        </section>
+
+
+<section>
+    <h3>Manual Classification - red</h3>
+    <img src="img/decision-boundaries/decision-boundaries-1.jpg">
+</section>
+
+<section>
+    <h3>Manual Classification - yellow</h3>
+<img src="img/decision-boundaries/decision-boundaries-2.jpg">
+</section>
+
+<section>
+    <h3>Manual Classification - green</h3>
+<img src="img/decision-boundaries/decision-boundaries-3.jpg">
+</section>
+
+<section>
+    <h3>Decision Bounaries</h3>
+<img src="img/decision-boundaries/decision-boundaries-4.jpg">
+</section>
+
+<section data-markdown>
+<textarea data-template>
+## Core Question
+
+### Can we automate this process of drawing Decision Bondaries?
+</textarea>
+</section>
+
+
+<section data-markdown>
+<textarea data-template>
+<img src='img/sketch/supervised-ml.jpg' height="650px">
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Step I
+## Data Preparation
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Data is King
+
+_collecting data might be the hardest part of the job_
+
+* but also the most important
+* no data, not good quality or quantity => no supervised machine learning
+* if we have a simulator, reinforcement learning might be an option
+    
+    </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Clean Data and Select Features
+
+<img src='img/applications/data.png' height="500">
+
+</textarea>
+</section>
+
+<section data-markdown class="workshop exercise">
+    <textarea data-template>
+### Exercise on Paper #2 - Data Cleaning and Feature Selection
+
+_Data Cleaning_
+* What errors do you find in the data? Mark on paper and describe
+* How to deal with those errors?
+
+_Feature Selection_
+* Which column would you predict?
+* Which columns would you use as input for training?
+* Would you use all columns? If not, why?
+
+<!--
+- Datendopplung Zeile 4/5 => eine löschen
+- Fehlender Wert Zeile 16 => Zeile löschen oder Durchschnitt
+- Spalte 'state' mit mehr als 50% fehlenden Werten
+- Zeile 23 Ausreißer: Zeile löschen oder auf plausiblen Wert korrigieren 
+- Zeile 24: Califorina
+-->
+
+
+    </textarea>
+        </section>
+
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Results: Data Cleaning und Feature Selection
+
+_Data Cleaning_
+* Typos: Califorina
+* Outliers: Delete line or replace with decent value
+* Doubles: Delete
+* Missing Value: Delete line or replace with imputed value
+
+_Feature Selection_
+* Make sure which value to predict
+* Row missig more than 50% of values: do not use
+* Explore dependencies to decide what to use for training input
+            </textarea>
+            </section>
+
+    <section data-markdown>
+    <textarea data-template>
+### Final Check on Collected Data
+
+<img src='img/df_describe.png' height="500">
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Step II
+## Training
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Revisiting our Rule based approach
+
+Plotting the predictions as a background
+
+<img src='img/decision-boundaries/5-prog.png' class="fragment" height="450px">
+<br>
+<small class="fragment">approx. 43% predictions correct</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+## Do we really have to write those rules by hand?
+</textarea>
+</section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Decision Trees can learn such rules
+
+<img src="img/dt/dt-all.png" height="500px">
+        </textarea>
+        </section>
+
+    <section>
+<h3>Code in Scikit-learn</h3>
+
+<p>Training</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+            </code></pre>
+        
+<p>Prediction</p>
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+y_pred = clf.predict(input)
+        </code></pre>
+
+<small>
+    <a href='https://scikit-learn.org/stable/modules/classes.html'>https://scikit-learn.org/stable/modules/classes.html</a>
+    <br>
+    <a href='https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb'>
+        https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/sklearn/overview.ipynb</a>
+</small>
+        </section>
+        
+    <section data-markdown>
+            <textarea data-template>
+### How do they learn?
+
+<img src="img/dt/cart.png" height="500px">
+
+<small>
+http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart
+</small>
+        
+        
+        </textarea>
+        </section>
+
+    <section>
+            <h3>Decision Trees</h3>
+            <div>
+
+        <img src="img/decision-boundaries/dt-sweet-test.png">
+        <small>Up to 70% accuracy on unknown data</small>
+        </div>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+## Not bad, but can we do even better?
+
+        </textarea>
+        </section>
+    <section data-markdown>
+            <textarea data-template>
+### Foundation of Deep Neural Networks
+    
+<img src='img/insurance/neuron213.jpg'>
+    
+    </textarea>
+    </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+    ### From Neuron to Network 
+<a href='https://playground.tensorflow.org'>    
+    <img src='img/tf-plaground.png' height="500px">
+</a>
+    <small>
+    https://playground.tensorflow.org
+    </small>
+    </textarea>
+    </section>
+    
+    <!-- <section>
+            <h3>Neural Networks</h3>
+            <div class="fragment">
+
+        <img src="img/decision-boundaries/15-nn-reg-test.png">
+        <small>Up to 80% accuracy on unknown data</small>
+        </div>
+    </section>
+ -->
+<section data-markdown>
+    <textarea data-template>
+### Keras is TensorFlow's high level API
+
+* https://www.tensorflow.org 
+* https://www.tensorflow.org/guide/low_level_intro 
+* https://www.tensorflow.org/guide/keras 
+
+    </textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Next step: Encode this with Keras
+
+<img src='img/insurance/encoding3.jpg'>
+
+</textarea>
+</section>
+
+        <section>
+<h3>Code using Keras High Level API</h3>
+
+<p>Network Setup</p>
+<pre><code contenteditable data-trim class="line-numbers python">
+model = keras.Sequential()
+
+model.add(Dense(100, name='hidden1', activation='relu', input_dim=3))
+model.add(Dense(100, name='hidden2', activation='relu'))
+model.add(Dense(3, name='softmax', activation='softmax'))
+</code></pre>
+        
+        </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Step III
+## Evaluation
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Machine Learning is all about Generalization
+
+<img src='img/MELLI.jpg' height="500px">
+            </textarea>
+            </section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Split known data into training and test
+
+<img class='fragment' src='img/insurance/generalization.jpg' height="550px">
+
+</textarea>
+</section>
+
+<section data-markdown class="workshop exercise">
+    <textarea data-template>
+### Exercise on Paper #3 - How well did you generalize?
+
+<p>Turn the page and redraw the lines you printed through from the first page</p>
+<p>Get an estimate of the misclassified samples on both diagrams</p>
+<p>What do you think, is this result worse?</p>
+<p>What would you have done differently if you had been given this information before (that it is all about generalisation)?</p>
+
+    </textarea>
+        </section>
+
+
+<section id='overfitting'>
+        <h3>The Issue: Overfitting</h2>
+    <div>
+    <div style="float: left">
+        <img src="img/scans/elements/80_percent.jpg" height="200" class="fragment" data-fragment-index='1'>
+        <p>
+            <small><em>Training Score</em></small>
+        </p>
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='5'>
+        <img src="img/scans/elements/down.jpg" height="200">
+    </div>
+    <div style="float: left" class="fragment" data-fragment-index='4'>
+        <img src="img/scans/elements/up.jpg" height="200">
+    </div>
+    <div style="float: left">
+            <img src="img/scans/elements/70_percent.jpg" height="225"  class="fragment" data-fragment-index='2'>
+            <p>
+                <small><em>Test Score</em></small>
+            </p>
+    </div>
+    </div>
+    <p style="clear: both" class="fragment" data-fragment-index='3'><em>Training and test scores clearly divert</em></p>
+
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Regularization
+
+_Process to counter overfitting_
+
+Each ML strategy has its own means of Regularization, e.g.
+* KNN: more neighbors
+* Decision Trees: reduce depth, use ensenbles
+* SVM: gamma (how many points to use) and cost (of misclassified data)
+* NN: Dropout, Batch Normalization, Reduced Capacity, Reduced Training Time
+            </textarea>
+            </section>
+    
+
+<section data-markdown>
+        <textarea data-template>
+### Great results
+
+<img src='img/manning/nn-reg.png' height="450">
+
+<p class="fragment"><small>Up to 80% accuracy on test data using a regularized neural networks</small></p>
+</textarea>
+    </section>
+
+
+
+<section data-markdown>
+    <textarea data-template>
+### How does this behave in the real world?
+
+<img src='img/test-vs-real-life.jpg' height="500px">
+<small>
+https://twitter.com/brenankeller/status/1068615953989087232    
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Revisiting the Risk Calculator
+
+<a href='html/calculator.html'>
+<img src='img/manning/calculator.png' height="450">
+</a>
+<p><small>
+What about really fast cars?    
+</small></p>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Areas not covered by training data
+
+<img src='img/extended_coc.png' height="550px">
+
+</textarea>
+</section>
+
+<section data-markdown style='font-size: xx-large'>
+        <textarea data-template>
+### How to deal with those blank spots?
+
+<p class="fragment"><em>First: Be aware of the reasonable range of values</em></p>
+
+* For requests in extended area
+  * at least add a warning or 
+  * refuse to make a prediction
+* Identify suspicious scores
+  * in exteded area scores often are very biased towards one category (1.0 score)
+* Try to get more data, even incrementally
+  * Use user feedback, give it lower training score
+* Add likelihoods to scores
+  * Bayesian approaches are the new hype
+  
+</textarea>
+    </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Making Your Neural Network Say "I am not sure"
+
+<img src='img/tf_proba.jpg' class="fragment">
+
+<small>
+https://www.tensorflow.org/probability/
+<br>
+https://towardsdatascience.com/making-your-neural-network-say-i-dont-know-bayesian-nns-using-pyro-and-pytorch-b1c24e6ab8cd
+<br>
+
+</small>
+</textarea>
+    </section>
+
+<section data-markdown class="detail">
+        <textarea data-template>
+### From TensorFlow Probability to 
+
+<img src='img/tf_proba2PyMC4.png'>
+
+<small>
+https://twitter.com/twiecki/status/1077354710863093760
+<br>
+https://github.com/pymc-devs/pymc4
+</small>
+</textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+    
+## What does work?             
+
+</textarea>
+</section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Supervised Machine Learning fits best when
+
+* the problem at hand is hard to specify (_Who is a good customer?_)
+* you have a lot of examples
+* solving the problem can tolerate some error or uncertainty
+* there is a clear, simple input and output
+* you want to replace a gut feeling
+            </textarea>
+            </section>
+
+<section data-markdown>
+    <textarea data-template>
+<img src='img/twitter-fcholett-bias.png' height="580px">
+
+<small>
+https://twitter.com/fchollet/status/1050227462162894848
+</small>
+        </textarea>
+        </section>
+
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Remember, you are not Facebook or Google
+
+<img src='img/dl-research-vs-application.png' height="500px">
+<small>https://twitter.com/casarock/status/1064438008756256768</small>
+    </textarea>
+</section>
+-->
+<section data-markdown>
+    <textarea data-template>
+<!-- ### Andrew Ng: Supervised Machine Learning -->
+
+<img src='img/ng_supervised.png' height="570px">
+
+<small>
+https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now
+</small>
+        </textarea>
+        </section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+<img src='img/explaining_ml.jpg' height="580px">
+
+<small>
+https://twitter.com/ilyasut/status/1070436619755241472
+</small>
+        </textarea>
+        </section> -->
+
+<section data-markdown>
+    <textarea data-template>
+## Is Supervised Machine Learning all there is?
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+## Types of Learning
+<img src='img/types-of-ml.jpg'>
+<small>
+https://www.facebook.com/nipsfoundation/posts/795861577420073/
+<br>
+https://ranzato.github.io/publications/tutorial_deep_unsup_learning_part1_NeurIPS2018.pdf
+</small>
+</textarea>
+</section>
+
+
+            <!-- <section>
+                    <h3>
+                        Three types of machine learning
+                    </h3>
+                    <img src="img/sketch/types-of-ml.png" height="550px">
+                </section> -->
+    
+        <!-- <section>
+                <h3>What to use depends on your data</h3>
+                <img src='img/applications/decisions/type.png'>
+            </section> -->
+
+
+
+            <section data-markdown>
+                    <textarea data-template>
+                
+## What does not work?             
+            
+            </textarea>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>             
+### The easy answer
+
+* if your logic follows very clear and well defined rules and can not tolerate errors or uncertainty
+* like laws and regulations
+* you have no data and can not simulate an environment
+* in this case consider a very strong foundation for your logic
+  * like https://en.wikipedia.org/wiki/Coq theorem prover
+  * more insights http://www.pathsensitive.com/2018/12/my-strange-loop-talk-you-are-program.html
+            
+            </textarea>
+            </section>
+
+            <section data-markdown>
+                    <textarea data-template>             
+## The harder answer ...
+            
+            </textarea>
+            </section>
+
+
+        <section>
+            <h3>There is no general AI</h3>
+            <div class='fragment' style="float: left; padding-left: 50px">
+                    <img src='img/no_brain_robo.jpg' height="300">
+                    <p><small><em>Consciousness or autonomous learning<br>
+                        does not exit in machines</em></small>
+                    </p>
+                </div>
+            <div class='fragment' style="float: right; padding-left: 50px; padding-right: 50px">
+                    <img src='img/human_neq_robot_shadow.jpg' height="300">
+                    <p><small><em>AI and machine learning is not like super-humans<br>
+</em></small></p>
+            </div>
+        </section>
+
+    <section data-markdown>
+            <textarea data-template>
+<h4 class="fragment"> NY Times in 1958 after perceptrons were invented</h4>
+<img src='img/ny-times-1958.jpg' height="500px">
+
+<small>https://twitter.com/genekogan/status/1055839216280588289</small>
+                </textarea>
+            </section>
+
+<section data-markdown>
+    <textarea data-template>
+### What does this mean for you?
+
+If you want to adopt Machine Learning in your Company
+* Success can not guranteed
+* Rather experiment within time boxes
+* Expect and clearly communicate failures
+* Bring models into production as quickly as possible
+* Do not optimize for the last few percentages
+* Quality of the data matters more than your approach
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### What really matters 
+
+<img src='img/sean-data.png'>
+
+<small>
+https://twitter.com/SeanPedersen96/status/1063272488489099264
+</small>
+</textarea>
+</section>
+
+            <section data-markdown>
+        <textarea data-template>
+<img src='img/twitter-cholett-applications.png' height="570px">
+
+<small>
+https://twitter.com/fchollet/status/1035951190276681728
+</small>
+            </textarea>
+            </section>
+
+<section style="font-size: xx-large">
+    <h2>Wrap-Up</h2>
+    <ul>
+        <li class="fragment">Machine Learning can learn from existing data and generalize from it
+        <li class="fragment">Sometimes, it can be an alternative to explicit, classic business logic
+        <li class="fragment">No machine has common knowledge of the world, though
+        <li class="fragment">"Can the AI not handle this?" is thus never a reasonable question
+        <li class="fragment">"the AI" does not exist
+        <li class="fragment">Machine Learning is an engineering effort. There is no strong AI that you just throw a problem at and it will solve it automatically. 
+                <a href='https://twitter.com/DJCordhose/status/1070304319218569218'>Dr. Sebastian Wieczorek, Head of AI @SAP</a>
+    </ul>
+    <br>
+    <p>
+            <em>Machine Learning: Das Ende der Businesslogik?</em>
+        <br>
+        <br>
+    <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a> / <a href="https://www.embarc.de/ ">embarc GmbH</a>
+        <br>
+    <a href="http://bit.ly/wien-architectur">
+        http://bit.ly/wien-architectur
+    </a>
+    </p>
+</section>
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+- Unsupervised Länger
+  - Clustering erst mal mit K means (wie vorher)
+- Für jede ML Art Konkret Tools und Lib zeigen
+- Semi Supervised ML: https://twitter.com/colinraffel/status/1059941035651010561
+- Reinforcement Learning
+  - https://twitter.com/xbpeng4/status/1051880967814574087
+- GANs
+  - Auch aus anderen Talks
+  - Computer generated faces using generative adversarial network / progressive growing technique from Nvidia. Trained on 50,000 images from a photobooth at ZKM Center for Art and Media by @highqualitysh1t https://t.co/RO1EG6ha8S
+(https://twitter.com/darren_cullen/status/1060225126313156613?s=03)
+- Vision: If there’s this much hype about using lots of data to make predictions with AI I can’t even imagine the hype train when physics is invented we can make predictions with no data...
+(https://twitter.com/brendanjmeade/status/1060341302599081984?s=03)
+</textarea>
+</section> -->
+
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        // remove for workshop version
+        $('.workshop').remove();
+        $('.exercise').remove();
+        
+
+        Reveal.addEventListener( 'ready', function( event ) {
+            // do we want this???
+            $('li').addClass('fragment')
+
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        $('section').attr('data-background-image', "backgrounds/sky.jpg");
+        // $('section').attr('data-background-image', "backgrounds/cloud.jpg");
+        // $('section').attr('data-background-image', "backgrounds/snow.jpg");
+
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white-transparent.jpg")
+        // $('section').attr('data-background-image', "backgrounds/murmel2.jpg")
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1100,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

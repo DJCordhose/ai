@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Dystopie oder Utopie</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+        .reveal pre code {
+            max-height: 1000px !important;
+        }
+
+        img {
+            border: 0 !important;
+            box-shadow:0 0 0 0 !important;
+        }
+
+        .reveal {
+            -ms-touch-action: auto !important;
+            touch-action: auto !important;
+				}
+
+				.reveal h2,
+                .reveal h3,
+				.reveal h4 {
+					letter-spacing: 2px;
+                    font-family: 'Amiri', serif;
+                    /* font-family: 'Times New Roman', Times, serif; */
+                    font-weight: bold;
+                    font-style: italic;
+                    letter-spacing: -2px;
+                    text-transform: none !important;
+                }
+
+                .reveal em {
+                    font-weight: bold;
+                }
+
+				.reveal .step-subtitle h1 {
+					letter-spacing: 1px;
+				}
+				.reveal .step-subtitle h2,
+				.reveal .step-subtitle h3 {
+					text-transform: none;
+					font-style: italic;
+					font-weight: normal;
+					/* font-weight: 400; */
+					/* font-family: 'Amiri', serif; */
+					font-family: 'Lobster', serif;
+					letter-spacing: 1px;
+					color: #2aa198;
+					text-decoration: underline;
+				}
+
+				.reveal .front-page h1,
+				.reveal .front-page h2 {
+					font-family: "League Gothic";
+					font-style: normal;
+					text-transform: uppercase !important;
+					letter-spacing: 1px;
+				}
+
+				.reveal .front-page h1 {
+					font-size: 2.5em !important;
+				}
+
+				.reveal .highlight {
+					background-color: #D3337B;
+					color: white;
+				}
+
+        .reveal section img {
+          background: none;
+        }
+
+				.reveal img.with-border {
+					border: 1px solid #586e75 !important;
+					box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+				}
+
+				.reveal li {
+					margin-bottom: 8px;
+				}
+
+				/* For li's that use FontAwesome icons as bullet-point */
+			.reveal ul.fa-ul li {
+				list-style-type: none;
+			}
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h2>KI</h2>
+            <h3>Teil I: Gibt es intelligente Maschinen?</h3>
+            <h3>Teil II: KI - Dystopie oder Utopie?</h3>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <small>
+                    <a href="https://djcordhose.github.io/ai/2018_ki_haw_outro.html">
+                        https://djcordhose.github.io/ai/2018_ki_haw_outro.html</a>
+                        </small>
+
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+# Teil I
+## Gibt es intelligente Maschinen?
+
+</textarea>
+</section>
+
+<section>
+        <h3>Ergebnisse "Was ist Intelligenz" vom Anfang der Vorlesung</h3>
+        <pre contenteditable="true">
+Team 1:
+- Selbständige Entscheidung, z.B. selbstfahrendes Auto
+- Bewusstsein
+
+Team 2:
+- Lernfähig, über das initiale Training
+- Selbständige Entscheidung
+- Situationen oder Dinge bewerten (muss nicht moralisch sein)
+
+Team 3:
+- Nicht: stumpfes Regelwerk, wenn dann Regeln
+- nicht deterministisch, nicht immer nachvollziehbar
+- es wirkt intelligent
+- lernen, reflektieren, flexibel, allgemein
+
+Team 4:
+- Abstraktionsfähigkeit von einem bekannten in einen unbekannten Bereich
+- Erklärungsfähigkeit, strategisches Denken
+        </pre>
+    </section>
+
+    <section>
+            <h3>Schwache KI (künstliche Intelligenz)</h3>
+            <p>Hypothese: es kommt darauf an, ob man das Ergebnis von dem eines Menschen unterscheiden kann</p>
+            <p>So ist auch der <strong>Turing Test</strong> definiert</p>
+        </section>
+
+        <section>
+            <p>Nach den Forderungen der schwachen KI wäre ein Schachprogramm intelligent,
+                obwohl das was es tut relativ stumpf ist</p>
+            <p class="fragment"> und
+                (sehr wahrscheinlich) <strong>nicht</strong> dem ähnelt was wir Menschen tun</p>
+        </section>
+
+        <section>
+            <p>Schachprogramme haben Menschen überwunden weil</p>
+            <div class="fragment" style="float: left">
+                <img src="img/cray2.png" height="250">
+                <p><small>Cray X-MP<br> Supercomputer (1982)</small></p>
+            </div>
+            <div class="fragment" style="float: left; padding-left: 20px; padding-top: 120px; font-weight: bold">
+            x 100.000 =
+            </div>
+            <div class="fragment" style="float: left">
+              <img src="img/titan5.jpg" height="250" style="float: right">
+                <p><small><br>Titan 5 im Gamer PC (2017)</small></p>
+            </div>
+       </section>
+
+        <section>
+            <p>Neuerdings haben wir allerdings auch</p>
+            <ol>
+                <li>Schlauere Strategien (Programme)
+                <li>Sehr große Datenmengen
+            </ol>
+        </section>
+
+        <section>
+            <h3>Starke KI</h3>
+            <p>Hypothese: Maschinen sind nur dann intelligent, wenn sie etwas ähnliches macht wie ein Mensch</p>
+        </section>
+
+
+        <section>
+            <h2>Turing</h2>
+            <h3 class="fragment">Vater der modernen Informatik</h3>
+            <p class="fragment"><em>Wenn man eine intelligente Maschine sieht, stellt man diese Frage nicht mehr</em></p>
+            <p class="fragment"><em>Sie macht genau so viel Sinn, wie zu fragen, ob ein anderer Mensch auch intelligent ist</em></p>
+        </section>
+
+    <section>
+        <h2>Do Machines have Consciousness?</h2>
+    </section>
+
+    <section>
+        <h3>Consciousness</h2>
+        <p><em>the state of being aware of and responsive to one's surroundings</em></p>
+        <a href="https://en.wikipedia.org/wiki/Consciousness" target="_blank">https://en.wikipedia.org/wiki/Consciousness</a>
+        <!-- <p><em><small>Consciousness is the state or quality of awareness, or, of being aware of an external object or something within oneself. It has been defined variously in terms of sentience, awareness, subjectivity, the ability to experience or to feel, wakefulness, having a sense of selfhood or soul, the fact that there is something "that it is like" to "have" or "be" it, and the executive control system of the mind, or the state or quality of awareness, or, of being aware of an external object or something within oneself. In contemporary philosophy its definition is often hinted at via the logical possibility of its absence, the philosophical zombie, which is defined as a being whose behavior and function are identical to one's own yet there is "no-one in there" experiencing it.</small></em></p> -->
+    </section>
+
+    <section>
+        <h3>Strong position</h3>
+        <p><small><a target="_blank" href="https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)">https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)</a></small></p>
+        <p>From <em>Ascribing Mental Qualities to Machines</em></p>
+        <p class="fragment"><em>Machines as simple as thermostats can be said to have beliefs, and having beliefs seems to be a characteristic of most machines capable of problem solving performance.</em></p>
+        <p class="fragment"><strong>The appropriately programmed computer with the right inputs and outputs would thereby have a mind in exactly the same sense human beings have minds.</strong></em></p>
+    </section>
+
+    <section>
+        <h3>Counter Argument</h3>
+        <p>By Philosopher <a href="https://en.wikipedia.org/wiki/John_Searle" target="_blank">https://en.wikipedia.org/wiki/John_Searle</a></p>
+        <p class="fragment"><em>The Chinese room argument holds that a program cannot give a computer a "mind", "understanding" or "consciousness", regardless of how intelligently or human-like the program may make the computer behave. </em></p>
+        <p class="fragment"><em>In this thought experiment, a person in the "Chinese room" is passed questions from outside the room, and consults a library of books to formulate an answer.</em></p>
+        <p><small><a target="_blank" href="https://en.wikipedia.org/wiki/Chinese_room">https://en.wikipedia.org/wiki/Chinese_room</a></small></p>
+    </section>
+
+    <section>
+        <h3>But, remember Turing</h3>
+        <p class="fragment"><strong>if you ever experience an intelligent machine,
+            such a distinction (if the machine has mental qualities or a consciousness)
+            would not make more sense than asking if the other people do real thinking either</strong></p>
+    </section>
+
+        <section data-markdown>
+        <textarea data-template>
+## Auf der Suche nach Intelligenz
+
+### Sind die gesehenen Ansätze intelligent?
+     </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Suche
+
+* Uninformierte Suche
+* Informierte Suche
+* Constraint Systeme
+* Adversarial Search
+* Monte-Carlo Game Search / Tree Search
+        </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Supervised Machine Learning
+
+* KNN
+* Decision Trees / Random Forest
+* Support Vector Machines
+* Neural Networks
+* Deep Learning
+* CNNs
+* RNNs
+        </textarea>
+    </section>
+    <section data-markdown>
+        <textarea data-template>
+### Reinforcment Learning
+        </textarea>
+    </section>
+    <section data-markdown>
+        <textarea data-template>
+### Unsupervised ML
+
+* Clustering
+* PCA, t-SNE, UMAP
+* Autoencoders, GANs
+        </textarea>
+    </section>
+    <section data-markdown>
+        <textarea data-template>
+### NLP
+
+* Feature Engeneering, wie n-grams TF-IDF und POS
+* DCGs / Grammatiken
+* Embeddings, Word2Vec
+* LSTMs/GRUs
+        </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Fishbowl: Auf der Suche nach Intelligenz
+
+#### Sind die gesehenen Ansätze intelligent?
+
+#### Welche Techniken führen in der Zukunft am ehesten zu einem intelligenten System? Oder keine?
+        </textarea>
+    </section>
+
+
+    <!-- <section>
+        <h2>More elaborated approach</h3>
+        <p><small>What makes us conscious? <a target="_blank" href="https://theconversation.com/what-makes-us-conscious-50011">
+            https://theconversation.com/what-makes-us-conscious-50011
+        </a></small></p>
+        <p>Integrated Information Theory postulates physical system can give rise to consciousness if it is</p>
+        <ol>
+            <li>very rich in information (like brain and SSD)
+            <li>highly integrated (data is highly connected in complex ways)
+        </ol>
+        <p><small>Should be able to distinguish awake and anaesthetised brains
+            (<a target="_blank" href="http://journals.sagepub.com/doi/abs/10.1177/1550059413513723">http://journals.sagepub.com/doi/abs/10.1177/1550059413513723</a>)
+        </small></p>
+        <p><small>Might consciousness be something not restricted to living things? <a target="_blank " href="https://www.scientificamerican.com/article/is-consciousness-universal/">
+            https://www.scientificamerican.com/article/is-consciousness-universal/
+        </a> </small></p>
+    </section> -->
+
+    <!-- <section data-markdown>
+        <script type="text/template">
+### Is our consciousness linked to / identical to brain functions?
+
+Facial recognition reduced to a few brain cells: http://www.cell.com/cell/fulltext/S0092-8674(17)30538-X
+- Facial images can be linearly reconstructed using responses of ∼200 face cells
+- early brain regions pre process images before that
+        </script>
+    </section> -->
+
+    <section data-markdown>
+        <textarea data-template>
+# Teil II
+## KI: Dystopie oder Utopie?
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Google und Verantwortung
+
+<img src='img/google-ai-principles.png' height="450px">
+<small>
+https://twitter.com/algorithmwatch/status/1004957404193271808
+<br>
+https://www.blog.google/topics/ai/ai-principles/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Wir Entwickler von KI tragen Verantwortung
+
+<img src='img/ml-responsibilty.png' height="450px">
+<small>
+https://twitter.com/Smerity/status/1004487181879005184
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# Thema 1
+## Wie weit sind Computer generierte Bilder und Videos?
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Realistic controlled motions
+
+<img src='img/wolf-motion.png' height="450px">
+
+<small>
+https://twitter.com/blacksquirrel__/status/1002768915133394945
+https://www.fxguide.com/quicktakes/siggraph-2018-tech-papers-preview
+</small>
+            </textarea>
+        </section>
+        
+<section data-markdown>
+        <textarea data-template>
+### Detecting Fake Images
+
+Self trained to learn image splices (Klebestellen) (on unmanipulated images)
+
+<img src="img/splice_detection.png" height="350px">
+
+<small>
+... a step in the long quest for a truly general-purpose visual forensics tool
+<br>
+https://arxiv.org/abs/1805.04096
+</small>
+</textarea>
+</section>
+
+<section>
+<h3>Generating Celebreties</h3>
+<p>Trained for two weeks on a single high-end GPU on CelebA-HQ data set (images of celebreties)</p>
+<div class="fragment" style="float: left">
+    <img src="img/unsupervised/gan-model-male2.png" height="220">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female2.png" height="220">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-female1.png" height="220">
+</div>
+<div class="fragment" style="float: left; padding-left: 25px">
+        <img src="img/unsupervised/gan-model-male.png" height="220">
+</div>
+<p style="clear: both">
+<small>
+<a href="https://alantian.net/ganshowcase/" target="_blank">https://alantian.net/ganshowcase/</a>
+<br>
+<a href="https://github.com/alantian/ganshowcase" target="_blank">https://github.com/alantian/ganshowcase</a>
+<br>
+<a href="https://twitter.com/alanyttian/status/988242167998148608" target="_blank">https://twitter.com/alanyttian/status/988242167998148608</a>
+</small>
+                   
+</p>
+</section>                                
+
+<section data-markdown>
+        <textarea data-template>
+### Usings GANs to learn image translation
+
+<video controls 
+src="img/unsupervised/dog2cat.mp4" type="video/mp4"
+></video>
+
+<small>
+https://twitter.com/liu_mingyu/status/985677397172207616
+https://www.youtube.com/watch?v=ab64TWzWn40
+</small>
+</textarea>
+</section>
+
+<section>
+    <h4>State of the Art GAN (higher is better)</h4>
+    <img src="img/unsupervised/gan-clothes.jpg" height="500px">
+    <p><small><a href="https://arxiv.org/abs/1711.02231" target="_blank">Visually-Aware Fashion Recommendation and Design with Generative Image Models</a></small></p>
+</section>
+
+<section>
+        <h4>Only two of these images are actual images</h4>
+        <img src="img/applications/gan.jpg" height="500px">
+        <p>
+            <small>
+                <a href="https://twitter.com/goodfellow_ian/status/918900712901197824" target="_blank">
+                    https://twitter.com/goodfellow_ian/status/918900712901197824</a>
+            </small>
+        </p>
+    </section>
+    
+    <section>
+        <h4>All others generated by neural networks</h4>
+        <img src="img/applications/gan-real-images.jpg" height="500px">
+        <p>
+            <small>
+                <a href="https://twitter.com/davegershgorn/status/918902123668168704" target="_blank">https://twitter.com/davegershgorn/status/918902123668168704</a>
+            </small>
+        </p>
+    </section>
+
+
+    <section data-markdown>
+            <textarea data-template>
+    ### Faking Video
+    
+    Learning a model from a few minutes of video
+    
+    <img src="img/fake_obama.png">
+    
+<small>
+https://s2018.siggraph.org/presentation/?id=papers_129&sess=sess146
+<br>
+https://youtu.be/qc5P2bvfl44?t=60
+<br>
+<a href="https://www.reddit.com/r/MachineLearning/comments/8kj06q/r_ai_tool_controls_people_in_videos_deep_video/">
+        Kommentare auf Reddit
+</a>
+</small>
+    </textarea>
+    </section>
+    
+    <section data-markdown>
+        <textarea data-template>
+# Thema 2
+## Erkennen und Scannen von Menschen
+</textarea>
+</section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Menschen an ihrem Gang erkennen
+
+_Es reicht, über eine Matte mit Sensoren zu gehen_
+
+* Grenzkontrolle (anstatt andere Biometrischer Daten)
+* Kann Veränderungen im Gang feststellen (medizinische Diagnose)
+
+<small>
+https://www.heise.de/newsticker/meldung/Maschinenlernen-KI-erkennt-Personen-an-ihrem-Gang-4063356.html
+http://www.manchester.ac.uk/discover/news/ai-footstep-recognition-system-could-be-used-for-airport-security/
+</small>
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### PoseNet: Real-time pose estimation
+
+<img src='img/posenet_camera.gif'>
+
+<small>
+https://twitter.com/random_forests/status/993639149780459520
+<br>
+https://twitter.com/teropa/status/1001151524351959041
+</small>    
+    
+        </textarea>
+    </section>
+    
+<section data-markdown>
+        <textarea data-template>
+<img src='img/facebook_face_recognition.jpg' height="550px">
+
+<small>
+https://www.theverge.com/2018/3/27/17165150/facebook-face-recognition-how-to-turn-off-disable
+</small>    
+    
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Scanning von Arm-Nerven
+
+<img src='img/twtter-nerve-scanner.png' height="450px">
+<small>
+https://twitter.com/ben_ferns/status/1002167116215214080
+<br>
+http://www.ctrl-labs.com/ctrl-kit/
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+# Thema 3
+## Maschinen imitieren Menschen
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Wavenet passes turing test?
+
+System can call people and make appointments (without people noticing it is a machine)
+
+<img src='img/rnn_big.png'>
+
+<small>
+https://ai.googleblog.com/2018/05/duplex-ai-system-for-natural-conversation.html
+</small>
+            </textarea>
+            </section>
+
+<section data-markdown>
+        <textarea data-template>
+<img src='img/kun_turing_twitter.png'>
+
+<small>
+https://twitter.com/jeremyjkun/status/994020061437345792
+</small>
+            </textarea>
+            </section>
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Ehtics I
+* I am genuinely bothered and disturbed at how morally wrong it is for the Google Assistant voice to act like a human and deceive other humans on the other line of a phone call, using upspeek and other quirks of language. "Hi um, do you have anything available on uh May 3?" (https://twitter.com/BridgetCarey/status/993910061209702400)
+* We should make AI sound different from humans for the same reason we put a smelly additive in normally odorless natural gas. (https://twitter.com/traviskorte/status/993954759932612608)
+* The synthetic voice of synthetic intelligence should sound synthetic. Successful spoofing of any kind destroys trust. When trust is gone, what remains becomes vicious fast. (https://twitter.com/stewartbrand/status/994046632428752896)
+                    </textarea>
+                    </section>
+
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Ehtics II
+* Google Assistant making calls pretending to be human not only without disclosing that it's a bot, but adding "ummm" and "aaah" to deceive the human on the other end with the room cheering it... horrifying. Silicon Valley is ethically lost, rudderless and has not learned a thing. (https://twitter.com/zeynep/status/994233568359575552)
+* I have a related qualm with the new autocomplete in Gmail and earlier autoreply in Allo. These applications of AI aren’t just “convenience”; they subtly corrupt human communication by encouraging us to choose machined messages. (https://twitter.com/mbostock/status/994241566607790080)
+                    </textarea>
+                    </section>
+
+
+
+<section data-markdown>
+        <textarea data-template>
+California plans law forcing AI bots to identify themselves
+
+<small>
+https://twitter.com/TheRegister/status/999456537314775040
+</small>
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+        <textarea data-template>
+# Thema 4
+## Maschinen als Künstler
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Generation High-quality Anime Characters 
+
+<img src="img/anime_gan.png">
+
+<small>
+https://make.girls.moe
+<br>
+https://alantian.net/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Generating Music
+
+* Could Artificial Intelligence Replace Musicians and Songwriters?: https://groups.google.com/a/tensorflow.org/forum/#!topic/magenta-discuss/EcT6lATirjE
+* Thoughts on Ownership and Copyrights of AI Generated Music?: https://groups.google.com/a/tensorflow.org/forum/#!topic/magenta-discuss/uYDysfC7AP8
+
+<small>
+https://magenta.tensorflow.org/demos
+</small>
+</textarea>
+</section>
+ -->
+<section data-markdown>
+        <textarea data-template>
+# Thema 4
+## KI macht unsere Arbeit
+</textarea>
+</section>
+
+<section>
+        <img src="img/new-yorker-robots.jpg" height="580px">
+        <p><small><a href="https://twitter.com/conorsen/status/920063253115531271" target="_blank">
+            https://twitter.com/conorsen/status/920063253115531271</a></small></p>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Artificial intelligence will wipe out half the banking jobs in a decade, experts say
+
+_Deutsche Bank, John Cryan_ 
+
+“In our bank we have people doing work like robots,” he said. “Tomorrow we will have robots behaving like people. It doesn’t
+matter if we as a bank will participate in these changes or not, it is going to happen.”
+
+
+<small>
+https://www.mercurynews.com/2018/04/20/artificial-intelligence-will-wipe-out-half-the-banking-jobs-in-a-decade-experts-say/
+</small>
+    </textarea>
+    </section>
+
+<section>
+    <h3>KI besser als die Marketingabteilung?</h3>
+        <p class="fragment"><em>Zalando streicht 250 Stellen in der Marketingabteilung am Unternehmensstandort Berlin. Werbe-E-Mails sollen in Zukunft verstärkt
+        von Algorithmen oder Künstlicher Intelligenz verschickt werden.</em></p>
+        <div class="fragment">
+
+        <p><em>"Wir gehen davon aus, dass Marketing in Zukunft noch datenbasierter sein muss. Dafür brauchen wir einen höheren Anteil an
+        Entwicklern und Datenanalysten", sagt Rubin Ritter, Co-Chef von Zalando, gegenüber der FAZ.</p>
+    </em> <p>
+            <small>
+        <a target="_blank" href="https://www.heise.de/newsticker/meldung/KI-gesteuertes-Marketing-Zalando-streicht-250-Arbeitsplaetze-3990425.html">
+            https://www.heise.de/newsticker/meldung/KI-gesteuertes-Marketing-Zalando-streicht-250-Arbeitsplaetze-3990425.html</a>
+            </small>
+        </p>
+
+    </div>    </section>
+
+    <section data-markdown style="font-size: x-large">
+        <textarea data-template>
+### In Summe Gewinn oder Verlust von Arbeitsplätzen?
+
+* Bitkom: bis zum Jahr 2022 fallen allein in Deutschland drei Millionen Arbeitsplätze durch die Digitalisierung weg
+* Mannheimer Zentrum für Europäische Wirtschaftsforschung (ZEW):
+  * Der Einsatz von Hightech hat viele Unternehmen wettbewerbsfähiger gemacht. Sie produzieren deshalb zu günstigeren Preisen größere Mengen - und haben aus diesem Grund mitunter an anderen Positionen mehr Leute angestellt.
+  * Multiplikator-Effekt": Die produktiveren Firmen generieren neues Einkommen in Form von Löhnen, Gewinnen und Kapitaleinkommen. Mitarbeiter und Anteilseigner der Firmen haben mehr Geld in der Tasche. Sie geben es aus - und das schafft Jobs an anderen Stellen der Wirtschaft.
+
+<small>
+http://www.spiegel.de/wirtschaft/unternehmen/arbeitsmarkt-regierungsgutachten-rechnet-mit-job-gewinnen-durch-roboter-a-1200538.html
+</small>
+        </textarea>
+    </section>
+    
+    
+    
+    <section>
+            <img src="img/unemployment-rate.png">
+            <p><small><a href="https://www.google.com/search?q=unemployment+rate+usa&rlz=1C1XYJR_enDE765GB766&oq=unemployment+rate+usa&aqs=chrome..69i57j0l5.5879j0j7&sourceid=chrome&ie=UTF-8" target="_blank">
+    Wie geht der Trend weiter?</a></small></p>
+        </section>
+
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+We've been working on a prototype microscope that we think is a great way to blend the expertise of automated machine learning systems with human expertise.  It projects augmented information from an ML model into the visual pathway in the microscope.
+
+https://twitter.com/JeffDean/status/985941149759299584
+</textarea>
+</section> -->
+
+
+        <section data-markdown>
+            <textarea data-template>
+
+Me: Let’s talk about AI in medicine. 
+
+Hospital CIO on record: “It’ll augment our radiologists” 
+
+Off record: “Once the algorithm beats my $600k a year radiologist, it’ll replace at least some. And sooner than you think.”
+
+<small>
+https://twitter.com/chrissyfarr/status/980940379607347200
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### AI: The next industrial revolution?
+            
+_If AI is a new industrial revolution shouldn't we be... incredibly concerned? The industrial revolution was a time of great chaos and misery for millions of people, and it occurred during a period with less extreme weather and a less connected world._
+
+<small>
+https://twitter.com/jackclarkSF/status/1001588352842457094
+</small>
+    </textarea>
+    </section>
+    
+    
+        <!-- <section data-markdown class="todo">
+            <textarea data-template>
+
+
+Ironies of Automation: https://twitter.com/allspaw/status/994352046982729728
+</textarea>
+</section> -->
+
+        
+<!-- <section data-markdown>
+        <textarea data-template>
+### Sollten Optimierungsfunktionen für Recommender Systeme ethisch sein? 
+
+<small>
+http://www.argmin.net/2018/04/16/ethical-rewards/
+</small>
+            </textarea>
+            </section> -->
+            
+        <section data-markdown>
+        <textarea data-template>
+# Ausblick und Grenzen
+## Was bringt die Zukunft?
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### GANs are a lively field of science
+
+Using attention to achieve better results
+
+<img src='img/goodfellow_progress_gan.jpg' height="450px">
+<small>
+https://twitter.com/gstsdn/status/999083473754189824
+https://twitter.com/goodfellow_ian/status/1001965061806706691
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Moore like law for results in AI
+
+<img src="img/compute_diagram-log.png" height="500px">
+
+<small>
+https://blog.openai.com/ai-and-compute/
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Democratizing ML by making it accssible to non-experts to solve their problems on their own
+
+What will be the Excel of ML? Just Excel? Collocate Data with AI?
+
+<small>
+https://twitter.com/fchollet/status/994635075525361666
+</small>
+</textarea>
+</section>
+
+<!-- <section data-markdown class="todo">
+        <textarea data-template>
+### Ernsthafter Zweifel am Durchbruch von AlphaZero
+https://medium.com/@josecamachocollados/is-alphazero-really-a-scientific-breakthrough-in-ai-bf66ae1c84f2
+</textarea>
+</section> -->
+
+
+<section>
+        <h3>Was ist das?</h3>
+        <img src="img/squirrels/original/Black_New_York_stuy_town_squirrel_amanda_ernlund.jpeg" height="500px">
+    </section>
+    
+    <section>
+        <h3>Kein Standard System erkennt eine solche Abweichung von der Norm</h3>
+        <p>Wir Menschen haben damit aber kein Problem</p>
+        <p>Maschinen können momentan nur reproduzieren</p>
+    </section>
+    
+    
+    <section>
+        <img src="img/kasparov-twitter.png">
+        <p>
+            <small>
+                <a href="https://twitter.com/Kasparov63/status/955524468192854016" target="_blank">
+                    https://twitter.com/Kasparov63/status/955524468192854016</a>
+            </small>
+        </p>
+    </section>
+
+    <section>
+        <h4>Kleine Abweichungen im Kontext können zu komplett falschen Bewertungen führen</h4>
+        <img src="img/tumblr_inline_p4yzicpI1u1rl9zu7_500.jpg" height="400px">
+        <p>
+            <small>
+                <a href="http://aiweirdness.com/post/171451900302/do-neural-nets-dream-of-electric-sheep" target="_blank">
+                    http://aiweirdness.com/post/171451900302/do-neural-nets-dream-of-electric-sheep</a>
+                <br>
+                <a href="https://twitter.com/srchvrs/status/969618207416946688" target="_blank">
+                    https://twitter.com/srchvrs/status/969618207416946688</a>
+                <br>
+                <a href="https://twitter.com/JanelleCShane/status/969239712190746624" target="_blank">
+                    https://twitter.com/JanelleCShane/status/969239712190746624</a>
+            </small>
+        </p>
+    </section>
+    
+    <section>
+        <h4>Systeme können bewusst getäuscht werden</h4>
+        <img src="img/not-a-fan.jpg" height="500px">
+        <p>
+            <small>
+                <a target="_blank" href="https://twitter.com/dribnet/status/925871135849193472">https://twitter.com/dribnet/status/925871135849193472</a>
+            </small>
+        </p>
+    </section>
+    
+
+        <section>
+            <h3>Wiederholung der Übung vom ersten Termin: Visionen für KI</h3>
+            <p>Erstellt Visionen einer durch KI geprägten Zukunft</p>
+            <ul>
+                <li>Tut euch in Gruppen zusammen</li>
+                <li>Erstellt 3 positive und 3 negative Visionen an die ihr persönlich für möglich haltet</li>
+                <li>Haltet die Visionen als Skizzen fest</li>
+            </ul>
+            <p>Als Abschluss stellen wir Visionen zur Diskussion vor</p>
+            <p>
+                <small>15 Minuten</small>
+            </p>
+        </section>
+        
+        <section>
+            <img src="img/ethics/team1.jpg" height="700px">
+        </section>
+        
+        <section>
+            <img src="img/ethics/team2.jpg" height="700px">
+        </section>
+        <section>
+            <img src="img/ethics/team3.jpg" height="700px">
+        </section>
+        <section>
+            <img src="img/ethics/team4.jpg" height="700px">
+        </section>
+        <section>
+            <img src="img/ethics/team5.jpg" height="700px">
+        </section>
+
+        <!--
+        <section>
+            <h3>Beispielergebnis: Negative Vision #1</h3>
+            <img src="img/ethics/negative_olli.jpg">
+        </section>
+        
+        <section>
+            <h3>Beispielergebnis: Negative Vision #2</h3>
+            <img src="img/ethics/negative.jpg" height="500px">
+        </section>
+        
+        <section>
+            <h3>Beispielergebnis: Positive Vision #1</h3>
+            <img src="img/ethics/positive_olli.jpg">
+        </section>
+        
+        <section>
+            <h3>Beispielergebnis: Positive Vision #2</h3>
+            <img src="img/ethics/positive.jpg" height="550px">
+        </section>
+             
+
+<section data-markdown class="todo">
+        <textarea data-template>
+# AB HIER NUR NOCH MATERIAL
+</textarea>
+</section>
+
+
+    <section class="todo">
+<pre>
+the architecture of DNN is a strong prior on the input, and with random initializa- tion, is able to capture low-level input
+structure particularly for images.
+- https://openreview.net/forum?id=SJOYTK1vM
+</pre>
+    </section>
+
+
+
+<section data-markdown class="todo">
+    <textarea data-template>
+
+Are CNNs like the brain?
+"Several studies have directly compared the ability of CNNs and previous models of the visual system to capture neural activity. CNNs come out on top"
+
+https://twitter.com/jeremyphoward/status/1001810855208435712
+
+https://neurdiness.wordpress.com/2018/05/17/deep-convolutional-neural-networks-as-models-of-the-visual-system-qa/
+</textarea>
+</section>
+
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+Preparing for Malicious Uses of AI: https://blog.openai.com/preparing-for-malicious-uses-of-ai/ …
+Policy research on forecasting, prevention, and mitigation of AI-borne threats.
+With authors at @FHIOxford, @CSERCambridge, @EFF, @CNASdc, and many others.        
+https://twitter.com/OpenAI/status/966100927290605569
+</textarea>
+</section>
+        <section data-markdown class="todo">
+                <textarea data-template>
+        
+    https://hackernoon.com/the-implications-of-adversarial-examples-deep-learning-bits-3-4086108287c7
+</textarea>
+</section>
+
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+Rob Miles (@robertskmiles) tweeted at 5:59 PM on Thu, May 10, 2018:
+New @computer_phile Video: AI Safety Gridworlds
+
+Some simple AI safety problem scenarios you can download and experiment with!
+
+https://t.co/gxDbLbJILg
+
+https://t.co/o3Cw03PfPL https://t.co/F5j4N0KqXC
+(https://twitter.com/robertskmiles/status/994607824385859584?s=03)
+        </textarea>
+        </section>
+    
+        <section data-markdown class="todo">
+                <textarea data-template>
+Christian Wolf (@chriswolfvision) tweeted at 11:07 AM on Thu, May 10, 2018:
+Two different discoveries (Emergence of Grid cells in neural networks trained for localization) described in two independent papers:
+ICLR 2018: https://t.co/duKvS49qxA
+and now
+Nature 2018: https://t.co/BgwNkSMACV
+
+This is similar to biological agents (Nobel Prize 2014). https://t.co/scC8353JKK
+(https://twitter.com/chriswolfvision/status/994504141799116800?s=03)
+            </textarea>
+        </section>
+
+
+        <section data-markdown class="todo">
+                <textarea data-template>
+### Visualizing how a network learns
+
+
+* https://towardsdatascience.com/hyper-parameters-in-action-introducing-deepreplay-31132a7b9631
+* https://towardsdatascience.com/hyper-parameters-in-action-a524bf5bf1c
+
+</textarea>
+    </section>
+
+        <section class="todo">
+                <pre>
+### Ist das intelligent?
+        https://github.com/karpathy/neuraltalk2/blob/master/README.md
+    </pre>
+</section>
+
+        <section class="todo">
+                <pre>
+        https://www.heise.de/newsticker/meldung/Kuenstliche-Intelligenz-Facebook-sagt-Nutzerverhalten-voraus-und-verkauft-damit-Anzeigen-4024377.html
+    </pre>
+</section>
+
+
+        <section class="todo">
+            <pre>
+hardmaru (@hardmaru) tweeted at 2:39 AM on Wed, Mar 28, 2018: Feels weird to be playing inside of a recurrent neural network’s
+hallucination of a Doom level. Demo→ https://t.co/ocrLd4Da6a https://t.co/VlhZ8LFnLy (https://twitter.com/hardmaru/status/978793678419369984?s=03)
+Get the official Twitter app at https://twitter.com/download?s=13
+            </pre>
+            </section>
+-->
+        </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+<script>
+    if (window.location.hostname.indexOf('localhost') !== -1) {
+    } else {
+        // only applies to public version
+        $('.preparation').remove();
+    }
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+    } );
+    // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+    // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+    $('section').attr('data-background-image', "backgrounds/white.jpg");
+//    $('section').attr('data-background-image', "backgrounds/code.jpg");
+</script>
+
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

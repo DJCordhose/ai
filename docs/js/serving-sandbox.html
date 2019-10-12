@@ -1,0 +1,25 @@
+<html>
+    <title>TensorFlow Serving Client</title>
+    <p>Will not work because CORS requires OPTION to be implemented</p>    
+<script>
+    const data = [ 100.0,  47.0,  10.0];
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+    (async () => {
+
+        const result = await fetch('http://localhost:8501/v1/models/manning_insurance_1:predict', {
+            body: JSON.stringify({ "instances": [{"inputs": data}]}),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST',
+            mode: 'cors'
+        });
+
+        const json = await result.json();
+        console.log(json);
+    })();
+
+</script>
+
+</html>

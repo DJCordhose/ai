@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>RNNs with TensorFlow</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                        letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+
+            .reveal {
+                color: black !important;
+             }       
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!-- <section data-markdown class="preparation">
+    <textarea data-template>
+### Preparation
+
+</textarea>
+</section> -->
+
+
+<section>
+        <h2>Recurrent Neural Networks with TensorFlow</h2>
+<h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+</h4>
+<p><small><a href="https://djcordhose.github.io/ai/2019_tf_rnn.html">
+https://djcordhose.github.io/ai/2019_tf_rnn.html
+</a></small></p>
+</section>
+
+<section>
+    <h3>How does this sequence continue?</h3>
+    
+    <pre><code contenteditable data-trim class="line-numbers python">
+[10, 20, 30, 40, 50, 60, 70, 80, 90]    
+        </code></pre>
+    <p>Question: How do we train a network to predict the next number?</p>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Challenge: Dense Networks have no memory of previous events
+
+They lack capability to deal with sequential data, which is required to predict time series or "understand" text
+            </textarea>
+            </section>
+
+            <section data-markdown>
+        <textarea data-template>
+### Solution: Recurrent Neural Networks (RNNs)
+
+_If training vanilla neural nets is optimization over functions, training recurrent nets is optimization over programs._
+
+RNNs are Turing-Complete 
+
+<small>
+http://karpathy.github.io/2015/05/21/rnn-effectiveness/
+<br>
+http://binds.cs.umass.edu/papers/1995_Siegelmann_Science.pdf
+</small>
+</textarea>
+            </section>
+
+
+    <section data-markdown>
+        <textarea data-template>
+### RNNs - Networks with Loops
+<img src='img/nlp/colah/RNN-rolled.png' height="450px">
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+        
+    <section data-markdown>
+        <textarea data-template>
+### Unrolling the loop
+#### Becomes a truly deep feed-forward network!
+<img src='img/nlp/colah/RNN-unrolled.png'>
+
+<small>
+http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+</small>
+        </textarea>
+    </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Simple RNN
+
+<img src='img/nlp/fchollet_rnn.png'>
+
+<script type="math/tex; mode=display">
+output_t = \tanh(W input_t + U output_{t-1} + b)
+</script>
+    
+<small>
+<a href="https://livebook.manning.com/#!/book/deep-learning-with-python/chapter-6/129">
+    Deep Learning with Python, Chapter 6, François Chollet, Manning            
+</a>
+
+</small>
+
+</textarea>
+</section>
+
+<!-- <section>
+    <h3>Activation Functions</h3>
+    <div style="float: left">
+            <img src="img/sigmoid-activation.png" height="300px">
+            <p>
+                <small>Sigmoid, floating from 0 to 1</small>
+            </p>
+        </div>
+        <div style="float: right">
+                <img src="img/tanh-activation.png" height="300px">
+                <p>
+                <small>Tangens Hyperbolicus, floating from -1 to 1</small>
+            </p>
+        </div>
+    <small>
+        <a href="https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb">
+            https://notebooks.azure.com/djcordhose/libraries/buch/html/kap7-iris.ipynb
+    </a>
+    </small>    
+</section> -->
+
+<section data-markdown>
+        <textarea data-template>
+### Question
+
+_Even having a network that can deal with time seqeuences, how do you train it using our data?_
+
+        </textarea>
+    </section>
+
+<section>
+    <h3>First Step: Slice and Splice data to have a training set</h3>
+
+
+    <p>Training Data, sliced to only use 3 past events</p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+[10, 20, 30] => 40
+[20, 30, 40] => 50
+[30, 40, 50] => 60
+[40, 50, 60] => 70
+[50, 60, 70] => 80
+[60, 70, 80] => 90
+                        </code></pre>
+</section>
+
+<section>
+    <h3>Simple Time Series Forecasting with RNNs</h3>
+        <p>The Model</p>
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
+n_features = 1
+n_steps = 3
+
+model.add(SimpleRNN(units=50, activation='relu', name="RNN_Input"))
+model.add(Dense(units=1, name="Linear_Output"))
+model.compile(optimizer='adam', loss='mse')
+model.fit(X, y)
+        </code></pre>
+
+    <p>Predictions</p>
+
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+[10, 20, 30] => 39.767338
+[70, 80, 90] => 100.001076
+[100, 110, 120] => 130.40291
+[200, 210, 220] => 231.74236
+[200, 300, 400] => 489.32404
+                        </code></pre>
+
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Notebook: Time Series Prediction
+
+_only look at introductory part_
+
+<small style="font-size: large">
+https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/2019_tf/time_series.ipynb
+</small>
+        </textarea>
+    </section>
+    
+
+    <section data-markdown>
+            <textarea data-template>
+### Main issues with RNNs
+
+_Vanishing or exploding gradient problem:_
+* Each step in training applies the same weights to the output, also in back-propagation  
+* The further we move backwards, the bigger (explodes) or smaller (vanishes) the gradient becomes
+* Multiplying many numbers <1 closes in on 0 (vanshing) and the same for >1 approaches infinty (exploding)
+
+<small>
+https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Intuition of effect
+
+_Effectively long term memory does not work:_
+
+* RNNs experiences difficulty in memorising words from far away in the sequence
+* Predictions based on most recent words only
+
+<small>
+    https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7
+</small>
+</textarea>
+</section>
+
+    <section data-markdown>
+        <textarea data-template>
+### LSTM (Long short-term memory) / GRU (Gated Recurrent Unit)
+
+_allow past information
+to be reinjected at a later time, thus fighting the vanishing-gradient problem_
+
+<small>
+https://en.wikipedia.org/wiki/Long_short-term_memory
+<br>            
+<a href="https://www.manning.com/books/deep-learning-with-python">
+    Deep Learning with Python, Chapter 6.2.2, François Chollet, Manning            
+</a>            
+https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be
+<br>
+<br>
+https://datascience.stackexchange.com/questions/14581/when-to-use-gru-over-lstm
+<br>
+<br>
+https://arxiv.org/ftp/arxiv/papers/1701/1701.05923.pdf
+<br>
+https://www.dlology.com/blog/how-to-deal-with-vanishingexploding-gradients-in-keras/
+<br>
+https://towardsdatascience.com/animated-rnn-lstm-and-gru-ef124d06cf45
+</small>
+</textarea>
+</section>
+
+<section>
+    <h3>Advanced Keras RNN Layers</h3>
+
+    <p><small>LSTM / GRU Nodes</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(LSTM(units=rnn_units))
+model.add(GRU(units=rnn_units))
+</code></pre>
+
+<p><small>Bidirectional RNNs</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(Bidirectional(SimpleRNN(units=rnn_units)))        
+</code></pre>
+
+<p><small>Passes all outputs of all timesteps (not only the last one) to the next layer</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(GRU(units=rnn_units, return_sequences=True))
+        </code></pre>
+
+<p><small>Adds Dropout inside feedback loop</small></p>
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+model.add(GRU(units=rnn_units, return_sequences=True, recurrent_dropout=0.2))
+        </code></pre>
+
+    <small>
+            <a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers">
+                https://www.tensorflow.org/api_docs/python/tf/keras/layers
+            </a>
+    </small>
+</p>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Optional: Advanced Time Series Prediction
+
+_start with advanced part_
+
+<small style="font-size: large">
+        https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/2019_tf/time_series.ipynb#scrollTo=IWl0BJUJMJ_x
+</small>
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Open Question
+### How would you map any amount of input time steps to any amount of output time steps?
+            </textarea>
+</section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Surprising Solution: RNN Encoder-Decoder
+
+* RNN Encoder-Decoder consists of two recurrent neural networks (RNN)
+* they act as an encoder and a decoder pair
+* encoder maps a variable-length source sequence to _a fixed-length vector_
+* decoder maps the vector representation back to a variable-length target sequence
+
+<small>
+https://arxiv.org/abs/1406.1078
+<br>
+https://machinelearningmastery.com/encoder-decoder-long-short-term-memory-networks/    
+</small>
+    </textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Example: Sequence to Sequence translations
+
+* could be interpreted as sequential embedding
+* fixed-length vector between decoder and encoder is the latent space
+
+<img src='img/nlp/encdec.jpg'>
+
+<small>
+https://github.com/tensorflow/nmt
+</small>
+</textarea>
+</section>
+<section data-markdown>
+        <textarea data-template>
+## Does this really work?
+
+Remember: we are loosing all the temporal information in the latent representation
+
+</textarea>
+</section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Simple and theoretical example: addition digit by digit
+
+```
+ 216
++648
+ ===
+ 864```
+_Can we solve this using an encoder-decoder approach?_
+
+</textarea>
+        </section>
+
+                <section data-markdown>
+            <textarea data-template>
+### Architectural Sketch
+
+<img src='img/encoder-decoder-addition.jpg'>
+
+</textarea>
+        </section>
+
+<section>
+    <h3>The Model</h3>
+
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
+# encoder for 7 digits
+# each being 0-9, + or space (12 possibilities encoded one-hot) 
+model.add(SimpleRNN(units=128, input_shape=(7, 12)))
+</code></pre>
+
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+# latent space: 32
+model.add(Dense(units=32))
+</code></pre>
+
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+# decoder: have 4 temporal outputs one for each of the digits of the results
+model.add(RepeatVector(4))
+
+# keep all 4 temporal outputs
+model.add(RNN(units=128, return_sequences=True))            
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+# finally decode this back to digit as one-hot    
+model.add(Dense(units=12, activation='softmax'))
+    </code></pre>
+    
+<!-- <p class="fragment">That's right: Knowledge how to do addition on character level fits into 32 neurons</p> -->
+
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### Seeing the network at work in a notebook
+
+```
+Input: "216+648"
+Output: "864"```
+
+Padding is handled by using a repeated sentinel character (space)
+
+<small>
+Notebook: https://colab.research.google.com/github/DJCordhose/ai/blob/master/notebooks/2019_tf/rnn-add-example.ipynb
+<br>
+https://machinelearningmastery.com/learn-add-numbers-seq2seq-recurrent-neural-networks/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### You can even describe all networks as a combination of encoder / decoder
+
+<img src='img/encoder-decoder-everywhere.png' height="530">
+
+<small style="font-size: large">
+https://medium.com/tensorflow/mit-deep-learning-basics-introduction-and-overview-with-tensorflow-355bcd26baf0
+</small>
+    </textarea>
+</section>
+
+
+<section>
+    <h3>We can apply all this to text as well</h3>
+
+    <p>Texts can be seen as sequences of words</p>
+        <pre><code contenteditable data-trim class="fragment line-numbers python">
+# we encode each word in an embedding
+model.add(Embedding(input_dim=dictionary_size, output_dim=embedding_dim, 
+                    input_length=text_length))
+</code></pre>
+
+<pre><code contenteditable data-trim class="fragment line-numbers python">
+# encoder
+model.add(GRU(units=32))
+    </code></pre>
+    
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+# latent space: 32
+model.add(Dense(units=32))
+</code></pre>
+
+    <pre><code contenteditable data-trim class="fragment line-numbers python">
+# decoder as a binary classifier good / bad
+model.add(tf.keras.layers.Dense(units=1, activation='sigmoid'))
+model.compile(optimizer='adam', loss='binary_crossentropy')
+    </code></pre>
+    
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Text Processing for Sentiment Analysis 
+
+<small>
+https://colab.research.google.com/github/djcordhose/ai/blob/master/notebooks/tensorflow/sentiment-gru-reg.ipynb
+</small>
+    </textarea>
+</section>
+
+
+
+<section data-markdown>
+        <textarea data-template>
+## Finding applications
+
+</textarea>
+</section>
+
+<section>
+    <img src='img/applications/decisions/data.png'>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Types of Sequence to Sequence translations
+
+_What type do we have here?_
+
+<pre><code contenteditable data-trim class="line-numbers python">
+[10, 20, 30, 40, 50, 60, 70, 80, 90]  => [100]
+                </code></pre>
+        
+<img src='img/types_seq2seq.jpeg'>
+
+<small>
+http://karpathy.github.io/2015/05/21/rnn-effectiveness/    
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### Funny Example: seq2seq-chatbot - mean, grumpy and sarcastic
+
+<img src='img/seq2seq-chatbot.jpg' height="500">
+
+<small>
+https://twitter.com/suzatweet/status/1072605210357448704
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Example: Using CNNs and RNNs for Music Genre Recognition
+
+<img src='https://cdn-images-1.medium.com/max/1760/1*oWeQLfDKNh0xM4bH-iuW0w.gif'>
+
+<small>
+https://towardsdatascience.com/using-cnns-and-rnns-for-music-genre-recognition-2435fb2ed6af
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### What's next?
+
+<img src='img/colah-next.png'>
+
+<small>
+https://distill.pub/2016/augmented-rnns/
+<br>
+Attention is all you need: https://arxiv.org/pdf/1706.03762.pdf
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### More
+
+* Tuning hyperparameters: https://machinelearningmastery.com/tune-lstm-hyperparameters-keras-time-series-forecasting/
+* Air Pollution: Multivariate Time Series Forecasting: https://machinelearningmastery.com/multivariate-time-series-forecasting-lstms-keras/
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Have you found any inspiration?
+
+* Are you predicting time series or do you have seq2seq translation?
+* Do you have any time series data?
+* Would you need to process text?
+* Any sequence of symbols?
+* This could easily build on embeddings
+* Have a look at some more time series forecasting scenarios here: https://machinelearningmastery.com/how-to-develop-lstm-models-for-time-series-forecasting/
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Neural Machine Translation with Attention
+
+_Using TensorFlow and Keras_
+
+<img src='img/nmt-attention-twitter.png' height="400">
+
+<small>
+https://twitter.com/dennybritz/status/1011464747877838848/
+<br>
+https://colab.research.google.com/github/tensorflow/tensorflow/blob/master/tensorflow/contrib/eager/python/examples/nmt_with_attention/nmt_with_attention.ipynb
+</small>
+</textarea>
+</section> -->
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        $('.slido').remove();
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to local version
+            $('.remote').remove();
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+                // do we want this???
+            $('li').addClass('fragment')
+
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/sky.jpg");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1100,
+
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Quality in Machine Learning</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+    
+        /*display: block;*/
+    
+        /*padding: 0.5em;*/
+    
+        /*background: #FFFFFF !important;*/
+    
+        /*color: #000000 !important;*/
+    
+        /*}*/
+    
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+    
+        .todo:before {
+            content: 'TODO: ';
+        }
+    
+        .todo {
+            color: red !important;
+        }
+    
+        code span.line-number {
+            color: lightcoral;
+        }
+    
+        .reveal pre code {
+            max-height: 1000px !important;
+        }
+    
+        img {
+            border: 0 !important;
+            box-shadow: 0 0 0 0 !important;
+        }
+    
+        .reveal {
+            -ms-touch-action: auto !important;
+            touch-action: auto !important;
+            color: black !important;
+        }
+    
+        .reveal h2,
+        .reveal h3,
+        .reveal h4 {
+            letter-spacing: 2px;
+            font-family: 'Amiri', serif;
+            /* font-family: 'Times New Roman', Times, serif; */
+            font-weight: bold;
+            font-style: italic;
+            letter-spacing: -2px;
+            text-transform: none !important;
+            color: black !important;
+        }
+    
+        .reveal em {
+            font-weight: bold;
+        }
+    
+        .reveal p {
+            font-weight: bold;
+            color: black !important;
+        }
+    
+        .reveal li {
+            font-weight: bold;
+            color: black !important;
+        }
+        .reveal .step-subtitle h1 {
+            letter-spacing: 1px;
+        }
+    
+        .reveal .step-subtitle h2,
+        .reveal .step-subtitle h3 {
+            text-transform: none;
+            font-style: italic;
+            font-weight: normal;
+            /* font-weight: 400; */
+            /* font-family: 'Amiri', serif; */
+            font-family: 'Lobster', serif;
+            letter-spacing: 1px;
+            color: #2aa198;
+            text-decoration: underline;
+            color: black !important;
+        }
+    
+        .reveal .front-page h1,
+        .reveal .front-page h2 {
+            font-family: "League Gothic";
+            font-style: normal;
+            text-transform: uppercase !important;
+            letter-spacing: 1px;
+            color: black !important;
+        }
+    
+        .reveal .front-page h1 {
+            font-size: 2.5em !important;
+            color: black !important;
+        }
+    
+        .reveal .highlight {
+            background-color: #D3337B;
+            color: white;
+        }
+    
+        .reveal img.with-border {
+            border: 1px solid #586e75 !important;
+            box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+        }
+    
+        .reveal li {
+            margin-bottom: 8px;
+            color: black !important;
+        }
+    
+        /* For li's that use FontAwesome icons as bullet-point */
+    
+        .reveal ul.fa-ul li {
+            list-style-type: none;
+            color: black !important;
+        }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        var printMode = window.location.search.match(/print-pdf/gi);
+        link.href = printMode ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!--
+https://www.m3-konferenz.de/veranstaltung-6458-wie-gut-ist-ein-machine-learning-modell.html?id=6458
+https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf
+
+
+Wie gut ist dein Machine-Learning-Modell?
+
+Ein kleines Beispielprojekt ist schnell trainiert. Wenn es allerdings darum geht, ein ML-Modell produktiv zu nutzen, sollten Entwickler wissen, wie sehr sie dem Modell vertrauen können.
+
+Zuerst müssen sie erkennen, ob das Modell für reale Daten geeignet ist. Dazu können sie anhand von Metriken bestimmen, wie stark sie es mit Overfitting und Underfitting zu tun haben.
+
+Aber lässt sich überhaupt immer nachvollziehen, warum ein Modell bestimmte Ergebnisse liefert?
+
+Dieser Vortrag beschäftigt sich neben den Qualitätsansprüchen an den Trainingsdaten und dem trainiertes Modell auch mit den softwaretechnischen Prozessen wie Test und Deployment um das Modell herum.
+
+Vorkenntnisse
+Optimal ist es, wenn die Besucher bereits Machine-Learning-Modelle trainiert und evtl. sogar in Produktion gebracht haben.
+Lernziele
+Kenntnis über die Herausforderungen bei produktiven ML-Modellen
+
+
+-->
+
+        <section>
+            <h2>Wie gut ist dein Machine-Learning-Modell?</h2>
+            <h3>Oder: Wie ich Null Punkte im Google Test bekam</h3>
+            <p><a href="https://www.m3-konferenz.de/veranstaltung-6458-wie-gut-ist-ein-machine-learning-modell.html?id=6458" target="_blank">
+                M3, Köln</a></p>
+            <h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </h4>
+            <p><small><a href="http://bit.ly/m3-ml-quality">
+                http://bit.ly/m3-ml-quality
+            </a></small></p>
+        </section>
+
+        <!-- <section class="todo">
+            <pre>
+            </pre>
+        </section> -->
+
+        <section class="local">
+            <h3>Eine kleine Umfrage</h3>
+            <!-- <p>Ich biete und bitte um Ehrlichkeit</p> -->
+            <ul>
+                <li class="fragment">Wer versioniert seine Modell-Spezifikation?</li>
+                <li class="fragment">Wer macht Code-Reviews Modell-Spezifikation?</li>
+                <li class="fragment">Wer vergleicht mit einem (nicht-trivialen) Baseline-Modell?</li>
+                <li class="fragment">Wer hat Unit-Tests für den Trainingscode?</li>
+                <li class="fragment">Wer hat eine Deploy-Pipeline?</li>
+            </ul>
+        </section>
+
+        <section class="local">
+            <h3>Mein Eindruck</h3>
+            <p>Verglichen mit Software-Entwicklung sind wir mehrere Jahre zurück</p>
+        </section>
+
+        <section data-markdown>
+                <textarea data-template>
+### Bewertung basiert auf:
+
+What’s your ML Test Score? A rubric for ML production systems
+
+<small>
+https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45742.pdf
+</small>
+
+Präsentiert auf der NIPS 2016
+
+https://nips.cc/Conferences/2016/Schedule?showEvent=6255
+</textarea>
+        </section>
+
+        <section>
+            <h3>Wir illustrieren die Anforderungen anhand einer Beispielbewertung</h3>
+            <p>Wir sind uns aber bewusst: Google löst andere Probleme als die meisten von uns</p>
+        </section>
+
+        <section>
+            <h3>Unser Projekt</h3>
+            <p>Customer Churn / Conversion</p>
+            <img src="img/churn/log7335277f@example.com.png" height="400px">
+            <p><small>Wie verhält sich jemand, der später Kunde wird / kündigt?</small></p>
+        </section>
+        
+        <section>
+            <h3>Technik / Umsetzung</h3>
+            <ul>
+                    <li>Präprocessing mit Pandas/Sklearn</li>
+                    <li>Modell mit TensorFlow/Keras</li>
+                    <li>Deployment auf Google Cloud ML</li>
+            </ul>
+        </section>
+            
+        <section>
+            <h3>Bewertung</h3>
+            <p>Ein Punkt für das Erfüllen eines Test-Kriteriums</p>
+            <p>Ein weiterer falls die Erfüllung automatisiert ist</p>
+            <p>Vier Kategorien mit jeweils maximal 14 Punkten</p>
+        </section>
+
+
+        <section>
+            <h1>Kategorie 1</h1>
+            <h2>Features und Daten</h2>
+        </section>
+
+        <section>
+            <h3>Test: Verteilung der tatsächlichen Features entspricht den Erwartungen</h3>
+        </section>
+
+        <section>
+                <h3>Unser Projekt: Manueller Plot</h3>
+            <div class="fragment">
+                    <img src="img/insurance/scatter-matrix.png" height="450px">
+                    <p>1 Punkt!</p>
+                </div>
+        </section>
+        
+        <section>
+            <h3>Test: Beziehung zwischen den Features</h3>
+        </section>
+    
+        <section>
+            <h3>Unser Projekt: Korrelation Plot</h3>
+            <div class="fragment">
+                    <img src="img/insurance/corr.png" height="450px">
+                    <p>Noch ein Punkt! Es sind jetzt schon zwei!</p>
+                </div>
+        </section>
+            
+        <section>
+            <h3>Test: Wie teuer ist ein Feature?</h3>
+            <p>Wie teuer ist die Beschaffung? Wie viele Ressourcen belegt es im Modell?</p>
+        </section>
+    
+        <section>
+            <h3>Test: Sind die Feaures brauchbar?</h3>
+            <p>Ist das Feature immer verfügbar und von konstanter Qualität?</p>
+        </section>
+    
+        <section>
+            <h3>Test: Werden Privacy Belange in der kompletten Kette eingehalten?</h3>
+            <p><a target="_blank" href="https://www.heise.de/newsticker/meldung/DSGVO-Folterfragebogen-im-Selbsttest-3974512.html">
+                https://www.heise.de/newsticker/meldung/DSGVO-Folterfragebogen-im-Selbsttest-3974512.html</a></p>
+                <p><a target="_blank" href="https://gdpr-info.eu/">
+                    https://gdpr-info.eu/</a></p>
+        </section>
+
+        <section>
+                <h3>Unser Projekt: Daten werden von vorn herein nur anonymisiert verwendet</h3>
+                <pre><code data-trim class="python">
+str(hashlib.sha512(license)).hexdigest())[:8] + '@example.com'
+                </code></pre>
+                <p>Zwei Punkte, da das hier automatisiert ist! Vier insgesamt!</p>
+            </section>
+                
+            <section>
+                <h3>Test: Wie lange dauert es, ein Feature hinzuzufügen?</h3>
+                <p>Wie schnell kann reagiert werden?</p>
+            </section>
+                
+            <section>
+                <h3>Test: Funktioniert der Code, der Features für Test und Produktion liefert?</h3>
+                <p>Auch so simpler, aber extrem wichtiger, zentraler Code braucht Unit-Tests</p>
+            </section>
+                
+            <section>
+                <h3>Ergebnis</h3>
+                <h2>Features und Daten</h2>
+                <p>4 von 14 Punkten</p>
+                <p>
+                    <em>3-4 points: There’s been first pass at basic productionization, but additional investment may be needed.</em>
+                </p>
+            </section>
+
+        <section>
+                <h1>Kategorie 2</h1>
+                <h2>Modell-Entwicklung</h2>
+        </section>
+
+        <section>
+            <h3>Test: Ist die Modell-Spezifikation versioniert und unterliegt einem Code-Review?</h3>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <ul>
+                <li>Modelle werden in Jupyter Noteboks entwickelt</li>
+                <li>Modell-Spezifikationen selbst wird in puren Python-Code gewandelt und in Git versioniert</li>
+                <li>Entweder Pair-Programming oder Code Review</li>
+            </ul>
+            <p>Zwei Punkte</p>
+        </section>
+                
+        <section>
+            <h3>Test: In welchem Zusammenhang stehen Modell Metriken und Auswirkung in der echten Welt?</h3>
+            <p>Wenn sich der Test-Score erhöht, kann man dann eine Auswirkung auf relevante Business-Größen ferstellen? Kaufen mehr Leute? Sind Kunden zufriedener?</p>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Wie für jedes Feature wollen wir das überprüfen, dies ist bisher aber nicht geschehen</p>
+            <p>Kein Punkt</p>
+        </section>
+
+        <section>
+            <h3>Test: Welchen Einfluss haben Hyper-Parameter auf das Ergebnis?</h3>
+            <p>Systematische Untersuchung von Hyper-Parametern kann zu deutlich besseren Ergebnissen führen</p>
+        </section>
+    
+        <section>
+                <h2>Unser Projekt</h2>
+                <p>Parameter-Raum ist zu groß und Laufzeit für Training zu lang für Grid-Search, wir nehmen Random-Search</p>
+                <p>Zwei Punkte</p>
+        </section>
+        <section>
+            <h3>Test: Passt sich das Modell an die Entwicklung der Daten aus der realen Welt an?</h3>
+            <p>Verhält sich das Modell mit Daten von dieser Woche anders als das von letztem Jahr?</p>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Besteht noch nicht lang genug, um das sicher sagen zu können</p>
+            <p>Kein Punkt</p>
+        </section>
+
+        <section>
+            <h3>Test: Liefert das Modell bessere Ergebnisse als ein Baseline-Model?</h3>
+            <p>Wenn ja, mit welchem Aufwand erreichen wir das bessere Ergebnis? Lohnt sich das eigentlich?</p>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Unser Baseline-Modell ist ein von Hand kodiertes stochastisches Modell</p>
+            <p>Unser ML Modell ist auf Testdaten 20% besser und passt sich an die Daten an</p>
+            <p>Ein Punkt!</p>
+        </section>
+    
+        <section>
+            <h3>Test: Wie verhält sich das Modell wenn man es nur auf Teildaten anwendet?</h3>
+            <p>Betrachtung z.B. nach Land kann Schwächen zeigen, die im Gesamtmodell untergehen</p>
+        </section>
+
+        <section>
+            <h3>Test: Gibt es impliziten Bias?</h3>
+            <p>Decken die Trainingsdaten alle realistischen Szenarien ab</p>
+        </section>
+    
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Wir wissen sicher, dass wir Bias in den Trainingsdaten haben</p>
+            <p>Dazu gibt es von bestimmten Daten viel und von anderen weniger Datensätze</p>
+            <p>Kein Punkt!</p>
+        </section>
+
+        <section>
+                <h3>Ergebnis</h3>
+                <h2>Features und Daten</h2>
+                <p>5 von 14 Punkten</p>
+                <p>
+                        <em>5-6 points: Reasonably tested, but it’s possible that more of those tests and procedures may
+                                be automated.</em>
+                    </p>
+            </section>
+
+        <section>
+                <h1>Kategorie 3</h1>
+                <h2>Machine Learning Infrastruktur</h2>
+        </section>
+
+        <section>
+            <h3>Test: Sind die Trainingsergebnisse reproduzierbar?</h3>
+            <p>Liefern Modelle, die auf denselben Trainingsdaten trainiert werden dieselben Ergebnisse?</p>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Ist gewährleistet</p>
+            <p>Ramdom Seeds fest gesetzt</p>
+            <p>Initiale Weights immer gleich geladen</p>
+            <p>Zwei Punkte</p>
+        </section>
+    
+            <section>
+            <h3>Test: Gibt es Unit-Tests für den Trainingscode?</h3>
+            <p>Geht Loss beim Training tatsächlich herunter? Kann man nach einem Crash wieder aufsetzen? Funktioniert Early-Stopping?
+                Sind Checkpoints brauchbar?
+            </p>
+        </section>
+    
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Loss wird über das TensorBoard überprüft (manuell)</p>
+            <p>Early Stopping Callbacks wenn Validation Loss nicht mehr herunter geht</p>
+            <p>Checkpoints werden geschrieben</p>
+            <p>Ein Punkt, keine automatische Überprüfung</p>
+        </section>
+
+        <section>
+            <h3>Test: Gibt es Integrationstests für die komplette Pipeline?</h3>
+        </section>
+    
+        <section>
+            <h3>Test: Wird die Modell-Qualität vor Produktivstellung getestet?</h3>
+            <p>Funktioniert das Modell besser als ein vorheriges? Werden bekannte Ergebnisse richtig vorhergesagt?</p>
+        </section>
+        
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Accuracy aller Test-Daten wird automatisch berechnet</p>
+            <p>Ausgewählte Datensätze werden nur manuell überprüft</p>
+            <p>Ein Punkt (bekannte Ergebnisse könnten Unit-Tests sein)!</p>
+        </section>
+    
+        <section>
+            <h3>Test: Verhält sich das Modell nachvollziehbar?</h3>
+            <p>Kann man das Verhalten nachvollziehen wenn man es nur mit einem Datensatz füttert?</p>
+            <p>Was passiert wenn man einen kleinen Trainingsdatensatz füttert?</p>
+            <p>Hat man irgendeinen Einblick in die internen Abläufe des Modells?</p>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Bei Convolutional Layers nutzen wir die bekannten Strategien</p>
+            <p>Manuell überprüfen wir Aktivierungen von Feature Channels, Activation Maps, und welche Feature Channels pro Bild angesprochen werden</p>
+            <p>Fully Connected Layers sind allerdings komplett intransparent</p>
+            <p>Ein Punkt!</p>
+        </section>
+    
+        <section>
+            <h3>Test: Gibt es im Staging-Prozess ein System, das Production nachempfunden ist?</h3>
+            <p>Nur so kann man sicher stellen, dass System-Änderungen aus dem Training auch in Produktion Funktionieren</p>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Auf Google Cloud ML ist ein Modell mit einer bestimmten Version default</p>
+            <p>Diese Versionsnummer kann jederzeit umgesetzet werden</p>
+            <p>Ein Punkt!</p>
+        </section>
+        
+            <section>
+            <h3>Test: Kann ein Modell sicher und schnell aus Production zurück gerollt werden?</h3>
+        </section>
+
+        <section>
+            <h2>Unser Projekt</h2>
+            <p>Manuell, aber auch dafür ist Google Clound ML gut geeignet</p>
+            <p>Produzierte Modelle werden aber auch im Git mitversioniert</p>
+            <p>Ein Punkt!</p>
+        </section>
+            
+            <section>
+            <h3>Ergebnis</h3>
+            <p>7 von 14 Punkten</p>
+            <p>
+                <em>7-10 points: Strong levels of automated testing and monitoring, appropriate for missioncritical
+                                systems.</em>
+            </p>
+        </section>
+
+        <section>
+            <h1>Kategorie 4</h1>
+            <h2>Monitoring</h2>
+        </section>
+                        
+        <section>
+            <h3>Test: Kommen Daten von weiteren Systemen weiterhin in richtiger Menge an?</h3>
+            <p>Das kann sich auf regelmäßiges (Nach-)Training beziehen und sich auf die Trainingszeiten auswirken</p>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Werden bekannte Invarianten in Trainingsdaten und Vorhersagedaten eingehalten?
+
+Häufig findet man bestimmte Korrelationen oder Konstanten in Eingabedaten. 
+
+Ändern sich diese kann das ein Hinweis darauf sein, dass sich die Natur der Daten verändert hat und wir das Modell überdenken müssen. Oder die Daten sind nicht mehr sinnvoll.
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Wird _training-serving skew_ vermieden?
+
+Falls Vorverarbeitung von Eingabedaten statt findet, wird dies für Training und Production gleich getan? 
+
+Wenn nicht, kommt dann trotzdem dieselbe Art Daten in Production an, mit der wir auch trainiert haben?
+
+
+https://research.googleblog.com/2017/02/preprocessing-for-machine-learning-with.html
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Ist das Modell korrekt aktualisiert worden?
+
+Kann festgestellt werden, ob ein (Nach-)Training korrekt ausgeführt wurde?
+
+
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Tauchen ungültige Werte (NaNs oder Infinity) im Modell auf?
+
+Das Aufauchen von ungültigen Werten irgendwo in der Pipeline sollte so früh wie möglich festgestellt werden
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Gibt es Regressionen in Produktion für Ausführungsgeschwindigkeit, Latenz, Durchsatz, RAM Verbrauch? 
+
+So etwas geht manchmal schleichend, dann besonders schwer zu entdecken
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+### Test: Nimmt die Vorhersagekraft des Productionsmodells ab?
+
+Das kann an einem verschlechterten Modell oder aber auch an neuen, unvorhergesehenen Eingabendaten aus der realen Welt liegen.
+
+            </textarea>
+        </section>
+
+            <section>
+                <h3>Ergebnis</h3>
+                <p>0 von 14 Punkten</p>
+                <p>
+                    <em>0 points: More of a research project than a productionized system.</em>
+                </p>
+                <p>Hier muss noch viel passieren</p>
+            </section>
+
+        <section>
+            <h2>Endergebnis</h2>
+            <p>Das Minimum eines Ergebnisses jeder Kategorie</p>
+            <p>Das bedeutet leider insgesamt 0 Punkte</p>
+                <p>
+                    <em>0 points: More of a research project than a productionized system.</em>
+                </p>
+        </section>
+
+        <section>
+                <h3>Der Vollständigkeit halber: Die restlichen Bewertungen, die wir nicht erreicht haben</h3>
+                <ul>
+                    <li>5-6 points: Reasonably tested, but it’s possible that more of those tests and procedures may
+                                be automated.</li>
+                    <li>12+ points: Exceptional levels of automated testing and monitoring.</li>
+                </ul>
+        </section>
+        <section>
+                    <h3>Zusammenfassung</h3>
+                    <ul>
+                        <li class="fragment">Machine Learning läuft klassischer Software-Technik um Jahre hinterher</li>
+                        <li class="fragment">Wenige haben dieselben hohen Anforderungen an ihr Modell wie Google</li>
+                        <li class="fragment">Bewusstsein für diese Liste von Tests in jedem Fall sinnvoll</li>
+                        <li class="fragment">Jeder muss individuell entscheiden, welcher Test Sinn macht</li>
+                    </ul>
+                    <p>
+                        <small>
+                             Wie gut ist dein Machine-Learning-Modell?
+                            <br>
+                            <a href="http://zeigermann.eu">Oliver Zeigermann</a> /
+                            <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                            <br>
+                            <a href="http://bit.ly/m3-ml-quality">
+                                http://bit.ly/m3-ml-quality
+                            </a>
+                        </small>
+                    </p>
+                </section>
+
+<!-- 
+        <section class="todo">
+            <pre>
+
+* Interpretierbarkeit, 
+ * https://christophm.github.io/interpretable-ml-book/
+ Christoph Molnar (@ChristophMolnar) tweeted at 4:23 PM on Sun, Feb 25, 2018:
+Most common arguments against interpretable ML: 
+- Humans can't explain their actions either
+- Performance > Interpretability
+- Slows down ML adoption
+- Linear model also not interpretable
+- Might create illusion of understanding the model
+   * (https://twitter.com/ChristophMolnar/status/967782105815142400?s=03)
+
+https://blog.openai.com/interpretable-machine-learning-through-teaching/?utm_campaign=Revue%20newsletter&utm_medium=Newsletter&utm_source=The%20Wild%20Week%20in%20AI
+
+* Nachvollziehbarkeit
+https://twitter.com/pmddomingos/status/957825455666618368
+
+https://research.google.com/pubs/pub45428.html
+
+https://gdpr-info.eu/art-22-gdpr/
+
+https://arxiv.org/abs/1710.09511
+
+https://gdpr-info.eu/art-4-gdpr/
+
+`Key problem for ML: train and test data share many superficial regularities with each other that they don't with the real world, so you can overfit the test data even without looking at it - and that's what deep learning does:`
+* https://twitter.com/pmddomingos/status/954172808640131072?s=03
+
+* History relevant?: https://twitter.com/rasbt/status/952786774379646976?s=03
+
+Mehr auf das Google Paper beziehen, LIME nur erwähnen und auf den Talk
+und den Post verweisen:
+* https://blog.codecentric.de/2018/01/vertrauen-und-vorurteile-maschinellem-lernen/?utm_content=65461486&utm_medium=social&utm_source=twitter
+* https://blog.codecentric.de/en/2018/01/look-beyond-accuracy-improve-trust-machine-learning/?utm_content=65461834&utm_medium=social&utm_source=twitter
+
+
+* Visualisieren von Ergebnissen
+  * Plots der Decision Boundaries wie im Intro Notebook
+
+
+* Andrew Ng (@AndrewYNg) tweeted at 1:26 AM on Tue, Nov 28, 2017:
+
+Here's our full paper on improving palliative care with deep learning. Neural net with 18 hidden layers inputs EHR, estimates chance of mortality in next 3-12 months. Also generates report to explain predictions to clinicians. https://t.co/Vp2uRLAn3A
+(https://twitter.com/AndrewYNg/status/935303734787129344?s=03)
+
+* Google Research (@googleresearch) tweeted at 10:16 PM on Tue, Nov 28, 2017:
+In order to build better and more robust DNN-based systems, one must be able to effectively interpret the models. We introduce a simple and scalable method to both compare and interpret the representations learned by DNNs https://t.co/Z8shujfkVu
+(https://twitter.com/googleresearch/status/935618525246382080?s=03)
+
+Bewertung insgesamt
+
+	* Sampling repräsentativ? (Kühn bei XING fragen)
+	*
+
+	* Interpretierbarkeit
+
+		* Haben wir die richtige Methode gwählt?
+
+			* http://hyperparameter.space/blog/when-not-to-use-deep-learning/
+		* LIME Bewertung: https://www.oreilly.com/learning/introduction-to-local-interpretable-model-agnostic-explanations-lime
+		* https://twitter.com/ChristophMolnar/status/937328240959590400
+
+			* https://christophm.github.io/interpretable-ml-book/
+			* https://twitter.com/ChristophMolnar/status/938716611707580417
+		* https://medium.com/@akelleh/causal-inference-with-pandas-dataframes-fc3e64fce5d
+		* ML is Alchemy: https://youtu.be/Qi1Yry33TQE
+	* Das Google Paper: https://research.google.com/pubs/pub45742.html
+
+
+Validation
+
+	* Getrenntes Test-Set
+	* Passt Test-Set zu realer Anwendung?
+	* Methoden, wie in Kapitel 6
+
+
+Introspection of CNN
+
+	* https://distill.pub/2017/feature-visualization/
+	*
+
+Vorgehen
+Notebook aus Kap 6 nehmen und aufbrezeln
+
+- Daten Sauberkeit
+- Datenmenge
+- Baseline
+- Confusion Matrix wie in Speed Limit Signs
+
+* https://www.coursera.org/learn/machine-learning-projects
+
+* Concept drift: https://en.m.wikipedia.org/wiki/Concept_drift
+
+More people are confused an looking for the right thing to do
+* https://twitter.com/bearloga/status/946161804241125376
+* https://twitter.com/beeonaposy/status/946406328288923654?s=03
+  'Data scientists: what's your team's approach to tracking the quality of models in production? (How do you know if a model is decaying? How do you quality-check the data going into a model? Who builds and tracks these things?)'
+  * https://twitter.com/agibsonccc/status/946598483598876673
+  * https://twitter.com/snoble/status/946600113002053633
+            </pre>
+        </section>
+ -->
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+//    $('section').attr('data-background-image', "backgrounds/dark-blur.jpg")
+//     $('section').attr('data-background-image', "backgrounds/dark-floor.jpg")
+    $('section').attr('data-background-image', "backgrounds/murmel1.jpg")
+    // $('section').attr('data-background-image', "backgrounds/lights.jpg")
+    // $('section').attr('data-background-image', "backgrounds/white-transparent.jpg")
+    // $('section').attr('data-background-image', "backgrounds/white.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-valley.jpg")
+//    $('section').attr('data-background-image', "backgrounds/blur-floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/blur-floor2.jpg")
+//    $('section').attr('data-background-image', "backgrounds/floor.jpg")
+//    $('section').attr('data-background-image', "backgrounds/floor2.jpg")
+</script>
+<script>
+    if (window.location.hostname.indexOf('localhost') !== -1 && !printMode) {
+    } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+    }
+    Reveal.addEventListener( 'ready', function( event ) {
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to presentation version
+            Reveal.configure({ controls: false });
+        } else {
+            // only applies to public version
+            $('.fragment').removeClass('fragment');
+        }
+        // applies to all versions
+        $('code').addClass('line-numbers');
+    } );
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>

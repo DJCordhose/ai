@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>ML Praktikum</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                          letter-spacing: 2px;
+                          font-family: 'Amiri', serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<!-- <section>
+        <h3>Diskussion: Auf der Suche nach Intelligenz</h3>
+        <p>Sind die Ansätze intelligent?</p>
+    </section> -->
+
+<section>
+    <h1>Praktikum IS</h1>
+    <h2>Block Machine Learning</h2>
+    <small>
+    <a href="https://djcordhose.github.io/ai/2018_haw_ml_praktikum.html">
+        https://djcordhose.github.io/ai/2018_haw_ml_praktikum.html</a>
+        </small>
+    <!-- <h2 style="color: red">Work in Progress</h2> -->
+
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Unser Ziel is zumindest 'understand'
+
+<small>
+Praktikum soll das durch Umsetzung fördern
+</small>
+<img src='img/Blooms-Taxonomy.jpg' height="450px">
+
+<small>
+https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/     
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### How learning works
+
+<img src='img/how_to_learn.jpg' height="500px">
+
+<small>
+@shancarter #openvisconf     
+</small>
+</textarea>
+</section>
+
+<section data-markdown style="font-size: x-large">
+        <textarea data-template>
+## Bewertung
+* _Stufe 3_: 13 bis 15 Punkte
+  * _Nicht-offensichtliche komplexe_ Eigenschaften von Konzepten der künstlichen Intelligenz wurden erkannt
+    * und zwar _ausreichend abstrakt und ausreichend verallgemeinert_.
+  * Ein etwaiges Anwendungsumfeld wurde _korrekt, angemessen und effektiv_ analysiert und modelliert. 
+* _Stufe 2_: 9 bis 12 Punkte
+  * _Einzelne nicht-offensichtliche_ Eigenschaften von Konzepten der künstlichen Intelligenz wurden erkannt. 
+  * Ein etwaiges Anwendungsumfeld wurde _korrekt_ und _mit kleinen Einschränkungen angemessen_ analysiert und modelliert.
+* _Stufe 1_: 5 bis 8 Punkte
+  * _Wenige recht offensichtliche_ Eigenschaften von Konzepten der künstlichen Intelligenz wurden erkannt. 
+  * Ein etwaiges Anwendungsumfeld wurde _in einfacher Weise_ so analysiert und modelliert, dass praktische Tests möglich sind.
+
+</textarea>
+</section>
+
+<!-- <section data-markdown>
+    <textarea data-template>
+### Praktikum: Organisatorisches
+
+* Ziel des Praktikums: etwas neues lernen
+* Wir sind jeden Montag zu sprechen
+  * von 10:00 - 12:00 (12.81) oder 
+  * 17:30 - 18:30 (Vorlesungsraum)
+  * Fragen und Diskussion
+  * Praktikumsabnahme
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Letzter Abnahme-Termin für die Praktika
+
+* _Suche_: KW21, 23.05.2018
+* _Lernen_: KW24, 11.06.2018
+* _Natürliche Sprache_, erste Prüfungen möglich: KW26, 25.06.2018
+            </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+### Prüfungstermine
+* KW26, 25.06.2018
+* KW27
+* KW29
+
+            </textarea>
+        </section> -->
+        <section data-markdown style="font-size: xx-large">
+                <textarea data-template>
+### Update: Prüfungen
+
+* Zwei Studierende haben ein gemeinsames Basisthema vorbereitet mit eigener, individueller Erweiterung. 
+* Die Basis wird gemeinsam vorgetragen, also jeder mit ca. 50% Redeanteil. (5 Minuten)
+* Danach trägt jeder seine eigene Ergänzung vor. (2 x 5 Minuten).
+* Gesamtzeit 4 x 15 = 60 Minuten.
+* Die Ausarbeitungen sind individuell.
+* Die Noten werden auch individuell vergeben.
+* Einzelprüfung möglich, dann 7,5 bis 10 Minuten pro Thema.
+
+</textarea>
+            </section>
+
+    <!-- <section data-markdown>
+            <textarea data-template>
+#### Trost
+<img src="img/confusion.png" height="600px">
+        
+https://twitter.com/math_rachel/status/991375671648702464
+    </textarea>
+        </section> -->
+
+    <!-- <section data-markdown class="todo">
+            <textarea data-template>
+* Neural Style Transfer umsetzen: https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/8.3-neural-style-transfer.ipynb
+* Transfer Learning: https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html
+* RL: 
+  * https://blog.openai.com/retro-contest/
+  * https://twitter.com/Mvandepanne/status/983753861146918912
+
+
+</textarea>
+</section> -->
+    
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+## Install ML Software
+### Local Installation:
+* https://www.anaconda.com/download/
+* _Important_: Install verison 3.x
+* git clone git@github.com:DJCordhose/haw.git
+* cd haw/notebooks
+* jupyter notebook
+
+### Or clone on Azure Notebooks:
+* https://notebooks.azure.com/djcordhose/libraries/ml-haw
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Alternative besonders für CNNs: Colab
+
+https://medium.com/tensorflow/colab-an-easy-way-to-learn-and-use-tensorflow-d74d1686e309
+
+
+<small>
+Tolles Beispiel für Fashion MNIST: https://medium.com/tensorflow/hello-deep-learning-fashion-mnist-with-keras-50fcff8cd74a
+<br><br>
+Trainiert auf Colab in wenigen Minuten: https://colab.research.google.com/github/margaretmz/deep-learning/blob/master/fashion_mnist_keras.ipynb
+</small>
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+### Mögliche Aufgaben auf diesem Notebook
+
+* Andere Architektur von Hand aufbauen (andere Layers, andere Abfolge, mehr oder weniger Filter)
+* Overfitting besser verhindern
+* Mit anderen Daten trainieren
+* Standard-Architekturen verwenden
+  * https://medium.com/towards-data-science/neural-network-architectures-156e5bad51ba
+  * https://keras.io/applications/
+  * Schwierig, da
+    * Bildgröße meist nicht direkt zum Modell passt
+    * Eigener Classifier angehängt werden muss
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+        <textarea data-template>
+### Tolle Sammlungen von Notebooks
+
+Als Inspiration oder Startpunkt für eigene Projekte
+
+* https://github.com/ageron/handson-ml
+* https://github.com/fchollet/deep-learning-with-python-notebooks
+</textarea>
+</section>
+
+<section>
+        <h2>Mögliche Aufgaben für Praktium</h2>
+    </section>
+
+    <section data-markdown>
+            <textarea data-template>
+### Beispiel Stufe 1: Wie funktionieren selbstfahrende Autos?
+        
+Nachvollziehen und recherchieren
+
+<small>
+Waymo: https://www.theverge.com/2018/5/9/17307156/google-waymo-driverless-cars-deep-learning-neural-net-interview
+<br>
+Tesla: https://www.figure-eight.com/building-the-software-2-0-stack-by-andrej-karpathy-from-tesla/
+</small>
+        </textarea>
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+## Classic ML
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Beispiel Stufe 1: Random Forest und Adaboost anwenden
+
+* Dasselbe wie bei Decision Trees für Random Forest und Ada Boost machen
+* Parameter herausfinden
+* Algorithmen verstehen
+
+    
+<small>
+        Notebook: 3-sklearn-decision-trees
+</small>
+    </textarea>
+    </section>
+    
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Beispiel bis Stufe 3: Regulasierung auf Neuronalen Netzwerken
+
+* Dropout: https://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/
+* BatchNormalizatiion: https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c
+* L1 und L2: https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a, https://keras.io/regularizers/
+* Zum experimentieren mit L1 und L2: http://playground.tensorflow.org
+* Allgemeine Hinweise: https://machinelearningmastery.com/improve-deep-learning-performance/
+<small>
+</small>
+</textarea>
+</section>
+      
+<section data-markdown>
+    <textarea data-template>
+### Beispiel Stufe 2-3: Wende Machine Learning auf eine eigene Problemstellung an
+
+<small>
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Beispiel bis Stufe 2: Erarbeite dir die Strategie Support Vector Machines
+
+Nutze die Implementierung von sklearn und versuche einen besseren Wert zu erreichen als mit RandomForest
+
+<small>
+Ausgehend von Notebook: 3-sklearn-decision-trees
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+## Deep Learning / CNNs
+</textarea>
+</section>
+    
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Beispiel bis Stufe 3: Ein Convolutional Neural Network mit eigenen Bilddaten trainieren
+
+Aufwändig, da lokale installation oder tensorflow.js nötig und eigene Bilder besondere Herausforderung
+
+* if you are looking for a handy python  script for 'searching' and 'downloading' hundreds of Google images to the local hard disk for you next DL project, that's the one: https://t.co/4nh3hnoZr1
+(https://twitter.com/rasbt/status/982822969947848704?s=03)
+* Pokemon Images: https://www.pyimagesearch.com/2018/04/16/keras-and-convolutional-neural-networks-cnns/
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Hinweise: Ein Convolutional Neural Network mit eigenen Bilddaten trainieren
+
+* Man braucht mind. 5000 Bilder pro Kategorie
+* Das hat man oft gar nicht. Dann kann man künstlich Variationen erzeugen
+* passende Architektur wählen (eigene, z.B. ResNet, ImageNet)
+* Evtl. auf ImageNet vortrainierte Modelle nehmen und nur die letzten Layers nachtrainieren
+* Auch mit sehr guter Hardware können Experimente Stunden dauern wenn die Bilder hoch aufgelöst sind
+* Mit Teildaten Overfitten, um zu sehen, ob das Modell überhaupt genug Kapazität hat
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Beispiel bis Stufe 3: Object Detection
+
+<small>
+https://www.datacamp.com/community/tutorials/object-detection-guide
+<br>
+https://towardsdatascience.com/deep-learning-in-your-browser-a-brisk-guide-ca06c2198846
+<br>
+https://github.com/ModelDepot/tfjs-yolo-tiny
+</small></textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Beispiel bis Stufe 2: Experimente, wie funktionieren CNNs?
+
+<img src='img/building-blocks.jpg' height="400px">
+
+<small>
+https://distill.pub/2018/building-blocks/
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Beispiel Stufe 1: Neural Network tunen
+
+* Netzwerk für Problemstellung optimieren.
+* Kannst du es verbessern? 
+* Woran erkennst du eine Verbesserung? 
+* Wie klein kann man das Netzwerk machen?
+    
+<small>
+4-tf-keras-nn / 4-keras-tensorflow-nn
+</small>
+    </textarea>
+    </section>
+
+    <section>
+    <h2>Reinforcement Learning</h2>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Beispiel bis Stufe 3: Experimente aus dem Open AI gym
+
+Python Kenntnisse notwendig, alle Schwierigkeitsstufen denkbar
+
+_Wir haben hiermit keine eigenen Erfahrungen und können nicht viel helfen_
+
+https://gym.openai.com/envs/#classic_control
+</textarea>    
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Beispiel bis Stufe 3: Ein eigenes Browserspiel mit DQNs (Reinforcement Leearning bauen)
+
+Projekt braucht kein Setup, man sollte JavaScript-Kenntnisse haben
+
+http://web.sfc.keio.ac.jp/~t15704yn/falling/index.html
+https://github.com/seann999/dodge_tfjs
+</textarea>    
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Tutorial: Write an AI to win at Pong from scratch with Reinforcement Learning. 
+
+* Unklar welche Stufe, für die Prüfung müsstet ihr euch da noch etwas ausdenken
+
+https://medium.com/@dhruvp/how-to-write-a-neural-network-to-play-pong-from-scratch-956b57d4f6e0
+</textarea>    
+</section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Beispiel bis Stufe 3: Atari spielen lernen auf dem eigenen PC
+
+aufwändig, lokale Installation und GPU notwendig, aber Code und Blogpost sind vorhanden
+
+<small>
+Post: https://eng.uber.com/accelerated-neuroevolution/
+<br>
+Code: https://github.com/uber-common/deep-neuroevolution/tree/master/gpu_implementation
+</small>
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Beispiel bis Stufe 3: AlphaGo Zero nachbauen
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+<img src='img/rf/alpha_go_zero_cheat_sheet_small.png' height="300px">
+</a>
+
+aufwändig, lokale Installation notwendig, aber Code und Tutorial ist vorhanden
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188
+<br>
+Code: https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
+<br>
+Technische Erklärung: http://tim.hibal.org/blog/alpha-zero-how-and-why-it-works/
+</small>
+</textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+### Beispiel bis Stufe 3: World Model nachbauen
+
+<a href='https://applied-data.science/static/main/res/alpha_go_zero_cheat_sheet.png' target="_blank">
+    <img src='img/rf/world-models.gif' height="300px">
+</a>
+
+aufwändig, lokale Installation notwendig, aber Code und Tutorial ist vorhanden
+
+<small>
+Tutorial: https://medium.com/applied-data-science/how-to-build-your-own-world-model-using-python-and-keras-64fb388ba459
+<br>
+Code: https://github.com/AppliedDataSciencePartners/WorldModels
+</small>
+</textarea>
+</section>
+
+<section>
+        <h2>Unsupervised Learning</h2>
+    </section>
+    
+<section data-markdown>
+    <textarea data-template>
+### Beispiel bis Stufe 3: UMAP selbst erarbeiten und erklären
+</textarea>
+</section>
+<section data-markdown>
+    <textarea data-template>
+### Beispiel bis Stufe 2: Finde ein eigenes Beispiel für Clustering und probiere unterschiedliche Strategien aus
+
+* mit den Parametern der bekannten Algos experimentieren
+* mit welchen Paramtern
+* Clustering. Anderer Algo, Birch. 
+
+<small>
+        Notebook: k-means_vs_dbscan, plot_cluster_comparison 
+</small>
+    
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+### Beispiel bis Stufe 3: Implementiere einen eigenen Clustering Algorithmus
+
+* den Algorithmus sollte es so noch nicht geben
+* wie unterscheidet er sich von DBSCANN und k-means?
+    </textarea>
+    </section>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        $('section').attr('data-background-image', "backgrounds/white.jpg");
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

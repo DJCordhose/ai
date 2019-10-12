@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>TensorFlow Introduction</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                        letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+
+            .reveal {
+                color: black !important;
+             }       
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+<section data-markdown class="preparation">
+        <textarea data-template>
+### Preparation
+
+    </textarea>
+</section>
+
+<section>
+        <h2>Supervised Learning with TensorFlow</h2>
+<h4><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+</h4>
+<p><small><a href="https://djcordhose.github.io/ai/2019_tf_supervised.html">
+https://djcordhose.github.io/ai/2019_tf_supervised.html
+</a></small></p>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Alten CNN Teil ausschlachten
+
+* Fashion MNIST mit dem hier verstärken: https://www.pyimagesearch.com/2019/02/11/fashion-mnist-with-keras-and-deep-learning/
+
+    </textarea>
+    </section>
+    
+    <section data-markdown class="todo">
+        <textarea data-template>
+### A Comprehensive Introduction to Different Types of Convolutions in Deep Learning
+
+Advanced
+
+https://towardsdatascience.com/a-comprehensive-introduction-to-different-types-of-convolutions-in-deep-learning-669281e58215
+</textarea>
+</section>
+
+    
+<section>
+        <h3>Illustration using Loss Landscape</h2>
+    <div>
+    <div style="float: left"  class="fragment">
+        <img src="img/resnet56_noshort_small.jpg" height="350">
+        <p>
+            <small><em>deep network, sharp surface, many solutions</em></small>
+        </p>
+    </div>
+    <div style="float: right"  class="fragment">
+            <img src="img/resnet56_small.jpg" height="350">
+            <p>
+                <small><em>residual shortcuts, smooth surface, naturally converging</em></small>
+            </p>
+    </div>
+    <p style="clear: both"><small>ResNet Architecture having 56 layers
+<br>
+<a href='https://github.com/tomgoldstein/loss-landscape#visualizing-3d-loss-surface'>
+https://github.com/tomgoldstein/loss-landscape#visualizing-3d-loss-surface
+</a>
+    </small></p>
+
+    </section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+### Why Resnet Rulz
+    
+<img src='img/resnet-effect-of-shortcuts.jpg'>
+    
+https://twitter.com/DJCordhose/status/1089872544075837440
+https://twitter.com/ljk628/status/1069770013484167175/photo/1
+https://twitter.com/ljk628/status/1069770013484167175
+https://github.com/tomgoldstein/loss-landscape
+https://github.com/tomgoldstein/loss-landscape#visualizing-3d-loss-surface      
+    </textarea>
+    </section>
+    
+<section data-markdown class="todo">
+    <textarea data-template>
+### Phases and Reaction Times of Image Regocnition in the human brain
+
+<img src='img/brain-reaction.jpg'>
+
+https://twitter.com/CasualEffects/status/1086098296270217218
+  
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### CNN Internals
+
+<img src='img/cnn-kernels.gif'>
+
+<small>
+http://sigmoidprime.com/post/the-inner-workings-of-convolutional-nets/
+<br>
+https://twitter.com/wster/status/1079741301418049537
+</small>
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### Bilder klauen für Conv und Flatten
+
+https://towardsdatascience.com/convolutional-neural-network-17fb77e76c05
+https://codelabs.developers.google.com/codelabs/keras-flowers-tpu/#7
+  
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+CNN: Speed/accuracy trade-offs for modern convolutional object detectors
+
+https://arxiv.org/abs/1611.10012
+</textarea>
+</section>
+
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### CNN: Das hier ausschlachten
+
+https://github.com/DJCordhose/ai/blob/master/notebooks/workshops/tss/workshop.ipynb
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+    <textarea data-template>
+### Abschluss CNN (Auch Interpretation aus Vilnius Keynote nehmen)
+
+DataScienceNigeria (@DataScienceNIG) tweeted at 9:09 AM on Thu, Dec 06, 2018:
+#NeurIPS2018. Inspiring one by a mentor @julius_adebayo etal on Sanity check for Saliency maps! Why? Visual inspection of explanations alone can favor methods that may provide compelling pictures,but lack sensitivity to the model &data generating process  
+https://t.co/b4ek484I1K https://t.co/BAkxvLU3TU
+(https://twitter.com/DataScienceNIG/status/1070591168856186881?s=03)
+
+
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+        <textarea data-template>
+
+I built a demo for arbitrary image stylization in the browser using @TensorFlow.js at https://t.co/ZAFj3ICx2M. Instead of having a single network per style like previous algorithms for fast style transfer, only a single model is used for all style images. more details in replies https://t.co/trkRPRfM57
+(https://twitter.com/ReiiYoda/status/1064549214368129024?s=03)
+
+</textarea>
+</section>
+
+
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        $('.slido').remove();
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            // only applies to local version
+            $('.remote').remove();
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+                // do we want this???
+            $('li').addClass('fragment')
+
+            if (window.location.hostname.indexOf('localhost') !== -1) {
+                // only applies to presentation version
+                Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        $('section').attr('data-background-image', "backgrounds/sky.jpg");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1100,
+
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

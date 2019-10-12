@@ -1,0 +1,30 @@
+{
+    "cSpell.enabledLanguageIds": [
+        "c",
+        "cpp",
+        "csharp",
+        "go",
+        "handlebars",
+        "html",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "latex",
+        "markdown",
+        "php",
+        "plaintext",
+        "python",
+        "restructuredtext",
+        "text",
+        "typescript",
+        "typescriptreact",
+        "yml"
+    ],
+    "liveServer.settings.multiRootWorkspaceName": "ai",
+    "python.pythonPath": "C:\\Users\\olive\\Anaconda3\\python.exe",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#00AA00"
+    },
+    "python.linting.pylintEnabled": true,
+    "liveServer.settings.port": 5501
+}
