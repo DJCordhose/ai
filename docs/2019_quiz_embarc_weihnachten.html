@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Quiz</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+          <link rel="stylesheet" href="reveal.js/css/reveal.css">
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+          <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+          <link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+      
+          <!-- Code syntax highlighting -->
+          <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+          <style>
+              /*pre code {*/
+                  /*display: block;*/
+                  /*padding: 0.5em;*/
+                  /*background: #FFFFFF !important;*/
+                  /*color: #000000 !important;*/
+              /*}*/
+      
+              .right-img {
+                  margin-left: 10px !important;
+                  float: right;
+                  height: 500px;
+              }
+              .todo:before {
+                  content: 'TODO: ';
+              }
+              .todo {
+                  color: red !important;
+              }
+              code span.line-number {
+                  color: lightcoral;
+              }
+              .reveal pre code {
+                  max-height: 1000px !important;
+              }
+      
+              img {
+                  border: 0 !important;
+                  box-shadow:0 0 0 0 !important;
+              }
+      
+              .reveal {
+                  -ms-touch-action: auto !important;
+                  touch-action: auto !important;
+                      }
+      
+                      .reveal h2,
+                      .reveal h3,
+                      .reveal h4 {
+                        letter-spacing: 2px;
+                          font-family: 'Calibri', sans-serif;
+                          /* font-family: 'Times New Roman', Times, serif; */
+                          font-weight: bold;
+                          color: black;
+                          font-style: italic;
+                          letter-spacing: -2px;
+                          text-transform: none !important;
+                      }
+      
+                      .reveal em {
+                          font-weight: bold;
+                      }
+      
+                      .reveal .step-subtitle h1 {
+                          letter-spacing: 1px;
+                      }
+                      .reveal .step-subtitle h2,
+                      .reveal .step-subtitle h3 {
+                          text-transform: none;
+                          font-style: italic;
+                          font-weight: normal;
+                          /* font-weight: 400; */
+                          /* font-family: 'Amiri', serif; */
+                          font-family: 'Lobster', serif;
+                          letter-spacing: 1px;
+                          color: #2aa198;
+                          text-decoration: underline;
+                      }
+      
+                      .reveal .front-page h1,
+                      .reveal .front-page h2 {
+                          font-family: "League Gothic";
+                          font-style: normal;
+                          text-transform: uppercase !important;
+                          letter-spacing: 1px;
+                      }
+      
+                      .reveal .front-page h1 {
+                          font-size: 2.5em !important;
+                      }
+      
+                      .reveal .highlight {
+                          background-color: #D3337B;
+                          color: white;
+                      }
+      
+              .reveal section img {
+                background: none;
+              }
+      
+                      .reveal img.with-border {
+                          border: 1px solid #586e75 !important;
+                          box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.15) !important;
+                      }
+      
+                      .reveal li {
+                          margin-bottom: 8px;
+                      }
+      
+                      /* For li's that use FontAwesome icons as bullet-point */
+                  .reveal ul.fa-ul li {
+                      list-style-type: none;
+                  }
+
+            .reveal {
+                color: black !important;
+             }       
+
+          </style>
+      
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+    <section data-markdown class="preparation">
+    <textarea data-template>
+* C64 Mucke als Soundtrack im Hintergrund
+    * https://www.youtube.com/watch?v=huEUOPDPbgQ
+    * https://www.youtube.com/watch?v=AE77tYu5EA8
+    * https://www.youtube.com/watch?v=U9Racui9jJI
+    * Wizball: https://www.youtube.com/watch?v=6VYP5pLBnZ8
+
+Preise zeigen
+* Embarc Powerbanks
+* Bücher von SuS
+* Manning Crash Course: https://www.manning.com/livevideo/deep-learning-crash-course?a_aid=djcordhose&a_bid=e8e77cbf
+* SuS E-Book: https://entwickler.de/press/shortcuts/einstieg-ins-machine-learning-579888594.html
+
+* Tische nach vorn tun
+* Post Its mit Namen und Punkten für die Teams darauf
+    </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+# Quiz
+
+<!-- Total chaotisch und ungerecht -->
+
+mit Preisen!
+
+<!-- https://djcordhose.github.io/ai/2019_quiz.html -->
+
+<!-- ## Täuschungen aus Wissenschaft, Statistik und Wahrnehmung -->
+<!-- <br>
+<br>
+#### <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a> -->
+
+    </textarea>
+    </section>
+
+    <!-- <section data-markdown class="todo">
+            <textarea data-template>
+* Quellen erst später einblenden, damit keiner Googlen kann
+* Count Down Web Component bauen
+* Bildgrößen anpassen
+* Hintergrund Musik
+  * Bladerunner: https://www.youtube.com/watch?v=cuCqn07EOKk
+  * Darth Vader Breathing: https://www.youtube.com/watch?v=un8FAjXWOBY&t=30s
+  * C64 Music: 
+    * https://www.youtube.com/watch?v=AE77tYu5EA8
+    * https://www.youtube.com/watch?v=U9Racui9jJI
+    * Wizball: https://www.youtube.com/watch?v=6VYP5pLBnZ8
+                </textarea>
+            </section>
+                 -->
+
+    <section data-markdown class="fragments">
+    <textarea data-template>
+### Wie funktioniert es?
+
+* Vier Teams spielen gegeneinander
+* Diskutiert Antworten im Team
+* Antworten per Buzzer anmelden
+* Bei richtiger Antwort gibt es einen Punkt
+* Bei falscher Antwort sind nur noch Antworten durch die anderen Teams möglich
+* Es gibt keine Minuspunkte
+    </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Teams bilden
+
+<img src='img/vacant.jpg' height="800px">
+
+        </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+### Namen der Teams
+
+<img src='img/engaged.jpg' height="800px">
+
+        </textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+#### Kategorie: Spaß - Bild wird ausgeblendet bei erstem Buzz
+### Wie viele Becher?
+
+<img src="IMG_20191017_164914.jpg" height="500px" class="fragment">
+</textarea>
+    </section>
+
+    <section data-markdown>
+        <textarea data-template>
+#### Kategorie: Spaß - Schwer  - Bild wird ausgeblendet bei erstem Buzz
+### Was wird hier gleich schief gehen?
+
+<img src='img/quiz/kaffee-oder-tee.jpg' class="fragment">
+        </textarea>
+    </section>
+
+<section data-markdown>
+    <textarea data-template>
+### Geografie: Wo ist das (Land)? - Bild wird ausgeblendet bei erstem Buzz
+
+<img src='img/quiz/embarc-wo-bratislava2.jpg' height="800px" class="fragment">
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Trivia: Was ist das?
+
+<img src='img/quiz/embarc-was.jpg' height="800px" class="fragment">
+</textarea>
+</section>
+
+        <section data-markdown>
+                <textarea data-template>
+<!-- #### Kategorie: Spaß - Ersatzfrage, falls erste zu schwer - Bild wird ausgeblendet bei erstem Buzz -->
+#### Kategorie: Spaß - Bild wird ausgeblendet bei erstem Buzz
+### Was ist ganz oben links
+
+<img src="img/ai/dog-vs-bread.jpg" height="500px" class="fragment">
+</textarea>
+            </section>
+
+
+<section data-markdown class="statics">
+    <textarea data-template>
+#### Kategorie: Nerd / Statistik
+### Statistiker oder Verkäufer
+
+Nehmen wir an, 90% aller Statistiker sind schüchtern und nur 5% aller Verkäufer
+
+_Du triffst einen schüchternen Menschen irgendwo auf der Straße, ist er eher Statistiker oder Verkäufer?_
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### Kategorie: Wahrnehmung - Bild wird ausgeblendet bei erstem Buzz
+
+### Wie viele Ausreißer?
+
+<img src='img/quiz/franconeri_test_2.jpg' height="650px" class="fragment">
+<br>
+<small>
+https://twitter.com/SteveFranconeri/status/996309506425544705    
+</small>
+</textarea>
+</section>
+<section data-markdown  class="data-viz">
+        <textarea data-template>
+#### Kategorie: Visualisierung
+### Welche Metropolregion hatte als erste mehr als 10 Millionen Einwohner?
+
+<video src='img/quiz/metropol.mp4' controls height="500"></video>
+
+Spezialregel: jedes Team bekommt einen Tipp, keine doppelten Tipps, wer zuerst buzzed darf zuerst wählen 
+
+<small>
+@jburnmurdoch: https://twitter.com/i/status/1107595419557740549
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### Kategorie: Spaß - Bild wird ausgeblendet bei erstem Buzz
+### Was liegt rechts unten neben dem Stuhl der Dame, die uns den Rücken zudreht?
+
+<img src='img/quiz/purse_or_dachshund.jpg' height="650px" class="fragment">
+
+<small>
+https://twitter.com/dumb_hannah/status/891678558841708544
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+#### Kategorie: Wahrnehmung - Bild wird ausgeblendet bei erstem Buzz
+### Wie viele Punkte?
+    
+<img src='img/quiz/dots.jfif' height="450px" class="fragment">
+
+<small>
+https://twitter.com/_youhadonejob1/status/1116335796838125570
+</small>    
+    </textarea>
+    </section>
+    
+<section data-markdown style="font-size: xx-large">
+    <textarea data-template>
+#### Kategorie: Wahrnehmung - Bild wird ausgeblendet bei erstem Buzz
+### Welche Farben haben die großen Bälle?
+
+<img src='img/quiz/balls-color.jpg' height="500px" class="fragment">
+
+1. Blau und Grün
+1. Beide Cyan
+1. Gelb und Lila
+1. Beide Lila
+
+<small>
+https://twitter.com/NovickProf/status/1133211527367073792?s=03
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### Kategorie: Wissenschaft
+### Welche Zahl ist am Größten
+
+1. Positionen im Schach <em class="fragment">~ 10<sup>50</sup></em>
+1. Positionen bei Go <em class="fragment">~ 10<sup>171</sup></em>
+1. Atome im Menschlichen Körper <em class="fragment">~ 10<sup>27</sup></em>
+1. Sandkörner auf der Erde <em class="fragment">~ 10<sup>19</sup></em>
+1. Atome im Universum <em class="fragment">~ 10<sup>78</sup></em>
+
+<p class="fragment"><em>Positionen bei Go</em></p>
+
+<small>
+https://www.quora.com/How-many-grains-of-sand-are-there-on-Earth-and-how-many-stars-are-there-in-the-universe
+</small>
+</textarea>
+</section>
+
+<section>
+<h4>Kategorie: Spaß - Bild wird ausgeblendet bei erstem Buzz</h4>
+        <h3>Was ist oberste Reihe, dritter von links?</h3>
+                <img src="img/ai/dog-vs-chicken-wing.jpg" height="500px" class="fragment">
+        </section>
+
+<section data-markdown>
+        <textarea data-template>
+#### Kategorie: Nerd / Statistik
+### Wie oft wechselt der Ball in einem Spiel im Durchschnitt den Besitzer, d.h. die ballführende Mannschaft?
+
+Je nach zählweise 
+1. 10 bis 50
+1. 100 bis 200     
+1. 200 bis 400 <em class="fragment">richtig</em>
+1. 1000 bis 2000
+
+<small>
+Quelle: The Numbers Game: Why Everything You Know About Football is Wrong    
+</small>
+<!-- <img src='img/IMG_20190816_114241.jpg'>             -->
+    </textarea>
+    </section>
+
+    <section data-markdown style="font-size: xx-large">
+        <textarea data-template>
+#### Kategorie: Visualisierung
+### Welche Berufsgruppe genießt weltweit das größte Vertrauen?
+
+<img src='img/quiz/trust-in-professions.png' height="550px" class="fragment">
+
+1. Politiker
+1. Ärzte
+1. Wissenschaftler
+1. Journalisten
+
+<small>
+https://www.ipsos.com/sites/default/files/ct/publication/documents/2019-09/ipsos-mori-trust-the-truth-event_0.pdf
+</small>
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### Kategorie: Spaß - Bild wird ausgeblendet bei erstem Buzz
+### Was ist in 3. Reihe, 3. Spalte
+
+<img src="img/ai/dog-vs-muffin.jpg" height="500px"  class="fragment">
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### Kategorie: Spaß - Bild wird ausgeblendet bei erstem Buzz
+### Welches Tier versteckt sich hier?
+
+<img src='img/quiz/katz1.jpg' height="800px">
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+#### Kategorie: Spaß - Bild wird ausgeblendet bei erstem Buzz
+### Welches Tier versteckt sich hier?
+        
+<!-- <img src='img/quiz/katz1.jpg'> -->
+<img src='img/quiz/katz2.jpg' height="800px">
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Tie-Breaker
+
+Umap Zoo
+
+https://duhaime.s3.amazonaws.com/apps/umap-zoo/index.html
+
+Was ist das in 3d?
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# Preise 
+
+</textarea>
+</section>
+
+<section data-markdown>
+        <textarea data-template>
+# Das war's 
+
+## Vielen Dank an alle!
+</textarea>
+</section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+
+<script>
+        const isLocal = window.location.hostname.indexOf('localhost') !== -1 || 
+                    window.location.hostname.indexOf('127.0.0.1') !== -1;
+
+        // $('.info').remove();
+
+        if (isLocal) {
+            // only applies to local version
+            $('.remote').remove();
+        } else {
+            // only applies to public version
+            $('.todo').remove();
+            $('.preparation').remove();
+            $('.local').remove();
+        }
+        Reveal.addEventListener( 'ready', function( event ) {
+            $('.fragments li').addClass('fragment');
+            $('.no-fragments li').removeClass('fragment')
+
+            // hide link to solution until later
+            $('.solution').addClass('fragment')
+
+
+            if (isLocal) {
+                // only applies to presentation version
+                // Reveal.configure({ controls: false });
+            } else {
+                // only applies to public version
+                // $('.fragment').removeClass('fragment');
+            }
+            // applies to all versions
+            $('code').addClass('line-numbers');
+
+            // make all links open in new tab
+            $('a').attr('target', '_blank')
+
+        } );
+        // $('section').attr('data-background-image', "backgrounds/light-metal.jpg");
+        // $('section').attr('data-background-image', "backgrounds/pink.jpg");
+        // $('section').attr('data-background-image', "backgrounds/white.jpg");
+        // $('section').attr('data-background-image', "backgrounds/sky.jpg");
+        // $('section').attr('data-background-image', "backgrounds/sky-morning.jpg");
+        $('section').attr('data-background-image', "backgrounds/sky-winter.jpg");
+
+    //    $('section').attr('data-background-image', "backgrounds/code.jpg");
+    </script>
+    
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: false,
+        progress: false,
+        history: true,
+        center: true,
+        width: "100%",
+        height: 1000,
+
+
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            // https://github.com/mikemiles86/reveal-line-numbers
+            {src: 'lib/js/line-numbers.js'},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
